@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "PAN-GST Cross-Check Flow",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
@@ -53,9 +53,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -90,9 +90,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{authId_A}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{authId_A}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -451,9 +451,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -488,9 +488,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{authId_B}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{authId_B}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -887,9 +887,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -924,9 +924,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{authId_C}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{authId_C}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",

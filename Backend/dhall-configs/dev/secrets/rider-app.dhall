@@ -1,4 +1,4 @@
-let ondclogsUrl = "https://logs.ondc.in"
+﻿let ondclogsUrl = "https://logs.ondc.in"
 
 let googleSAPrivateKey = "some-secret-private-key-for-google-service-account"
 
@@ -7,7 +7,7 @@ let ondcTokenMap
         { mapKey : { merchantId : Text, domain : Text }
         , mapValue : { token : Text, ondcUrl : Text }
         }
-    = [ { mapKey = { merchantId = "NAMMA_YATRI", domain = "MOBILITY" }
+    = [ { mapKey = { merchantId = "qolari", domain = "MOBILITY" }
         , mapValue = { token = "abcd123", ondcUrl = ondclogsUrl }
         }
       , { mapKey = { merchantId = "YATRI", domain = "MOBILITY" }
@@ -16,7 +16,7 @@ let ondcTokenMap
       , { mapKey = { merchantId = "YATRI_SATHI", domain = "MOBILITY" }
         , mapValue = { token = "abcd123", ondcUrl = ondclogsUrl }
         }
-      , { mapKey = { merchantId = "NAMMA_YATRI", domain = "PUBLIC_TRANSPORT" }
+      , { mapKey = { merchantId = "qolari", domain = "PUBLIC_TRANSPORT" }
         , mapValue = { token = "abcd123", ondcUrl = ondclogsUrl }
         }
       ]

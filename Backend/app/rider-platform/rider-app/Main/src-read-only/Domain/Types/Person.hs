@@ -1,4 +1,4 @@
-{-# LANGUAGE ApplicativeDo #-}
+﻿{-# LANGUAGE ApplicativeDo #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Domain.Types.Person where
@@ -47,7 +47,7 @@ data PersonE e = Person
     comments :: Kernel.Prelude.Maybe [Kernel.Prelude.Text],
     createdAt :: Kernel.Prelude.UTCTime,
     currentCity :: Kernel.Types.Beckn.Context.City,
-    customerNammaTags :: Kernel.Prelude.Maybe [Lib.Yudhishthira.Types.TagNameValueExpiry],
+    customerQolariTags :: Kernel.Prelude.Maybe [Lib.Yudhishthira.Types.TagNameValueExpiry],
     customerReferralCode :: Kernel.Prelude.Maybe Kernel.Prelude.Text,
     dateOfBirth :: Kernel.Prelude.Maybe Kernel.Prelude.UTCTime,
     description :: Kernel.Prelude.Maybe Kernel.Prelude.Text,
@@ -72,7 +72,7 @@ data PersonE e = Person
     informPoliceSos :: Kernel.Prelude.Bool,
     isNew :: Kernel.Prelude.Bool,
     isValidRating :: Kernel.Prelude.Bool,
-    juspayCustomerPaymentID :: Kernel.Prelude.Maybe Kernel.External.Payment.Interface.Types.CustomerId,
+    QolariCustomerPaymentID :: Kernel.Prelude.Maybe Kernel.External.Payment.Interface.Types.CustomerId,
     language :: Kernel.Prelude.Maybe Kernel.External.Maps.Language,
     lastName :: Kernel.Prelude.Maybe Kernel.Prelude.Text,
     lastUsedVehicleCategories :: [BecknV2.OnDemand.Enums.VehicleCategory],
@@ -147,7 +147,7 @@ instance EncryptedItem Person where
           comments = comments entity,
           createdAt = createdAt entity,
           currentCity = currentCity entity,
-          customerNammaTags = customerNammaTags entity,
+          customerQolariTags = customerQolariTags entity,
           customerReferralCode = customerReferralCode entity,
           dateOfBirth = dateOfBirth entity,
           description = description entity,
@@ -172,7 +172,7 @@ instance EncryptedItem Person where
           informPoliceSos = informPoliceSos entity,
           isNew = isNew entity,
           isValidRating = isValidRating entity,
-          juspayCustomerPaymentID = juspayCustomerPaymentID entity,
+          QolariCustomerPaymentID = QolariCustomerPaymentID entity,
           language = language entity,
           lastName = lastName entity,
           lastUsedVehicleCategories = lastUsedVehicleCategories entity,
@@ -239,7 +239,7 @@ instance EncryptedItem Person where
             comments = comments entity,
             createdAt = createdAt entity,
             currentCity = currentCity entity,
-            customerNammaTags = customerNammaTags entity,
+            customerQolariTags = customerQolariTags entity,
             customerReferralCode = customerReferralCode entity,
             dateOfBirth = dateOfBirth entity,
             description = description entity,
@@ -264,7 +264,7 @@ instance EncryptedItem Person where
             informPoliceSos = informPoliceSos entity,
             isNew = isNew entity,
             isValidRating = isValidRating entity,
-            juspayCustomerPaymentID = juspayCustomerPaymentID entity,
+            QolariCustomerPaymentID = QolariCustomerPaymentID entity,
             language = language entity,
             lastName = lastName entity,
             lastUsedVehicleCategories = lastUsedVehicleCategories entity,

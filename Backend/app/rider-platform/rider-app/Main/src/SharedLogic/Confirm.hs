@@ -188,7 +188,7 @@ confirm DConfirmReq {..} = do
   city <- CQMOC.findById merchantOperatingCityId >>= fmap (.city) . fromMaybeM (MerchantOperatingCityNotFound merchantOperatingCityId.getId)
   exophone <- findRandomExophone merchantOperatingCityId
   let isScheduled = (maybe False not searchRequest.isMultimodalSearch) && merchant.scheduleRideBufferTime `addUTCTime` now < searchRequest.startTime
-  let driverPreference = extractDriverPreference person.customerNammaTags
+  let driverPreference = extractDriverPreference person.customerQolariTags
   (booking, bookingParties) <- buildBooking merchant personId searchRequest bppQuoteId quote fromLocation mbToLocation exophone now Nothing paymentMethodId paymentInstrument isScheduled searchRequest.disabilityTag searchRequest.configInExperimentVersions person.paymentMode dashboardAgentId requiresPaymentBeforeConfirm driverPreference
   mbBookingOfferEntity <-
     case booking.selectedOfferId of

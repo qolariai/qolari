@@ -74,7 +74,7 @@ postCorporateInvoiceData mbApiKey req = do
     case req.partnerCustomerId of
       Just partnerCustomerId -> B.runInReplica $ QPerson.findById (Id partnerCustomerId)
       Nothing -> do
-        merchant <- findMerchantByShortId (ShortId "NAMMA_YATRI")
+        merchant <- findMerchantByShortId (ShortId "qolari")
         case req.mobileNumber of
           Just mobileNum -> do
             let (countryCode, phoneNumber) = parseMobileNumber mobileNum
@@ -122,7 +122,7 @@ buildInvoiceData ::
   m PBSAPI.InvoiceDataRes
 buildInvoiceData person booking mbRide mbEmail mbMobile = do
   mbMerchant <- CQM.findById booking.merchantId
-  let employerName = maybe "Namma Yatri" (.name) mbMerchant
+  let employerName = maybe "Qolari" (.name) mbMerchant
       mbCompletedRide = mbRide >>= (\ride -> if ride.status == DRide.COMPLETED then Just ride else Nothing)
       paymentCurrency = show booking.estimatedTotalFare.currency
   case mbCompletedRide of
@@ -166,7 +166,7 @@ buildInvoiceData person booking mbRide mbEmail mbMobile = do
                 }
           }
     Just ride -> do
-      let provider = "Namma Yatri"
+      let provider = "Qolari"
           paymentAmount = fromMaybe (toHighPrecMoney booking.estimatedTotalFare.amountInt) (toHighPrecMoney . (.amountInt) <$> ride.totalFare)
           fromLocation = SLoc.makeLocationAPIEntity booking.fromLocation
           toLocation = getToLocation' booking
@@ -298,7 +298,7 @@ postCorporateBookingStatement mbApiKey req = do
     Just partnerCustomerId -> do
       B.runInReplica $ QPerson.findById (Id partnerCustomerId)
     Nothing -> do
-      merchant <- findMerchantByShortId (ShortId "NAMMA_YATRI")
+      merchant <- findMerchantByShortId (ShortId "qolari")
       mobileNumberHash <- getDbHash phoneNumber
       B.runInReplica $ QPerson.findByMobileNumberAndMerchantId countryCode mobileNumberHash merchant.id
 
@@ -309,7 +309,7 @@ postCorporateBookingStatement mbApiKey req = do
         PBSAPI.BookingStatementRes
           { responseCode = "400",
             outcomeCode = "400",
-            responseMessage = "Person not registered with the NammaYatri",
+            responseMessage = "Person not registered with the Qolari",
             mobileNumber = mobileNumber,
             emailId = fromMaybe "" req.emailId,
             partnerCustomerId = req.partnerCustomerId,
@@ -365,7 +365,7 @@ buildBookingItem ::
   DRide.Ride ->
   m PBSAPI.BookingStatementItem
 buildBookingItem booking ride = do
-  let provider = "Namma Yatri"
+  let provider = "Qolari"
       providerCode = ride.vehicleNumber
       -- Get payment amount
       paymentAmount = fromMaybe (toHighPrecMoney booking.estimatedTotalFare.amountInt) (toHighPrecMoney . (.amountInt) <$> ride.totalFare)

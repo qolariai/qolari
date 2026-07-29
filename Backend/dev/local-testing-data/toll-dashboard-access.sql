@@ -1,4 +1,4 @@
--- Toll dashboard access_matrix for JUSPAY_ADMIN integration tests (idempotent).
+﻿-- Toll dashboard access_matrix for Qolari_ADMIN integration tests (idempotent).
 -- Applied by test-context-api startup (local-testing-data batch) and ./run-tests.sh toll-*.
 
 -- Provider dashboard (BPP)

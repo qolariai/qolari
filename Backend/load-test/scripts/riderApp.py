@@ -1,4 +1,4 @@
-from locust import HttpUser, task
+﻿from locust import HttpUser, task
 import time
 import requests
 import json
@@ -42,7 +42,7 @@ class RiderApp(HttpUser):
                     "address": {
                         "area": "8th Block Koramangala",
                         "areaCode": "560047",
-                        "building": "Juspay Buildings",
+                        "building": "Qolari Buildings",
                         "city": "Bangalore",
                         "country": "India",
                         "door": "#444",
@@ -58,7 +58,7 @@ class RiderApp(HttpUser):
                     "address": {
                         "area": "6th Block Koramangala",
                         "areaCode": "560047",
-                        "building": "Juspay Apartments",
+                        "building": "Qolari Apartments",
                         "city": "Bangalore",
                         "country": "India",
                         "door": "#444",

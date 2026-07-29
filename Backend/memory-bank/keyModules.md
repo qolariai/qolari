@@ -1,6 +1,6 @@
-# Nammayatri Backend - Key Modules and Functionality
+﻿# Qolari Backend - Key Modules and Functionality
 
-This document outlines the key Haskell modules and their primary functionalities within the Nammayatri backend, based on the analysis of the codebase.
+This document outlines the key Haskell modules and their primary functionalities within the Qolari backend, based on the analysis of the codebase.
 
 ## 1. Core Libraries (`lib/` directory)
 
@@ -18,7 +18,7 @@ These modules provide foundational functionalities and shared components across 
 *   **Purpose:** Provides common services related to the BECKN protocol and external integrations.
 *   **Key Functionality:**
     *   **AWS S3 Integration:** Functions for interacting with AWS S3 for file storage (`AWS.S3.Flow`, `AWS.S3.Types`).
-    *   **Registry Interaction:** Interfaces for interacting with the BECKN registry (`Registry.Beckn.Interface`, `Registry.Beckn.Nammayatri.Flow`).
+    *   **Registry Interaction:** Interfaces for interacting with the BECKN registry (`Registry.Beckn.Interface`, `Registry.Beckn.Qolari.Flow`).
 
 ### `lib/dashcam/`
 *   **Purpose:** Likely related to dashcam data processing or integration.
@@ -44,7 +44,7 @@ These modules provide foundational functionalities and shared components across 
 *   **Key Functionality:**
     *   **Domain Types:** Defines domain models for payment orders, transactions, payouts, and refunds (`Domain.Types.PaymentOrder`, `Domain.Types.PaymentTransaction`, `Domain.Types.PayoutOrder`, `Domain.Types.Refunds`).
     *   **Database Storage (Beam/Esqueleto):** Defines Beam table schemas (`Storage.Beam.PaymentOrder`, `Storage.Beam.PaymentTransaction`, `Storage.Beam.PayoutOrder`, `Storage.Beam.Refunds`) and provides query/update functions using Esqueleto/Sequelize-like wrappers (`Storage.Queries.PaymentOrder`, `Storage.Queries.PaymentTransaction`, `Storage.Queries.PayoutOrderExtra`).
-    *   **External Payment Interface:** Integrates with Juspay payment gateway (`Kernel.External.Payment.Interface`).
+    *   **External Payment Interface:** Integrates with Qolari payment gateway (`Kernel.External.Payment.Interface`).
     *   **Encryption:** Handles encryption and hashing of sensitive payment data.
 
 ### `lib/producer/`
@@ -92,7 +92,7 @@ These modules provide foundational functionalities and shared components across 
 
 ## 2. Application Services (`app/` directory)
 
-These are the executable microservices that compose the Nammayatri backend.
+These are the executable microservices that compose the Qolari backend.
 
 ### `app/rider-platform/rider-app/`
 *   **Purpose:** The main customer-facing application.

@@ -1,4 +1,4 @@
-{-# LANGUAGE DuplicateRecordFields #-}
+﻿{-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE OverloadedStrings #-}
 
 module EmailOtpUnitTests where
@@ -47,11 +47,11 @@ testEmailOtpReqDataTypes =
         reqOtp @?= "1234"
         reqRequesteeId @?= Id "person-456",
       testCase "EmailOtpSendReq positional construction" $ do
-        let DEV.EmailOtpSendReq {email = reqEmail} = DEV.EmailOtpSendReq "test@nammayatri.in"
-        reqEmail @?= "test@nammayatri.in",
+        let DEV.EmailOtpSendReq {email = reqEmail} = DEV.EmailOtpSendReq "test@drive.qolari.com"
+        reqEmail @?= "test@drive.qolari.com",
       testCase "EmailOtpVerifyReq positional construction" $ do
-        let DEV.EmailOtpVerifyReq {email = reqEmail, otp = reqOtp} = DEV.EmailOtpVerifyReq "test@nammayatri.in" "5678" (Id "person-789")
-        reqEmail @?= "test@nammayatri.in"
+        let DEV.EmailOtpVerifyReq {email = reqEmail, otp = reqOtp} = DEV.EmailOtpVerifyReq "test@drive.qolari.com" "5678" (Id "person-789")
+        reqEmail @?= "test@drive.qolari.com"
         reqOtp @?= "5678"
     ]
 
@@ -137,14 +137,14 @@ testSendEmailVerificationOtpStructure =
   testGroup
     "sendEmailVerificationOtp Request Structure"
     [ testCase "Valid email request structure" $ do
-        let req = DEV.EmailOtpSendReq {email = "fleet@nammayatri.in"}
+        let req = DEV.EmailOtpSendReq {email = "fleet@drive.qolari.com"}
             DEV.EmailOtpSendReq {email = reqEmail} = req
-        reqEmail @?= "fleet@nammayatri.in"
+        reqEmail @?= "fleet@drive.qolari.com"
         not (T.null reqEmail) @? "Email should not be empty"
         T.isInfixOf "@" reqEmail @? "Email should contain @",
       testCase "Different emails are distinct" $ do
         let DEV.EmailOtpSendReq {email = email1} = DEV.EmailOtpSendReq "admin@company.com"
-            DEV.EmailOtpSendReq {email = email2} = DEV.EmailOtpSendReq "operator@nammayatri.in"
+            DEV.EmailOtpSendReq {email = email2} = DEV.EmailOtpSendReq "operator@drive.qolari.com"
         email1 /= email2 @? "Different emails should be distinct",
       testCase "Any dashboard user TokenInfo can be constructed" $ do
         let bppUser = Auth.TokenInfo (Id "bpp-person") (Id "bpp-merchant") (Context.City "Bangalore")
@@ -159,9 +159,9 @@ testVerifyEmailOtpStructure =
   testGroup
     "verifyEmailOtp Request Structure"
     [ testCase "Valid email and OTP request structure" $ do
-        let req = DEV.EmailOtpVerifyReq {email = "fleet@nammayatri.in", otp = "1234", requesteeId = Id "person-1"}
+        let req = DEV.EmailOtpVerifyReq {email = "fleet@drive.qolari.com", otp = "1234", requesteeId = Id "person-1"}
             DEV.EmailOtpVerifyReq {email = reqEmail, otp = reqOtp} = req
-        reqEmail @?= "fleet@nammayatri.in"
+        reqEmail @?= "fleet@drive.qolari.com"
         reqOtp @?= "1234"
         T.length reqOtp == 4 @? "OTP should be exactly 4 digits",
       testCase "Different OTP values are distinct" $ do
@@ -210,7 +210,7 @@ testEmailOtpComplexScenarios =
   testGroup
     "Email OTP Complex Scenarios"
     [ testCase "Send and verify flow uses same email" $ do
-        let emailAddr = "fleet@nammayatri.in"
+        let emailAddr = "fleet@drive.qolari.com"
             sendReq = DEV.EmailOtpSendReq emailAddr
             verifyReq = DEV.EmailOtpVerifyReq emailAddr "4567" (Id "person-1")
             DEV.EmailOtpSendReq {email = sendEmail} = sendReq
@@ -218,7 +218,7 @@ testEmailOtpComplexScenarios =
         sendEmail @?= verifyEmail,
       testCase "Redis keys are consistent between send and verify for same person+email" $ do
         let personId = Id "person-1" :: Id DP.Person
-            email = "test@nammayatri.in"
+            email = "test@drive.qolari.com"
             otpKey = DEV.makeEmailOtpKey personId email
         T.isPrefixOf "Dashboard:EmailVerification:" otpKey @? "Key should have correct prefix"
         T.isSuffixOf email otpKey @? "Key should end with email",
@@ -299,7 +299,7 @@ testVerifyEmailUpdateReq =
           @? "Different person IDs should be distinct",
       testCase "personId matches tokenInfo personId pattern" $ do
         let ti = Auth.TokenInfo (Id "person-abc") (Id "merchant-1") (Context.City "Bangalore")
-            req = InternalClient.VerifyEmailUpdateReq {email = "test@nammayatri.in", personId = getId (Auth.personId ti)}
+            req = InternalClient.VerifyEmailUpdateReq {email = "test@drive.qolari.com", personId = getId (Auth.personId ti)}
             InternalClient.VerifyEmailUpdateReq {personId = pid} = req
         pid @?= "person-abc"
     ]

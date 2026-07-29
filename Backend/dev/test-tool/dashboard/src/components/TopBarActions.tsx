@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import './TopBarActions.css';
 import { showAlert, showConfirm } from './Dialogs';
 import { RefPicker } from './RefPicker';
@@ -443,7 +443,7 @@ export const TopBarActions: React.FC = () => {
             <div className="tb-modal-form">
               <div className="tb-modal-form-field">
                 <RefPicker
-                  repo="nammayatri/control-center"
+                  repo="Qolari/control-center"
                   value={ccRef}
                   onChange={(v) => { setCcRef(v); saveUiState({ ccRef: v || null }); }}
                   disabled={ccData?.running}
@@ -455,7 +455,7 @@ export const TopBarActions: React.FC = () => {
                     className={`tb-btn tb-modal-form-primary${ccIsStarting ? ' tb-busy' : ''}`}
                     onClick={handleControlCenterStart}
                     disabled={ccIsStarting}
-                    title="Clone-or-pull nammayatri/control-center, optionally checkout the chosen ref, npm install, run vite dev (VITE_BAP_URL=http://localhost:8017, VITE_BPP_URL=http://localhost:8018)"
+                    title="Clone-or-pull Qolari/control-center, optionally checkout the chosen ref, npm install, run vite dev (VITE_BAP_URL=http://localhost:8017, VITE_BPP_URL=http://localhost:8018)"
                   >
                     {ccIsStarting ? (
                       <>

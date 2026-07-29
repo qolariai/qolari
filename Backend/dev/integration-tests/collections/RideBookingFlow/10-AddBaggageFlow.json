@@ -1,4 +1,4 @@
-{
+﻿{
 	"info": {
 		"name": "NY Add Baggage Flow (RideOTP)",
 		"description": "RideOTP flow + add baggage before ride starts: search in special zone -> confirm quote -> add baggage (fare recalculated) -> verify booking fare changed -> driver starts with OTP -> end.\n\nPrerequisites: same as 08-RideOtpFlow.json. AddBaggage endpoint must be wired and a fare policy with non-zero perLuggageCharge must be configured for the booked vehicle tier in the special zone.",
@@ -31,7 +31,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}],
 				"body": {"mode": "raw", "raw": "{\"mobileNumber\": \"{{_test_driver_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"{{driver_merchant_id}}\", \"merchantOperatingCity\": \"{{city}}\"}"},
-				"url": {"raw": "{{baseURL_namma_P}}/auth", "host": ["{{baseURL_namma_P}}"], "path": ["auth"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/auth", "host": ["{{baseURL_qolari_P}}"], "path": ["auth"]}
 			}
 		},
 		{
@@ -41,7 +41,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}],
 				"body": {"mode": "raw", "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-device\"}"},
-				"url": {"raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify", "host": ["{{baseURL_namma_P}}"], "path": ["auth", "{{driver_authId}}", "verify"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify", "host": ["{{baseURL_qolari_P}}"], "path": ["auth", "{{driver_authId}}", "verify"]}
 			}
 		},
 		{
@@ -71,7 +71,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{}"},
-				"url": {"raw": "{{baseURL_namma_P}}/plan/{{plan_id}}/subscribe", "host": ["{{baseURL_namma_P}}"], "path": ["plan", "{{plan_id}}", "subscribe"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/plan/{{plan_id}}/subscribe", "host": ["{{baseURL_qolari_P}}"], "path": ["plan", "{{plan_id}}", "subscribe"]}
 			}
 		},
 		{
@@ -81,7 +81,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{}"},
-				"url": {"raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "setActivity"], "query": [{"key": "active", "value": "true"}, {"key": "mode", "value": "%22ONLINE%22"}]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "setActivity"], "query": [{"key": "active", "value": "true"}, {"key": "mode", "value": "%22ONLINE%22"}]}
 			}
 		},
 		{
@@ -274,7 +274,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{\"specialZoneOtpCode\": \"{{sz_otp}}\", \"point\": {\"lat\": {{sz_origin_lat}}, \"lon\": {{sz_origin_lon}}}}"},
-				"url": {"raw": "{{baseURL_namma_P}}/driver/otpRide/start", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "otpRide", "start"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/otpRide/start", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "otpRide", "start"]}
 			}
 		},
 		{
@@ -287,7 +287,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{\"point\": {\"lat\": {{dest_lat}}, \"lon\": {{dest_lon}}}}"},
-				"url": {"raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/end", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "ride", "{{driver_ride_id}}", "end"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/end", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "ride", "{{driver_ride_id}}", "end"]}
 			}
 		},
 		{

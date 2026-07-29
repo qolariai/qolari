@@ -1,4 +1,4 @@
-# Common backend scripts available in devshell.
+﻿# Common backend scripts available in devshell.
 #
 # We use https://github.com/Platonic-Systems/mission-control
 _:
@@ -81,7 +81,7 @@ _:
             REPO_ROOT=$(git -C "''${FLAKE_ROOT}" rev-parse --show-toplevel)
             BASE_API="''${BASE_API:-http://service-discovery.devenv.movingtech.net:8787}"
             # Same pin file the test dashboard's local-api writes — so , run-cabal-build-devbox
-            # and the dashboard's Deploy/Start land on the SAME machine + /tmp/<id>/nammayatri.
+            # and the dashboard's Deploy/Start land on the SAME machine + /tmp/<id>/Qolari.
             ID_FILE="$REPO_ROOT/.devbox-id.json"
 
             # ── flags ──
@@ -158,7 +158,7 @@ _:
             else
               echo "Using pinned dev-box: $NAME → id $DEV_ID [.devbox-id.json]" >&2
             fi
-            REMOTE_DIR="/tmp/$DEV_ID/nammayatri"
+            REMOTE_DIR="/tmp/$DEV_ID/Qolari"
             echo "Target: $RUSER@$HOST:$REMOTE_DIR  port=$PORT" >&2
 
             # ── ssh key discovery; generate a key if the user has none ──
@@ -282,28 +282,28 @@ _:
                 break
               fi
             done
-            current_commit_hash=$( ${pkgs.jq}/bin/jq -r '.nodes."namma-dsl".locked.rev' "''${FLAKE_ROOT}/flake.lock" || true)
+            current_commit_hash=$( ${pkgs.jq}/bin/jq -r '.nodes."qolari-dsl".locked.rev' "''${FLAKE_ROOT}/flake.lock" || true)
             # Skip update check if using local path (current_commit_hash will be null)
             if [[ "$current_commit_hash" == "null" || -z "$current_commit_hash" ]];
             then
-              echo -e "\033[32mUsing local Namma-DSL path, skipping update check"
+              echo -e "\033[32mUsing local qolari-dsl path, skipping update check"
             else
-              latest_commit_hash=$(curl -s "https://api.github.com/repos/nammayatri/namma-dsl/commits/main" | jq -r '.sha' || true)
+              latest_commit_hash=$(curl -s "https://api.github.com/repos/Qolari/qolari-dsl/commits/main" | jq -r '.sha' || true)
               if [[ -z $latest_commit_hash ]];
               then
-                echo -e "\033[33mNot able to get status of Namma-DSL"
+                echo -e "\033[33mNot able to get status of qolari-dsl"
               else
                 if [[ "$current_commit_hash" != "$latest_commit_hash" ]]; then
-                    echo -e "\033[33mNamma-DSL in not up to date !!\nCurrent commit hash: $current_commit_hash\nLatest commit hash: $latest_commit_hash"
+                    echo -e "\033[33mqolari-dsl in not up to date !!\nCurrent commit hash: $current_commit_hash\nLatest commit hash: $latest_commit_hash"
                     if [[ $skip_update == false ]]; then
-                        echo -e "\033[33mUpdating Namma-DSL to latest commit";
-                        nix flake lock --update-input namma-dsl;
-                        echo -e "\033[32mNamma-DSL updated to latest commit\nPlease run nix develop again to use the updated version"
+                        echo -e "\033[33mUpdating qolari-dsl to latest commit";
+                        nix flake lock --update-input qolari-dsl;
+                        echo -e "\033[32mqolari-dsl updated to latest commit\nPlease run nix develop again to use the updated version"
                         echo -e "\033[00m";
                         exit 0
                     fi
                 else
-                    echo -e "\033[32mNamma-DSL is up to date";
+                    echo -e "\033[32mqolari-dsl is up to date";
                 fi
               fi
             fi
@@ -387,7 +387,7 @@ _:
         run-mobility-stack-nix = {
           category = "Backend";
           description = ''
-            Run the nammayatri backend components via Nix (This is slower, due to doing full nix build).
+            Run the Qolari backend components via Nix (This is slower, due to doing full nix build).
           '';
           exec = ''
             # Bump soft stack to the hard max. `nix run` spawns a fresh shell
@@ -409,7 +409,7 @@ _:
 
         run-mobility-stack-dev = {
           category = "Backend";
-          description = "Run the nammayatri backend + test-context-api + mock-server (no test-dashboard) on the fixed ports from ports.nix.";
+          description = "Run the Qolari backend + test-context-api + mock-server (no test-dashboard) on the fixed ports from ports.nix.";
           exec = ''
             echo "── Pre-flight: freeing service ports ──"
             ${killSvcPortsScript}
@@ -471,13 +471,13 @@ _:
               DEVBOX_KEY=$(${pkgs.jq}/bin/jq -r '.id // ""' "''${FLAKE_ROOT}/.devbox-id.json" 2>/dev/null || true)
             fi
             if [[ -z "$DEVBOX_KEY" ]]; then
-              DEVBOX_KEY=$(echo "''${FLAKE_ROOT}" | ${pkgs.gnused}/bin/sed -n 's|^/tmp/\([^/]*\)/nammayatri.*|\1|p')
+              DEVBOX_KEY=$(echo "''${FLAKE_ROOT}" | ${pkgs.gnused}/bin/sed -n 's|^/tmp/\([^/]*\)/Qolari.*|\1|p')
             fi
             if [[ -z "$DEVBOX_KEY" ]]; then
               DEVBOX_KEY="local-$(id -un 2>/dev/null || echo dev)"
             fi
             # Exported for: resolve-ports (self-exclusion), the Caddyfile eval,
-            # and nammayatri.nix (module + test-context-api) — all key off these.
+            # and Qolari.nix (module + test-context-api) — all key off these.
             DEVBOX_REGISTRY_FILE="$REGISTRY"
             export DEVBOX_KEY DEVBOX_REGISTRY_FILE
 
@@ -548,7 +548,7 @@ _:
               exit 1
             fi
 
-            # ── Record our slice in the registry so nammayatri.nix, the
+            # ── Record our slice in the registry so Qolari.nix, the
             #    Caddyfile, the dashboard and other developers can read it.
             #    ATOMIC (temp + rename): a concurrent reader — our own Nix eval,
             #    or another dev's preflight — never sees a half-written file.
@@ -576,7 +576,7 @@ _:
             #    The expression is single-quoted so the key never enters the Nix
             #    source text: it reads FLAKE_ROOT / DEVBOX_REGISTRY_FILE /
             #    DEVBOX_KEY via getEnv (same, injection-proof mechanism as
-            #    nammayatri.nix) and falls back to base ports.nix if the registry
+            #    Qolari.nix) and falls back to base ports.nix if the registry
             #    file is missing. ──
             echo "── Pre-flight: generating Caddyfile ──"
             mkdir -p "''${FLAKE_ROOT}/data"
@@ -640,7 +640,7 @@ _:
 
         run-mobility-stack-full = {
           category = "Backend";
-          description = "Run the FULL nammayatri stack in one terminal: backend + test-context-api + mock-server + test-local-api + test-dashboard.";
+          description = "Run the FULL Qolari stack in one terminal: backend + test-context-api + mock-server + test-local-api + test-dashboard.";
           exec = ''
             echo "── Pre-flight: freeing service ports ──"
             ${killSvcPortsScript}

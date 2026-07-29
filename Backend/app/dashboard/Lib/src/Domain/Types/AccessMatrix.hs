@@ -357,7 +357,7 @@ data UserActionType
   | CLEAR_FEE
   | PAN_AADHAAR_SELFIE_DETAILS
   | SYNC_DOC_AADHAR_PAN
-  | CREATE_NAMMA_TAG
+  | CREATE_QOLARI_TAG
   | TIME_BOUNDS
   | CREATE_CHAKRA_QUERY
   | MANUAL_TAG_UPDATE
@@ -419,7 +419,7 @@ genSingletons [''UserActionType]
 -------- Required access levels for helper api --------
 
 -- TODO ApiEntity will be deprecated when we move all apis to DSL. For now we use DSL api entity for all generated apis
-data ApiEntity = DSL | CUSTOMERS | DRIVERS | RIDES | MONITORING | MERCHANT | MESSAGE | REFERRAL | ISSUE | VOLUNTEER | SPECIAL_ZONES | SUBSCRIPTION | FLEET | OVERLAY | NAMMA_TAG | MIGRATION | FRFS | BHARAT_TAXI_USER
+data ApiEntity = DSL | CUSTOMERS | DRIVERS | RIDES | MONITORING | MERCHANT | MESSAGE | REFERRAL | ISSUE | VOLUNTEER | SPECIAL_ZONES | SUBSCRIPTION | FLEET | OVERLAY | QOLARI_TAG | MIGRATION | FRFS | BHARAT_TAXI_USER
   deriving (Show, Read, Generic, ToJSON, FromJSON, ToSchema, Eq, Ord)
 
 $(mkBeamInstancesForEnum ''ApiEntity)

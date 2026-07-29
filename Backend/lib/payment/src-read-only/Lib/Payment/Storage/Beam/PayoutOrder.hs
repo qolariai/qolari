@@ -1,4 +1,4 @@
-{-# LANGUAGE StandaloneDeriving #-}
+﻿{-# LANGUAGE StandaloneDeriving #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Lib.Payment.Storage.Beam.PayoutOrder where
@@ -8,14 +8,14 @@ import Kernel.Beam.Lib.UtilsTH
 import Kernel.External.Encryption
 import qualified Kernel.External.Encryption
 import qualified Kernel.External.Payout.Interface.Types
-import qualified Kernel.External.Payout.Juspay.Types.Payout
+import qualified Kernel.External.Payout.Qolari.Types.Payout
 import Kernel.Prelude
 import qualified Kernel.Prelude
 import qualified Kernel.Types.Common
 import qualified Lib.Payment.Domain.Types.Common
 
 data PayoutOrderT f = PayoutOrderT
-  { accountDetailsType :: B.C f (Kernel.Prelude.Maybe Kernel.External.Payout.Juspay.Types.Payout.AccountDetailsType),
+  { accountDetailsType :: B.C f (Kernel.Prelude.Maybe Kernel.External.Payout.Qolari.Types.Payout.AccountDetailsType),
     currency :: B.C f (Kernel.Prelude.Maybe Kernel.Types.Common.Currency),
     price :: B.C f Kernel.Types.Common.HighPrecMoney,
     city :: B.C f Kernel.Prelude.Text,
@@ -40,7 +40,7 @@ data PayoutOrderT f = PayoutOrderT
     responseMessage :: B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Text),
     retriedOrderId :: B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Text),
     shortId :: B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Text),
-    status :: B.C f Kernel.External.Payout.Juspay.Types.Payout.PayoutOrderStatus,
+    status :: B.C f Kernel.External.Payout.Qolari.Types.Payout.PayoutOrderStatus,
     transferAmount :: B.C f (Kernel.Prelude.Maybe Kernel.Types.Common.HighPrecMoney),
     transferId :: B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Text),
     transferStatus :: B.C f (Kernel.Prelude.Maybe Kernel.External.Payout.Interface.Types.TransferStatus),

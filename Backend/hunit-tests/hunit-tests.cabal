@@ -6,11 +6,11 @@
 
 name:           hunit-tests
 version:        0.1.0.0
-description:    NammaYatri HUnit tests
+description:    Qolari HUnit tests
 homepage:       https://github.com/qolariai/qolari#readme
 bug-reports:    https://github.com/qolariai/qolari/issues
-author:         nammayatri
-maintainer:     nammayatri
+author:         Qolari
+maintainer:     Qolari
 copyright:      2023 Qolari Technologies
 license:        AllRightsReserved
 build-type:     Simple

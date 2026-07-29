@@ -9,8 +9,8 @@ version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/qolariai/qolari#readme>
 homepage:       https://github.com/qolariai/qolari#readme
 bug-reports:    https://github.com/qolariai/qolari/issues
-author:         nammayatri
-maintainer:     nammayatri
+author:         Qolari
+maintainer:     Qolari
 copyright:      2023 Qolari Technologies
 license:        AllRightsReserved
 build-type:     Simple
@@ -105,10 +105,10 @@ library
       MerchantDocuments.Storage.CachedQueries.MerchantDocument
       MerchantDocuments.Tools.Error
       Registry.Beckn.Interface
-      Registry.Beckn.Interface.Nammayatri
+      Registry.Beckn.Interface.Qolari
       Registry.Beckn.Interface.Types
-      Registry.Beckn.Nammayatri.Flow
-      Registry.Beckn.Nammayatri.Types
+      Registry.Beckn.Qolari.Flow
+      Registry.Beckn.Qolari.Types
       Safety.Domain.Action.UI.PersonDefaultEmergencyNumber
       Safety.Domain.Action.UI.Sos
       Safety.Domain.Types.Common

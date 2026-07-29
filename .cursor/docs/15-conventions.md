@@ -1,4 +1,4 @@
-# Haskell Conventions
+﻿# Haskell Conventions
 
 ## Module Organization
 
@@ -141,6 +141,6 @@ Example: `backend/fix/GH-123/driver-allocation-bug`
 
 ## Related Docs
 
-- NammaDSL conventions: `07-namma-dsl.md`
+- QolariDSL conventions: `07-qolari-dsl.md`
 - Database patterns: `08-database-patterns.md`
 - Build commands: `02-build-and-dev.md`

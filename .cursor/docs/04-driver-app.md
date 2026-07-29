@@ -1,4 +1,4 @@
-# Driver App (BPP) Deep Dive
+﻿# Driver App (BPP) Deep Dive
 
 **Package**: `dynamic-offer-driver-app` | **Port**: 8016 | **Path**: `app/provider-platform/dynamic-offer-driver-app/`
 **Schema**: `atlas_driver_offer_bpp`
@@ -60,7 +60,7 @@ app/provider-platform/dynamic-offer-driver-app/
 ### Payments & Fees
 | Module | Purpose |
 |--------|---------|
-| `Payment.hs` | Payment processing, Juspay webhooks |
+| `Payment.hs` | Payment processing, Qolari webhooks |
 | `Payout.hs` | Driver payouts |
 | `ReferralPayout.hs` | Referral payout processing |
 | `Plan.hs` | Subscription plan management |

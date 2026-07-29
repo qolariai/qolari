@@ -612,7 +612,7 @@ rideAssignedReqHandler req = do
                       Payment.CANCELLED -> "Payment was cancelled. Please try again."
                       Payment.AUTHENTICATION_FAILED -> "Card authentication failed. Please use a different payment method."
                       Payment.AUTHORIZATION_FAILED -> "Card authorization failed. Please use a different payment method."
-                      Payment.JUSPAY_DECLINED -> "Payment was declined. Please use a different payment method."
+                      Payment.Qolari_DECLINED -> "Payment was declined. Please use a different payment method."
                       _ -> "Payment could not be processed. Please try again with a different payment method."
                 logError $ "Payment intent in non-capturable status " <> show order.status <> ", cancelling ride. PI: " <> paymentResp.paymentIntentId
                 handle (\(_ :: SomeException) -> pure ()) $
@@ -963,8 +963,8 @@ rideCompletedReqHandler ValidatedRideCompletedReq {..} = do
       ET.trackEvent booking.merchantId booking.merchantOperatingCityId (ET.FirstRideCompleted (getId booking.riderId))
 
   when (riderConfig.enableRideEndOffers) $ do
-    fork "computing offers namma tag" $
-      addOffersNammaTags updRide person
+    fork "computing offers Qolari tag" $
+      addOffersQolariTags updRide person
 
   -- we should create job for collecting money from customer
   let applicationFeeAmount' = fromMaybe 0 rideCommission
@@ -1173,7 +1173,7 @@ rideCompletedReqHandler ValidatedRideCompletedReq {..} = do
             ..
           }
 
-addOffersNammaTags ::
+addOffersQolariTags ::
   ( MonadFlow m,
     CoreMetrics m,
     EsqDBFlow m r,
@@ -1185,21 +1185,21 @@ addOffersNammaTags ::
   DRide.Ride ->
   DPerson.Person ->
   m ()
-addOffersNammaTags ride person = do
+addOffersQolariTags ride person = do
   decryptedMobileNumber <- mapM decrypt person.mobileNumber >>= fromMaybeM (InternalError "Customer has no mobile number")
   now <- getCurrentTime
   mbBooking <- QRB.findById ride.bookingId
   let mbTransactionId = (.transactionId) <$> mbBooking
   let rideData = mkRideData ride
       customerData = Y.CustomerData {mobileNumber = decryptedMobileNumber, gender = person.gender}
-  tags <- LYDL.computeNammaTagsWithExpiryAndDebugLog LYDL.Rider (cast person.merchantOperatingCityId) Yudhishthira.RideEndOffers mbTransactionId (Y.EndRideOffersTagData customerData rideData)
-  newTags <- modifiedNewNammaTags tags (fromMaybe [] person.customerNammaTags) now
+  tags <- LYDL.computeQolariTagsWithExpiryAndDebugLog LYDL.Rider (cast person.merchantOperatingCityId) Yudhishthira.RideEndOffers mbTransactionId (Y.EndRideOffersTagData customerData rideData)
+  newTags <- modifiedNewQolariTags tags (fromMaybe [] person.customerQolariTags) now
   when (not $ null newTags) $ do
-    CQPerson.updateCustomerTags (Just $ (fromMaybe [] person.customerNammaTags) <> newTags) person.id
+    CQPerson.updateCustomerTags (Just $ (fromMaybe [] person.customerQolariTags) <> newTags) person.id
     pushToKafka (RideEndOffersKafkaData ride.id person.id newTags now) "customer-ride-end-offers" person.id.getId
     Notify.notifyOnRideEndOffer person
   where
-    modifiedNewNammaTags newTags currTags now = do
+    modifiedNewQolariTags newTags currTags now = do
       let currValidParsedTags =
             foldr
               ( \tag acc ->
@@ -1435,7 +1435,7 @@ cancellationTransaction booking mbRide cancellationSource cancellationFee cancel
 
   unless (cancellationSource == DBCR.ByUser) $
     QBCR.upsert bookingCancellationReason
-  fork "Update namma tags and cancellation rate for customer cancellation" $ do
+  fork "Update Qolari tags and cancellation rate for customer cancellation" $ do
     when (cancellationSource == DBCR.ByUser) $ do
       case mbRide of
         Just ride -> do
@@ -1458,20 +1458,20 @@ cancellationTransaction booking mbRide cancellationSource cancellationFee cancel
                     merchantOperatingCityId = booking.merchantOperatingCityId,
                     driverArrivalTime
                   }
-          nammaTags <- withTryCatch "computeNammaTags:RideCancel" (LYDL.computeNammaTagsWithDebugLog LYDL.Rider (cast booking.merchantOperatingCityId) Yudhishthira.RideCancel (Just booking.transactionId) tagData)
-          logDebug $ "Tags for cancelled ride, rideId: " <> ride.id.getId <> " tagresults:" <> show (eitherToMaybe nammaTags)
-          let mbNammaTags = eitherToMaybe nammaTags
-          tagsWithExpiry <- forM (fromMaybe [] mbNammaTags) $ \tag -> Yudhishthira.fetchNammaTagExpiry (cast booking.merchantOperatingCityId) tag
+          QolariTags <- withTryCatch "computeQolariTags:RideCancel" (LYDL.computeQolariTagsWithDebugLog LYDL.Rider (cast booking.merchantOperatingCityId) Yudhishthira.RideCancel (Just booking.transactionId) tagData)
+          logDebug $ "Tags for cancelled ride, rideId: " <> ride.id.getId <> " tagresults:" <> show (eitherToMaybe QolariTags)
+          let mbQolariTags = eitherToMaybe QolariTags
+          tagsWithExpiry <- forM (fromMaybe [] mbQolariTags) $ \tag -> Yudhishthira.fetchQolariTagExpiry (cast booking.merchantOperatingCityId) tag
           person <- QP.findById booking.riderId >>= fromMaybeM (PersonNotFound booking.riderId.getId)
-          let existingTags = fromMaybe [] person.customerNammaTags
+          let existingTags = fromMaybe [] person.customerQolariTags
           let updatedTags = existingTags <> tagsWithExpiry
           CQPerson.updateCustomerTags (Just updatedTags) booking.riderId
-          let tags = fromMaybe [] mbNammaTags
+          let tags = fromMaybe [] mbQolariTags
           when (validCustomerCancellation `elem` tags) $ do
             windowSize <- CCR.getWindowSize booking.merchantOperatingCityId
             void $ CCR.incrementCancelledCount booking.riderId windowSize
             logDebug $ "Incremented cancellation count for customer: " <> booking.riderId.getId
-        Nothing -> logError "No ride found for customer cancellation, skipping namma tags and cancellation rate update"
+        Nothing -> logError "No ride found for customer cancellation, skipping Qolari tags and cancellation rate update"
   fork "Checking lifetime blocking condition for customer based on cancellation rate" $ do
     val :: Maybe Bool <- Redis.safeGet $ makeCustomerBlockingKey booking.id.getId
     when (val == Just True) $ do
@@ -1496,9 +1496,9 @@ cancellationTransaction booking mbRide cancellationSource cancellationFee cancel
         DRB.OneWayDetails details ->
           when (details.isUpgradedToCab == Just True) $ do
             person <- QP.findById booking.riderId >>= fromMaybeM (PersonNotFound booking.riderId.getId)
-            let personTags = fromMaybe [] person.customerNammaTags
+            let personTags = fromMaybe [] person.customerQolariTags
             unless (rejectUpgradeTag `Yudhishthira.elemTagNameValue` personTags) $ do
-              rejectUpgradeTagWithExpiry <- Yudhishthira.fetchNammaTagExpiry (cast booking.merchantOperatingCityId) rejectUpgradeTag
+              rejectUpgradeTagWithExpiry <- Yudhishthira.fetchQolariTagExpiry (cast booking.merchantOperatingCityId) rejectUpgradeTag
               CQPerson.updateCustomerTags (Just $ personTags <> [rejectUpgradeTagWithExpiry]) person.id
         _ -> pure ()
 
@@ -1795,7 +1795,7 @@ customerReferralPayout ride currency isValidRide riderConfig person_ merchantId 
             merchantOperatingCity <- CQMOC.findById merchantOperatingCityId >>= fromMaybeM (MerchantOperatingCityNotFound merchantOperatingCityId.getId)
             uid <- generateGUID
             let entityName = entity
-                payoutServiceFlow = Payout.JuspayFlow -- Stripe payouts are not supported
+                payoutServiceFlow = Payout.QolariFlow -- Stripe payouts are not supported
                 createPayoutOrderReq = Payout.mkCreatePayoutServiceReq uid amount currency phoneNo emailId person.id.getId payoutConfig.remark person.firstName (Just vpa) payoutConfig.orderType payoutServiceFlow Nothing
             logDebug $ "create payoutOrder with riderId: " <> person.id.getId <> " | amount: " <> show amount <> " | orderId: " <> show uid
             let createPayoutOrderCall = TP.createPayoutOrder person.clientSdkVersion merchantId merchantOperatingCityId (Just person.id.getId)

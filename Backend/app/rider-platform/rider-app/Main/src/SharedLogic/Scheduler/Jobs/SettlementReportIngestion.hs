@@ -27,7 +27,7 @@ import qualified EulerHS.Language as L
 import Kernel.Beam.Lib.UtilsTH (HasSchemaName)
 import Kernel.External.Encryption ()
 import qualified Kernel.External.Payment.Interface.Types as Payment
-import Kernel.External.Settlement.Types (JuspayOrderStatusConfig (..), SettlementService, SettlementServiceConfig)
+import Kernel.External.Settlement.Types (QolariOrderStatusConfig (..), SettlementService, SettlementServiceConfig)
 import Kernel.Prelude
 import qualified Kernel.Storage.Hedis as Hedis
 import Kernel.Tools.Metrics.CoreMetrics (CoreMetrics)
@@ -89,19 +89,19 @@ runSettlementReportIngestionJob Job {id, jobInfo} = withLogTag ("JobId-" <> id.g
         logWarning "No SettlementService configs found in MerchantServiceConfig"
         pure True -- success, nothing to do
       else do
-        mbJuspayCfg <- case jobData.juspayServiceName of
-          Just svcName -> getJuspayOrderStatusConfig merchantId merchantOperatingCityId svcName
+        mbQolariCfg <- case jobData.PaymentGatewayServiceName of
+          Just svcName -> getQolariOrderStatusConfig merchantId merchantOperatingCityId svcName
           Nothing -> pure Nothing
         -- Process each service independently, catch errors per-service to avoid one failure blocking others
         results <- forM settlementConfigs $ \settlementSvcCfg -> do
           logInfo $ "Processing settlement service: " <> show settlementSvcCfg.settlementService
-          let mbJuspayCfgForService =
-                if fromMaybe False settlementSvcCfg.useJuspayOrderStatus
-                  then mbJuspayCfg
+          let mbQolariCfgForService =
+                if fromMaybe False settlementSvcCfg.useQolariOrderStatus
+                  then mbQolariCfg
                   else Nothing
           serviceResult <-
             try @_ @SomeException $
-              ingestPaymentSettlementReport settlementSvcCfg mbJuspayCfgForService merchantId.getId merchantOperatingCityId.getId (\_ -> pure (Nothing, Nothing, Nothing))
+              ingestPaymentSettlementReport settlementSvcCfg mbQolariCfgForService merchantId.getId merchantOperatingCityId.getId (\_ -> pure (Nothing, Nothing, Nothing))
           case serviceResult of
             Left err -> do
               logError $ "Settlement ingestion for " <> show settlementSvcCfg.settlementService <> " threw exception: " <> show err
@@ -154,13 +154,13 @@ runSettlementReportIngestionJob Job {id, jobInfo} = withLogTag ("JobId-" <> id.g
           Nothing -> Nothing
       pure $ catMaybes configs
 
-    getJuspayOrderStatusConfig ::
+    getQolariOrderStatusConfig ::
       (MonadFlow m, CacheFlow m r, EsqDBFlow m r, Log m) =>
       Id DM.Merchant ->
       Id DMOC.MerchantOperatingCity ->
       DMSC.ServiceName ->
-      m (Maybe JuspayOrderStatusConfig)
-    getJuspayOrderStatusConfig mId mOpCityId svcName = do
+      m (Maybe QolariOrderStatusConfig)
+    getQolariOrderStatusConfig mId mOpCityId svcName = do
       mbCfg <-
         getOneConfig
           ( MerchantServiceConfigDimensions
@@ -171,14 +171,14 @@ runSettlementReportIngestionJob Job {id, jobInfo} = withLogTag ("JobId-" <> id.g
           )
           (Just (maybeToList <$> CQMSC.findByMerchantOpCityIdAndService mId mOpCityId svcName))
       case mbCfg >>= extractPaymentServiceConfig . (.serviceConfig) of
-        Just (Payment.JuspayConfig juspayCfg) ->
+        Just (Payment.PaymentGatewayConfig QolariCfg) ->
           pure . Just $
-            JuspayOrderStatusConfig
-              { juspayBaseUrl = juspayCfg.url,
-                juspayApiKey = juspayCfg.apiKey
+            QolariOrderStatusConfig
+              { QolariBaseUrl = QolariCfg.url,
+                QolariApiKey = QolariCfg.apiKey
               }
         _ -> do
-          logWarning $ "No Juspay MerchantServiceConfig found for juspayServiceName: " <> show svcName
+          logWarning $ "No Qolari MerchantServiceConfig found for PaymentGatewayServiceName: " <> show svcName
           pure Nothing
 
     extractPaymentServiceConfig :: DMSC.ServiceConfig -> Maybe Payment.PaymentServiceConfig
@@ -191,7 +191,7 @@ runSettlementReportIngestionJob Job {id, jobInfo} = withLogTag ("JobId-" <> id.g
       DMSC.PassPaymentServiceConfig cfg -> Just cfg
       DMSC.ParkingPaymentServiceConfig cfg -> Just cfg
       DMSC.MembershipPaymentServiceConfig cfg -> Just cfg
-      DMSC.JuspayWalletServiceConfig cfg -> Just cfg
+      DMSC.PaymentWalletServiceConfig cfg -> Just cfg
       _ -> Nothing
 
     scheduleNextIngestionJob ::

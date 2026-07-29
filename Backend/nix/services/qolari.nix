@@ -1,4 +1,4 @@
-# process-compose module for running the nammayatri stack
+﻿# process-compose module for running the Qolari stack
 ny:
 { config, pkgs, lib, ... }:
 let
@@ -40,10 +40,10 @@ let
 in
 {
   options = {
-    services.nammayatri = lib.mkOption {
+    services.Qolari = lib.mkOption {
       type = types.submodule {
         options = {
-          enable = lib.mkEnableOption "Enable nammayatri stack";
+          enable = lib.mkEnableOption "Enable Qolari stack";
           useCabal = lib.mkEnableOption "Use cabal instead of Nix";
           useCaddy = lib.mkOption {
             type = types.bool;
@@ -85,7 +85,7 @@ in
   config =
     let
       inherit (ny) inputs self' inputs';
-      cfg = config.services.nammayatri;
+      cfg = config.services.Qolari;
 
       # Metabase plugin JARs — deterministic, store-backed.
       #
@@ -117,7 +117,7 @@ in
             - first_name: Admin
               last_name: Dev
               password: metabase123
-              email: admin@nammayatri.local
+              email: admin@Qolari.local
           databases:
             - name: atlas_dev
               engine: postgres
@@ -176,9 +176,9 @@ in
         user = {
           first_name = "Admin";
           last_name = "Dev";
-          email = "admin@nammayatri.local";
+          email = "admin@Qolari.local";
           password = "metabase123";
-          site_name = "Nammayatri";
+          site_name = "Qolari";
         };
       };
 
@@ -226,7 +226,7 @@ in
         };
       };
 
-      # The cabal executables we want to run as part of the nammayatri service
+      # The cabal executables we want to run as part of the Qolari service
       # group.
       cabalExecutables = [
         "rider-app-exe"
@@ -363,7 +363,7 @@ in
               ];
               depends_on =
                 {
-                  "nammayatri-init".condition = "process_completed_successfully";
+                  "Qolari-init".condition = "process_completed_successfully";
                   "mock-registry".condition = "process_healthy";
                 } // (
                   if idx == 0 then { }
@@ -381,7 +381,7 @@ in
       backendProcs =
         cabalExecutables ++ [
           "rider-producer-exe"
-          "nammayatri-init"
+          "Qolari-init"
           "log-cleaner"
           "cache-restore"
           "cabal-build"
@@ -424,7 +424,7 @@ in
           (lib.mkIf (!inTestDash) (disableAll [ "test-local-api" "test-dashboard" "config-sync-server" ]))
           # When the backend slice is disabled, the test-dashboard / test-local-api
           # processes would otherwise wait on disabled backend processes
-          # (nammayatri-init, rider-app-exe, …) — process-compose treats that as
+          # (Qolari-init, rider-app-exe, …) — process-compose treats that as
           # a hard failure rather than auto-satisfying. Clear those depends_on
           # entries so the dashboard slice runs standalone.
           (lib.mkIf (!inBackend) {
@@ -477,7 +477,7 @@ in
             "db-primary-replica".shutdown.signal = lib.mkForce 9;
           })
           (lib.mkIf (cfg.profile == "backend" && cfg.useCaddy) (
-            let excluded = [ "caddy-reverse-proxy" "nammayatri-init" "cabal-build" "cache-restore" "osrm-server" ];
+            let excluded = [ "caddy-reverse-proxy" "Qolari-init" "cabal-build" "cache-restore" "osrm-server" ];
             in lib.listToAttrs (map
               (n: lib.nameValuePair n {
                 depends_on."caddy-reverse-proxy".condition = "process_healthy";
@@ -511,7 +511,7 @@ in
                 PRODUCER_HEALTHCHECK_PORT = toString ports.rider-producer-healthcheck;
               };
               depends_on = {
-                "nammayatri-init".condition = "process_completed_successfully";
+                "Qolari-init".condition = "process_completed_successfully";
                 "rider-app-exe".condition = "process_healthy";
                 "dynamic-offer-driver-app-exe".condition = "process_healthy";
                 "mock-registry".condition = "process_healthy";
@@ -520,7 +520,7 @@ in
             };
 
             # Things to do before local Haskell processes are started
-            nammayatri-init = {
+            Qolari-init = {
               imports = [ common ];
               depends_on = {
                 # Services
@@ -817,7 +817,7 @@ in
                     SETUP_CFG=$(find dist-newstyle -name "setup-config" -type f -print -quit 2>/dev/null || true)
                     if [ -n "$SETUP_CFG" ]; then
                       DETECTED_ROOT=$(strings "$SETUP_CFG" \
-                        | grep -m1 -oE '/[^ "]+/nammayatri/Backend' \
+                        | grep -m1 -oE '/[^ "]+/Qolari/Backend' \
                         | sed 's|/Backend.*|/Backend|' || true)
                       if [ -n "$DETECTED_ROOT" ] && [ "$DETECTED_ROOT" != "$(pwd)" ]; then
                         echo "$DETECTED_ROOT" > .ci-project-root
@@ -916,7 +916,7 @@ in
             };
 
 
-            # Processes from other repos in nammayatri GitHub org
+            # Processes from other repos in Qolari GitHub org
             beckn-gateway = {
               imports = [ common ];
               command = ny.config.haskellProjects.default.outputs.finalPackages.beckn-gateway;
@@ -931,7 +931,7 @@ in
               environment = {
                 SERVICE_PORT = toString ports.mock-registry;
               };
-              depends_on."nammayatri-init".condition = "process_completed_successfully";
+              depends_on."Qolari-init".condition = "process_completed_successfully";
               readiness_probe = {
                 http_get = {
                   host = "127.0.0.1";
@@ -1120,12 +1120,12 @@ in
             };
 
             # Test tools — dashboard, mock servers, context API
-            # Unified mock server for Juspay, Stripe, PayTM, Acko, SOS, WhatsApp, CMRL, CRIS, etc.
+            # Unified mock server for Qolari, Stripe, PayTM, Acko, SOS, WhatsApp, CMRL, CRIS, etc.
             mock-server = {
               imports = [ common ];
               command = "${pkgs.python3.withPackages (ps: [ ps.pynacl ps.psycopg2 ])}/bin/python3 dev/mock-servers/server.py --port ${toString ports.mock-server}";
               namespace = lib.mkForce "test";
-              depends_on."nammayatri-init".condition = "process_completed_successfully";
+              depends_on."Qolari-init".condition = "process_completed_successfully";
               availability = {
                 restart = "on_failure";
                 backoff_seconds = 20;
@@ -1175,7 +1175,7 @@ in
               imports = [ common ];
               command = "${pkgs.python3.withPackages (ps: with ps; [ pyyaml ])}/bin/python3 dev/test-tool/local-api/server.py";
               namespace = lib.mkForce "test";
-              depends_on."nammayatri-init".condition = "process_completed_successfully";
+              depends_on."Qolari-init".condition = "process_completed_successfully";
               availability = {
                 restart = "on_failure";
                 backoff_seconds = 20;
@@ -1257,7 +1257,7 @@ in
                   export MB_JETTY_PORT=${toString ports.metabase}
                   export MB_CONFIG_FILE_PATH=${metabaseConfigFile}
                   # Auto-complete the /setup wizard on first launch — see comment
-                  # next to `metabaseUserDefaults` in nammayatri.nix.
+                  # next to `metabaseUserDefaults` in Qolari.nix.
                   export MB_USER_DEFAULTS=${lib.escapeShellArg metabaseUserDefaults}
                   export MB_PLUGINS_DIR="$MB_PLUGINS"
                   # Pin CWD to the data dir so any stray writes (e.g. the H2
@@ -1311,7 +1311,7 @@ in
                 text = ''
                   set -uo pipefail
                   MB="http://127.0.0.1:${toString ports.metabase}"
-                  EMAIL="admin@nammayatri.local"
+                  EMAIL="admin@Qolari.local"
                   PASS="metabase123"
 
                   # 1. Try to log in. Success => setup-token clears automatically.
@@ -1342,10 +1342,10 @@ in
                       last_name: "Dev",
                       email: $email,
                       password: $pass,
-                      site_name: "Nammayatri"
+                      site_name: "Qolari"
                     },
                     prefs: {
-                      site_name: "Nammayatri",
+                      site_name: "Qolari",
                       site_locale: "en",
                       allow_tracking: false
                     },
@@ -1426,7 +1426,7 @@ in
               # Driver-proxy must own port 8016 before the app starts so any
               # consumer dialing localhost:8016 sees a working endpoint by the
               # time dynamic-offer-driver-app-exe is healthy. Merges with the
-              # depends_on chain set by haskellProcesses (nammayatri-init,
+              # depends_on chain set by haskellProcesses (Qolari-init,
               # mock-registry, and the previous cabalExecutable in the chain).
               depends_on."driver-proxy".condition = "process_healthy";
             };
@@ -1484,7 +1484,7 @@ in
                   '';
                 };
               depends_on = {
-                "nammayatri-init".condition = "process_completed_successfully";
+                "Qolari-init".condition = "process_completed_successfully";
               };
               readiness_probe = {
                 http_get = {
@@ -1532,7 +1532,7 @@ in
                 '';
               };
               depends_on = {
-                "nammayatri-init".condition = "process_completed_successfully";
+                "Qolari-init".condition = "process_completed_successfully";
               };
               readiness_probe = {
                 http_get = {

@@ -1,4 +1,4 @@
-"""Launcher spec parsing + templating.
+﻿"""Launcher spec parsing + templating.
 
 Reads YAML files from Backend/dev/test-tool/specs/*.yaml. Each spec describes
 how to run an external repo as a launcher (ports, inputs, stages, workflows,
@@ -25,7 +25,7 @@ else:
 
 
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent.parent  # nammayatri/
+PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent.parent  # Qolari/
 SPECS_DIR = SCRIPT_DIR.parent / "specs"
 
 _TEMPLATE_RE = re.compile(r"\$\{([^}]+)\}")

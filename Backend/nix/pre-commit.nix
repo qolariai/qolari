@@ -1,4 +1,4 @@
-# https://pre-commit.com/ hooks defined in Nix
+﻿# https://pre-commit.com/ hooks defined in Nix
 # cf. https://github.com/cachix/pre-commit-hooks.nix
 { pkgs, lib, ... }:
 
@@ -68,7 +68,7 @@
           # lines still match, which is intentional — we want to catch
           # those too.
           # Allowlist: DML targeting `system_configs` is permitted because that
-          # table holds NammaDSL kv_configs / runtime config that is schema-
+          # table holds QolariDSL kv_configs / runtime config that is schema-
           # coupled to the migration that adds it (and not in scope of
           # config-sync). Any DML matching the regex below that ALSO mentions
           # system_configs in the same line is filtered out before failing.
@@ -102,7 +102,7 @@
     yaml-constraint-tags = {
       enable = true;
       name = "yaml-constraint-tags";
-      description = "Reject unquoted YAML tags (e.g. !SecondaryKey) in Storage spec constraints — they are silently dropped by the NammaDSL parser";
+      description = "Reject unquoted YAML tags (e.g. !SecondaryKey) in Storage spec constraints — they are silently dropped by the QolariDSL parser";
       types = [ "file" ];
       pass_filenames = true;
       files = "Backend/.*/spec/Storage/.*\\.yaml$";
@@ -114,7 +114,7 @@
             if grep -nE '^[[:space:]]+[a-zA-Z_][a-zA-Z0-9_]*:[[:space:]]+![A-Za-z]+[[:space:]]*$' "''$f"; then
               echo "ERROR: ''$f contains unquoted YAML tag(s) in constraints (shown above)."
               echo "       Wrap the value in quotes, e.g. fieldName: \"!SecondaryKey\""
-              echo "       Unquoted !Tag values are parsed as YAML tags and silently dropped by the NammaDSL parser,"
+              echo "       Unquoted !Tag values are parsed as YAML tags and silently dropped by the QolariDSL parser,"
               echo "       producing an empty secondary-key list in the generated Beam file."
               fail=1
             fi

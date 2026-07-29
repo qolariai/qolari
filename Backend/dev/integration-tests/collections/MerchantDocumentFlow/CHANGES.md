@@ -1,4 +1,4 @@
-# MerchantDocumentFlow — Fix Summary
+﻿# MerchantDocumentFlow — Fix Summary
 
 ## What this flow tests
 
@@ -64,7 +64,7 @@ cd Backend/dev/test-tool/dashboard && npm run build
 ```
 
 **Root cause**: The dashboard enforces per-endpoint access via an `access_matrix` table.
-The `JUSPAY_ADMIN` role (id `37947162-3b5d-4ed6-bcac-08841be1534d`) had no rows in
+The `Qolari_ADMIN` role (id `37947162-3b5d-4ed6-bcac-08841be1534d`) had no rows in
 `atlas_bpp_dashboard.access_matrix` for any of the four MerchantDocument action types:
 - `PROVIDER_MANAGEMENT/MERCHANT/GET_MERCHANT_MERCHANT_DOCUMENT_LIST`
 - `PROVIDER_MANAGEMENT/MERCHANT/POST_MERCHANT_MERCHANT_DOCUMENT_CREATE`
@@ -73,12 +73,12 @@ The `JUSPAY_ADMIN` role (id `37947162-3b5d-4ed6-bcac-08841be1534d`) had no rows 
 
 These endpoints were added to the API but the access grants were never seeded for local dev.
 
-**Fix**: Feature migration `0024-merchant-document-access-matrix-juspay-admin.sql` — inserts
-`USER_FULL_ACCESS` rows for all four action types for the `JUSPAY_ADMIN` role.
+**Fix**: Feature migration `0024-merchant-document-access-matrix-Qolari-admin.sql` — inserts
+`USER_FULL_ACCESS` rows for all four action types for the `Qolari_ADMIN` role.
 
 Run it once against your local `atlas_bpp_dashboard`:
 ```bash
-psql -d atlas_dev -f Backend/dev/feature-migrations/0024-merchant-document-access-matrix-juspay-admin.sql
+psql -d atlas_dev -f Backend/dev/feature-migrations/0024-merchant-document-access-matrix-Qolari-admin.sql
 ```
 
 ---
@@ -110,12 +110,12 @@ This makes the collection safe to re-run at any time without manual DB cleanup.
 | File | Change |
 |------|--------|
 | `dev/test-tool/dashboard/src/services/postman-parser.ts` | Added `bpp_url` and `dashboard_url` to `URL_VAR_TO_SERVICE` proxy map |
-| `dev/feature-migrations/0024-merchant-document-access-matrix-juspay-admin.sql` | Grants JUSPAY_ADMIN `USER_FULL_ACCESS` for all 4 MerchantDocument dashboard APIs |
+| `dev/feature-migrations/0024-merchant-document-access-matrix-Qolari-admin.sql` | Grants Qolari_ADMIN `USER_FULL_ACCESS` for all 4 MerchantDocument dashboard APIs |
 | `collections/MerchantDocumentFlow/01-MerchantDocumentCRUD.json` | Added 2 pre-cleanup steps to delete leftover doc before Create, making the flow re-runnable |
 
 ## Re-run checklist
 
-1. Run migration `0024-merchant-document-access-matrix-juspay-admin.sql` against your local DB (one-time)
+1. Run migration `0024-merchant-document-access-matrix-Qolari-admin.sql` against your local DB (one-time)
 2. Make sure local services are running: `dynamic-offer-driver-app` (port 8016) and `provider-dashboard` (port 8018)
-3. Select environment **"Local - NAMMA_YATRI Bangalore (MerchantDocument)"** in the test runner
+3. Select environment **"Local - qolari Bangalore (MerchantDocument)"** in the test runner
 4. The flow creates and deletes its own document — safe to re-run without any DB reset

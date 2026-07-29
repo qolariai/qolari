@@ -1,9 +1,9 @@
-# access tokens with different roles
-@customer = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer}}
-@driver = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/driver}}
-@juspay_ops = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_ops}}
-@juspay_admin = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_admin}}
-@customer_service = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer_service}}
+﻿# access tokens with different roles
+@customer = {{bpp-dashboard/token/qolari_PARTNER/customer}}
+@driver = {{bpp-dashboard/token/qolari_PARTNER/driver}}
+@Qolari_ops = {{bpp-dashboard/token/qolari_PARTNER/Qolari_ops}}
+@Qolari_admin = {{bpp-dashboard/token/qolari_PARTNER/Qolari_admin}}
+@customer_service = {{bpp-dashboard/token/qolari_PARTNER/customer_service}}
 
 # @name healthcheck
 GET {{bpp-dashboard-host}}
@@ -12,7 +12,7 @@ GET {{bpp-dashboard-host}}
 
 # @name stuckBookingsCancel
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/booking/cancel/allStuck
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/booking/cancel/allStuck
 token: {{customer_service}}
 content-type: application/json
 
@@ -28,7 +28,7 @@ content-type: application/json
 
 # @name multipleBookingsSync
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/booking/sync
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/booking/sync
 content-type: application/json
 token: {{customer_service}}
 

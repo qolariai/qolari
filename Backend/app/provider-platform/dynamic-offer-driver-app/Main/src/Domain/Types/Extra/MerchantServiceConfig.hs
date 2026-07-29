@@ -1,4 +1,4 @@
-{-# LANGUAGE ApplicativeDo #-}
+﻿{-# LANGUAGE ApplicativeDo #-}
 
 module Domain.Types.Extra.MerchantServiceConfig where
 
@@ -94,7 +94,7 @@ data ServiceName
   | IncidentReportService IncidentReport.IncidentReportService
   | LLMChatCompletionService ChatCompletion.Types.LLMChatCompletionService
   | DashCamService Dashcam.DashcamService
-  | JuspayWalletService Payment.PaymentService
+  | PaymentWalletService Payment.PaymentService
   | PlasmaService Plasma.PlasmaService
   | InsuranceDeclarationService InsuranceProvider
   | PartnerSdkService PartnerSdkProvider
@@ -131,7 +131,7 @@ instance Show ServiceName where
   show (IncidentReportService s) = "IncidentReport_" <> show s
   show (LLMChatCompletionService s) = "LLMChatCompletion_" <> show s
   show (DashCamService s) = "DashCamService_" <> show s
-  show (JuspayWalletService s) = "JuspayWalletService_" <> show s
+  show (PaymentWalletService s) = "PaymentWalletService_" <> show s
   show (PlasmaService s) = "Plasma_" <> show s
   show (InsuranceDeclarationService s) = "InsuranceDeclaration_" <> show s
   show (PartnerSdkService s) = "PartnerSdk_" <> show s
@@ -231,8 +231,8 @@ instance Read ServiceName where
                  | r1 <- stripPrefix "DashCamService_" r,
                    (v1, r2) <- readsPrec (app_prec + 1) r1
                ]
-            ++ [ (JuspayWalletService v1, r2)
-                 | r1 <- stripPrefix "JuspayWalletService_" r,
+            ++ [ (PaymentWalletService v1, r2)
+                 | r1 <- stripPrefix "PaymentWalletService_" r,
                    (v1, r2) <- readsPrec (app_prec + 1) r1
                ]
             ++ [ (PlasmaService v1, r2)
@@ -298,7 +298,7 @@ data ServiceConfigD (s :: UsageSafety)
   | IncidentReportServiceConfig !IncidentReport.IncidentReportServiceConfig
   | LLMChatCompletionServiceConfig !ChatCompletion.Interface.Types.LLMChatCompletionServiceConfig
   | DashCamServiceConfig !DashcamInter.DashCamServiceConfig
-  | JuspayWalletServiceConfig !PaymentServiceConfig
+  | PaymentWalletServiceConfig !PaymentServiceConfig
   | PlasmaServiceConfig !Plasma.PlasmaServiceConfig
   | InsuranceDeclarationServiceConfig !IffcoTokioConfig
   | PartnerSdkServiceConfig !PartnerSdk.PartnerSdkConfig

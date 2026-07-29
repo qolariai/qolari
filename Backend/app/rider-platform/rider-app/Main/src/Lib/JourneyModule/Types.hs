@@ -1,4 +1,4 @@
-module Lib.JourneyModule.Types where
+﻿module Lib.JourneyModule.Types where
 
 import API.Types.RiderPlatform.Management.FRFSTicket
 import qualified API.Types.UI.FRFSTicketService as FRFSTicketServiceAPI
@@ -1345,8 +1345,8 @@ mkLegInfoFromFrfsSearchRequest frfsSearch@FRFSSR.FRFSSearch {..} journeyLeg jour
   integratedBPPConfig <- SIBC.findIntegratedBPPConfigFromEntity frfsSearch
   mRiderConfig <- getConfig (RiderConfigDimensions {merchantOperatingCityId = merchantOperatingCityId.getId}) (Just (CQRC.findByMerchantOperatingCityId merchantOperatingCityId))
   person <- QPerson.findById riderId >>= fromMaybeM (PersonNotFound riderId.getId)
-  let isPTBookingAllowedForUser = ("PTBookingAllowed#Yes" `elem` (maybe [] (map YTypes.getTagNameValueExpiry) person.customerNammaTags))
-  let isPTBookingNotAllowedForUser = ("PTBookingAllowed#No" `elem` (maybe [] (map YTypes.getTagNameValueExpiry) person.customerNammaTags))
+  let isPTBookingAllowedForUser = ("PTBookingAllowed#Yes" `elem` (maybe [] (map YTypes.getTagNameValueExpiry) person.customerQolariTags))
+  let isPTBookingNotAllowedForUser = ("PTBookingAllowed#No" `elem` (maybe [] (map YTypes.getTagNameValueExpiry) person.customerQolariTags))
   let isSearchFailed = fromMaybe False onSearchFailed
   let isCurrentLegBus = vehicleType == Spec.BUS
   let journeyModes = map (.mode) journeyLegs

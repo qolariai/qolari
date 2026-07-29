@@ -1,11 +1,11 @@
-# Run Integration Tests with RCA
+﻿# Run Integration Tests with RCA
 
-You are running NammaYatri integration tests and performing root cause analysis on failures.
+You are running Qolari integration tests and performing root cause analysis on failures.
 
 ## Test runner location
 - Script: `Backend/dev/integration-tests/run-tests.sh`
 - Collections: `Backend/dev/integration-tests/collections/`
-- Process-compose logs: `*.log` files in the project root (`/Users/khuzemakhomosi/Documents/international/nammayatri/`)
+- Process-compose logs: `*.log` files in the project root (`/Users/khuzemakhomosi/Documents/international/Qolari/`)
 
 ## Available test commands
 ```
@@ -25,7 +25,7 @@ For EACH test collection+city combination, follow this exact procedure:
 
 ### Step 1: Clear logs
 ```bash
-cd /Users/khuzemakhomosi/Documents/international/nammayatri
+cd /Users/khuzemakhomosi/Documents/international/Qolari
 : > rider-app-exe.log
 : > dynamic-offer-driver-app-exe.log
 : > rider-app-scheduler-exe.log
@@ -51,7 +51,7 @@ If the test fails, immediately collect ALL relevant logs and perform detailed an
 For each service, extract errors that occurred DURING the test window (logs are clean since we cleared them in step 1). Use grep to find errors but also look for context around the error (use -B5 -A5 for surrounding lines).
 
 ```bash
-ROOT="/Users/khuzemakhomosi/Documents/international/nammayatri"
+ROOT="/Users/khuzemakhomosi/Documents/international/Qolari"
 
 echo "=== RIDER-APP ERRORS ==="
 grep -n "ERROR\|error\|Exception\|FAIL\|400\|500\|not found\|NO_FARE\|not serviceable" "$ROOT/rider-app-exe.log" | grep -v "rdkafka\|kvdb" | tail -40
@@ -80,7 +80,7 @@ Based on the failing API from the test output, trace the full request lifecycle:
 
 - **Search fails**: Look for the search request ID in rider-app logs, then trace it to BPP via the beckn transaction ID. Check if on_search callback was received.
 - **Driver not found**: Check LTS logs for getNearbyDrivers calls, check driver_pool_config radius, check if driver was online and in correct geometry.
-- **Payment fails**: Check mock-server for Stripe/Juspay request handling, check if the right payment config exists.
+- **Payment fails**: Check mock-server for Stripe/Qolari request handling, check if the right payment config exists.
 - **Estimate empty**: Check BPP logs for fare_product/fare_policy lookup, check if progressive_details exist for the fare_policy_id.
 - **400 errors**: Extract the full error response body from the verbose test output — it usually contains the exact error message.
 - **Station/route empty**: Check if FRFS config, stop_information, route data exist for the city.

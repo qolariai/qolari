@@ -1,4 +1,4 @@
-{-# LANGUAGE ApplicativeDo #-}
+﻿{-# LANGUAGE ApplicativeDo #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Domain.Types.SearchRequest where
@@ -36,7 +36,7 @@ data SearchRequest = SearchRequest
     currency :: Kernel.Types.Common.Currency,
     customerCancellationDues :: Kernel.Prelude.Maybe Kernel.Types.Common.HighPrecMoney,
     customerLanguage :: Kernel.Prelude.Maybe Tools.Maps.Language,
-    customerNammaTags :: Kernel.Prelude.Maybe [Lib.Yudhishthira.Types.TagNameValue],
+    customerQolariTags :: Kernel.Prelude.Maybe [Lib.Yudhishthira.Types.TagNameValue],
     device :: Kernel.Prelude.Maybe Kernel.Prelude.Text,
     disabilityTag :: Kernel.Prelude.Maybe Kernel.Prelude.Text,
     distanceUnit :: Kernel.Types.Common.DistanceUnit,

@@ -1,7 +1,7 @@
-{
+﻿{
 	"info": {
 		"_postman_id": "international-onboarding-03-add-vehicle",
-		"name": "International Onboarding 03 - Add Vehicle (JUSPAY_ADMIN path + admin-approve + enable driver)",
+		"name": "International Onboarding 03 - Add Vehicle (Qolari_ADMIN path + admin-approve + enable driver)",
 		"description": "Adds a vehicle to the onboarded driver under the fleet owner (fleetOwnerId=... query param triggers `syncDriverOnboardingAsWithFDA` → DI.onboardingAs=FLEET_DRIVER), uploads RC + VehicleFront docs, admin-approves the RC, then enables the driver. Under the new refactor: RC approve fires `processOnboardingEvent(VehicleDocChanged)` → `forkRecomputeVehicleVerified` derives VRC.verified/approved from `FODVC.isApprovalSupported`. Driver `enabled` requires verified+approved+linked-vehicle (`DRCA.isRcActive` after activateRC). Ported from HelsinkiOnboarding/04-AddVehicle_AdminPath.json.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -235,8 +235,8 @@
 				"method": "GET",
 				"header": [ { "key": "token", "value": "{{driver_token}}" } ],
 				"url": {
-					"raw": "{{baseURL_namma_P}}/driver/profile",
-					"host": ["{{baseURL_namma_P}}"],
+					"raw": "{{baseURL_qolari_P}}/driver/profile",
+					"host": ["{{baseURL_qolari_P}}"],
 					"path": ["driver", "profile"]
 				}
 			}
@@ -263,8 +263,8 @@
 				"method": "GET",
 				"header": [ { "key": "token", "value": "{{driver_token}}" } ],
 				"url": {
-					"raw": "{{baseURL_namma_P}}/driver/vehicle/info?vehicleNo={{vehicle_reg_no}}",
-					"host": ["{{baseURL_namma_P}}"],
+					"raw": "{{baseURL_qolari_P}}/driver/vehicle/info?vehicleNo={{vehicle_reg_no}}",
+					"host": ["{{baseURL_qolari_P}}"],
 					"path": ["driver", "vehicle", "info"],
 					"query": [ { "key": "vehicleNo", "value": "{{vehicle_reg_no}}" } ]
 				}

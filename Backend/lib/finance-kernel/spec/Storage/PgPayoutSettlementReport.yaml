@@ -1,5 +1,5 @@
-# Finance Kernel - PG Payout Settlement Report Table
-# Namma-DSL YAML specification
+﻿# Finance Kernel - PG Payout Settlement Report Table
+# qolari-dsl YAML specification
 #
 # Purpose:
 #   One row per line in the Payment Gateway's payout settlement file.
@@ -46,7 +46,7 @@ PgPayoutSettlementReport:
     id: Id PgPayoutSettlementReport
 
     # --- Transaction identity ---
-    orderId: Text                                  # PG payout order ID (Juspay orderId)
+    orderId: Text                                  # PG payout order ID (Qolari orderId)
     txnId: Maybe Text                              # PG transaction ID
     rrn: Maybe Text                                # Bank Reference Number
     utr: Maybe Text                                # Unique Transaction Reference from bank
@@ -62,7 +62,7 @@ PgPayoutSettlementReport:
 
     # --- Payout recipient ---
     payoutCustomerId: Maybe Text                         # Driver / fleet owner / vendor internal ID
-    paymentGateway: Maybe Text                     # e.g. JUSPAY, RAZORPAY
+    paymentGateway: Maybe Text                     # e.g. Qolari, RAZORPAY
 
     # --- Beneficiary / Bank details ---
     beneficiaryIfsc: Maybe Text
@@ -81,11 +81,11 @@ PgPayoutSettlementReport:
     referenceType: Maybe Text                      # SPECIAL_ZONE_PAYOUT | DAILY_INCENTIVE | REGISTRATION_REFUND | etc.
 
     # --- Fulfillment details (from PG payout response) ---
-    fulfillmentId: Maybe Text                      # Juspay fulfillment ID
+    fulfillmentId: Maybe Text                      # Qolari fulfillment ID
     fulfillmentInstrumentType: Maybe FulfillmentInstrument   # IMPS | NEFT | RTGS | UPI
-    fulfillmentMethod: Maybe Text                  # e.g. JUSPAY_VPA | ACCOUNT_IFSC
-    fulfillmentTxnId: Maybe Text                    # Juspay fulfillment transaction ID
-    fulfillmentStatus: Maybe Text                  # Juspay fulfillment status text
+    fulfillmentMethod: Maybe Text                  # e.g. Qolari_VPA | ACCOUNT_IFSC
+    fulfillmentTxnId: Maybe Text                    # Qolari fulfillment transaction ID
+    fulfillmentStatus: Maybe Text                  # Qolari fulfillment status text
     fulfillmentResponseCode: Maybe Text
     fulfillmentResponseMessage: Maybe Text
     fulfillmentDate: Maybe UTCTime

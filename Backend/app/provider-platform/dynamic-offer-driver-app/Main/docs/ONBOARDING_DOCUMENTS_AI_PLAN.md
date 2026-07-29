@@ -1,6 +1,6 @@
-# AI Plan: Driver Onboarding Document Flows
+﻿# AI Plan: Driver Onboarding Document Flows
 
-Structured plan for implementing Pan onboarding, DriverGSTIN changes, and UDYAM certificate. Use this with the NammaDSL generator (YAML → `src-read-only`), and implement business logic in `src/`.
+Structured plan for implementing Pan onboarding, DriverGSTIN changes, and UDYAM certificate. Use this with the QolariDSL generator (YAML → `src-read-only`), and implement business logic in `src/`.
 
 ---
 
@@ -62,7 +62,7 @@ New document type “UDYAM Certificate”: extraction and verification both via 
 
 ### Steps
 
-1. **NammaDSL – new table**
+1. **QolariDSL – new table**
    - In `spec/Storage/DriverOnboarding.yaml` (or a new YAML if preferred), define:
      - **UdyamCertificate** (or **UdhyamCertificate** to match “udhyam” in spec):
        - Fields: `id`, `driverId`, `merchantId`, `merchantOperatingCityId`, `documentImageId1` (and optionally `documentImageId2`), `verificationStatus`, `verifiedBy`, Idfy request/response identifiers if needed, `createdAt`, `updatedAt`.

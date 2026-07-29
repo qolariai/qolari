@@ -1,8 +1,8 @@
-# Profiling Setup for NammaYatri Project
+﻿# Profiling Setup for Qolari Project
 
 <!-- Author: Vijay Gupta -->
 
-This guide explains how to enable profiling for Haskell projects, specifically for the `NammaYatri` project, and other Haskell projects using `haskell-flake`.
+This guide explains how to enable profiling for Haskell projects, specifically for the `Qolari` project, and other Haskell projects using `haskell-flake`.
 
 ## Step-by-Step Guide to Enable Profiling
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # Self-seeding integration test for the FleetRegistration verified-gate.
 # Runs the newman collection, then tears down the run's test fleet owner (PG + KV).
 # The FleetRegistration fleet-doc-config rows are left in place (feature config; the
@@ -36,9 +36,9 @@ else
   echo "== Teardown skipped (no fleet_owner_id exported) =="
 fi
 
-# Restore env: remove the FleetRegistration fleet-doc-config this run seeded (NAMMA/Bangalore).
+# Restore env: remove the FleetRegistration fleet-doc-config this run seeded (Qolari/Bangalore).
 MOC=f067bccf-5b34-fb51-a5a3-9d6fa6baac26
-echo "== Teardown: removing seeded FleetRegistration config (NAMMA/Bangalore) =="
+echo "== Teardown: removing seeded FleetRegistration config (Qolari/Bangalore) =="
 psql -h "$PGH" -p "$PGP" -d "$PGDB" -tA -c "DELETE FROM atlas_driver_offer_bpp.fleet_owner_document_verification_config WHERE document_type='FleetRegistration' AND merchant_operating_city_id='$MOC';" 2>/dev/null
 
 echo "== Done (newman exit=$RC) =="

@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "NY Ride OTP Flow (Special Zone)",
     "description": "End-to-end RideOTP flow: fresh driver + rider -> onboard -> search in special zone -> quote (no estimate) -> confirm -> OTP assigned -> driver starts with OTP -> end.\n\nPrerequisites:\n- Special location geometry must be seeded in the special-zone DB\n- fare_product with trip_category='OneWay_OneWayRideOtp' must exist for the pickup area\n- Environment must have sz_origin_lat/sz_origin_lon within a special zone\n- If no special zone is configured, this test will fail at the 'Has quotes' assertion",
@@ -67,9 +67,9 @@
           "raw": "{\n    \"mobileNumber\": \"{{_test_driver_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"{{driver_merchant_id}}\",\n    \"merchantOperatingCity\": \"{{city}}\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -107,9 +107,9 @@
           "raw": "{\n    \"otp\": \"{{login_otp}}\",\n    \"deviceToken\": \"test-device\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -237,9 +237,9 @@
           "raw": "{}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/plan/{{plan_id}}/subscribe",
+          "raw": "{{baseURL_qolari_P}}/plan/{{plan_id}}/subscribe",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "plan",
@@ -283,9 +283,9 @@
           "raw": "{}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -723,9 +723,9 @@
           "raw": "{\"specialZoneOtpCode\": \"{{sz_otp}}\", \"point\": {\"lat\": {{sz_origin_lat}}, \"lon\": {{sz_origin_lon}}}}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/otpRide/start",
+          "raw": "{{baseURL_qolari_P}}/driver/otpRide/start",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -776,9 +776,9 @@
           "raw": "{\"point\": {\"lat\": {{dest_lat}}, \"lon\": {{dest_lon}}}}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/end",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/end",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",

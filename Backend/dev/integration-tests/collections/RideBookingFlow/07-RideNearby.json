@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "07-RideNearby",
     "description": "Integration test for GET /{driverId}/nearby.\nSetup: registers 5 drivers at origin_lat/lon + 5 riders who each do a search from the same origin.\nAsserts: nearbyDriverCount >= 4 (other 4 drivers visible to driver1), nearbyCustomerCount >= 5.",
@@ -126,9 +126,9 @@
           "raw": "{\"mobileNumber\": \"{{_test_d1_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"{{driver_merchant_id}}\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -163,9 +163,9 @@
           "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-d1\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{_d1_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{_d1_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -202,9 +202,9 @@
           "raw": "{\"mobileNumber\": \"{{_test_d2_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"{{driver_merchant_id}}\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -239,9 +239,9 @@
           "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-d2\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{_d2_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{_d2_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -278,9 +278,9 @@
           "raw": "{\"mobileNumber\": \"{{_test_d3_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"{{driver_merchant_id}}\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -315,9 +315,9 @@
           "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-d3\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{_d3_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{_d3_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -354,9 +354,9 @@
           "raw": "{\"mobileNumber\": \"{{_test_d4_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"{{driver_merchant_id}}\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -391,9 +391,9 @@
           "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-d4\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{_d4_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{_d4_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -430,9 +430,9 @@
           "raw": "{\"mobileNumber\": \"{{_test_d5_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"{{driver_merchant_id}}\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -467,9 +467,9 @@
           "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-d5\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{_d5_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{_d5_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -780,9 +780,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/plan/{{plan_id}}/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
+          "raw": "{{baseURL_qolari_P}}/plan/{{plan_id}}/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "plan",
@@ -874,9 +874,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/plan/{{plan_id}}/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
+          "raw": "{{baseURL_qolari_P}}/plan/{{plan_id}}/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "plan",
@@ -968,9 +968,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/plan/{{plan_id}}/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
+          "raw": "{{baseURL_qolari_P}}/plan/{{plan_id}}/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "plan",
@@ -1062,9 +1062,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/plan/{{plan_id}}/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
+          "raw": "{{baseURL_qolari_P}}/plan/{{plan_id}}/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "plan",
@@ -1156,9 +1156,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/plan/{{plan_id}}/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
+          "raw": "{{baseURL_qolari_P}}/plan/{{plan_id}}/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "plan",
@@ -1521,9 +1521,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1573,9 +1573,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1625,9 +1625,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1677,9 +1677,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1729,9 +1729,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1774,7 +1774,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_test_rider1_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_test_rider1_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -1850,7 +1850,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_test_rider2_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_test_rider2_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -1926,7 +1926,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_test_rider3_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_test_rider3_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -2002,7 +2002,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_test_rider4_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_test_rider4_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -2078,7 +2078,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_test_rider5_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_test_rider5_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",

@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 
 module SharedLogic.Offer
   ( module SharedLogic.Offer,
@@ -148,7 +148,7 @@ offerListCache merchantId personId merchantOperatingCityId paymentServiceType pr
   let customerId = fromMaybe person.id.getId (req.customer <&> (.customerId))
       version = fromMaybe "N/A" riderConfig.offerListCacheVersion
   useDomainOffers <- TPayment.useDomainOffers merchantId merchantOperatingCityId Nothing DOrder.RideHailing
-  autoApplyOfferCodes <- getAutoApplyOfferCodes person.customerNammaTags
+  autoApplyOfferCodes <- getAutoApplyOfferCodes person.customerQolariTags
   offerListResp <-
     if useDomainOffers
       then do
@@ -580,7 +580,7 @@ offerListWithBasket merchantId personId merchantOperatingCityId paymentServiceTy
   isMultipleOrNoDeviceIdExist <- mkIsMultipleOrNoDeviceIdExist person
   let isDriverNumberSameAsCustomer = mkIsDriverNumberSameAsCustomer person mbRide
   useDomainOffers <- TPayment.useDomainOffers merchantId merchantOperatingCityId Nothing paymentServiceType
-  autoApplyOfferCodes <- getAutoApplyOfferCodes person.customerNammaTags
+  autoApplyOfferCodes <- getAutoApplyOfferCodes person.customerQolariTags
   productOffers <-
     if useDomainOffers
       then do

@@ -1,9 +1,9 @@
-name: config-pilot
+﻿name: config-pilot
 version: 0.1.0.0
-github: "nammayatri/nammayatri"
+github: "Qolari/Qolari"
 license: AllRightsReserved
-author: "nammayatri"
-maintainer: "nammayatri"
+author: "Qolari"
+maintainer: "Qolari"
 copyright: "2024 Moving Innovation Technologies Private Limited"
 
 description: Shared ConfigPilot framework for type-safe config fetching with dimension-based filtering and dynamic logic rollouts.

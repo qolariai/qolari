@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   Merchant: Domain.Types.Merchant
   MerchantOperatingCity: Domain.Types.MerchantOperatingCity
   MerchantMessageDefaultDataJSON: Domain.Types.Extra.MerchantMessage
@@ -385,8 +385,8 @@ MerchantServiceUsageConfig:
     insuranceService: fromMaybe (Kernel.External.Insurance.Types.Acko) insuranceService|E
     createRefunds: fromMaybe (Kernel.External.Payment.Types.Stripe)|I
     getRefunds: fromMaybe (Kernel.External.Payment.Types.Stripe)|I
-    createPayoutOrder: fromMaybe (Kernel.External.Payout.Types.Juspay)|I
-    payoutOrderStatus: fromMaybe (Kernel.External.Payout.Types.Juspay)|I
+    createPayoutOrder: fromMaybe (Kernel.External.Payout.Types.Qolari)|I
+    payoutOrderStatus: fromMaybe (Kernel.External.Payout.Types.Qolari)|I
     eventTrackingProviders: fromMaybe [Kernel.External.EventTracking.Types.Moengage]|I
     eventTrackingOverrides: Kernel.Utils.JSON.valueToMaybe =<< eventTrackingOverrides|E
   toTType:
@@ -465,8 +465,8 @@ MerchantServiceUsageConfig:
     deleteCard: "'Stripe'"
     createRefunds: "'Stripe'"
     getRefunds: "'Stripe'"
-    createPayoutOrder: "'Juspay'"
-    payoutOrderStatus: "'Juspay'"
+    createPayoutOrder: "'Qolari'"
+    payoutOrderStatus: "'Qolari'"
     getDistancesForScheduledRides: "'OSRM'"
     getFrfsAutocompleteDistances: "'OSRM'"
     getInstructionRoute: "'OSRM'"
@@ -720,7 +720,7 @@ PayoutConfig:
     isPayoutEnabled: "False"
     batchLimit: "10"
     maxRetryCount: "5"
-    remark: "'Cashback for metro ticket booking with NammaYatri'"
+    remark: "'Cashback for metro ticket booking with Qolari'"
     orderType: "'FULFILL_ONLY'"
     payoutEntity: "'PAYOUT_AWARD'"
     currency: "'INR'"

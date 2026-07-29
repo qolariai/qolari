@@ -1,4 +1,4 @@
-# Nammayatri Finance Module — Driver-Side Guide
+﻿# Qolari Finance Module — Driver-Side Guide
 
 A practical walk-through of the double-entry accounting model that powers the
 driver wallet, earnings, payouts, and the BPP (driver-app) ride lifecycle.
@@ -195,10 +195,10 @@ Business code never touches `AccountType` directly. It uses named **roles** in
 | `GovtDirectAsset`     | Asset               | GOVERNMENT_DIRECT    | TDS receivable (when we are the taxpayer)      |
 | `GovtDirectExpense`   | Expense             | GOVERNMENT_DIRECT    | Direct tax expense                             |
 | `ParkingFeeRecipient` | **Liability**       | AIRPORT              | Owed to airport/parking authority              |
-| `PGPaymentExpense`    | Expense             | PG_PAYMENT_JUSPAY    | PG fees we pay on incoming payments            |
-| `PGPaymentLiability`  | Liability           | PG_PAYMENT_JUSPAY    | Amount in PG settlement pipeline               |
-| `PGPayoutExpense`     | Expense             | PG_PAYOUT_JUSPAY     | PG fees we pay on driver payouts               |
-| `PGPayoutLiability`   | Liability           | PG_PAYOUT_JUSPAY     | Amount in PG payout pipeline                   |
+| `PGPaymentExpense`    | Expense             | PG_PAYMENT_Qolari    | PG fees we pay on incoming payments            |
+| `PGPaymentLiability`  | Liability           | PG_PAYMENT_Qolari    | Amount in PG settlement pipeline               |
+| `PGPayoutExpense`     | Expense             | PG_PAYOUT_Qolari     | PG fees we pay on driver payouts               |
+| `PGPayoutLiability`   | Liability           | PG_PAYOUT_Qolari     | Amount in PG payout pipeline                   |
 | `PGGstAsset`          | Asset               | GOVERNMENT_INDIRECT  | Input GST credit on PG fees                    |
 
 ### 2.3 The `transfer` API
@@ -398,8 +398,8 @@ equation is preserved on both sides: Assets +100 = Liabilities +100.
 
 **Why the ledger is "lazy".** Neither Step A nor Step B is written when the
 rider actually pays — they are both written when the **ride ends**. The
-nammayatri ledger is a **settlement record**, not a real-time money-movement
-feed. The real-time side of things lives in Juspay's books; the platform
+Qolari ledger is a **settlement record**, not a real-time money-movement
+feed. The real-time side of things lives in Qolari's books; the platform
 trusts the PG and only commits to its own ledger at business events it
 cares about (ride end, cancellation, payout). A more rigorous bank-grade
 ledger would write an entry at every micro-event:
@@ -410,7 +410,7 @@ ledger would write an entry at every micro-event:
 3. Ride completes           → DR RiderLiability   / CR DriverWalletLiability
 ```
 
-nammayatri collapses all three into the Step A + Step B pair at ride-end.
+Qolari collapses all three into the Step A + Step B pair at ride-end.
 It's a deliberate simplification that trades real-time visibility for a
 dramatically simpler settlement model — and since the PG is the
 authoritative source for steps 1 and 2 anyway, there's no business value
@@ -514,14 +514,14 @@ Driver wallet: **+48 − 0.48 = +47.52** net credit.
 
 Entry point:
 `Backend/app/provider-platform/dynamic-offer-driver-app/Main/src/Domain/Action/UI/Payout.hs:83`
-(Juspay webhook handler).
+(Qolari webhook handler).
 
 Two-step commit:
 
 1. **Create the payout ledger entry** via `createWalletEntryDelta` with a
    **negative** amount and reference `WalletPayout`. This debits
    `OwnerLiability` (wallet shrinks) and credits `PGPayoutLiability`
-   (the platform now owes Juspay the disbursement).
+   (the platform now owes Qolari the disbursement).
 2. **Mark redeemable entries as `PAID_OUT`** via `markEntriesAsPaidOut`
    (`Backend/lib/finance-kernel/src/Lib/Finance/Ledger/Service.hs:450`),
    stamping them with the `payoutRequestId`. This is purely a bookkeeping
@@ -561,5 +561,5 @@ history.
 | `Backend/app/provider-platform/dynamic-offer-driver-app/Main/src/SharedLogic/Finance/Wallet.hs`                    | Wallet helpers, reference-type constants, redeemable balance |
 | `Backend/app/provider-platform/dynamic-offer-driver-app/Main/src/Domain/Action/UI/Ride/EndRide/Internal.hs:460`    | `createDriverWalletTransaction` (ride completion)            |
 | `Backend/app/provider-platform/dynamic-offer-driver-app/Main/src/Domain/Action/UI/Ride/CancelRide/Internal.hs:256` | `cancelRideTransaction` (ride cancellation)                  |
-| `Backend/app/provider-platform/dynamic-offer-driver-app/Main/src/Domain/Action/UI/Payout.hs:83`                    | `juspayPayoutWebhookHandler` (payout)                        |
+| `Backend/app/provider-platform/dynamic-offer-driver-app/Main/src/Domain/Action/UI/Payout.hs:83`                    | `QolariPayoutWebhookHandler` (payout)                        |
 | `Backend/app/provider-platform/dynamic-offer-driver-app/Main/src/Domain/Action/UI/DriverWallet.hs`                 | Wallet API (balance, transactions)                           |

@@ -1,9 +1,9 @@
-"""ny-react-native launcher orchestrator.
+﻿"""ny-react-native launcher orchestrator.
 
 Driven by env vars (set by test-context-api before Popen):
     NY_RN_APP       customer | driver | both
     NY_RN_PLATFORM  android | ios
-    NY_RN_VARIANT   <Brand>  (e.g. lynx, NammaYatri, BharatTaxi)
+    NY_RN_VARIANT   <Brand>  (e.g. lynx, Qolari, BharatTaxi)
     NY_RN_PATH      optional explicit checkout path; default = <repo>/data/ny-react-native
 
 Pipeline:
@@ -51,31 +51,31 @@ def _validate_env() -> tuple[str, str, str]:
 
 
 def _check_ios_submodules(ny_rn_dir: Path, apps: list[str]) -> None:
-    """The nammayatri-ios submodule is required for iOS builds. On the
+    """The Qolari-ios submodule is required for iOS builds. On the
     current upstream branch it ships only ``mobility-customer/`` (no
     ``mobility-driver/``).
 
     Important asymmetry: the consumer (rider) Podfile DOES reference
-    ``nammayatri-ios/mobility-customer/`` for its podspecs, so we must
+    ``Qolari-ios/mobility-customer/`` for its podspecs, so we must
     fail loud if that's missing. The provider (driver) Podfile pulls
     ALL its pods from the ``ny-cocoapods-specs`` private spec repo
     instead — it does not reference any sibling subdir under
-    ``nammayatri-ios/``. So for provider builds we only check that the
+    ``Qolari-ios/``. So for provider builds we only check that the
     submodule itself populated (cheap sanity), not that any per-app
     subdir exists."""
     if os.environ.get("NY_RN_PLATFORM") != "ios":
         return
-    sub_root = ny_rn_dir / "nammayatri-ios"
+    sub_root = ny_rn_dir / "Qolari-ios"
     if not sub_root.is_dir() or not any(sub_root.iterdir()):
         print("")
         log.err(
-            f"nammayatri-ios/ submodule did not populate under {ny_rn_dir}"
+            f"Qolari-ios/ submodule did not populate under {ny_rn_dir}"
         )
         print(f"  iOS builds need this submodule for at least the spec source repo.")
         print(f"  Re-clone the parent repo over SSH so submodule auth carries through:")
         print(
             f"    rm -rf {ny_rn_dir} && git clone --recurse-submodules "
-            f"git@github.com:nammayatri/ny-react-native {ny_rn_dir}"
+            f"git@github.com:Qolari/ny-react-native {ny_rn_dir}"
         )
         print("  Or set NY_RN_PATH=…/your-checkout if you have one.")
         raise SystemExit(5)
@@ -86,13 +86,13 @@ def _check_ios_submodules(ny_rn_dir: Path, apps: list[str]) -> None:
         if not sub_dir.is_dir() or not any(sub_dir.iterdir()):
             print("")
             log.err(
-                f"nammayatri-ios/{sub} is missing or empty under {ny_rn_dir}"
+                f"Qolari-ios/{sub} is missing or empty under {ny_rn_dir}"
             )
-            print(f"  The consumer iOS Podfile expects podspecs under nammayatri-ios/{sub}/.")
+            print(f"  The consumer iOS Podfile expects podspecs under Qolari-ios/{sub}/.")
             print(f"  Re-clone the parent repo over SSH so submodule auth carries through:")
             print(
                 f"    rm -rf {ny_rn_dir} && git clone --recurse-submodules "
-                f"git@github.com:nammayatri/ny-react-native {ny_rn_dir}"
+                f"git@github.com:Qolari/ny-react-native {ny_rn_dir}"
             )
             print("  Or set NY_RN_PATH=…/your-checkout if you have one.")
             print(

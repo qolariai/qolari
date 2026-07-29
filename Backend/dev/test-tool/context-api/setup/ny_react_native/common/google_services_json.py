@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Write a placeholder ``google-services.json`` into the consumer/provider
 ``android/app/`` directory so the ``com.google.gms.google-services`` Gradle
 plugin can resolve a client matching whichever flavor.applicationId is being
@@ -20,15 +20,15 @@ from pathlib import Path
 
 PACKAGE_NAMES = [
     "com.mobility.movingtech", "com.mobility.movingtech.debug",
-    "in.juspay.nammayatri", "in.juspay.nammayatri.debug",
+    "com.qolari.drive", "com.qolari.drive.debug",
     "net.openkochi.yatri", "net.openkochi.yatri.debug",
     "in.mobility.manayatri", "in.mobility.manayatri.debug",
-    "in.juspay.jatrisaathi", "in.juspay.jatrisaathi.debug",
+    "com.qolari.saathi", "com.qolari.saathi.debug",
     "in.mobility.lynx", "in.mobility.lynx.debug",
     "in.mobility.bharattaxi", "in.mobility.bharattaxi.debug",
     "in.mobility.bharatTaxi", "in.mobility.bharatTaxi.debug",
-    "in.juspay.nammayatripartner", "in.juspay.nammayatripartner.debug",
-    "in.juspay.jatrisaathidriver", "in.juspay.jatrisaathidriver.debug",
+    "com.qolari.driver", "com.qolari.driver.debug",
+    "com.qolari.saathidriver", "com.qolari.saathidriver.debug",
     "com.mobility.movingtechdriver", "com.mobility.movingtechdriver.debug",
     "in.mobility.odishayatripartner", "in.mobility.odishayatripartner.debug",
     "in.mobility.keralasavaari", "in.mobility.keralasavaari.debug",

@@ -37,9 +37,9 @@ import qualified Domain.Action.UI.Payment as Payment
 import qualified Domain.Types.Merchant as DM
 import Environment
 import EulerHS.Prelude
-import qualified Kernel.External.Payment.Juspay.Webhook as Juspay
+import qualified Kernel.External.Payment.Gateway.Webhook as Qolari
 import qualified Kernel.External.Payment.Stripe.Webhook as Stripe
-import qualified Kernel.External.Payout.Juspay.Webhook as JuspayPayout
+import qualified Kernel.External.Payout.Qolari.Webhook as QolariPayout
 import qualified Kernel.Types.Beckn.Context as Context
 import Kernel.Types.Id
 import Kernel.Types.Servant (RawByteString (..))
@@ -70,7 +70,7 @@ type MainAPI =
              :> QueryParam "city" Context.City
              :> QueryParam "serviceType" TPayment.PaymentServiceType
              :> QueryParam "placeId" Text
-             :> Juspay.JuspayWebhookAPI
+             :> Qolari.QolariWebhookAPI
          )
     :<|> ( Capture "merchantId" (ShortId DM.Merchant)
              :> QueryParam "city" Context.City
@@ -91,7 +91,7 @@ type MainAPI =
     :<|> ( Capture "merchantId" (ShortId DM.Merchant)
              :> QueryParam "city" Context.City
              :> "v2"
-             :> JuspayPayout.JuspayPayoutWebhookAPI
+             :> QolariPayout.QolariPayoutWebhookAPI
          )
     :<|> Conductor.API
     :<|> Depot.API
@@ -117,13 +117,13 @@ mainServer =
   UI.handler
     -- :<|> Beckn.handler  -- TODO : Revert after 2.x release
     -- :<|> const Beckn.handler  -- TODO : Revert after 2.x release
-    :<|> juspayWebhookHandler
+    :<|> QolariWebhookHandler
     :<|> stripeWebhookHandler
     :<|> stripeTestWebhookHandler
     :<|> Dashboard.handlerV2
     :<|> UnifiedDashboard.handler
     :<|> Internal.handler
-    :<|> juspayPayoutWebhookHandlerV2
+    :<|> QolariPayoutWebhookHandlerV2
     :<|> Conductor.handler
     :<|> Depot.handler
     :<|> FRFSMetrics.handler
@@ -150,7 +150,7 @@ writeSwaggerHTMLFlow = lift $ BS.readFile "swagger/index.html"
 writeOpenAPIFlow :: FlowServer OpenAPI
 writeOpenAPIFlow = pure openAPI
 
-juspayWebhookHandler ::
+QolariWebhookHandler ::
   ShortId DM.Merchant ->
   Maybe Context.City ->
   Maybe TPayment.PaymentServiceType ->
@@ -158,8 +158,8 @@ juspayWebhookHandler ::
   BasicAuthData ->
   Value ->
   FlowHandler AckResponse
-juspayWebhookHandler merchantShortId mbCity mbServiceType mbPlaceId secret =
-  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo . Payment.juspayWebhookHandler merchantShortId mbCity mbServiceType mbPlaceId secret
+QolariWebhookHandler merchantShortId mbCity mbServiceType mbPlaceId secret =
+  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo . Payment.QolariWebhookHandler merchantShortId mbCity mbServiceType mbPlaceId secret
 
 stripeWebhookHandler ::
   ShortId DM.Merchant ->
@@ -183,11 +183,11 @@ stripeTestWebhookHandler ::
 stripeTestWebhookHandler merchantShortId mbCity mbServiceType mbPlaceId mbSigHeader =
   withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo . Payment.stripeTestWebhookHandler merchantShortId mbCity mbServiceType mbPlaceId mbSigHeader
 
-juspayPayoutWebhookHandlerV2 ::
+QolariPayoutWebhookHandlerV2 ::
   ShortId DM.Merchant ->
   Maybe Context.City ->
   BasicAuthData ->
   Value ->
   FlowHandler AckResponse
-juspayPayoutWebhookHandlerV2 merchantShortId mbOpCity secret value' =
-  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo $ Payout.juspayPayoutWebhookHandler merchantShortId mbOpCity secret value'
+QolariPayoutWebhookHandlerV2 merchantShortId mbOpCity secret value' =
+  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo $ Payout.QolariPayoutWebhookHandler merchantShortId mbOpCity secret value'

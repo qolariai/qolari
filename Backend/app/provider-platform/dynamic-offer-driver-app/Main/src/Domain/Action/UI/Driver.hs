@@ -3522,7 +3522,7 @@ refundByPayoutDriverFee (personId, _, opCityId) refundByPayoutReq = do
     person <- QPerson.findById personId >>= fromMaybeM (PersonNotFound personId.getId)
     (payoutServiceFlow, payoutServiceName, mbPersonBankAccount) <- Payout.getCreatePayoutServiceFlow (Payout.SubscriptionConfigOption serviceName) DEMSC.PayoutService person.clientSdkVersion opCityId person.id
     let payoutVpaValid = case payoutServiceFlow of
-          IPayout.JuspayFlow -> isJust mbVpa
+          IPayout.QolariFlow -> isJust mbVpa
           IPayout.StripeFlow -> True
     unless payoutVpaValid $ throwError (InternalError $ "payer vpa not present for " <> personId.getId)
     when payoutVpaValid $ do

@@ -1,4 +1,4 @@
-"""Gridline (Aadhaar/bank account verification) mock."""
+﻿"""Gridline (Aadhaar/bank account verification) mock."""
 
 import json
 import logging
@@ -22,7 +22,7 @@ _MOCK_AADHAAR_NUMBER = "123456789012"
 # Verification_Idfy secret. Hardcoded for the local NY Bangalore test env
 # (the async submit body carries only group_id=driverId, not merchant/city).
 # Routed via caddy (8016), which proxies the webhook path to the driver-app.
-CRC_WEBHOOK_URL = "http://localhost:8016/NAMMA_YATRI_PARTNER/Bangalore/service/idfy/verification"
+CRC_WEBHOOK_URL = "http://localhost:8016/qolari_PARTNER/Bangalore/service/idfy/verification"
 CRC_WEBHOOK_SECRET = "test-secret"
 
 

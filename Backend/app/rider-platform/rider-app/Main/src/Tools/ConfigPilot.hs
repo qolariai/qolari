@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-deprecations -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-deprecations -Wno-orphans #-}
 
 module Tools.ConfigPilot where
 
@@ -293,7 +293,7 @@ getTSServiceUrl = do
 -- | Map a LogicDomain's generic inner ConfigType to the rider-specific config-pilot cache
 -- ConfigType (i.e. what 'getConfigType' returns for that config's dimensions). Identity for
 -- configs whose cache type is already un-suffixed. Used at the dynamic invalidation sites in
--- Domain.Action.Dashboard.NammaTag, where only the generic runtime ConfigType is available;
+-- Domain.Action.Dashboard.QolariTag, where only the generic runtime ConfigType is available;
 -- passing the generic value straight to invalidateConfigInMem misses the suffixed Redis bucket.
 toCacheConfigType :: LYTU.ConfigType -> LYTU.ConfigType
 toCacheConfigType cfgType = case cfgType of

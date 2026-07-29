@@ -1,4 +1,4 @@
-module SharedLogic.FRFSStatus where
+﻿module SharedLogic.FRFSStatus where
 
 import API.Types.UI.FRFSTicketService
 import qualified API.Types.UI.FRFSTicketService as FRFSTicketService
@@ -392,7 +392,7 @@ frfsBookingStatus (personId, merchantId_) isMultiModalBooking withPaymentStatusR
                 orderShortId = paymentOrder.shortId.getShortId,
                 amount = paymentOrder.amount,
                 customerId = staticCustomerId,
-                customerEmail = fromMaybe "growth@nammayatri.in" personEmail,
+                customerEmail = fromMaybe "growth@drive.qolari.com" personEmail,
                 customerPhone = personPhone,
                 customerFirstName = person.firstName,
                 customerLastName = person.lastName,
@@ -505,7 +505,7 @@ makeTicketBookingPaymentAPIStatus PENDING_VBV = FRFSTicketService.PENDING
 makeTicketBookingPaymentAPIStatus CHARGED = FRFSTicketService.SUCCESS
 makeTicketBookingPaymentAPIStatus AUTHENTICATION_FAILED = FRFSTicketService.PENDING -- FRFSTicketService.FAILURE
 makeTicketBookingPaymentAPIStatus AUTHORIZATION_FAILED = FRFSTicketService.PENDING -- FRFSTicketService.FAILURE
-makeTicketBookingPaymentAPIStatus JUSPAY_DECLINED = FRFSTicketService.PENDING -- FRFSTicketService.FAILURE
+makeTicketBookingPaymentAPIStatus Qolari_DECLINED = FRFSTicketService.PENDING -- FRFSTicketService.FAILURE
 makeTicketBookingPaymentAPIStatus AUTHORIZING = FRFSTicketService.PENDING
 makeTicketBookingPaymentAPIStatus COD_INITIATED = FRFSTicketService.REFUNDED
 makeTicketBookingPaymentAPIStatus STARTED = FRFSTicketService.PENDING
@@ -537,7 +537,7 @@ addPaymentoffersTags totalPrice person = do
       Right offerListResp -> do
         let offerTags = createPaymentOfferTags offerListResp.offerResp
         unless (null offerTags) $ do
-          let currentTags = fromMaybe [] person.customerNammaTags
+          let currentTags = fromMaybe [] person.customerQolariTags
               -- Extract offer codes from new tags (format: "offerCode#STATUS") before wrapping
               newOfferCodes = mapMaybe extractOfferCode offerTags
               -- Remove existing tags that match any of the new offer codes

@@ -3046,7 +3046,7 @@ mapTxnStatusToPayoutStatus = \case
   Payment.CHARGED -> PayoutTypes.SUCCESS
   Payment.AUTHENTICATION_FAILED -> PayoutTypes.FAILURE
   Payment.AUTHORIZATION_FAILED -> PayoutTypes.FAILURE
-  Payment.JUSPAY_DECLINED -> PayoutTypes.FAILURE
+  Payment.Qolari_DECLINED -> PayoutTypes.FAILURE
   Payment.CANCELLED -> PayoutTypes.CANCELLED
   Payment.AUTO_REFUNDED -> PayoutTypes.REVERSED
   Payment.CLIENT_AUTH_TOKEN_EXPIRED -> PayoutTypes.INVALID

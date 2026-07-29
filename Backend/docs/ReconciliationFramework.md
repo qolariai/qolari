@@ -1,4 +1,4 @@
-# Reconciliation Framework
+﻿# Reconciliation Framework
 
 A recipe-driven framework in `finance-kernel` for cross-checking financial data across sources (DSR, PG settlements, ledger, subscriptions, driver_fees, payment_orders, etc.). Each recon is a single declarative `Recipe` value; the shared runner handles chunking, locking, persistence, and — via the sweep — re-checking previously-broken entries.
 
@@ -187,4 +187,4 @@ The B1/B2 columns and indices land via a single ddl-migration per app:
 - `dev/ddl-migrations/dynamic-offer-driver-app/0846-finance-reconciliation-entry-b1-b2-columns-and-indexes.sql`
 - `dev/ddl-migrations/rider-app/1555-finance-reconciliation-entry-b1-b2-columns-and-indexes.sql`
 
-Both use `IF NOT EXISTS` guards so a re-run is a no-op. Column definitions also flow through the `ReconciliationEntry.yaml` Namma-DSL spec so codegen keeps read-only migrations in sync for fresh provisions.
+Both use `IF NOT EXISTS` guards so a re-run is a no-op. Column definitions also flow through the `ReconciliationEntry.yaml` qolari-dsl spec so codegen keeps read-only migrations in sync for fresh provisions.

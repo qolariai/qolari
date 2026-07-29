@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 
 module Domain.Action.Dashboard.PayoutRequest
   ( deleteVpa,
@@ -74,7 +74,7 @@ verifyVpaForUpdateImpl :: PayoutTypes.UpdateVpaReq -> Environment.Flow ()
 verifyVpaForUpdateImpl req = do
   let driverId = (Id.Id req.personId) :: Id.Id DP.Person
   person <- QPerson.findById driverId >>= fromMaybeM (PersonNotFound driverId.getId)
-  paymentServiceName <- TPayment.decidePaymentService (DEMSC.PaymentService Payment.Juspay) person.clientSdkVersion person.merchantOperatingCityId
+  paymentServiceName <- TPayment.decidePaymentService (DEMSC.PaymentService Payment.Gateway) person.clientSdkVersion person.merchantOperatingCityId
   let verifyVPAReq =
         KT.VerifyVPAReq
           { orderId = Nothing,
@@ -102,7 +102,7 @@ refundRegistrationAmount merchantShortId opCity req = do
 
   -- Eligibility check: VPA must be captured via webhook, refund not already done
   let payoutVpaValid = case payoutServiceFlow of
-        IPayout.JuspayFlow -> driverInfo.payoutVpaStatus == Just DI.VIA_WEBHOOK && isJust driverInfo.payoutVpa
+        IPayout.QolariFlow -> driverInfo.payoutVpaStatus == Just DI.VIA_WEBHOOK && isJust driverInfo.payoutVpa
         IPayout.StripeFlow -> True
   unless (payoutVpaValid && isNothing driverInfo.payoutRegAmountRefunded) $
     throwError $ InvalidRequest $ "Driver not eligible for refund | driver id: " <> show driverId

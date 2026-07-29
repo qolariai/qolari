@@ -9,8 +9,8 @@ version:        0.1.0.0
 description:    Finance Kernel - Domain-agnostic financial primitives (Ledger, Account, Invoice, StateMachine, Audit)
 homepage:       https://github.com/qolariai/qolari#readme
 bug-reports:    https://github.com/qolariai/qolari/issues
-author:         nammayatri
-maintainer:     nammayatri
+author:         Qolari
+maintainer:     Qolari
 copyright:      2024 Qolari Technologies
 license:        AllRightsReserved
 build-type:     Simple
@@ -55,7 +55,7 @@ library
       Lib.Finance.Settlement.Ingestion
       Lib.Finance.Settlement.ParserTypeMap
       Lib.Finance.Settlement.Sources.Email
-      Lib.Finance.Settlement.Sources.JuspayApi
+      Lib.Finance.Settlement.Sources.QolariApi
       Lib.Finance.Settlement.Sources.SFTP
       Lib.Finance.Settlement.Transformer
       Lib.Finance.StateMachine.Interface

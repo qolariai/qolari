@@ -1,6 +1,6 @@
-# Nammayatri Backend - Data Flow and Handling
+﻿# Qolari Backend - Data Flow and Handling
 
-This document describes how data flows between different modules and systems (both internal and external) within the Nammayatri backend, based on the analysis of the codebase.
+This document describes how data flows between different modules and systems (both internal and external) within the Qolari backend, based on the analysis of the codebase.
 
 ## 1. Data Flow within Microservices
 
@@ -41,15 +41,15 @@ Asynchronous data flow is primarily handled via Kafka:
 
 ## 4. External System Integrations
 
-Data flows between the Nammayatri backend and various external third-party systems:
+Data flows between the Qolari backend and various external third-party systems:
 
 *   **BECKN/ONDC Protocol:**
     *   **Request/Response:** Data is exchanged with other BECKN-compliant platforms (BAPs, BPPs) via standardized JSON messages over HTTP.
     *   **API Definitions:** `lib/beckn-spec/` defines the precise structure of these messages and the Servant APIs for interaction.
     *   **Validation:** Incoming BECKN messages undergo rigorous validation (e.g., context, domain, action, version) to ensure protocol compliance.
-*   **Payment Gateways (Juspay):**
-    *   **Requests:** Payment-related data (e.g., order details, amounts) is sent to Juspay for processing.
-    *   **Webhooks:** Juspay sends back payment status updates and other transaction details via webhooks, which are consumed by the backend (`lib/webhook/`).
+*   **Payment Gateways (Qolari):**
+    *   **Requests:** Payment-related data (e.g., order details, amounts) is sent to Qolari for processing.
+    *   **Webhooks:** Qolari sends back payment status updates and other transaction details via webhooks, which are consumed by the backend (`lib/webhook/`).
     *   **Sensitive Data:** Payment data, especially client authentication tokens, is encrypted and hashed before storage or transmission.
 *   **Mapping Services (OSRM, Google Maps):**
     *   **Requests:** Location data (e.g., `LatLong` points) is sent to map services for route calculation, snap-to-road functionality, and distance estimation.

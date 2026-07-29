@@ -1,7 +1,7 @@
-{
+﻿{
   "info": {
     "name": "Student Pass Purchase Flow",
-    "description": "Tests PR #13586 (Student Pass). Flow: register PassOrganization (dashboard) \u2192 student submits PassDetails with CSV-derived routeDetails \u2192 admin verifies CLG_VERIFIED then MTC_VERIFIED \u2192 student lists Available Passes (verificationStatus=MTC_VERIFIED enables tier pricing) \u2192 student purchases the StudentPass via /multimodal/pass/v2/{passId}/select \u2192 mock Juspay CHARGED \u2192 verify in /multimodal/pass/list.",
+    "description": "Tests PR #13586 (Student Pass). Flow: register PassOrganization (dashboard) \u2192 student submits PassDetails with CSV-derived routeDetails \u2192 admin verifies CLG_VERIFIED then MTC_VERIFIED \u2192 student lists Available Passes (verificationStatus=MTC_VERIFIED enables tier pricing) \u2192 student purchases the StudentPass via /multimodal/pass/v2/{passId}/select \u2192 mock Qolari CHARGED \u2192 verify in /multimodal/pass/list.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "event": [
@@ -42,7 +42,7 @@
           "    console.log('Derived baseUrl_dashboard:', dash);",
           "}",
           "if (!pm.environment.get('bap_short_id') && !pm.variables.get('bap_short_id')) {",
-          "    pm.environment.set('bap_short_id', 'NAMMA_YATRI');",
+          "    pm.environment.set('bap_short_id', 'qolari');",
           "}",
           "if (!pm.environment.get('city') && !pm.variables.get('city')) {",
           "    pm.environment.set('city', 'Chennai');",
@@ -109,7 +109,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_test_admin_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_test_admin_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -551,7 +551,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_test_student_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_test_student_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -1307,7 +1307,7 @@
       }
     },
     {
-      "name": "Mock Juspay CHARGED",
+      "name": "Mock Qolari CHARGED",
       "event": [
         {
           "listen": "prerequest",
@@ -1318,7 +1318,7 @@
               "    url: pm.environment.get('mockServerUrl') + '/mock/override',",
               "    method: 'POST',",
               "    header: { 'Content-Type': 'application/json' },",
-              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"juspay\", \"extract\": \"path.2\", \"value\": pm.environment.get('payment_order_short_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}, \"match\": \"/orders\"}) }",
+              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"Qolari\", \"extract\": \"path.2\", \"value\": pm.environment.get('payment_order_short_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}, \"match\": \"/orders\"}) }",
               "}, function(){});"
             ],
             "type": "text/javascript"
@@ -1344,7 +1344,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"service\": \"juspay\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{payment_order_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}}"
+          "raw": "{\"service\": \"Qolari\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{payment_order_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}}"
         },
         "url": {
           "raw": "{{mockServerUrl}}/mock/override",
@@ -1610,7 +1610,7 @@
     },
     {
       "key": "bap_short_id",
-      "value": "NAMMA_YATRI"
+      "value": "qolari"
     },
     {
       "key": "bap_merchant_id",

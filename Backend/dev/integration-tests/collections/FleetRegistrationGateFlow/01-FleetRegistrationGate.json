@@ -1,7 +1,7 @@
-{
+﻿{
   "info": {
     "name": "FleetRegistrationGate - Verified gated on registration",
-    "description": "Self-seeding gate proof for the FleetRegistration change. Seeds the FleetRegistration fleet-doc-config for NAMMA_YATRI/Bangalore, creates a fleet owner via OTP, mints a /ui token, and asserts via the real onboarding-status API that FleetRegistration is a recognized mandatory fleet doc that is NOT valid before registration (so it gates `verified`). The post-registration flip (FleetRegistration->VALID, verified->true) is verified manually (see Rules.md) because fleet_owner_information is KV-backed and the only KV-correct way to set registered_at is the real /fleet/v2/register API (which requires the full PAN/Aadhaar onboarding chain).",
+    "description": "Self-seeding gate proof for the FleetRegistration change. Seeds the FleetRegistration fleet-doc-config for qolari/Bangalore, creates a fleet owner via OTP, mints a /ui token, and asserts via the real onboarding-status API that FleetRegistration is a recognized mandatory fleet doc that is NOT valid before registration (so it gates `verified`). The post-registration flip (FleetRegistration->VALID, verified->true) is verified manually (see Rules.md) because fleet_owner_information is KV-backed and the only KV-correct way to set registered_at is the real /fleet/v2/register API (which requires the full PAN/Aadhaar onboarding chain).",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "event": [
@@ -32,7 +32,7 @@
   ],
   "item": [
     {
-      "name": "01 - Switch Dashboard to NAMMA/Bangalore",
+      "name": "01 - Switch Dashboard to Qolari/Bangalore",
       "request": {
         "method": "POST",
         "header": [
@@ -217,7 +217,7 @@
             "value": "{{fleet_ui_token}}"
           }
         ],
-        "url": "{{baseURL_namma_P}}/driver/register/status?onlyMandatoryDocs=true"
+        "url": "{{baseURL_qolari_P}}/driver/register/status?onlyMandatoryDocs=true"
       },
       "event": [
         {

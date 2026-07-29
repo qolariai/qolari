@@ -1,4 +1,4 @@
-diff --git a/api/build/build.yaml b/api/build/build.yaml
+﻿diff --git a/api/build/build.yaml b/api/build/build.yaml
 index ec6cb9e..1461659 100644
 --- a/api/build/build.yaml
 +++ b/api/build/build.yaml
@@ -5068,7 +5068,7 @@ index ec6cb9e..1461659 100644
 -              bap_id: example-bap.com
 -              bap_uri: https://example-bap.com/prod/trv10
 -              bpp_id: >-
--                api.beckn.juspay.in/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
+-                api.beckn.qolari.com/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
 -              bpp_uri: https://example-bpp.com/prod/seller
 -              domain: ONDC:TRV10
 -              location:
@@ -5399,7 +5399,7 @@ index ec6cb9e..1461659 100644
                bap_id: example-bap.com
                bap_uri: https://example-bap.com/prod/trv10
 -              bpp_id: >-
--                api.beckn.juspay.in/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
+-                api.beckn.qolari.com/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
 +              bpp_id: example-bpp.com
                bpp_uri: https://example-bpp.com/prod/seller
                domain: ONDC:TRV10
@@ -7373,7 +7373,7 @@ index ec6cb9e..1461659 100644
 -                bap_id: example-bap.com
 -                bap_uri: https://example-bap.com/prod/trv10
 -                bpp_id: >-
--                  api.beckn.juspay.in/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
+-                  api.beckn.qolari.com/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
 -                bpp_uri: https://example-bpp.com/prod/seller
 -                domain: ONDC:TRV10
 -                location:
@@ -8240,9 +8240,9 @@ index ec6cb9e..1461659 100644
 -                version: 2.0.0
 -              message:
 -                support:
--                  email: support@nammayatri.in
+-                  email: support@Qolari.in
 -                  phone: '+918068870525'
--                  url: https://support.nammayatri.com/gethelp
+-                  url: https://support.qolari.com/gethelp
 -      on_track:
 -        examples:
 -          - *ref_23
@@ -17847,7 +17847,7 @@ index ec6cb9e..1461659 100644
 +              bap_id: example-bap.com
 +              bap_uri: https://example-bap.com/prod/trv10
 +              bpp_id: >-
-+                api.beckn.juspay.in/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
++                api.beckn.qolari.com/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
 +              bpp_uri: https://example-bpp.com/prod/seller
 +              domain: ONDC:TRV10
 +              location:
@@ -18182,7 +18182,7 @@ index ec6cb9e..1461659 100644
 +              bap_id: example-bap.com
 +              bap_uri: https://example-bap.com/prod/trv10
 +              bpp_id: >-
-+                api.beckn.juspay.in/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
++                api.beckn.qolari.com/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
 +              bpp_uri: https://example-bpp.com/prod/seller
 +              domain: ONDC:TRV10
 +              location:
@@ -34618,7 +34618,7 @@ index ec6cb9e..1461659 100644
 +                bap_id: example-bap.com
 +                bap_uri: https://example-bap.com/prod/trv10
 +                bpp_id: >-
-+                  api.beckn.juspay.in/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
++                  api.beckn.qolari.com/dobpp/beckn/7f7896dd-787e-4a0b-8675-e9e6fe93bb8f
 +                bpp_uri: https://example-bpp.com/prod/seller
 +                domain: ONDC:TRV10
 +                location:
@@ -35561,9 +35561,9 @@ index ec6cb9e..1461659 100644
 +                version: 2.1.0
 +              message:
 +                support:
-+                  email: support@nammayatri.in
++                  email: support@Qolari.in
 +                  phone: '+918068870525'
-+                  url: https://support.nammayatri.com/gethelp
++                  url: https://support.qolari.com/gethelp
 +      on_track:
 +        examples:
 +          - summary: Return_tracking_information_for_an_order___X23

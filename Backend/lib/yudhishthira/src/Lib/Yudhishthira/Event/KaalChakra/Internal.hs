@@ -1,4 +1,4 @@
-module Lib.Yudhishthira.Event.KaalChakra.Internal
+﻿module Lib.Yudhishthira.Event.KaalChakra.Internal
   ( Handle (..),
     kaalChakraEvent,
     clearEventData,
@@ -38,7 +38,7 @@ import qualified Lib.Yudhishthira.Event.KaalChakra.Parse as Parse
 import qualified Lib.Yudhishthira.Event.KaalChakra.Template as Template
 import Lib.Yudhishthira.Storage.Beam.BeamFlow
 import Lib.Yudhishthira.Storage.Queries.ChakraQueries as QChakraQueries
-import qualified Lib.Yudhishthira.Storage.Queries.NammaTagV2 as QNammaTagV2
+import qualified Lib.Yudhishthira.Storage.Queries.QolariTagV2 as QQolariTagV2
 import qualified Lib.Yudhishthira.Storage.Queries.UserData as QUserData
 import qualified Lib.Yudhishthira.Storage.Queries.UserDataExtra as QUserDataE
 import Lib.Yudhishthira.Tools.Error
@@ -46,7 +46,7 @@ import Lib.Yudhishthira.Tools.Utils
 import qualified Lib.Yudhishthira.Types as YT
 import qualified Lib.Yudhishthira.Types as Yudhishthira
 import qualified Lib.Yudhishthira.Types.ChakraQueries
-import qualified Lib.Yudhishthira.Types.NammaTagV2 as DNTv2
+import qualified Lib.Yudhishthira.Types.QolariTagV2 as DNTv2
 import qualified Lib.Yudhishthira.Types.UserData as DUserData
 
 data Handle m action = Handle
@@ -150,10 +150,10 @@ updateUserTagsHandlerInternal h req = withLogTag ("EventId-" <> req.eventId.getI
   let eventId = req.eventId
   startTime <- getCurrentTime
   chakraQueries <- QChakraQueries.findAllByChakra req.chakra
-  tags <- QNammaTagV2.findAllByChakra merchantOpCityId req.chakra
+  tags <- QQolariTagV2.findAllByChakra merchantOpCityId req.chakra
   -- used only for update tags expiry in DailyUpdateTag job
   mbAllTags <- case req.chakra of
-    Yudhishthira.Daily -> Just <$> QNammaTagV2.findAllByMerchantOperatingCityId merchantOpCityId
+    Yudhishthira.Daily -> Just <$> QQolariTagV2.findAllByMerchantOperatingCityId merchantOpCityId
     _ -> pure Nothing
 
   -- Skip LLM tags instead of throwing error
@@ -288,8 +288,8 @@ kaalChakraEventUser ::
   forall m r action.
   (BeamFlow m r, Monad m, Log m, Read action, Show action) =>
   Handle m action ->
-  [DNTv2.NammaTagV2] ->
-  Maybe [DNTv2.NammaTagV2] ->
+  [DNTv2.QolariTagV2] ->
+  Maybe [DNTv2.QolariTagV2] ->
   Id Yudhishthira.Event ->
   [Parse.DefaultDataMap] ->
   UTCTime ->
@@ -351,7 +351,7 @@ updateUserTagsExpiry ::
   Handle m action ->
   Id Yudhishthira.User ->
   UTCTime ->
-  Maybe [DNTv2.NammaTagV2] ->
+  Maybe [DNTv2.QolariTagV2] ->
   Maybe [Yudhishthira.TagNameValueExpiry] ->
   m (Maybe [Yudhishthira.TagNameValueExpiry])
 updateUserTagsExpiry _ _ _ Nothing mbOldTagsText = logDebug "User tags expiry updated only in DailyUpdateTag job" >> pure mbOldTagsText
@@ -363,7 +363,7 @@ updateUserTagsWithExtraAction ::
   Handle m action ->
   Id Yudhishthira.User ->
   UTCTime ->
-  Maybe [DNTv2.NammaTagV2] ->
+  Maybe [DNTv2.QolariTagV2] ->
   Maybe [Yudhishthira.TagNameValueExpiry] ->
   Maybe [Yudhishthira.TagNameValueExpiry] ->
   m () ->
@@ -386,17 +386,17 @@ updateUserTagsWithExtraAction h userId now mbAllTags mbOldTagsText mbNewTagsText
 -- it will work for all users with userData in DailyUpdateTag job
 addExpiryIfNotPresent ::
   UTCTime ->
-  Maybe [DNTv2.NammaTagV2] ->
+  Maybe [DNTv2.QolariTagV2] ->
   [Yudhishthira.TagNameValueExpiry] ->
   [Yudhishthira.TagNameValueExpiry]
 addExpiryIfNotPresent _now Nothing oldTags = oldTags
-addExpiryIfNotPresent now (Just allNammaTags) oldTags =
+addExpiryIfNotPresent now (Just allQolariTags) oldTags =
   oldTags <&> \tagValue ->
     if isNothing (parseTagExpiry tagValue)
       then fromMaybe tagValue $ do
         tagName <- parseTagName tagValue
-        nammaTag <- find (\nammaTag -> Yudhishthira.TagName nammaTag.name == tagName) allNammaTags
-        tagValidity <- nammaTag.validity
+        QolariTag <- find (\QolariTag -> Yudhishthira.TagName QolariTag.name == tagName) allQolariTags
+        tagValidity <- QolariTag.validity
         pure $ addTagExpiry (removeTagExpiry tagValue) (Just tagValidity) now
       else tagValue
 
@@ -450,8 +450,8 @@ appendUserDataValue (A.Object obj1) (A.Object obj2) = Left $ "User data for the 
 appendUserDataValue (A.Object _) val2 = Left $ "User data should be object: " <> show val2 <> "; skipping."
 appendUserDataValue val1 _ = Left $ "User data should be object: " <> show val1 <> "; skipping."
 
-mkTagAPIEntity :: DNTv2.NammaTagV2 -> Yudhishthira.TagAPIEntity
-mkTagAPIEntity DNTv2.NammaTagV2 {..} = Yudhishthira.TagAPIEntity {..}
+mkTagAPIEntity :: DNTv2.QolariTagV2 -> Yudhishthira.TagAPIEntity
+mkTagAPIEntity DNTv2.QolariTagV2 {..} = Yudhishthira.TagAPIEntity {..}
 
 mkRunKaalChakraJobResForUser ::
   Id Yudhishthira.User ->
@@ -465,8 +465,8 @@ mkRunKaalChakraJobResForUser userId userDataValue userOldTags userUpdatedTags = 
 applyRule ::
   Id Yudhishthira.User ->
   A.Value ->
-  DNTv2.NammaTagV2 ->
-  Either Text (DNTv2.NammaTagV2, Yudhishthira.TagValue)
+  DNTv2.QolariTagV2 ->
+  Either Text (DNTv2.QolariTagV2, Yudhishthira.TagValue)
 applyRule userId userDataValue tag = case tag.rule of
   Yudhishthira.RuleEngine logic -> do
     let eTagValueObj = JsonLogic.jsonLogicEither logic userDataValue
@@ -483,7 +483,7 @@ type TagsMap = M.Map Yudhishthira.TagName
 
 updateUserTagValues ::
   Id Yudhishthira.User ->
-  [(DNTv2.NammaTagV2, Yudhishthira.TagValue)] ->
+  [(DNTv2.QolariTagV2, Yudhishthira.TagValue)] ->
   Maybe [Yudhishthira.TagNameValueExpiry] ->
   UTCTime ->
   Either Text ([Yudhishthira.TagNameValueExpiry], [ActionData])
@@ -499,7 +499,7 @@ updateUserTagValues userId updatedTags (Just oldTagsText) now = do
   where
     foldFunc ::
       (TagsMap Yudhishthira.TagNameValueExpiry, TagsMap ActionData) ->
-      (DNTv2.NammaTagV2, Yudhishthira.TagValue) ->
+      (DNTv2.QolariTagV2, Yudhishthira.TagValue) ->
       (TagsMap Yudhishthira.TagNameValueExpiry, TagsMap ActionData)
     foldFunc (tagNameValueMapOld, actionDataMapOld) (tag, tagValueNew) = do
       let tagName = Yudhishthira.TagName tag.name
@@ -511,7 +511,7 @@ updateUserTagValues userId updatedTags (Just oldTagsText) now = do
       (tagNameValueMapNew, actionDataMapNew)
 
 data ActionData = ActionData
-  { tag :: DNTv2.NammaTagV2,
+  { tag :: DNTv2.QolariTagV2,
     tagValueNew :: Yudhishthira.TagValue,
     tagNameValueNew :: Yudhishthira.TagNameValueExpiry,
     tagNameValueOld :: Maybe Yudhishthira.TagNameValueExpiry -- only if it was present earlier

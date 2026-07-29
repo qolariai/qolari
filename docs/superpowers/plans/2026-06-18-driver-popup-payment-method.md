@@ -1,4 +1,4 @@
-# Driver Popup Payment Method (Cash / Online) Implementation Plan
+﻿# Driver Popup Payment Method (Cash / Online) Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -8,13 +8,13 @@
 
 > **Reviewer note (2026-06-22, @khuzema786):** Moved from `SearchRequest` to `SearchTry` — the instrument can be set at INSERT time (no separate UPDATE step), and the popup builder already has `searchTry` in scope so no extra DB read is needed.
 
-**Tech Stack:** Haskell, NammaDSL (YAML codegen), Beam/Sequelize KV, Cabal, `-Werror`.
+**Tech Stack:** Haskell, QolariDSL (YAML codegen), Beam/Sequelize KV, Cabal, `-Werror`.
 
 **Design doc:** `docs/superpowers/specs/2026-06-18-driver-popup-payment-method-design.md`
 
 ## Global Constraints
 
-- **NEVER edit files in `src-read-only/`** — they are generated from YAML specs via NammaDSL. Change the spec and run the generator.
+- **NEVER edit files in `src-read-only/`** — they are generated from YAML specs via QolariDSL. Change the spec and run the generator.
 - **`-Werror` is on** — unused imports/params/dodgy imports are compile errors.
 - **Build command (verification cycle):** `cd Backend && cabal build dynamic-offer-driver-app`. This codebase has no per-function unit-test harness for this layer; each task's "test" is a clean compile under `-Werror`, plus behavioral verification at the end via the integration framework.
 - **Generator command:** run from `Backend/` inside the nix shell: `, run-generator` (only changed specs).

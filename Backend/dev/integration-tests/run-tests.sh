@@ -1,5 +1,5 @@
-#!/bin/bash
-# Run NammaYatri integration tests against local dev environment
+﻿#!/bin/bash
+# Run Qolari integration tests against local dev environment
 #
 # Usage:
 #   ./run-tests.sh                                    # Run all ride booking suites for all cities
@@ -680,7 +680,7 @@ show_help() {
     echo "  phone-consent       Run rider phone-share consent gate suite (auto-seeds DirectCall + flushes Redis)"
     echo "  ./run-tests.sh toll-config NY_Bangalore       # Toll dashboard APIs (Bangalore)"
     echo "  ./run-tests.sh toll-config BT_Delhi           # Toll dashboard APIs (Delhi)"
-    echo "  ./run-tests.sh rewards NY_Bangalore           # Rewards APIs (Namma Yatri)"
+    echo "  ./run-tests.sh rewards NY_Bangalore           # Rewards APIs (Qolari)"
     echo "  ./run-tests.sh rewards BT_Delhi               # Rewards APIs (Bharat Taxi)"
     echo "  ./run-tests.sh toll-ride NY_Bangalore           # Toll on estimate + auto ride (Bangalore)"
     echo "  ./run-tests.sh toll-ride BT_Delhi             # Toll on estimate + auto ride (Delhi)"

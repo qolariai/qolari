@@ -18,7 +18,7 @@ module Domain.Action.UI.Payment
     getStatus,
     getStatusV2,
     getOrder,
-    juspayWebhookHandler,
+    QolariWebhookHandler,
     pdnNotificationStatus,
     postWalletRecharge,
     getWalletBalance,
@@ -59,9 +59,9 @@ import Kernel.Beam.Functions as B (runInReplica)
 import Kernel.External.Encryption
 import qualified Kernel.External.Notification.FCM.Types as FCM
 import qualified Kernel.External.Payment.Interface as DPayments
-import qualified Kernel.External.Payment.Interface.Juspay as Juspay
+import qualified Kernel.External.Payment.Interface.Qolari as Qolari
 import qualified Kernel.External.Payment.Interface.Types as Payment
-import qualified Kernel.External.Payment.Juspay.Types as Juspay
+import qualified Kernel.External.Payment.Gateway.Types as Qolari
 import qualified Kernel.External.Payment.Types as Payment
 import Kernel.External.Types (SchedulerType, ServiceFlow)
 import qualified Kernel.External.Wallet as Wallet
@@ -230,7 +230,7 @@ getStatus (personId, merchantId, merchantOperatingCityId) paymentOrderId = do
         fromMaybe
           (if isJust mbSubscriptionPurchase then DP.PREPAID_SUBSCRIPTION else DP.YATRI_SUBSCRIPTION)
           mbServiceName
-  if order.status == Juspay.CHARGED -- Consider CHARGED status as terminal status
+  if order.status == Qolari.CHARGED -- Consider CHARGED status as terminal status
     then do
       return $
         DPayment.PaymentStatus
@@ -266,12 +266,12 @@ getStatus (personId, merchantId, merchantOperatingCityId) paymentOrderId = do
         CQSC.findSubscriptionConfigsByMerchantOpCityIdAndServiceName merchantOperatingCityId Nothing serviceName
           >>= fromMaybeM (NoSubscriptionConfigForService merchantOperatingCityId.getId $ show serviceName)
       driver <- B.runInReplica $ QP.findById (cast order.personId) >>= fromMaybeM (PersonDoesNotExist order.personId.getId)
-      -- Wallet topup uses AirportReachargeService (separate Juspay account); STCL uses MembershipPaymentService; otherwise use the service config's payment service name
+      -- Wallet topup uses AirportReachargeService (separate Qolari account); STCL uses MembershipPaymentService; otherwise use the service config's payment service name
       paymentServiceName <-
         if isWalletTopupOrder
-          then pure $ DMSC.AirportReachargeService Payment.Juspay
+          then pure $ DMSC.AirportReachargeService Payment.Gateway
           else do
-            let defaultPaymentServiceName = if isStclOrder then DMSC.MembershipPaymentService Payment.Juspay else serviceConfig.paymentServiceName
+            let defaultPaymentServiceName = if isStclOrder then DMSC.MembershipPaymentService Payment.Gateway else serviceConfig.paymentServiceName
             Payment.decidePaymentService defaultPaymentServiceName driver.clientSdkVersion driver.merchantOperatingCityId
       paymentStatus <- DPayment.orderStatusService commonMerchantOperatingCityId commonPersonId paymentOrderId (orderStatusCall paymentServiceName (Just order.personId.getId))
       case paymentStatus of
@@ -286,7 +286,7 @@ getStatus (personId, merchantId, merchantOperatingCityId) paymentOrderId = do
           logDebug $ "Invoices: " <> show invoices
           let isOneTimeSecurityInvoice = any (\inv -> inv.paymentMode == INV.ONE_TIME_SECURITY_INVOICE && inv.invoiceStatus == INV.ACTIVE_INVOICE) invoices
           let isPayoutRegistration = order.entityName == Just DPayment.PAYOUT_REGISTRATION
-          -- Legacy path: merchants without auto-refund enabled at Juspay still receive CHARGED for the ₹2 registration.
+          -- Legacy path: merchants without auto-refund enabled at Qolari still receive CHARGED for the ₹2 registration.
           when ((isOneTimeSecurityInvoice || isPayoutRegistration) && status == Payment.CHARGED) do
             whenJust payerVpa $ \vpa -> do
               updatePayoutVpaAndStatusByRole driver.role order.personId vpa
@@ -382,15 +382,15 @@ getStatusV2 tokenDetails orderIdText = do
 
 -- webhook ----------------------------------------------------------
 
-juspayWebhookHandler ::
+QolariWebhookHandler ::
   ShortId DM.Merchant ->
   Maybe Context.City ->
   Maybe DP.ServiceNames ->
   BasicAuthData ->
   Value ->
   Flow AckResponse
-juspayWebhookHandler merchantShortId mbOpCity mbServiceName authData value = do
-  logDebug $ "Juspay Webhook Raw Value: " <> show value
+QolariWebhookHandler merchantShortId mbOpCity mbServiceName authData value = do
+  logDebug $ "Qolari Webhook Raw Value: " <> show value
   merchant <- findMerchantByShortId merchantShortId
   now <- getCurrentTime
   merchantOperatingCityId <- CQMOC.getMerchantOpCityId Nothing merchant mbOpCity
@@ -402,14 +402,14 @@ juspayWebhookHandler merchantShortId mbOpCity mbServiceName authData value = do
       >>= fromMaybeM (NoSubscriptionConfigForService merchantOperatingCityId.getId $ show serviceName')
   merchantServiceConfig <-
     getOneConfig (MerchantServiceConfigDimensions {merchantOperatingCityId = merchantOperatingCityId.getId, merchantId = Nothing, serviceName = Just (subscriptionConfig.paymentServiceName)}) (Just (maybeToList <$> CQMSC.findByServiceAndCity (subscriptionConfig.paymentServiceName) merchantOperatingCityId))
-      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "Payment" (show Payment.Juspay))
+      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "Payment" (show Payment.Gateway))
   psc <- case merchantServiceConfig.serviceConfig of
     DMSC.PaymentServiceConfig psc' -> pure psc'
     DMSC.RentalPaymentServiceConfig psc' -> pure psc'
     DMSC.CautioPaymentServiceConfig psc' -> pure psc'
     DMSC.MembershipPaymentServiceConfig psc' -> pure psc'
     _ -> throwError $ InternalError "Unknown Service Config"
-  orderStatusResp <- Juspay.orderStatusWebhook psc (DPayment.juspayWebhookService commonMerchantOperatingCityId) authData value
+  orderStatusResp <- Qolari.orderStatusWebhook psc (DPayment.QolariWebhookService commonMerchantOperatingCityId) authData value
   osr <- case orderStatusResp of
     Nothing -> throwError $ InternalError "Order Contents not found."
     Just osr' -> pure osr'
@@ -432,7 +432,7 @@ juspayWebhookHandler merchantShortId mbOpCity mbServiceName authData value = do
             then do
               driver <- B.runInReplica $ QP.findById (cast order.personId) >>= fromMaybeM (PersonDoesNotExist order.personId.getId)
               let mbVpa = payerVpa <|> ((.payerVpa) =<< upi)
-              -- Legacy path: pre-auto-refund Juspay merchants emit CHARGED on the registration ₹2.
+              -- Legacy path: pre-auto-refund Qolari merchants emit CHARGED on the registration ₹2.
               when (transactionStatus == Payment.CHARGED) $ do
                 whenJust mbVpa $ \vpa -> updatePayoutVpaAndStatusByRole driver.role order.personId vpa
                 logDebug $ "PAYOUT_REGISTRATION CHARGED for order " <> show order.id <> " | Vpa: " <> show mbVpa
@@ -441,7 +441,7 @@ juspayWebhookHandler merchantShortId mbOpCity mbServiceName authData value = do
                 when (isJust mbVpa) $ fork ("processing backlog payout for driver " <> order.personId.getId) $ PayoutA.processPreviousPayoutAmount (cast order.personId) mbVpa merchantOperatingCityId
               -- Auto-refund path: post-toggle merchants emit AUTO_REFUND_INITIATED / AUTO_REFUND_SUCCEEDED instead of CHARGED.
               case eventName of
-                Just Juspay.AUTO_REFUND_INITIATED -> do
+                Just Qolari.AUTO_REFUND_INITIATED -> do
                   whenJust mbVpa $ \vpa -> updatePayoutVpaAndStatusByRole driver.role order.personId vpa
                   logDebug $ "AUTO_REFUND_INITIATED for registration order " <> show order.id <> " | Vpa: " <> show mbVpa
                   QOrder.updateVpa order.id mbVpa
@@ -451,7 +451,7 @@ juspayWebhookHandler merchantShortId mbOpCity mbServiceName authData value = do
                   mbDriverFee <- QDF.findLatestByFeeTypeAndStatusWithServiceName PAYOUT_REGISTRATION [PAYMENT_PENDING] (cast order.personId) DP.YATRI_SUBSCRIPTION
                   whenJust mbDriverFee $ \df -> QDF.updateStatus REFUND_PENDING df.id now
                   updatePayoutRegAmountRefundedByRole driver.role order.personId Registration.registrationAmount
-                Just Juspay.AUTO_REFUND_SUCCEEDED -> do
+                Just Qolari.AUTO_REFUND_SUCCEEDED -> do
                   mbDriverFee <- QDF.findLatestByFeeTypeAndStatusWithServiceName PAYOUT_REGISTRATION [REFUND_PENDING] (cast order.personId) DP.YATRI_SUBSCRIPTION
                   whenJust mbDriverFee $ \df -> QDF.updateStatus REFUNDED df.id now
                 _ -> pure ()
@@ -459,7 +459,7 @@ juspayWebhookHandler merchantShortId mbOpCity mbServiceName authData value = do
               (invoices, serviceName, serviceConfig, driver) <- getInvoicesAndServiceWithServiceConfigByOrderId order
               logDebug $ "Invoices: " <> show invoices
               when (order.entityName == Just DPayment.DRIVER_STCL || order.paymentServiceType == Just DOrder.STCL) $ do
-                logDebug $ "STCL order detected in juspayWebhookHandler, calling stclMemberShipOrderStatusHandler for order: " <> show orderShortId
+                logDebug $ "STCL order detected in QolariWebhookHandler, calling stclMemberShipOrderStatusHandler for order: " <> show orderShortId
                 let stclPaymentStatusResp =
                       DPayment.PaymentStatus
                         { orderId = order.id,
@@ -567,7 +567,7 @@ processWalletTopupWebhook driver order transactionStatus = do
                   isVat = False,
                   issuedToTaxNo = Nothing,
                   issuedByTaxNo = Nothing,
-                  paymentMode = Just "ONLINE", -- wallet topup goes through Juspay; always online
+                  paymentMode = Just "ONLINE", -- wallet topup goes through Qolari; always online
                   periodStart = Nothing,
                   periodEnd = Nothing
                 }
@@ -908,7 +908,7 @@ notifyAndUpdateInvoiceStatusIfPaymentFailed ::
   Id DP.Person ->
   Id DOrder.PaymentOrder ->
   Payment.TransactionStatus ->
-  Maybe Juspay.PaymentStatus ->
+  Maybe Qolari.PaymentStatus ->
   Maybe Text ->
   Bool ->
   (DP.ServiceNames, DSC.SubscriptionConfig) ->
@@ -938,8 +938,8 @@ notifyAndUpdateInvoiceStatusIfPaymentFailed driverId orderId orderStatus eventNa
       sendNotificationIfNotSent key 3600 $ fork "Sending payment failure notification" (PaymentNudge.notifyPaymentFailure driverId paymentMode mbBankErrorCode serviceName)
 
     toNotifyFailure isActiveExecutionInvoice_ eventName_ orderStatus_ = do
-      let validStatus = orderStatus_ `elem` [Payment.AUTHENTICATION_FAILED, Payment.AUTHORIZATION_FAILED, Payment.JUSPAY_DECLINED]
-      case (isActiveExecutionInvoice_, eventName_ == Just Juspay.ORDER_FAILED) of
+      let validStatus = orderStatus_ `elem` [Payment.AUTHENTICATION_FAILED, Payment.AUTHORIZATION_FAILED, Payment.Qolari_DECLINED]
+      case (isActiveExecutionInvoice_, eventName_ == Just Qolari.ORDER_FAILED) of
         (True, False) -> (validStatus, False)
         (_, _) -> (validStatus, validStatus)
 
@@ -1001,10 +1001,10 @@ processNotification ::
 processNotification merchantOpCityId notification notificationStatus respCode respMessage driverFee driver fromWebhook = do
   let driverFeeId = driverFee.id
   now <- getCurrentTime
-  unless (notification.status == Juspay.SUCCESS) $ do
+  unless (notification.status == Qolari.SUCCESS) $ do
     transporterConfig <- getOneConfig (TransporterConfigDimensions {merchantOperatingCityId = driver.merchantOperatingCityId.getId}) (Just (SCTC.findByMerchantOpCityId driver.merchantOperatingCityId Nothing)) >>= fromMaybeM (TransporterConfigNotFound driver.merchantOperatingCityId.getId)
     case notificationStatus of
-      Juspay.NOTIFICATION_FAILURE -> do
+      Qolari.NOTIFICATION_FAILURE -> do
         --- here based on notification status failed update driver fee to payment_overdue and reccuring invoice----
         mbIsNotificationSchedulerRunning <- SLDriverFee.isNotificationSchedulerRunningKey driverFee.startTime driverFee.endTime merchantOpCityId driverFee.serviceName
         let isRetryEligibleError = case (mbIsNotificationSchedulerRunning, respCode) of
@@ -1020,7 +1020,7 @@ processNotification merchantOpCityId notification notificationStatus respCode re
             else do
               QDF.updateAutoPayToManual driverFeeId
               QIN.updateInvoiceStatusByDriverFeeIdsAndMbPaymentMode INV.INACTIVE [driverFeeId] (Just INV.AUTOPAY_INVOICE)
-      Juspay.SUCCESS -> do
+      Qolari.SUCCESS -> do
         --- based on notification status Success udpate driver fee autoPayPaymentStage to Execution scheduled -----
         unless (driverFee.status == CLEARED) $ do
           QIN.updateInvoiceStatusByDriverFeeIdsAndMbPaymentMode INV.ACTIVE_INVOICE [driverFeeId] (Just INV.AUTOPAY_INVOICE)

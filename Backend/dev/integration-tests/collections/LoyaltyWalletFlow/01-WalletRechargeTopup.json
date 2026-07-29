@@ -1,7 +1,7 @@
-{
+﻿{
   "info": {
     "name": "Wallet Recharge - Topup Earn (test-Zumgy8FTRw)",
-    "description": "Recharges the loyalty wallet via /payment/wallet/recharge, overrides the Juspay order-status mock to return CHARGED with a TOPUP earn of 500 points for the configured programId, then triggers the order-status check. Verifies the wallet balance reflects the topup.",
+    "description": "Recharges the loyalty wallet via /payment/wallet/recharge, overrides the Qolari order-status mock to return CHARGED with a TOPUP earn of 500 points for the configured programId, then triggers the order-status check. Verifies the wallet balance reflects the topup.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "event": [
@@ -59,7 +59,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"NAMMA_YATRI\"\n}"
+          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"qolari\"\n}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -170,7 +170,7 @@
       }
     },
     {
-      "name": "Override Juspay Status (CHARGED + Topup Earn 500)",
+      "name": "Override Qolari Status (CHARGED + Topup Earn 500)",
       "event": [
         {
           "listen": "prerequest",
@@ -181,7 +181,7 @@
               "    url: pm.environment.get('mockServerUrl') + '/mock/override',",
               "    method: 'POST',",
               "    header: { 'Content-Type': 'application/json' },",
-              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"juspay\", \"extract\": \"path.2\", \"value\": pm.environment.get('wallet_order_short_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 500.0, \"effective_amount\": 500.0, \"currency\": \"INR\", \"payment_method_type\": \"NB\", \"payment_method\": \"JP_HDFC\", \"loyalty_info\": {\"earn_details\": [{\"program_id\": \"{{loyalty_program_id}}\", \"applied\": {\"points\": \"500.00\"}, \"campaigns\": []}]}}, \"match\": \"/orders\"}) }",
+              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"Qolari\", \"extract\": \"path.2\", \"value\": pm.environment.get('wallet_order_short_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 500.0, \"effective_amount\": 500.0, \"currency\": \"INR\", \"payment_method_type\": \"NB\", \"payment_method\": \"JP_HDFC\", \"loyalty_info\": {\"earn_details\": [{\"program_id\": \"{{loyalty_program_id}}\", \"applied\": {\"points\": \"500.00\"}, \"campaigns\": []}]}}, \"match\": \"/orders\"}) }",
               "}, function(){});"
             ],
             "type": "text/javascript"
@@ -212,7 +212,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"service\": \"juspay\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{wallet_order_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 500.0, \"effective_amount\": 500.0, \"currency\": \"INR\", \"payment_method_type\": \"NB\", \"payment_method\": \"JP_HDFC\", \"loyalty_info\": {\"earn_details\": [{\"program_id\": \"{{loyalty_program_id}}\", \"applied\": {\"points\": \"500.00\"}, \"campaigns\": []}]}}}"
+          "raw": "{\"service\": \"Qolari\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{wallet_order_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 500.0, \"effective_amount\": 500.0, \"currency\": \"INR\", \"payment_method_type\": \"NB\", \"payment_method\": \"JP_HDFC\", \"loyalty_info\": {\"earn_details\": [{\"program_id\": \"{{loyalty_program_id}}\", \"applied\": {\"points\": \"500.00\"}, \"campaigns\": []}]}}}"
         },
         "url": {
           "raw": "{{mockServerUrl}}/mock/override",
@@ -227,7 +227,7 @@
       }
     },
     {
-      "name": "Stage Juspay Loyalty Programs Response",
+      "name": "Stage Qolari Loyalty Programs Response",
       "event": [
         {
           "listen": "test",
@@ -254,7 +254,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"service\": \"juspay\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"loyalty\", \"response\": {\"status\": \"OK\", \"programs\": [{\"id\": \"{{loyalty_program_id}}\", \"code\": \"LOYALTYOS7\", \"burn\": {\"options\": []}, \"earn\": {\"status\": \"ELIGIBLE\", \"applicable\": {\"label\": \"Earn points\", \"points\": \"0.00\"}}, \"campaigns\": [], \"membership\": {\"enroll_on\": \"AUTO\", \"enrolled_date\": \"2026-04-16T11:42:19Z\", \"status\": \"ACTIVE\"}, \"topup\": {\"status\": \"ELIGIBLE\"}, \"ui_label\": {\"asset\": {\"code\": \"POINTS\", \"name\": \"Points\"}, \"description\": \"Earn and redeem points at 1:1 ratio\", \"title\": \"Loyalty Points Program\", \"tnc\": \"Points are valid for 12 months from date of credit\", \"tnc_url\": \"https://example.com/tnc\"}, \"wallet\": {\"available_points\": \"500.00\", \"lifetime_earned\": \"500.00\", \"lifetime_redeemed\": \"0.00\", \"pockets\": [{\"label\": \"TOPUP Points\", \"available_points\": \"500.00\", \"lifetime_earned\": \"500.00\", \"lifetime_redeemed\": \"0.00\"}]}}]}}"
+          "raw": "{\"service\": \"Qolari\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"loyalty\", \"response\": {\"status\": \"OK\", \"programs\": [{\"id\": \"{{loyalty_program_id}}\", \"code\": \"LOYALTYOS7\", \"burn\": {\"options\": []}, \"earn\": {\"status\": \"ELIGIBLE\", \"applicable\": {\"label\": \"Earn points\", \"points\": \"0.00\"}}, \"campaigns\": [], \"membership\": {\"enroll_on\": \"AUTO\", \"enrolled_date\": \"2026-04-16T11:42:19Z\", \"status\": \"ACTIVE\"}, \"topup\": {\"status\": \"ELIGIBLE\"}, \"ui_label\": {\"asset\": {\"code\": \"POINTS\", \"name\": \"Points\"}, \"description\": \"Earn and redeem points at 1:1 ratio\", \"title\": \"Loyalty Points Program\", \"tnc\": \"Points are valid for 12 months from date of credit\", \"tnc_url\": \"https://example.com/tnc\"}, \"wallet\": {\"available_points\": \"500.00\", \"lifetime_earned\": \"500.00\", \"lifetime_redeemed\": \"0.00\", \"pockets\": [{\"label\": \"TOPUP Points\", \"available_points\": \"500.00\", \"lifetime_earned\": \"500.00\", \"lifetime_redeemed\": \"0.00\"}]}}]}}"
         },
         "url": {
           "raw": "{{mockServerUrl}}/mock/override",

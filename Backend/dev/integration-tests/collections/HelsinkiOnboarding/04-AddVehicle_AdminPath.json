@@ -1,7 +1,7 @@
-{
+﻿{
 	"info": {
 		"_postman_id": "helsinki-onboarding-04a-add-vehicle-admin",
-		"name": "Helsinki Onboarding 04A - Add Vehicle (JUSPAY_ADMIN path)",
+		"name": "Helsinki Onboarding 04A - Add Vehicle (Qolari_ADMIN path)",
 		"description": "Adds a vehicle to the onboarded driver under the fleet owner, uploads RC + VehicleFront docs, admin-approves both. Matches the working pattern in 01-StripeRideFlow.json (add via /driver/{driverId}/addVehicle) plus the doc-workflow proven in 01-FleetOwnerOnboarding.json.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},

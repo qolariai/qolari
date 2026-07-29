@@ -1,7 +1,7 @@
-# Process-compose packages for the nammayatri stack.
+﻿# Process-compose packages for the Qolari stack.
 #
-# Four top-level configs, each importing the shared nammayatri service module
-# (Backend/nix/services/nammayatri.nix) with a different `profile`:
+# Four top-level configs, each importing the shared Qolari service module
+# (Backend/nix/services/Qolari.nix) with a different `profile`:
 #
 #   run-mobility-stack-nix    → full stack, nix-built executables.
 #   run-mobility-stack-dev    → backend + test-context-api + mock-server
@@ -22,29 +22,29 @@
       let
         commonFor = profile: { config, ... }: {
           imports = [
-            (import ./services/nammayatri.nix { inherit (perSystem) config self' inputs'; inherit inputs; })
+            (import ./services/Qolari.nix { inherit (perSystem) config self' inputs'; inherit inputs; })
           ];
           apiServer = false;
-          services.nammayatri.enable = true;
-          services.nammayatri.profile = profile;
+          services.Qolari.enable = true;
+          services.Qolari.profile = profile;
         };
       in
       {
         run-mobility-stack-nix = {
           imports = [ (commonFor "full") ];
-          services.nammayatri.useCabal = false;
+          services.Qolari.useCabal = false;
         };
 
         # Fixed ports straight out of ports.nix, fronted by caddy on a single
         # origin (:9090) so local URLs match the dev-box. The caddy process
         # self-generates data/Caddyfile from these fixed ports when none exists
-        # (see caddy-reverse-proxy in nammayatri.nix), so it becomes healthy and
+        # (see caddy-reverse-proxy in Qolari.nix), so it becomes healthy and
         # the backend profile's per-process "wait for caddy" gate is satisfied
         # instead of deadlocking.
         run-mobility-stack-dev = {
           imports = [ (commonFor "backend") ];
-          services.nammayatri.useCabal = true;
-          services.nammayatri.useCaddy = true;
+          services.Qolari.useCabal = true;
+          services.Qolari.useCaddy = true;
         };
 
         # Same processes, but the ports come from the devbox registry slice the
@@ -52,13 +52,13 @@
         # caddy fronts them.
         run-mobility-stack-dev-on-available-ports = {
           imports = [ (commonFor "backend") ];
-          services.nammayatri.useCabal = true;
+          services.Qolari.useCabal = true;
         };
 
         run-mobility-stack-full = {
           imports = [ (commonFor "full") ];
-          services.nammayatri.useCabal = true;
-          services.nammayatri.useCaddy = true;
+          services.Qolari.useCabal = true;
+          services.Qolari.useCaddy = true;
         };
 
         run-local-test-dashboard = {

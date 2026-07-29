@@ -1,6 +1,6 @@
-# Haskell Patterns
+﻿# Haskell Patterns
 
-This file captures common Haskell patterns used in the Nammayatri backend.
+This file captures common Haskell patterns used in the Qolari backend.
 
 ## Common Patterns
 

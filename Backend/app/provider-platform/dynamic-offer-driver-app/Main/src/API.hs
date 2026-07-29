@@ -35,8 +35,8 @@ import qualified Domain.Types.Merchant as DM
 import qualified Domain.Types.Plan as Plan
 import Environment
 import EulerHS.Prelude
-import qualified Kernel.External.Payment.Juspay.Webhook as Juspay
-import qualified Kernel.External.Payout.Juspay.Webhook as JuspayPayout
+import qualified Kernel.External.Payment.Gateway.Webhook as Qolari
+import qualified Kernel.External.Payout.Qolari.Webhook as QolariPayout
 import qualified Kernel.External.Payout.Stripe.Webhook as Stripe
 import qualified Kernel.External.Verification.Interface.Idfy as Idfy
 import Kernel.Types.Beckn.Context as Context
@@ -74,13 +74,13 @@ type MainAPI =
              :> Idfy.IdfyWebhookAPI
          )
     :<|> ( Capture "merchantId" (ShortId DM.Merchant)
-             :> Juspay.JuspayWebhookAPI
+             :> Qolari.QolariWebhookAPI
          )
     :<|> ( Capture "merchantId" (ShortId DM.Merchant)
              :> QueryParam "city" Context.City
              :> QueryParam "serviceName" Plan.ServiceNames
              :> "v2"
-             :> Juspay.JuspayWebhookAPI
+             :> Qolari.QolariWebhookAPI
          )
     :<|> ( Capture "merchantId" (ShortId DM.Merchant)
              :> Capture "city" Context.City
@@ -90,13 +90,13 @@ type MainAPI =
     :<|> HyperVergeWebhook.HyperVergeVerificationWebhookAPI
     :<|> DigiLockerCallback.DigiLockerCallbackAPI
     :<|> ( Capture "merchantId" (ShortId DM.Merchant)
-             :> JuspayPayout.JuspayPayoutWebhookAPI
+             :> QolariPayout.QolariPayoutWebhookAPI
          )
     :<|> ( Capture "merchantId" (ShortId DM.Merchant)
              :> QueryParam "city" Context.City
              :> QueryParam "serviceName" Plan.ServiceNames
              :> "v2"
-             :> JuspayPayout.JuspayPayoutWebhookAPI
+             :> QolariPayout.QolariPayoutWebhookAPI
          )
     :<|> ( Capture "merchantId" (ShortId DM.Merchant)
              :> QueryParam "city" Context.City
@@ -125,14 +125,14 @@ mainServer env =
     :<|> oldIdfyWebhookHandler
     :<|> idfyWebhookHandler
     :<|> idfyWebhookV2Handler
-    :<|> juspayWebhookHandler
-    :<|> juspayWebhookHandlerV2
+    :<|> QolariWebhookHandler
+    :<|> QolariWebhookHandlerV2
     :<|> safetyWebhookHandler
     :<|> hyperVergeResultWebhookHandler
     :<|> hyperVergeVerificaitonWebhookHandler
     :<|> digiLockerCallbackHandler
-    :<|> juspayPayoutWebhookHandler
-    :<|> juspayPayoutWebhookHandlerV2
+    :<|> QolariPayoutWebhookHandler
+    :<|> QolariPayoutWebhookHandlerV2
     :<|> stripePayoutWebhookHandler
     :<|> stripeTestPayoutWebhookHandler
     :<|> Dashboard.handler
@@ -160,7 +160,7 @@ openAPI = do
   openApi
     { _openApiInfo =
         (_openApiInfo openApi)
-          { _infoTitle = "Namma Yatri Partner",
+          { _infoTitle = "Qolari Partner",
             _infoVersion = "1.0"
           }
     }
@@ -195,23 +195,23 @@ oldIdfyWebhookHandler ::
 oldIdfyWebhookHandler secret =
   withFlowHandlerAPI . DriverOnboarding.oldIdfyWebhookHandler secret
 
-juspayWebhookHandler ::
+QolariWebhookHandler ::
   ShortId DM.Merchant ->
   BasicAuthData ->
   Value ->
   FlowHandler AckResponse
-juspayWebhookHandler merchantShortId secret value' =
-  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo $ Payment.juspayWebhookHandler merchantShortId Nothing Nothing secret value'
+QolariWebhookHandler merchantShortId secret value' =
+  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo $ Payment.QolariWebhookHandler merchantShortId Nothing Nothing secret value'
 
-juspayWebhookHandlerV2 ::
+QolariWebhookHandlerV2 ::
   ShortId DM.Merchant ->
   Maybe Context.City ->
   Maybe Plan.ServiceNames ->
   BasicAuthData ->
   Aeson.Value ->
   FlowHandler AckResponse
-juspayWebhookHandlerV2 merchantShortId mbOpCity mbServiceName secret webhookPayload =
-  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo $ Payment.juspayWebhookHandler merchantShortId mbOpCity mbServiceName secret webhookPayload
+QolariWebhookHandlerV2 merchantShortId mbOpCity mbServiceName secret webhookPayload =
+  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo $ Payment.QolariWebhookHandler merchantShortId mbOpCity mbServiceName secret webhookPayload
 
 safetyWebhookHandler ::
   ShortId DM.Merchant ->
@@ -244,23 +244,23 @@ digiLockerCallbackHandler ::
 digiLockerCallbackHandler mbError mbErrorDescription mbCode stateParam =
   withFlowHandlerAPI $ DigiLockerCallback.digiLockerCallbackHandler mbError mbErrorDescription mbCode stateParam
 
-juspayPayoutWebhookHandler ::
+QolariPayoutWebhookHandler ::
   ShortId DM.Merchant ->
   BasicAuthData ->
   Value ->
   FlowHandler AckResponse
-juspayPayoutWebhookHandler merchantShortId secret value' =
-  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo $ Payout.juspayPayoutWebhookHandler merchantShortId Nothing Nothing secret value'
+QolariPayoutWebhookHandler merchantShortId secret value' =
+  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo $ Payout.QolariPayoutWebhookHandler merchantShortId Nothing Nothing secret value'
 
-juspayPayoutWebhookHandlerV2 ::
+QolariPayoutWebhookHandlerV2 ::
   ShortId DM.Merchant ->
   Maybe Context.City ->
   Maybe Plan.ServiceNames ->
   BasicAuthData ->
   Value ->
   FlowHandler AckResponse
-juspayPayoutWebhookHandlerV2 merchantShortId mbOpCity mbServiceName secret value' =
-  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo $ Payout.juspayPayoutWebhookHandler merchantShortId mbOpCity mbServiceName secret value'
+QolariPayoutWebhookHandlerV2 merchantShortId mbOpCity mbServiceName secret value' =
+  withFlowHandlerAPI . ActorInfo.withRequestIdActorInfo $ Payout.QolariPayoutWebhookHandler merchantShortId mbOpCity mbServiceName secret value'
 
 stripePayoutWebhookHandler ::
   ShortId DM.Merchant ->

@@ -1,4 +1,4 @@
-module Storage.Queries.MerchantServiceConfigExtra where
+﻿module Storage.Queries.MerchantServiceConfigExtra where
 
 import qualified Data.Aeson as A
 import Domain.Types.Merchant
@@ -131,35 +131,35 @@ getServiceNameConfigJSON = \case
   Domain.AadhaarVerificationServiceConfig aadhaarVerificationCfg -> case aadhaarVerificationCfg of
     AadhaarVerification.GridlineConfig cfg -> (Domain.AadhaarVerificationService AadhaarVerification.Gridline, toJSON cfg)
   Domain.PaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> (Domain.PaymentService Payment.Juspay, toJSON cfg)
+    Payment.PaymentGatewayConfig cfg -> (Domain.PaymentService Payment.Gateway, toJSON cfg)
     Payment.StripeConfig cfg -> (Domain.PaymentService Payment.Stripe, toJSON cfg)
     Payment.PaytmEDCConfig cfg -> (Domain.PaymentService Payment.PaytmEDC, toJSON cfg)
   Domain.MetroPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> (Domain.MetroPaymentService Payment.Juspay, toJSON cfg)
+    Payment.PaymentGatewayConfig cfg -> (Domain.MetroPaymentService Payment.Gateway, toJSON cfg)
     Payment.StripeConfig cfg -> (Domain.MetroPaymentService Payment.Stripe, toJSON cfg)
     Payment.PaytmEDCConfig cfg -> (Domain.MetroPaymentService Payment.PaytmEDC, toJSON cfg)
   Domain.BusPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> (Domain.BusPaymentService Payment.Juspay, toJSON cfg)
+    Payment.PaymentGatewayConfig cfg -> (Domain.BusPaymentService Payment.Gateway, toJSON cfg)
     Payment.StripeConfig cfg -> (Domain.BusPaymentService Payment.Stripe, toJSON cfg)
     Payment.PaytmEDCConfig cfg -> (Domain.BusPaymentService Payment.PaytmEDC, toJSON cfg)
   Domain.BbpsPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> (Domain.BbpsPaymentService Payment.Juspay, toJSON cfg)
+    Payment.PaymentGatewayConfig cfg -> (Domain.BbpsPaymentService Payment.Gateway, toJSON cfg)
     Payment.StripeConfig cfg -> (Domain.BbpsPaymentService Payment.Stripe, toJSON cfg)
     Payment.PaytmEDCConfig cfg -> (Domain.BbpsPaymentService Payment.PaytmEDC, toJSON cfg)
   Domain.MultiModalPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> (Domain.MultiModalPaymentService Payment.Juspay, toJSON cfg)
+    Payment.PaymentGatewayConfig cfg -> (Domain.MultiModalPaymentService Payment.Gateway, toJSON cfg)
     Payment.StripeConfig cfg -> (Domain.MultiModalPaymentService Payment.Stripe, toJSON cfg)
     Payment.PaytmEDCConfig cfg -> (Domain.MultiModalPaymentService Payment.PaytmEDC, toJSON cfg)
   Domain.PassPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> (Domain.PassPaymentService Payment.Juspay, toJSON cfg)
+    Payment.PaymentGatewayConfig cfg -> (Domain.PassPaymentService Payment.Gateway, toJSON cfg)
     Payment.StripeConfig cfg -> (Domain.PassPaymentService Payment.Stripe, toJSON cfg)
     Payment.PaytmEDCConfig cfg -> (Domain.PassPaymentService Payment.PaytmEDC, toJSON cfg)
   Domain.ParkingPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> (Domain.ParkingPaymentService Payment.Juspay, toJSON cfg)
+    Payment.PaymentGatewayConfig cfg -> (Domain.ParkingPaymentService Payment.Gateway, toJSON cfg)
     Payment.StripeConfig cfg -> (Domain.ParkingPaymentService Payment.Stripe, toJSON cfg)
     Payment.PaytmEDCConfig cfg -> (Domain.ParkingPaymentService Payment.PaytmEDC, toJSON cfg)
   Domain.MembershipPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> (Domain.MembershipPaymentService Payment.Juspay, toJSON cfg)
+    Payment.PaymentGatewayConfig cfg -> (Domain.MembershipPaymentService Payment.Gateway, toJSON cfg)
     Payment.StripeConfig cfg -> (Domain.MembershipPaymentService Payment.Stripe, toJSON cfg)
     Payment.PaytmEDCConfig cfg -> (Domain.MembershipPaymentService Payment.PaytmEDC, toJSON cfg)
   Domain.IssueTicketServiceConfig ticketCfg -> case ticketCfg of
@@ -175,7 +175,7 @@ getServiceNameConfigJSON = \case
     Tokenize.DigilockerTokenizationServiceConfig cfg -> (Domain.TokenizationService Tokenize.Digilocker, toJSON cfg)
     Tokenize.TtenTokenizationServiceConfig cfg -> (Domain.TokenizationService Tokenize.Tten, toJSON cfg)
   Domain.PayoutServiceConfig payoutCfg -> case payoutCfg of
-    Payout.JuspayConfig cfg -> (Domain.PayoutService Payout.Juspay, toJSON cfg)
+    Payout.PaymentGatewayConfig cfg -> (Domain.PayoutService Payout.Qolari, toJSON cfg)
     Payout.StripeConfig cfg -> do
       let service = Domain.PayoutService $
             case cfg.serviceMode of
@@ -188,10 +188,10 @@ getServiceNameConfigJSON = \case
     MultiModal.OTPTransitConfig cfg -> (Domain.MultiModalService MultiModal.OTPTransit, toJSON cfg)
   Domain.WalletServiceConfig walletCfg -> case walletCfg of
     GW.GoogleWalletConfig cfg -> (Domain.WalletService GW.GoogleWallet, toJSON cfg)
-  Domain.JuspayWalletServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> (Domain.JuspayWalletService Payment.Juspay, toJSON cfg)
-    Payment.StripeConfig cfg -> (Domain.JuspayWalletService Payment.Stripe, toJSON cfg)
-    Payment.PaytmEDCConfig cfg -> (Domain.JuspayWalletService Payment.PaytmEDC, toJSON cfg)
+  Domain.PaymentWalletServiceConfig paymentCfg -> case paymentCfg of
+    Payment.PaymentGatewayConfig cfg -> (Domain.PaymentWalletService Payment.Gateway, toJSON cfg)
+    Payment.StripeConfig cfg -> (Domain.PaymentWalletService Payment.Stripe, toJSON cfg)
+    Payment.PaytmEDCConfig cfg -> (Domain.PaymentWalletService Payment.PaytmEDC, toJSON cfg)
   Domain.MultiModalStaticDataServiceConfig multiModalStaticDataCfg -> case multiModalStaticDataCfg of
     MultiModal.GoogleTransitConfig cfg -> (Domain.MultiModalStaticDataService MultiModal.GoogleTransit, toJSON cfg)
     MultiModal.OTPTransitConfig cfg -> (Domain.MultiModalStaticDataService MultiModal.OTPTransit, toJSON cfg)

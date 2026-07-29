@@ -1,4 +1,4 @@
-INSERT INTO atlas_driver_offer_bpp.merchant_service_config (
+﻿INSERT INTO atlas_driver_offer_bpp.merchant_service_config (
     merchant_id,
     merchant_operating_city_id,
     service_name,
@@ -26,7 +26,7 @@ SELECT
         }
       },
       "parserTypeMap": null,
-      "useJuspayOrderStatus": null
+      "useQolariOrderStatus": null
     }'::jsonb,
     NOW(),
     NOW()
@@ -63,7 +63,7 @@ SELECT
         }
       },
       "parserTypeMap": null,
-      "useJuspayOrderStatus": null
+      "useQolariOrderStatus": null
     }'::jsonb,
     NOW(),
     NOW()

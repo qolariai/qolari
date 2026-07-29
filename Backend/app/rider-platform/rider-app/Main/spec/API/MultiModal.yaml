@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   Int64: Data.Int
   Journey: Domain.Types.Journey
   SearchRequest: Domain.Types.SearchRequest
@@ -21,7 +21,7 @@ imports:
   UnifiedTicketQRV2: Lib.JourneyModule.Types
   FRFSBookingPaymentStatusAPI: API.Types.UI.FRFSTicketService
   CrisSdkResponse: API.Types.UI.FRFSTicketService
-  CreateOrderResp: Kernel.External.Payment.Juspay.Types
+  CreateOrderResp: Kernel.External.Payment.Qolari.Types
   ExtendLegStartPoint: Lib.JourneyModule.Types
   GetFareResponse: Lib.JourneyModule.Types
   BookingUpdateRequest: Domain.Types.BookingUpdateRequest
@@ -31,7 +31,7 @@ imports:
   AvailableRoutesByTier: Domain.Types.RouteDetails
   JourneyLegOption: Lib.JourneyModule.Utils
   VehiclePosition: Lib.JourneyModule.Types
-  SDKPayloadDetails: Kernel.External.Payment.Juspay.Types
+  SDKPayloadDetails: Kernel.External.Payment.Qolari.Types
   ServiceTierType: BecknV2.FRFS.Enums
   ServiceSubType: BecknV2.FRFS.Enums
   City: Kernel.Types.Beckn.Context

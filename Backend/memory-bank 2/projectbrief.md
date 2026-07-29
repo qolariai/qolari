@@ -1,7 +1,7 @@
-# Project Brief: Namma Yatri
+﻿# Project Brief: Qolari
 
 ## 1. Project Overview
-Namma Yatri is an open and driver-centric mobility platform. It aims to empower service providers (like auto drivers) with a high-tech, cost-effective app and open data platform. The main goals are to ensure fair earnings for drivers (zero commission), foster transparency and collaboration through open platforms/code/networks, achieve population scale growth with utility-like pricing, support multimodal transport, and promote shared mobility.
+Qolari is an open and driver-centric mobility platform. It aims to empower service providers (like auto drivers) with a high-tech, cost-effective app and open data platform. The main goals are to ensure fair earnings for drivers (zero commission), foster transparency and collaboration through open platforms/code/networks, achieve population scale growth with utility-like pricing, support multimodal transport, and promote shared mobility.
 
 ## 2. Core Requirements
 -   **Driver-centric Applications:** Provide robust, user-friendly mobile applications for individual drivers.
@@ -51,13 +51,13 @@ Namma Yatri is an open and driver-centric mobility platform. It aims to empower 
 -   Tools for community engagement and open-source development.
 
 **Likely Excluded (based on current information):**
--   Direct vehicle ownership or physical fleet operation by the Namma Yatri platform entity itself (focus is on enabling existing providers).
+-   Direct vehicle ownership or physical fleet operation by the Qolari platform entity itself (focus is on enabling existing providers).
 -   Traditional commission-based revenue models as the primary source of income (emphasis on zero-commission or subscription alternatives).
 -   Hardware development (e.g., custom driver devices, dashcams - though integration with such hardware is possible).
 
 ## 5. Key Stakeholders
 - **Drivers/Service Providers:** Their livelihood and earnings are directly impacted.
 - **Citizens/Riders:** Users of the mobility services.
-- **Namma Yatri Team/Founders:** Originators and core developers of the platform.
+- **Qolari Team/Founders:** Originators and core developers of the platform.
 - **Open Source Community:** Contributors to the platform's code, data, and roadmap.
 - **Local Communities/Cities:** Where the platform operates, benefiting from improved mobility.

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Postman Collection Parser
  *
  * Converts Postman v2.1.0 collection JSON into dashboard Step[]/TreeNode[]
@@ -76,7 +76,7 @@ export interface ParsedStep {
   index: number;
   name: string;
   method: 'GET' | 'POST' | 'PUT' | 'DELETE';
-  service: 'rider' | 'driver' | 'lts' | 'provider-dashboard' | 'rider-dashboard' | 'mock-idfy' | 'mock-server' | 'juspay-payment' | 'internal';
+  service: 'rider' | 'driver' | 'lts' | 'provider-dashboard' | 'rider-dashboard' | 'mock-idfy' | 'mock-server' | 'Qolari-payment' | 'internal';
   /** URL path with {{var}} placeholders, relative to proxy prefix */
   pathTemplate: string;
   /** Raw URL template before service resolution */
@@ -118,7 +118,7 @@ export interface ParsedTreeNode {
 
 const URL_VAR_TO_SERVICE: Record<string, { service: ParsedStep['service']; stripPrefix?: string }> = {
   'baseUrl_app': { service: 'rider' },
-  'baseURL_namma_P': { service: 'driver' },
+  'baseURL_qolari_P': { service: 'driver' },
   // driver-app dashboard APIs (http://localhost:8016/dashboard) — operator/fleet/hub
   // endpoints. Same driver service; basePath '/dashboard' is preserved from the env value.
   'baseURL_BPP_Driver_Direct': { service: 'driver' },
@@ -132,7 +132,7 @@ const URL_VAR_TO_SERVICE: Record<string, { service: ParsedStep['service']; strip
   // Routing it through the rider proxy preserves the /dashboard prefix extracted from the env URL.
   'baseUrl_dashboard': { service: 'rider' },
   'mockServerUrl': { service: 'mock-server' },
-  'mock_server_url': { service: 'juspay-payment' },
+  'mock_server_url': { service: 'Qolari-payment' },
 };
 
 // ── Parser ──

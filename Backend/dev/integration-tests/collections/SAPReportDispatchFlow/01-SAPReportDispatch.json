@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "SAP Report Dispatch",
     "description": "Tests SAPReportDispatch scheduler job: seeds past-dated subscription purchases + PG settlement reports + IndirectTaxTransaction, triggers the scheduler, verifies sap_journal_entry rows.",
@@ -118,7 +118,7 @@
         "header": [{ "key": "Content-Type", "value": "application/json" }],
         "body": {
           "mode": "raw",
-          "raw": "{\"db_name\": \"atlas_dev\", \"db_schema\": \"atlas_driver_offer_bpp\", \"table_name\": \"payment_order\", \"on_conflict_do_nothing\": true, \"touch_timestamps\": true, \"values\": {\"id\": \"test-sap-po-001\", \"short_id\": \"test-sap-po-short-001\", \"payment_service_order_id\": \"test-sap-juspay-001\", \"person_id\": \"test-driver-001\", \"merchant_id\": \"{{bpp_merchant_id}}\", \"amount\": 123.9, \"currency\": \"INR\", \"status\": \"CHARGED\"}}"
+          "raw": "{\"db_name\": \"atlas_dev\", \"db_schema\": \"atlas_driver_offer_bpp\", \"table_name\": \"payment_order\", \"on_conflict_do_nothing\": true, \"touch_timestamps\": true, \"values\": {\"id\": \"test-sap-po-001\", \"short_id\": \"test-sap-po-short-001\", \"payment_service_order_id\": \"test-sap-Qolari-001\", \"person_id\": \"test-driver-001\", \"merchant_id\": \"{{bpp_merchant_id}}\", \"amount\": 123.9, \"currency\": \"INR\", \"status\": \"CHARGED\"}}"
         },
         "url": {
           "raw": "{{mockServerUrl}}/mock/sql/insert",

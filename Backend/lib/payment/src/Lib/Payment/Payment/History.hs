@@ -1,4 +1,4 @@
-module Lib.Payment.Payment.History
+﻿module Lib.Payment.Payment.History
   ( recordPaymentHistory,
     getStatusMessage,
   )
@@ -61,7 +61,7 @@ toPaymentState Payment.CHARGED = ST.CAPTURED
 toPaymentState Payment.AUTHENTICATION_FAILED = ST.FAILED
 toPaymentState Payment.AUTHORIZATION_FAILED = ST.FAILED
 toPaymentState Payment.CANCELLED = ST.CANCELLED
-toPaymentState Payment.JUSPAY_DECLINED = ST.FAILED
+toPaymentState Payment.Qolari_DECLINED = ST.FAILED
 toPaymentState Payment.AUTHORIZING = ST.PROCESSING
 toPaymentState Payment.COD_INITIATED = ST.CASH_PENDING
 toPaymentState Payment.STARTED = ST.INITIATED
@@ -76,7 +76,7 @@ getStatusMessage Payment.CHARGED = "Payment successful"
 getStatusMessage Payment.AUTHENTICATION_FAILED = "3DS authentication failed"
 getStatusMessage Payment.AUTHORIZATION_FAILED = "Bank authorization failed"
 getStatusMessage Payment.CANCELLED = "Payment cancelled"
-getStatusMessage Payment.JUSPAY_DECLINED = "Payment declined by system"
+getStatusMessage Payment.Qolari_DECLINED = "Payment declined by system"
 getStatusMessage Payment.AUTHORIZING = "Authorizing payment..."
 getStatusMessage Payment.COD_INITIATED = "Cash on delivery initiated"
 getStatusMessage Payment.STARTED = "Payment started"
@@ -91,7 +91,7 @@ toPaymentEvent Payment.CHARGED = ST.CAPTURE
 toPaymentEvent Payment.AUTHENTICATION_FAILED = ST.FAIL
 toPaymentEvent Payment.AUTHORIZATION_FAILED = ST.FAIL
 toPaymentEvent Payment.CANCELLED = ST.CANCEL
-toPaymentEvent Payment.JUSPAY_DECLINED = ST.FAIL
+toPaymentEvent Payment.Qolari_DECLINED = ST.FAIL
 toPaymentEvent Payment.AUTHORIZING = ST.AUTHORIZE
 toPaymentEvent Payment.COD_INITIATED = ST.INITIATE
 toPaymentEvent Payment.STARTED = ST.INITIATE

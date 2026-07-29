@@ -1,4 +1,4 @@
-# Progress: Namma Yatri Memory Bank Population
+﻿# Progress: Qolari Memory Bank Population
 
 ## What Works (Completed Steps)
 1.  **Initial Setup:** Memory Bank file structure created.
@@ -59,11 +59,11 @@
     -   Deeper dive into Kafka event flows and consumer logic.
     -   Frontend application architecture and state management.
     -   The `memory-bank/backend_parsing.md` file (intended for detailed parsing logs) was not found and will be created with the ride booking flow analysis.
-12. **Processed NammaDSL Documentation (June 20, 2025):**
-    *   Received and analyzed the NammaDSL documentation.
+12. **Processed QolariDSL Documentation (June 20, 2025):**
+    *   Received and analyzed the QolariDSL documentation.
     *   Summarized syntax for API DSL and Storage DSL.
-    *   Created `memory-bank/namma_dsl_rules.md` to store these rules.
-    *   Updated `techContext.md` to reference NammaDSL.
+    *   Created `memory-bank/qolari_dsl_rules.md` to store these rules.
+    *   Updated `techContext.md` to reference QolariDSL.
 13. **Planned NYRegular (Recurring Rides) Feature (June 20, 2025):**
     *   Incorporated peer's context and refined the plan for the NYRegular feature.
     *   Key design decisions documented:
@@ -75,10 +75,10 @@
     *   Documented in `productContext.md`, `systemPatterns.md`, and `activeContext.md`.
 
 ## Current Status
--   Core Memory Bank files have been updated with a foundational understanding of the Namma Yatri project.
+-   Core Memory Bank files have been updated with a foundational understanding of the Qolari project.
 -   A detailed understanding of the Beckn-based ride booking choreography between the `rider-app` (BAP) and `dynamic-offer-driver-app` (BPP) has been achieved and documented in `systemPatterns.md` and `activeContext.md`.
 -   The system's reliance on ACLs, asynchronous processing, Redis for idempotency, and distinct domain logic for BAP and BPP roles in the Beckn flow is now clearer.
--   NammaDSL documentation has been processed and summarized in `memory-bank/namma_dsl_rules.md`, enhancing understanding of the YAML-to-Haskell code generation pipeline.
+-   QolariDSL documentation has been processed and summarized in `memory-bank/qolari_dsl_rules.md`, enhancing understanding of the YAML-to-Haskell code generation pipeline.
 -   A detailed plan for the "NYRegular" (recurring rides) feature has been formulated, incorporating peer context and refining the automation strategy. This plan is documented across relevant memory bank files.
 
 ## Known Issues/Limitations during this task
@@ -190,7 +190,7 @@
 **Tasks:**
 
 **Phase 1: Core NYRegular Subscription Management (`rider-app`)**
-*   [X] **Task 1.1 (DB & Haskell):** Define `ny_regular_subscriptions` schema using Namma DSL in `spec/Storage/`. Generate SQL migration and Haskell Beam/domain types.
+*   [X] **Task 1.1 (DB & Haskell):** Define `ny_regular_subscriptions` schema using Qolari DSL in `spec/Storage/`. Generate SQL migration and Haskell Beam/domain types.
     *   Haskell Types / (SQL Types):
     *   `id`: `Id NyRegularSubscription` (PK, character(36))
     *   `userId`: `Id Person` (character(36))
@@ -213,7 +213,7 @@
     *   `updatedAt`: `UTCTime` (timestamp with time zone)
     *   `metadata`: `Maybe Value` (nullable, json)
     *   (Implicit `merchant_id`, `merchant_operating_city_id` auto-added by DSL generator)
-*   [X] **Task 1.2 (DB & Haskell):** Define `ny_regular_instance_log` schema using Namma DSL in `spec/Storage/`. Generate SQL migration and Haskell Beam/domain types.
+*   [X] **Task 1.2 (DB & Haskell):** Define `ny_regular_instance_log` schema using Qolari DSL in `spec/Storage/`. Generate SQL migration and Haskell Beam/domain types.
     *   Haskell Types / (SQL Types):
     *   `instanceTransactionId`: `Text` (PK, text)
     *   `nyRegularSubscriptionId`: `Id NyRegularSubscription` (character(36), indexed via SecondaryKey)

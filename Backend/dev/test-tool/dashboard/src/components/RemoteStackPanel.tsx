@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import { Terminal } from './Terminal';
 import { LOCAL_API_BASE } from '../config';
 import {
@@ -36,7 +36,7 @@ interface PanelState {
   error?: string;
 }
 
-const DEFAULT_REMOTE_DIR = '/tmp/nammayatri';
+const DEFAULT_REMOTE_DIR = '/tmp/Qolari';
 // Canonical start command — sent server-side as the inner command of the PTY.
 // The exact argv (including this string) is echoed into the terminal by
 // local-api as the first line of the session, so users see what runs.

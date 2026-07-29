@@ -1,4 +1,4 @@
-# Tech Context: Namma Yatri
+﻿# Tech Context: Qolari
 
 ## 1. Core Technologies
 -   **Backend:**
@@ -31,7 +31,7 @@
 ## 2. Development Environment & Setup
 -   **Common Prerequisite:**
     -   Nix: [Install Nix](https://nixos.asia/en/install)
-    -   Direnv: [Install direnv](https://github.com/juspay/nixos-unified-template) (home-manager template recommended)
+    -   Direnv: [Install direnv](https://github.com/qolariai/nixos-unified-template) (home-manager template recommended)
 -   **Backend Setup:**
     1.  `ln -s .envrc.backend .envrc` (from project root, once)
     2.  `direnv allow` (from project root, once)
@@ -95,7 +95,7 @@
     -   Data transformation functions between database representations and domain types.
     -   Boilerplate for CRUD operations or specific queries.
     -   Servant API type definitions and potentially server/client stubs.
-    -   **NammaDSL**: The custom Domain Specific Language used for defining API and Storage specifications in YAML. It drives the code generation process for Haskell types, Beam mappings, queries, and API definitions. (See `memory-bank/namma_dsl_rules.md` for syntax and usage).
+    -   **QolariDSL**: The custom Domain Specific Language used for defining API and Storage specifications in YAML. It drives the code generation process for Haskell types, Beam mappings, queries, and API definitions. (See `memory-bank/qolari_dsl_rules.md` for syntax and usage).
 
 ## 6. Configuration Management
 -   **Dhall:** Used for static service configuration, providing a typed and programmable configuration language (`dhall-configs/`).
@@ -128,5 +128,5 @@
 -   **Android Studio:**
     -   Used for building and running the native Android application.
 -   **Git:** (Implied as version control, specific workflow not detailed in these READMEs but mentioned in root README).
--   **Shell Scripts:** Used for specific tasks like Android bundling (`bundling.sh`) and updating Juspay assets.
+-   **Shell Scripts:** Used for specific tasks like Android bundling (`bundling.sh`) and updating Qolari assets.
 -   **Comma Commands (`,`)**: Custom aliases/scripts available within the Nix develop shell for common development tasks (e.g., `, ghcid`, `, run-mobility-stack-dev`).

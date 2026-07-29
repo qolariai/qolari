@@ -12,15 +12,15 @@
   General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 -}
 
-module Registry.Beckn.Interface.Nammayatri where
+module Registry.Beckn.Interface.Qolari where
 
 import qualified Data.Aeson as A
 import Kernel.Prelude
 import Kernel.Tools.Metrics.CoreMetrics
 import Kernel.Utils.Common
 import qualified Registry.Beckn.Interface.Types as Types
-import qualified Registry.Beckn.Nammayatri.Flow as Flow
-import Registry.Beckn.Nammayatri.Types
+import qualified Registry.Beckn.Qolari.Flow as Flow
+import Registry.Beckn.Qolari.Types
 
 updateCities :: (MonadFlow m, CoreMetrics m, HasRequestId r, MonadReader r m) => Types.UpdateSubscriberReq -> UpdData -> m UpdateCitiesRes
 updateCities Types.RegistryReq {..} updData =

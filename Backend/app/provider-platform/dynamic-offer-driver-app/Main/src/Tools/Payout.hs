@@ -99,11 +99,11 @@ runWithServiceConfigAndName func mkReq payoutServiceName merchantOperatingCityId
     mRoutingId = Just personId.getId
 
     getRoutingId = \case
-      DMSC.PayoutService PT.AAJuspay -> mRoutingId
+      DMSC.PayoutService PT.AAQolari -> mRoutingId
       _ -> Nothing
 
     callFunc vsc = case vsc of
-      Payout.JuspayConfig _ -> do
+      Payout.PaymentGatewayConfig _ -> do
         let mConnectedAccountId = Nothing
         func vsc (mkReq (getRoutingId payoutServiceName) mConnectedAccountId serviceReq)
       Payout.StripeConfig _ -> do
@@ -153,14 +153,14 @@ getPayoutServiceFlowForMerchant getCfg payoutServiceNameOption serviceType merch
       subscriptionConfig <- do
         CQSC.findSubscriptionConfigsByMerchantOpCityIdAndServiceName merchantOperatingCityId Nothing serviceName
           >>= fromMaybeM (NoSubscriptionConfigForService merchantOperatingCityId.getId $ show serviceName)
-      pure $ fromMaybe (serviceType PT.Juspay) subscriptionConfig.payoutServiceName
+      pure $ fromMaybe (serviceType PT.Qolari) subscriptionConfig.payoutServiceName
   case payoutServiceNameRaw of
     DMSC.PayoutService payoutService -> pure $ Payout.castPayoutServiceFlow payoutService
     DMSC.RentalPayoutService payoutService -> pure $ Payout.castPayoutServiceFlow payoutService
     DMSC.RidePayoutService payoutService -> pure $ Payout.castPayoutServiceFlow payoutService
     _ -> throwError $ InternalError "Unknown Service Name"
 
--- flow differentiate between Stripe and Juspay
+-- flow differentiate between Stripe and Qolari
 getPayoutServiceFlow ::
   ServiceFlow m r =>
   (DMSUC.MerchantServiceUsageConfig -> Payout.PayoutService) ->
@@ -179,7 +179,7 @@ getPayoutServiceFlow getCfg payoutServiceNameOption serviceType clientSdkVersion
       subscriptionConfig <- do
         CQSC.findSubscriptionConfigsByMerchantOpCityIdAndServiceName merchantOperatingCityId Nothing serviceName
           >>= fromMaybeM (NoSubscriptionConfigForService merchantOperatingCityId.getId $ show serviceName)
-      pure $ fromMaybe (serviceType PT.Juspay) subscriptionConfig.payoutServiceName
+      pure $ fromMaybe (serviceType PT.Qolari) subscriptionConfig.payoutServiceName
   -- PersonBankAccount required only for Stripe service
   (payoutServiceFlow, mbPersonBankAccount) <- case payoutServiceNameRaw of
     DMSC.PayoutService payoutService -> fetchPersonBankAccount payoutService
@@ -194,7 +194,7 @@ getPayoutServiceFlow getCfg payoutServiceNameOption serviceType clientSdkVersion
       let payoutServiceFlow = Payout.castPayoutServiceFlow payoutService
       mbPersonBankAccount <- case payoutServiceFlow of
         Payout.StripeFlow -> Just <$> (QDBA.findByPrimaryKey personId >>= fromMaybeM (InvalidRequest "Driver bank aсcount not found"))
-        Payout.JuspayFlow -> pure Nothing
+        Payout.QolariFlow -> pure Nothing
       pure (payoutServiceFlow, mbPersonBankAccount)
 
 modifyServiceName ::
@@ -213,7 +213,7 @@ modifyServiceName serviceName paymentMode clientSdkVersion merchantOpCityId =
   where
     modifyPayoutService serviceType payoutService =
       case Payout.castPayoutServiceFlow payoutService of
-        Payout.JuspayFlow -> decidePayoutService serviceName clientSdkVersion merchantOpCityId
+        Payout.QolariFlow -> decidePayoutService serviceName clientSdkVersion merchantOpCityId
         Payout.StripeFlow -> pure . serviceType $ modifyPayoutServiceByMode payoutService paymentMode
 
 -- relevant only for Stripe
@@ -221,14 +221,14 @@ modifyPayoutServiceByMode :: PT.PayoutService -> DMPM.PaymentMode -> PT.PayoutSe
 modifyPayoutServiceByMode Payout.Stripe DMPM.LIVE = Payout.Stripe
 modifyPayoutServiceByMode Payout.Stripe DMPM.TEST = Payout.StripeTest
 modifyPayoutServiceByMode Payout.StripeTest _ = Payout.StripeTest
-modifyPayoutServiceByMode Payout.Juspay _ = Payout.Juspay
-modifyPayoutServiceByMode Payout.AAJuspay _ = Payout.AAJuspay
+modifyPayoutServiceByMode Payout.Qolari _ = Payout.Qolari
+modifyPayoutServiceByMode Payout.AAQolari _ = Payout.AAQolari
 
--- relevant only for Juspay
+-- relevant only for Qolari
 decidePayoutService :: ServiceFlow m r => DMSC.ServiceName -> Maybe Version -> Id DMOC.MerchantOperatingCity -> m DMSC.ServiceName
 decidePayoutService payoutServiceName clientSdkVersion merchantOpCityId = do
   transporterConfig <- getOneConfig (TransporterConfigDimensions {merchantOperatingCityId = merchantOpCityId.getId}) (Just (SCTC.findByMerchantOpCityId merchantOpCityId Nothing)) >>= fromMaybeM (TransporterConfigNotFound merchantOpCityId.getId)
   return $ case clientSdkVersion of
     Just v
-      | v >= textToVersionDefault transporterConfig.aaEnabledClientSdkVersion -> DMSC.PayoutService PT.AAJuspay
+      | v >= textToVersionDefault transporterConfig.aaEnabledClientSdkVersion -> DMSC.PayoutService PT.AAQolari
     _ -> payoutServiceName

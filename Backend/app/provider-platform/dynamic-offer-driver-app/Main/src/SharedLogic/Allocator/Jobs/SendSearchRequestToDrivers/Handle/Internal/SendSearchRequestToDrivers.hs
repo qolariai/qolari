@@ -146,7 +146,7 @@ sendSearchRequestToDrivers isAllocatorBatch tripQuoteDetails oldSearchReq search
 
   -- This is a cache for coin configurations by service tier type
   coinConfigCache <-
-    if isContainsGoldTierTag searchReq.customerNammaTags && fromMaybe 0 searchReq.estimatedDistance > 1000
+    if isContainsGoldTierTag searchReq.customerQolariTags && fromMaybe 0 searchReq.estimatedDistance > 1000
       then do
         let serviceTiers = List.nub $ map (.vehicleServiceTier) tripQuoteDetails
         coinConfigs <- forM serviceTiers $ \stt -> do
@@ -403,8 +403,8 @@ sendSearchRequestToDrivers isAllocatorBatch tripQuoteDetails oldSearchReq search
           catMaybes $ [safetyCharges]
 
     isContainsGoldTierTag :: Maybe [Lib.Yudhishthira.Types.TagNameValue] -> Bool
-    isContainsGoldTierTag customerNammaTags =
-      case customerNammaTags of
+    isContainsGoldTierTag customerQolariTags =
+      case customerQolariTags of
         Just tags -> any (\tag -> tag == TagNameValue "CustomerTier#Gold") tags
         Nothing -> False
 

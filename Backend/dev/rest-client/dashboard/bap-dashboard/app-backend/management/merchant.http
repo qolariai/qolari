@@ -1,8 +1,8 @@
-# access tokens with different roles
+﻿# access tokens with different roles
 @customer = {{bap-dashboard/token/YATRI/customer}}
 @driver = {{bap-dashboard/token/YATRI/driver}}
-@juspay_ops = {{bap-dashboard/token/YATRI/juspay_ops}}
-@juspay_admin = {{bap-dashboard/token/YATRI/juspay_admin}}
+@Qolari_ops = {{bap-dashboard/token/YATRI/Qolari_ops}}
+@Qolari_admin = {{bap-dashboard/token/YATRI/Qolari_admin}}
 @customer_service = {{bap-dashboard/token/YATRI/customer_service}}
 
 # @name healthcheck
@@ -13,7 +13,7 @@ GET {{bap-dashboard-host}}
 # @name merchantUpdate
 
 POST {{bap-dashboard-host}}/bap/YATRI/merchant/update
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "name" : "YATRI",
@@ -49,7 +49,7 @@ content-type: application/json
 # @name merchantServiceUsageConfig
 
 GET {{bap-dashboard-host}}/bap/YATRI/merchant/serviceUsageConfig
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/json
 
 ###
@@ -57,7 +57,7 @@ content-type: application/json
 # @name merchantGoogleConfigUpdate
 
 POST {{bap-dashboard-host}}/bap/YATRI/merchant/serviceConfig/maps/update
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "Google",
@@ -73,7 +73,7 @@ content-type: application/json
 # @name merchantRealGoogleConfigUpdate
 
 POST {{bap-dashboard-host}}/bap/YATRI/merchant/serviceConfig/maps/update
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "Google",
@@ -89,7 +89,7 @@ content-type: application/json
 # @name merchantOSRMConfigUpdate
 
 POST {{bap-dashboard-host}}/bap/YATRI/merchant/serviceConfig/maps/update
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "OSRM",
@@ -104,7 +104,7 @@ content-type: application/json
 # @name merchantMMIConfigUpdate
 
 POST {{bap-dashboard-host}}/bap/YATRI/merchant/serviceConfig/maps/update
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "MMI",
@@ -123,7 +123,7 @@ content-type: application/json
 # @name mapsServiceUsageConfigUpdate
 
 POST {{bap-dashboard-host}}/bap/YATRI/merchant/serviceUsageConfig/maps/update
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "getDistances" : "Google",
@@ -139,7 +139,7 @@ content-type: application/json
 # @name merchantMyValueFirstConfigUpdate
 
 POST {{bap-dashboard-host}}/bap/YATRI/merchant/serviceConfig/sms/update
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "MyValueFirst",
@@ -155,7 +155,7 @@ content-type: application/json
 # @name merchantExotelSmsConfigUpdate
 
 POST {{bap-dashboard-host}}/bap/YATRI/merchant/serviceConfig/sms/update
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "ExotelSms",
@@ -172,7 +172,7 @@ content-type: application/json
 # @name smsServiceUsageConfigUpdate
 
 POST {{bap-dashboard-host}}/bap/YATRI/merchant/serviceUsageConfig/sms/update
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "smsProvidersPriorityList" : ["ExotelSms","MyValueFirst"]
@@ -183,7 +183,7 @@ content-type: application/json
 # @name postMerchantSpecialLocationUpsert
 
 POST {{bap-dashboard-host}}/bap/YATRI/merchant/specialLocation/upsert?specialLocationId=12175690-5356-c62e-ee91-8dfa8c520b39
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/x-www-form-urlencoded
 
 file=null
@@ -197,7 +197,7 @@ file=null
 # @name postMerchantSpecialLocationGatesUpsert
 
 POST {{bap-dashboard-host}}/bap/YATRI/merchant/specialLocation/12175690-5356-c62e-ee91-8dfa8c520b39/gates/upsert
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 content-type: application/x-www-form-urlencoded
 
 file=null

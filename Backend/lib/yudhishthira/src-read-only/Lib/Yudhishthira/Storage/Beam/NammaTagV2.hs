@@ -1,7 +1,7 @@
-{-# LANGUAGE StandaloneDeriving #-}
+﻿{-# LANGUAGE StandaloneDeriving #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
-module Lib.Yudhishthira.Storage.Beam.NammaTagV2 where
+module Lib.Yudhishthira.Storage.Beam.QolariTagV2 where
 
 import qualified Data.Aeson
 import qualified Database.Beam as B
@@ -10,15 +10,15 @@ import Kernel.Prelude
 import qualified Kernel.Prelude
 import qualified Kernel.Types.Common
 import qualified Lib.Yudhishthira.Types
-import qualified Lib.Yudhishthira.Types.NammaTagV2
+import qualified Lib.Yudhishthira.Types.QolariTagV2
 import Tools.Beam.UtilsTH
 
-data NammaTagV2T f = NammaTagV2T
+data QolariTagV2T f = QolariTagV2T
   { actionEngine :: (B.C f (Kernel.Prelude.Maybe Data.Aeson.Value)),
     category :: (B.C f Kernel.Prelude.Text),
     description :: (B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Text)),
     chakra :: (B.C f (Kernel.Prelude.Maybe Lib.Yudhishthira.Types.Chakra)),
-    tagType :: (B.C f Lib.Yudhishthira.Types.NammaTagV2.TagType),
+    tagType :: (B.C f Lib.Yudhishthira.Types.QolariTagV2.TagType),
     merchantOperatingCityId :: (B.C f Kernel.Prelude.Text),
     name :: (B.C f Kernel.Prelude.Text),
     rangeEnd :: (B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Double)),
@@ -32,12 +32,12 @@ data NammaTagV2T f = NammaTagV2T
   }
   deriving (Generic, B.Beamable)
 
-instance B.Table NammaTagV2T where
-  data PrimaryKey NammaTagV2T f = NammaTagV2Id (B.C f Kernel.Prelude.Text) (B.C f Kernel.Prelude.Text) deriving (Generic, B.Beamable)
-  primaryKey = NammaTagV2Id <$> merchantOperatingCityId <*> name
+instance B.Table QolariTagV2T where
+  data PrimaryKey QolariTagV2T f = QolariTagV2Id (B.C f Kernel.Prelude.Text) (B.C f Kernel.Prelude.Text) deriving (Generic, B.Beamable)
+  primaryKey = QolariTagV2Id <$> merchantOperatingCityId <*> name
 
-type NammaTagV2 = NammaTagV2T Identity
+type QolariTagV2 = QolariTagV2T Identity
 
-$(enableKVPG (''NammaTagV2T) [('merchantOperatingCityId), ('name)] [])
+$(enableKVPG (''QolariTagV2T) [('merchantOperatingCityId), ('name)] [])
 
-$(mkTableInstancesGenericSchema (''NammaTagV2T) "namma_tag_v2")
+$(mkTableInstancesGenericSchema (''QolariTagV2T) "QOLARI_TAG_v2")

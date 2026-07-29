@@ -1,4 +1,4 @@
-module Lib.Yudhishthira.Tools.Utils where
+﻿module Lib.Yudhishthira.Tools.Utils where
 
 import qualified Data.Aeson as A
 import qualified Data.Aeson.Key as A
@@ -19,9 +19,9 @@ import Kernel.Types.Error
 import Kernel.Types.Id
 import Kernel.Utils.Common
 import Lib.Yudhishthira.Storage.Beam.BeamFlow
-import qualified Lib.Yudhishthira.Storage.Queries.NammaTagV2 as QNammaTagV2
+import qualified Lib.Yudhishthira.Storage.Queries.QolariTagV2 as QQolariTagV2
 import qualified Lib.Yudhishthira.Types as LYT
-import qualified Lib.Yudhishthira.Types.NammaTagV2 as DNTv2
+import qualified Lib.Yudhishthira.Types.QolariTagV2 as DNTv2
 
 mandatoryChakraFields :: [Text]
 mandatoryChakraFields = [userIdField]
@@ -112,7 +112,7 @@ mkTagNameValueExpiry (LYT.TagName tagName) tagValue mbValidity now = do
         LYT.TextValue tagValueText -> tagValueText
         LYT.NumberValue tagValueDouble -> show tagValueDouble
         LYT.ArrayValue tagValueArray -> T.intercalate "&" tagValueArray
-  LYT.TagNameValueExpiry $ tagName <> "#" <> showTagValue <> maybe "" (\expiredAt -> "#" <> showNammaTagExpiry expiredAt) mbExpiredAt
+  LYT.TagNameValueExpiry $ tagName <> "#" <> showTagValue <> maybe "" (\expiredAt -> "#" <> showQolariTagExpiry expiredAt) mbExpiredAt
 
 mkTagNameValue ::
   LYT.TagName ->
@@ -133,10 +133,10 @@ addTagExpiry ::
 addTagExpiry (LYT.TagNameValue txt) (Just validity) now = do
   let expiredAt = addUTCTime (3600 * fromIntegral validity) now
   LYT.TagNameValueExpiry $ case T.splitOn "#" txt of
-    (tagName : tagValue : _oldExpiredAt : xs) -> T.intercalate "#" (tagName : tagValue : showNammaTagExpiry expiredAt : xs)
-    [tagName, tagValue] -> T.intercalate "#" [tagName, tagValue, showNammaTagExpiry expiredAt]
-    [tagName] -> T.intercalate "#" [tagName, "", showNammaTagExpiry expiredAt]
-    [] -> T.intercalate "#" ["", "", showNammaTagExpiry expiredAt] -- should never happen
+    (tagName : tagValue : _oldExpiredAt : xs) -> T.intercalate "#" (tagName : tagValue : showQolariTagExpiry expiredAt : xs)
+    [tagName, tagValue] -> T.intercalate "#" [tagName, tagValue, showQolariTagExpiry expiredAt]
+    [tagName] -> T.intercalate "#" [tagName, "", showQolariTagExpiry expiredAt]
+    [] -> T.intercalate "#" ["", "", showQolariTagExpiry expiredAt] -- should never happen
 addTagExpiry (LYT.TagNameValue txt) Nothing _now = LYT.TagNameValueExpiry txt
 
 parseTag :: LYT.TagNameValueExpiry -> UTCTime -> Maybe (LYT.TagName, LYT.TagValue, Maybe Hours)
@@ -164,17 +164,17 @@ parseTagExpiry (LYT.TagNameValueExpiry txt) = case T.splitOn "#" txt of
   _xs -> Nothing
 
 parseTagExpiryTxt :: Text -> Maybe UTCTime
-parseTagExpiryTxt expiredAt = Time.parseTimeM @Maybe True Time.defaultTimeLocale nammaTagExpiryFormat (T.unpack expiredAt)
+parseTagExpiryTxt expiredAt = Time.parseTimeM @Maybe True Time.defaultTimeLocale QolariTagExpiryFormat (T.unpack expiredAt)
 
 -- ISO 8601
-nammaTagExpiryFormat :: String
-nammaTagExpiryFormat = "%Y-%m-%dT%H:%M:%S"
+QolariTagExpiryFormat :: String
+QolariTagExpiryFormat = "%Y-%m-%dT%H:%M:%S"
 
-showNammaTagExpiry :: UTCTime -> Text
-showNammaTagExpiry = T.pack . Time.formatTime Time.defaultTimeLocale nammaTagExpiryFormat
+showQolariTagExpiry :: UTCTime -> Text
+showQolariTagExpiry = T.pack . Time.formatTime Time.defaultTimeLocale QolariTagExpiryFormat
 
 -- inverse conversion for mkTagNameValue
-parseTagValueFromText :: HasTagNameValue tag => DNTv2.NammaTagV2 -> tag -> Either Text LYT.TagValue
+parseTagValueFromText :: HasTagNameValue tag => DNTv2.QolariTagV2 -> tag -> Either Text LYT.TagValue
 parseTagValueFromText tag txt = case T.splitOn "#" . (.getTagNameValue) $ convertToTagNameValue txt of
   _tagName : tagValue : _xs -> do
     case tag.possibleValues of
@@ -248,19 +248,19 @@ parseTagName tag = case T.splitOn "#" . (.getTagNameValue) $ convertToTagNameVal
   _ -> Nothing
 
 -- used if we don't want fetch the same tag multiple times
-fetchNammaTagValidity :: BeamFlow m r => Id LYT.MerchantOperatingCity -> LYT.TagName -> m (Maybe Hours)
-fetchNammaTagValidity merchantOpCityId (LYT.TagName tagName) = runMaybeT $ do
-  nammaTag <- MaybeT $ QNammaTagV2.findByPrimaryKey merchantOpCityId tagName
-  MaybeT $ pure nammaTag.validity
+fetchQolariTagValidity :: BeamFlow m r => Id LYT.MerchantOperatingCity -> LYT.TagName -> m (Maybe Hours)
+fetchQolariTagValidity merchantOpCityId (LYT.TagName tagName) = runMaybeT $ do
+  QolariTag <- MaybeT $ QQolariTagV2.findByPrimaryKey merchantOpCityId tagName
+  MaybeT $ pure QolariTag.validity
 
-fetchNammaTagExpiry :: BeamFlow m r => Id LYT.MerchantOperatingCity -> LYT.TagNameValue -> m LYT.TagNameValueExpiry
-fetchNammaTagExpiry merchantOpCityId tagValue = do
+fetchQolariTagExpiry :: BeamFlow m r => Id LYT.MerchantOperatingCity -> LYT.TagNameValue -> m LYT.TagNameValueExpiry
+fetchQolariTagExpiry merchantOpCityId tagValue = do
   now <- getCurrentTime
   let defaulTagValueExpiry = addTagExpiry tagValue Nothing now
   mbTagValueExpiry <- runMaybeT $ do
     LYT.TagName tagName <- MaybeT $ pure (parseTagName tagValue)
-    nammaTag <- MaybeT $ QNammaTagV2.findByPrimaryKey merchantOpCityId tagName
-    validity <- MaybeT $ pure nammaTag.validity
+    QolariTag <- MaybeT $ QQolariTagV2.findByPrimaryKey merchantOpCityId tagName
+    validity <- MaybeT $ pure QolariTag.validity
     pure $ addTagExpiry tagValue (Just validity) now
   pure $ fromMaybe defaulTagValueExpiry mbTagValueExpiry
 

@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "Fleet Driver Name & Association",
     "description": "End-to-end test: registers driver + fleet owner, creates fleet association via joining OTP, then tests updateName set/clear/restore and verifies driverAssociation response includes firstName, middleName, lastName fields",
@@ -61,8 +61,8 @@
           "raw": "{\n    \"mobileNumber\": \"{{_test_driver_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"{{driver_merchant_id}}\",\n    \"merchantOperatingCity\": \"{{city}}\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth"]
         }
       }
@@ -94,8 +94,8 @@
           "raw": "{\n    \"otp\": \"{{login_otp}}\",\n    \"deviceToken\": \"test-device\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth", "{{driver_authId}}", "verify"]
         }
       }

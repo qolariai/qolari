@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   UTCTime: Kernel.Prelude
   HighPrecMoney: Kernel.Types.Common
   Currency: Kernel.Types.Common
@@ -8,11 +8,11 @@ imports:
   WalletPaymentKind: Lib.Payment.Domain.Types.WalletPayments
 
 # One wallet per (person, program). `programType` is the finance-kernel
-# CounterpartyType used on the linked finance_account row. The Juspay
+# CounterpartyType used on the linked finance_account row. The Qolari
 # `programId` is resolved to a `programType` via LoyaltyProgramConfig.
 #
 # `availableBalance`, lifetimeEarned/Burned, topup/cashbackEarned are all in
-# POINTS, snapped to Juspay's loyaltyInfo pockets on every post-CHARGED
+# POINTS, snapped to Qolari's loyaltyInfo pockets on every post-CHARGED
 # reconciliation. The linked finance-kernel ledger/account is in ₹ (MONETARY):
 # account balance = availableBalance * conversionRate. `conversionRate` is the
 # latest ₹-per-point rate seen from the programs API (burn rate value/points);
@@ -157,7 +157,7 @@ WalletHistory:
   defaultQueryTypeConstraint: "(Lib.Payment.Storage.Beam.BeamFlow.BeamFlow m r)"
   beamInstance: MakeTableInstancesGenericSchema
 
-# NOTE: Juspay programId -> internal CounterpartyType resolution lives on
-# JuspayCfg.loyaltyProgramMap (shared-kernel) — stored inline on the
-# MerchantServiceConfig row for ServiceName = JuspayWalletService Juspay.
+# NOTE: Qolari programId -> internal CounterpartyType resolution lives on
+# QolariCfg.loyaltyProgramMap (shared-kernel) — stored inline on the
+# MerchantServiceConfig row for ServiceName = PaymentWalletService Qolari.
 # No separate table.

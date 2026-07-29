@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
+﻿{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
 
 module Lib.Payment.Payout.Status
   ( refreshPayoutStatus,
@@ -8,7 +8,7 @@ where
 
 import Kernel.External.Encryption (EncFlow)
 import qualified Kernel.External.Payout.Interface.Types as IPayout
-import qualified Kernel.External.Payout.Juspay.Types.Payout as JPayout
+import qualified Kernel.External.Payout.Qolari.Types.Payout as JPayout
 import Kernel.Prelude
 import Kernel.Types.Error
 import Kernel.Types.Id

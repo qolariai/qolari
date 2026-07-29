@@ -1,9 +1,9 @@
-# access tokens with different roles
-@customer = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer}}
-@driver = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/driver}}
-@juspay_ops = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_ops}}
-@juspay_admin = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_admin}}
-@customer_service = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer_service}}
+﻿# access tokens with different roles
+@customer = {{bpp-dashboard/token/qolari_PARTNER/customer}}
+@driver = {{bpp-dashboard/token/qolari_PARTNER/driver}}
+@Qolari_ops = {{bpp-dashboard/token/qolari_PARTNER/Qolari_ops}}
+@Qolari_admin = {{bpp-dashboard/token/qolari_PARTNER/Qolari_admin}}
+@customer_service = {{bpp-dashboard/token/qolari_PARTNER/customer_service}}
 
 # @name healthcheck
 GET {{bpp-dashboard-host}}
@@ -31,7 +31,7 @@ GET {{bpp-dashboard-host}}
 
 @volunteerId = 8b278f98-f9fb-4be6-a19f-175ffe2ac1fb
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/revenue/collectionHistory
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/revenue/collectionHistory
   ?volunteerId={{volunteerId}}
   # &place="Kochi"
   &from=2024-01-01T07:02:42Z

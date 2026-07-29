@@ -1,4 +1,4 @@
-module Storage.Queries.NotificationExtra where
+﻿module Storage.Queries.NotificationExtra where
 
 import Data.Time (UTCTime (UTCTime, utctDay), secondsToDiffTime)
 import qualified Domain.Types.DriverFee as DF
@@ -6,7 +6,7 @@ import qualified Domain.Types.MerchantOperatingCity as DMOC
 import Domain.Types.Notification as Domain
 import Kernel.Beam.Functions
 import Kernel.External.Payment.Interface.Types as PaymentI
-import qualified Kernel.External.Payment.Juspay.Types as Payment
+import qualified Kernel.External.Payment.Gateway.Types as Payment
 import Kernel.Prelude
 import Kernel.Types.Common
 import Kernel.Types.Id
@@ -89,7 +89,7 @@ updateNotificationResponseById notificationId response = do
   mNotification <- findById notificationId
   let notificationStatus = maybe response.status (\nf -> if nf.status == Payment.SUCCESS then Payment.SUCCESS else response.status) mNotification
   updateWithKV
-    [ Se.Set BeamI.juspayProvidedId response.juspayProvidedId,
+    [ Se.Set BeamI.QolariProvidedId response.QolariProvidedId,
       Se.Set BeamI.txnDate (fromMaybe now response.sourceInfo.txnDate),
       Se.Set BeamI.providerName response.providerName,
       Se.Set BeamI.notificationType response.notificationType,

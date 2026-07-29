@@ -1,4 +1,4 @@
-{
+﻿{
 	"info": {
 		"name": "NY EasyBooking Ride Flow (Bangalore, Auto Rickshaw)",
 		"description": "End-to-end EasyBooking flow (Bangalore, Auto Rickshaw pilot):\n  Driver onboard -> Rider auth -> EasyBooking search (no destination, no distance/duration estimate) -> Get quotes (onRentalCab) -> Confirm quote -> Driver accepts -> Driver starts -> End ride -> Verify completed.\n\nEasyBooking vs Rental, for anyone adapting this from RentalRideFlow:\n- Search body has no estimatedRentalDistance/estimatedRentalDuration (EasyBookingSearchReq is destination- and estimate-less; the quote shows base_fare + per_extra_km_rate from the Regular/Progressive fare policy instead of a package price).\n- No 'Enable Rental Switch (Driver Profile)' step: canSwitchToRental only gates Rental-category driver-pool eligibility, not EasyBooking (confirmed by reading SharedLogic/DriverPool/DriverPoolData.hs) - dropped from this flow since it's a no-op for EasyBooking.\n- End ride needs no OTP (isEndOtpRequired EasyBooking = False, hardcoded in Trip.hs), but Start ride's OTP is unrelated to trip category (StartRide.hs always checks driverReq.rideOtp against ride.otp unless the rider has an otp-less-ride tag), so Start still supplies rideOtp exactly like Rental does.\n- fare_product for EasyBooking + AUTO_RICKSHAW must be seeded for this city (pilot cities: Bangalore, Mysore, Tumakuru; see backend/feat/easybooking commit 25a817c728).\n",
@@ -39,7 +39,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}],
 				"body": {"mode": "raw", "raw": "{\"mobileNumber\": \"{{_test_driver_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"{{driver_merchant_id}}\", \"merchantOperatingCity\": \"{{city}}\"}"},
-				"url": {"raw": "{{baseURL_namma_P}}/auth", "host": ["{{baseURL_namma_P}}"], "path": ["auth"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/auth", "host": ["{{baseURL_qolari_P}}"], "path": ["auth"]}
 			}
 		},
 		{
@@ -49,7 +49,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}],
 				"body": {"mode": "raw", "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-device\"}"},
-				"url": {"raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify", "host": ["{{baseURL_namma_P}}"], "path": ["auth", "{{driver_authId}}", "verify"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify", "host": ["{{baseURL_qolari_P}}"], "path": ["auth", "{{driver_authId}}", "verify"]}
 			}
 		},
 		{
@@ -79,7 +79,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{}"},
-				"url": {"raw": "{{baseURL_namma_P}}/plan/{{plan_id}}/subscribe", "host": ["{{baseURL_namma_P}}"], "path": ["plan", "{{plan_id}}", "subscribe"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/plan/{{plan_id}}/subscribe", "host": ["{{baseURL_qolari_P}}"], "path": ["plan", "{{plan_id}}", "subscribe"]}
 			}
 		},
 		{
@@ -89,7 +89,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{}"},
-				"url": {"raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "setActivity"], "query": [{"key": "active", "value": "true"}, {"key": "mode", "value": "%22ONLINE%22"}]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "setActivity"], "query": [{"key": "active", "value": "true"}, {"key": "mode", "value": "%22ONLINE%22"}]}
 			}
 		},
 		{
@@ -236,7 +236,7 @@
 			"request": {
 				"method": "GET",
 				"header": [{"key": "token", "value": "{{driver_token}}"}],
-				"url": {"raw": "{{baseURL_namma_P}}/driver/nearbyRideRequest", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "nearbyRideRequest"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/nearbyRideRequest", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "nearbyRideRequest"]}
 			}
 		},
 		{
@@ -246,7 +246,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{\"searchTryId\": \"{{searchTryId}}\", \"offeredFare\": null, \"response\": \"Accept\"}"},
-				"url": {"raw": "{{baseURL_namma_P}}/driver/searchRequest/quote/respond", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "searchRequest", "quote", "respond"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/searchRequest/quote/respond", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "searchRequest", "quote", "respond"]}
 			}
 		},
 		{
@@ -289,7 +289,7 @@
 			"request": {
 				"method": "GET",
 				"header": [{"key": "token", "value": "{{driver_token}}"}],
-				"url": {"raw": "{{baseURL_namma_P}}/driver/ride/list?limit=1&isActive=true", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "ride", "list"], "query": [{"key": "limit", "value": "1"}, {"key": "isActive", "value": "true"}]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/ride/list?limit=1&isActive=true", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "ride", "list"], "query": [{"key": "limit", "value": "1"}, {"key": "isActive", "value": "true"}]}
 			}
 		},
 		{
@@ -299,7 +299,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{\"rideOtp\": \"{{ride_otp}}\", \"point\": {\"lat\": {{origin_lat}}, \"lon\": {{origin_lon}}}, \"odometer\": {\"value\": 0, \"fileId\": \"test-odometer-start\"}}"},
-				"url": {"raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/start", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "ride", "{{driver_ride_id}}", "start"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/start", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "ride", "{{driver_ride_id}}", "start"]}
 			}
 		},
 		{
@@ -312,7 +312,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{\"point\": {\"lat\": {{dest_lat}}, \"lon\": {{dest_lon}}}, \"odometer\": {\"value\": 3, \"fileId\": \"test-odometer-end\"}}"},
-				"url": {"raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/end", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "ride", "{{driver_ride_id}}", "end"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/end", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "ride", "{{driver_ride_id}}", "end"]}
 			}
 		},
 		{

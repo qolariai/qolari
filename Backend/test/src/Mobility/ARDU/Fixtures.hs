@@ -47,17 +47,17 @@ arduDriver2 =
 defaultAllowedDriverFee :: Money
 defaultAllowedDriverFee = 10
 
-nammaYatriPartnerMerchantId :: Id DM.Merchant
-nammaYatriPartnerMerchantId = "favorit0-0000-0000-0000-00000favorit"
+QolariPartnerMerchantId :: Id DM.Merchant
+QolariPartnerMerchantId = "favorit0-0000-0000-0000-00000favorit"
 
-nammaYatriPartnerMerchantOperatingCityId :: Id DMOC.MerchantOperatingCity
-nammaYatriPartnerMerchantOperatingCityId = "favorit0-0000-0000-0000-00000000city"
+QolariPartnerMerchantOperatingCityId :: Id DMOC.MerchantOperatingCity
+QolariPartnerMerchantOperatingCityId = "favorit0-0000-0000-0000-00000000city"
 
-nammaYatriPartnerMerchantShortId :: ShortId DM.Merchant
-nammaYatriPartnerMerchantShortId = "NAMMA_YATRI_PARTNER"
+QolariPartnerMerchantShortId :: ShortId DM.Merchant
+QolariPartnerMerchantShortId = "qolari_PARTNER"
 
-nammaYatriDefaultOperatingCity :: Context.City
-nammaYatriDefaultOperatingCity = Context.City "Bangalore"
+QolariDefaultOperatingCity :: Context.City
+QolariDefaultOperatingCity = Context.City "Bangalore"
 
 otherMerchant2Id :: Id DM.Merchant
 otherMerchant2Id = "nearest-drivers-testing-organization"

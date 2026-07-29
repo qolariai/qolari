@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
+﻿{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
 
 module Lib.Payment.Payout.Request
   ( PayoutRequest (..),
@@ -241,7 +241,7 @@ executePayoutRequest = executePayoutRequestInternal Nothing
 -- Internal helpers
 -- ---------------------------------------------------------------------------
 
--- | Internal: call Juspay via createPayoutService, manage status transitions.
+-- | Internal: call Qolari via createPayoutService, manage status transitions.
 executePayoutRequestInternal ::
   ( EncFlow m r,
     PaymentBeamFlow.BeamFlow m r,
@@ -287,7 +287,7 @@ executePayoutRequestInternal mbTransferAmount currency payoutServiceFlow payoutR
 buildCreatePayoutOrderReq :: (MonadFlow m) => Text -> Currency -> PayoutRequest -> Payout.PayoutServiceFlow -> Maybe HighPrecMoney -> m DPayment.CreatePayoutServiceReq
 buildCreatePayoutOrderReq orderId currency pr payoutServiceFlow mbTransferAmount = do
   vpa <- case payoutServiceFlow of
-    Payout.JuspayFlow -> Just <$> fromMaybeM (InvalidRequest $ "VPA is required for payout but missing in PayoutRequest " <> pr.id.getId) pr.customerVpa
+    Payout.QolariFlow -> Just <$> fromMaybeM (InvalidRequest $ "VPA is required for payout but missing in PayoutRequest " <> pr.id.getId) pr.customerVpa
     Payout.StripeFlow -> pure $ pr.customerVpa
   pure $
     DPayment.mkCreatePayoutServiceReq

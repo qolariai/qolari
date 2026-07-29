@@ -1,6 +1,6 @@
-# Mock Servers
+﻿# Mock Servers
 
-Unified mock server for NammaYatri merchant service providers.
+Unified mock server for Qolari merchant service providers.
 
 ## Architecture
 
@@ -11,7 +11,7 @@ Unified mock server for NammaYatri merchant service providers.
 | mock-sms | 4343 | Haskell | GupShup, Exotel, Karix, MyValueFirst, Pingbix, Twilio |
 | mock-idfy | 6235 | Haskell | Document verification (Idfy, HyperVerge) |
 | mock-registry | 8020 | Haskell | Beckn registry |
-| **mock-server** | **8080** | **Python** | **Everything else** (Juspay, PayTM, Acko, SOS, WhatsApp, etc.) |
+| **mock-server** | **8080** | **Python** | **Everything else** (Qolari, PayTM, Acko, SOS, WhatsApp, etc.) |
 
 ## Usage
 
@@ -25,7 +25,7 @@ python dev/mock-servers/server.py --port 8080
 
 | Path | Service |
 |------|---------|
-| `/juspay/*` | Juspay Payment/Payout |
+| `/Qolari/*` | Qolari Payment/Payout |
 | `/paytm/*` | PayTM EDC/Notifications |
 | `/acko/*` | Acko Insurance |
 | `/erss/*`, `/sos/*` | SOS/ERSS/Trinity |

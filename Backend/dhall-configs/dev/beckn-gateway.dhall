@@ -1,4 +1,4 @@
-let common = ./common.dhall
+﻿let common = ./common.dhall
 
 let sec = ./secrets/beckn-gateway.dhall
 
@@ -32,11 +32,11 @@ in  { hedisCfg = rcfg
     , cutOffHedisCluster = False
     , port = Natural/toInteger (env:SERVICE_PORT ? 8015)
     , metricsPort = Natural/toInteger (env:METRICS_PORT ? 9998)
-    , selfId = "JUSPAY.BG.1"
+    , selfId = "Qolari.BG.1"
     , hostName = "localhost"
     , authEntity =
       { signingKey = sec.signingKey
-      , uniqueKeyId = "juspay-bg-1-key"
+      , uniqueKeyId = "Qolari-bg-1-key"
       , signatureExpiry = common.signatureExpiry
       }
     , loggerConfig =
@@ -45,7 +45,7 @@ in  { hedisCfg = rcfg
     , httpClientOptions = common.httpClientOptions
     , shortDurationRetryCfg = common.shortDurationRetryCfg
     , longDurationRetryCfg = common.longDurationRetryCfg
-    , registryUrl = common.nammayatriRegistryConfig.url
+    , registryUrl = common.QolariRegistryConfig.url
     , disableSignatureAuth = False
     , enableRedisLatencyLogging = True
     , enablePrometheusMetricLogging = True

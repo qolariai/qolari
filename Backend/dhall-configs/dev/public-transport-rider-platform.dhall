@@ -1,4 +1,4 @@
-let common = ./common.dhall
+﻿let common = ./common.dhall
 
 let sec = ./secrets/public-transport-rider-platform.dhall
 
@@ -70,12 +70,12 @@ in  { esqDBCfg
             common.loggerConfig
         //  { logFilePath = "/tmp/public-transport-rider-platform.log" }
     , graceTerminationPeriod = +90
-    , selfId = "JUSPAY.PUBLIC_TRANSPORT.APP.UAT.1"
+    , selfId = "Qolari.PUBLIC_TRANSPORT.APP.UAT.1"
     , selfURI = "http://localhost:8023/beckn"
     , authServiceUrl = common.authServiceUrl
     , authEntity =
       { signingKey = sec.signingKey
-      , uniqueKeyId = "juspay-mobility-bap-1-key"
+      , uniqueKeyId = "Qolari-mobility-bap-1-key"
       , signatureExpiry = common.signatureExpiry
       }
     , disableSignatureAuth = False
@@ -83,7 +83,7 @@ in  { esqDBCfg
     , httpClientOptions = common.httpClientOptions
     , shortDurationRetryCfg = common.shortDurationRetryCfg
     , longDurationRetryCfg = common.longDurationRetryCfg
-    , registryUrl = common.nammayatriRegistryConfig.url
+    , registryUrl = common.QolariRegistryConfig.url
     , kafkaProducerCfg
     , secondaryKafkaProducerCfg
     , enableRedisLatencyLogging = True

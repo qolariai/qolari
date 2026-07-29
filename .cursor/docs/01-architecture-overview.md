@@ -1,8 +1,8 @@
-# Architecture Overview
+﻿# Architecture Overview
 
 ## Project Structure
 
-Namma Yatri is an open-source mobility platform (ride-hailing + delivery + public transport) built on the BECKN/ONDC protocol. Monorepo with Haskell backend, PureScript frontend, native Android.
+Qolari is an open-source mobility platform (ride-hailing + delivery + public transport) built on the BECKN/ONDC protocol. Monorepo with Haskell backend, PureScript frontend, native Android.
 
 The backend is a multi-package Cabal project (~48 packages) following microservices architecture.
 
@@ -49,7 +49,7 @@ The backend is a multi-package Cabal project (~48 packages) following microservi
 |---------|------|---------|
 | beckn-spec | `lib/beckn-spec/` | BECKN protocol types and API definitions |
 | beckn-services | `lib/beckn-services/` | BECKN service utilities |
-| payment | `lib/payment/` | Juspay payment gateway integration |
+| payment | `lib/payment/` | Qolari payment gateway integration |
 | scheduler | `lib/scheduler/` | Redis-based job scheduling |
 | location-updates | `lib/location-updates/` | Real-time tracking with OSRM |
 | yudhishthira | `lib/yudhishthira/` | Business rule/decision engine |

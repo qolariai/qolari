@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # Clone-or-pull the control-center frontend and run `npm run dev` against
-# the local nammayatri stack. Invoked by test-context-api when the user
+# the local Qolari stack. Invoked by test-context-api when the user
 # clicks "Launch Control Center" in the test-dashboard.
 #
 # Modern Node (>=20.19 / >=22.12) is required by Vite. We source it from the
@@ -22,7 +22,7 @@ mkdir -p "$DATA_DIR"
 
 if [ ! -d "$CC_DIR/.git" ]; then
   echo "control-center: cloning into $CC_DIR"
-  git clone https://github.com/nammayatri/control-center "$CC_DIR"
+  git clone https://github.com/Qolari/control-center "$CC_DIR"
 else
   echo "control-center: pulling latest in $CC_DIR"
   git -C "$CC_DIR" pull --ff-only || echo "control-center: pull failed, continuing with existing checkout"

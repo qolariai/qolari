@@ -1,5 +1,5 @@
-# Finance Kernel - Direct Tax Transaction Table (TDS)
-# Namma-DSL YAML specification
+﻿# Finance Kernel - Direct Tax Transaction Table (TDS)
+# qolari-dsl YAML specification
 
 imports:
   UTCTime: Kernel.Prelude

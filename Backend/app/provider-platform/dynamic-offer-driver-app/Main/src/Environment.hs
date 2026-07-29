@@ -63,7 +63,7 @@ import qualified Network.HTTP.Client as Http
 import qualified Network.HTTP.Client.TLS as HttpTLS
 import Passetto.Client
 import Passetto.Lib (mkPassettoContextAuto)
-import qualified Registry.Beckn.Nammayatri.Types as NyRegistry
+import qualified Registry.Beckn.Qolari.Types as NyRegistry
 import SharedLogic.Allocator (AllocatorJobType)
 import SharedLogic.CallBAPInternal
 import SharedLogic.CallInternalMLPricing
@@ -181,7 +181,7 @@ data AppCfg = AppCfg
     ondcGatewayUrl :: BaseUrl,
     nyRegistryUrl :: BaseUrl,
     nyGatewayUrl :: BaseUrl,
-    nammayatriRegistryConfig :: NyRegistry.RegistryConfig,
+    QolariRegistryConfig :: NyRegistry.RegistryConfig,
     urlShortnerConfig :: UrlShortner.UrlShortnerConfig,
     vocalyticsCnfg :: VocalyticsCnfg,
     selfBaseUrl :: BaseUrl,
@@ -313,7 +313,7 @@ data AppEnv = AppEnv
     ondcGatewayUrl :: BaseUrl,
     nyRegistryUrl :: BaseUrl,
     nyGatewayUrl :: BaseUrl,
-    nammayatriRegistryConfig :: NyRegistry.RegistryConfig,
+    QolariRegistryConfig :: NyRegistry.RegistryConfig,
     urlShortnerConfig :: UrlShortner.UrlShortnerConfig,
     vocalyticsCnfg :: VocalyticsCnfg,
     selfBaseUrl :: BaseUrl,

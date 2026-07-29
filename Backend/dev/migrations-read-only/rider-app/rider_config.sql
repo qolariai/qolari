@@ -1,6 +1,6 @@
-CREATE TABLE atlas_app.rider_config ();
+﻿CREATE TABLE atlas_app.rider_config ();
 
-ALTER TABLE atlas_app.rider_config ADD COLUMN app_url text NOT NULL default 'nammayatri.in/link/rider/rmxw';
+ALTER TABLE atlas_app.rider_config ADD COLUMN app_url text NOT NULL default 'drive.qolari.com/link/rider/rmxw';
 ALTER TABLE atlas_app.rider_config ADD COLUMN enable_emergency_contact_added_message boolean NOT NULL default true;
 ALTER TABLE atlas_app.rider_config ADD COLUMN enable_local_police_support boolean NOT NULL default false;
 ALTER TABLE atlas_app.rider_config ADD COLUMN enable_support_for_safety boolean NOT NULL default false;
@@ -9,7 +9,7 @@ ALTER TABLE atlas_app.rider_config ADD COLUMN merchant_operating_city_id charact
 ALTER TABLE atlas_app.rider_config ADD COLUMN safety_check_end_time integer NOT NULL default 21600;
 ALTER TABLE atlas_app.rider_config ADD COLUMN safety_check_start_time integer NOT NULL default 75600;
 ALTER TABLE atlas_app.rider_config ADD COLUMN time_diff_from_utc integer NOT NULL default 19800;
-ALTER TABLE atlas_app.rider_config ADD COLUMN tracking_short_url_pattern text NOT NULL default 'nammayatri.in/t/';
+ALTER TABLE atlas_app.rider_config ADD COLUMN tracking_short_url_pattern text NOT NULL default 'drive.qolari.com/t/';
 ALTER TABLE atlas_app.rider_config ADD COLUMN video_file_size_upper_limit integer NOT NULL default 15000000;
 ALTER TABLE atlas_app.rider_config ADD COLUMN merchant_id character varying(36) ;
 ALTER TABLE atlas_app.rider_config ADD COLUMN created_at timestamp with time zone NOT NULL default CURRENT_TIMESTAMP;
@@ -624,7 +624,7 @@ ALTER TABLE atlas_app.rider_config ADD COLUMN include_vehicles_with_no_eta boole
 
 ------- SQL updates -------
 
-ALTER TABLE atlas_app.rider_config ALTER COLUMN tracking_short_url_pattern SET DEFAULT 'https://nammayatri.in/t/';
+ALTER TABLE atlas_app.rider_config ALTER COLUMN tracking_short_url_pattern SET DEFAULT 'https://drive.qolari.com/t/';
 ALTER TABLE atlas_app.rider_config ALTER COLUMN dashboard_media_file_url_pattern SET DEFAULT 'https://control-center.moving.tech/ops/rides/<RIDE_ID>';
 
 

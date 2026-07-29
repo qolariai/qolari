@@ -1,4 +1,4 @@
-let common = ./common.dhall
+﻿let common = ./common.dhall
 
 let sec = ./secrets/public-transport-rider-platform.dhall
 
@@ -26,7 +26,7 @@ let hccfg =
 
 in  { port = Natural/toInteger (env:SERVICE_PORT ? 8091)
     , selfId = "mock-public-transport-bpp"
-    , uniqueKeyId = "juspay-mobility-bpp-1-key1"
+    , uniqueKeyId = "Qolari-mobility-bpp-1-key1"
     , selfUri = "http://localhost:8091/"
     , hedisCfg = hcfg
     , hedisClusterCfg = hccfg
@@ -41,7 +41,7 @@ in  { port = Natural/toInteger (env:SERVICE_PORT ? 8091)
         //  { logFilePath = "/tmp/mock-public-transport-provider-platform.log" }
     , authEntity =
       { signingKey = sec.signingKey
-      , uniqueKeyId = "juspay-mobility-bpp-1-key1"
+      , uniqueKeyId = "Qolari-mobility-bpp-1-key1"
       , signatureExpiry = common.signatureExpiry
       }
     , enableRedisLatencyLogging = True

@@ -1,8 +1,8 @@
-{-# OPTIONS_GHC -Wno-deprecations #-}
+﻿{-# OPTIONS_GHC -Wno-deprecations #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Domain.Action.Internal.Payout
-  ( juspayPayoutWebhookHandler,
+  ( QolariPayoutWebhookHandler,
     payoutProcessingLockKey,
     castOrderStatus,
   )
@@ -17,10 +17,10 @@ import qualified Domain.Types.PersonStats as DPS
 import qualified Domain.Types.VehicleCategory as DV
 import Environment
 import Kernel.Beam.Functions as B (runInReplica)
-import qualified Kernel.External.Payout.Interface as Juspay
-import qualified Kernel.External.Payout.Interface.Juspay as Juspay
+import qualified Kernel.External.Payout.Interface as Qolari
+import qualified Kernel.External.Payout.Interface.Qolari as Qolari
 import qualified Kernel.External.Payout.Interface.Types as IPayout
-import qualified Kernel.External.Payout.Juspay.Types.Payout as Payout
+import qualified Kernel.External.Payout.Qolari.Types.Payout as Payout
 import qualified Kernel.External.Payout.Types as TPayout
 import Kernel.Prelude
 import qualified Kernel.Types.Beckn.Context as Context
@@ -55,24 +55,24 @@ payoutProcessingLockKey = UIPayout.payoutProcessingLockKey
 
 -- webhook ----------------------------------------------------------
 
-juspayPayoutWebhookHandler ::
+QolariPayoutWebhookHandler ::
   ShortId DM.Merchant ->
   Maybe Context.City ->
   BasicAuthData ->
   Value ->
   Flow AckResponse
-juspayPayoutWebhookHandler merchantShortId mbOpCity authData value = do
+QolariPayoutWebhookHandler merchantShortId mbOpCity authData value = do
   merchant <- findMerchantByShortId merchantShortId
   merchanOperatingCityId <- CQMOC.getMerchantOpCityId merchant mbOpCity
   let merchantId = merchant.id
-      serviceName' = DEMSC.PayoutService TPayout.Juspay
+      serviceName' = DEMSC.PayoutService TPayout.Qolari
   merchantServiceConfig <-
     getOneConfig (MerchantServiceConfigDimensions {merchantOperatingCityId = merchanOperatingCityId.getId, merchantId = merchantId.getId, serviceName = Just serviceName'}) (Just (maybeToList <$> CQMSC.findByMerchantOpCityIdAndService merchantId merchanOperatingCityId (serviceName')))
-      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "Payout" (show TPayout.Juspay))
+      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "Payout" (show TPayout.Qolari))
   psc <- case merchantServiceConfig.serviceConfig of
     DMSC.PayoutServiceConfig psc' -> pure psc'
     _ -> throwError $ InternalError "Unknown Service Config"
-  orderStatusResp <- Juspay.payoutOrderStatusWebhook psc authData value
+  orderStatusResp <- Qolari.payoutOrderStatusWebhook psc authData value
   osr <- case orderStatusResp of
     Nothing -> throwError $ InternalError "Order Contents not found."
     Just osr' -> pure osr'

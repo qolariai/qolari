@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+﻿import axios, { AxiosResponse } from 'axios';
 import { Config, Step } from '../types';
 import { ApiDef } from '../api-catalog/types';
 import { ParsedStep } from './postman-parser';
@@ -273,7 +273,7 @@ const SERVICE_PROXY_MAP: Record<string, string> = {
   'rider-dashboard': '/proxy/rider-dashboard',
   'mock-idfy': '/proxy/mock-idfy',
   'mock-server': '/proxy/mock-server',
-  'juspay-payment': '/proxy/juspay-payment',
+  'Qolari-payment': '/proxy/Qolari-payment',
 };
 
 export interface PostmanStepResult extends ApiResult {
@@ -339,7 +339,7 @@ export async function callPostmanStep(
   }
 
   const _svcEnvVar: Record<string, string> = {
-    driver: 'baseURL_namma_P',
+    driver: 'baseURL_qolari_P',
     rider: 'baseUrl_app',
     lts: 'baseUrl_lts',
     'provider-dashboard': 'dashboard_base_url',

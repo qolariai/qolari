@@ -1,4 +1,4 @@
-{
+﻿{
 	"info": {
 		"name": "Challan Fetch Error on Vehicle Approval (3P failure capture)",
 		"description": "E2E test that the challan-fetch FAILURE is captured and persisted. Mirrors the success flow (register driver+RC, inspection request, approve) but points the ChallanSearch_Signzy provider URL at a dead port so the forked getPendingChallanCount throws; the fork's Left branch then stores pending_challan = {pendingChallanCount: null, errorMessage: <err>}. Asserts the error is persisted (errorMessage non-null, pendingChallanCount null). Final step restores the working provider config. RUN SERIALLY (mutates the shared ChallanSearch_Signzy merchant_service_config).",
@@ -242,9 +242,9 @@
 					"raw": "{\"mobileNumber\": \"{{_test_driver_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"{{driver_merchant_id}}\", \"merchantOperatingCity\": \"{{city}}\"}"
 				},
 				"url": {
-					"raw": "{{baseURL_namma_P}}/auth",
+					"raw": "{{baseURL_qolari_P}}/auth",
 					"host": [
-						"{{baseURL_namma_P}}"
+						"{{baseURL_qolari_P}}"
 					],
 					"path": [
 						"auth"
@@ -282,9 +282,9 @@
 					"raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-device-challan\"}"
 				},
 				"url": {
-					"raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
+					"raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
 					"host": [
-						"{{baseURL_namma_P}}"
+						"{{baseURL_qolari_P}}"
 					],
 					"path": [
 						"auth",
@@ -327,9 +327,9 @@
 					"raw": "{\"image\": \"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==\", \"imageType\": \"VehicleRegistrationCertificate\", \"rcNumber\": null, \"validationStatus\": null, \"vehicleCategory\": null}"
 				},
 				"url": {
-					"raw": "{{baseURL_namma_P}}/driver/register/validateImage",
+					"raw": "{{baseURL_qolari_P}}/driver/register/validateImage",
 					"host": [
-						"{{baseURL_namma_P}}"
+						"{{baseURL_qolari_P}}"
 					],
 					"path": [
 						"driver",
@@ -370,9 +370,9 @@
 					"raw": "{\"vehicleRegistrationCertNumber\": \"{{_test_rc_number}}\", \"imageId\": \"{{rc_image_id}}\", \"operatingCity\": \"{{city}}\", \"dateOfRegistration\": \"2023-01-15T00:00:00Z\", \"vehicleCategory\": \"CAR\", \"vehicleDetails\": {\"vehicleManufacturer\": \"Maruti\", \"vehicleModel\": \"Swift Dzire\", \"vehicleColour\": \"White\", \"vehicleDoors\": 4, \"vehicleSeatBelts\": 4, \"vehicleModelYear\": 2023}}"
 				},
 				"url": {
-					"raw": "{{baseURL_namma_P}}/driver/register/rc",
+					"raw": "{{baseURL_qolari_P}}/driver/register/rc",
 					"host": [
-						"{{baseURL_namma_P}}"
+						"{{baseURL_qolari_P}}"
 					],
 					"path": [
 						"driver",
@@ -455,9 +455,9 @@
 					}
 				],
 				"url": {
-					"raw": "{{baseURL_namma_P}}/driver/register/status?onlyMandatoryDocs=true",
+					"raw": "{{baseURL_qolari_P}}/driver/register/status?onlyMandatoryDocs=true",
 					"host": [
-						"{{baseURL_namma_P}}"
+						"{{baseURL_qolari_P}}"
 					],
 					"path": [
 						"driver",

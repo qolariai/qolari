@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-unused-imports #-}
+﻿{-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module API.Types.UI.ReferralPayout where
 
@@ -8,7 +8,7 @@ import qualified Data.Time.Calendar
 import qualified Domain.Types.DailyStats
 import qualified Domain.Types.PayoutConfig
 import EulerHS.Prelude hiding (id)
-import qualified Kernel.External.Payment.Juspay.Types.Common
+import qualified Kernel.External.Payment.Gateway.Types.Common
 import qualified Kernel.Prelude
 import qualified Kernel.Types.Common
 import Servant
@@ -47,7 +47,7 @@ data ReferralEarningsRes = ReferralEarningsRes
     d2dReferralEarnings :: Kernel.Prelude.Maybe [DailyEarning],
     dailyEarnings :: [DailyEarning],
     orderId :: Kernel.Prelude.Maybe Data.Text.Text,
-    orderStatus :: Kernel.Prelude.Maybe Kernel.External.Payment.Juspay.Types.Common.TransactionStatus,
+    orderStatus :: Kernel.Prelude.Maybe Kernel.External.Payment.Gateway.Types.Common.TransactionStatus,
     payoutRegAmountRefunded :: Kernel.Prelude.Maybe Kernel.Types.Common.HighPrecMoney,
     payoutRegistrationAmount :: Kernel.Types.Common.HighPrecMoney,
     referralRewardAmountPerRide :: Kernel.Types.Common.HighPrecMoney,

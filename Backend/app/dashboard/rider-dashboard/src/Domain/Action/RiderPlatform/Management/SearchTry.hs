@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wwarn=unused-imports #-}
+﻿{-# OPTIONS_GHC -Wwarn=unused-imports #-}
 
 module Domain.Action.RiderPlatform.Management.SearchTry
   ( postSearchTryRecentSearchTries,
@@ -37,7 +37,7 @@ postSearchTryRecentSearchTries merchantShortId opCity apiTokenInfo req = do
       Nothing
       (Just req)
   SharedLogic.Transaction.withTransactionStoring transaction $ do
-    -- BAP merchant shortIds map to BPP partner shortIds (e.g. NAMMA_YATRI → NAMMA_YATRI_PARTNER)
+    -- BAP merchant shortIds map to BPP partner shortIds (e.g. qolari → qolari_PARTNER)
     let bppMerchantShortId = Kernel.Types.Id.ShortId (merchantShortId.getShortId <> "_PARTNER")
     -- Call BPP driver-app API with the same phoneNumbers / limit input
     bppRes <-

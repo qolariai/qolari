@@ -1,4 +1,4 @@
-# 🚖 Qolari
+﻿# 🚖 Qolari
 
 **Open and Driver Centric Mobility Platform**
 
@@ -38,4 +38,4 @@ Instructions to build and run the project can be found in the sub-project direct
 
 This project is licensed under the GNU Affero General Public License v3.0 — see the [LICENSE](LICENSE) file for details.
 
-Based on the open-source Namma Yatri project (AGPL-3.0).
+Based on the open-source Qolari project (AGPL-3.0).

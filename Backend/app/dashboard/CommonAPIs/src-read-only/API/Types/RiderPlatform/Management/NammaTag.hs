@@ -1,5 +1,5 @@
-{-# OPTIONS_GHC -Wno-unused-imports #-}
+﻿{-# OPTIONS_GHC -Wno-unused-imports #-}
 
-module API.Types.RiderPlatform.Management.NammaTag (module ReExport) where
+module API.Types.RiderPlatform.Management.QolariTag (module ReExport) where
 
-import API.Types.RiderPlatform.Management.Endpoints.NammaTag as ReExport
+import API.Types.RiderPlatform.Management.Endpoints.QolariTag as ReExport

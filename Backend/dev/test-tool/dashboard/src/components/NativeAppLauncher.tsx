@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+﻿import React, { useEffect, useRef, useState } from 'react';
 import './TopBarActions.css';
 import { showAlert, showConfirm } from './Dialogs';
 import { RefPicker } from './RefPicker';
@@ -397,7 +397,7 @@ export const NativeAppLauncher: React.FC<Props> = ({ app, label, icon = '📱' }
                 </div>
                 <div className="tb-modal-form-field">
                   <RefPicker
-                    repo="nammayatri/ny-react-native"
+                    repo="Qolari/ny-react-native"
                     value={selRef}
                     onChange={(v) => { setSelRef(v); saveUiState({ [`nativeApp.${app}.ref`]: v || null }); }}
                     disabled={!!data?.running}
@@ -559,7 +559,7 @@ export const NativeAppLauncher: React.FC<Props> = ({ app, label, icon = '📱' }
                 <input
                   type="text"
                   placeholder={tab === 'all'
-                    ? 'Filter (substring or /regex/i) — try: OkHttp, ReactNativeJS, in.juspay, FATAL'
+                    ? 'Filter (substring or /regex/i) — try: OkHttp, ReactNativeJS, in.Qolari, FATAL'
                     : 'Refine filter (substring or /regex/i)'}
                   value={logcatFilter}
                   onChange={e => setLogcatFilter(e.target.value)}

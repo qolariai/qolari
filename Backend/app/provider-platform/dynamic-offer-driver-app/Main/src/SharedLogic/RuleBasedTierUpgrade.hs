@@ -1,4 +1,4 @@
-module SharedLogic.RuleBasedTierUpgrade
+﻿module SharedLogic.RuleBasedTierUpgrade
   ( computeEligibleUpgradeTiers,
   )
 where
@@ -72,8 +72,8 @@ computeEligibleUpgradeTiers ride transporterConfig =
               }
       mbBooking <- QBooking.findById ride.bookingId
       let mbTransactionId = (.transactionId) <$> mbBooking
-      nammaTags <- withTryCatch "computeNammaTags:UpgradeTier" (LYDL.computeNammaTagsWithDebugLog LYDL.Driver (Id.cast ride.merchantOperatingCityId) Yudhishthira.UpgradeTier mbTransactionId upgradeTierTagData)
-      let newEligibleTiers = eligibleTiersFromTags $ fromMaybe [] $ eitherToMaybe nammaTags
+      QolariTags <- withTryCatch "computeQolariTags:UpgradeTier" (LYDL.computeQolariTagsWithDebugLog LYDL.Driver (Id.cast ride.merchantOperatingCityId) Yudhishthira.UpgradeTier mbTransactionId upgradeTierTagData)
+      let newEligibleTiers = eligibleTiersFromTags $ fromMaybe [] $ eitherToMaybe QolariTags
           newUpgrades = computeMergedUpgrades now (fromMaybe 0 transporterConfig.upgradeTierDropRetentionTime) (fromMaybe [] driverInfo.ruleBasedUpgradeTiers) newEligibleTiers
           vehicleNewUpgrades = computeMergedUpgrades now (fromMaybe 0 transporterConfig.upgradeTierDropRetentionTime) (fromMaybe [] vehicle.ruleBasedUpgradeTiers) newEligibleTiers
       QDriverInformation.updateUpgradedTiers (Just newUpgrades) driverInfo.driverId

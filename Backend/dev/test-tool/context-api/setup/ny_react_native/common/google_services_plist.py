@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """iOS counterpart of ``google_services_json``: drop a placeholder
 ``GoogleService-Info.plist`` into ``consumer/ios/`` and into every
 ``consumer/ios/<Variant>/Plist/`` directory we find.
@@ -44,7 +44,7 @@ PLIST: dict = {
     # actual PRODUCT_BUNDLE_IDENTIFIER — see write_google_services_plist().
     # The placeholder here is only used if the resolver fails (e.g.
     # xcodebuild not on PATH).
-    "BUNDLE_ID":           "in.juspay.nammayatri.dev",
+    "BUNDLE_ID":           "com.qolari.drive.dev",
     "PROJECT_ID":          "ny-rn-dev-placeholder",
     "STORAGE_BUCKET":      "ny-rn-dev-placeholder.appspot.com",
     "IS_ADS_ENABLED":      False,

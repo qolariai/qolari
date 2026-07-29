@@ -5,10 +5,10 @@
 # https://github.com/NixOS/nixpkgs/issues/149692#issuecomment-1587564664
 name: route-extractor
 version: 0.1.0.0
-github: "nammayatri/nammayatri"
+github: "Qolari/Qolari"
 license: AllRightsReserved
-author: "nammayatri"
-maintainer: "nammayatri"
+author: "Qolari"
+maintainer: "Qolari"
 copyright: "2026 Qolari Technologies"
 
 flags:

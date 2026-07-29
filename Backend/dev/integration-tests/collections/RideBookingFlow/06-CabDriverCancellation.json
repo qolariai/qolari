@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "NY Taxi Driver Cancellation + Reallocation",
     "description": "2 drivers (SEDAN): D1 gets ride, cancels -> D2 gets reallocated ride -> completes",
@@ -70,9 +70,9 @@
           "raw": "{\n    \"mobileNumber\": \"{{_test_driver_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"{{driver_merchant_id}}\",\n    \"merchantOperatingCity\": \"{{city}}\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -110,9 +110,9 @@
           "raw": "{\n    \"otp\": \"{{login_otp}}\",\n    \"deviceToken\": \"test-device\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -242,9 +242,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/plan/18911beb-28ba-456d-8cca-4d019461d2b0/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
+          "raw": "{{baseURL_qolari_P}}/plan/18911beb-28ba-456d-8cca-4d019461d2b0/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "plan",
@@ -352,9 +352,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -401,9 +401,9 @@
           "raw": "{\n    \"mobileNumber\": \"{{_test_driver2_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"{{driver_merchant_id}}\",\n    \"merchantOperatingCity\": \"{{city}}\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -441,9 +441,9 @@
           "raw": "{\n    \"otp\": \"{{login_otp}}\",\n    \"deviceToken\": \"test-device\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver2_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver2_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -573,9 +573,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/plan/18911beb-28ba-456d-8cca-4d019461d2b0/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
+          "raw": "{{baseURL_qolari_P}}/plan/18911beb-28ba-456d-8cca-4d019461d2b0/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "plan",
@@ -616,7 +616,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"NAMMA_YATRI\"\n}"
+          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"qolari\"\n}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -924,9 +924,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/nearbyRideRequest",
+          "raw": "{{baseURL_qolari_P}}/driver/nearbyRideRequest",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -966,9 +966,9 @@
           "raw": "{\"searchTryId\": \"{{searchTryId}}\", \"offeredFare\": null, \"response\": \"Accept\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/searchRequest/quote/respond",
+          "raw": "{{baseURL_qolari_P}}/driver/searchRequest/quote/respond",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1076,9 +1076,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/list?limit=1&isActive=true",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/list?limit=1&isActive=true",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1190,9 +1190,9 @@
           "raw": ""
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1314,9 +1314,9 @@
           "raw": "{\"reasonCode\": \"OTHER\", \"additionalInfo\": \"test cancellation\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/cancel",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/cancel",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1371,9 +1371,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/nearbyRideRequest",
+          "raw": "{{baseURL_qolari_P}}/driver/nearbyRideRequest",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1413,9 +1413,9 @@
           "raw": "{\"searchTryId\": \"{{searchTryId}}\", \"offeredFare\": null, \"response\": \"Accept\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/searchRequest/quote/respond",
+          "raw": "{{baseURL_qolari_P}}/driver/searchRequest/quote/respond",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1523,9 +1523,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/list?limit=1&isActive=true",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/list?limit=1&isActive=true",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1575,9 +1575,9 @@
           "raw": "{\"rideOtp\": \"{{ride_otp}}\", \"point\": {\"lat\": {{origin_lat}}, \"lon\": {{origin_lon}}}}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/start",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/start",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1629,9 +1629,9 @@
           "raw": "{\"point\": {\"lat\": {{dest_lat}}, \"lon\": {{dest_lon}}}}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/end",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/end",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1684,9 +1684,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/subscription/invoices?invoiceType=%22Ride%22&limit=10&offset=0",
+          "raw": "{{baseURL_qolari_P}}/subscription/invoices?invoiceType=%22Ride%22&limit=10&offset=0",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "subscription",

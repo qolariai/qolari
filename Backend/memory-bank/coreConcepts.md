@@ -1,10 +1,10 @@
-# Nammayatri Backend - Core Concepts
+﻿# Qolari Backend - Core Concepts
 
-This document outlines fundamental concepts related to types, flow, Domain-Specific Languages (DSLs), and data handling within the Nammayatri backend, based on the analysis of the codebase.
+This document outlines fundamental concepts related to types, flow, Domain-Specific Languages (DSLs), and data handling within the Qolari backend, based on the analysis of the codebase.
 
 ## 1. Types and Type System
 
-Haskell's strong, static type system is a cornerstone of the Nammayatri backend, ensuring correctness, reliability, and maintainability.
+Haskell's strong, static type system is a cornerstone of the Qolari backend, ensuring correctness, reliability, and maintainability.
 
 *   **Algebraic Data Types (ADTs) and Newtypes:**
     *   **ADTs:** Used extensively to model domain entities and their variations (e.g., `PaymentOrder`, `Event`, various BECKN message types). They provide a precise way to define data structures and enforce invariants.

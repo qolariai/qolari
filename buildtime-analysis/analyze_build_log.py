@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Optimized build log analyzer for Nix builds with Haskell compilation tracking.
 """
@@ -51,8 +51,8 @@ class BuildAnalyzer:
             return 'cache.nixos.org'
         elif 'cache.nixos.asia' in url:
             return 'cache.nixos.asia'
-        elif 'nammayatri.cachix.org' in url:
-            return 'nammayatri.cachix.org'
+        elif 'Qolari.cachix.org' in url:
+            return 'Qolari.cachix.org'
         return url
 
     def parse_log(self):

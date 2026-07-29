@@ -479,7 +479,7 @@ search personId req bundleVersion clientVersion clientConfigVersion_ mbRnVersion
         ((.lon) <$> searchRequest.toLocation)
   QPFS.clearCache person.id
   fork "updating search counters" $ unless isDashboardRequest_ $ fraudCheck person merchantOperatingCity searchRequest
-  let updatedPerson = backfillCustomerNammaTags person
+  let updatedPerson = backfillCustomerQolariTags person
   reservePricingTag <-
     if isReservedRideSearch
       then do
@@ -527,12 +527,12 @@ search personId req bundleVersion clientVersion clientConfigVersion_ mbRnVersion
     personVehicleCategory :: Person.Person -> Maybe Enums.VehicleCategory
     personVehicleCategory person = SLS.mostFrequent person.lastUsedVehicleCategories
 
-    backfillCustomerNammaTags :: Person.Person -> Person.Person
-    backfillCustomerNammaTags Person.Person {..} =
-      if isNothing customerNammaTags
+    backfillCustomerQolariTags :: Person.Person -> Person.Person
+    backfillCustomerQolariTags Person.Person {..} =
+      if isNothing customerQolariTags
         then do
           let genderTag = LYT.TagNameValueExpiry $ "Gender#" <> show gender -- handle it properly later
-          Person.Person {customerNammaTags = Just [genderTag], ..}
+          Person.Person {customerQolariTags = Just [genderTag], ..}
         else Person.Person {..}
 
     getTags tag searchRequest reservePricingTag person distance duration returnTime roundTrip mbPoints mbMultipleRoutes txnCity mbIsReallocationEnabled isDashboardRequest mbfareParametersInRateCard isMeterRideSearch phoneNumber numberOfLuggages mbFromSpecialLocationId mbToSpecialLocationId mbEmailDomain mbBusinessEmailDomain = do
@@ -573,7 +573,7 @@ search personId req bundleVersion clientVersion clientConfigVersion_ mbRnVersion
                 (Beckn.CUSTOMER_VEHICLE_CATEGORY, maybe Nothing (Just . show) (personVehicleCategory person)),
                 (Beckn.DASHBOARD_USER, (Just . show) isDashboardRequest),
                 (Beckn.CUSTOMER_DISABILITY, (decode . encode) tag),
-                (Beckn.CUSTOMER_NAMMA_TAGS, show @Text @[Text] . fmap ((.getTagNameValue) . Yudhishthira.removeTagExpiry) <$> person.customerNammaTags),
+                (Beckn.CUSTOMER_QOLARI_TAGS, show @Text @[Text] . fmap ((.getTagNameValue) . Yudhishthira.removeTagExpiry) <$> person.customerQolariTags),
                 (Beckn.USER_OS_TYPE, show . (.deviceType) <$> searchRequest.clientDevice),
                 (Beckn.USER_OS_VERSION, (.deviceVersion) <$> searchRequest.clientDevice),
                 (Beckn.USER_MODEL_NAME, (.deviceModel) <$> searchRequest.clientDevice),

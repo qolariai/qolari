@@ -168,7 +168,7 @@ processWalletPayouts config jobData = do
       mbLastDriverId <- Redis.get driverCursorKey
       payoutServiceFlow <- TPayout.getPayoutServiceFlowForMerchant (.createPayoutOrder) (TPayout.SubscriptionConfigOption PREPAID_SUBSCRIPTION) DEMSC.PayoutService merchantOpCityId
       let isPayoutVpaRequired = case payoutServiceFlow of
-            Payout.JuspayFlow -> True
+            Payout.QolariFlow -> True
             Payout.StripeFlow -> False
       eligibleDriverInfos <- QDIE.findEligibleForScheduledPayout merchantOpCityId config.batchSize mbLastDriverId isPayoutVpaRequired
       unless (null eligibleDriverInfos) $ do

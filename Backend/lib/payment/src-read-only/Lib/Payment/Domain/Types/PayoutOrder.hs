@@ -1,4 +1,4 @@
-{-# LANGUAGE ApplicativeDo #-}
+﻿{-# LANGUAGE ApplicativeDo #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Lib.Payment.Domain.Types.PayoutOrder where
@@ -6,7 +6,7 @@ module Lib.Payment.Domain.Types.PayoutOrder where
 import qualified Kernel.Beam.Lib.UtilsTH
 import Kernel.External.Encryption
 import qualified Kernel.External.Payout.Interface.Types
-import qualified Kernel.External.Payout.Juspay.Types.Payout
+import qualified Kernel.External.Payout.Qolari.Types.Payout
 import Kernel.Prelude
 import qualified Kernel.Types.Common
 import qualified Kernel.Types.Id
@@ -14,7 +14,7 @@ import qualified Lib.Payment.Domain.Types.Common
 import qualified Tools.Beam.UtilsTH
 
 data PayoutOrderE e = PayoutOrder
-  { accountDetailsType :: Kernel.Prelude.Maybe Kernel.External.Payout.Juspay.Types.Payout.AccountDetailsType,
+  { accountDetailsType :: Kernel.Prelude.Maybe Kernel.External.Payout.Qolari.Types.Payout.AccountDetailsType,
     amount :: Kernel.Types.Common.Price,
     city :: Kernel.Prelude.Text,
     createdAt :: Kernel.Prelude.UTCTime,
@@ -36,7 +36,7 @@ data PayoutOrderE e = PayoutOrder
     responseMessage :: Kernel.Prelude.Maybe Kernel.Prelude.Text,
     retriedOrderId :: Kernel.Prelude.Maybe Kernel.Prelude.Text,
     shortId :: Kernel.Prelude.Maybe (Kernel.Types.Id.ShortId Lib.Payment.Domain.Types.PayoutOrder.PayoutOrder),
-    status :: Kernel.External.Payout.Juspay.Types.Payout.PayoutOrderStatus,
+    status :: Kernel.External.Payout.Qolari.Types.Payout.PayoutOrderStatus,
     transferAmount :: Kernel.Prelude.Maybe Kernel.Types.Common.HighPrecMoney,
     transferId :: Kernel.Prelude.Maybe Kernel.Prelude.Text,
     transferStatus :: Kernel.Prelude.Maybe Kernel.External.Payout.Interface.Types.TransferStatus,

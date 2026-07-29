@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=./_schema.json
+﻿# yaml-language-server: $schema=./_schema.json
 name: control-center-backend
 title: Control Center — Backend
 icon: assets/icons/control-center.svg
@@ -6,7 +6,7 @@ category: tool
 tags: [node, dashboard, backend]
 
 source:
-  url: https://github.com/nammayatri/control-center
+  url: https://github.com/Qolari/control-center
   ref: main
   destDir: data/control-center
 

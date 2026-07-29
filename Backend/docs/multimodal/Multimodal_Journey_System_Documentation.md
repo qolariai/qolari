@@ -1,8 +1,8 @@
-# Namma Yatri Multimodal Journey System - Documentation Index
+﻿# Qolari Multimodal Journey System - Documentation Index
 
 ## Overview
 
-This documentation suite provides comprehensive coverage of the Namma Yatri multimodal journey system - a sophisticated transportation orchestration platform enabling users to plan and execute seamless journeys across multiple transport modes (taxi, metro, bus, subway, walking) in a single trip.
+This documentation suite provides comprehensive coverage of the Qolari multimodal journey system - a sophisticated transportation orchestration platform enabling users to plan and execute seamless journeys across multiple transport modes (taxi, metro, bus, subway, walking) in a single trip.
 
 ## 📚 Documentation Structure
 
@@ -109,7 +109,7 @@ Skipped   Cancelled  Cancelled
 - **Database**: PostgreSQL with Beam ORM
 - **Caching**: Redis for performance
 - **External Integration**: Beckn Protocol for transport providers
-- **Payment**: Juspay integration
+- **Payment**: Qolari integration
 - **Real-time**: Location tracking and status updates
 
 ## 📱 API Highlights
@@ -159,4 +159,4 @@ Skipped   Cancelled  Cancelled
 
 ---
 
-*This documentation covers the complete multimodal journey system as implemented in the Namma Yatri platform, providing urban mobility solutions across Indian cities.*
+*This documentation covers the complete multimodal journey system as implemented in the Qolari platform, providing urban mobility solutions across Indian cities.*

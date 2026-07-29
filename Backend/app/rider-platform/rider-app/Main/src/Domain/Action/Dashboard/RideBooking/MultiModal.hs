@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wwarn=unused-imports #-}
 
 module Domain.Action.Dashboard.RideBooking.MultiModal (getMultiModalList, postMultiModalSendMessage, postMultiModalSendDirectMessage, postMultiModalAddComment, getMultiModalGetComments) where
@@ -69,7 +69,7 @@ postMultiModalSendDirectMessage merchantShortId opCity req = do
       riderConfig <-
         getConfig (RiderConfigDimensions {merchantOperatingCityId = merchantOpCityId.getId}) (Just (CQRC.findByMerchantOperatingCityId merchantOpCityId))
           >>= fromMaybeM (RiderConfigDoesNotExist merchantOpCityId.getId)
-      let fromEmail = maybe "noreply@nammayatri.in" (.fromEmail) riderConfig.emailOtpConfig
+      let fromEmail = maybe "noreply@drive.qolari.com" (.fromEmail) riderConfig.emailOtpConfig
       emailServiceConfig <- asks (.emailServiceConfig)
       let vars = fromMaybe [] req.variables
       body <-

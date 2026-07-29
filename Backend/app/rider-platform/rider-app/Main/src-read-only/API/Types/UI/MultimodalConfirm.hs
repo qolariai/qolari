@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-unused-imports #-}
+﻿{-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module API.Types.UI.MultimodalConfirm where
 
@@ -28,7 +28,7 @@ import qualified Domain.Types.VehicleSeatLayoutMapping
 import EulerHS.Prelude hiding (id)
 import qualified Kernel.External.Maps.Google.MapsClient.Types
 import qualified Kernel.External.Maps.Types
-import qualified Kernel.External.Payment.Juspay.Types
+import qualified Kernel.External.Payment.Gateway.Types
 import qualified Kernel.Prelude
 import qualified Kernel.Types.Common
 import qualified Kernel.Types.Id
@@ -143,7 +143,7 @@ data JourneyConfirmReqElement = JourneyConfirmReqElement
 
 data JourneyConfirmResp = JourneyConfirmResp
   { gatewayReferenceId :: Kernel.Prelude.Maybe Kernel.Prelude.Text,
-    orderSdkPayload :: Kernel.Prelude.Maybe Kernel.External.Payment.Juspay.Types.CreateOrderResp,
+    orderSdkPayload :: Kernel.Prelude.Maybe Kernel.External.Payment.Gateway.Types.CreateOrderResp,
     result :: Kernel.Prelude.Text
   }
   deriving stock (Generic)
@@ -301,7 +301,7 @@ data PaymentFareUpdate = PaymentFareUpdate
   deriving stock (Generic)
   deriving anyclass (ToJSON, FromJSON, ToSchema)
 
-data PaymentOrder = PaymentOrder {sdkPayload :: Kernel.Prelude.Maybe Kernel.External.Payment.Juspay.Types.CreateOrderResp, status :: API.Types.UI.FRFSTicketService.FRFSBookingPaymentStatusAPI}
+data PaymentOrder = PaymentOrder {sdkPayload :: Kernel.Prelude.Maybe Kernel.External.Payment.Gateway.Types.CreateOrderResp, status :: API.Types.UI.FRFSTicketService.FRFSBookingPaymentStatusAPI}
   deriving stock (Generic)
   deriving anyclass (ToJSON, FromJSON, ToSchema)
 
@@ -501,6 +501,6 @@ data UpdatePaymentOrderReq = UpdatePaymentOrderReq {childTicketQuantity :: Kerne
   deriving stock (Generic)
   deriving anyclass (ToJSON, FromJSON, ToSchema)
 
-data UpdatePaymentOrderResp = UpdatePaymentOrderResp {sdkPayload :: Kernel.Prelude.Maybe Kernel.External.Payment.Juspay.Types.SDKPayloadDetails}
+data UpdatePaymentOrderResp = UpdatePaymentOrderResp {sdkPayload :: Kernel.Prelude.Maybe Kernel.External.Payment.Gateway.Types.SDKPayloadDetails}
   deriving stock (Generic)
   deriving anyclass (ToJSON, FromJSON, ToSchema)

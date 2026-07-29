@@ -1,4 +1,4 @@
--- | Top-level fan-out processor for RideEndedEvent.
+﻿-- | Top-level fan-out processor for RideEndedEvent.
 --
 -- Each handler is wrapped in an idempotency guard so re-delivery (XCLAIM after idle,
 -- consumer restart) is a no-op. Handler failures propagate up to the transport, which
@@ -29,7 +29,7 @@ processRideEnded event =
       withTimeGeneric "rs-event:RideEndedEvent" $ do
         runHandler "publishToAnalyticsKafka" event Handlers.handleAnalyticsKafka
         runHandler "publishRideInterpolation" event Handlers.handleRideInterpolation
-        runHandler "computeAndStoreNammaTags" event Handlers.handleNammaTags
+        runHandler "computeAndStoreQolariTags" event Handlers.handleQolariTags
         runHandler "updateFleetAndOperatorStats" event Handlers.handleFleetOperatorStats
         runHandler "checkGpsTollBehavior" event Handlers.handleGpsTollBehavior
         runHandler "incrementRCStatsAndReminders" event Handlers.handleRCStatsReminders

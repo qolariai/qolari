@@ -99,7 +99,7 @@ sendScheduledRideNotificationsToDriver Job {id, jobInfo} = withLogTag ("JobId-" 
             "BRIDGE_CABS_PARTNER" -> "Bridge Cabs"
             "JATRI_SAATHI_PARTNER" -> "Jatri Saathi"
             "YATRI_PARTNER" -> "Yatri"
-            _ -> "Namma Yatri"
+            _ -> "Qolari"
       let formattedTitle = T.replace "{#isRentalOrIntercity#}" isRentalOrIntercity title
           fullAddress = fromMaybe "" booking.fromLocation.address.fullAddress
           formattedBody = T.replace "{#pickupAddress#}" fullAddress $ T.replace "{#isRentalOrIntercity#}" isRentalOrIntercity $ T.replace "{#driverPartnerName#}" driverPartnerName body

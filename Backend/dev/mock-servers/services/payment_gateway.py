@@ -1,10 +1,10 @@
-"""Juspay payment gateway mock — orders, offers, payouts, mandates.
+﻿"""Qolari payment gateway mock — orders, offers, payouts, mandates.
 
 The `response` dict from POST /mock/override is deep-merged into responses.
 This lets test collections override any response field:
 
   POST /mock/override {
-    "service": "juspay",
+    "service": "Qolari",
     "extract": "path.2",
     "value": "order-123",
     "match": "/orders",
@@ -29,7 +29,7 @@ from ._env import MOCK_SERVER_PORT
 
 
 def handle(handler, path, body):
-    """Route Juspay requests."""
+    """Route Qolari requests."""
     path_lower = path.lower()
     path_parts = path.strip("/").split("/")
 
@@ -49,7 +49,7 @@ def handle(handler, path, body):
         except (json.JSONDecodeError, AttributeError):
             pass
 
-    # ── Offers (must match before "order" since path contains /juspay/) ──
+    # ── Offers (must match before "order" since path contains /Qolari/) ──
     if "offer" in path_lower:
         return _offer(handler, path_lower, body)
 
@@ -89,7 +89,7 @@ def _refund(handler, order_id, body):
     """Handle POST /orders/{orderId}/refunds.
 
     Installs a /mock/override rule keyed on path.2 == order_id so that subsequent
-    GET /juspay/orders/{order_id} returns the refund in the response. Returns
+    GET /Qolari/orders/{order_id} returns the refund in the response. Returns
     AutoRefundResp. Multiple refunds for the same order accumulate because each
     override entry remains in the rule list and check_overrides deep-merges all
     matches; the latest refunds array wins.
@@ -115,7 +115,7 @@ def _refund(handler, order_id, body):
     refunds = []
     existing_status = "CHARGED"
     for o in list_overrides():
-        if (o["service"] == "juspay" and o["extract"] == "path.2"
+        if (o["service"] == "Qolari" and o["extract"] == "path.2"
                 and o["value"] == str(order_id)):
             resp = o.get("response") or {}
             if resp.get("refunds"):
@@ -137,7 +137,7 @@ def _refund(handler, order_id, body):
     amount_refunded = sum(r.get("amount", 0) for r in refunds)
 
     add_override(
-        "juspay", "path.2", order_id,
+        "Qolari", "path.2", order_id,
         {
             "status": existing_status,
             "refunds": refunds,
@@ -148,7 +148,7 @@ def _refund(handler, order_id, body):
 
     handler._json({
         "order_id": order_id,
-        "merchant_id": "nammayatri",
+        "merchant_id": "Qolari",
         "customer_id": "mock-customer",
         "currency": "INR",
         "amount_refunded": amount_refunded,
@@ -187,14 +187,14 @@ def _create_order(handler, order_id, short_id):
         "status_id": 10,
         "amount": 0.0,
         "currency": "INR",
-        "payment_links": {"web": f"http://localhost:{MOCK_SERVER_PORT}/juspay/pay/{order_id}"},
+        "payment_links": {"web": f"http://localhost:{MOCK_SERVER_PORT}/Qolari/pay/{order_id}"},
         "sdk_payload": {
             "requestId": order_id,
-            "service": "in.juspay.nammayatri",
+            "service": "com.qolari.drive",
             "payload": {
-                "clientId": "nammayatri",
+                "clientId": "Qolari",
                 "amount": "0",
-                "merchantId": "nammayatri",
+                "merchantId": "Qolari",
                 "clientAuthToken": f"mock-auth-{uuid.uuid4().hex[:8]}",
                 "clientAuthTokenExpiry": "2027-01-01T00:00:00Z",
                 "environment": "sandbox",
@@ -202,7 +202,7 @@ def _create_order(handler, order_id, short_id):
                 "firstName": "Test",
                 "lastName": "User",
                 "customerId": "test-customer",
-                "returnUrl": f"http://localhost:{MOCK_SERVER_PORT}/juspay/return",
+                "returnUrl": f"http://localhost:{MOCK_SERVER_PORT}/Qolari/return",
                 "orderId": order_id,
             }
         },
@@ -212,13 +212,13 @@ def _create_order(handler, order_id, short_id):
 def _order_data(handler, order_id):
     """Return OrderData. The `data` dict from the status store is deep-merged
     into the default response, so test collections can override any field."""
-    override_status, extra = handler._get_override("juspay", order_id)
+    override_status, extra = handler._get_override("Qolari", order_id)
     status = override_status or "NEW"
 
     status_id_map = {
         "NEW": 10, "PENDING_VBV": 20, "CHARGED": 21,
         "AUTHENTICATION_FAILED": 22, "AUTHORIZATION_FAILED": 23,
-        "JUSPAY_DECLINED": 24, "AUTHORIZING": 25, "COD_INITIATED": 26,
+        "Qolari_DECLINED": 24, "AUTHORIZING": 25, "COD_INITIATED": 26,
         "STARTED": 27, "AUTO_REFUNDED": 28, "CLIENT_AUTH_TOKEN_EXPIRED": 29,
         "CANCELLED": 30,
     }
@@ -227,7 +227,7 @@ def _order_data(handler, order_id):
         "AUTO_REFUNDED": "ORDER_REFUNDED",
         "AUTHENTICATION_FAILED": "ORDER_FAILED",
         "AUTHORIZATION_FAILED": "ORDER_FAILED",
-        "JUSPAY_DECLINED": "ORDER_FAILED",
+        "Qolari_DECLINED": "ORDER_FAILED",
     }
     now = datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
 

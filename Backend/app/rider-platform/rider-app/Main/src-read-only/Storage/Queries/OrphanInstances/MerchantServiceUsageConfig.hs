@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Storage.Queries.OrphanInstances.MerchantServiceUsageConfig where
@@ -35,7 +35,7 @@ instance FromTType' Beam.MerchantServiceUsageConfig Domain.Types.MerchantService
             createEphemeralKeys = createEphemeralKeys,
             createPaymentCustomer = createPaymentCustomer,
             createPaymentIntent = createPaymentIntent,
-            createPayoutOrder = fromMaybe Kernel.External.Payout.Types.Juspay createPayoutOrder,
+            createPayoutOrder = fromMaybe Kernel.External.Payout.Types.Qolari createPayoutOrder,
             createRefunds = fromMaybe Kernel.External.Payment.Types.Stripe createRefunds,
             createSetupIntent = createSetupIntent,
             createdAt = createdAt,
@@ -65,7 +65,7 @@ instance FromTType' Beam.MerchantServiceUsageConfig Domain.Types.MerchantService
             merchantId = Kernel.Types.Id.Id merchantId,
             merchantOperatingCityId = Kernel.Types.Id.Id merchantOperatingCityId,
             notifyPerson = notifyPerson,
-            payoutOrderStatus = fromMaybe Kernel.External.Payout.Types.Juspay payoutOrderStatus,
+            payoutOrderStatus = fromMaybe Kernel.External.Payout.Types.Qolari payoutOrderStatus,
             smsProvidersPriorityList = smsProvidersPriorityList,
             snapToRoad = snapToRoad,
             sosTicketService = sosTicketService,

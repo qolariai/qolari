@@ -171,7 +171,7 @@ cancel req merchant booking mbActiveSearchTry = do
         cancellationCharges <- withTryCatch "cancellationCharges" $ do
           case mbRide of
             Just ride -> do
-              rideTags <- updateNammaTagsForCancelledRide booking ride bookingCR transporterConfig
+              rideTags <- updateQolariTagsForCancelledRide booking ride bookingCR transporterConfig
               when (validDriverCancellation `elem` rideTags) $ do
                 let windowSize = toInteger $ fromMaybe 7 transporterConfig.cancellationRateWindow
                 void $ SCR.incrementCancelledCount ride.driverId windowSize

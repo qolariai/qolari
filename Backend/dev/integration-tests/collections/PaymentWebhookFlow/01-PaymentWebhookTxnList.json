@@ -1,7 +1,7 @@
-{
+﻿{
 	"info": {
-		"name": "Juspay OrderStatus txnList Iteration",
-		"description": "Exercises the txnList iteration in Lib.Payment.Domain.Action.orderStatusService. Creates a wallet recharge payment order, overrides the mock juspay response so /orders/<id> returns CHARGED with a txn_list containing two transactions, then triggers /payment/<orderId>/status. Verifies that BOTH txn_list entries are upserted into payment_transaction with the right per-txn fields (payment_method = JP_HDFC for one, LOYALTYOS7 for the other) — proving the iteration uses per-txn fields, not the top-level order fields.",
+		"name": "Qolari OrderStatus txnList Iteration",
+		"description": "Exercises the txnList iteration in Lib.Payment.Domain.Action.orderStatusService. Creates a wallet recharge payment order, overrides the mock Qolari response so /orders/<id> returns CHARGED with a txn_list containing two transactions, then triggers /payment/<orderId>/status. Verifies that BOTH txn_list entries are upserted into payment_transaction with the right per-txn fields (payment_method = JP_HDFC for one, LOYALTYOS7 for the other) — proving the iteration uses per-txn fields, not the top-level order fields.",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"event": [
@@ -43,7 +43,7 @@
 				"header": [{ "key": "Content-Type", "value": "application/json" }],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"mobileNumber\":\"{{_test_rider_number}}\",\"mobileCountryCode\":\"+91\",\"merchantId\":\"NAMMA_YATRI\"}"
+					"raw": "{\"mobileNumber\":\"{{_test_rider_number}}\",\"mobileCountryCode\":\"+91\",\"merchantId\":\"qolari\"}"
 				},
 				"url": {
 					"raw": "{{baseUrl_app}}/auth",
@@ -72,7 +72,7 @@
 				"header": [{ "key": "Content-Type", "value": "application/json" }],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"otp\":\"{{login_otp}}\",\"deviceToken\":\"juspay-txnlist-test\"}"
+					"raw": "{\"otp\":\"{{login_otp}}\",\"deviceToken\":\"Qolari-txnlist-test\"}"
 				},
 				"url": {
 					"raw": "{{baseUrl_app}}/auth/:authId/verify",
@@ -93,9 +93,9 @@
 							"var d = pm.response.json();",
 							"console.log('Recharge order:', JSON.stringify(d));",
 							"pm.test('Status 200', function () { pm.response.to.have.status(200); });",
-							"// Local-mock path: rider-app short_id is in d.id (e.g. '7EVFcfSEWJ'). Real-Juspay path: d.id is the gateway id ('ordeh_…') and the short_id is in d.order_id. Pick d.id unless it looks like a Juspay gateway id.",
-							"var looksLikeJuspayId = function (s) { return typeof s === 'string' && /^ord(eh|er)?_/.test(s); };",
-							"var orderShortId = (d.id && !looksLikeJuspayId(d.id)) ? d.id : (d.order_id || d.orderShortId || d.orderId || d.id);",
+							"// Local-mock path: rider-app short_id is in d.id (e.g. '7EVFcfSEWJ'). Real-Qolari path: d.id is the gateway id ('ordeh_…') and the short_id is in d.order_id. Pick d.id unless it looks like a Qolari gateway id.",
+							"var looksLikeQolariId = function (s) { return typeof s === 'string' && /^ord(eh|er)?_/.test(s); };",
+							"var orderShortId = (d.id && !looksLikeQolariId(d.id)) ? d.id : (d.order_id || d.orderShortId || d.orderId || d.id);",
 							"pm.environment.set('test_order_id', orderShortId);",
 							"pm.environment.set('test_order_short_id', orderShortId);",
 							"pm.test('Order short id present', function () { pm.expect(orderShortId).to.not.be.undefined; });"
@@ -121,7 +121,7 @@
 			}
 		},
 		{
-			"name": "Override Juspay Status (CHARGED + 2 txn_list entries)",
+			"name": "Override Qolari Status (CHARGED + 2 txn_list entries)",
 			"event": [
 				{
 					"listen": "prerequest",
@@ -129,7 +129,7 @@
 						"type": "text/javascript",
 						"exec": [
 							"var body = {",
-							"  service: 'juspay',",
+							"  service: 'Qolari',",
 							"  id: [pm.environment.get('test_order_id'), pm.environment.get('test_order_short_id')],",
 							"  status: 'CHARGED',",
 							"  data: {",
@@ -195,7 +195,7 @@
 			}
 		},
 		{
-			"name": "Stage Juspay Loyalty Programs Response",
+			"name": "Stage Qolari Loyalty Programs Response",
 			"event": [
 				{
 					"listen": "test",
@@ -212,7 +212,7 @@
 				"header": [{ "key": "Content-Type", "value": "application/json" }],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"service\":\"juspay\",\"id\":[\"loyalty\"],\"status\":\"OK\",\"data\":{\"programs\":[{\"id\":\"{{loyalty_program_id}}\",\"code\":\"LOYALTYOS7\",\"burn\":{\"options\":[]},\"earn\":{\"status\":\"ELIGIBLE\",\"applicable\":{\"label\":\"Earn\",\"points\":\"0.00\"}},\"campaigns\":[],\"membership\":{\"enroll_on\":\"AUTO\",\"enrolled_date\":\"2026-04-16T11:42:19Z\",\"status\":\"ACTIVE\"},\"topup\":{\"status\":\"ELIGIBLE\"},\"ui_label\":{\"asset\":{\"code\":\"POINTS\",\"name\":\"Points\"},\"description\":\"Earn and redeem points at 1:1\",\"title\":\"Loyalty\",\"tnc\":\"\",\"tnc_url\":\"\"},\"wallet\":{\"available_points\":\"0.00\",\"lifetime_earned\":\"0.00\",\"lifetime_redeemed\":\"0.00\",\"pockets\":[]}}]}}"
+					"raw": "{\"service\":\"Qolari\",\"id\":[\"loyalty\"],\"status\":\"OK\",\"data\":{\"programs\":[{\"id\":\"{{loyalty_program_id}}\",\"code\":\"LOYALTYOS7\",\"burn\":{\"options\":[]},\"earn\":{\"status\":\"ELIGIBLE\",\"applicable\":{\"label\":\"Earn\",\"points\":\"0.00\"}},\"campaigns\":[],\"membership\":{\"enroll_on\":\"AUTO\",\"enrolled_date\":\"2026-04-16T11:42:19Z\",\"status\":\"ACTIVE\"},\"topup\":{\"status\":\"ELIGIBLE\"},\"ui_label\":{\"asset\":{\"code\":\"POINTS\",\"name\":\"Points\"},\"description\":\"Earn and redeem points at 1:1\",\"title\":\"Loyalty\",\"tnc\":\"\",\"tnc_url\":\"\"},\"wallet\":{\"available_points\":\"0.00\",\"lifetime_earned\":\"0.00\",\"lifetime_redeemed\":\"0.00\",\"pockets\":[]}}]}}"
 				},
 				"url": {
 					"raw": "{{mockServerUrl}}/mock/status",

@@ -1,6 +1,6 @@
-# Abstract Syntax Tree (AST) and Code Generation Patterns
+﻿# Abstract Syntax Tree (AST) and Code Generation Patterns
 
-While the Nammayatri backend primarily focuses on business logic and API implementation, several patterns indicate interaction with or generation of Abstract Syntax Trees (ASTs), particularly through the use of Template Haskell and generic programming.
+While the Qolari backend primarily focuses on business logic and API implementation, several patterns indicate interaction with or generation of Abstract Syntax Trees (ASTs), particularly through the use of Template Haskell and generic programming.
 
 ## 1. Template Haskell for Code Generation
 

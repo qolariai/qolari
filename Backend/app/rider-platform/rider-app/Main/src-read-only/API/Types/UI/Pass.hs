@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-unused-imports #-}
+﻿{-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module API.Types.UI.Pass where
 
@@ -17,7 +17,7 @@ import qualified Domain.Types.PurchasedPassPayment
 import EulerHS.Prelude hiding (id)
 import qualified IssueManagement.Domain.Types.MediaFile
 import qualified Kernel.External.Payment.Interface
-import qualified Kernel.External.Payment.Juspay.Types.CreateOrder
+import qualified Kernel.External.Payment.Gateway.Types.CreateOrder
 import qualified Kernel.Prelude
 import qualified Kernel.Types.Common
 import qualified Kernel.Types.Id
@@ -74,7 +74,7 @@ data PassSelectReq = PassSelectReq
   deriving anyclass (ToJSON, FromJSON, ToSchema)
 
 data PassSelectionAPIEntity = PassSelectionAPIEntity
-  { paymentOrder :: Data.Maybe.Maybe Kernel.External.Payment.Juspay.Types.CreateOrder.CreateOrderResp,
+  { paymentOrder :: Data.Maybe.Maybe Kernel.External.Payment.Gateway.Types.CreateOrder.CreateOrderResp,
     purchasedPassId :: Kernel.Types.Id.Id Domain.Types.PurchasedPass.PurchasedPass
   }
   deriving stock (Generic, Show)

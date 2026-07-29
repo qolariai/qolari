@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "Rider Cancellation 3-Min Rule (Stripe Payment)",
     "description": "End-to-end rider 3-min cancellation: search → assign → wait 3+ min → rider cancels → verify cancellation fee charged via Stripe, finance ledger settled",
@@ -93,8 +93,8 @@
           "raw": "{\"mobileNumber\": \"{{_test_driver_number}}\", \"mobileCountryCode\": \"+358\", \"merchantId\": \"{{driver_merchant_id}}\", \"merchantOperatingCity\": \"{{city}}\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth"]
         }
       },
@@ -124,8 +124,8 @@
           "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-device\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth", "{{driver_authId}}", "verify"]
         }
       },
@@ -191,9 +191,9 @@
           "raw": "{\"domain\":{\"tag\":\"USER_CANCELLATION_DUES\"},\"shouldUpdateRule\":true,\"updatePassword\":\"98979\",\"description\":\"Helsinki rider 3-min cancellation charge\",\"inputData\":[{\"cancelledBy\":\"CancellationByCustomer\",\"timeOfDriverCancellation\":0,\"timeOfCustomerCancellation\":200,\"isArrivedAtPickup\":false,\"driverWaitingTime\":0,\"callAttemptByDriver\":false,\"actualCoveredDistance\":0,\"expectedCoveredDistance\":0,\"cancellationDues\":0,\"cancelledRides\":0,\"totalBookings\":0,\"estimatedBookingFare\":25,\"completedRides\":0,\"validCancellations\":0,\"cancellationDueRides\":0,\"serviceTier\":\"COMFY\",\"tripCategory\":{\"tag\":\"OneWay\",\"contents\":\"OneWayOnDemandDynamicOffer\"},\"cancellationReasonSelected\":null,\"userSdkVersion\":null,\"isCashPayment\":false,\"timeSinceBooking\":200}],\"rules\":[{\"cat\":[{\"var\":\"\"},{\"cancellationCharges\":{\"if\":[{\"and\":[{\"==\":[{\"var\":\"cancelledBy\"},\"CancellationByCustomer\"]},{\">=\" :[{\"var\":\"timeSinceBooking\"},180]}]},3,0]}}]},{\"cat\":[{\"var\":\"\"},{\"cancellationChargesTax\":{\"if\":[{\"and\":[{\"==\":[{\"var\":\"cancelledBy\"},\"CancellationByCustomer\"]},{\">=\" :[{\"var\":\"timeSinceBooking\"},180]}]},0.72,0]}}]}]}"
         },
         "url": {
-          "raw": "{{baseURL_BPP_Dashboard_Internal}}/{{dashboard_merchant_id}}/{{dashboard_city}}/nammaTag/appDynamicLogic/verify",
+          "raw": "{{baseURL_BPP_Dashboard_Internal}}/{{dashboard_merchant_id}}/{{dashboard_city}}/QolariTag/appDynamicLogic/verify",
           "host": ["{{baseURL_BPP_Dashboard_Internal}}"],
-          "path": ["{{dashboard_merchant_id}}", "{{dashboard_city}}", "nammaTag", "appDynamicLogic", "verify"]
+          "path": ["{{dashboard_merchant_id}}", "{{dashboard_city}}", "QolariTag", "appDynamicLogic", "verify"]
         }
       },
       "response": []
@@ -231,9 +231,9 @@
           "raw": "[{\"domain\":{\"tag\":\"USER_CANCELLATION_DUES\"},\"timeBounds\":\"Unbounded\",\"rollout\":[{\"rolloutPercentage\":100,\"version\":{{cancellation_logic_version}},\"versionDescription\":\"Rider 3-min cancellation - Helsinki\"}]}]"
         },
         "url": {
-          "raw": "{{baseURL_BPP_Dashboard_Internal}}/{{dashboard_merchant_id}}/{{dashboard_city}}/nammaTag/appDynamicLogic/upsertLogicRollout",
+          "raw": "{{baseURL_BPP_Dashboard_Internal}}/{{dashboard_merchant_id}}/{{dashboard_city}}/QolariTag/appDynamicLogic/upsertLogicRollout",
           "host": ["{{baseURL_BPP_Dashboard_Internal}}"],
-          "path": ["{{dashboard_merchant_id}}", "{{dashboard_city}}", "nammaTag", "appDynamicLogic", "upsertLogicRollout"]
+          "path": ["{{dashboard_merchant_id}}", "{{dashboard_city}}", "QolariTag", "appDynamicLogic", "upsertLogicRollout"]
         }
       },
       "response": []
@@ -361,8 +361,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "setActivity"],
           "query": [{ "key": "active", "value": "true" }, { "key": "mode", "value": "%22ONLINE%22" }]
         }
@@ -453,8 +453,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "setActivity"],
           "query": [{ "key": "active", "value": "true" }, { "key": "mode", "value": "%22ONLINE%22" }]
         }
@@ -483,8 +483,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/bankAccount/link?paymentMode=%22LIVE%22",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/register/bankAccount/link?paymentMode=%22LIVE%22",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "register", "bankAccount", "link"],
           "query": [{ "key": "paymentMode", "value": "%22LIVE%22" }]
         }
@@ -513,8 +513,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/bankAccount/status",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/register/bankAccount/status",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "register", "bankAccount", "status"]
         }
       },
@@ -540,8 +540,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "setActivity"],
           "query": [{ "key": "active", "value": "true" }, { "key": "mode", "value": "%22ONLINE%22" }]
         }
@@ -911,8 +911,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/nearbyRideRequest",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/nearbyRideRequest",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "nearbyRideRequest"]
         }
       },
@@ -943,8 +943,8 @@
           "raw": "{\"searchTryId\": \"{{searchTryId}}\", \"offeredFare\": null, \"response\": \"Accept\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/searchRequest/quote/respond",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/searchRequest/quote/respond",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "searchRequest", "quote", "respond"]
         }
       },
@@ -1010,7 +1010,7 @@
           "listen": "prerequest",
           "script": {
             "exec": [
-              "// The CustomerCancellation NammaTag rule fires when currentTime - bookingCreatedTime >= 180s.",
+              "// The CustomerCancellation QolariTag rule fires when currentTime - bookingCreatedTime >= 180s.",
               "// Busy-wait 185s to cross the window reliably.",
               "console.log('Waiting 185s for 3-minute cancellation window to elapse...');",
               "const start = Date.now();",
@@ -1228,8 +1228,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/wallet/transactions",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/wallet/transactions",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["wallet", "transactions"]
         }
       },

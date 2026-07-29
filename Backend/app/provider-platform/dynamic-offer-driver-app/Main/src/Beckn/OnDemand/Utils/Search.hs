@@ -135,10 +135,10 @@ buildCustomerLanguage req = do
   let tagValue = Utils.getTagV2 Tag.CUSTOMER_INFO Tag.CUSTOMER_LANGUAGE tagGroups
   readMaybe . T.unpack =<< tagValue
 
-buildCustomerNammaTags :: Spec.SearchReqMessage -> Maybe [LYT.TagNameValue]
-buildCustomerNammaTags req = do
+buildCustomerQolariTags :: Spec.SearchReqMessage -> Maybe [LYT.TagNameValue]
+buildCustomerQolariTags req = do
   let tagGroups = req.searchReqMessageIntent >>= (.intentFulfillment) >>= (.fulfillmentCustomer) >>= (.customerPerson) >>= (.personTags)
-  let tagValue = Utils.getTagV2 Tag.CUSTOMER_INFO Tag.CUSTOMER_NAMMA_TAGS tagGroups
+  let tagValue = Utils.getTagV2 Tag.CUSTOMER_INFO Tag.CUSTOMER_QOLARI_TAGS tagGroups
   fmap LYT.TagNameValue <$> (readMaybe @[Text] . T.unpack =<< tagValue)
 
 getIsMeterRideSearch :: Spec.SearchReqMessage -> Maybe Bool

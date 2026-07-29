@@ -1,4 +1,4 @@
-# run migration for dev testing:
+﻿# run migration for dev testing:
 
 # UPDATE atlas_bpp_dashboard.access_matrix
 # 	SET user_access_type='USER_FULL_ACCESS'
@@ -76,7 +76,7 @@ FORMAT JSON
 
 # @name getAllDriverFeeHistory
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/Kochi/revenue/allFeeHistory
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/Kochi/revenue/allFeeHistory
   ?from=2024-01-01T07:02:42Z
   &to=2024-02-22T08:02:42Z
 token: {{dashboardToken}}
@@ -151,7 +151,7 @@ FORMAT JSON
 
 # @name getCollectionHistory
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/Kochi/revenue/collectionHistory
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/Kochi/revenue/collectionHistory
   ?volunteerId={{volunteerId}}
   # &place="Kochi"
   &from=2024-01-01T07:02:42Z

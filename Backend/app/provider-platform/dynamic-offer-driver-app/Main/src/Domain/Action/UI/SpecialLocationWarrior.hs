@@ -1,4 +1,4 @@
-module Domain.Action.UI.SpecialLocationWarrior
+﻿module Domain.Action.UI.SpecialLocationWarrior
   ( getSpecialLocationListCategory,
     getGetInfoSpecialLocWarrior,
     postUpdateInfoSpecialLocWarrior,
@@ -74,7 +74,7 @@ postUpdateInfoSpecialLocWarrior (_, _, merchantOperatingCityId) personId Special
   let preferredPrimarySpecialLocationId = preferredPrimarySpecialLocId <|> driverInfo.preferredPrimarySpecialLocId
   preferredPrimarySpecialLocation <- maybe (return Nothing) (\locId -> TDI.getPreferredPrimarySpecialLoc (Just locId.getId)) preferredPrimarySpecialLocationId
   when (isSpecialLocWarrior && isNothing preferredPrimarySpecialLocation) $ throwError (InvalidRequest "preferredPrimarySpecialLoc is required when isSpecialLocWarrior is true")
-  metroWarriorTagValidity <- Yudhishthira.fetchNammaTagValidity (cast merchantOperatingCityId) $ LYT.TagName "MetroWarrior"
+  metroWarriorTagValidity <- Yudhishthira.fetchQolariTagValidity (cast merchantOperatingCityId) $ LYT.TagName "MetroWarrior"
   now <- getCurrentTime
   mbOlderDriverTag <- runMaybeT $ do
     preferredPrimarySpecialLocationId' <- MaybeT $ pure driverInfo.preferredPrimarySpecialLocId

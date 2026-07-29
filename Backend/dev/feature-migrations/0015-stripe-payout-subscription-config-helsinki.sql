@@ -1,4 +1,4 @@
--- Enable PREPAID_SUBSCRIPTION config for Stripe payout (Helsinki / BRIDGE_FINLAND_PARTNER)
+﻿-- Enable PREPAID_SUBSCRIPTION config for Stripe payout (Helsinki / BRIDGE_FINLAND_PARTNER)
 -- BPP merchant_id:               a7f3c8e2-4b5d-4c9a-8f6e-2d1a3b4c5d6e  (BRIDGE_FINLAND_PARTNER)
 -- BPP merchant_operating_city_id: beabba6a-c817-43d2-93b2-a916f5cf2ceb  (Helsinki)
 
@@ -44,6 +44,6 @@ VALUES (
   'a7f3c8e2-4b5d-4c9a-8f6e-2d1a3b4c5d6e',
   'beabba6a-c817-43d2-93b2-a916f5cf2ceb',
   'Payout_StripeTest',
-  '{"apiKey": "0.1.0|0|hMiwf44YibY/N5esKqfgy97pr+nB6zbGnr/HY4+iIAhihc+2d21CA4mrcCHnVvBPe5zlt5VLerKCiKhyl0k=", "returnUrl": "https://www.nammayatri.in/return", "refreshUrl": "https://www.nammayatri.in/refresh", "url": "http://localhost:8080/stripe/", "chargeDestination": "Platform", "serviceMode": "Test"}',
+  '{"apiKey": "0.1.0|0|hMiwf44YibY/N5esKqfgy97pr+nB6zbGnr/HY4+iIAhihc+2d21CA4mrcCHnVvBPe5zlt5VLerKCiKhyl0k=", "returnUrl": "https://www.drive.qolari.com/return", "refreshUrl": "https://www.drive.qolari.com/refresh", "url": "http://localhost:8080/stripe/", "chargeDestination": "Platform", "serviceMode": "Test"}',
   now(), now()
 ) ON CONFLICT DO NOTHING;

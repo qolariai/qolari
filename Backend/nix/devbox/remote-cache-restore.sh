@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # Standalone port of the `cache-restore` process body
-# (Backend/nix/services/nammayatri.nix cache-restore) for use by
+# (Backend/nix/services/Qolari.nix cache-restore) for use by
 # `, run-cabal-build-devbox`. Runs in the Backend/ cwd on the dev-box; reads
 # .ci-cache-sha (written by the deploy step) and restores dist-newstyle + .hie +
 # .ci-ghc-path + .ci-project-root + .ci-cabal-dir from MinIO so that the

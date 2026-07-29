@@ -1,4 +1,4 @@
--- Seed invoice_template rows for Lynx (Helsinki) on both BAP + BPP schemas.
+﻿-- Seed invoice_template rows for Lynx (Helsinki) on both BAP + BPP schemas.
 -- These are the HTML bodies for the config-driven invoice PDF pipeline; the
 -- companion JL rules (which produce the variable bindings consumed here) are
 -- seeded separately via control-center's DynamicLogicPage post-deploy, not SQL.
@@ -14,7 +14,7 @@
 -- NULL for Generic rows, so we conflict on the PK instead.
 
 ------------------------------------------------------------
--- UNIQUE INDEX (NammaDSL extraIndexes doesn't emit SQL UNIQUE per spec gap)
+-- UNIQUE INDEX (QolariDSL extraIndexes doesn't emit SQL UNIQUE per spec gap)
 ------------------------------------------------------------
 CREATE UNIQUE INDEX IF NOT EXISTS uniq_invoice_template_mocid_type_lang
   ON atlas_driver_offer_bpp.invoice_template

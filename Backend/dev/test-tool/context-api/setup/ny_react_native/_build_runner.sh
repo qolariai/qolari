@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # Inner build runner — exec'd inside the nix shell from
 # ny-react-native-setup.sh. Reads everything from env vars (no positional args).
 set -euo pipefail
@@ -114,13 +114,13 @@ ios_resolve_variant_bundle_id() {
   # whole graph correctly. Costs ~2s per call (worth it for correctness).
   local app_dir="$1" scheme="$2"
   # The two repos use different workspace names — consumer ships
-  # Nammayatri.xcworkspace, provider ships provider.xcworkspace. Don't
+  # Qolari.xcworkspace, provider ships provider.xcworkspace. Don't
   # hardcode either; pick whichever .xcworkspace lives in <app_dir>/ios/.
-  # (Earlier the hardcoded "Nammayatri.xcworkspace" worked for consumer
+  # (Earlier the hardcoded "Qolari.xcworkspace" worked for consumer
   # but silently returned empty for provider, which made the post-launch
   # crash check fall through to a `simctl listapps | tail -n1` heuristic
   # — that picks the lexicographically-last installed user app on the
-  # sim, frequently a stale `in.mobility.nammayatri.debug` from yesterday's
+  # sim, frequently a stale `in.mobility.Qolari.debug` from yesterday's
   # build, and reports a phantom crash.)
   local workspace
   workspace=$(ls -1d "$app_dir/ios/"*.xcworkspace 2>/dev/null | head -n1)
@@ -170,8 +170,8 @@ sdk.dir=${ANDROID_HOME:-$HOME/Library/Android/sdk}
 MAPS_API_KEY=""
 CONFIG_URL_DRIVER="http://localhost:8016"
 CONFIG_URL_USER="http://localhost:8013"
-MERCHANT_ID_USER="NAMMA_YATRI"
-MERCHANT_ID_DRIVER="NAMMA_YATRI_PARTNER"
+MERCHANT_ID_USER="qolari"
+MERCHANT_ID_DRIVER="qolari_PARTNER"
 FACEBOOK_APP_ID=""
 FACEBOOK_CLIENT_TOKEN=""
 FB_LOGIN_PROTOCOL_SCHEMA=""
@@ -296,7 +296,7 @@ else
   fi
 fi
 
-# When the launcher runs inside the nammayatri nix dev shell (the common
+# When the launcher runs inside the Qolari nix dev shell (the common
 # case — test-context-api itself is started from there), CC/CXX point at
 # nix's clang-11 wrapper and PATH puts it ahead of /usr/bin/clang.
 # CocoaPods + xcodebuild Pod targets inherit `CC=clang` and resolve to
@@ -470,7 +470,7 @@ for app in "${APPS[@]}"; do
     write_dummy_google_services_json "$APP_DIR/android/app"
     # Same Firebase BUNDLE_ID-match concern as consumer above. The
     # provider's Lynx-Debug variant launches as in.mobility.lynxdriver
-    # (NOT in.juspay.nammayatri.dev like the placeholder), so
+    # (NOT com.qolari.drive.dev like the placeholder), so
     # +[FIRApp configure] SIGABRTs <2s after launch unless the
     # GoogleService-Info.plist's BUNDLE_ID matches the variant's
     # PRODUCT_BUNDLE_IDENTIFIER. Resolve it the same way consumer does.
@@ -490,8 +490,8 @@ for app in "${APPS[@]}"; do
     ensure_admob_debug_manifest "$APP_DIR"
     if [ -f "$APP_DIR/setup_config.sh" ]; then
       # NY_RN_VARIANT is the brand for which to generate provider config.
-      # Provider expects camelCase (nammaYatri, jatriSaathi). Default to
-      # nammaYatri if the user picked a consumer-style PascalCase brand
+      # Provider expects camelCase (Qolari, jatriSaathi). Default to
+      # Qolari if the user picked a consumer-style PascalCase brand
       # that the provider doesnt have.
       provider_app="$NY_RN_VARIANT"
       # PascalCase -> camelCase fallback for cross-app convenience
@@ -534,39 +534,39 @@ for app in "${APPS[@]}"; do
   fi
 
   if [ "$NY_RN_PLATFORM" = "ios" ]; then
-    # Sanity check on the nammayatri-ios submodule. Asymmetry between
+    # Sanity check on the Qolari-ios submodule. Asymmetry between
     # consumer and provider:
     #   - consumer/ios/Podfile DOES reference
-    #     nammayatri-ios/mobility-customer/MobilityCustomer.podspec, so
+    #     Qolari-ios/mobility-customer/MobilityCustomer.podspec, so
     #     that subdir MUST exist or pod install dies in CocoaPods with
     #     "No podspec found for MobilityCustomer".
     #   - provider/ios/Podfile pulls all pods from the
-    #     `git@github.com:nammayatri/ny-cocoapods-specs.git` private
+    #     `git@github.com:Qolari/ny-cocoapods-specs.git` private
     #     spec repo (line 2 of the Podfile) — it does NOT reference
-    #     any sibling subdir under nammayatri-ios/. The submodule only
+    #     any sibling subdir under Qolari-ios/. The submodule only
     #     needs to be populated; no per-app subdir is required.
     #
     # The consumer-only check below mirrors the early Python check in
     # __main__.py — both layers gate iOS consumer builds on the
     # presence of mobility-customer/ since pod install would fail
     # otherwise. For provider we just ensure the submodule populated.
-    if [ ! -d "$NY_RN_DIR/nammayatri-ios" ] || [ -z "$(ls -A "$NY_RN_DIR/nammayatri-ios" 2>/dev/null || true)" ]; then
+    if [ ! -d "$NY_RN_DIR/Qolari-ios" ] || [ -z "$(ls -A "$NY_RN_DIR/Qolari-ios" 2>/dev/null || true)" ]; then
       echo ""
-      echo "ny-react-native: ERROR nammayatri-ios/ submodule did not populate under $NY_RN_DIR"
+      echo "ny-react-native: ERROR Qolari-ios/ submodule did not populate under $NY_RN_DIR"
       echo "  iOS builds need this submodule (consumer for podspecs, provider for spec source repo)."
       echo "  Re-clone the parent repo over SSH so submodule auth carries through:"
-      echo "    rm -rf $NY_RN_DIR && git clone --recurse-submodules git@github.com:nammayatri/ny-react-native $NY_RN_DIR"
+      echo "    rm -rf $NY_RN_DIR && git clone --recurse-submodules git@github.com:Qolari/ny-react-native $NY_RN_DIR"
       echo "  Or set NY_RN_PATH=/Users/khuzemakhomosi/Documents/ny-react-native if you have a working checkout."
       exit 5
     fi
     if [ "$app" = "consumer" ]; then
-      sub_dir="$NY_RN_DIR/nammayatri-ios/mobility-customer"
+      sub_dir="$NY_RN_DIR/Qolari-ios/mobility-customer"
       if [ ! -d "$sub_dir" ] || [ -z "$(ls -A "$sub_dir" 2>/dev/null || true)" ]; then
         echo ""
-        echo "ny-react-native: ERROR nammayatri-ios/mobility-customer is missing or empty under $NY_RN_DIR"
-        echo "  The consumer iOS Podfile expects podspecs under nammayatri-ios/mobility-customer/."
+        echo "ny-react-native: ERROR Qolari-ios/mobility-customer is missing or empty under $NY_RN_DIR"
+        echo "  The consumer iOS Podfile expects podspecs under Qolari-ios/mobility-customer/."
         echo "  Re-clone the parent repo over SSH so submodule auth carries through:"
-        echo "    rm -rf $NY_RN_DIR && git clone --recurse-submodules git@github.com:nammayatri/ny-react-native $NY_RN_DIR"
+        echo "    rm -rf $NY_RN_DIR && git clone --recurse-submodules git@github.com:Qolari/ny-react-native $NY_RN_DIR"
         echo "  Or set NY_RN_PATH=/Users/khuzemakhomosi/Documents/ny-react-native if you have a working checkout."
         echo "  If the submodule populated but this dir is genuinely absent,"
         echo "  the branch ny-react-native is on may not ship mobility-customer yet."
@@ -576,7 +576,7 @@ for app in "${APPS[@]}"; do
 
     echo "ny-react-native: $app · pod install"
     # First run: --repo-update so any newly-added podspec sources (incl.
-    # ones served from the nammayatri-ios submodule) resolve.
+    # ones served from the Qolari-ios submodule) resolve.
     # Subsequent runs: a plain `pod install` is enough; we always pass
     # --repo-update to be safe and avoid the "Unable to find a specification"
     # class of errors on a fresh checkout.
@@ -616,7 +616,7 @@ apply_firebase_override() {
       target="$app_dir/android/app/google-services.json"
       ;;
     ios)
-      # Per-variant subdir (Lynx, Bridge, NammaYatri, …). The build picks
+      # Per-variant subdir (Lynx, Bridge, Qolari, …). The build picks
       # the correct one based on the active scheme. If the variant subdir
       # doesn't exist yet, fall back to the top-level ios/GoogleService-Info.plist.
       if [ -n "${NY_RN_VARIANT:-}" ] && [ -d "$app_dir/ios/$NY_RN_VARIANT" ]; then
@@ -1038,7 +1038,7 @@ PY
         # Filter to APKs newer than $cmd_log (which is recreated at the
         # start of every build attempt). Without this filter we pick the
         # newest APK across ALL flavors — e.g. an earlier Lynx APK
-        # whose mtime beats the just-built NammaYatri APK.
+        # whose mtime beats the just-built Qolari APK.
         apk_path=$(find "$APP_DIR/android/app/build/outputs/apk" -type f -name "*.apk" -newer "$cmd_log" 2>/dev/null \
           | head -n1)
         if [ -z "$apk_path" ]; then
@@ -1263,7 +1263,7 @@ PY
       build_with_install_recovery npx react-native run-android --port "$METRO_PORT"
     else
       # Provider iOS schemes are PascalCase like consumer (Bridge-Debug,
-      # KeralaSavaari-Debug, Lynx-Debug, NammaYatri-Debug, OdishaYatri-
+      # KeralaSavaari-Debug, Lynx-Debug, Qolari-Debug, OdishaYatri-
       # Debug, YatriSathi-Debug — see the run-ios error message). Without
       # an explicit --scheme RN CLI looks for one literally named
       # "provider" and fails with "Could not load the shared scheme".
@@ -1296,7 +1296,7 @@ PY
     # $APP_DIR/ios/. The earlier code only resolved for consumer, then fell
     # through to a `simctl listapps | tail -n1` heuristic for provider — but
     # that heuristic picks the LAST installed user app on the simulator,
-    # which is non-deterministic (e.g. yesterday's `in.mobility.nammayatri.debug`
+    # which is non-deterministic (e.g. yesterday's `in.mobility.Qolari.debug`
     # would shadow today's `in.mobility.lynxdriver` and report a false crash).
     variant_pascal_check="$(printf %s "$NY_RN_VARIANT" | python3 -c "import sys; s=sys.stdin.read().strip(); print((s[:1].upper()+s[1:]) if s else s)")"
     bundle_to_check="$(ios_resolve_variant_bundle_id "$APP_DIR" "${variant_pascal_check}-Debug" || true)"

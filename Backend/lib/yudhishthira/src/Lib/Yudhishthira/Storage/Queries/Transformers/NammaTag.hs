@@ -1,30 +1,30 @@
-module Lib.Yudhishthira.Storage.Queries.Transformers.NammaTag where
+﻿module Lib.Yudhishthira.Storage.Queries.Transformers.QolariTag where
 
 import qualified Data.Aeson
 import Kernel.Prelude
 import qualified Lib.Yudhishthira.Types
-import qualified Lib.Yudhishthira.Types.NammaTag
+import qualified Lib.Yudhishthira.Types.QolariTag
 
-getChakra :: (Lib.Yudhishthira.Types.NammaTag.TagInfo -> Kernel.Prelude.Maybe Lib.Yudhishthira.Types.Chakra)
+getChakra :: (Lib.Yudhishthira.Types.QolariTag.TagInfo -> Kernel.Prelude.Maybe Lib.Yudhishthira.Types.Chakra)
 getChakra tag =
   case tag of
-    Lib.Yudhishthira.Types.NammaTag.Application -> Kernel.Prelude.Nothing
-    Lib.Yudhishthira.Types.NammaTag.KaalChakra (Lib.Yudhishthira.Types.NammaTag.KaalChakraTagInfo chakra) -> Just chakra
-    Lib.Yudhishthira.Types.NammaTag.Manual -> Kernel.Prelude.Nothing
+    Lib.Yudhishthira.Types.QolariTag.Application -> Kernel.Prelude.Nothing
+    Lib.Yudhishthira.Types.QolariTag.KaalChakra (Lib.Yudhishthira.Types.QolariTag.KaalChakraTagInfo chakra) -> Just chakra
+    Lib.Yudhishthira.Types.QolariTag.Manual -> Kernel.Prelude.Nothing
 
-getTag :: (Lib.Yudhishthira.Types.NammaTag.TagInfo -> Lib.Yudhishthira.Types.NammaTag.TagType)
+getTag :: (Lib.Yudhishthira.Types.QolariTag.TagInfo -> Lib.Yudhishthira.Types.QolariTag.TagType)
 getTag tag =
   case tag of
-    Lib.Yudhishthira.Types.NammaTag.Application -> Lib.Yudhishthira.Types.NammaTag.ApplicationTag
-    Lib.Yudhishthira.Types.NammaTag.KaalChakra _ -> Lib.Yudhishthira.Types.NammaTag.KaalChakraTag
-    Lib.Yudhishthira.Types.NammaTag.Manual -> Lib.Yudhishthira.Types.NammaTag.ManualTag
+    Lib.Yudhishthira.Types.QolariTag.Application -> Lib.Yudhishthira.Types.QolariTag.ApplicationTag
+    Lib.Yudhishthira.Types.QolariTag.KaalChakra _ -> Lib.Yudhishthira.Types.QolariTag.KaalChakraTag
+    Lib.Yudhishthira.Types.QolariTag.Manual -> Lib.Yudhishthira.Types.QolariTag.ManualTag
 
-mkTagInfo :: (Kernel.Prelude.Maybe Lib.Yudhishthira.Types.Chakra -> Lib.Yudhishthira.Types.NammaTag.TagType -> Lib.Yudhishthira.Types.NammaTag.TagInfo)
+mkTagInfo :: (Kernel.Prelude.Maybe Lib.Yudhishthira.Types.Chakra -> Lib.Yudhishthira.Types.QolariTag.TagType -> Lib.Yudhishthira.Types.QolariTag.TagInfo)
 mkTagInfo chakra tagType =
   case tagType of
-    Lib.Yudhishthira.Types.NammaTag.ApplicationTag -> Lib.Yudhishthira.Types.NammaTag.Application
-    Lib.Yudhishthira.Types.NammaTag.KaalChakraTag -> Lib.Yudhishthira.Types.NammaTag.KaalChakra (Lib.Yudhishthira.Types.NammaTag.KaalChakraTagInfo (fromMaybe Lib.Yudhishthira.Types.Monthly chakra))
-    Lib.Yudhishthira.Types.NammaTag.ManualTag -> Lib.Yudhishthira.Types.NammaTag.Manual
+    Lib.Yudhishthira.Types.QolariTag.ApplicationTag -> Lib.Yudhishthira.Types.QolariTag.Application
+    Lib.Yudhishthira.Types.QolariTag.KaalChakraTag -> Lib.Yudhishthira.Types.QolariTag.KaalChakra (Lib.Yudhishthira.Types.QolariTag.KaalChakraTagInfo (fromMaybe Lib.Yudhishthira.Types.Monthly chakra))
+    Lib.Yudhishthira.Types.QolariTag.ManualTag -> Lib.Yudhishthira.Types.QolariTag.Manual
 
 getRangeEnd :: (Lib.Yudhishthira.Types.TagValues -> Kernel.Prelude.Maybe Kernel.Prelude.Double)
 getRangeEnd = \case

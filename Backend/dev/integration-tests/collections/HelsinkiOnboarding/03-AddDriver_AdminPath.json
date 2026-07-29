@@ -1,7 +1,7 @@
-{
+﻿{
 	"info": {
 		"_postman_id": "helsinki-onboarding-03a-add-driver-admin",
-		"name": "Helsinki Onboarding 03A - Add Driver (JUSPAY_ADMIN path)",
+		"name": "Helsinki Onboarding 03A - Add Driver (Qolari_ADMIN path)",
 		"description": "Onboards a driver via the proven driver-app OTP path (same pattern used by existing 01-StripeRideFlow.json). This is the PRIMARY path — it always works because the dev OTP is bypassed. The driver is linked to the fleet owner downstream when 04-AddVehicle attaches a vehicle with ?fleetOwnerId=...",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -45,8 +45,8 @@
 					"raw": "{\"mobileNumber\": \"{{driver_mobile}}\", \"mobileCountryCode\": \"{{country_code}}\", \"merchantId\": \"{{driver_merchant_id}}\", \"merchantOperatingCity\": \"{{city}}\"}"
 				},
 				"url": {
-					"raw": "{{baseURL_namma_P}}/auth",
-					"host": ["{{baseURL_namma_P}}"],
+					"raw": "{{baseURL_qolari_P}}/auth",
+					"host": ["{{baseURL_qolari_P}}"],
 					"path": ["auth"]
 				}
 			}
@@ -76,8 +76,8 @@
 					"raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-driver-helsinki\"}"
 				},
 				"url": {
-					"raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
-					"host": ["{{baseURL_namma_P}}"],
+					"raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
+					"host": ["{{baseURL_qolari_P}}"],
 					"path": ["auth", "{{driver_authId}}", "verify"]
 				}
 			}
@@ -106,8 +106,8 @@
 					"raw": "{\"firstName\": \"Driver{{driver_name_suffix}}\", \"lastName\": \"Test\", \"email\": \"driver-{{driver_mobile}}@helsinki.test\"}"
 				},
 				"url": {
-					"raw": "{{baseURL_namma_P}}/driver/profile",
-					"host": ["{{baseURL_namma_P}}"],
+					"raw": "{{baseURL_qolari_P}}/driver/profile",
+					"host": ["{{baseURL_qolari_P}}"],
 					"path": ["driver", "profile"]
 				}
 			}

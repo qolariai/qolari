@@ -389,7 +389,7 @@ lookupRoleAndEntity person = do
 
 -- 2FA is required for a person when the deployment enforces it AND the
 -- person's role name isn't in the deployment-configured exempt list
--- (twoFaExemptRoles). We compare against Role.name (e.g. "JUSPAY_ADMIN",
+-- (twoFaExemptRoles). We compare against Role.name (e.g. "Qolari_ADMIN",
 -- "FLEET"), NOT DashboardAccessType — the latter is a coarser bucket and
 -- would exempt more users than intended.
 is2FARequired ::

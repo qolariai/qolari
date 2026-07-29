@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
+﻿{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
 
 module Lib.Payment.Payout.RequestStatus
   ( castPayoutOrderStatusToPayoutRequestStatus,
@@ -10,7 +10,7 @@ module Lib.Payment.Payout.RequestStatus
   )
 where
 
-import qualified Kernel.External.Payout.Juspay.Types.Payout as JuspayPayout
+import qualified Kernel.External.Payout.Qolari.Types.Payout as QolariPayout
 import Kernel.Prelude
 import qualified Lib.Finance.Core.Types as Finance
 import qualified Lib.Finance.Domain.Types.StateTransition as ST
@@ -20,15 +20,15 @@ import qualified Lib.Payment.Payout.History as PayoutHistory
 import qualified Lib.Payment.Storage.Beam.BeamFlow as PaymentBeamFlow
 import qualified Lib.Payment.Storage.Queries.PayoutRequest as QPR
 
-castPayoutOrderStatusToPayoutRequestStatus :: JuspayPayout.PayoutOrderStatus -> PayoutRequestStatus
+castPayoutOrderStatusToPayoutRequestStatus :: QolariPayout.PayoutOrderStatus -> PayoutRequestStatus
 castPayoutOrderStatusToPayoutRequestStatus = \case
-  JuspayPayout.SUCCESS -> CREDITED
-  JuspayPayout.FULFILLMENTS_SUCCESSFUL -> CREDITED
-  JuspayPayout.ERROR -> AUTO_PAY_FAILED
-  JuspayPayout.FAILURE -> AUTO_PAY_FAILED
-  JuspayPayout.FULFILLMENTS_FAILURE -> AUTO_PAY_FAILED
-  JuspayPayout.CANCELLED -> CANCELLED
-  JuspayPayout.FULFILLMENTS_CANCELLED -> CANCELLED
+  QolariPayout.SUCCESS -> CREDITED
+  QolariPayout.FULFILLMENTS_SUCCESSFUL -> CREDITED
+  QolariPayout.ERROR -> AUTO_PAY_FAILED
+  QolariPayout.FAILURE -> AUTO_PAY_FAILED
+  QolariPayout.FULFILLMENTS_FAILURE -> AUTO_PAY_FAILED
+  QolariPayout.CANCELLED -> CANCELLED
+  QolariPayout.FULFILLMENTS_CANCELLED -> CANCELLED
   _ -> PROCESSING
 
 updatePayoutRequestStatusWithHistory ::

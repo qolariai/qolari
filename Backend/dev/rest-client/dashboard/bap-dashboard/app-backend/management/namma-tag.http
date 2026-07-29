@@ -1,8 +1,8 @@
-# access tokens with different roles
+﻿# access tokens with different roles
 @customer = {{bap-dashboard/token/YATRI/customer}}
 @driver = {{bap-dashboard/token/YATRI/driver}}
-@juspay_ops = {{bap-dashboard/token/YATRI/juspay_ops}}
-@juspay_admin = {{bap-dashboard/token/YATRI/juspay_admin}}
+@Qolari_ops = {{bap-dashboard/token/YATRI/Qolari_ops}}
+@Qolari_admin = {{bap-dashboard/token/YATRI/Qolari_admin}}
 @customer_service = {{bap-dashboard/token/YATRI/customer_service}}
 
 # @name healthcheck
@@ -12,8 +12,8 @@ GET {{bap-dashboard-host}}
 
 # @name dailyRidesQueryCreate
 
-POST {{bap-dashboard-host}}/bap/YATRI/nammaTag/query/create
-token: {{juspay_admin}}
+POST {{bap-dashboard-host}}/bap/YATRI/QolariTag/query/create
+token: {{Qolari_admin}}
 content-type: application/json
 
 {
@@ -64,8 +64,8 @@ content-type: application/json
 
 # @name dailyRidesQueryUpdate
 
-POST {{bap-dashboard-host}}/bap/YATRI/nammaTag/query/update
-token: {{juspay_admin}}
+POST {{bap-dashboard-host}}/bap/YATRI/QolariTag/query/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 {
@@ -116,8 +116,8 @@ content-type: application/json
 
 # @name dailyRidesQueryDelete
 
-DELETE {{bap-dashboard-host}}/bap/YATRI/nammaTag/query/delete
-token: {{juspay_admin}}
+DELETE {{bap-dashboard-host}}/bap/YATRI/QolariTag/query/delete
+token: {{Qolari_admin}}
 content-type: application/json
 
 {
@@ -129,8 +129,8 @@ content-type: application/json
 
 # @name CustomerSpeedTagCreate
 
-POST {{bap-dashboard-host}}/bap/YATRI/nammaTag/tag/create
-token: {{juspay_admin}}
+POST {{bap-dashboard-host}}/bap/YATRI/QolariTag/tag/create
+token: {{Qolari_admin}}
 content-type: application/json
 
 {
@@ -196,8 +196,8 @@ content-type: application/json
 
 @customerId = ec34eede-5a3e-4a41-89d4-7290a0d7a629
 
-POST {{bap-dashboard-host}}/bap/YATRI/nammaTag/{{customerId}}/updateCustomerTag
-token: {{juspay_admin}}
+POST {{bap-dashboard-host}}/bap/YATRI/QolariTag/{{customerId}}/updateCustomerTag
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "tag" : "CustomerSpeed#FAST_CUSTOMER",

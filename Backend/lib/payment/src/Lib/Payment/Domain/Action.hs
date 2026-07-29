@@ -18,7 +18,7 @@ module Lib.Payment.Domain.Action
   ( PaymentStatusResp (..),
     createOrderService,
     orderStatusService,
-    juspayWebhookService,
+    QolariWebhookService,
     stripeWebhookService,
     mkStripeWebhookData,
     StripeWebhookData (..),
@@ -91,13 +91,13 @@ import Kernel.External.Encryption
 import qualified Kernel.External.Payment.Interface as Payment
 import qualified Kernel.External.Payment.Interface.Events.Types as PEInterface
 import qualified Kernel.External.Payment.Interface.Types as PInterface
-import qualified Kernel.External.Payment.Juspay.Types as Juspay
+import qualified Kernel.External.Payment.Gateway.Types as Qolari
 import qualified Kernel.External.Payout.Interface as PT
 import qualified Kernel.External.Payout.Interface.Events.Types as PayoutEvents
 import qualified Kernel.External.Payout.Interface.Stripe as IPayoutStripe
 import qualified Kernel.External.Payout.Interface.Types as Payout
-import qualified Kernel.External.Payout.Juspay.Types as Juspay
-import qualified Kernel.External.Payout.Juspay.Types.Payout as JuspayPayout
+import qualified Kernel.External.Payout.Qolari.Types as Qolari
+import qualified Kernel.External.Payout.Qolari.Types.Payout as QolariPayout
 import qualified Kernel.External.Payout.Types as Payout
 import qualified Kernel.External.Wallet as Wallet
 -- import qualified Tools.Wallet as TWallet
@@ -186,7 +186,7 @@ data PaymentStatusResp
         sourceObject :: Maybe Text,
         sourceInfo :: Payment.SourceInfo,
         notificationType :: Maybe Text,
-        juspayProviedId :: Text,
+        QolariProviedId :: Text,
         responseCode :: Maybe Text,
         responseMessage :: Maybe Text,
         notificationId :: Text
@@ -326,7 +326,7 @@ data CreatePaymentServiceReq = CreatePaymentServiceReq
     driverAccountId :: Maybe Payment.AccountId,
     applicationFeeAmount :: Maybe HighPrecMoney,
     receiptEmail :: Maybe Text,
-    -- Juspay-specific (optional)
+    -- Qolari-specific (optional)
     splitSettlementDetails :: Maybe Payment.SplitSettlementDetails,
     createMandate :: Maybe Payment.MandateType,
     mandateMaxAmount :: Maybe HighPrecMoney,
@@ -813,21 +813,21 @@ createOrderService merchantId mbMerchantOpCityId personId mbPaymentOrderValidity
       let buffer = secondsToNominalDiffTime 150 -- 2.5 mins of buffer
       return (order.status `notElem` [Payment.CHARGED, Payment.AUTO_REFUNDED] && expiry < addUTCTime buffer now)
 
-buildSDKPayload :: EncFlow m r => Payment.CreateOrderReq -> DOrder.PaymentOrder -> m (Maybe Juspay.SDKPayload)
+buildSDKPayload :: EncFlow m r => Payment.CreateOrderReq -> DOrder.PaymentOrder -> m (Maybe Qolari.SDKPayload)
 buildSDKPayload req order = do
   payload <- buildSDKPayloadDetails req order
   case payload of
     Just sdkPayload -> do
       return $
         Just
-          Juspay.SDKPayload
+          Qolari.SDKPayload
             { requestId = order.requestId,
               service = order.service,
               payload = sdkPayload
             }
     Nothing -> return Nothing
 
-buildSDKPayloadDetails :: EncFlow m r => Payment.CreateOrderReq -> DOrder.PaymentOrder -> m (Maybe Juspay.SDKPayloadDetails)
+buildSDKPayloadDetails :: EncFlow m r => Payment.CreateOrderReq -> DOrder.PaymentOrder -> m (Maybe Qolari.SDKPayloadDetails)
 buildSDKPayloadDetails req order = do
   logDebug $ "CreateOrderReq called for order: " <> show req
   case (order.clientAuthToken, order.clientAuthTokenExpiry) of
@@ -835,7 +835,7 @@ buildSDKPayloadDetails req order = do
       clientAuthToken <- decrypt token
       return $
         Just
-          Juspay.SDKPayloadDetails
+          Qolari.SDKPayloadDetails
             { clientId = order.clientId,
               amount = show order.amount,
               merchantId = order.paymentMerchantId,
@@ -876,7 +876,7 @@ buildPaymentOrder ::
   Payment.CreateOrderResp ->
   Bool ->
   Maybe Text ->
-  Maybe PGFeeConfig -> -- fee config from JuspayConfig (if configured)
+  Maybe PGFeeConfig -> -- fee config from PaymentGatewayConfig (if configured)
   m DOrder.PaymentOrder
 buildPaymentOrder merchantId mbMerchantOpCityId personId mbPaymentOrderValidity mbEntityName paymentServiceType req resp isMockPayment mbGroupId mbPGFeeConfig = do
   now <- getCurrentTime
@@ -919,7 +919,7 @@ buildPaymentOrder merchantId mbMerchantOpCityId personId mbPaymentOrderValidity 
             mandateMaxAmount = read . T.unpack <$> resp.sdk_payload.payload.mandateMaxAmount,
             mandateStartDate = posixSecondsToUTCTime . read . T.unpack <$> (resp.sdk_payload.payload.mandateStartDate),
             mandateEndDate = posixSecondsToUTCTime . read . T.unpack <$> resp.sdk_payload.payload.mandateEndDate,
-            serviceProvider = Payment.Juspay, -- fix it later
+            serviceProvider = Payment.Gateway, -- fix it later
             bankErrorCode = Nothing,
             bankErrorMessage = Nothing,
             isRetried = False,
@@ -1766,7 +1766,7 @@ updateOrderTransaction merchantOpCityId order resp respDump = do
                         mandateId = resp.mandateId,
                         mandateFrequency = resp.mandateFrequency,
                         mandateMaxAmount = resp.mandateMaxAmount,
-                        juspayResponse = respDump,
+                        QolariResponse = respDump,
                         txnId = resp.txnId,
                         splitSettlementResponse = resp.splitSettlementResponse,
                         customerName = resp.customerName,
@@ -1806,22 +1806,22 @@ buildPaymentTransaction order OrderTxn {..} respDump = do
         retryCount = 0,
         createdAt = now,
         updatedAt = now,
-        juspayResponse = respDump,
+        QolariResponse = respDump,
         bankErrorCode,
         bankErrorMessage,
         merchantOperatingCityId = order.merchantOperatingCityId,
         ..
       }
 
--- juspay webhook ----------------------------------------------------------
+-- Qolari webhook ----------------------------------------------------------
 
-juspayWebhookService ::
+QolariWebhookService ::
   (BeamFlow m r, Finance.HasActorInfo m r) =>
   Id MerchantOperatingCity ->
   Payment.OrderStatusResp ->
   Text ->
   m AckResponse
-juspayWebhookService merchantOpCityId resp respDump = do
+QolariWebhookService merchantOpCityId resp respDump = do
   logWarning $ "Webhook response dump: " <> respDump --- want this for now that's why changed it to warning
   logWarning $ "Webhook response: " <> show resp
   case resp of
@@ -2220,7 +2220,7 @@ createExecutionService (request, orderId) merchantId mbMerchantOpCityId executio
             paymentLinks = Payment.PaymentLinks Nothing Nothing Nothing Nothing,
             clientAuthToken = Nothing,
             clientAuthTokenExpiry = Nothing,
-            serviceProvider = Payment.Juspay, -- fix it later
+            serviceProvider = Payment.Gateway, -- fix it later
             getUpiDeepLinksOption = Nothing,
             environment = Nothing,
             createMandate = Nothing,
@@ -2427,7 +2427,7 @@ createPayoutService ::
   Text ->
   CreatePayoutServiceReq ->
   (CreatePayoutServiceReq -> m PT.CreatePayoutOrderResp) ->
-  Maybe PGFeeConfig -> -- fee config from JuspayConfig (if configured)
+  Maybe PGFeeConfig -> -- fee config from PaymentGatewayConfig (if configured)
   m (Maybe PT.CreatePayoutOrderResp, Maybe Payment.PayoutOrder)
 createPayoutService merchantId mbMerchantOpCityId _personId mbEntityIds mbEntityName city createPayoutServiceReq createPayoutOrderCall mbPGFeeConfig = do
   mbExistingPayoutOrder <- QPayoutOrder.findByOrderId createPayoutServiceReq.orderId
@@ -2469,7 +2469,7 @@ createPayoutService merchantId mbMerchantOpCityId _personId mbEntityIds mbEntity
       customerEmail <- encrypt req.customerEmail
       mobileNo <- encrypt req.customerPhone
       let transferStatus = case createPayoutServiceReq.payoutServiceFlow of
-            PT.JuspayFlow -> Nothing
+            PT.QolariFlow -> Nothing
             PT.StripeFlow -> Just Payout.TRANSFER_INITIATED
       pure $
         Payment.PayoutOrder
@@ -2547,7 +2547,7 @@ payoutStatusUpdates orderId statusResp = do
       mbTxn = listToMaybe <$> sortBy (comparing (.updatedAt)) =<< txns
   QPayoutOrder.updatePayoutOrderTxnRespInfo ((.responseCode) =<< mbTxn) ((.responseMessage) =<< mbTxn) orderId
   updatePayoutRequestStatusFromOrder order statusResp.status
-  whenJust mbTxn $ \JuspayPayout.Transaction {amount = amount_txn, ..} -> do
+  whenJust mbTxn $ \QolariPayout.Transaction {amount = amount_txn, ..} -> do
     findTransaction <- QPayoutTransaction.findByTransactionRef transactionRef
     let mbBeneficiaryDetails = (.beneficiaryDetails) =<< mbFulfillment
         mbDetails = (.details) =<< mbBeneficiaryDetails
@@ -2578,7 +2578,7 @@ payoutStatusUpdates orderId statusResp = do
 updatePayoutRequestStatusFromOrder ::
   (PaymentBeamFlow.BeamFlow m r, FinanceBeamFlow.BeamFlow m r, Finance.HasActorInfo m r) =>
   Payment.PayoutOrder ->
-  JuspayPayout.PayoutOrderStatus ->
+  QolariPayout.PayoutOrderStatus ->
   m ()
 updatePayoutRequestStatusFromOrder order orderStatus = do
   let newStatus = RequestStatus.castPayoutOrderStatusToPayoutRequestStatus orderStatus
@@ -2607,7 +2607,7 @@ mkCreatePayoutServiceReq ::
 mkCreatePayoutServiceReq orderId amount currency mbPhoneNo mbEmail customerId remark mbCustomerName customerVpa orderType payoutServiceFlow mbTransferAmount =
   CreatePayoutServiceReq
     { customerPhone = fromMaybe "6666666666" mbPhoneNo,
-      customerEmail = fromMaybe "growth@nammayatri.in" mbEmail,
+      customerEmail = fromMaybe "growth@drive.qolari.com" mbEmail,
       customerName = fromMaybe "Unknown Customer" mbCustomerName,
       transferAmount = fromMaybe 0 mbTransferAmount,
       ..

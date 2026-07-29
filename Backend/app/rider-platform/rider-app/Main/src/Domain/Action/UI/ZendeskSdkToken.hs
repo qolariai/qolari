@@ -1,4 +1,4 @@
-module Domain.Action.UI.ZendeskSdkToken (postProfileZendeskSdkToken) where
+﻿module Domain.Action.UI.ZendeskSdkToken (postProfileZendeskSdkToken) where
 
 import qualified API.Types.UI.ZendeskSdkToken as Types
 import qualified Data.Map.Strict as M
@@ -43,7 +43,7 @@ postProfileZendeskSdkToken req = do
         fn <- person.firstName
         ln <- person.lastName
         pure $ fn <> " " <> ln
-      email = fromMaybe ("user_" <> externalId <> "@nammayatri.in") mbEmail
+      email = fromMaybe ("user_" <> externalId <> "@drive.qolari.com") mbEmail
       claimsMap =
         M.fromList
           [ ("name", toJSON name),

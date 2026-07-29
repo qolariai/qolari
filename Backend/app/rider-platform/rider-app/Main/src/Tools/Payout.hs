@@ -83,17 +83,17 @@ runWithServiceConfigAndName func getCfg mkReq clientSdkVersion merchantId mercha
   payoutServiceName <- modifyServiceName payoutServiceNameRaw (fromMaybe DMPM.LIVE paymentMode) clientSdkVersion
   merchantServiceConfig <-
     getOneConfig (MerchantServiceConfigDimensions {merchantOperatingCityId = merchantOperatingCityId.getId, merchantId = merchantId.getId, serviceName = Just payoutServiceName}) (Just (maybeToList <$> CQMSC.findByMerchantOpCityIdAndService merchantId merchantOperatingCityId (payoutServiceName)))
-      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "Payout" (show Payout.Juspay))
+      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "Payout" (show Payout.Qolari))
   case merchantServiceConfig.serviceConfig of
     DMSC.PayoutServiceConfig vsc -> case vsc of
-      Payout.JuspayConfig _ -> do
+      Payout.PaymentGatewayConfig _ -> do
         let mConnectedAccountId = Nothing
         func vsc (mkReq (getRoutingId payoutServiceName) mConnectedAccountId serviceReq)
       Payout.StripeConfig _ -> throwError (InvalidRequest "Stripe payouts are not supported")
     _ -> throwError $ InternalError "Unknown Service Config"
   where
     getRoutingId = \case
-      DMSC.PayoutService PT.AAJuspay -> mRoutingId
+      DMSC.PayoutService PT.AAQolari -> mRoutingId
       _ -> Nothing
 
 modifyServiceName ::
@@ -109,7 +109,7 @@ modifyServiceName serviceName paymentMode clientSdkVersion =
   where
     modifyPayoutService serviceType payoutService =
       case Payout.castPayoutServiceFlow payoutService of
-        Payout.JuspayFlow -> decidePayoutService serviceName clientSdkVersion
+        Payout.QolariFlow -> decidePayoutService serviceName clientSdkVersion
         Payout.StripeFlow -> pure . serviceType $ modifyPayoutServiceByMode payoutService paymentMode
 
 -- relevant only for Stripe
@@ -117,14 +117,14 @@ modifyPayoutServiceByMode :: PT.PayoutService -> DMPM.PaymentMode -> PT.PayoutSe
 modifyPayoutServiceByMode Payout.Stripe DMPM.LIVE = Payout.Stripe
 modifyPayoutServiceByMode Payout.Stripe DMPM.TEST = Payout.StripeTest
 modifyPayoutServiceByMode Payout.StripeTest _ = Payout.StripeTest
-modifyPayoutServiceByMode Payout.Juspay _ = Payout.Juspay
-modifyPayoutServiceByMode Payout.AAJuspay _ = Payout.AAJuspay
+modifyPayoutServiceByMode Payout.Qolari _ = Payout.Qolari
+modifyPayoutServiceByMode Payout.AAQolari _ = Payout.AAQolari
 
--- relevant only for Juspay
+-- relevant only for Qolari
 decidePayoutService :: ServiceFlow m r => DMSC.ServiceName -> Maybe Version -> m DMSC.ServiceName
 decidePayoutService payoutServiceName clientSdkVersion = do
   aaClientSdkVersion <- L.runIO $ (T.pack . (fromMaybe "999.999.999") <$> SE.lookupEnv "AA_ENABLED_CLIENT_SDK_VERSION")
   return $ case clientSdkVersion of
     Just v
-      | v >= textToVersionDefault aaClientSdkVersion -> DMSC.PayoutService PT.AAJuspay
+      | v >= textToVersionDefault aaClientSdkVersion -> DMSC.PayoutService PT.AAQolari
     _ -> payoutServiceName

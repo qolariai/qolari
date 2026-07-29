@@ -60,7 +60,7 @@ prepareDataForLoadTest privateKey nmbOfReq filePath = do
       let body = LBS.toStrict $ J.encode request
       let bodyHash = S.becknSignatureHash body
       let headers = [("(created)", ""), ("(expires)", ""), ("digest", "")]
-      let signatureParams = S.mkSignatureParams "JUSPAY.MOBILITY.APP.UAT.1" "juspay-mobility-bap-1-key" now 600 S.Ed25519
+      let signatureParams = S.mkSignatureParams "Qolari.MOBILITY.APP.UAT.1" "Qolari-mobility-bap-1-key" now 600 S.Ed25519
       signature <- S.sign (Base64 $ Base64.decodeLenient privateKey) signatureParams bodyHash headers
       pure $ RequestForLoadTest (decodeUtf8 body) (decodeUtf8 $ S.encode $ S.SignaturePayload signature signatureParams)
   L.runIO . writeFile (T.unpack filePath) . decodeUtf8 . J.encode . catMaybes $ reqs

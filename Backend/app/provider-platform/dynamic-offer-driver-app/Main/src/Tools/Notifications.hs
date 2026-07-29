@@ -897,7 +897,7 @@ notifyPaymentPending merchantOpCityId person mbDeviceToken orderId = do
 -- body =
 --   FCMNotificationBody $
 --     EulerHS.Prelude.unwords
---       [ "To continue taking rides on Namma Yatri, clear you payment dues"
+--       [ "To continue taking rides on Qolari, clear you payment dues"
 --       ]
 
 notifyPaymentSuccess ::
@@ -939,7 +939,7 @@ notifyPaymentSuccess merchantOpCityId person orderId = do
 -- body =
 --   FCMNotificationBody $
 --     EulerHS.Prelude.unwords
---       [ "Your payment has been processed successfully. Start earning with Namma Yatri!"
+--       [ "Your payment has been processed successfully. Start earning with Qolari!"
 --       ]
 
 notifyPaymentModeManualOnCancel ::
@@ -1494,7 +1494,7 @@ getNewMerchantOpCityId (Just version) currentMerchantCityId = do
   let clientBundleVersion = Version.versionToText version
   let getClientBundleVersion = clientBundleVersion `compare` "1.8.319" ----- 1.8.319 is current client bundle version of the apk in prod
   case getClientBundleVersion of
-    GT -> "3a95be1d-9052-4715-8cf5-ea8f68ffc85a" ------------ Namma Yatri HyderaBad city Id as it is common in both
+    GT -> "3a95be1d-9052-4715-8cf5-ea8f68ffc85a" ------------ Qolari HyderaBad city Id as it is common in both
     _ -> currentMerchantCityId
 
 cityFallback :: Maybe Version.Version -> Id DMOC.MerchantOperatingCity -> Id DMOC.MerchantOperatingCity

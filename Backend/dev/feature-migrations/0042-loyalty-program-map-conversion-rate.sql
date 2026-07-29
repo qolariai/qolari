@@ -1,4 +1,4 @@
--- Migrate JuspayCfg.loyaltyProgramMap from the legacy string shape
+﻿-- Migrate QolariCfg.loyaltyProgramMap from the legacy string shape
 --   { "<programId>": "LOYALTY_WALLET" }
 -- to the structured shape carrying a default conversion rate
 --   { "<programId>": { "programType": "LOYALTY_WALLET", "conversionRate": 1 } }

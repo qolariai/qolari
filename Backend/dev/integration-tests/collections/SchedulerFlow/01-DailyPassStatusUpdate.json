@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "Daily Pass Status Update",
     "description": "Tests DailyPassStatusUpdate scheduler job: purchase passes via API, mock payment, override status, trigger scheduler, verify transitions (Active->Expired, PreBooked->Active).",
@@ -99,7 +99,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_test_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_test_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -258,7 +258,7 @@
       }
     },
     {
-      "name": "Mock Juspay CHARGED (Pass A)",
+      "name": "Mock Qolari CHARGED (Pass A)",
       "event": [
         {
           "listen": "prerequest",
@@ -269,7 +269,7 @@
               "    url: pm.environment.get('mockServerUrl') + '/mock/override',",
               "    method: 'POST',",
               "    header: { 'Content-Type': 'application/json' },",
-              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"juspay\", \"extract\": \"path.2\", \"value\": pm.environment.get('_pass_a_order_short_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}, \"match\": \"/orders\"}) }",
+              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"Qolari\", \"extract\": \"path.2\", \"value\": pm.environment.get('_pass_a_order_short_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}, \"match\": \"/orders\"}) }",
               "}, function(){});"
             ],
             "type": "text/javascript"
@@ -295,7 +295,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"service\": \"juspay\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{_pass_a_order_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}}"
+          "raw": "{\"service\": \"Qolari\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{_pass_a_order_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}}"
         },
         "url": {
           "raw": "{{mockServerUrl}}/mock/override",
@@ -393,7 +393,7 @@
       }
     },
     {
-      "name": "Mock Juspay CHARGED (Pass B)",
+      "name": "Mock Qolari CHARGED (Pass B)",
       "event": [
         {
           "listen": "prerequest",
@@ -404,7 +404,7 @@
               "    url: pm.environment.get('mockServerUrl') + '/mock/override',",
               "    method: 'POST',",
               "    header: { 'Content-Type': 'application/json' },",
-              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"juspay\", \"extract\": \"path.2\", \"value\": pm.environment.get('_pass_b_order_short_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}, \"match\": \"/orders\"}) }",
+              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"Qolari\", \"extract\": \"path.2\", \"value\": pm.environment.get('_pass_b_order_short_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}, \"match\": \"/orders\"}) }",
               "}, function(){});"
             ],
             "type": "text/javascript"
@@ -430,7 +430,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"service\": \"juspay\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{_pass_b_order_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}}"
+          "raw": "{\"service\": \"Qolari\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{_pass_b_order_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 1.0}}"
         },
         "url": {
           "raw": "{{mockServerUrl}}/mock/override",

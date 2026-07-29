@@ -1,4 +1,4 @@
--- Grant JUSPAY_OPS and JUSPAY_ADMIN roles access to /bap/{merchantId}/person/bulkCreate.
+﻿-- Grant Qolari_OPS and Qolari_ADMIN roles access to /bap/{merchantId}/person/bulkCreate.
 -- Endpoint gate is DashboardAuth 'DASHBOARD_USER at the type level; this row seeds the
 -- fine-grained AccessMatrix check that verifyAccessLevel does at handler entry.
 -- ON CONFLICT DO NOTHING because migrations re-run on every deploy.
@@ -13,5 +13,5 @@ SELECT
   now(),
   now()
 FROM atlas_bap_dashboard.role
-WHERE name IN ('JUSPAY_OPS', 'JUSPAY_ADMIN')
+WHERE name IN ('Qolari_OPS', 'Qolari_ADMIN')
 ON CONFLICT DO NOTHING;

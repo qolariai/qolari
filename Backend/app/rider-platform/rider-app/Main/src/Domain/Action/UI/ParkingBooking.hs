@@ -1,4 +1,4 @@
-{-# LANGUAGE TypeApplications #-}
+﻿{-# LANGUAGE TypeApplications #-}
 
 module Domain.Action.UI.ParkingBooking (postMultimodalParkingBook, postMultimodalParkingMarshalCreate, parkingBookingOrderStatusHandler) where
 
@@ -72,7 +72,7 @@ postMultimodalParkingBook mbApiKey req = ActorInfo.withRequestIdActorInfo $ do
   isPercentageSplitEnabled <- TPayment.getIsPercentageSplit person.merchantId merchantOpCityId Nothing TPayment.ParkingBooking
   splitSettlementDetails <- TPayment.mkSplitSettlementDetails isSplitEnabled req.amount [] isPercentageSplitEnabled False
 
-  customerEmail <- fromMaybe "noreply@nammayatri.in" <$> mapM decrypt person.email
+  customerEmail <- fromMaybe "noreply@drive.qolari.com" <$> mapM decrypt person.email
   customerPhone <- person.mobileNumber & fromMaybeM (PersonFieldNotPresent "mobileNumber") >>= decrypt
   staticCustomerId <- SLUtils.getStaticCustomerId person customerPhone
   nwAddress <- asks (.nwAddress)
@@ -214,10 +214,10 @@ postMultimodalParkingMarshalCreate mbApiKey req = do
                   deviceId = Nothing,
                   androidId = Nothing,
                   registeredViaPartnerOrgId = Nothing,
-                  juspayCustomerPaymentID = Nothing,
+                  QolariCustomerPaymentID = Nothing,
                   enableOtpLessRide = Nothing,
                   totalRidesCount = Just 0,
-                  customerNammaTags = Nothing,
+                  customerQolariTags = Nothing,
                   informPoliceSos = False,
                   payoutVpa = Nothing,
                   frequentLocGeohashes = Just [],
@@ -271,7 +271,7 @@ parkingBookingOrderStatusHandler paymentOrderId _merchantId status = do
       Payment.CHARGED -> Just DPT.Booked
       Payment.AUTHENTICATION_FAILED -> Just DPT.Failed
       Payment.AUTHORIZATION_FAILED -> Just DPT.Failed
-      Payment.JUSPAY_DECLINED -> Just DPT.Failed
+      Payment.Qolari_DECLINED -> Just DPT.Failed
       Payment.CANCELLED -> Just DPT.Failed
       Payment.AUTO_REFUNDED -> Just DPT.Refunded
       _ -> Nothing

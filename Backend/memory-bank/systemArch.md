@@ -1,6 +1,6 @@
-# Nammayatri Backend - System Architecture
+﻿# Qolari Backend - System Architecture
 
-The Nammayatri backend is a comprehensive mobility platform built in Haskell, implementing the BECKN/ONDC protocol. It follows a microservices architecture with over 40 services, designed for scalability, high performance, and reliability.
+The Qolari backend is a comprehensive mobility platform built in Haskell, implementing the BECKN/ONDC protocol. It follows a microservices architecture with over 40 services, designed for scalability, high performance, and reliability.
 
 ## 1. Overall Architecture
 
@@ -49,7 +49,7 @@ The system is logically divided into several main platforms and service categori
 *   **Mapping/Geospatial:** OSRM (routing engine), Google Maps API, geospatial queries in PostgreSQL.
 *   **Feature Management:** CAC (Client Application Configuration), SuperPosition (feature flagging and A/B testing).
 *   **External Integrations:**
-    *   **Payment:** Juspay payment gateway (webhooks, payouts, mandates).
+    *   **Payment:** Qolari payment gateway (webhooks, payouts, mandates).
     *   **Verification:** Idfy, HyperVerge (document verification).
     *   **Communication:** SMS, FCM notifications, Exophone (call status).
     *   **AI/ML:** Azure OpenAI, Gemini (Chat Completion APIs).

@@ -1,4 +1,4 @@
-# Cline's Rules of EngagementAdd commentMore actions
+﻿# Cline's Rules of EngagementAdd commentMore actions
 
 This file contains rules and guidelines learned from user feedback to improve my performance and avoid repeating mistakes. I must adhere to these rules in all future tasks.
 
@@ -10,7 +10,7 @@ This file contains rules and guidelines learned from user feedback to improve my
 - **Correct Format for other commands:** For other commands like `cabal repl`, the comma should be omitted: `nix develop .#backend -c cabal repl rider-app`.
 - **No Unsolicited Quoting:** Specifically for the `-c` flag, I must **NEVER** add double quotes around the command string unless explicitly told to. This is a strict rule.
 
-## 2. Namma DSL Generator Errors
+## 2. Qolari DSL Generator Errors
 
 - **"Type not determined" Error:** When the `alchemist-generator-exe` fails with a `"Type" type not determined` error, the root cause is almost always a missing or incorrect type import in the relevant `.yaml` specification file.
 - **Troubleshooting Steps:**

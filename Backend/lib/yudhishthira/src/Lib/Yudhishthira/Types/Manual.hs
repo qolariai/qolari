@@ -1,10 +1,10 @@
-module Lib.Yudhishthira.Types.Manual where
+﻿module Lib.Yudhishthira.Types.Manual where
 
 import Kernel.Prelude
 import Kernel.Types.Common
 import Lib.Yudhishthira.Types.Common
 
-data NammaTagManual = NammaTagManual
+data QolariTagManual = QolariTagManual
   { tagCategory :: Text,
     description :: Maybe Text,
     tagName :: Text,

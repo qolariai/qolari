@@ -1,4 +1,4 @@
-let topSecret = ./top-secret-template.dhall
+﻿let topSecret = ./top-secret-template.dhall
 
 let globalCommon = ../../generic/common.dhall
 
@@ -22,5 +22,5 @@ in  { smsUserName = "xxxxxxx"
     , slackToken = "xxxxxxx"
     , InfoBIPConfig
     , urlShortnerApiKey = "some-internal-api-key"
-    , nammayatriRegistryApiKey = "some-secret-api-key"
+    , QolariRegistryApiKey = "some-secret-api-key"
     }

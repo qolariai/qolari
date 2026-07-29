@@ -1,4 +1,4 @@
-module SharedLogic.Allocator.Jobs.Mandate.Notification (sendPDNNotificationToDriver) where
+﻿module SharedLogic.Allocator.Jobs.Mandate.Notification (sendPDNNotificationToDriver) where
 
 import Control.Monad.Extra (mapMaybeM)
 import qualified Data.Map as M
@@ -246,7 +246,7 @@ sendAsyncNotification driverToNotify merchantId merchantOperatingCityId subscrip
           sourceAmount = req.amount,
           mandateId = mandateId,
           driverFeeId = driverFeeId,
-          juspayProvidedId = "Unknown",
+          QolariProvidedId = "Unknown",
           txnDate = now,
           providerName = Nothing,
           notificationType = Nothing,

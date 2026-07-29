@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Test Context API + CORS Proxy
 
@@ -169,7 +169,7 @@ VICTORIA_METRICS_QUERY_URL = os.environ.get("VICTORIA_METRICS_QUERY_URL", "http:
 # ── Paths ──
 SCRIPT_DIR = Path(__file__).resolve().parent
 COLLECTIONS_DIR = SCRIPT_DIR.parent.parent / "integration-tests" / "collections"
-PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent.parent  # nammayatri/
+PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent.parent  # Qolari/
 
 # Resolved ports, in preference order: data/ports.json published by the
 # run-mobility-stack-dev preflight (single source of truth, also what the local
@@ -359,8 +359,8 @@ def _svc_port(name, default):
 # (gitignored). Adding a new launcher? Add an entry here so its modal can
 # offer a branch / commit picker.
 KNOWN_REPOS: dict = {
-    "nammayatri/ny-react-native": PROJECT_ROOT / "data" / "ny-react-native",
-    "nammayatri/control-center":  PROJECT_ROOT / "data" / "control-center",
+    "Qolari/ny-react-native": PROJECT_ROOT / "data" / "ny-react-native",
+    "Qolari/control-center":  PROJECT_ROOT / "data" / "control-center",
 }
 
 # ── Service log files for per-API capture ──
@@ -563,7 +563,7 @@ def run_config_sync(from_env: str, restart_services: bool = True, force_fetch: b
         #
         # Why this order:
         #   - prod import populates merchants, vehicle configs, etc.
-        #   - local-testing-data adds fixed-UUID test persons (juspay_admin etc.)
+        #   - local-testing-data adds fixed-UUID test persons (Qolari_admin etc.)
         #     that feature-migrations like 0001-dashboard-access-setup.sql reference
         #     by hard-coded UUID. Without this seed, feature-migrations FK-fail.
         #   - feature-migrations sit on top of both layers.
@@ -824,7 +824,7 @@ def trigger_control_center(ref: str | None = None):
 
 # ── ny-react-native launcher ──
 # Drives Backend/dev/test-tool/context-api/setup/ny_react_native/setup.sh —
-# clones the nammayatri/ny-react-native repo, installs deps, builds the
+# clones the Qolari/ny-react-native repo, installs deps, builds the
 # requested apps (consumer / provider / both) for android/ios, boots an
 # emulator if none is running, and installs+launches via Metro on 8088
 # (and 8089 for "both"). Metro defaults dodge every reservation in
@@ -868,10 +868,10 @@ NY_RN_READY_SENTINEL = "ny-react-native: launched"
 # the cloned repo and fall back to these defaults. The strings are PascalCase
 # (consumer) / camelCase (provider) per the upstream convention.
 NY_RN_DEFAULT_VARIANTS = {
-    "customer": ["Bridge", "NammaYatri", "Yatri", "ManaYatri", "YatriSathi", "Lynx", "BharatTaxi"],
-    "driver":   ["nammaYatri", "jatriSaathi", "bridge", "manaYatri", "yatri", "lynx", "bharatTaxi"],
+    "customer": ["Bridge", "Qolari", "Yatri", "ManaYatri", "YatriSathi", "Lynx", "BharatTaxi"],
+    "driver":   ["Qolari", "jatriSaathi", "bridge", "manaYatri", "yatri", "lynx", "bharatTaxi"],
 }
-NY_RN_DEFAULT_VARIANT_BY_APP = {"customer": "Bridge", "driver": "nammaYatri"}
+NY_RN_DEFAULT_VARIANT_BY_APP = {"customer": "Bridge", "driver": "Qolari"}
 
 
 def _ny_rn_repo_dir() -> Path:
@@ -1657,7 +1657,7 @@ def stop_ny_rn(app: str) -> bool:
     return _kill_process_group(proc)
 
 
-# Paths match each service's readiness_probe in Backend/nix/services/nammayatri.nix.
+# Paths match each service's readiness_probe in Backend/nix/services/Qolari.nix.
 # Ports come from the resolved table (dynamic per dev) — NOT the base ports.
 HASKELL_SERVICE_HEALTH = [
     ("rider-app", _svc_port("rider-app", 8013), "/v2"),
@@ -3149,9 +3149,9 @@ class ContextHandler(BaseHTTPRequestHandler):
         elif path.startswith("/proxy/driver/"):
             target_base = DRIVER_URL
             target_path = "/ui" + path[len("/proxy/driver"):]
-        elif path.startswith("/proxy/juspay-payment/"):
+        elif path.startswith("/proxy/Qolari-payment/"):
             target_base = os.environ.get("MOCK_SERVER_URL", "http://localhost:8091/")
-            target_path = path[len("/proxy/juspay-payment"):]
+            target_path = path[len("/proxy/Qolari-payment"):]
         else:
             return False
 
@@ -4193,7 +4193,7 @@ class ContextHandler(BaseHTTPRequestHandler):
                     return True
 
                 # Process name = PascalCase variant. The Lynx scheme builds
-                # a binary called "Lynx"; NammaYatri → "NammaYatri", etc.
+                # a binary called "Lynx"; Qolari → "Qolari", etc.
                 proc_name = (variant[:1].upper() + variant[1:]) if variant else "Lynx"
 
                 # Window: ~2 minutes. log show is hard-capped at 4096 lines

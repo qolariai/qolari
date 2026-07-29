@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
+﻿{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
 
 module Lib.Finance.Settlement.Ingestion
   ( ingestPaymentSettlementReport,
@@ -12,7 +12,7 @@ import Kernel.Beam.Functions (ToTType' (..))
 import Kernel.External.Encryption (EncFlow)
 import Kernel.External.Settlement.Interface (parseAndEnrichPaymentSettlementCsv)
 import Kernel.External.Settlement.Interface.Types (ParsePaymentSettlementResult, ParseResult (..))
-import Kernel.External.Settlement.Types (JuspayOrderStatusConfig, SettlementServiceConfig (..))
+import Kernel.External.Settlement.Types (QolariOrderStatusConfig, SettlementServiceConfig (..))
 import Kernel.Prelude
 import Kernel.Tools.Metrics.CoreMetrics as Metrics
 import Kernel.Utils.Common (logInfo, logWarning)
@@ -92,12 +92,12 @@ ingestPaymentSettlementReport ::
     HasActorInfo m r
   ) =>
   SettlementServiceConfig ->
-  Maybe JuspayOrderStatusConfig ->
+  Maybe QolariOrderStatusConfig ->
   Text ->
   Text ->
   (Text -> m (Maybe Dom.OrderType, Maybe Bool, Maybe Text)) ->
   m IngestionResult
-ingestPaymentSettlementReport cfg mbJuspayCfg merchantId merchantOperatingCityId resolveOrderType = do
+ingestPaymentSettlementReport cfg mbQolariCfg merchantId merchantOperatingCityId resolveOrderType = do
   logInfo $ "Starting settlement report ingestion for merchant: " <> merchantId
   fetchResult <- fetchSettlementCsv cfg merchantId merchantOperatingCityId
   case fetchResult of
@@ -117,7 +117,7 @@ ingestPaymentSettlementReport cfg mbJuspayCfg merchantId merchantOperatingCityId
       logDebug $ "ingestPaymentSettlementReport: mbSftpMeta=" <> show mbSftpMeta
       logDebug $ "ingestPaymentSettlementReport: mbSplitCustomerTy=" <> show mbSplitCustomerTy
       -- Only applies to SFTP chunk resumption: a zero-row chunk means \"past
-      -- end of file\", so we can skip parsing. Atomic-pull sources (e.g. Juspay
+      -- end of file\", so we can skip parsing. Atomic-pull sources (e.g. Qolari
       -- portal API) always carry the full dataset and must parse regardless.
       let sftpDeliveredZeroRows = case mbSftpMeta of
             Just meta -> not meta.atomicPull && meta.dataRowsDelivered == 0
@@ -127,7 +127,7 @@ ingestPaymentSettlementReport cfg mbJuspayCfg merchantId merchantOperatingCityId
           then do
             logInfo "SFTP delivered 0 data rows past cursor; skipping parse and treating file as complete"
             pure $ ParseResult {reports = [], totalRows = 0, failedRows = 0, errors = []}
-          else parseAndEnrichPaymentSettlementCsv cfg mbJuspayCfg mbSplitCustomerTy csvBytes
+          else parseAndEnrichPaymentSettlementCsv cfg mbQolariCfg mbSplitCustomerTy csvBytes
       let parseHadNoReports = null (reports parseResult)
           parseHadErrors = not (null (errors parseResult)) || failedRows parseResult > 0
       result <-
@@ -180,7 +180,7 @@ finalizeSftpFileCursor mbMeta parseHadNoReports = do
   maybe (logInfo "finalizeSftpFileCursor: mbMeta=Nothing → no-op") finalize mbMeta
   where
     finalize meta@SftpFetchMeta {..}
-      -- Atomic pulls (Juspay portal API's whole-day fetch) always land in the
+      -- Atomic pulls (Qolari portal API's whole-day fetch) always land in the
       -- COMPLETED branch: there's no row-index resume protocol for them.
       | not atomicPull && not parseHadNoReports && dataRowsDelivered > 0 = do
         let newIndex = firstDataRowIndex + dataRowsDelivered - 1

@@ -1,4 +1,4 @@
-CREATE TABLE atlas_driver_offer_bpp.transporter_config ();
+﻿CREATE TABLE atlas_driver_offer_bpp.transporter_config ();
 
 ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN aadhaar_image_resize_config json ;
 ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN aadhaar_verification_required boolean NOT NULL default false;
@@ -748,9 +748,9 @@ ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN reconciliation_
 ------- SQL updates -------
 
 ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN video_file_size_upper_limit integer ;
-ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN tracking_short_url_pattern text  default 'nammayatri.in/t/';
+ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN tracking_short_url_pattern text  default 'drive.qolari.com/t/';
 ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN enable_support_for_safety boolean  default false;
-ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN dashboard_media_file_url_pattern text  default 'https://nammayatri.in/t/<FILE_PATH>';
+ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN dashboard_media_file_url_pattern text  default 'https://drive.qolari.com/t/<FILE_PATH>';
 
 
 ------- SQL updates -------
@@ -805,8 +805,8 @@ ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN enable_direct_w
 
 ------- SQL updates -------
 
-ALTER TABLE atlas_driver_offer_bpp.transporter_config ALTER COLUMN tracking_short_url_pattern SET DEFAULT 'https://nammayatri.in/p/?vp={#vp#}&rideId=';
-ALTER TABLE atlas_driver_offer_bpp.transporter_config ALTER COLUMN dashboard_media_file_url_pattern SET DEFAULT 'https://nammayatri.in/p/<FILE_PATH>';
+ALTER TABLE atlas_driver_offer_bpp.transporter_config ALTER COLUMN tracking_short_url_pattern SET DEFAULT 'https://drive.qolari.com/p/?vp={#vp#}&rideId=';
+ALTER TABLE atlas_driver_offer_bpp.transporter_config ALTER COLUMN dashboard_media_file_url_pattern SET DEFAULT 'https://drive.qolari.com/p/<FILE_PATH>';
 
 
 ------- SQL updates -------

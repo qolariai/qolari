@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "_postman_id": "4f993caa-30c9-4b57-a223-20047896779e",
     "name": "Subway TechnicalFailure Flow",
@@ -36,7 +36,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"NAMMA_YATRI\"\n}",
+          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"qolari\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -679,7 +679,7 @@
           "listen": "prerequest",
           "script": {
             "exec": [
-              "// Wait for rider-app to create the Juspay payment order",
+              "// Wait for rider-app to create the Qolari payment order",
               "const start = Date.now();",
               "while (Date.now() - start < 3000) { /* busy wait */ }"
             ],
@@ -770,7 +770,7 @@
               "    url: pm.environment.get('mockServerUrl') + '/mock/override',",
               "    method: 'POST',",
               "    header: { 'Content-Type': 'application/json' },",
-              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"juspay\", \"extract\": \"path.2\", \"value\": pm.environment.get('payment_order_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 10.0}, \"match\": \"/orders\"}) }",
+              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"Qolari\", \"extract\": \"path.2\", \"value\": pm.environment.get('payment_order_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 10.0}, \"match\": \"/orders\"}) }",
               "}, function(){});"
             ],
             "type": "text/javascript"
@@ -801,7 +801,7 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\"service\": \"juspay\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{payment_order_short_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 10.0}}"
+          "raw": "{\"service\": \"Qolari\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{payment_order_short_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 10.0}}"
         }
       },
       "response": []
@@ -1006,7 +1006,7 @@
               "    url: pm.environment.get('mockServerUrl') + '/mock/override',",
               "    method: 'POST',",
               "    header: { 'Content-Type': 'application/json' },",
-              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"juspay\", \"extract\": \"path.2\", \"value\": pm.environment.get('payment_order_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 10.0, \"amount_refunded\": 10.0, \"refunds\": [{\"id\": \"rfnd-mock-001\", \"amount\": 10.0, \"status\": \"REFUND_SUCCESS\", \"error_message\": null, \"error_code\": null, \"initiated_by\": \"merchant\", \"unique_request_id\": \"ref-mock-001\", \"arn\": null}]}, \"match\": \"/orders\"}) }",
+              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"Qolari\", \"extract\": \"path.2\", \"value\": pm.environment.get('payment_order_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 10.0, \"amount_refunded\": 10.0, \"refunds\": [{\"id\": \"rfnd-mock-001\", \"amount\": 10.0, \"status\": \"REFUND_SUCCESS\", \"error_message\": null, \"error_code\": null, \"initiated_by\": \"merchant\", \"unique_request_id\": \"ref-mock-001\", \"arn\": null}]}, \"match\": \"/orders\"}) }",
               "}, function(){});"
             ],
             "type": "text/javascript"
@@ -1037,7 +1037,7 @@
         },
         "body": {
           "mode": "raw",
-          "raw": "{\"service\": \"juspay\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{payment_order_short_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 10.0, \"amount_refunded\": 10.0, \"refunds\": [{\"id\": \"rfnd-mock-001\", \"amount\": 10.0, \"status\": \"REFUND_SUCCESS\", \"error_message\": null, \"error_code\": null, \"initiated_by\": \"merchant\", \"unique_request_id\": \"ref-mock-001\", \"arn\": null}]}}"
+          "raw": "{\"service\": \"Qolari\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{payment_order_short_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 10.0, \"amount_refunded\": 10.0, \"refunds\": [{\"id\": \"rfnd-mock-001\", \"amount\": 10.0, \"status\": \"REFUND_SUCCESS\", \"error_message\": null, \"error_code\": null, \"initiated_by\": \"merchant\", \"unique_request_id\": \"ref-mock-001\", \"arn\": null}]}}"
         }
       },
       "response": []

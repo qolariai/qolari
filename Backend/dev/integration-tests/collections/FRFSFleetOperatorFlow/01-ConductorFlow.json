@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "_postman_id": "frfs-fleet-operator-conductor-flow",
     "name": "FRFS Fleet Operator - Conductor Flow",
@@ -49,8 +49,8 @@
           }
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/ui/auth",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/ui/auth",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["ui", "auth"]
         }
       },
@@ -104,8 +104,8 @@
           }
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/ui/frfs/fleetOperator/currentOperation",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/ui/frfs/fleetOperator/currentOperation",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["ui", "frfs", "fleetOperator", "currentOperation"]
         }
       },
@@ -151,8 +151,8 @@
           }
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/ui/frfs/fleetOperator/tripAction",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/ui/frfs/fleetOperator/tripAction",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["ui", "frfs", "fleetOperator", "tripAction"]
         }
       },
@@ -186,8 +186,8 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/ui/v2/frfs/route/{{route_id}}?city={{city}}&vehicleType=%22BUS%22",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/ui/v2/frfs/route/{{route_id}}?city={{city}}&vehicleType=%22BUS%22",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["ui", "v2", "frfs", "route", "{{route_id}}"],
           "query": [
             { "key": "city", "value": "{{city}}" },
@@ -225,8 +225,8 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/ui/v2/frfs/trip/{{waybill_no}}-{{trip_number}}/route/{{manifest_route_id}}/manifest",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/ui/v2/frfs/trip/{{waybill_no}}-{{trip_number}}/route/{{manifest_route_id}}/manifest",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["ui", "v2", "frfs", "trip", "{{waybill_no}}-{{trip_number}}", "route", "{{manifest_route_id}}", "manifest"]
         }
       },
@@ -269,8 +269,8 @@
           }
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/ui/frfs/fleetOperator/tripAction",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/ui/frfs/fleetOperator/tripAction",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["ui", "frfs", "fleetOperator", "tripAction"]
         }
       },

@@ -13,7 +13,7 @@
 -}
 
 module Domain.Action.UI.Payout
-  ( juspayPayoutWebhookHandler,
+  ( QolariPayoutWebhookHandler,
     castPayoutOrderStatus,
     payoutProcessingLockKey,
     processPreviousPayoutAmount,
@@ -44,12 +44,12 @@ import Kernel.Beam.Functions as B (runInReplica)
 import Kernel.External.Encryption (decrypt)
 import qualified Kernel.External.Notification.FCM.Types as FCM
 import qualified Kernel.External.Payment.Stripe.Types.Common as PaymentStripe
-import qualified Kernel.External.Payout.Interface as Juspay
+import qualified Kernel.External.Payout.Interface as Qolari
 import qualified Kernel.External.Payout.Interface.Events.Types as PayoutEvents
-import qualified Kernel.External.Payout.Interface.Juspay as Juspay
+import qualified Kernel.External.Payout.Interface.Qolari as Qolari
 import qualified Kernel.External.Payout.Interface.Stripe as IStripe
 import qualified Kernel.External.Payout.Interface.Types as IPayout
-import qualified Kernel.External.Payout.Juspay.Types.Payout as Payout
+import qualified Kernel.External.Payout.Qolari.Types.Payout as Payout
 import qualified Kernel.External.Payout.Types as TPayout
 import Kernel.Prelude
 import qualified Kernel.Storage.Hedis as Redis
@@ -107,28 +107,28 @@ type CallPayoutServiceAction =
   DPC.PayoutConfig ->
   Flow (Payout.PayoutOrderStatus, Text)
 
-juspayPayoutWebhookHandler ::
+QolariPayoutWebhookHandler ::
   ShortId DM.Merchant ->
   Maybe Context.City ->
   Maybe DP.ServiceNames ->
   BasicAuthData ->
   Value ->
   Flow AckResponse
-juspayPayoutWebhookHandler merchantShortId mbOpCity mbServiceName authData value = do
-  (psc, merchantOperatingCityId, merchantId) <- fetchPaymentServiceConfig merchantShortId mbOpCity mbServiceName TPayout.Juspay
-  orderStatusResp <- Juspay.payoutOrderStatusWebhook psc authData value
+QolariPayoutWebhookHandler merchantShortId mbOpCity mbServiceName authData value = do
+  (psc, merchantOperatingCityId, merchantId) <- fetchPaymentServiceConfig merchantShortId mbOpCity mbServiceName TPayout.Qolari
+  orderStatusResp <- Qolari.payoutOrderStatusWebhook psc authData value
   osr <- case orderStatusResp of
     Nothing -> throwError $ InternalError "Order Contents not found."
     Just osr' -> pure osr'
   logDebug $ "Webhook Payout Resp: " <> show osr
   case osr of
     IPayout.OrderStatusPayoutResp {..} -> do
-      payoutSettlementAction merchantId merchantOperatingCityId payoutStatus amount payoutOrderId callJuspayPayoutServiceAction
+      payoutSettlementAction merchantId merchantOperatingCityId payoutStatus amount payoutOrderId callQolariPayoutServiceAction
     IPayout.BadStatusResp -> pure ()
   pure Ack
   where
-    callJuspayPayoutServiceAction :: CallPayoutServiceAction
-    callJuspayPayoutServiceAction payoutOrderId driverId payoutConfig = do
+    callQolariPayoutServiceAction :: CallPayoutServiceAction
+    callQolariPayoutServiceAction payoutOrderId driverId payoutConfig = do
       driver <- B.runInReplica $ QP.findById driverId >>= fromMaybeM (PersonDoesNotExist driverId.getId)
       payoutOrder <- QPayoutOrder.findByOrderId payoutOrderId >>= fromMaybeM (PayoutOrderNotFound payoutOrderId)
       let payoutServiceNameCons = case payoutOrder.entityName of
@@ -289,7 +289,7 @@ fetchPaymentServiceConfig merchantShortId mbOpCity mbServiceName service = do
         throwError $ InternalError "Unknown Payout Service"
       pure case webhookFlow of
         TPayout.StripeFlow -> service -- we should keep differentiation between Stripe and StripeTest, depending to which webhook triggered
-        TPayout.JuspayFlow -> subscriptionService
+        TPayout.QolariFlow -> subscriptionService
 
 isPayoutOrderSuccess :: IPayout.PayoutOrderStatus -> Bool
 isPayoutOrderSuccess status = status `elem` [Payout.SUCCESS, Payout.FULFILLMENTS_SUCCESSFUL]
@@ -509,7 +509,7 @@ settlePayoutEntities merchantId merchantOperatingCityId payoutStatus amount payo
         when (dailyStats.payoutStatus /= DS.Success) $ QDailyStats.updatePayoutStatusById dPayoutStatus dStatsId
       callPayoutServiceAction payoutOrder.orderId dailyStats.driverId payoutConfig
 
--- | Poll Juspay and run the same settlement as the webhook when payout_order is not
+-- | Poll Qolari and run the same settlement as the webhook when payout_order is not
 -- already SUCCESS; otherwise return the order as-is.
 refreshPayoutOrderWithSettlement ::
   DPayoutOrder.PayoutOrder ->
@@ -578,7 +578,7 @@ processPreviousPayoutAmount personId mbVpa merchOpCity = do
           pendingAmount = sum (map (.referralEarnings) dailyStats) + sum (map (.d2dReferralEarnings) dailyStats)
       (payoutServiceFlow, payoutServiceName, mbPersonBankAccount) <- Payout.getCreatePayoutServiceFlow Payout.MerchantServiceUsageConfigOption DEMSC.PayoutService person.clientSdkVersion merchOpCity person.id
       let payoutVpaValid = case payoutServiceFlow of
-            TPayout.JuspayFlow -> isJust mbVpa
+            TPayout.QolariFlow -> isJust mbVpa
             TPayout.StripeFlow -> True
       case (payoutVpaValid, pendingAmount <= payoutConfig.thresholdPayoutAmountPerPerson) of
         (True, True) -> do

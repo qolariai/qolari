@@ -1,4 +1,4 @@
-{
+﻿{
   "_comment": "Patch rules applied after export, before import. Keyed by transfer direction.",
   "master_to_local": {
     "global_replacements": [
@@ -6,7 +6,7 @@
         "_comment": "Beckn gateway URLs"
       },
       {
-        "find": "https://beta.beckn.uat.juspay.net/dev/gateway/v1",
+        "find": "https://beta.beckn.uat.qolari.net/dev/gateway/v1",
         "replace": "http://localhost:8015/v1"
       },
       {
@@ -17,7 +17,7 @@
         "_comment": "Beckn registry URLs"
       },
       {
-        "find": "https://beta.beckn.uat.juspay.net/dev/registry",
+        "find": "https://beta.beckn.uat.qolari.net/dev/registry",
         "replace": "http://localhost:8020"
       },
       {
@@ -32,22 +32,22 @@
         "_comment": "BAP subscriber URLs"
       },
       {
-        "find": "https://api.sandbox.beckn.juspay.in/dev/bap",
+        "find": "https://api.sandbox.beckn.Qolari.in/dev/bap",
         "replace": "http://localhost:8013"
       },
       {
-        "find": "http://api.sandbox.beckn.juspay.in/dev/bap",
+        "find": "http://api.sandbox.beckn.Qolari.in/dev/bap",
         "replace": "http://localhost:8013"
       },
       {
         "_comment": "BPP subscriber URLs"
       },
       {
-        "find": "https://api.sandbox.beckn.juspay.in/dev/dobpp",
+        "find": "https://api.sandbox.beckn.Qolari.in/dev/dobpp",
         "replace": "http://localhost:8016"
       },
       {
-        "find": "http://api.sandbox.beckn.juspay.in/dev/dobpp",
+        "find": "http://api.sandbox.beckn.Qolari.in/dev/dobpp",
         "replace": "http://localhost:8016"
       },
       {
@@ -58,11 +58,11 @@
         "_comment": "Subscriber ID domains"
       },
       {
-        "find": "api.sandbox.beckn.juspay.in/dev/bap",
+        "find": "api.sandbox.beckn.Qolari.in/dev/bap",
         "replace": "localhost:8013"
       },
       {
-        "find": "api.sandbox.beckn.juspay.in/dev/dobpp",
+        "find": "api.sandbox.beckn.Qolari.in/dev/dobpp",
         "replace": "localhost:8016"
       },
       {
@@ -107,12 +107,12 @@
         "_comment": "Other service URLs"
       },
       {
-        "find": "https://api.juspay.in",
-        "replace": "http://localhost:8080/juspay"
+        "find": "https://api.Qolari.in",
+        "replace": "http://localhost:8080/Qolari"
       },
       {
-        "find": "https://sandbox.juspay.in",
-        "replace": "http://localhost:8080/juspay"
+        "find": "https://sandbox.Qolari.in",
+        "replace": "http://localhost:8080/Qolari"
       },
       {
         "find": "https://my.exotel.com",
@@ -207,7 +207,7 @@
         "replace": "http://localhost:8080/gtfs-inmemory"
       },
       {
-        "find": "https://api.sandbox.beckn.juspay.in/dev/app/v1",
+        "find": "https://api.sandbox.beckn.Qolari.in/dev/app/v1",
         "replace": "http://localhost:8013/v1"
       },
       {
@@ -215,7 +215,7 @@
         "replace": "http://localhost:8013"
       },
       {
-        "find": "https://www.nammayatri.in",
+        "find": "https://www.Qolari.in",
         "replace": "http://localhost:8013"
       },
       {
@@ -300,15 +300,15 @@
         "replace": "http://localhost:8020"
       },
       {
-        "_comment": "Juspay — additional URL variants"
+        "_comment": "Qolari — additional URL variants"
       },
       {
-        "find": "https://payments.sandbox.juspay.in",
-        "replace": "http://localhost:8080/juspay"
+        "find": "https://payments.sandbox.Qolari.in",
+        "replace": "http://localhost:8080/Qolari"
       },
       {
-        "find": "https://router.sandbox.juspay.in",
-        "replace": "http://localhost:8080/juspay"
+        "find": "https://router.sandbox.Qolari.in",
+        "replace": "http://localhost:8080/Qolari"
       },
       {
         "_comment": "Verification providers → mock server"
@@ -393,11 +393,11 @@
         "replace": "http://localhost:8080/kapture"
       },
       {
-        "find": "http://nammayatri.kapturecrm.com",
+        "find": "http://qolari.kapturecrm.com",
         "replace": "http://localhost:8080/kapture"
       },
       {
-        "find": "https://nammayatri.kapturecrm.com",
+        "find": "https://qolari.kapturecrm.com",
         "replace": "http://localhost:8080/kapture"
       },
       {
@@ -439,21 +439,21 @@
       },
       {
         "find": "http://beckn-payment-mock-server-master.atlas.svc.cluster.local:8091",
-        "replace": "http://localhost:8080/juspay"
+        "replace": "http://localhost:8080/Qolari"
       },
       {
         "_comment": "Safety dashboard"
       },
       {
-        "find": "https://dashboard.beckn.juspay.in",
+        "find": "https://dashboard.beckn.Qolari.in",
         "replace": "http://localhost:8022"
       },
       {
-        "_comment": "External Juspay endpoint"
+        "_comment": "External Qolari endpoint"
       },
       {
-        "find": "https://external.beta.beckn.uat.juspay.net",
-        "replace": "http://localhost:8080/juspay"
+        "find": "https://external.beta.beckn.uat.qolari.net",
+        "replace": "http://localhost:8080/Qolari"
       },
       {
         "_comment": "Triffy metro BPP"
@@ -482,14 +482,14 @@
       },
       {
         "find": "https://6c5pzmeqcg.execute-api.ap-south-1.amazonaws.com",
-        "replace": "http://localhost:8080/juspay"
+        "replace": "http://localhost:8080/Qolari"
       },
       {
         "_comment": "Parkwise callback"
       },
       {
         "find": "https://parkwise-userapp.automicle.com",
-        "replace": "http://localhost:8080/juspay"
+        "replace": "http://localhost:8080/Qolari"
       },
       {
         "_comment": "FCM jp-beckn-dev — without trailing slash"
@@ -502,7 +502,7 @@
         "_comment": "BAP app/v2 media URLs"
       },
       {
-        "find": "https://api.sandbox.beckn.juspay.in/dev/app/v2",
+        "find": "https://api.sandbox.beckn.Qolari.in/dev/app/v2",
         "replace": "http://localhost:8013/v2"
       },
       {
@@ -516,28 +516,28 @@
         "_comment": "BPP subscriber URLs in registry"
       },
       {
-        "find": "https://api.sandbox.beckn.juspay.in/dev/bpp",
+        "find": "https://api.sandbox.beckn.Qolari.in/dev/bpp",
         "replace": "http://localhost:8016/beckn"
       },
       {
         "_comment": "Driver app UI callback URLs"
       },
       {
-        "find": "https://api.sandbox.beckn.juspay.in/dev/app/ui",
+        "find": "https://api.sandbox.beckn.Qolari.in/dev/app/ui",
         "replace": "http://localhost:8016/ui"
       },
       {
         "_comment": "BPP metro subscriber"
       },
       {
-        "find": "https://api.sandbox.beckn.juspay.in/dev/bpp/metro",
+        "find": "https://api.sandbox.beckn.Qolari.in/dev/bpp/metro",
         "replace": "http://localhost:8016/beckn/metro"
       },
       {
         "_comment": "Load test endpoints"
       },
       {
-        "find": "https://api.sandbox.beckn.juspay.in/loadtest",
+        "find": "https://api.sandbox.beckn.Qolari.in/loadtest",
         "replace": "http://localhost:8013/loadtest"
       }
     ],
@@ -857,7 +857,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_Juspay"
+              "service_name": "Payment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -868,7 +868,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_AAJuspay"
+              "service_name": "Payment_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -879,7 +879,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_Juspay"
+              "service_name": "Payout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -890,7 +890,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_AAJuspay"
+              "service_name": "Payout_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -901,7 +901,7 @@
           },
           {
             "where": {
-              "service_name": "MetroPayment_Juspay"
+              "service_name": "MetroPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -912,7 +912,7 @@
           },
           {
             "where": {
-              "service_name": "BusPayment_Juspay"
+              "service_name": "BusPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -923,7 +923,7 @@
           },
           {
             "where": {
-              "service_name": "BbpsPayment_Juspay"
+              "service_name": "BbpsPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -934,7 +934,7 @@
           },
           {
             "where": {
-              "service_name": "PassPayment_Juspay"
+              "service_name": "PassPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -945,7 +945,7 @@
           },
           {
             "where": {
-              "service_name": "MultiModalPayment_Juspay"
+              "service_name": "MultiModalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -967,7 +967,7 @@
           },
           {
             "where": {
-              "service_name": "ParkingPayment_Juspay"
+              "service_name": "ParkingPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1038,7 +1038,7 @@
           },
           {
             "where": {
-              "service_name": "CautioPayment_Juspay"
+              "service_name": "CautioPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1081,7 +1081,7 @@
           },
           {
             "where": {
-              "service_name": "MembershipPayment_Juspay"
+              "service_name": "MembershipPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1102,7 +1102,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayment_Juspay"
+              "service_name": "RentalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1114,7 +1114,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayout_Juspay"
+              "service_name": "RentalPayout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1688,7 +1688,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_Juspay"
+              "service_name": "Payment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1699,7 +1699,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_AAJuspay"
+              "service_name": "Payment_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -1710,7 +1710,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_Juspay"
+              "service_name": "Payout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1721,7 +1721,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_AAJuspay"
+              "service_name": "Payout_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -1732,7 +1732,7 @@
           },
           {
             "where": {
-              "service_name": "MetroPayment_Juspay"
+              "service_name": "MetroPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1743,7 +1743,7 @@
           },
           {
             "where": {
-              "service_name": "BusPayment_Juspay"
+              "service_name": "BusPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1754,7 +1754,7 @@
           },
           {
             "where": {
-              "service_name": "BbpsPayment_Juspay"
+              "service_name": "BbpsPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1765,7 +1765,7 @@
           },
           {
             "where": {
-              "service_name": "PassPayment_Juspay"
+              "service_name": "PassPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1776,7 +1776,7 @@
           },
           {
             "where": {
-              "service_name": "MultiModalPayment_Juspay"
+              "service_name": "MultiModalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1798,7 +1798,7 @@
           },
           {
             "where": {
-              "service_name": "ParkingPayment_Juspay"
+              "service_name": "ParkingPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1869,7 +1869,7 @@
           },
           {
             "where": {
-              "service_name": "CautioPayment_Juspay"
+              "service_name": "CautioPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1912,7 +1912,7 @@
           },
           {
             "where": {
-              "service_name": "MembershipPayment_Juspay"
+              "service_name": "MembershipPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1933,7 +1933,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayment_Juspay"
+              "service_name": "RentalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -1945,7 +1945,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayout_Juspay"
+              "service_name": "RentalPayout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -2111,10 +2111,10 @@
               "domain": "MOBILITY"
             },
             "set": {
-              "subscriber_id": "JUSPAY.BG.1",
+              "subscriber_id": "Qolari.BG.1",
               "subscriber_url": "http://localhost:8015/v1",
               "signing_public_key": "1tRC4LHVKWeGikY5C8T1FYI9t3oacpa3IFvj8e7aGws=",
-              "unique_key_id": "juspay-bg-1-key"
+              "unique_key_id": "Qolari-bg-1-key"
             }
           },
           {
@@ -2141,7 +2141,7 @@
         "registration_token": [
           {
             "where": {
-              "token": "local-admin-token-bangalore-namma-yatri"
+              "token": "local-admin-token-bangalore-qolari"
             },
             "set": {
               "operating_city": "Bangalore"
@@ -2168,7 +2168,7 @@
         "_comment": "Prod registry URLs — must route to mock-registry at :8020, NOT rider-app"
       },
       {
-        "find": "https://api.beckn.juspay.in/registry",
+        "find": "https://api.beckn.Qolari.in/registry",
         "replace": "http://localhost:8020"
       },
       {
@@ -2183,7 +2183,7 @@
         "_comment": "Prod gateway URLs — must route to beckn-gateway at :8015/v1"
       },
       {
-        "find": "https://api.beckn.juspay.in/gateway/v1",
+        "find": "https://api.beckn.Qolari.in/gateway/v1",
         "replace": "http://localhost:8015/v1"
       },
       {
@@ -2198,11 +2198,11 @@
         "_comment": "Prod BAP URLs — /bap/beckn/v1/ path → rider-app local serves /beckn/cab/v1/"
       },
       {
-        "find": "https://api.beckn.juspay.in/bap/beckn/v1",
+        "find": "https://api.beckn.Qolari.in/bap/beckn/v1",
         "replace": "http://localhost:8013/beckn/cab/v1"
       },
       {
-        "find": "http://api.beckn.juspay.in/bap/beckn/v1",
+        "find": "http://api.beckn.Qolari.in/bap/beckn/v1",
         "replace": "http://localhost:8013/beckn/cab/v1"
       },
       {
@@ -2214,7 +2214,7 @@
         "replace": "http://localhost:8013/beckn/cab/v1"
       },
       {
-        "find": "api.beckn.juspay.in/bap/beckn/v1",
+        "find": "api.beckn.Qolari.in/bap/beckn/v1",
         "replace": "localhost:8013/beckn/cab/v1"
       },
       {
@@ -2229,11 +2229,11 @@
         "_comment": "Prod DoBPP (driver) URLs — /dobpp/beckn/ path → driver-app at localhost:8016/beckn/"
       },
       {
-        "find": "https://api.beckn.juspay.in/dobpp/beckn",
+        "find": "https://api.beckn.Qolari.in/dobpp/beckn",
         "replace": "http://localhost:8016/beckn"
       },
       {
-        "find": "http://api.beckn.juspay.in/dobpp/beckn",
+        "find": "http://api.beckn.Qolari.in/dobpp/beckn",
         "replace": "http://localhost:8016/beckn"
       },
       {
@@ -2245,7 +2245,7 @@
         "replace": "http://localhost:8016/beckn"
       },
       {
-        "find": "api.beckn.juspay.in/dobpp/beckn",
+        "find": "api.beckn.Qolari.in/dobpp/beckn",
         "replace": "localhost:8016/beckn"
       },
       {
@@ -2260,11 +2260,11 @@
         "_comment": "Prod BAP (rider) URLs — /bap/beckn/ path → rider-app at localhost:8013/bap/beckn/"
       },
       {
-        "find": "https://api.beckn.juspay.in",
+        "find": "https://api.beckn.Qolari.in",
         "replace": "http://localhost:8013"
       },
       {
-        "find": "http://api.beckn.juspay.in",
+        "find": "http://api.beckn.Qolari.in",
         "replace": "http://localhost:8013"
       },
       {
@@ -2287,7 +2287,7 @@
         "_comment": "Prod subscriber ID domains (no scheme)"
       },
       {
-        "find": "api.beckn.juspay.in",
+        "find": "api.beckn.Qolari.in",
         "replace": "localhost:8013"
       },
       {
@@ -2337,19 +2337,19 @@
         "replace": "http://localhost:8080"
       },
       {
-        "_comment": "Prod Juspay payment URLs"
+        "_comment": "Prod Qolari payment URLs"
       },
       {
-        "find": "https://api.juspay.in",
-        "replace": "http://localhost:8080/juspay"
+        "find": "https://api.Qolari.in",
+        "replace": "http://localhost:8080/Qolari"
       },
       {
-        "find": "https://payments.juspay.in",
-        "replace": "http://localhost:8080/juspay"
+        "find": "https://payments.Qolari.in",
+        "replace": "http://localhost:8080/Qolari"
       },
       {
-        "find": "https://external.beta.beckn.uat.juspay.net",
-        "replace": "http://localhost:8080/juspay"
+        "find": "https://external.beta.beckn.uat.qolari.net",
+        "replace": "http://localhost:8080/Qolari"
       },
       {
         "_comment": "Prod Stripe"
@@ -2521,11 +2521,11 @@
         "replace": "http://localhost:8080/kapture"
       },
       {
-        "find": "http://nammayatri.kapturecrm.com",
+        "find": "http://qolari.kapturecrm.com",
         "replace": "http://localhost:8080/kapture"
       },
       {
-        "find": "https://nammayatri.kapturecrm.com",
+        "find": "https://qolari.kapturecrm.com",
         "replace": "http://localhost:8080/kapture"
       },
       {
@@ -2888,7 +2888,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_Juspay"
+              "service_name": "Payment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -2899,7 +2899,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_AAJuspay"
+              "service_name": "Payment_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -2910,7 +2910,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_Juspay"
+              "service_name": "Payout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -2921,7 +2921,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_AAJuspay"
+              "service_name": "Payout_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -2932,7 +2932,7 @@
           },
           {
             "where": {
-              "service_name": "MetroPayment_Juspay"
+              "service_name": "MetroPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -2943,7 +2943,7 @@
           },
           {
             "where": {
-              "service_name": "BusPayment_Juspay"
+              "service_name": "BusPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -2954,7 +2954,7 @@
           },
           {
             "where": {
-              "service_name": "BbpsPayment_Juspay"
+              "service_name": "BbpsPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -2965,7 +2965,7 @@
           },
           {
             "where": {
-              "service_name": "PassPayment_Juspay"
+              "service_name": "PassPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -2976,7 +2976,7 @@
           },
           {
             "where": {
-              "service_name": "MultiModalPayment_Juspay"
+              "service_name": "MultiModalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -2998,7 +2998,7 @@
           },
           {
             "where": {
-              "service_name": "ParkingPayment_Juspay"
+              "service_name": "ParkingPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3069,7 +3069,7 @@
           },
           {
             "where": {
-              "service_name": "CautioPayment_Juspay"
+              "service_name": "CautioPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3112,7 +3112,7 @@
           },
           {
             "where": {
-              "service_name": "MembershipPayment_Juspay"
+              "service_name": "MembershipPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3133,7 +3133,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayment_Juspay"
+              "service_name": "RentalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3145,7 +3145,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayout_Juspay"
+              "service_name": "RentalPayout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3727,7 +3727,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_Juspay"
+              "service_name": "Payment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3738,7 +3738,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_AAJuspay"
+              "service_name": "Payment_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -3749,7 +3749,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_Juspay"
+              "service_name": "Payout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3760,7 +3760,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_AAJuspay"
+              "service_name": "Payout_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -3771,7 +3771,7 @@
           },
           {
             "where": {
-              "service_name": "MetroPayment_Juspay"
+              "service_name": "MetroPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3782,7 +3782,7 @@
           },
           {
             "where": {
-              "service_name": "BusPayment_Juspay"
+              "service_name": "BusPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3793,7 +3793,7 @@
           },
           {
             "where": {
-              "service_name": "BbpsPayment_Juspay"
+              "service_name": "BbpsPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3804,7 +3804,7 @@
           },
           {
             "where": {
-              "service_name": "PassPayment_Juspay"
+              "service_name": "PassPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3815,7 +3815,7 @@
           },
           {
             "where": {
-              "service_name": "MultiModalPayment_Juspay"
+              "service_name": "MultiModalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3837,7 +3837,7 @@
           },
           {
             "where": {
-              "service_name": "ParkingPayment_Juspay"
+              "service_name": "ParkingPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3908,7 +3908,7 @@
           },
           {
             "where": {
-              "service_name": "CautioPayment_Juspay"
+              "service_name": "CautioPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3951,7 +3951,7 @@
           },
           {
             "where": {
-              "service_name": "MembershipPayment_Juspay"
+              "service_name": "MembershipPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3972,7 +3972,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayment_Juspay"
+              "service_name": "RentalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -3984,7 +3984,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayout_Juspay"
+              "service_name": "RentalPayout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -4150,10 +4150,10 @@
               "domain": "MOBILITY"
             },
             "set": {
-              "subscriber_id": "JUSPAY.BG.1",
+              "subscriber_id": "Qolari.BG.1",
               "subscriber_url": "http://localhost:8015/v1",
               "signing_public_key": "1tRC4LHVKWeGikY5C8T1FYI9t3oacpa3IFvj8e7aGws=",
-              "unique_key_id": "juspay-bg-1-key"
+              "unique_key_id": "Qolari-bg-1-key"
             }
           },
           {
@@ -4180,7 +4180,7 @@
         "registration_token": [
           {
             "where": {
-              "token": "local-admin-token-bangalore-namma-yatri"
+              "token": "local-admin-token-bangalore-qolari"
             },
             "set": {
               "operating_city": "Bangalore"
@@ -4207,7 +4207,7 @@
         "_comment": "Prod registry URLs — must route to mock-registry at :8020, NOT rider-app"
       },
       {
-        "find": "https://api.beckn.juspay.in/registry",
+        "find": "https://api.beckn.Qolari.in/registry",
         "replace": "http://localhost:8020"
       },
       {
@@ -4222,7 +4222,7 @@
         "_comment": "Prod gateway URLs — must route to beckn-gateway at :8015/v1"
       },
       {
-        "find": "https://api.beckn.juspay.in/gateway/v1",
+        "find": "https://api.beckn.Qolari.in/gateway/v1",
         "replace": "http://localhost:8015/v1"
       },
       {
@@ -4237,11 +4237,11 @@
         "_comment": "Prod BAP URLs — /bap/beckn/v1/ path → rider-app local serves /beckn/cab/v1/"
       },
       {
-        "find": "https://api.beckn.juspay.in/bap/beckn/v1",
+        "find": "https://api.beckn.Qolari.in/bap/beckn/v1",
         "replace": "http://localhost:8013/beckn/cab/v1"
       },
       {
-        "find": "http://api.beckn.juspay.in/bap/beckn/v1",
+        "find": "http://api.beckn.Qolari.in/bap/beckn/v1",
         "replace": "http://localhost:8013/beckn/cab/v1"
       },
       {
@@ -4253,7 +4253,7 @@
         "replace": "http://localhost:8013/beckn/cab/v1"
       },
       {
-        "find": "api.beckn.juspay.in/bap/beckn/v1",
+        "find": "api.beckn.Qolari.in/bap/beckn/v1",
         "replace": "localhost:8013/beckn/cab/v1"
       },
       {
@@ -4268,11 +4268,11 @@
         "_comment": "Prod DoBPP (driver) URLs — /dobpp/beckn/ path → driver-app at localhost:8016/beckn/"
       },
       {
-        "find": "https://api.beckn.juspay.in/dobpp/beckn",
+        "find": "https://api.beckn.Qolari.in/dobpp/beckn",
         "replace": "http://localhost:8016/beckn"
       },
       {
-        "find": "http://api.beckn.juspay.in/dobpp/beckn",
+        "find": "http://api.beckn.Qolari.in/dobpp/beckn",
         "replace": "http://localhost:8016/beckn"
       },
       {
@@ -4284,7 +4284,7 @@
         "replace": "http://localhost:8016/beckn"
       },
       {
-        "find": "api.beckn.juspay.in/dobpp/beckn",
+        "find": "api.beckn.Qolari.in/dobpp/beckn",
         "replace": "localhost:8016/beckn"
       },
       {
@@ -4299,11 +4299,11 @@
         "_comment": "Prod BAP (rider) URLs — /bap/beckn/ path → rider-app at localhost:8013/bap/beckn/"
       },
       {
-        "find": "https://api.beckn.juspay.in",
+        "find": "https://api.beckn.Qolari.in",
         "replace": "http://localhost:8013"
       },
       {
-        "find": "http://api.beckn.juspay.in",
+        "find": "http://api.beckn.Qolari.in",
         "replace": "http://localhost:8013"
       },
       {
@@ -4326,7 +4326,7 @@
         "_comment": "Prod subscriber ID domains (no scheme)"
       },
       {
-        "find": "api.beckn.juspay.in",
+        "find": "api.beckn.Qolari.in",
         "replace": "localhost:8013"
       },
       {
@@ -4376,19 +4376,19 @@
         "replace": "http://localhost:8080"
       },
       {
-        "_comment": "Prod Juspay payment URLs"
+        "_comment": "Prod Qolari payment URLs"
       },
       {
-        "find": "https://api.juspay.in",
-        "replace": "http://localhost:8080/juspay"
+        "find": "https://api.Qolari.in",
+        "replace": "http://localhost:8080/Qolari"
       },
       {
-        "find": "https://payments.juspay.in",
-        "replace": "http://localhost:8080/juspay"
+        "find": "https://payments.Qolari.in",
+        "replace": "http://localhost:8080/Qolari"
       },
       {
-        "find": "https://external.beta.beckn.uat.juspay.net",
-        "replace": "http://localhost:8080/juspay"
+        "find": "https://external.beta.beckn.uat.qolari.net",
+        "replace": "http://localhost:8080/Qolari"
       },
       {
         "_comment": "Prod Stripe"
@@ -4560,11 +4560,11 @@
         "replace": "http://localhost:8080/kapture"
       },
       {
-        "find": "http://nammayatri.kapturecrm.com",
+        "find": "http://qolari.kapturecrm.com",
         "replace": "http://localhost:8080/kapture"
       },
       {
-        "find": "https://nammayatri.kapturecrm.com",
+        "find": "https://qolari.kapturecrm.com",
         "replace": "http://localhost:8080/kapture"
       },
       {
@@ -4927,7 +4927,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_Juspay"
+              "service_name": "Payment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -4938,7 +4938,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_AAJuspay"
+              "service_name": "Payment_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -4949,7 +4949,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_Juspay"
+              "service_name": "Payout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -4960,7 +4960,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_AAJuspay"
+              "service_name": "Payout_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -4971,7 +4971,7 @@
           },
           {
             "where": {
-              "service_name": "MetroPayment_Juspay"
+              "service_name": "MetroPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -4982,7 +4982,7 @@
           },
           {
             "where": {
-              "service_name": "BusPayment_Juspay"
+              "service_name": "BusPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -4993,7 +4993,7 @@
           },
           {
             "where": {
-              "service_name": "BbpsPayment_Juspay"
+              "service_name": "BbpsPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5004,7 +5004,7 @@
           },
           {
             "where": {
-              "service_name": "PassPayment_Juspay"
+              "service_name": "PassPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5015,7 +5015,7 @@
           },
           {
             "where": {
-              "service_name": "MultiModalPayment_Juspay"
+              "service_name": "MultiModalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5037,7 +5037,7 @@
           },
           {
             "where": {
-              "service_name": "ParkingPayment_Juspay"
+              "service_name": "ParkingPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5108,7 +5108,7 @@
           },
           {
             "where": {
-              "service_name": "CautioPayment_Juspay"
+              "service_name": "CautioPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5151,7 +5151,7 @@
           },
           {
             "where": {
-              "service_name": "MembershipPayment_Juspay"
+              "service_name": "MembershipPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5172,7 +5172,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayment_Juspay"
+              "service_name": "RentalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5184,7 +5184,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayout_Juspay"
+              "service_name": "RentalPayout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5766,7 +5766,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_Juspay"
+              "service_name": "Payment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5777,7 +5777,7 @@
           },
           {
             "where": {
-              "service_name": "Payment_AAJuspay"
+              "service_name": "Payment_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -5788,7 +5788,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_Juspay"
+              "service_name": "Payout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5799,7 +5799,7 @@
           },
           {
             "where": {
-              "service_name": "Payout_AAJuspay"
+              "service_name": "Payout_AAQolari"
             },
             "merge_json": {
               "config_json": {
@@ -5810,7 +5810,7 @@
           },
           {
             "where": {
-              "service_name": "MetroPayment_Juspay"
+              "service_name": "MetroPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5821,7 +5821,7 @@
           },
           {
             "where": {
-              "service_name": "BusPayment_Juspay"
+              "service_name": "BusPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5832,7 +5832,7 @@
           },
           {
             "where": {
-              "service_name": "BbpsPayment_Juspay"
+              "service_name": "BbpsPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5843,7 +5843,7 @@
           },
           {
             "where": {
-              "service_name": "PassPayment_Juspay"
+              "service_name": "PassPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5854,7 +5854,7 @@
           },
           {
             "where": {
-              "service_name": "MultiModalPayment_Juspay"
+              "service_name": "MultiModalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5876,7 +5876,7 @@
           },
           {
             "where": {
-              "service_name": "ParkingPayment_Juspay"
+              "service_name": "ParkingPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5947,7 +5947,7 @@
           },
           {
             "where": {
-              "service_name": "CautioPayment_Juspay"
+              "service_name": "CautioPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -5990,7 +5990,7 @@
           },
           {
             "where": {
-              "service_name": "MembershipPayment_Juspay"
+              "service_name": "MembershipPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -6011,7 +6011,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayment_Juspay"
+              "service_name": "RentalPayment_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -6023,7 +6023,7 @@
           },
           {
             "where": {
-              "service_name": "RentalPayout_Juspay"
+              "service_name": "RentalPayout_Qolari"
             },
             "merge_json": {
               "config_json": {
@@ -6189,10 +6189,10 @@
               "domain": "MOBILITY"
             },
             "set": {
-              "subscriber_id": "JUSPAY.BG.1",
+              "subscriber_id": "Qolari.BG.1",
               "subscriber_url": "http://localhost:8015/v1",
               "signing_public_key": "1tRC4LHVKWeGikY5C8T1FYI9t3oacpa3IFvj8e7aGws=",
-              "unique_key_id": "juspay-bg-1-key"
+              "unique_key_id": "Qolari-bg-1-key"
             }
           },
           {
@@ -6219,7 +6219,7 @@
         "registration_token": [
           {
             "where": {
-              "token": "local-admin-token-bangalore-namma-yatri"
+              "token": "local-admin-token-bangalore-qolari"
             },
             "set": {
               "operating_city": "Bangalore"

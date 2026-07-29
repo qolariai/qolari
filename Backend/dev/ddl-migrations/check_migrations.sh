@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # check_migrations.sh — validate dev/migrations + dev/migrations-read-only
 # without booting the full stack. Boots a standalone Postgres-with-postgis
 # against the existing dev data dir, recreates atlas_dev, runs all seeds in
@@ -251,7 +251,7 @@ $PSQL -h localhost -p "$PORT" -U atlas_superuser -d postgres -c "DROP DATABASE I
 $PSQL -h localhost -p "$PORT" -U atlas_superuser -d postgres -c "CREATE DATABASE atlas_dev OWNER atlas_superuser;" >/dev/null
 ok "atlas_dev recreated"
 
-# ---------- run seeds in dev-stack order (Backend/nix/services/nammayatri.nix initialDatabases.schemas) ----------
+# ---------- run seeds in dev-stack order (Backend/nix/services/Qolari.nix initialDatabases.schemas) ----------
 SEEDS=(
   dev/sql-seed/pre-init.sql
   dev/sql-seed/rider-app-seed.sql

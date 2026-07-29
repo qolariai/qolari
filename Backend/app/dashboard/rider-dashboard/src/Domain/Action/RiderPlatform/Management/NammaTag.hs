@@ -1,44 +1,44 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 
-module Domain.Action.RiderPlatform.Management.NammaTag
-  ( postNammaTagTagCreate,
-    postNammaTagTagUpdate,
-    deleteNammaTagTagDelete,
-    postNammaTagQueryCreate,
-    postNammaTagQueryUpdate,
-    postNammaTagTagVerify,
-    deleteNammaTagQueryDelete,
-    postNammaTagAppDynamicLogicVerify,
-    getNammaTagAppDynamicLogic,
-    postNammaTagRunJob,
-    getNammaTagTimeBounds,
-    postNammaTagTimeBoundsCreate,
-    deleteNammaTagTimeBoundsDelete,
-    getNammaTagAppDynamicLogicGetLogicRollout,
-    postNammaTagAppDynamicLogicUpsertLogicRollout,
-    getNammaTagAppDynamicLogicDomainsAndEvents,
-    getNammaTagAppDynamicLogicVersions,
-    getNammaTagAppDynamicLogicDomains,
-    getNammaTagAppDynamicLogicGetDomainSchema,
-    getNammaTagQueryAll,
-    postNammaTagUpdateCustomerTag,
-    postNammaTagConfigPilotGetVersion,
-    postNammaTagConfigPilotGetConfig,
-    postNammaTagConfigPilotCreateUiConfig,
-    getNammaTagConfigPilotAllConfigs,
-    getNammaTagConfigPilotConfigDetails,
-    getNammaTagConfigPilotGetTableData,
-    postNammaTagConfigPilotActionChange,
-    getNammaTagConfigPilotAllUiConfigs,
-    getNammaTagConfigPilotUiConfigDetails,
-    getNammaTagConfigPilotGetUiTableData,
-    getNammaTagTagAll,
-    getNammaTagConfigPilotAlwaysOnList,
-    postNammaTagConfigPilotGetConfigWithDimensions,
-    getNammaTagConfigPilotGetDimensionSchema,
-    postNammaTagConfigPilotCreateRow,
-    getNammaTagTagDetails,
-    getNammaTagQueryDetails,
+module Domain.Action.RiderPlatform.Management.QolariTag
+  ( postQolariTagTagCreate,
+    postQolariTagTagUpdate,
+    deleteQolariTagTagDelete,
+    postQolariTagQueryCreate,
+    postQolariTagQueryUpdate,
+    postQolariTagTagVerify,
+    deleteQolariTagQueryDelete,
+    postQolariTagAppDynamicLogicVerify,
+    getQolariTagAppDynamicLogic,
+    postQolariTagRunJob,
+    getQolariTagTimeBounds,
+    postQolariTagTimeBoundsCreate,
+    deleteQolariTagTimeBoundsDelete,
+    getQolariTagAppDynamicLogicGetLogicRollout,
+    postQolariTagAppDynamicLogicUpsertLogicRollout,
+    getQolariTagAppDynamicLogicDomainsAndEvents,
+    getQolariTagAppDynamicLogicVersions,
+    getQolariTagAppDynamicLogicDomains,
+    getQolariTagAppDynamicLogicGetDomainSchema,
+    getQolariTagQueryAll,
+    postQolariTagUpdateCustomerTag,
+    postQolariTagConfigPilotGetVersion,
+    postQolariTagConfigPilotGetConfig,
+    postQolariTagConfigPilotCreateUiConfig,
+    getQolariTagConfigPilotAllConfigs,
+    getQolariTagConfigPilotConfigDetails,
+    getQolariTagConfigPilotGetTableData,
+    postQolariTagConfigPilotActionChange,
+    getQolariTagConfigPilotAllUiConfigs,
+    getQolariTagConfigPilotUiConfigDetails,
+    getQolariTagConfigPilotGetUiTableData,
+    getQolariTagTagAll,
+    getQolariTagConfigPilotAlwaysOnList,
+    postQolariTagConfigPilotGetConfigWithDimensions,
+    getQolariTagConfigPilotGetDimensionSchema,
+    postQolariTagConfigPilotCreateRow,
+    getQolariTagTagDetails,
+    getQolariTagQueryDetails,
   )
 where
 
@@ -58,212 +58,212 @@ import Storage.Beam.CommonInstances ()
 import Tools.Auth.Api
 import Tools.Auth.Merchant
 
-postNammaTagTagCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateNammaTagRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagTagCreate merchantShortId opCity apiTokenInfo req = do
+postQolariTagTagCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateQolariTagRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagTagCreate merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagTagCreate) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagTagCreate) req)
 
-postNammaTagTagUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UpdateNammaTagRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagTagUpdate merchantShortId opCity apiTokenInfo req = do
+postQolariTagTagUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UpdateQolariTagRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagTagUpdate merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagTagUpdate) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagTagUpdate) req)
 
-deleteNammaTagTagDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Text -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-deleteNammaTagTagDelete merchantShortId opCity apiTokenInfo tagName = do
+deleteQolariTagTagDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Text -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+deleteQolariTagTagDelete merchantShortId opCity apiTokenInfo tagName = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing SharedLogic.Transaction.emptyRequest
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.deleteNammaTagTagDelete) tagName)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.deleteQolariTagTagDelete) tagName)
 
-postNammaTagQueryCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueriesAPIEntity -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagQueryCreate merchantShortId opCity apiTokenInfo req = do
+postQolariTagQueryCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueriesAPIEntity -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagQueryCreate merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagQueryCreate) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagQueryCreate) req)
 
-postNammaTagAppDynamicLogicVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.AppDynamicLogicReq -> Environment.Flow Lib.Yudhishthira.Types.AppDynamicLogicResp)
-postNammaTagAppDynamicLogicVerify merchantShortId opCity apiTokenInfo req = do
+postQolariTagAppDynamicLogicVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.AppDynamicLogicReq -> Environment.Flow Lib.Yudhishthira.Types.AppDynamicLogicResp)
+postQolariTagAppDynamicLogicVerify merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagAppDynamicLogicVerify) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagAppDynamicLogicVerify) req)
 
-getNammaTagAppDynamicLogic :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow [Lib.Yudhishthira.Types.GetLogicsResp])
-getNammaTagAppDynamicLogic merchantShortId opCity apiTokenInfo version domain = do
+getQolariTagAppDynamicLogic :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow [Lib.Yudhishthira.Types.GetLogicsResp])
+getQolariTagAppDynamicLogic merchantShortId opCity apiTokenInfo version domain = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagAppDynamicLogic) version domain
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagAppDynamicLogic) version domain
 
-postNammaTagRunJob :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.RunKaalChakraJobReq -> Environment.Flow Lib.Yudhishthira.Types.RunKaalChakraJobRes)
-postNammaTagRunJob merchantShortId opCity apiTokenInfo req = do
-  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagRunJob) req)
-
-getNammaTagTimeBounds :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow Lib.Yudhishthira.Types.TimeBoundResp)
-getNammaTagTimeBounds merchantShortId opCity apiTokenInfo domain = do
-  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagTimeBounds) domain
-
-postNammaTagTimeBoundsCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateTimeBoundRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagTimeBoundsCreate merchantShortId opCity apiTokenInfo req = do
+postQolariTagRunJob :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.RunKaalChakraJobReq -> Environment.Flow Lib.Yudhishthira.Types.RunKaalChakraJobRes)
+postQolariTagRunJob merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagTimeBoundsCreate) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagRunJob) req)
 
-deleteNammaTagTimeBoundsDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Kernel.Prelude.Text -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-deleteNammaTagTimeBoundsDelete merchantShortId opCity apiTokenInfo domain name = do
+getQolariTagTimeBounds :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow Lib.Yudhishthira.Types.TimeBoundResp)
+getQolariTagTimeBounds merchantShortId opCity apiTokenInfo domain = do
+  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagTimeBounds) domain
+
+postQolariTagTimeBoundsCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateTimeBoundRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagTimeBoundsCreate merchantShortId opCity apiTokenInfo req = do
+  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
+  transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagTimeBoundsCreate) req)
+
+deleteQolariTagTimeBoundsDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Kernel.Prelude.Text -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+deleteQolariTagTimeBoundsDelete merchantShortId opCity apiTokenInfo domain name = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing SharedLogic.Transaction.emptyRequest
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.deleteNammaTagTimeBoundsDelete) domain name)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.deleteQolariTagTimeBoundsDelete) domain name)
 
-getNammaTagAppDynamicLogicGetLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Kernel.Prelude.Maybe (Kernel.Prelude.Text) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow [Lib.Yudhishthira.Types.LogicRolloutObject])
-getNammaTagAppDynamicLogicGetLogicRollout merchantShortId opCity apiTokenInfo activeOnly timeBound domain = do
+getQolariTagAppDynamicLogicGetLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Kernel.Prelude.Maybe (Kernel.Prelude.Text) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow [Lib.Yudhishthira.Types.LogicRolloutObject])
+getQolariTagAppDynamicLogicGetLogicRollout merchantShortId opCity apiTokenInfo activeOnly timeBound domain = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagAppDynamicLogicGetLogicRollout) activeOnly timeBound domain
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagAppDynamicLogicGetLogicRollout) activeOnly timeBound domain
 
-postNammaTagAppDynamicLogicUpsertLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicRolloutReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagAppDynamicLogicUpsertLogicRollout merchantShortId opCity apiTokenInfo req = do
+postQolariTagAppDynamicLogicUpsertLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicRolloutReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagAppDynamicLogicUpsertLogicRollout merchantShortId opCity apiTokenInfo req = do
   let updatedReq = map (\r -> r{modifiedBy = Just (Kernel.Types.Id.cast apiTokenInfo.personId)}) req
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just updatedReq)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagAppDynamicLogicUpsertLogicRollout) updatedReq)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagAppDynamicLogicUpsertLogicRollout) updatedReq)
 
-getNammaTagAppDynamicLogicVersions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow Lib.Yudhishthira.Types.AppDynamicLogicVersionResp)
-getNammaTagAppDynamicLogicVersions merchantShortId opCity apiTokenInfo limit offset domain = do
+getQolariTagAppDynamicLogicVersions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow Lib.Yudhishthira.Types.AppDynamicLogicVersionResp)
+getQolariTagAppDynamicLogicVersions merchantShortId opCity apiTokenInfo limit offset domain = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagAppDynamicLogicVersions) limit offset domain
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagAppDynamicLogicVersions) limit offset domain
 
-getNammaTagAppDynamicLogicDomains :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Environment.Flow Lib.Yudhishthira.Types.AppDynamicLogicDomainResp)
-getNammaTagAppDynamicLogicDomains merchantShortId opCity apiTokenInfo = do
+getQolariTagAppDynamicLogicDomains :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Environment.Flow Lib.Yudhishthira.Types.AppDynamicLogicDomainResp)
+getQolariTagAppDynamicLogicDomains merchantShortId opCity apiTokenInfo = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagAppDynamicLogicDomains)
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagAppDynamicLogicDomains)
 
-getNammaTagQueryAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.Chakra -> Environment.Flow Lib.Yudhishthira.Types.ChakraQueryResp)
-getNammaTagQueryAll merchantShortId opCity apiTokenInfo chakra = do
+getQolariTagQueryAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.Chakra -> Environment.Flow Lib.Yudhishthira.Types.ChakraQueryResp)
+getQolariTagQueryAll merchantShortId opCity apiTokenInfo chakra = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagQueryAll) chakra
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagQueryAll) chakra
 
-postNammaTagUpdateCustomerTag :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Types.Id.Id Dashboard.Common.User -> Lib.Yudhishthira.Types.UpdateTagReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagUpdateCustomerTag merchantShortId opCity apiTokenInfo customerId req = do
-  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagUpdateCustomerTag) customerId req)
-
-postNammaTagConfigPilotGetVersion :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.Flow Lib.Yudhishthira.Types.UiConfigGetVersionResponse)
-postNammaTagConfigPilotGetVersion merchantShortId opCity apiTokenInfo req = do
+postQolariTagUpdateCustomerTag :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Types.Id.Id Dashboard.Common.User -> Lib.Yudhishthira.Types.UpdateTagReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagUpdateCustomerTag merchantShortId opCity apiTokenInfo customerId req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagConfigPilotGetVersion) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagUpdateCustomerTag) customerId req)
 
-postNammaTagConfigPilotGetConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.Flow Lib.Yudhishthira.Types.UiConfigResponse)
-postNammaTagConfigPilotGetConfig merchantShortId opCity apiTokenInfo req = do
+postQolariTagConfigPilotGetVersion :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.Flow Lib.Yudhishthira.Types.UiConfigGetVersionResponse)
+postQolariTagConfigPilotGetVersion merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagConfigPilotGetConfig) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagConfigPilotGetVersion) req)
 
-postNammaTagConfigPilotCreateUiConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateConfigRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagConfigPilotCreateUiConfig merchantShortId opCity apiTokenInfo req = do
+postQolariTagConfigPilotGetConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.Flow Lib.Yudhishthira.Types.UiConfigResponse)
+postQolariTagConfigPilotGetConfig merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagConfigPilotCreateUiConfig) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagConfigPilotGetConfig) req)
 
-getNammaTagConfigPilotAllConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Bool -> Environment.Flow [Lib.Yudhishthira.Types.ConfigType])
-getNammaTagConfigPilotAllConfigs merchantShortId opCity apiTokenInfo underExperiment = do
-  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagConfigPilotAllConfigs) underExperiment
-
-getNammaTagConfigPilotConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.Flow [Lib.Yudhishthira.Types.ConfigDetailsResp])
-getNammaTagConfigPilotConfigDetails merchantShortId opCity apiTokenInfo tableName = do
-  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagConfigPilotConfigDetails) tableName
-
-getNammaTagConfigPilotGetTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.Flow Lib.Yudhishthira.Types.TableDataResp)
-getNammaTagConfigPilotGetTableData merchantShortId opCity apiTokenInfo tableName = do
-  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagConfigPilotGetTableData) tableName
-
-postNammaTagQueryUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueryUpdateReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagQueryUpdate merchantShortId opCity apiTokenInfo req = do
+postQolariTagConfigPilotCreateUiConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateConfigRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagConfigPilotCreateUiConfig merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagQueryUpdate) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagConfigPilotCreateUiConfig) req)
 
-deleteNammaTagQueryDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueryDeleteReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-deleteNammaTagQueryDelete merchantShortId opCity apiTokenInfo req = do
+getQolariTagConfigPilotAllConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Bool -> Environment.Flow [Lib.Yudhishthira.Types.ConfigType])
+getQolariTagConfigPilotAllConfigs merchantShortId opCity apiTokenInfo underExperiment = do
+  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagConfigPilotAllConfigs) underExperiment
+
+getQolariTagConfigPilotConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.Flow [Lib.Yudhishthira.Types.ConfigDetailsResp])
+getQolariTagConfigPilotConfigDetails merchantShortId opCity apiTokenInfo tableName = do
+  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagConfigPilotConfigDetails) tableName
+
+getQolariTagConfigPilotGetTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.Flow Lib.Yudhishthira.Types.TableDataResp)
+getQolariTagConfigPilotGetTableData merchantShortId opCity apiTokenInfo tableName = do
+  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagConfigPilotGetTableData) tableName
+
+postQolariTagQueryUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueryUpdateReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagQueryUpdate merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.deleteNammaTagQueryDelete) req)
+  SharedLogic.Transaction.withTransactionStoring transaction (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagQueryUpdate) req)
 
-postNammaTagConfigPilotActionChange :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ActionChangeRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagConfigPilotActionChange merchantShortId opCity apiTokenInfo req = do
+deleteQolariTagQueryDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueryDeleteReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+deleteQolariTagQueryDelete merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagConfigPilotActionChange) req)
+  SharedLogic.Transaction.withTransactionStoring transaction (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.deleteQolariTagQueryDelete) req)
 
-getNammaTagConfigPilotAllUiConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Environment.Flow [Lib.Yudhishthira.Types.LogicDomain])
-getNammaTagConfigPilotAllUiConfigs merchantShortId opCity apiTokenInfo underExperiment = do
-  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagConfigPilotAllUiConfigs) underExperiment
-
-getNammaTagConfigPilotUiConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.Flow [Lib.Yudhishthira.Types.ConfigDetailsResp])
-getNammaTagConfigPilotUiConfigDetails merchantShortId opCity apiTokenInfo req = do
-  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagConfigPilotUiConfigDetails) req
-
-getNammaTagConfigPilotGetUiTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.Flow Lib.Yudhishthira.Types.TableDataResp)
-getNammaTagConfigPilotGetUiTableData merchantShortId opCity apiTokenInfo req = do
-  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagConfigPilotGetUiTableData) req
-
-postNammaTagTagVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.VerifyNammaTagRequest -> Environment.Flow Lib.Yudhishthira.Types.VerifyNammaTagResponse)
-postNammaTagTagVerify merchantShortId opCity apiTokenInfo req = do
+postQolariTagConfigPilotActionChange :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ActionChangeRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagConfigPilotActionChange merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagTagVerify) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagConfigPilotActionChange) req)
 
-getNammaTagAppDynamicLogicGetDomainSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow Lib.Yudhishthira.Types.DomainSchemaResp)
-getNammaTagAppDynamicLogicGetDomainSchema merchantShortId opCity apiTokenInfo domain = do
+getQolariTagConfigPilotAllUiConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Environment.Flow [Lib.Yudhishthira.Types.LogicDomain])
+getQolariTagConfigPilotAllUiConfigs merchantShortId opCity apiTokenInfo underExperiment = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagAppDynamicLogicGetDomainSchema) domain
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagConfigPilotAllUiConfigs) underExperiment
 
-getNammaTagAppDynamicLogicDomainsAndEvents :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Environment.Flow Lib.Yudhishthira.Types.NammaTagEventsOrNammaTagNamesResp)
-getNammaTagAppDynamicLogicDomainsAndEvents merchantShortId opCity apiTokenInfo fetchNammaTagNames = do
+getQolariTagConfigPilotUiConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.Flow [Lib.Yudhishthira.Types.ConfigDetailsResp])
+getQolariTagConfigPilotUiConfigDetails merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagAppDynamicLogicDomainsAndEvents) fetchNammaTagNames
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagConfigPilotUiConfigDetails) req
 
-getNammaTagTagAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Environment.Flow [Lib.Yudhishthira.Types.NammaTagDetailsResp])
-getNammaTagTagAll merchantShortId opCity apiTokenInfo = do
+getQolariTagConfigPilotGetUiTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.Flow Lib.Yudhishthira.Types.TableDataResp)
+getQolariTagConfigPilotGetUiTableData merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagTagAll)
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagConfigPilotGetUiTableData) req
 
-getNammaTagConfigPilotAlwaysOnList :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow Lib.Yudhishthira.Types.AlwaysOnListResp)
-getNammaTagConfigPilotAlwaysOnList merchantShortId opCity apiTokenInfo domain = do
-  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagConfigPilotAlwaysOnList) domain
-
-postNammaTagConfigPilotGetConfigWithDimensions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigPilotGetConfigRequest -> Environment.Flow Lib.Yudhishthira.Types.TableDataResp)
-postNammaTagConfigPilotGetConfigWithDimensions merchantShortId opCity apiTokenInfo req = do
+postQolariTagTagVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.VerifyQolariTagRequest -> Environment.Flow Lib.Yudhishthira.Types.VerifyQolariTagResponse)
+postQolariTagTagVerify merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagConfigPilotGetConfigWithDimensions) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagTagVerify) req)
 
-getNammaTagConfigPilotGetDimensionSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.Flow Lib.Yudhishthira.Types.DomainSchemaResp)
-getNammaTagConfigPilotGetDimensionSchema merchantShortId opCity apiTokenInfo configType = do
+getQolariTagAppDynamicLogicGetDomainSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow Lib.Yudhishthira.Types.DomainSchemaResp)
+getQolariTagAppDynamicLogicGetDomainSchema merchantShortId opCity apiTokenInfo domain = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagConfigPilotGetDimensionSchema) configType
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagAppDynamicLogicGetDomainSchema) domain
 
-postNammaTagConfigPilotCreateRow :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigPilotCreateRowRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagConfigPilotCreateRow merchantShortId opCity apiTokenInfo req = do
+getQolariTagAppDynamicLogicDomainsAndEvents :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Environment.Flow Lib.Yudhishthira.Types.QolariTagEventsOrQolariTagNamesResp)
+getQolariTagAppDynamicLogicDomainsAndEvents merchantShortId opCity apiTokenInfo fetchQolariTagNames = do
+  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagAppDynamicLogicDomainsAndEvents) fetchQolariTagNames
+
+getQolariTagTagAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Environment.Flow [Lib.Yudhishthira.Types.QolariTagDetailsResp])
+getQolariTagTagAll merchantShortId opCity apiTokenInfo = do
+  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagTagAll)
+
+getQolariTagConfigPilotAlwaysOnList :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.Flow Lib.Yudhishthira.Types.AlwaysOnListResp)
+getQolariTagConfigPilotAlwaysOnList merchantShortId opCity apiTokenInfo domain = do
+  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagConfigPilotAlwaysOnList) domain
+
+postQolariTagConfigPilotGetConfigWithDimensions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigPilotGetConfigRequest -> Environment.Flow Lib.Yudhishthira.Types.TableDataResp)
+postQolariTagConfigPilotGetConfigWithDimensions merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
   transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
-  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.postNammaTagConfigPilotCreateRow) req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagConfigPilotGetConfigWithDimensions) req)
 
-getNammaTagTagDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Text -> Environment.Flow Lib.Yudhishthira.Types.NammaTagDetailsResp)
-getNammaTagTagDetails merchantShortId opCity apiTokenInfo tagName = do
+getQolariTagConfigPilotGetDimensionSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.Flow Lib.Yudhishthira.Types.DomainSchemaResp)
+getQolariTagConfigPilotGetDimensionSchema merchantShortId opCity apiTokenInfo configType = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagTagDetails) tagName
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagConfigPilotGetDimensionSchema) configType
 
-getNammaTagQueryDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.Chakra -> Kernel.Prelude.Text -> Environment.Flow Lib.Yudhishthira.Types.ChakraQueriesAPIEntity)
-getNammaTagQueryDetails merchantShortId opCity apiTokenInfo chakra queryName = do
+postQolariTagConfigPilotCreateRow :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigPilotCreateRowRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagConfigPilotCreateRow merchantShortId opCity apiTokenInfo req = do
   checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
-  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.nammaTagDSL.getNammaTagQueryDetails) chakra queryName
+  transaction <- SharedLogic.Transaction.buildTransaction (Domain.Types.Transaction.castEndpoint apiTokenInfo.userActionType) (Kernel.Prelude.Just APP_BACKEND_MANAGEMENT) (Kernel.Prelude.Just apiTokenInfo) Kernel.Prelude.Nothing Kernel.Prelude.Nothing (Kernel.Prelude.Just req)
+  SharedLogic.Transaction.withTransactionStoring transaction $ (do API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.postQolariTagConfigPilotCreateRow) req)
+
+getQolariTagTagDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Text -> Environment.Flow Lib.Yudhishthira.Types.QolariTagDetailsResp)
+getQolariTagTagDetails merchantShortId opCity apiTokenInfo tagName = do
+  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagTagDetails) tagName
+
+getQolariTagQueryDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.Chakra -> Kernel.Prelude.Text -> Environment.Flow Lib.Yudhishthira.Types.ChakraQueriesAPIEntity)
+getQolariTagQueryDetails merchantShortId opCity apiTokenInfo chakra queryName = do
+  checkedMerchantId <- merchantCityAccessCheck merchantShortId apiTokenInfo.merchant.shortId opCity apiTokenInfo.city
+  API.Client.RiderPlatform.Management.callManagementAPI checkedMerchantId opCity (.QolariTagDSL.getQolariTagQueryDetails) chakra queryName

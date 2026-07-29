@@ -1,47 +1,47 @@
-{-# OPTIONS_GHC -Wno-deprecations #-}
+﻿{-# OPTIONS_GHC -Wno-deprecations #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
-module Domain.Action.Dashboard.NammaTag
-  ( postNammaTagTagCreate,
-    postNammaTagTagUpdate,
-    deleteNammaTagTagDelete,
-    getNammaTagTagAll,
-    getNammaTagTagDetails,
-    getNammaTagQueryDetails,
-    postNammaTagQueryCreate,
-    postNammaTagQueryUpdate,
-    deleteNammaTagQueryDelete,
-    postNammaTagTagVerify,
-    postNammaTagAppDynamicLogicVerify,
-    getNammaTagAppDynamicLogic,
-    postNammaTagRunJob,
-    postNammaTagTimeBoundsCreate,
-    deleteNammaTagTimeBoundsDelete,
-    getNammaTagAppDynamicLogicGetLogicRollout,
-    postNammaTagAppDynamicLogicUpsertLogicRollout,
-    getNammaTagTimeBounds,
-    getNammaTagAppDynamicLogicVersions,
-    getNammaTagAppDynamicLogicDomains,
-    getNammaTagAppDynamicLogicDomainsAndEvents,
-    getNammaTagAppDynamicLogicGetDomainSchema,
-    getNammaTagQueryAll,
-    postNammaTagUpdateCustomerTag,
-    postNammaTagConfigPilotGetVersion,
-    postNammaTagConfigPilotGetConfig,
-    postNammaTagConfigPilotCreateUiConfig,
-    getNammaTagConfigPilotAllConfigs,
-    getNammaTagConfigPilotConfigDetails,
-    getNammaTagConfigPilotGetTableData,
-    getNammaTagConfigPilotAlwaysOnList,
+module Domain.Action.Dashboard.QolariTag
+  ( postQolariTagTagCreate,
+    postQolariTagTagUpdate,
+    deleteQolariTagTagDelete,
+    getQolariTagTagAll,
+    getQolariTagTagDetails,
+    getQolariTagQueryDetails,
+    postQolariTagQueryCreate,
+    postQolariTagQueryUpdate,
+    deleteQolariTagQueryDelete,
+    postQolariTagTagVerify,
+    postQolariTagAppDynamicLogicVerify,
+    getQolariTagAppDynamicLogic,
+    postQolariTagRunJob,
+    postQolariTagTimeBoundsCreate,
+    deleteQolariTagTimeBoundsDelete,
+    getQolariTagAppDynamicLogicGetLogicRollout,
+    postQolariTagAppDynamicLogicUpsertLogicRollout,
+    getQolariTagTimeBounds,
+    getQolariTagAppDynamicLogicVersions,
+    getQolariTagAppDynamicLogicDomains,
+    getQolariTagAppDynamicLogicDomainsAndEvents,
+    getQolariTagAppDynamicLogicGetDomainSchema,
+    getQolariTagQueryAll,
+    postQolariTagUpdateCustomerTag,
+    postQolariTagConfigPilotGetVersion,
+    postQolariTagConfigPilotGetConfig,
+    postQolariTagConfigPilotCreateUiConfig,
+    getQolariTagConfigPilotAllConfigs,
+    getQolariTagConfigPilotConfigDetails,
+    getQolariTagConfigPilotGetTableData,
+    getQolariTagConfigPilotAlwaysOnList,
     addCustomerTag,
     removeCustomerTag,
-    postNammaTagConfigPilotActionChange,
-    getNammaTagConfigPilotAllUiConfigs,
-    getNammaTagConfigPilotUiConfigDetails,
-    getNammaTagConfigPilotGetUiTableData,
-    postNammaTagConfigPilotGetConfigWithDimensions,
-    getNammaTagConfigPilotGetDimensionSchema,
-    postNammaTagConfigPilotCreateRow,
+    postQolariTagConfigPilotActionChange,
+    getQolariTagConfigPilotAllUiConfigs,
+    getQolariTagConfigPilotUiConfigDetails,
+    getQolariTagConfigPilotGetUiTableData,
+    postQolariTagConfigPilotGetConfigWithDimensions,
+    getQolariTagConfigPilotGetDimensionSchema,
+    postQolariTagConfigPilotCreateRow,
   )
 where
 
@@ -103,13 +103,13 @@ import qualified Lib.Yudhishthira.SchemaInstances ()
 import Lib.Yudhishthira.SchemaTH
 import Lib.Yudhishthira.SchemaUtils
 import qualified Lib.Yudhishthira.Storage.CachedQueries.AppDynamicLogicRollout as CADLR
-import qualified Lib.Yudhishthira.Storage.Queries.NammaTagTriggerV2 as QNammaTagTriggerV2
-import qualified Lib.Yudhishthira.Storage.Queries.NammaTagV2 as QNammaTagV2
+import qualified Lib.Yudhishthira.Storage.Queries.QolariTagTriggerV2 as QQolariTagTriggerV2
+import qualified Lib.Yudhishthira.Storage.Queries.QolariTagV2 as QQolariTagV2
 import qualified Lib.Yudhishthira.Tools.Utils as LYTU
 import qualified Lib.Yudhishthira.Types
 import qualified Lib.Yudhishthira.Types as LYTU
 import qualified Lib.Yudhishthira.Types.Common as C
-import qualified Lib.Yudhishthira.Types.NammaTagV2
+import qualified Lib.Yudhishthira.Types.QolariTagV2
 import qualified Lib.Yudhishthira.TypesTH as YTH
 import SharedLogic.JobScheduler (RiderJobType (..))
 import SharedLogic.Merchant
@@ -258,55 +258,55 @@ instance Default FRT.RenderLineItem where
         language = ENGLISH
       }
 
-postNammaTagTagCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.CreateNammaTagRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagTagCreate merchantShortId opCity req = do
+postQolariTagTagCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.CreateQolariTagRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagTagCreate merchantShortId opCity req = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   YudhishthiraFlow.postTagCreate (cast merchantOperatingCity.id) req
 
-postNammaTagTagUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.UpdateNammaTagRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagTagUpdate merchantShortId opCity req = do
+postQolariTagTagUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.UpdateQolariTagRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagTagUpdate merchantShortId opCity req = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   YudhishthiraFlow.postTagUpdate (cast merchantOperatingCity.id) req
 
-deleteNammaTagTagDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Prelude.Text -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-deleteNammaTagTagDelete merchantShortId opCity tagName = do
+deleteQolariTagTagDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Prelude.Text -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+deleteQolariTagTagDelete merchantShortId opCity tagName = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   YudhishthiraFlow.deleteTag (cast merchantOperatingCity.id) tagName
 
-getNammaTagTagAll :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Environment.Flow [LYTU.NammaTagDetailsResp]
-getNammaTagTagAll merchantShortId opCity = do
+getQolariTagTagAll :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Environment.Flow [LYTU.QolariTagDetailsResp]
+getQolariTagTagAll merchantShortId opCity = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   let mocId = cast merchantOperatingCity.id
-  tags <- QNammaTagV2.findAllByMerchantOperatingCityId mocId
-  allTriggers <- QNammaTagTriggerV2.findAllByMerchantOperatingCityId mocId
+  tags <- QQolariTagV2.findAllByMerchantOperatingCityId mocId
+  allTriggers <- QQolariTagTriggerV2.findAllByMerchantOperatingCityId mocId
   let triggerMap = Map.fromListWith (++) [(t.tagName, [t.event]) | t <- allTriggers]
-  return $ map (\tag -> mkNammaTagDetailsResp tag (fromMaybe [] (Map.lookup tag.name triggerMap)) Map.empty) tags
+  return $ map (\tag -> mkQolariTagDetailsResp tag (fromMaybe [] (Map.lookup tag.name triggerMap)) Map.empty) tags
 
-getNammaTagTagDetails :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Text -> Environment.Flow LYTU.NammaTagDetailsResp
-getNammaTagTagDetails merchantShortId opCity tagName = do
+getQolariTagTagDetails :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Text -> Environment.Flow LYTU.QolariTagDetailsResp
+getQolariTagTagDetails merchantShortId opCity tagName = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   let mocId = cast merchantOperatingCity.id
-  tag <- QNammaTagV2.findByPrimaryKey mocId tagName >>= fromMaybeM (InvalidRequest $ "NammaTag not found: " <> tagName)
-  triggers <- QNammaTagTriggerV2.findAllByMerchantOperatingCityIdAndTagName mocId tagName
+  tag <- QQolariTagV2.findByPrimaryKey mocId tagName >>= fromMaybeM (InvalidRequest $ "QolariTag not found: " <> tagName)
+  triggers <- QQolariTagTriggerV2.findAllByMerchantOperatingCityIdAndTagName mocId tagName
   let events = map (.event) triggers
       inputDataMap = Map.fromList $ map (\e -> (show e, C.getLogicInputDef e)) events
-  return $ mkNammaTagDetailsResp tag events inputDataMap
+  return $ mkQolariTagDetailsResp tag events inputDataMap
 
 -- ChakraQueries are global (not merchant-scoped), so merchant/city params are intentionally unused
-getNammaTagQueryDetails :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.Chakra -> Text -> Environment.Flow LYTU.ChakraQueriesAPIEntity
-getNammaTagQueryDetails _merchantShortId _opCity chakra queryName = YudhishthiraFlow.getChakraQueryDetails chakra queryName
+getQolariTagQueryDetails :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.Chakra -> Text -> Environment.Flow LYTU.ChakraQueriesAPIEntity
+getQolariTagQueryDetails _merchantShortId _opCity chakra queryName = YudhishthiraFlow.getChakraQueryDetails chakra queryName
 
-postNammaTagQueryCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ChakraQueriesAPIEntity -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagQueryCreate _merchantShortId _opCity req = YudhishthiraFlow.postQueryCreate req
+postQolariTagQueryCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ChakraQueriesAPIEntity -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagQueryCreate _merchantShortId _opCity req = YudhishthiraFlow.postQueryCreate req
 
-postNammaTagQueryUpdate :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ChakraQueryUpdateReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess
-postNammaTagQueryUpdate _merchantShortId _opCity = YudhishthiraFlow.postQueryUpdate
+postQolariTagQueryUpdate :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ChakraQueryUpdateReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess
+postQolariTagQueryUpdate _merchantShortId _opCity = YudhishthiraFlow.postQueryUpdate
 
-deleteNammaTagQueryDelete :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ChakraQueryDeleteReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess
-deleteNammaTagQueryDelete _merchantShortId _opCity = YudhishthiraFlow.queryDelete
+deleteQolariTagQueryDelete :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ChakraQueryDeleteReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess
+deleteQolariTagQueryDelete _merchantShortId _opCity = YudhishthiraFlow.queryDelete
 
-postNammaTagTagVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.VerifyNammaTagRequest -> Environment.Flow LYTU.VerifyNammaTagResponse)
-postNammaTagTagVerify merchantShortId opCity LYTU.VerifyNammaTagRequest {..} = do
+postQolariTagTagVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.VerifyQolariTagRequest -> Environment.Flow LYTU.VerifyQolariTagResponse)
+postQolariTagTagVerify merchantShortId opCity LYTU.VerifyQolariTagRequest {..} = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   let merchantOpCityId = cast merchantOperatingCity.id
   case source of
@@ -320,7 +320,7 @@ postNammaTagTagVerify merchantShortId opCity LYTU.VerifyNammaTagRequest {..} = d
           -- validating data provided gets parsed to Stage InputData type.
           validateInputType tagStage value
           result <- YudhishthiraFlow.verifyEventLogic merchantOpCityId tagStage [logic] value
-          pure $ LYTU.VerifyNammaTagResponse {executionResult = result, dataUsed = value}
+          pure $ LYTU.VerifyQolariTagResponse {executionResult = result, dataUsed = value}
         Nothing -> throwError $ InvalidRequest "No data supplied and failed to get default for the specified event, check if `getLogicInputDef` is defined for your event in `instance YTC.LogicInputLink YA.ApplicationEvent`"
     _ -> do
       throwError $ InvalidRequest $ "Available only for Application events currenlty"
@@ -340,8 +340,8 @@ postNammaTagTagVerify merchantShortId opCity LYTU.VerifyNammaTagRequest {..} = d
         A.Success res -> pure res
         A.Error err -> throwError $ InvalidRequest $ show err
 
-postNammaTagAppDynamicLogicVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.AppDynamicLogicReq -> Environment.Flow LYTU.AppDynamicLogicResp)
-postNammaTagAppDynamicLogicVerify merchantShortId opCity req = do
+postQolariTagAppDynamicLogicVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.AppDynamicLogicReq -> Environment.Flow LYTU.AppDynamicLogicResp)
+postQolariTagAppDynamicLogicVerify merchantShortId opCity req = do
   merchant <- findMerchantByShortId merchantShortId
   let mbMerchantid = Just $ cast merchant.id
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
@@ -453,17 +453,17 @@ postNammaTagAppDynamicLogicVerify merchantShortId opCity req = do
     _ -> pure ()
   pure resp
 
-getNammaTagAppDynamicLogic :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Maybe Int -> LYTU.LogicDomain -> Environment.Flow [LYTU.GetLogicsResp]
-getNammaTagAppDynamicLogic merchantShortId opCity mbVersion domain = do
+getQolariTagAppDynamicLogic :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Maybe Int -> LYTU.LogicDomain -> Environment.Flow [LYTU.GetLogicsResp]
+getQolariTagAppDynamicLogic merchantShortId opCity mbVersion domain = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   YudhishthiraFlow.getAppDynamicLogicForDomain (cast merchantOperatingCity.id) mbVersion domain
 
-postNammaTagRunJob ::
+postQolariTagRunJob ::
   Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant ->
   Kernel.Types.Beckn.Context.City ->
   LYTU.RunKaalChakraJobReq ->
   Environment.Flow LYTU.RunKaalChakraJobRes
-postNammaTagRunJob merchantShortId opCity req = do
+postQolariTagRunJob merchantShortId opCity req = do
   mbMerchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity
   let mbMerchantOpCityId = mbMerchantOperatingCity <&> (.id)
   let mbMerchantId = mbMerchantOperatingCity <&> (.merchantId)
@@ -500,32 +500,32 @@ postNammaTagRunJob merchantShortId opCity req = do
     castChakra Quarterly = Just LYTU.Quarterly
     castChakra _ = Nothing
 
-getNammaTagTimeBounds :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.LogicDomain -> Environment.Flow LYTU.TimeBoundResp
-getNammaTagTimeBounds merchantShortId opCity domain = do
+getQolariTagTimeBounds :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.LogicDomain -> Environment.Flow LYTU.TimeBoundResp
+getQolariTagTimeBounds merchantShortId opCity domain = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   let merchantOpCityId = merchantOperatingCity.id
   YudhishthiraFlow.getTimeBounds (cast merchantOpCityId) domain
 
-postNammaTagTimeBoundsCreate :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.CreateTimeBoundRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess
-postNammaTagTimeBoundsCreate merchantShortId opCity req = do
+postQolariTagTimeBoundsCreate :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.CreateTimeBoundRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess
+postQolariTagTimeBoundsCreate merchantShortId opCity req = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   let merchantOpCityId = merchantOperatingCity.id
   YudhishthiraFlow.createTimeBounds (cast merchantOpCityId) req
 
-deleteNammaTagTimeBoundsDelete :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.LogicDomain -> Text -> Environment.Flow Kernel.Types.APISuccess.APISuccess
-deleteNammaTagTimeBoundsDelete merchantShortId opCity domain name = do
+deleteQolariTagTimeBoundsDelete :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.LogicDomain -> Text -> Environment.Flow Kernel.Types.APISuccess.APISuccess
+deleteQolariTagTimeBoundsDelete merchantShortId opCity domain name = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   let merchantOpCityId = merchantOperatingCity.id
   YudhishthiraFlow.deleteTimeBounds (cast merchantOpCityId) domain name
 
-getNammaTagAppDynamicLogicGetLogicRollout :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Maybe Bool -> Maybe Text -> LYTU.LogicDomain -> Environment.Flow [LYTU.LogicRolloutObject]
-getNammaTagAppDynamicLogicGetLogicRollout merchantShortId opCity activeOnly timeBound domain = do
+getQolariTagAppDynamicLogicGetLogicRollout :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Maybe Bool -> Maybe Text -> LYTU.LogicDomain -> Environment.Flow [LYTU.LogicRolloutObject]
+getQolariTagAppDynamicLogicGetLogicRollout merchantShortId opCity activeOnly timeBound domain = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   let merchantOpCityId = merchantOperatingCity.id
   YudhishthiraFlow.getLogicRollout (cast merchantOpCityId) timeBound activeOnly domain
 
-postNammaTagAppDynamicLogicUpsertLogicRollout :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> [LYTU.LogicRolloutObject] -> Environment.Flow Kernel.Types.APISuccess.APISuccess
-postNammaTagAppDynamicLogicUpsertLogicRollout merchantShortId opCity rolloutReq = do
+postQolariTagAppDynamicLogicUpsertLogicRollout :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> [LYTU.LogicRolloutObject] -> Environment.Flow Kernel.Types.APISuccess.APISuccess
+postQolariTagAppDynamicLogicUpsertLogicRollout merchantShortId opCity rolloutReq = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   result <- YudhishthiraFlow.upsertLogicRollout (Just $ cast merchantOperatingCity.merchantId) (cast merchantOperatingCity.id) rolloutReq TC.returnConfigs opCity
   forM_ rolloutReq $ \rolloutObj -> case rolloutObj.domain of
@@ -536,33 +536,33 @@ postNammaTagAppDynamicLogicUpsertLogicRollout merchantShortId opCity rolloutReq 
     _ -> pure ()
   pure result
 
-getNammaTagAppDynamicLogicVersions :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Prelude.Maybe Prelude.Int -> Prelude.Maybe Prelude.Int -> LYTU.LogicDomain -> Environment.Flow LYTU.AppDynamicLogicVersionResp
-getNammaTagAppDynamicLogicVersions merchantShortId opCity mbLimit mbOffset domain = do
+getQolariTagAppDynamicLogicVersions :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Prelude.Maybe Prelude.Int -> Prelude.Maybe Prelude.Int -> LYTU.LogicDomain -> Environment.Flow LYTU.AppDynamicLogicVersionResp
+getQolariTagAppDynamicLogicVersions merchantShortId opCity mbLimit mbOffset domain = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   YudhishthiraFlow.getAppDynamicLogicVersions (cast merchantOperatingCity.id) mbLimit mbOffset domain
 
-getNammaTagAppDynamicLogicDomains :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Environment.Flow LYTU.AppDynamicLogicDomainResp
-getNammaTagAppDynamicLogicDomains _merchantShortId _opCity = return LYTU.allValues
+getQolariTagAppDynamicLogicDomains :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Environment.Flow LYTU.AppDynamicLogicDomainResp
+getQolariTagAppDynamicLogicDomains _merchantShortId _opCity = return LYTU.allValues
 
-getNammaTagAppDynamicLogicDomainsAndEvents ::
+getQolariTagAppDynamicLogicDomainsAndEvents ::
   Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant ->
   Kernel.Types.Beckn.Context.City ->
   Maybe Bool ->
-  Environment.Flow LYTU.NammaTagEventsOrNammaTagNamesResp
-getNammaTagAppDynamicLogicDomainsAndEvents merchantShortId opCity mbFetchNammaTagNames =
-  case mbFetchNammaTagNames of
+  Environment.Flow LYTU.QolariTagEventsOrQolariTagNamesResp
+getQolariTagAppDynamicLogicDomainsAndEvents merchantShortId opCity mbFetchQolariTagNames =
+  case mbFetchQolariTagNames of
     Just True -> do
       merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
       let mocId = cast merchantOperatingCity.id
-      tags <- QNammaTagV2.findAllByMerchantOperatingCityId mocId
-      return $ LYTU.NammaTagNames (map (.name) tags)
-    _ -> return $ LYTU.NammaTagEvents LYTU.allValues
+      tags <- QQolariTagV2.findAllByMerchantOperatingCityId mocId
+      return $ LYTU.QolariTagNames (map (.name) tags)
+    _ -> return $ LYTU.QolariTagEvents LYTU.allValues
 
-getNammaTagQueryAll :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.Chakra -> Environment.Flow LYTU.ChakraQueryResp
-getNammaTagQueryAll _merchantShortId _opCity = YudhishthiraFlow.getNammaTagQueryAll
+getQolariTagQueryAll :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.Chakra -> Environment.Flow LYTU.ChakraQueryResp
+getQolariTagQueryAll _merchantShortId _opCity = YudhishthiraFlow.getQolariTagQueryAll
 
-getNammaTagAppDynamicLogicGetDomainSchema :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.LogicDomain -> Environment.Flow LYTU.DomainSchemaResp
-getNammaTagAppDynamicLogicGetDomainSchema _mrchntShortId _opCity domain = do
+getQolariTagAppDynamicLogicGetDomainSchema :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.LogicDomain -> Environment.Flow LYTU.DomainSchemaResp
+getQolariTagAppDynamicLogicGetDomainSchema _mrchntShortId _opCity domain = do
   case domain of
     LYTU.UI_RIDER {} -> do
       defaultConfig <- fromMaybeM (InvalidRequest "UiRiderConfig default config not found") (Prelude.listToMaybe $ YTH.genDef (Proxy @UiRiderConfig))
@@ -704,13 +704,13 @@ getNammaTagAppDynamicLogicGetDomainSchema _mrchntShortId _opCity domain = do
           }
     _ -> throwError $ InvalidRequest "Domain schema not available"
 
-postNammaTagUpdateCustomerTag :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Types.Id.Id Common.User -> LYTU.UpdateTagReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
-postNammaTagUpdateCustomerTag merchantShortId opCity userId req = do
+postQolariTagUpdateCustomerTag :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Types.Id.Id Common.User -> LYTU.UpdateTagReq -> Environment.Flow Kernel.Types.APISuccess.APISuccess)
+postQolariTagUpdateCustomerTag merchantShortId opCity userId req = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   let merchantOpCityId = merchantOperatingCity.id
   let personId = cast @Common.User @DP.Person userId
   person <- QPerson.findById personId >>= fromMaybeM (PersonDoesNotExist personId.getId)
-  when (req.isAddingTag && maybe False (LYTU.elemTagNameValue req.tag) person.customerNammaTags) $
+  when (req.isAddingTag && maybe False (LYTU.elemTagNameValue req.tag) person.customerQolariTags) $
     logInfo "Tag already exists, update expiry"
   -- merchant access checking
   unless (merchantOpCityId == person.merchantOperatingCityId) $ throwError (PersonDoesNotExist personId.getId)
@@ -720,14 +720,14 @@ postNammaTagUpdateCustomerTag merchantShortId opCity userId req = do
         if req.isAddingTag
           then do
             let reqCustomerTagWithExpiry = LYTU.addTagExpiry req.tag (mbNammTag >>= (.validity)) now
-            LYTU.replaceTagNameValue person.customerNammaTags reqCustomerTagWithExpiry
-          else LYTU.removeTagNameValue person.customerNammaTags req.tag
-  unless (Just (LYTU.showRawTags tag) == (LYTU.showRawTags <$> person.customerNammaTags)) $
+            LYTU.replaceTagNameValue person.customerQolariTags reqCustomerTagWithExpiry
+          else LYTU.removeTagNameValue person.customerQolariTags req.tag
+  unless (Just (LYTU.showRawTags tag) == (LYTU.showRawTags <$> person.customerQolariTags)) $
     CQPerson.updateCustomerTags (Just tag) personId
   pure Success
 
-postNammaTagConfigPilotGetVersion :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.UiConfigRequest -> Environment.Flow LYTU.UiConfigGetVersionResponse
-postNammaTagConfigPilotGetVersion _ _type uicr = do
+postQolariTagConfigPilotGetVersion :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.UiConfigRequest -> Environment.Flow LYTU.UiConfigGetVersionResponse
+postQolariTagConfigPilotGetVersion _ _type uicr = do
   merchantOperatingCity <- CQMOC.findByMerchantIdAndCity (Id uicr.merchantId) uicr.city >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantId: " <> uicr.merchantId <> " ,city: " <> show uicr.city)
   let merchantOpCityId = merchantOperatingCity.id
   configInfo <- UIRC.findUiConfig uicr merchantOpCityId False -- TODO: put the latest version of config in redis and fetch from there
@@ -737,8 +737,8 @@ postNammaTagConfigPilotGetVersion _ _type uicr = do
     Just (_, version) -> pure $ LYTU.UiConfigGetVersionResponse (Text.pack $ show version) (Text.pack $ show baseVersion)
     Nothing -> throwError $ InternalError $ "No config found for merchant:" <> show uicr.merchantId <> " and city:" <> show uicr.city <> " and request:" <> show uicr
 
-postNammaTagConfigPilotGetConfig :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.UiConfigRequest -> Environment.Flow LYTU.UiConfigResponse
-postNammaTagConfigPilotGetConfig _ _ uicr = do
+postQolariTagConfigPilotGetConfig :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.UiConfigRequest -> Environment.Flow LYTU.UiConfigResponse
+postQolariTagConfigPilotGetConfig _ _ uicr = do
   merchantOperatingCity <- CQMOC.findByMerchantIdAndCity (Id uicr.merchantId) uicr.city >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantId: " <> uicr.merchantId <> " ,city: " <> show uicr.city)
   let merchantOpCityId = merchantOperatingCity.id
   configInfo <- UIRC.findUiConfig uicr merchantOpCityId False
@@ -749,8 +749,8 @@ postNammaTagConfigPilotGetConfig _ _ uicr = do
     Just (cfg, version) -> pure (LYTU.UiConfigResponse cfg.config (Text.pack $ show version) (Text.pack $ show baseVersion) isExp)
     Nothing -> throwError $ InternalError $ "No config found for merchant:" <> show uicr.merchantId <> " and city:" <> show uicr.city <> " and request:" <> show uicr
 
-postNammaTagConfigPilotCreateUiConfig :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.CreateConfigRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess
-postNammaTagConfigPilotCreateUiConfig _ _ ccr = do
+postQolariTagConfigPilotCreateUiConfig :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.CreateConfigRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess
+postQolariTagConfigPilotCreateUiConfig _ _ ccr = do
   url <- TC.getTSServiceUrl
   when (ccr.platform == LYTU.TypeScript) $ do
     configValidateResp <- CPF.configValidate url (ccr.config)
@@ -780,36 +780,36 @@ postNammaTagConfigPilotCreateUiConfig _ _ ccr = do
           platform = ccr.platform
         }
 
-getNammaTagConfigPilotAllConfigs :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Prelude.Maybe Prelude.Bool -> Environment.Flow [LYTU.ConfigType]
-getNammaTagConfigPilotAllConfigs _merchantShortId _opCity mbUnderExp = do
+getQolariTagConfigPilotAllConfigs :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Prelude.Maybe Prelude.Bool -> Environment.Flow [LYTU.ConfigType]
+getQolariTagConfigPilotAllConfigs _merchantShortId _opCity mbUnderExp = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity _merchantShortId _opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> _merchantShortId.getShortId <> " ,city: " <> show _opCity)
   let merchantOpCityId = merchantOperatingCity.id
-  YudhishthiraFlow.getNammaTagConfigPilotAllConfigs (cast merchantOpCityId) mbUnderExp LYTU.RiderCfg
+  YudhishthiraFlow.getQolariTagConfigPilotAllConfigs (cast merchantOpCityId) mbUnderExp LYTU.RiderCfg
 
-getNammaTagConfigPilotConfigDetails :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ConfigType -> Environment.Flow [LYTU.ConfigDetailsResp]
-getNammaTagConfigPilotConfigDetails _merchantShortId _opCity configType = do
+getQolariTagConfigPilotConfigDetails :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ConfigType -> Environment.Flow [LYTU.ConfigDetailsResp]
+getQolariTagConfigPilotConfigDetails _merchantShortId _opCity configType = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity _merchantShortId _opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> _merchantShortId.getShortId <> " ,city: " <> show _opCity)
   let merchantOpCityId = merchantOperatingCity.id
-  YudhishthiraFlow.getNammaTagConfigPilotConfigDetails (cast merchantOpCityId) (LYTU.RIDER_CONFIG configType)
+  YudhishthiraFlow.getQolariTagConfigPilotConfigDetails (cast merchantOpCityId) (LYTU.RIDER_CONFIG configType)
 
-getNammaTagConfigPilotAlwaysOnList :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.LogicDomain -> Environment.Flow LYTU.AlwaysOnListResp
-getNammaTagConfigPilotAlwaysOnList merchantShortId opCity domain = do
+getQolariTagConfigPilotAlwaysOnList :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.LogicDomain -> Environment.Flow LYTU.AlwaysOnListResp
+getQolariTagConfigPilotAlwaysOnList merchantShortId opCity domain = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
-  YudhishthiraFlow.getNammaTagConfigPilotAlwaysOnList (cast merchantOperatingCity.id) domain
+  YudhishthiraFlow.getQolariTagConfigPilotAlwaysOnList (cast merchantOperatingCity.id) domain
 
-getNammaTagConfigPilotGetTableData :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ConfigType -> Environment.Flow LYTU.TableDataResp
-getNammaTagConfigPilotGetTableData _merchantShortId _opCity configType = do
+getQolariTagConfigPilotGetTableData :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ConfigType -> Environment.Flow LYTU.TableDataResp
+getQolariTagConfigPilotGetTableData _merchantShortId _opCity configType = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity _merchantShortId _opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> _merchantShortId.getShortId <> " ,city: " <> show _opCity)
   merchant <- findMerchantByShortId _merchantShortId
   let merchantOpCityId = merchantOperatingCity.id
   let domain = LYTU.RIDER_CONFIG configType
   TC.returnConfigs domain (cast merchantOpCityId) (cast merchant.id) _opCity
 
-postNammaTagConfigPilotActionChange :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ActionChangeRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess
-postNammaTagConfigPilotActionChange _merchantShortId _opCity req = do
+postQolariTagConfigPilotActionChange :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ActionChangeRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess
+postQolariTagConfigPilotActionChange _merchantShortId _opCity req = do
   merchant <- findMerchantByShortId _merchantShortId
   merchantOpCityId <- CQMOC.getMerchantOpCityId merchant (Just _opCity)
-  result <- YudhishthiraFlow.postNammaTagConfigPilotActionChange (Just $ cast merchant.id) (cast merchantOpCityId) req TC.handleConfigDBUpdate TC.returnConfigs _opCity
+  result <- YudhishthiraFlow.postQolariTagConfigPilotActionChange (Just $ cast merchant.id) (cast merchantOpCityId) req TC.handleConfigDBUpdate TC.returnConfigs _opCity
   let domain = case req of
         LYTU.Conclude c -> c.domain
         LYTU.Abort a -> a.domain
@@ -822,21 +822,21 @@ postNammaTagConfigPilotActionChange _merchantShortId _opCity req = do
     _ -> pure ()
   pure result
 
-getNammaTagConfigPilotAllUiConfigs :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Prelude.Maybe Prelude.Bool -> Environment.Flow [LYTU.LogicDomain]
-getNammaTagConfigPilotAllUiConfigs _merchantShortId _opCity mbUnderExp = do
+getQolariTagConfigPilotAllUiConfigs :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Prelude.Maybe Prelude.Bool -> Environment.Flow [LYTU.LogicDomain]
+getQolariTagConfigPilotAllUiConfigs _merchantShortId _opCity mbUnderExp = do
   merchant <- findMerchantByShortId _merchantShortId
   merchantOpCityId <- CQMOC.getMerchantOpCityId merchant (Just _opCity)
-  YudhishthiraFlow.getNammaTagConfigPilotAllUiConfigs (cast merchantOpCityId) mbUnderExp LYTU.RiderCfg
+  YudhishthiraFlow.getQolariTagConfigPilotAllUiConfigs (cast merchantOpCityId) mbUnderExp LYTU.RiderCfg
 
-getNammaTagConfigPilotUiConfigDetails :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.UiDevicePlatformReq -> Environment.Flow [LYTU.ConfigDetailsResp]
-getNammaTagConfigPilotUiConfigDetails _merchantShortId _opCity req = do
+getQolariTagConfigPilotUiConfigDetails :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.UiDevicePlatformReq -> Environment.Flow [LYTU.ConfigDetailsResp]
+getQolariTagConfigPilotUiConfigDetails _merchantShortId _opCity req = do
   merchant <- findMerchantByShortId _merchantShortId
   merchantOpCityId <- CQMOC.getMerchantOpCityId merchant (Just _opCity)
   let domain = LYTU.UI_RIDER req.deviceType req.platformType
-  YudhishthiraFlow.getNammaTagConfigPilotUiConfigDetails (cast merchantOpCityId) domain
+  YudhishthiraFlow.getQolariTagConfigPilotUiConfigDetails (cast merchantOpCityId) domain
 
-getNammaTagConfigPilotGetUiTableData :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.UiDevicePlatformReq -> Environment.Flow LYTU.TableDataResp
-getNammaTagConfigPilotGetUiTableData _merchantShortId _opCity req = do
+getQolariTagConfigPilotGetUiTableData :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.UiDevicePlatformReq -> Environment.Flow LYTU.TableDataResp
+getQolariTagConfigPilotGetUiTableData _merchantShortId _opCity req = do
   merchant <- findMerchantByShortId _merchantShortId
   merchantOpCityId <- CQMOC.getMerchantOpCityId merchant (Just _opCity)
   let domain = LYTU.UI_RIDER req.deviceType req.platformType
@@ -850,9 +850,9 @@ removeCustomerTag :: Maybe [Text] -> Text -> [Text]
 removeCustomerTag Nothing _ = []
 removeCustomerTag (Just tags) tag = filter (/= tag) tags
 
-mkNammaTagDetailsResp :: Lib.Yudhishthira.Types.NammaTagV2.NammaTagV2 -> [LYTU.ApplicationEvent] -> Map.Map Text (Maybe A.Value) -> LYTU.NammaTagDetailsResp
-mkNammaTagDetailsResp tag events inputDataMap =
-  LYTU.NammaTagDetailsResp
+mkQolariTagDetailsResp :: Lib.Yudhishthira.Types.QolariTagV2.QolariTagV2 -> [LYTU.ApplicationEvent] -> Map.Map Text (Maybe A.Value) -> LYTU.QolariTagDetailsResp
+mkQolariTagDetailsResp tag events inputDataMap =
+  LYTU.QolariTagDetailsResp
     { actionEngine = tag.actionEngine,
       category = tag.category,
       description = tag.description,
@@ -867,8 +867,8 @@ mkNammaTagDetailsResp tag events inputDataMap =
       updatedAt = tag.updatedAt
     }
 
-postNammaTagConfigPilotGetConfigWithDimensions :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ConfigPilotGetConfigRequest -> Environment.Flow LYTU.TableDataResp
-postNammaTagConfigPilotGetConfigWithDimensions merchantShortId opCity req = do
+postQolariTagConfigPilotGetConfigWithDimensions :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ConfigPilotGetConfigRequest -> Environment.Flow LYTU.TableDataResp
+postQolariTagConfigPilotGetConfigWithDimensions merchantShortId opCity req = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   let mocId = merchantOperatingCity.id.getId
       dims = parseDims req.dimensions
@@ -927,8 +927,8 @@ postNammaTagConfigPilotGetConfigWithDimensions merchantShortId opCity req = do
     dimLookup :: A.FromJSON a => A.Key -> Maybe A.Object -> Maybe a
     dimLookup key obj = obj >>= AT.parseMaybe (A..: key)
 
-getNammaTagConfigPilotGetDimensionSchema :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ConfigType -> Environment.Flow LYTU.DomainSchemaResp
-getNammaTagConfigPilotGetDimensionSchema _merchantShortId _opCity configType = do
+getQolariTagConfigPilotGetDimensionSchema :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ConfigType -> Environment.Flow LYTU.DomainSchemaResp
+getQolariTagConfigPilotGetDimensionSchema _merchantShortId _opCity configType = do
   case configType of
     LYTU.RiderConfig ->
       pure $ mkDimSchema (Proxy @RiderConfigDimensions)
@@ -971,8 +971,8 @@ getNammaTagConfigPilotGetDimensionSchema _merchantShortId _opCity configType = d
           LYTU.schema = toInlinedSchemaValue p
         }
 
-postNammaTagConfigPilotCreateRow :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ConfigPilotCreateRowRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess
-postNammaTagConfigPilotCreateRow merchantShortId opCity req = do
+postQolariTagConfigPilotCreateRow :: Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> LYTU.ConfigPilotCreateRowRequest -> Environment.Flow Kernel.Types.APISuccess.APISuccess
+postQolariTagConfigPilotCreateRow merchantShortId opCity req = do
   merchantOperatingCity <- CQMOC.findByMerchantShortIdAndCity merchantShortId opCity >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchantShortId: " <> merchantShortId.getShortId <> " ,city: " <> show opCity)
   let mocId = merchantOperatingCity.id
   case req.configType of

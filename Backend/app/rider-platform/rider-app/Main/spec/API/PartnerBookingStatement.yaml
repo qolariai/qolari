@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   Day: Data.Time.Calendar
   HighPrecMoney: Kernel.Types.Common
   VehicleCategory: BecknV2.OnDemand.Enums
@@ -80,7 +80,7 @@ types:
     itemName: Text # Vehicle Model Name
     bookingType: Maybe VehicleCategory
     bookingClass: ServiceTierType
-    provider: Text # NammaYatri
+    provider: Text # Qolari
     providerCode: Text # Vehicle number
     providerPriceCategory:  Text # Vehicle Varaint if available
     itemQuantity: Text

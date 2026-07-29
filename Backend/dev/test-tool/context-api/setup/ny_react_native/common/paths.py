@@ -1,4 +1,4 @@
-"""Project / repo path resolution. Reads env vars set by the bash shim
+﻿"""Project / repo path resolution. Reads env vars set by the bash shim
 (or by server.py). Centralised so every other module asks here instead
 of redo'ing path math."""
 from __future__ import annotations
@@ -7,12 +7,12 @@ import os
 from pathlib import Path
 
 # This file lives at:
-#   nammayatri/Backend/dev/test-tool/context-api/setup/ny_react_native/common/paths.py
+#   Qolari/Backend/dev/test-tool/context-api/setup/ny_react_native/common/paths.py
 # Walking parents:
 #   [0] common  [1] ny_react_native  [2] setup  [3] context-api
-#   [4] test-tool  [5] dev  [6] Backend  [7] nammayatri (project root)
+#   [4] test-tool  [5] dev  [6] Backend  [7] Qolari (project root)
 THIS = Path(__file__).resolve()
-REPO_ROOT = THIS.parents[7]            # …/nammayatri (the project root)
+REPO_ROOT = THIS.parents[7]            # …/Qolari (the project root)
 SETUP_DIR = THIS.parents[1]            # …/setup/ny_react_native
 TEMPLATES_DIR = SETUP_DIR / "templates"
 DATA_DIR = REPO_ROOT / "data"

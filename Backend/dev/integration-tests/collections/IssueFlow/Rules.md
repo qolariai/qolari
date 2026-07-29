@@ -1,4 +1,4 @@
-# IssueFlow
+﻿# IssueFlow
 
 Integration test for the rider-app (BAP) and dynamic-offer-driver-app (BPP)
 Issue / IssueCategory APIs introduced under the shared
@@ -25,7 +25,7 @@ A single pass through `01-IssueLifecycle.json` does:
    - Cleanup: delete option then category.
 
 2. **BPP path** (dynamic-offer-driver-app + provider-dashboard)
-   - Same shape, driver-side: OTP login on `baseURL_namma_P`, category +
+   - Same shape, driver-side: OTP login on `baseURL_qolari_P`, category +
      option creation on `/issue/...` under `bpp/driver-offer/...`, driver UI
      consumption + chat round-trip, config update + read-back, cleanup.
 

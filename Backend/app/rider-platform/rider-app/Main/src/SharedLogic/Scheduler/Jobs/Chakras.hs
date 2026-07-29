@@ -1,4 +1,4 @@
-module SharedLogic.Scheduler.Jobs.Chakras
+﻿module SharedLogic.Scheduler.Jobs.Chakras
   ( mkKaalChakraHandle,
     runDailyJob,
     runWeeklyJob,
@@ -46,7 +46,7 @@ mkKaalChakraHandle merchantId merchantOperatingCityId =
   Event.Handle
     { getUserTags = \userId -> do
         mbRider <- QPerson.findById $ cast @LYT.User @DPerson.Person userId
-        pure $ mbRider <&> (\rider -> fromMaybe [] rider.customerNammaTags),
+        pure $ mbRider <&> (\rider -> fromMaybe [] rider.customerQolariTags),
       updateUserTags = \userId customerTags -> CQPerson.updateCustomerTags (Just customerTags) (cast @LYT.User @DPerson.Person userId),
       action = Actions.kaalChakraAction merchantOperatingCityId . cast @LYT.User @DPerson.Person,
       createFetchUserDataJob = createFetchUserDataJob merchantId merchantOperatingCityId,

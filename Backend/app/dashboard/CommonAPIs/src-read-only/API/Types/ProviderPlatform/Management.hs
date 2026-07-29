@@ -1,4 +1,4 @@
-{-# LANGUAGE StandaloneKindSignatures #-}
+﻿{-# LANGUAGE StandaloneKindSignatures #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module API.Types.ProviderPlatform.Management where
@@ -22,7 +22,7 @@ import qualified API.Types.ProviderPlatform.Management.Media
 import qualified API.Types.ProviderPlatform.Management.MediaFileDocument
 import qualified API.Types.ProviderPlatform.Management.Merchant
 import qualified API.Types.ProviderPlatform.Management.Message
-import qualified API.Types.ProviderPlatform.Management.NammaTag
+import qualified API.Types.ProviderPlatform.Management.QolariTag
 import qualified API.Types.ProviderPlatform.Management.Payout
 import qualified API.Types.ProviderPlatform.Management.PlanManagement
 import qualified API.Types.ProviderPlatform.Management.Revenue
@@ -61,7 +61,7 @@ data ManagementUserActionType
   | MEDIA_FILE_DOCUMENT API.Types.ProviderPlatform.Management.MediaFileDocument.MediaFileDocumentUserActionType
   | MERCHANT API.Types.ProviderPlatform.Management.Merchant.MerchantUserActionType
   | MESSAGE API.Types.ProviderPlatform.Management.Message.MessageUserActionType
-  | NAMMA_TAG API.Types.ProviderPlatform.Management.NammaTag.NammaTagUserActionType
+  | QOLARI_TAG API.Types.ProviderPlatform.Management.QolariTag.QolariTagUserActionType
   | PAYOUT API.Types.ProviderPlatform.Management.Payout.PayoutUserActionType
   | PLAN_MANAGEMENT API.Types.ProviderPlatform.Management.PlanManagement.PlanManagementUserActionType
   | REVENUE API.Types.ProviderPlatform.Management.Revenue.RevenueUserActionType
@@ -97,7 +97,7 @@ instance Text.Show.Show ManagementUserActionType where
     MEDIA_FILE_DOCUMENT e -> "MEDIA_FILE_DOCUMENT/" <> show e
     MERCHANT e -> "MERCHANT/" <> show e
     MESSAGE e -> "MESSAGE/" <> show e
-    NAMMA_TAG e -> "NAMMA_TAG/" <> show e
+    QOLARI_TAG e -> "QOLARI_TAG/" <> show e
     PAYOUT e -> "PAYOUT/" <> show e
     PLAN_MANAGEMENT e -> "PLAN_MANAGEMENT/" <> show e
     REVENUE e -> "REVENUE/" <> show e
@@ -275,10 +275,10 @@ instance Text.Read.Read ManagementUserActionType where
                      ) <-
                      Text.Read.readsPrec (app_prec + 1) r1
                ]
-            ++ [ ( NAMMA_TAG v1,
+            ++ [ ( QOLARI_TAG v1,
                    r2
                  )
-                 | r1 <- stripPrefix "NAMMA_TAG/" r,
+                 | r1 <- stripPrefix "QOLARI_TAG/" r,
                    ( v1,
                      r2
                      ) <-

@@ -1,4 +1,4 @@
-let sec = ./secrets/common.dhall
+﻿let sec = ./secrets/common.dhall
 
 let globalCommon = ../generic/common.dhall
 
@@ -69,8 +69,8 @@ let nyRegistryUrl = "http://localhost:${mockRegistryPort}/"
 
 let nyGatewayUrl = "http://localhost:${becknGatewayPort}/v1"
 
-let nammayatriRegistryConfig =
-      { apiKey = sec.nammayatriRegistryApiKey, url = nyRegistryUrl }
+let QolariRegistryConfig =
+      { apiKey = sec.QolariRegistryApiKey, url = nyRegistryUrl }
 
 in  { smsSessionConfig = globalCommon.smsSessionConfig
     , autoMigrate = globalCommon.autoMigrate
@@ -97,7 +97,7 @@ in  { smsSessionConfig = globalCommon.smsSessionConfig
     , mockGoogleCfg
     , googleTranslateUrl = "https://www.googleapis.com/"
     , googleTranslateKey = sec.googleTranslateKey
-    , nammayatriRegistryConfig
+    , QolariRegistryConfig
     , authServiceUrl = "http://localhost:${riderAppPort}/"
     , consumerType = globalCommon.consumerType
     , schedulerType = SchedulerType

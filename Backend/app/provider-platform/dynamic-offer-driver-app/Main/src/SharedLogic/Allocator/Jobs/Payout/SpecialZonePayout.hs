@@ -295,7 +295,7 @@ executeOldSpecialZonePayout scheduledPayout = do
     Just opCityId -> do
       (payoutServiceFlow, payoutServiceName, mbPersonBankAccount) <- TP.getCreatePayoutServiceFlow TP.MerchantServiceUsageConfigOption DEMSC.RidePayoutService person.clientSdkVersion opCityId person.id
       let payoutVpaValid = case payoutServiceFlow of
-            IPayout.JuspayFlow -> isJust mbVpa
+            IPayout.QolariFlow -> isJust mbVpa
             IPayout.StripeFlow -> True
       if not payoutVpaValid
         then do

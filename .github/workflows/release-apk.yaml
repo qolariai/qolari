@@ -1,4 +1,4 @@
-name: Release (Production - Customer)
+﻿name: Release (Production - Customer)
 
 on:
   push:
@@ -13,27 +13,27 @@ jobs:
     strategy:
       matrix:
         variant:
-          - name: NammaYatri
+          - name: Qolari
             keystore: ANDROID_KEYSTORE_FILE
             fastlane_cm: NY
             key_alias: KEYSTORE_KEY_ALIAS
             local_properties: LOCAL_PROPERTIES
-            config_path: app/src/user/nammaYatri/assets/juspay
-            config_url: "https://assets.juspay.in/hyper/bundles/in.juspay.merchants/nammayatriconsumer/android/cug/config.json"
+            config_path: app/src/user/Qolari/assets/Qolari
+            config_url: "https://assets.Qolari.in/hyper/bundles/in.Qolari.merchants/Qolariconsumer/android/cug/config.json"
           - name: ManaYatri
             keystore: ANDROID_KEYSTORE_FILE_MY
             fastlane_cm: MY
             key_alias: KEYSTORE_KEY_ALIAS_MY
             local_properties: LOCAL_PROPERTIES_MY
-            config_path: app/src/user/manaYatri/assets/juspay
-            config_url: "https://assets.juspay.in/hyper/bundles/in.juspay.merchants/nammayatriconsumer/android/cug/config.json"
+            config_path: app/src/user/manaYatri/assets/Qolari
+            config_url: "https://assets.Qolari.in/hyper/bundles/in.Qolari.merchants/Qolariconsumer/android/cug/config.json"
           - name: Yatri
             keystore: ANDROID_KEYSTORE_FILE_Y
             fastlane_cm: Y
             key_alias: KEYSTORE_KEY_ALIAS_Y
             local_properties: LOCAL_PROPERTIES_Y
-            config_path: app/src/user/yatri/assets/juspay
-            config_url: "https://assets.juspay.in/hyper/bundles/in.juspay.merchants/yatriconsumer/android/cug/config.json"
+            config_path: app/src/user/yatri/assets/Qolari
+            config_url: "https://assets.Qolari.in/hyper/bundles/in.Qolari.merchants/yatriconsumer/android/cug/config.json"
           # Add more variants as needed
     defaults:
       run:

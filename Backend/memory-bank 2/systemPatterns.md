@@ -1,7 +1,7 @@
-# System Patterns: Namma Yatri
+﻿# System Patterns: Qolari
 
 ## 1. System Architecture Overview
-The Namma Yatri backend is structured as a collection of microservices/packages, primarily written in Haskell. It appears to be event-driven, utilizing Kafka for message consumption. The architecture separates concerns into rider platform, provider platform, dashboards, Kafka consumers, mocks, and utility services.
+The Qolari backend is structured as a collection of microservices/packages, primarily written in Haskell. It appears to be event-driven, utilizing Kafka for message consumption. The architecture separates concerns into rider platform, provider platform, dashboards, Kafka consumers, mocks, and utility services.
 The frontend consists of UI components for customers (riders) and drivers, likely interacting with the backend via APIs. Mobile applications are native Android and iOS.
 Nix is used for overall environment and build management, suggesting a focus on reproducible builds and dependency management.
 

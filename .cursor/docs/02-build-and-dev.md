@@ -1,4 +1,4 @@
-# Build & Development
+﻿# Build & Development
 
 ## Environment Setup (One-Time)
 
@@ -26,7 +26,7 @@ cabal repl <package-name>        # Interactive REPL for a specific package
 
 **Important**: Use `cabal build <target>` for comprehensive checks. `cabal repl` alone doesn't guarantee full compilability. The project uses `-Werror`, so all GHC warnings are compile errors.
 
-## Code Generation (NammaDSL)
+## Code Generation (QolariDSL)
 
 The generator (`alchemist` package at `app/alchemist/`) produces Haskell code from YAML specs.
 
@@ -101,5 +101,5 @@ hlint .                          # Haskell linting (uses .hlint.yaml)
 
 ## Related Docs
 
-- YAML spec details: `07-namma-dsl.md`
+- YAML spec details: `07-qolari-dsl.md`
 - Haskell conventions: `15-conventions.md`

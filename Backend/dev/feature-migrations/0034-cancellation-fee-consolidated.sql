@@ -1,4 +1,4 @@
--- ============================================================================
+﻿-- ============================================================================
 -- Cancellation fee — consolidated Helsinki config (supersedes 0005 / 0011 / 0031)
 -- ============================================================================
 -- Single source of truth for the cancellation-penalty feature. Replaces the
@@ -9,7 +9,7 @@
 --
 -- Design (see dev/docs/cancellation-fee-configuration-guide.md):
 --   * transporter_config.can_add_cancellation_fee is the single master switch.
---   * NammaTags gate ELIGIBILITY (the time/wait thresholds live ONLY here):
+--   * QolariTags gate ELIGIBILITY (the time/wait thresholds live ONLY here):
 --       - CustomerNoShowCancellation: driver cancels with a configured penalty
 --         reason and has waited >= 3 min at pickup.
 --       - CustomerCancellation: rider cancels >= 3 min after booking.
@@ -21,7 +21,7 @@
 --       - transporter_config.cancellation_fee_payment_method_exceptions  (skip fee for e.g. Cash)
 --       - rider_config.immediate_capture_driver_cancellation_fee / _rider_...  (capture now vs pending due)
 --   * The penalty reason ('CUSTOMER_NO_SHOW') appears in three coupled places
---     seeded together below: the config field, the no-show NammaTag rule_engine,
+--     seeded together below: the config field, the no-show QolariTag rule_engine,
 --     and (implicitly, via cancelledBy) the dynamic logic. Change it in ONE place here.
 --
 -- DO NOT RUN IN MASTER/PROD. Idempotent (ON CONFLICT / dynamic city lookup).
@@ -60,7 +60,7 @@ BEGIN
         invoice_config = '{"driverInvoiceLineItemsVatInclusive":false,"emitLedgerEntries":true,"logoUrl":"https://raw.githubusercontent.com/witcher-shailesh/github-asset-store/main/uploads/img-lynx-app-2-1778256229295.svg"}',
         -- Driver wallet for BPP-side finance ledger entries
         driver_wallet_config = '{"enableDriverWallet":true,"enableWalletPayout":true,"enableWalletTopup":false,"driverWalletPayoutThreshold":0,"forceOnlineLedger":true,"gstPercentage":0,"minimumWalletPayoutAmount":0,"payoutCutOffDays":0,"maxWalletPayoutsPerDay":null,"minWalletAmountForCashRides":null,"payoutFee":null}',
-        -- NEW: configurable penalty reason(s) for driver no-show (keep in sync with the NammaTag below)
+        -- NEW: configurable penalty reason(s) for driver no-show (keep in sync with the QolariTag below)
         valid_cancellation_penalty_reasons = '{CUSTOMER_NO_SHOW}'
         -- NEW: payment instruments exempt from the cancellation fee (no fee computed, none sent to BAP).
         -- Left unset here so cash rides are still charged (Helsinki charges cash cancellations).
@@ -87,7 +87,7 @@ BEGIN
       version_description = EXCLUDED.version_description,
       updated_at = now();
 
-    -- 4. USER-CANCELLATION-DUES logic — AMOUNTS ONLY (thresholds are enforced by NammaTags).
+    -- 4. USER-CANCELLATION-DUES logic — AMOUNTS ONLY (thresholds are enforced by QolariTags).
     --    Rider cancellation is the default amount; driver no-show overrides by cancelledBy.
 
     -- Order 0: base cancellation charge (rider cancellation) = 3 EUR
@@ -135,10 +135,10 @@ BEGIN
     WHERE domain = 'USER-CANCELLATION-DUES' AND version = 1 AND "order" >= 4
       AND merchant_id = v_bpp_merchant_id;
 
-    -- 6. NammaTag: CustomerNoShowCancellation — driver cancels with penalty reason, waited >= threshold.
+    -- 6. QolariTag: CustomerNoShowCancellation — driver cancels with penalty reason, waited >= threshold.
     --    Threshold is the driver-wait-at-pickup window. LOCAL/TEST value is 5s (integration test 08
     --    waits ~10s); PRODUCTION should use 180 (3 min). Change the `180`/`5` literal below per env.
-    INSERT INTO atlas_driver_offer_bpp.namma_tag_v2
+    INSERT INTO atlas_driver_offer_bpp.QOLARI_TAG_v2
       (category, description, tag_type, merchant_operating_city_id, name, tags, rule_engine, created_at, updated_at)
     VALUES
       ('CustomerNoShowCancellationValidity',
@@ -150,12 +150,12 @@ BEGIN
       rule_engine = EXCLUDED.rule_engine, description = EXCLUDED.description,
       category = EXCLUDED.category, updated_at = now();
 
-    INSERT INTO atlas_driver_offer_bpp.namma_tag_trigger_v2 (event, merchant_operating_city_id, tag_name, created_at, updated_at)
+    INSERT INTO atlas_driver_offer_bpp.QOLARI_TAG_trigger_v2 (event, merchant_operating_city_id, tag_name, created_at, updated_at)
     VALUES ('RideCancel', v_bpp_city_id, 'CustomerNoShowCancellation', now(), now())
     ON CONFLICT (event, merchant_operating_city_id, tag_name) DO UPDATE SET updated_at = now();
 
-    -- 7. NammaTag: CustomerCancellation — rider cancels >= 3 min after booking
-    INSERT INTO atlas_driver_offer_bpp.namma_tag_v2
+    -- 7. QolariTag: CustomerCancellation — rider cancels >= 3 min after booking
+    INSERT INTO atlas_driver_offer_bpp.QOLARI_TAG_v2
       (category, description, tag_type, merchant_operating_city_id, name, tags, rule_engine, created_at, updated_at)
     VALUES
       ('CustomerCancellationValidity',
@@ -167,7 +167,7 @@ BEGIN
       rule_engine = EXCLUDED.rule_engine, description = EXCLUDED.description,
       category = EXCLUDED.category, updated_at = now();
 
-    INSERT INTO atlas_driver_offer_bpp.namma_tag_trigger_v2 (event, merchant_operating_city_id, tag_name, created_at, updated_at)
+    INSERT INTO atlas_driver_offer_bpp.QOLARI_TAG_trigger_v2 (event, merchant_operating_city_id, tag_name, created_at, updated_at)
     VALUES ('RideCancel', v_bpp_city_id, 'CustomerCancellation', now(), now())
     ON CONFLICT (event, merchant_operating_city_id, tag_name) DO UPDATE SET updated_at = now();
 

@@ -1,4 +1,4 @@
-# Debugging
+﻿# Debugging
 
 ## Mock Services
 
@@ -12,7 +12,7 @@ For local development and testing, mock services simulate external dependencies:
 | SMS | `app/mocks/sms/src/` | SMS gateway |
 
 Start the per-language mocks (FCM/SMS/Google/Idfy) as part of the backend with
-`, run-mobility-stack-dev`. The unified `mock-server` (Juspay/Stripe/Acko/etc.,
+`, run-mobility-stack-dev`. The unified `mock-server` (Qolari/Stripe/Acko/etc.,
 port 8080) is started separately by `, run-test-context-server` — pair the two
 commands when running integration tests.
 

@@ -1,4 +1,4 @@
-{-# LANGUAGE StandaloneDeriving #-}
+﻿{-# LANGUAGE StandaloneDeriving #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Storage.Beam.DailyStats where
@@ -9,7 +9,7 @@ import qualified Database.Beam as B
 import Domain.Types.Common ()
 import qualified Domain.Types.DailyStats
 import Kernel.External.Encryption
-import qualified Kernel.External.Payout.Juspay.Types.Payout
+import qualified Kernel.External.Payout.Qolari.Types.Payout
 import Kernel.Prelude
 import qualified Kernel.Prelude
 import qualified Kernel.Types.Common
@@ -34,7 +34,7 @@ data DailyStatsT f = DailyStatsT
     numRides :: B.C f Kernel.Prelude.Int,
     onlineDuration :: B.C f (Kernel.Prelude.Maybe Kernel.Types.Common.Seconds),
     payoutOrderId :: B.C f (Kernel.Prelude.Maybe Data.Text.Text),
-    payoutOrderStatus :: B.C f (Kernel.Prelude.Maybe Kernel.External.Payout.Juspay.Types.Payout.PayoutOrderStatus),
+    payoutOrderStatus :: B.C f (Kernel.Prelude.Maybe Kernel.External.Payout.Qolari.Types.Payout.PayoutOrderStatus),
     payoutStatus :: B.C f (Kernel.Prelude.Maybe Domain.Types.DailyStats.PayoutStatus),
     referralCounts :: B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Int),
     referralEarnings :: B.C f (Kernel.Prelude.Maybe Kernel.Types.Common.HighPrecMoney),

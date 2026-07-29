@@ -1,4 +1,4 @@
-module Storage.Queries.Transformers.MerchantServiceConfig where
+﻿module Storage.Queries.Transformers.MerchantServiceConfig where
 
 import ChatCompletion.Interface.Types as CIT
 import ChatCompletion.Types
@@ -20,7 +20,7 @@ import qualified Kernel.External.Notification as Notification
 import Kernel.External.Notification.Interface.Types as Notification
 import qualified Kernel.External.PartnerSdk.Interface.Types as PartnerSdk
 import qualified Kernel.External.Payment.Interface as Payment
-import qualified Kernel.External.Payment.Interface.Juspay as Juspay
+import qualified Kernel.External.Payment.Interface.Qolari as Qolari
 import qualified Kernel.External.Payment.Stripe.Config as Stripe
 import qualified Kernel.External.Payout.Interface as Payout
 import qualified Kernel.External.Plasma as Plasma
@@ -78,28 +78,28 @@ getConfigJSON = \case
   Domain.AadhaarVerificationServiceConfig aadhaarVerificationCfg -> case aadhaarVerificationCfg of
     AadhaarVerification.GridlineConfig cfg -> toJSON cfg
   Domain.PaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> toJSON cfg
+    Payment.PaymentGatewayConfig cfg -> toJSON cfg
     Payment.StripeConfig cfg -> toJSON cfg
     Payment.PaytmEDCConfig cfg -> toJSON cfg
   Domain.PayoutServiceConfig payoutCfg -> case payoutCfg of
-    Payout.JuspayConfig cfg -> toJSON cfg
+    Payout.PaymentGatewayConfig cfg -> toJSON cfg
     Payout.StripeConfig cfg -> toJSON cfg
   Domain.RentalPayoutServiceConfig payoutCfg -> case payoutCfg of
-    Payout.JuspayConfig cfg -> toJSON cfg
+    Payout.PaymentGatewayConfig cfg -> toJSON cfg
     Payout.StripeConfig cfg -> toJSON cfg
   Domain.RentalPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> toJSON cfg
+    Payment.PaymentGatewayConfig cfg -> toJSON cfg
     Payment.StripeConfig cfg -> toJSON cfg
     Payment.PaytmEDCConfig cfg -> toJSON cfg
   Domain.RidePayoutServiceConfig payoutCfg -> case payoutCfg of
-    Payout.JuspayConfig cfg -> toJSON cfg
+    Payout.PaymentGatewayConfig cfg -> toJSON cfg
     Payout.StripeConfig cfg -> toJSON cfg
   Domain.CautioPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> toJSON cfg
+    Payment.PaymentGatewayConfig cfg -> toJSON cfg
     Payment.StripeConfig cfg -> toJSON cfg
     Payment.PaytmEDCConfig cfg -> toJSON cfg
   Domain.MembershipPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> toJSON cfg
+    Payment.PaymentGatewayConfig cfg -> toJSON cfg
     Payment.StripeConfig cfg -> toJSON cfg
     Payment.PaytmEDCConfig cfg -> toJSON cfg
   Domain.IssueTicketServiceConfig ticketCfg -> case ticketCfg of
@@ -125,8 +125,8 @@ getConfigJSON = \case
     CIT.Gemini cfg -> toJSON cfg
   Domain.DashCamServiceConfig dashcamCfg -> case dashcamCfg of
     DashcamInter.CautioConfig cfg -> toJSON cfg
-  Domain.JuspayWalletServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> toJSON cfg
+  Domain.PaymentWalletServiceConfig paymentCfg -> case paymentCfg of
+    Payment.PaymentGatewayConfig cfg -> toJSON cfg
     Payment.StripeConfig cfg -> toJSON cfg
     Payment.PaytmEDCConfig cfg -> toJSON cfg
   Domain.PlasmaServiceConfig plasmaCfg -> case plasmaCfg of
@@ -139,7 +139,7 @@ getConfigJSON = \case
   Domain.GSTEInvoiceServiceConfig eInvCfg -> case eInvCfg of
     GSTEInvoice.CharteredInfoEInvoiceConfig cfg -> toJSON cfg
   Domain.AirportReachargeServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> toJSON cfg
+    Payment.PaymentGatewayConfig cfg -> toJSON cfg
     Payment.StripeConfig cfg -> toJSON cfg
     Payment.PaytmEDCConfig cfg -> toJSON cfg
   Domain.ChallanSearchServiceConfig challanCfg -> case challanCfg of
@@ -217,10 +217,10 @@ getServiceName = \case
     CIT.Gemini _ -> Domain.LLMChatCompletionService ChatCompletion.Types.Gemini
   Domain.DashCamServiceConfig dashcamCfg -> case dashcamCfg of
     DashcamInter.CautioConfig _ -> Domain.DashCamService Dashcam.Cautio
-  Domain.JuspayWalletServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig _ -> Domain.JuspayWalletService Payment.Juspay
-    Payment.StripeConfig _ -> Domain.JuspayWalletService Payment.Stripe
-    Payment.PaytmEDCConfig _ -> Domain.JuspayWalletService Payment.PaytmEDC
+  Domain.PaymentWalletServiceConfig paymentCfg -> case paymentCfg of
+    Payment.PaymentGatewayConfig _ -> Domain.PaymentWalletService Payment.Gateway
+    Payment.StripeConfig _ -> Domain.PaymentWalletService Payment.Stripe
+    Payment.PaytmEDCConfig _ -> Domain.PaymentWalletService Payment.PaytmEDC
   Domain.PlasmaServiceConfig plasmaCfg -> case plasmaCfg of
     Plasma.LMSConfig _ -> Domain.PlasmaService Plasma.LMS
   Domain.InsuranceDeclarationServiceConfig _ -> Domain.InsuranceDeclarationService Domain.IffcoTokio
@@ -237,9 +237,9 @@ getServiceName = \case
 
 getPaymentServiceConfigJson :: Payment.PaymentServiceConfig -> Payment.PaymentService
 getPaymentServiceConfigJson = \case
-  Payment.JuspayConfig cfg -> case cfg.serviceMode of
-    Just Juspay.AA -> Payment.AAJuspay
-    _ -> Payment.Juspay
+  Payment.PaymentGatewayConfig cfg -> case cfg.serviceMode of
+    Just Qolari.AA -> Payment.AAQolari
+    _ -> Payment.Gateway
   Payment.StripeConfig cfg -> case cfg.serviceMode of
     Just Stripe.Live -> Payment.Stripe
     Just Stripe.Test -> Payment.StripeTest
@@ -248,7 +248,7 @@ getPaymentServiceConfigJson = \case
 
 getPayoutServiceConfigJson :: Payout.PayoutServiceConfig -> Payout.PayoutService
 getPayoutServiceConfigJson = \case
-  Payout.JuspayConfig _ -> Payout.Juspay
+  Payout.PaymentGatewayConfig _ -> Payout.Qolari
   Payout.StripeConfig cfg -> case cfg.serviceMode of
     Just Stripe.Live -> Payout.Stripe
     Just Stripe.Test -> Payout.StripeTest
@@ -313,7 +313,7 @@ mkServiceConfig configJSON serviceName = either (\err -> throwError $ InternalEr
   Domain.LLMChatCompletionService ChatCompletion.Types.AzureOpenAI -> Domain.LLMChatCompletionServiceConfig . CIT.AzureOpenAI <$> eitherValue configJSON
   Domain.LLMChatCompletionService ChatCompletion.Types.Gemini -> Domain.LLMChatCompletionServiceConfig . CIT.Gemini <$> eitherValue configJSON
   Domain.DashCamService Dashcam.Cautio -> Domain.DashCamServiceConfig . DashcamInter.CautioConfig <$> eitherValue configJSON
-  Domain.JuspayWalletService paymentServiceName -> Domain.JuspayWalletServiceConfig <$> mkPaymentServiceConfig configJSON paymentServiceName
+  Domain.PaymentWalletService paymentServiceName -> Domain.PaymentWalletServiceConfig <$> mkPaymentServiceConfig configJSON paymentServiceName
   Domain.PlasmaService Plasma.LMS -> Domain.PlasmaServiceConfig . Plasma.LMSConfig <$> eitherValue configJSON
   Domain.InsuranceDeclarationService Domain.IffcoTokio -> Domain.InsuranceDeclarationServiceConfig <$> eitherValue configJSON
   Domain.PartnerSdkService Domain.Aarokya -> Domain.PartnerSdkServiceConfig . PartnerSdk.AarokyaPartnerSdkConfig <$> eitherValue configJSON
@@ -342,15 +342,15 @@ eitherValue value = case A.fromJSON value of
 
 mkPaymentServiceConfig :: A.Value -> Payment.PaymentService -> Either Text Payment.PaymentServiceConfig
 mkPaymentServiceConfig configJSON = \case
-  Payment.Juspay -> Payment.JuspayConfig <$> eitherValue configJSON
-  Payment.AAJuspay -> Payment.JuspayConfig <$> eitherValue configJSON
+  Payment.Gateway -> Payment.PaymentGatewayConfig <$> eitherValue configJSON
+  Payment.AAQolari -> Payment.PaymentGatewayConfig <$> eitherValue configJSON
   Payment.Stripe -> Payment.StripeConfig <$> eitherValue configJSON
   Payment.StripeTest -> Payment.StripeConfig <$> eitherValue configJSON
   Payment.PaytmEDC -> Payment.PaytmEDCConfig <$> eitherValue configJSON
 
 mkPayoutServiceConfig :: A.Value -> Payout.PayoutService -> Either Text Payout.PayoutServiceConfig
 mkPayoutServiceConfig configJSON = \case
-  Payout.Juspay -> Payout.JuspayConfig <$> eitherValue configJSON
-  Payout.AAJuspay -> Payout.JuspayConfig <$> eitherValue configJSON
+  Payout.Qolari -> Payout.PaymentGatewayConfig <$> eitherValue configJSON
+  Payout.AAQolari -> Payout.PaymentGatewayConfig <$> eitherValue configJSON
   Payout.Stripe -> Payout.StripeConfig <$> eitherValue configJSON
   Payout.StripeTest -> Payout.StripeConfig <$> eitherValue configJSON

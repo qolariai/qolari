@@ -77,7 +77,7 @@ import Lib.SessionizerMetrics.Prometheus.Internal
 import Lib.SessionizerMetrics.Types.Event
 import Passetto.Client
 import Passetto.Lib (mkPassettoContextAuto)
-import qualified Registry.Beckn.Nammayatri.Types as NyRegistry
+import qualified Registry.Beckn.Qolari.Types as NyRegistry
 import SharedLogic.External.LocationTrackingService.Types
 import SharedLogic.GoogleTranslate
 import SharedLogic.JobScheduler
@@ -194,7 +194,7 @@ data AppCfg = AppCfg
     zendeskWebhookToken :: Text,
     xyneWebhookSigningSecret :: Text,
     xyneWebhookBearerToken :: Text,
-    nammayatriRegistryConfig :: NyRegistry.RegistryConfig,
+    QolariRegistryConfig :: NyRegistry.RegistryConfig,
     nearByDriverAPIRateLimitOptions :: APIRateLimitOptions,
     seatBookingConfirmAPIRateLimitOptions :: APIRateLimitOptions,
     sosTrackingRateLimitOptions :: APIRateLimitOptions,
@@ -319,7 +319,7 @@ data AppEnv = AppEnv
     zendeskWebhookToken :: Text,
     xyneWebhookSigningSecret :: Text,
     xyneWebhookBearerToken :: Text,
-    nammayatriRegistryConfig :: NyRegistry.RegistryConfig,
+    QolariRegistryConfig :: NyRegistry.RegistryConfig,
     nearByDriverAPIRateLimitOptions :: APIRateLimitOptions,
     seatBookingConfirmAPIRateLimitOptions :: APIRateLimitOptions,
     sosTrackingRateLimitOptions :: APIRateLimitOptions,

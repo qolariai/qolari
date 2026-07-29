@@ -1,9 +1,9 @@
-# access tokens with different roles
-@customer = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer}}
-@driver = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/driver}}
-@juspay_ops = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_ops}}
-@juspay_admin = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_admin}}
-@customer_service = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer_service}}
+﻿# access tokens with different roles
+@customer = {{bpp-dashboard/token/qolari_PARTNER/customer}}
+@driver = {{bpp-dashboard/token/qolari_PARTNER/driver}}
+@Qolari_ops = {{bpp-dashboard/token/qolari_PARTNER/Qolari_ops}}
+@Qolari_admin = {{bpp-dashboard/token/qolari_PARTNER/Qolari_admin}}
+@customer_service = {{bpp-dashboard/token/qolari_PARTNER/customer_service}}
 
 @operator = favorit-operator-token0-000000000000
 
@@ -14,7 +14,7 @@ GET {{bpp-dashboard-host}}
 
 # @name postDriverOperatorSendJoiningOtp
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/operator/sendJoiningOtp
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/operator/sendJoiningOtp
 token: {{operator}}
 content-type: application/json
 
@@ -23,7 +23,7 @@ content-type: application/json
     "lastName": "CumOwner",
     "mobileNumber": "2211111124",
     "mobileCountryCode": "+91",
-    "email": "dco@nammayatri.in"
+    "email": "dco@drive.qolari.com"
 }
 
 ###
@@ -33,7 +33,7 @@ content-type: application/json
 
 @authId={{postDriverOperatorSendJoiningOtp.response.body.authId}}
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/operator/verifyJoiningOtp
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/operator/verifyJoiningOtp
 token: {{operator}}
 content-type: application/json
 
@@ -50,7 +50,7 @@ content-type: application/json
 
 @authId={{postDriverOperatorSendJoiningOtp.response.body.authId}}
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/operator/verifyJoiningOtp?authId={{authId}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/operator/verifyJoiningOtp?authId={{authId}}
 token: {{operator}}
 content-type: application/json
 
@@ -64,7 +64,7 @@ content-type: application/json
 
 # @name addDriversToFleetByOperator
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/fleet/addDrivers
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/fleet/addDrivers
 token: {{operator}}
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
@@ -83,7 +83,7 @@ Samwell, 2211111207, no_constraint, 6666666666
 
 # @name addDriversToOperator
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/fleet/addDrivers
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/fleet/addDrivers
 token: {{operator}}
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
@@ -144,7 +144,7 @@ token: {{token2}}
 
 @operationHubRequestId = {{getHubRequests.response.body.requests[0].id}}
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/operator/respond/hubRequest
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/operator/respond/hubRequest
 token: {{operator}}
 content-type: application/json
 
@@ -184,7 +184,7 @@ token: {{token2}}
 
 @operationHubRequestId = {{getDriverHubRequests.response.body.requests[0].id}}
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/operator/respond/hubRequest
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/operator/respond/hubRequest
 token: {{operator}}
 content-type: application/json
 

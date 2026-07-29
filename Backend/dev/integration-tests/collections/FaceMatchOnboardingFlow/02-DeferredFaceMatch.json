@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "FaceMatchOnboardingFlow - Deferred",
     "_postman_id": "facematch-deferred-flow",
@@ -75,9 +75,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -110,9 +110,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{authId_G}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{authId_G}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -151,9 +151,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/validateImage",
+          "raw": "{{baseURL_qolari_P}}/driver/register/validateImage",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -192,9 +192,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/aadhaar",
+          "raw": "{{baseURL_qolari_P}}/driver/register/aadhaar",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -229,9 +229,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/status",
+          "raw": "{{baseURL_qolari_P}}/driver/register/status",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -302,9 +302,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/validateImage",
+          "raw": "{{baseURL_qolari_P}}/driver/register/validateImage",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -339,9 +339,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/status",
+          "raw": "{{baseURL_qolari_P}}/driver/register/status",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -399,9 +399,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -434,9 +434,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{authId_H}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{authId_H}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -475,9 +475,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/validateImage",
+          "raw": "{{baseURL_qolari_P}}/driver/register/validateImage",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -516,9 +516,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/aadhaar",
+          "raw": "{{baseURL_qolari_P}}/driver/register/aadhaar",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -557,9 +557,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/validateImage",
+          "raw": "{{baseURL_qolari_P}}/driver/register/validateImage",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -594,9 +594,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/status",
+          "raw": "{{baseURL_qolari_P}}/driver/register/status",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -631,9 +631,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/validateImage",
+          "raw": "{{baseURL_qolari_P}}/driver/register/validateImage",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -669,9 +669,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -704,9 +704,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{authId_M}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{authId_M}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -745,9 +745,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/validateImage",
+          "raw": "{{baseURL_qolari_P}}/driver/register/validateImage",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -786,9 +786,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/pan",
+          "raw": "{{baseURL_qolari_P}}/driver/register/pan",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -823,9 +823,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/status",
+          "raw": "{{baseURL_qolari_P}}/driver/register/status",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -896,9 +896,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/validateImage",
+          "raw": "{{baseURL_qolari_P}}/driver/register/validateImage",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -933,9 +933,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/status",
+          "raw": "{{baseURL_qolari_P}}/driver/register/status",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1006,9 +1006,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/validateImage",
+          "raw": "{{baseURL_qolari_P}}/driver/register/validateImage",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1043,9 +1043,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/status",
+          "raw": "{{baseURL_qolari_P}}/driver/register/status",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1080,9 +1080,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/validateImage",
+          "raw": "{{baseURL_qolari_P}}/driver/register/validateImage",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",

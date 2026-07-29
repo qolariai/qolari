@@ -147,35 +147,35 @@ getServiceName msc = case msc.serviceConfig of
     Notification.PayTMConfig _ -> NotificationService Notification.PayTM
     Notification.GRPCConfig _ -> NotificationService Notification.GRPC
   PaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig _ -> PaymentService Payment.Juspay
+    Payment.PaymentGatewayConfig _ -> PaymentService Payment.Gateway
     Payment.StripeConfig stripeCfg -> stripePaymentService PaymentService stripeCfg
     Payment.PaytmEDCConfig _ -> PaymentService Payment.PaytmEDC
   MetroPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig _ -> MetroPaymentService Payment.Juspay
+    Payment.PaymentGatewayConfig _ -> MetroPaymentService Payment.Gateway
     Payment.StripeConfig stripeCfg -> stripePaymentService MetroPaymentService stripeCfg
     Payment.PaytmEDCConfig _ -> MetroPaymentService Payment.PaytmEDC
   BusPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig _ -> BusPaymentService Payment.Juspay
+    Payment.PaymentGatewayConfig _ -> BusPaymentService Payment.Gateway
     Payment.StripeConfig stripeCfg -> stripePaymentService BusPaymentService stripeCfg
     Payment.PaytmEDCConfig _ -> BusPaymentService Payment.PaytmEDC
   BbpsPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig _ -> BbpsPaymentService Payment.Juspay
+    Payment.PaymentGatewayConfig _ -> BbpsPaymentService Payment.Gateway
     Payment.StripeConfig stripeCfg -> stripePaymentService BbpsPaymentService stripeCfg
     Payment.PaytmEDCConfig _ -> BbpsPaymentService Payment.PaytmEDC
   MultiModalPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig _ -> MultiModalPaymentService Payment.Juspay
+    Payment.PaymentGatewayConfig _ -> MultiModalPaymentService Payment.Gateway
     Payment.StripeConfig stripeCfg -> stripePaymentService MultiModalPaymentService stripeCfg
     Payment.PaytmEDCConfig _ -> MultiModalPaymentService Payment.PaytmEDC
   PassPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig _ -> PassPaymentService Payment.Juspay
+    Payment.PaymentGatewayConfig _ -> PassPaymentService Payment.Gateway
     Payment.StripeConfig stripeCfg -> stripePaymentService PassPaymentService stripeCfg
     Payment.PaytmEDCConfig _ -> PassPaymentService Payment.PaytmEDC
   ParkingPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig _ -> ParkingPaymentService Payment.Juspay
+    Payment.PaymentGatewayConfig _ -> ParkingPaymentService Payment.Gateway
     Payment.StripeConfig stripeCfg -> stripePaymentService ParkingPaymentService stripeCfg
     Payment.PaytmEDCConfig _ -> ParkingPaymentService Payment.PaytmEDC
   MembershipPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig _ -> MembershipPaymentService Payment.Juspay
+    Payment.PaymentGatewayConfig _ -> MembershipPaymentService Payment.Gateway
     Payment.StripeConfig stripeCfg -> stripePaymentService MembershipPaymentService stripeCfg
     Payment.PaytmEDCConfig _ -> MembershipPaymentService Payment.PaytmEDC
   IssueTicketServiceConfig ticketCfg -> case ticketCfg of
@@ -191,17 +191,17 @@ getServiceName msc = case msc.serviceConfig of
     Tokenize.DigilockerTokenizationServiceConfig _ -> TokenizationService Tokenize.Digilocker
     Tokenize.TtenTokenizationServiceConfig _ -> TokenizationService Tokenize.Tten
   PayoutServiceConfig payoutCfg -> case payoutCfg of
-    Payout.JuspayConfig _ -> PayoutService Payout.Juspay
+    Payout.PaymentGatewayConfig _ -> PayoutService Payout.Qolari
     Payout.StripeConfig stripeCfg -> stripePayoutService PayoutService stripeCfg
   MultiModalServiceConfig multiModalCfg -> case multiModalCfg of
     MultiModal.GoogleTransitConfig _ -> MultiModalService MultiModal.GoogleTransit
     MultiModal.OTPTransitConfig _ -> MultiModalService MultiModal.OTPTransit
   WalletServiceConfig walletCfg -> case walletCfg of
     GW.GoogleWalletConfig _ -> WalletService GW.GoogleWallet
-  JuspayWalletServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig _ -> JuspayWalletService Payment.Juspay
-    Payment.StripeConfig _ -> JuspayWalletService Payment.Stripe
-    Payment.PaytmEDCConfig _ -> JuspayWalletService Payment.PaytmEDC
+  PaymentWalletServiceConfig paymentCfg -> case paymentCfg of
+    Payment.PaymentGatewayConfig _ -> PaymentWalletService Payment.Gateway
+    Payment.StripeConfig _ -> PaymentWalletService Payment.Stripe
+    Payment.PaytmEDCConfig _ -> PaymentWalletService Payment.PaytmEDC
   MultiModalStaticDataServiceConfig multiModalStaticDataCfg -> case multiModalStaticDataCfg of
     MultiModal.GoogleTransitConfig _ -> MultiModalStaticDataService MultiModal.GoogleTransit
     MultiModal.OTPTransitConfig _ -> MultiModalStaticDataService MultiModal.OTPTransit

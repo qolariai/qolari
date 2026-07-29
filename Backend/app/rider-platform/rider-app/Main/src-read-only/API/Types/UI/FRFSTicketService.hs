@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-unused-imports #-}
+﻿{-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module API.Types.UI.FRFSTicketService where
 
@@ -24,7 +24,7 @@ import qualified Domain.Types.SeatLayout
 import qualified Domain.Types.StationType
 import EulerHS.Prelude hiding (id)
 import qualified Kernel.External.Maps.Types
-import qualified Kernel.External.Payment.Juspay.Types.CreateOrder
+import qualified Kernel.External.Payment.Gateway.Types.CreateOrder
 import qualified Kernel.Prelude
 import qualified Kernel.Types.Beckn.Context
 import qualified Kernel.Types.Common
@@ -75,7 +75,7 @@ data FRFSBookingFeedbackReq
   deriving anyclass (ToJSON, FromJSON, ToSchema)
 
 data FRFSBookingPaymentAPI = FRFSBookingPaymentAPI
-  { paymentOrder :: Data.Maybe.Maybe Kernel.External.Payment.Juspay.Types.CreateOrder.CreateOrderResp,
+  { paymentOrder :: Data.Maybe.Maybe Kernel.External.Payment.Gateway.Types.CreateOrder.CreateOrderResp,
     status :: FRFSBookingPaymentStatusAPI,
     transactionId :: Data.Maybe.Maybe Data.Text.Text
   }

@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -fno-warn-orphans #-}
+﻿{-# OPTIONS_GHC -fno-warn-orphans #-}
 
 module Domain.Action.UI.MultimodalConfirm
   ( postMultimodalInitiate,
@@ -402,7 +402,7 @@ buildCreateOrderResp paymentOrder personId merchantOperatingCityId person paymen
             orderShortId = paymentOrder.shortId.getShortId,
             amount = paymentOrder.amount,
             customerId = staticCustomerId,
-            customerEmail = fromMaybe "growth@nammayatri.in" personEmail,
+            customerEmail = fromMaybe "growth@drive.qolari.com" personEmail,
             customerPhone = personPhone,
             customerFirstName = person.firstName,
             customerLastName = person.lastName,

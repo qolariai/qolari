@@ -1,14 +1,10 @@
-{
+﻿{
   nixConfig = {
-    # Workaround https://github.com/nammayatri/nammayatri/pull/9493#issuecomment-2506672419
     max-call-depth = "1000000";
-    # Nix cache
-    extra-substituters = "https://cache.nixos.asia/oss";
-    extra-trusted-public-keys = "oss:KO872wNJkCDgmGN3xy9dT89WAhvv13EiKncTtHDItVU=";
   };
 
   inputs = {
-    common.url = "github:nammayatri/common";
+    common.url = "github:qolariai/common";
     nixpkgs.follows = "common/nixpkgs";
     haskell-flake.follows = "common/haskell-flake";
 
@@ -21,16 +17,16 @@
 
     # Backend inputs
     shared-kernel = {
-      url = "github:nammayatri/shared-kernel";
+      url = "github:qolariai/shared-kernel";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    namma-dsl = {
-      url = "github:nammayatri/namma-dsl";
+    qolari-dsl = {
+      url = "github:qolariai/qolari-dsl";
     };
 
     haskell-cac = {
-      url = "github:piyushKumar-1/haskell_cac_client/Testing";
+      url = "github:qolariai/haskell_cac_client/Testing";
       inputs = {
         common.follows = "common";
         nixpkgs.follows = "common/nixpkgs"; # nix eval is failing in pipeline without giving proper error message #36 for nix update https://github.com/srid/nixci/issues/36
@@ -38,7 +34,7 @@
     };
 
     beckn-gateway = {
-      url = "github:nammayatri/beckn-gateway";
+      url = "github:qolariai/beckn-gateway";
       inputs = {
         common.follows = "common";
         haskell-flake.follows = "haskell-flake";
@@ -47,13 +43,12 @@
       };
     };
 
-    location-tracking-service.url = "github:nammayatri/location-tracking-service";
+    location-tracking-service.url = "github:qolariai/location-tracking-service";
 
-    notification-service.url = "github:nammayatri/notification-service";
+    notification-service.url = "github:qolariai/notification-service";
 
-    # https://github.com/nammayatri/passetto/pull/8
     passetto = {
-      url = "github:nammayatri/passetto/use-crypton";
+      url = "github:qolariai/passetto/use-crypton";
       inputs = {
         nixpkgs.follows = "common/nixpkgs";
         flake-parts.follows = "common/flake-parts";
@@ -63,7 +58,7 @@
       };
     };
     # Question: move this to common?
-    services-flake.url = "github:juspay/services-flake";
+    services-flake.url = "github:qolariai/services-flake";
 
     # We cannot use southern-zone-latest here, because the sha256 will change
     # over time.  NOTE: This file is not permanent, find the available one at
@@ -77,8 +72,8 @@
 
     # Multi-Cloud DB Manager — a SQL console (Node backend + React/Vite frontend)
     # fetched + pinned by Nix (no runtime clone), built by nix/db-manager.nix and
-    # run as stack services against the local nammayatri Postgres + Redis.
-    db-manager-src.url = "github:nammayatri/Multi-Cloud-DB-Manager";
+    # run as stack services against the local Qolari Postgres + Redis.
+    db-manager-src.url = "github:qolariai/Multi-Cloud-DB-Manager";
     db-manager-src.flake = false;
 
     easy-purescript-nix.url = "github:justinwoo/easy-purescript-nix/a90bd941297497c83205f0a64f30c5188a2a4fda";
@@ -92,7 +87,7 @@
     google-cloud-haskell.url = "github:tusharad/google-cloud-haskell";
     google-cloud-haskell.flake = false;
 
-    json-logic-hs.url = "github:nammayatri/json-logic-hs";
+    json-logic-hs.url = "github:qolariai/json-logic-hs";
     json-logic-hs.flake = false;
 
     # Hackage version pins use all-cabal-hashes; 0.4.3.2 is missing from our snapshot.

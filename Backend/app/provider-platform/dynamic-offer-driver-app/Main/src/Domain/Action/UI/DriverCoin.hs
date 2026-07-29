@@ -33,7 +33,7 @@ import Environment
 import EulerHS.Prelude hiding (id)
 import qualified Kernel.Beam.Functions as B
 import qualified Kernel.External.Payout.Interface as IPayout
-import qualified Kernel.External.Payout.Juspay.Types.Payout as Payout
+import qualified Kernel.External.Payout.Qolari.Types.Payout as Payout
 import Kernel.External.Types (Language (..), ServiceFlow)
 import qualified Kernel.Storage.Hedis as Redis
 import Kernel.Types.APISuccess (APISuccess (Success))
@@ -412,7 +412,7 @@ redeemCoins driverId merchantId merchantOpCityId transporterConfig vehCategory d
   driverInformation <- QDriverInfo.findById (cast driverId) >>= fromMaybeM DriverInfoNotFound
   (payoutServiceFlow, payoutServiceName, mbPersonBankAccount) <- Payout.getCreatePayoutServiceFlow Payout.MerchantServiceUsageConfigOption DEMSC.PayoutService driver.clientSdkVersion merchantOpCityId driver.id
   vpa <- case payoutServiceFlow of
-    IPayout.JuspayFlow -> Just <$> (driverInformation.payoutVpa & fromMaybeM (InvalidRequest "Driver has no payout VPA"))
+    IPayout.QolariFlow -> Just <$> (driverInformation.payoutVpa & fromMaybeM (InvalidRequest "Driver has no payout VPA"))
     IPayout.StripeFlow -> pure Nothing
   merchantOperatingCity <- CQMOC.findById (cast merchantOpCityId) >>= fromMaybeM (MerchantOperatingCityNotFound merchantOpCityId.getId)
   let createPayoutOrderReq = DPayment.mkCreatePayoutServiceReq uid calculatedAmount transporterConfig.currency phoneNo driver.email driverId.getId "converted from coins" (Just driver.firstName) vpa payoutConfig.orderType payoutServiceFlow Nothing

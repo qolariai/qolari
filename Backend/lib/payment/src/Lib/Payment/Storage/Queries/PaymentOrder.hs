@@ -183,7 +183,7 @@ instance FromTType' BeamPO.PaymentOrder DOrder.PaymentOrder where
             personId = Id personId,
             merchantId = Id merchantId,
             entityName = entityName,
-            serviceProvider = fromMaybe Payment.Juspay serviceProvider,
+            serviceProvider = fromMaybe Payment.Gateway serviceProvider,
             clientAuthToken = case (clientAuthTokenEncrypted, clientAuthTokenHash) of
               (Just encryptedToken, Just hash) -> Just $ EncryptedHashed (Encrypted encryptedToken) hash
               (_, _) -> Nothing,

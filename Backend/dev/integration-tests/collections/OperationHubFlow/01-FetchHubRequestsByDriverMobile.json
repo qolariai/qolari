@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "Fetch Hub Requests by Driver Mobile Number",
     "description": "End-to-end test: registers a fleet owner (creator) and a driver, creates an inspection request linking the driver, then verifies the new mbDriverMobileNumber query param correctly filters requests by the driver's mobile number \u2014 and that the existing mbMobileNumber (creator search) still works.\n\nPrerequisite: run setup-local-operation-hub.sql to seed the operation hub:\n  psql -h localhost -p 5434 -U atlas_driver_offer_bpp_user -d atlas_dev -f setup-local-operation-hub.sql",
@@ -206,9 +206,9 @@
           "raw": "{\n    \"mobileNumber\": \"{{_test_driver_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"{{driver_merchant_id}}\",\n    \"merchantOperatingCity\": \"{{city}}\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -246,9 +246,9 @@
           "raw": "{\n    \"otp\": \"{{login_otp}}\",\n    \"deviceToken\": \"test-device-driver\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",

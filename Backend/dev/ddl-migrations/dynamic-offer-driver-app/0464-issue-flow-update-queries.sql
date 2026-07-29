@@ -1,4 +1,4 @@
-------------- Issue Category Table ----------------------------------
+﻿------------- Issue Category Table ----------------------------------
 ALTER TABLE atlas_driver_offer_bpp.issue_category ADD COLUMN category_type text NOT NULL DEFAULT 'Category';
 ALTER TABLE atlas_driver_offer_bpp.issue_category ADD COLUMN created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL;
 ALTER TABLE atlas_driver_offer_bpp.issue_category ADD COLUMN updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL;
@@ -14,7 +14,7 @@ ALTER TABLE atlas_driver_offer_bpp.issue_category ADD COLUMN is_ticket_required 
 -- SET merchant_operating_city_id = (
 --     SELECT id
 --     FROM atlas_driver_offer_bpp.merchant_operating_city
---     WHERE city = 'Bangalore' AND merchant_short_id = 'NAMMA_YATRI_PARTNER'
+--     WHERE city = 'Bangalore' AND merchant_short_id = 'QOLARI_PARTNER'
 -- );
 
 ALTER TABLE atlas_driver_offer_bpp.issue_category
@@ -33,7 +33,7 @@ ALTER TABLE atlas_driver_offer_bpp.issue_option ADD COLUMN show_only_when_user_b
 -- SET merchant_operating_city_id = (
 --     SELECT id
 --     FROM atlas_driver_offer_bpp.merchant_operating_city
---     WHERE city = 'Bangalore' AND merchant_short_id = 'NAMMA_YATRI_PARTNER'
+--     WHERE city = 'Bangalore' AND merchant_short_id = 'QOLARI_PARTNER'
 -- );
 
 ALTER TABLE atlas_driver_offer_bpp.issue_option
@@ -72,7 +72,7 @@ ALTER TABLE atlas_driver_offer_bpp.issue_message ADD COLUMN is_active boolean DE
 -- SET merchant_operating_city_id = (
 --     SELECT id
 --     FROM atlas_driver_offer_bpp.merchant_operating_city
---     WHERE city = 'Bangalore' AND merchant_short_id = 'NAMMA_YATRI_PARTNER'
+--     WHERE city = 'Bangalore' AND merchant_short_id = 'QOLARI_PARTNER'
 -- );
 
 ALTER TABLE atlas_driver_offer_bpp.issue_message

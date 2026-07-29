@@ -1,11 +1,11 @@
--- Mock Payment Server Configuration
+﻿-- Mock Payment Server Configuration
 let common = ./common.dhall
 
 in  { port = Natural/toInteger (env:SERVICE_PORT ? 8091)
     , loggerConfig =
         common.loggerConfig // { logFilePath = "/tmp/mock-payment.log" }
     , graceTerminationPeriod = +90
-    , juspayWebhookBaseUrl = "https://api.sandbox.moving.tech/app"
+    , QolariWebhookBaseUrl = "https://api.sandbox.moving.tech/app"
     , esqDBCfg =
       { connectHost = "localhost"
       , connectPort = env:DB_PRIMARY_PORT ? 5434

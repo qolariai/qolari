@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-dodgy-exports #-}
+﻿{-# OPTIONS_GHC -Wno-dodgy-exports #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
@@ -85,9 +85,9 @@ updateClientId :: (EsqDBFlow m r, MonadFlow m, CacheFlow m r) => (Kernel.Prelude
 updateClientId clientId id = do _now <- getCurrentTime; updateOneWithKV [Se.Set Beam.clientId clientId, Se.Set Beam.updatedAt _now] [Se.Is Beam.id $ Se.Eq (Kernel.Types.Id.getId id)]
 
 updateCustomerTags :: (EsqDBFlow m r, MonadFlow m, CacheFlow m r) => (Kernel.Prelude.Maybe [Lib.Yudhishthira.Types.TagNameValueExpiry] -> Kernel.Types.Id.Id Domain.Types.Person.Person -> m ())
-updateCustomerTags customerNammaTags id = do
+updateCustomerTags customerQolariTags id = do
   _now <- getCurrentTime
-  updateWithKV [Se.Set Beam.customerNammaTags (Lib.Yudhishthira.Tools.Utils.tagsNameValueExpiryToTType customerNammaTags), Se.Set Beam.updatedAt _now] [Se.Is Beam.id $ Se.Eq (Kernel.Types.Id.getId id)]
+  updateWithKV [Se.Set Beam.customerQolariTags (Lib.Yudhishthira.Tools.Utils.tagsNameValueExpiryToTType customerQolariTags), Se.Set Beam.updatedAt _now] [Se.Is Beam.id $ Se.Eq (Kernel.Types.Id.getId id)]
 
 updateDeviceToken :: (EsqDBFlow m r, MonadFlow m, CacheFlow m r) => (Kernel.Prelude.Maybe Kernel.Prelude.Text -> Kernel.Types.Id.Id Domain.Types.Person.Person -> m ())
 updateDeviceToken deviceToken id = do _now <- getCurrentTime; updateWithKV [Se.Set Beam.deviceToken deviceToken, Se.Set Beam.updatedAt _now] [Se.Is Beam.id $ Se.Eq (Kernel.Types.Id.getId id)]
@@ -110,12 +110,12 @@ updateIsValidRating isValidRating id = do
   _now <- getCurrentTime
   updateWithKV [Se.Set Beam.isValidRating isValidRating, Se.Set Beam.updatedAt _now] [Se.Is Beam.id $ Se.Eq (Kernel.Types.Id.getId id)]
 
-updateJuspayCustomerPaymentId ::
+updateQolariCustomerPaymentId ::
   (EsqDBFlow m r, MonadFlow m, CacheFlow m r) =>
   (Kernel.Prelude.Maybe Kernel.External.Payment.Interface.Types.CustomerId -> Kernel.Types.Id.Id Domain.Types.Person.Person -> m ())
-updateJuspayCustomerPaymentId juspayCustomerPaymentID id = do
+updateQolariCustomerPaymentId QolariCustomerPaymentID id = do
   _now <- getCurrentTime
-  updateWithKV [Se.Set Beam.juspayCustomerPaymentID juspayCustomerPaymentID, Se.Set Beam.updatedAt _now] [Se.Is Beam.id $ Se.Eq (Kernel.Types.Id.getId id)]
+  updateWithKV [Se.Set Beam.QolariCustomerPaymentID QolariCustomerPaymentID, Se.Set Beam.updatedAt _now] [Se.Is Beam.id $ Se.Eq (Kernel.Types.Id.getId id)]
 
 updateLastUsedVehicleCategories :: (EsqDBFlow m r, MonadFlow m, CacheFlow m r) => ([BecknV2.OnDemand.Enums.VehicleCategory] -> Kernel.Types.Id.Id Domain.Types.Person.Person -> m ())
 updateLastUsedVehicleCategories lastUsedVehicleCategories id = do
@@ -203,7 +203,7 @@ updateByPrimaryKey (Domain.Types.Person.Person {..}) = do
       Se.Set Beam.cloudType cloudType,
       Se.Set Beam.comments comments,
       Se.Set Beam.currentCity (Kernel.Prelude.Just currentCity),
-      Se.Set Beam.customerNammaTags (Lib.Yudhishthira.Tools.Utils.tagsNameValueExpiryToTType customerNammaTags),
+      Se.Set Beam.customerQolariTags (Lib.Yudhishthira.Tools.Utils.tagsNameValueExpiryToTType customerQolariTags),
       Se.Set Beam.customerReferralCode customerReferralCode,
       Se.Set Beam.dateOfBirth dateOfBirth,
       Se.Set Beam.description description,
@@ -229,7 +229,7 @@ updateByPrimaryKey (Domain.Types.Person.Person {..}) = do
       Se.Set Beam.informPoliceSos (Just informPoliceSos),
       Se.Set Beam.isNew isNew,
       Se.Set Beam.isValidRating isValidRating,
-      Se.Set Beam.juspayCustomerPaymentID juspayCustomerPaymentID,
+      Se.Set Beam.QolariCustomerPaymentID QolariCustomerPaymentID,
       Se.Set Beam.language language,
       Se.Set Beam.lastName lastName,
       Se.Set Beam.lastUsedVehicleCategories (Just lastUsedVehicleCategories),

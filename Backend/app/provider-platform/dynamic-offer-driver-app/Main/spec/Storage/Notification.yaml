@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   Merchant: Domain.Types.Merchant
   MerchantOperatingCity: Domain.Types.MerchantOperatingCity
   Mandate: Domain.Types.Mandate
@@ -15,7 +15,7 @@ Notification:
     mandateId : Id Mandate
     driverFeeId : Id DriverFee
     txnDate : UTCTime
-    juspayProvidedId : Text
+    QolariProvidedId : Text
     providerName : Maybe Text
     notificationType : Maybe Text
     description : Text
@@ -60,7 +60,7 @@ Notification:
     shortId: character varying (255)
     mandateId: character varying (255)
     driverFeeId: character varying (255)
-    juspayProvidedId: character varying (255)
+    QolariProvidedId: character varying (255)
     sourceAmount: numeric
 
   extraOperations:

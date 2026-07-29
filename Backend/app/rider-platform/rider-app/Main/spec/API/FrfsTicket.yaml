@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   Text: Data.Text
   Maybe: Data.Maybe
   Station: Domain.Types.Station
@@ -17,7 +17,7 @@ imports:
   FRFSSearch: Domain.Types.FRFSSearch
   VehicleCategory: BecknV2.FRFS.Enums
   ServiceTierType: BecknV2.FRFS.Enums
-  CreateOrderResp: Kernel.External.Payment.Juspay.Types.CreateOrder
+  CreateOrderResp: Kernel.External.Payment.Qolari.Types.CreateOrder
   City: Kernel.Types.Beckn.Context
   Merchant: Domain.Types.Merchant
   MerchantOperatingCity: Domain.Types.MerchantOperatingCity

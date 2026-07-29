@@ -1,4 +1,4 @@
-CREATE TABLE atlas_app.person ();
+﻿CREATE TABLE atlas_app.person ();
 
 ALTER TABLE atlas_app.person ADD COLUMN aadhaar_verified boolean NOT NULL default false;
 ALTER TABLE atlas_app.person ADD COLUMN backend_app_version text ;
@@ -107,7 +107,7 @@ ALTER TABLE atlas_app.person ADD COLUMN inform_police_sos boolean ;
 ------- SQL updates -------
 
 ALTER TABLE atlas_app.person ADD COLUMN android_id text ;
-ALTER TABLE atlas_app.person ADD COLUMN customer_namma_tags text[] ;
+ALTER TABLE atlas_app.person ADD COLUMN customer_QOLARI_TAGS text[] ;
 
 
 
@@ -153,7 +153,7 @@ ALTER TABLE atlas_app.person ADD COLUMN date_of_birth timestamp with time zone ;
 
 ------- SQL updates -------
 
-ALTER TABLE atlas_app.person ADD COLUMN juspay_customer_payment_id text ;
+ALTER TABLE atlas_app.person ADD COLUMN gateway_customer_payment_id text ;
 
 
 ------- SQL updates -------

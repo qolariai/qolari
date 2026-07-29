@@ -463,7 +463,7 @@ type instance JobContent 'DailyPassStatusUpdate = DailyPassStatusUpdateJobData
 data SettlementReportIngestionJobData = SettlementReportIngestionJobData
   { merchantId :: Id DM.Merchant,
     merchantOperatingCityId :: Id DMOC.MerchantOperatingCity,
-    juspayServiceName :: Maybe ServiceName
+    PaymentGatewayServiceName :: Maybe ServiceName
   }
   deriving (Generic, Show, Eq, FromJSON, ToJSON)
 

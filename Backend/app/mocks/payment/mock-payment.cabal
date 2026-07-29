@@ -9,8 +9,8 @@ version:        0.1.0.0
 description:    Mock Payment Server for local testing
 homepage:       https://github.com/qolariai/qolari#readme
 bug-reports:    https://github.com/qolariai/qolari/issues
-author:         nammayatri
-maintainer:     nammayatri
+author:         Qolari
+maintainer:     Qolari
 copyright:      2024 Qolari Technologies
 license:        AllRightsReserved
 build-type:     Simple

@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "Airport Taxi App Flow (Special Zone)",
     "description": "Real app-level airport taxi flow: fresh driver + rider onboard through the actual apps (not the dashboard booth proxy), search from an airport special zone, get a queue-based quote+OTP (no upfront driver assignment), and whichever driver enters the rider's OTP claims the ride -> starts -> ends.\n\nThis mirrors how a real airport taxi rank queue works: the rider books and receives an OTP; the driver at the front of the physical queue enters that OTP to claim the ride at ride-start time.\n\nPrerequisites:\n- Special zone geometry must be seeded for the pickup point (see AirportTaxiFlow collection notes for common geometry issues)\n- A fare_product with trip_category='OneWay_OneWayRideOtp' must exist for the special zone's pickup area\n- Environment must have sz_origin_lat/sz_origin_lon within an enabled airport special zone\n- If no special zone is configured / geom_geo_json is stale, this will fail at the 'Has quotes for special zone' assertion with empty quotes",
@@ -63,8 +63,8 @@
           "raw": "{\n    \"mobileNumber\": \"{{_test_driver_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"{{driver_merchant_id}}\",\n    \"merchantOperatingCity\": \"{{city}}\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth"]
         }
       }
@@ -96,8 +96,8 @@
           "raw": "{\n    \"otp\": \"{{login_otp}}\",\n    \"deviceToken\": \"test-device\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth", "{{driver_authId}}", "verify"]
         }
       }
@@ -204,7 +204,7 @@
             "exec": [
               "var d = pm.response.json();",
               "if (d.orderId) { pm.environment.set('payment_order_id', d.orderId); }",
-              "if (d.orderResp && d.orderResp.order_id) { pm.environment.set('juspay_mock_order_id', d.orderResp.order_id); }",
+              "if (d.orderResp && d.orderResp.order_id) { pm.environment.set('Qolari_mock_order_id', d.orderResp.order_id); }",
               "pm.test('Status 200', function () { pm.response.to.have.status(200); });"
             ],
             "type": "text/javascript"
@@ -219,8 +219,8 @@
         ],
         "body": { "mode": "raw", "raw": "{}" },
         "url": {
-          "raw": "{{baseURL_namma_P}}/plan/{{plan_id}}/subscribe?serviceName=%22{{plan_service_name}}%22",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/plan/{{plan_id}}/subscribe?serviceName=%22{{plan_service_name}}%22",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["plan", "{{plan_id}}", "subscribe"],
           "query": [
             { "key": "serviceName", "value": "%22{{plan_service_name}}%22" }
@@ -236,7 +236,7 @@
           "script": {
             "exec": [
               "pm.test('Status 200', function () { pm.response.to.have.status(200); });",
-              "console.log('Forced juspay order', pm.environment.get('juspay_mock_order_id'), 'to CHARGED');"
+              "console.log('Forced Qolari order', pm.environment.get('Qolari_mock_order_id'), 'to CHARGED');"
             ],
             "type": "text/javascript"
           }
@@ -249,7 +249,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"service\": \"juspay\", \"extract\": \"path.2\", \"value\": \"{{juspay_mock_order_id}}\", \"match\": \"/orders\", \"response\": {\"status\": \"CHARGED\"}}"
+          "raw": "{\"service\": \"Qolari\", \"extract\": \"path.2\", \"value\": \"{{Qolari_mock_order_id}}\", \"match\": \"/orders\", \"response\": {\"status\": \"CHARGED\"}}"
         },
         "url": {
           "raw": "{{mockServerUrl}}/mock/override",
@@ -288,8 +288,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/payment/{{payment_order_id}}/status",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/payment/{{payment_order_id}}/status",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["payment", "{{payment_order_id}}", "status"]
         }
       }
@@ -319,8 +319,8 @@
         ],
         "body": { "mode": "raw", "raw": "{}" },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "setActivity"],
           "query": [
             { "key": "active", "value": "true" },
@@ -650,8 +650,8 @@
           "raw": "{\"specialZoneOtpCode\": \"{{sz_otp}}\", \"point\": {\"lat\": {{sz_origin_lat}}, \"lon\": {{sz_origin_lon}}}}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/otpRide/start",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/otpRide/start",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "otpRide", "start"]
         }
       }
@@ -691,8 +691,8 @@
           "raw": "{\"point\": {\"lat\": {{dest_lat}}, \"lon\": {{dest_lon}}}}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/end",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/end",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "ride", "{{driver_ride_id}}", "end"]
         }
       }

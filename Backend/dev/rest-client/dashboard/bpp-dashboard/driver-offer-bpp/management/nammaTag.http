@@ -1,9 +1,9 @@
-# access tokens with different roles
-@customer = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer}}
-@driver = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/driver}}
-@juspay_ops = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_ops}}
-@juspay_admin = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_admin}}
-@customer_service = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer_service}}
+﻿# access tokens with different roles
+@customer = {{bpp-dashboard/token/qolari_PARTNER/customer}}
+@driver = {{bpp-dashboard/token/qolari_PARTNER/driver}}
+@Qolari_ops = {{bpp-dashboard/token/qolari_PARTNER/Qolari_ops}}
+@Qolari_admin = {{bpp-dashboard/token/qolari_PARTNER/Qolari_admin}}
+@customer_service = {{bpp-dashboard/token/qolari_PARTNER/customer_service}}
 
 # @name healthcheck
 GET {{bpp-dashboard-host}}
@@ -12,7 +12,7 @@ GET {{bpp-dashboard-host}}
 
 # @name dailyRidesQueryCreate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/nammaTag/query/create
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/QolariTag/query/create
 token: {{customer_service}}
 content-type: application/json
 
@@ -64,8 +64,8 @@ content-type: application/json
 
 # @name dailyRidesQueryUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/nammaTag/query/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/QolariTag/query/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 {
@@ -116,8 +116,8 @@ content-type: application/json
 
 # @name dailyRidesQueryDelete
 
-DELETE {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/nammaTag/query/delete
-token: {{juspay_admin}}
+DELETE {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/QolariTag/query/delete
+token: {{Qolari_admin}}
 content-type: application/json
 
 {
@@ -129,7 +129,7 @@ content-type: application/json
 
 # @name dailyCancellationsQueryCreate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/nammaTag/query/create
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/QolariTag/query/create
 token: {{customer_service}}
 content-type: application/json
 
@@ -168,7 +168,7 @@ content-type: application/json
 
 # @name DriverSpeedTagCreate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/nammaTag/tag/create
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/QolariTag/tag/create
 token: {{customer_service}}
 content-type: application/json
 
@@ -236,7 +236,7 @@ content-type: application/json
 #   "newValue" : "FAST_DRIVER"
 # }
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/nammaTag/tag/update
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/QolariTag/tag/update
 token: {{customer_service}}
 content-type: application/json
 
@@ -314,7 +314,7 @@ content-type: application/json
 
 # @name runKaalChakraJobSingleUser
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/nammaTag/runJob
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/QolariTag/runJob
 token: {{customer_service}}
 content-type: application/json
 
@@ -336,7 +336,7 @@ content-type: application/json
 
 # @name runKaalChakraJobUserList
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/nammaTag/runJob
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/QolariTag/runJob
 token: {{customer_service}}
 content-type: application/json
 
@@ -356,7 +356,7 @@ content-type: application/json
 
 # @name scheduleKaalChakraJob
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/nammaTag/runJob
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/QolariTag/runJob
 token: {{customer_service}}
 content-type: application/json
 

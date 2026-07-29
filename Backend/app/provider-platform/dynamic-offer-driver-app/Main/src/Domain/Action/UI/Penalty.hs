@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wwarn=unused-imports #-}
+﻿{-# OPTIONS_GHC -Wwarn=unused-imports #-}
 
 module Domain.Action.UI.Penalty (postPenaltyCheck) where
 
@@ -56,7 +56,7 @@ postPenaltyCheck (mbPersonId, _merchantId, _merchantOpCityId) req = do
   (isApplicable, penaltyAmount) <- case booking.fareParams.driverCancellationPenaltyAmount of
     Just penaltyAmount -> do
       tagData <- CancelRideInternal.buildPenaltyCheckContext booking ride req.point
-      tagsE <- withTryCatch "computeNammaTags:PenaltyCheck" $ LYDL.computeNammaTagsWithDebugLog LYDL.Driver (cast booking.merchantOperatingCityId) YA.PenaltyCheck (Just booking.transactionId) tagData
+      tagsE <- withTryCatch "computeQolariTags:PenaltyCheck" $ LYDL.computeQolariTagsWithDebugLog LYDL.Driver (cast booking.merchantOperatingCityId) YA.PenaltyCheck (Just booking.transactionId) tagData
       let tags = fromMaybe [] $ eitherToMaybe tagsE
           isPenaltyApplicable = validCancellationPenaltyApplicable `elem` tags
           existingTags = fromMaybe [] ride.rideTags
@@ -101,7 +101,7 @@ postPenaltyCheck (mbPersonId, _merchantId, _merchantOpCityId) req = do
               driverArrivalTime = driverArrivalTime,
               merchantOperatingCityId = booking.merchantOperatingCityId
             }
-    tagsE <- withTryCatch "computeNammaTags:RideCancel" $ LYDL.computeNammaTagsWithDebugLog LYDL.Driver (cast booking.merchantOperatingCityId) YA.RideCancel (Just booking.transactionId) tagData
+    tagsE <- withTryCatch "computeQolariTags:RideCancel" $ LYDL.computeQolariTagsWithDebugLog LYDL.Driver (cast booking.merchantOperatingCityId) YA.RideCancel (Just booking.transactionId) tagData
     let tags = fromMaybe [] $ eitherToMaybe tagsE
         isValid = validDriverCancellation `elem` tags
         isInvalid = invalidDriverCancellation `elem` tags

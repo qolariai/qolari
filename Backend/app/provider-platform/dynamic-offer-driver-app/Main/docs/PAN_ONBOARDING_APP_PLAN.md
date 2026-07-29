@@ -1,4 +1,4 @@
-# PAN Onboarding (App and Dashboard) – Full Plan
+﻿# PAN Onboarding (App and Dashboard) – Full Plan
 
 This document is the **complete** plan for PAN onboarding: **App** (HyperVerge) and **Dashboard** (Idfy `pan_aadhaar_link`), plus shared storage and tests. The main [ONBOARDING_DOCUMENTS_AI_PLAN.md](./ONBOARDING_DOCUMENTS_AI_PLAN.md) points here for all PAN onboarding details.
 
@@ -133,4 +133,4 @@ Persist HyperVerge response fields (**aadhaar linkage**, **PAN status**, **PAN c
 ## 7. References
 
 - Main plan: [ONBOARDING_DOCUMENTS_AI_PLAN.md](./ONBOARDING_DOCUMENTS_AI_PLAN.md) – PAN section (Dashboard Idfy flow, shared storage, execution order).
-- NammaDSL: change only YAML under `spec/Storage/DriverOnboarding.yaml`; run `, run-generator --apply-hint`; do not edit `src-read-only`.
+- QolariDSL: change only YAML under `spec/Storage/DriverOnboarding.yaml`; run `, run-generator --apply-hint`; do not edit `src-read-only`.

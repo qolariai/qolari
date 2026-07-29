@@ -1,4 +1,4 @@
-{-# LANGUAGE StandaloneDeriving #-}
+﻿{-# LANGUAGE StandaloneDeriving #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Storage.Beam.Notification where
@@ -18,7 +18,7 @@ data NotificationT f = NotificationT
     description :: B.C f Kernel.Prelude.Text,
     driverFeeId :: B.C f Kernel.Prelude.Text,
     id :: B.C f Kernel.Prelude.Text,
-    juspayProvidedId :: B.C f Kernel.Prelude.Text,
+    QolariProvidedId :: B.C f Kernel.Prelude.Text,
     lastStatusCheckedAt :: B.C f (Kernel.Prelude.Maybe Kernel.Prelude.UTCTime),
     lastUpdated :: B.C f Kernel.Prelude.UTCTime,
     mandateId :: B.C f Kernel.Prelude.Text,

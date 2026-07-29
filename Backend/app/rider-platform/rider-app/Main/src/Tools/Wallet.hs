@@ -107,10 +107,10 @@ runWithServiceConfig ::
   req ->
   m resp
 runWithServiceConfig func merchantId merchantOperatingCityId req = do
-  let serviceName = DMSC.JuspayWalletService Payment.Juspay
+  let serviceName = DMSC.PaymentWalletService Payment.Gateway
   merchantServiceConfig <-
     getOneConfig (MerchantServiceConfigDimensions {merchantOperatingCityId = merchantOperatingCityId.getId, merchantId = merchantId.getId, serviceName = Just serviceName}) (Just (maybeToList <$> CQMSC.findByMerchantOpCityIdAndService merchantId merchantOperatingCityId (serviceName)))
-      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "JuspayWallet" (show Payment.Juspay))
+      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "PaymentWallet" (show Payment.Gateway))
   case merchantServiceConfig.serviceConfig of
-    DMSC.JuspayWalletServiceConfig paymentCfg -> func paymentCfg req
+    DMSC.PaymentWalletServiceConfig paymentCfg -> func paymentCfg req
     _ -> throwError $ InternalError "Unknown Service Config"

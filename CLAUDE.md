@@ -1,11 +1,11 @@
-# CLAUDE.md
+﻿# CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 Detailed topic docs live in `.cursor/docs/` — read the relevant one(s) for your current task.
 
 ## Critical Rules (Always Apply)
 
-1. **NEVER edit files in `src-read-only/`** — these are generated from YAML specs via NammaDSL
+1. **NEVER edit files in `src-read-only/`** — these are generated from YAML specs via QolariDSL
 2. **Always run `cabal build all`** after code generation to verify correctness
 3. **Project uses `-Werror`** — all GHC warnings are compile errors (unused imports, dodgy imports, etc.)
 4. **ID generation**: `newId <- generateGUID` (from `Kernel.Utils.Common`)
@@ -15,7 +15,7 @@ Detailed topic docs live in `.cursor/docs/` — read the relevant one(s) for you
 8. **Beckn tags**: Must be defined in `Backend/lib/beckn-spec/src/BecknV2/OnDemand/Tags.hs` before use
 9. **Orphan instances**: Go in `Domain/Types/Extra/*.hs` files
 10. **Logging**: Use `logInfo`, `logDebug`, `logError` from `Kernel.Utils.Logging`
-11. **YAML Storage constraints — `!SecondaryKey` must be quoted**: Write `fieldName: "!SecondaryKey"`, never unquoted `fieldName: !SecondaryKey`. Unquoted `!Tag` values are parsed as YAML tags and silently dropped by the NammaDSL parser, producing an empty `enableKVPG` secondary-key list in the generated Beam file → intermittent-empty KV reads at runtime. Use `!SecondaryKey` (forced) when the query is in a hand-written Extra file; plain `SecondaryKey` only when the field appears in a YAML-declared query. The `yaml-constraint-tags` pre-commit hook enforces the quoting. Deny list: `merchantId`, `merchantOperatingCityId`, `status` cannot be secondary keys regardless of quoting.
+11. **YAML Storage constraints — `!SecondaryKey` must be quoted**: Write `fieldName: "!SecondaryKey"`, never unquoted `fieldName: !SecondaryKey`. Unquoted `!Tag` values are parsed as YAML tags and silently dropped by the QolariDSL parser, producing an empty `enableKVPG` secondary-key list in the generated Beam file → intermittent-empty KV reads at runtime. Use `!SecondaryKey` (forced) when the query is in a hand-written Extra file; plain `SecondaryKey` only when the field appears in a YAML-declared query. The `yaml-constraint-tags` pre-commit hook enforces the quoting. Deny list: `merchantId`, `merchantOperatingCityId`, `status` cannot be secondary keys regardless of quoting.
 
 ## Build & Development
 
@@ -75,7 +75,7 @@ Full architecture: `.cursor/docs/01-architecture-overview.md`
 | SharedLogic | `*/src/SharedLogic/` |
 | Migrations | `dev/migrations/<service-name>/` |
 
-## Code Generation (NammaDSL)
+## Code Generation (QolariDSL)
 
 - **API specs**: `spec/API/*.yaml` → generates `src-read-only/API/`
 - **Storage specs**: `spec/Storage/*.yaml` → generates `src-read-only/Domain/Types/`, `Storage/Beam/`, `Storage/Queries/`
@@ -83,7 +83,7 @@ Full architecture: `.cursor/docs/01-architecture-overview.md`
 - Use camelCase for endpoint paths, full module paths for imports
 - Common auto-imported types: `Text`, `Maybe`, `Int`, `Bool`, `Id`, `UTCTime`, `HighPrecMoney`, `Currency`
 
-Full DSL reference: `.cursor/docs/07-namma-dsl.md`
+Full DSL reference: `.cursor/docs/07-qolari-dsl.md`
 
 ## Haskell Conventions
 
@@ -127,7 +127,7 @@ Types: feat, fix, chore, ci, docs, perf, refactor, test
 | `04-driver-app.md` | Driver-facing features |
 | `05-beckn-protocol-flow.md` | BECKN protocol interactions |
 | `06-ride-flow.md` | End-to-end ride lifecycle |
-| `07-namma-dsl.md` | Creating/modifying YAML specs |
+| `07-qolari-dsl.md` | Creating/modifying YAML specs |
 | `08-database-patterns.md` | Queries, caching, migrations |
 | `09-dashboards.md` | Dashboard services |
 | `10-frfs-public-transport.md` | Metro/bus/public transport |

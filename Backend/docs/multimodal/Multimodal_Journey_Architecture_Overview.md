@@ -1,4 +1,4 @@
-# Multimodal Journey System - Architecture Overview
+﻿# Multimodal Journey System - Architecture Overview
 
 ## Table of Contents
 1. [System Overview](#system-overview)
@@ -9,7 +9,7 @@
 
 ## System Overview
 
-The Namma Yatri multimodal journey system is a sophisticated transportation orchestration platform that enables users to plan and execute journeys using multiple transportation modes (taxi, metro, bus, subway, walking) in a single trip.
+The Qolari multimodal journey system is a sophisticated transportation orchestration platform that enables users to plan and execute journeys using multiple transportation modes (taxi, metro, bus, subway, walking) in a single trip.
 
 ## Key Components
 
@@ -135,7 +135,7 @@ data LegExtraInfo
 ### 1. **External Service Integration**
 ```mermaid
 graph LR
-    A[Namma Yatri] --> B[Beckn Gateway]
+    A[Qolari] --> B[Beckn Gateway]
     B --> C[Transit BPP]
     B --> D[Taxi BPP]
     A --> E[Payment Gateway]

@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "Dashboard Email Verification Flow",
     "description": "Shared dashboard email verification: login -> send OTP -> verify OTP (any dashboard user), plus negative cases (invalid email, wrong OTP, wrong length OTP, expired/missing OTP, no auth)",
@@ -29,8 +29,8 @@
           "    var emailPrefix = 'dashtest' + Math.floor(1000 + Math.random() * 8999);",
           "    pm.collectionVariables.set('_test_dashboard_number', fNum);",
           "    pm.collectionVariables.set('_test_dashboard_number2', fNum2);",
-          "    pm.collectionVariables.set('_test_dashboard_email', emailPrefix + '@nammayatri.in');",
-          "    console.log('Test user1:', fNum, 'user2:', fNum2, 'email:', emailPrefix + '@nammayatri.in');",
+          "    pm.collectionVariables.set('_test_dashboard_email', emailPrefix + '@drive.qolari.com');",
+          "    console.log('Test user1:', fNum, 'user2:', fNum2, 'email:', emailPrefix + '@drive.qolari.com');",
           "}"
         ],
         "type": "text/javascript"
@@ -379,7 +379,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n  \"email\": \"never-sent-otp@nammayatri.in\",\n  \"otp\": \"1234\"\n}"
+          "raw": "{\n  \"email\": \"never-sent-otp@drive.qolari.com\",\n  \"otp\": \"1234\"\n}"
         },
         "url": {
           "raw": "{{dashboard_base_url}}/user/email/verifyOtp",

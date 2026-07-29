@@ -1,6 +1,6 @@
-# NammaDSL Usage Rules & Syntax
+﻿# QolariDSL Usage Rules & Syntax
 
-This document summarizes the rules and syntax for using NammaDSL, based on the provided documentation. It covers YAML file creation, code generation, and the specific DSL syntax for APIs and Storage.
+This document summarizes the rules and syntax for using QolariDSL, based on the provided documentation. It covers YAML file creation, code generation, and the specific DSL syntax for APIs and Storage.
 
 ## I. General Workflow
 

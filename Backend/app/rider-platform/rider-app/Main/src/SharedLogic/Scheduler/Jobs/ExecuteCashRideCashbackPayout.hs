@@ -1,4 +1,4 @@
-module SharedLogic.Scheduler.Jobs.ExecuteCashRideCashbackPayout where
+﻿module SharedLogic.Scheduler.Jobs.ExecuteCashRideCashbackPayout where
 
 import Domain.Types.PayoutConfig (PayoutConfig)
 import Domain.Types.Person (Person)
@@ -152,11 +152,11 @@ submitCashbackPayout person payoutVpa payoutConfig cashbackEntries totalAmount =
             coverageFrom = Nothing,
             coverageTo = Nothing,
             ledgerEntryIds = map (.getId) originalEntryIds,
-            payoutServiceFlow = Payout.JuspayFlow -- StripeFlow not supported currently in rider-app
+            payoutServiceFlow = Payout.QolariFlow -- StripeFlow not supported currently in rider-app
           }
   -- DB-level reservation: flip entries UNSETTLED → PROCESSING BEFORE
   -- submitting so a parallel job (or a delayed webhook) can't re-pick
-  -- the same entries while this Juspay call is in flight.
+  -- the same entries while this Qolari call is in flight.
   RidePaymentFinance.reserveCashbackEntriesForPayout originalEntryIds Nothing
   result <-
     PayoutRequest.submitPayoutRequest submission payoutCall
@@ -166,7 +166,7 @@ submitCashbackPayout person payoutVpa payoutConfig cashbackEntries totalAmount =
   case result of
     PayoutRequest.PayoutInitiated pr _ -> do
       -- Stamp the PayoutRequest id onto the PROCESSING entries. The
-      -- entries stay PROCESSING until the Juspay webhook resolves them
+      -- entries stay PROCESSING until the Qolari webhook resolves them
       -- (success → PAID_OUT via markCashbackEntriesAsPaidOut, failure →
       -- back to UNSETTLED via releaseCashbackEntriesReservation).
       RidePaymentFinance.reserveCashbackEntriesForPayout originalEntryIds (Just pr.id.getId)

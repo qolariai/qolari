@@ -1,4 +1,4 @@
-# NammaTag Concept
+﻿# QolariTag Concept
 
 ## Use Cases
 
@@ -103,7 +103,7 @@ Decides for tag value. Important points
 3. Return the tag result
 
 **Output:**
-- [NammaTagResponse]
+- [QolariTagResponse]
 
 ### KaalChakra
 Run jobs to assign tags on basis of daily, weekly, monthly and quaterly data
@@ -131,7 +131,7 @@ First field of query should always be the driverId
 Nothing
 
 ### Lib.Yudhishthira
-Library in application, which will have all the haskell types of NammaTags, event handler which handle all events coming from application and call Yudhishthira to decide on tag and update the tag in particular transaction object.
+Library in application, which will have all the haskell types of QolariTags, event handler which handle all events coming from application and call Yudhishthira to decide on tag and update the tag in particular transaction object.
 
 ### Dronacharya
 Dashboard side interface to create and validate tags and their rules. We should validate the rules by running them.
@@ -183,9 +183,9 @@ data KaalChakraData = KaalChakraData
   }
 
 data TagRule = RuleEngine Value | LLM Context
-data NammaTag = Application NammaTagApplication | KaalChakra NammaTagChakra
+data QolariTag = Application QolariTagApplication | KaalChakra QolariTagChakra
   
-data NammaTagApplication = NammaTagApplication
+data QolariTagApplication = QolariTagApplication
   { tagCategory :: Text,
     tagName :: Text,
     tagPossibleValues :: [Text],
@@ -193,7 +193,7 @@ data NammaTagApplication = NammaTagApplication
     tagRule :: TagRule
   } 
 
-data NammaTagChakra = NammaTagChakra
+data QolariTagChakra = QolariTagChakra
   { tagCategory :: Text,
     tagName :: Text,
     tagPossibleValues :: [Text],
@@ -202,7 +202,7 @@ data NammaTagChakra = NammaTagChakra
     tagRule :: TagRule
   }
 
-data NammaTagResponse = NammaTagResponse
+data QolariTagResponse = QolariTagResponse
   { tagName :: Text,
     tagValue :: Text,
     tagCategory :: Text,

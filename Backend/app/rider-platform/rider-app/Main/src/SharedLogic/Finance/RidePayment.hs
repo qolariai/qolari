@@ -1,4 +1,4 @@
-{-
+﻿{-
   Finance integration for rider-side (BAP) ride payments.
 
   ┌────────────────────────────────────────────────────────────────────────────┐
@@ -756,7 +756,7 @@ getPayoutEligibilityData counterparty personId = do
 --   by flipping their settlementStatus from UNSETTLED → PROCESSING. This
 --   is the DB-level guard that keeps subsequent eligibility queries
 --   (`findUnsettledByAccountBeforeTime*`) from returning the same entries
---   while the Juspay payout is in flight (which can outlive any Redis
+--   while the Qolari payout is in flight (which can outlive any Redis
 --   lock TTL). Idempotent — entries already PROCESSING/PAID_OUT are
 --   left alone.
 reserveCashbackEntriesForPayout ::
@@ -783,7 +783,7 @@ releaseCashbackEntriesReservation entryIds = do
   Lib.Finance.Ledger.Service.markEntriesAsUnsettled entryIds
   logInfo $ "Released cashback entries reservation (" <> show (length entryIds) <> " entries reverted to UNSETTLED)"
 
--- | Called after a successful payout submission (and on the Juspay webhook
+-- | Called after a successful payout submission (and on the Qolari webhook
 --   replay) for a RIDE_OFFER_CASHBACK payout. Posts the drain transfer
 --   (OwnerLiability → BuyerExternal) for the payout amount with refType
 --   `ridePaymentRefCashbackPayoutTransfer` and refId = personId (carried

@@ -123,14 +123,14 @@ makeTaggedDriverPool ::
   DriverPoolConfig ->
   Id DST.SearchTry ->
   m (Maybe Int, [DriverPoolWithActualDistResult])
-makeTaggedDriverPool mOCityId timeDiffFromUtc searchReq onlyNewDrivers batchSize isOnRidePool customerNammaTags mbPoolingLogicVersion batchNum driverPoolCfg searchTryId = do
+makeTaggedDriverPool mOCityId timeDiffFromUtc searchReq onlyNewDrivers batchSize isOnRidePool customerQolariTags mbPoolingLogicVersion batchNum driverPoolCfg searchTryId = do
   localTime <- getLocalCurrentTime timeDiffFromUtc
   (allLogics, mbVersion) <- getAppDynamicLogic (cast mOCityId) LYT.POOLING localTime mbPoolingLogicVersion Nothing
   updateVersionInSearchReq mbVersion
   let onlyNewDriversWithCustomerInfo = map updateDriverPoolWithActualDistResult onlyNewDrivers
   let taggedDriverPoolInput = TaggedDriverPoolInput {drivers = onlyNewDriversWithCustomerInfo, needOnRideDrivers = isOnRidePool, batchNum}
   logInfo $
-    "DriverPreference pooling input: customerNammaTags=" <> show customerNammaTags
+    "DriverPreference pooling input: customerQolariTags=" <> show customerQolariTags
       <> " | drivers=["
       <> mconcat
         ( map
@@ -170,7 +170,7 @@ makeTaggedDriverPool mOCityId timeDiffFromUtc searchReq onlyNewDrivers batchSize
       DriverPoolWithActualDistResult {driverPoolResult = updateDriverPoolResult driverPoolResult, searchTags = Just $ maybe A.emptyObject LYTU.convertTags searchReq.searchTags, tripDistance = searchReq.estimatedDistance, ..}
 
     updateDriverPoolResult DriverPoolResult {..} =
-      DriverPoolResult {customerTags = Just $ maybe A.emptyObject LYTU.convertTags customerNammaTags, ..}
+      DriverPoolResult {customerTags = Just $ maybe A.emptyObject LYTU.convertTags customerQolariTags, ..}
 
     updateVersionInSearchReq mbVersion =
       whenJust mbVersion $ \_ -> do

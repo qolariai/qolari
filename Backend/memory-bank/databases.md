@@ -1,6 +1,6 @@
-# Nammayatri Backend - Database Overview
+﻿# Qolari Backend - Database Overview
 
-The Nammayatri backend leverages a polyglot persistence strategy, utilizing different database technologies tailored to specific data storage, retrieval, and processing needs. This document details the key databases used, their primary roles, and how they are integrated and utilized within the project.
+The Qolari backend leverages a polyglot persistence strategy, utilizing different database technologies tailored to specific data storage, retrieval, and processing needs. This document details the key databases used, their primary roles, and how they are integrated and utilized within the project.
 
 ## 1. PostgreSQL
 
@@ -22,8 +22,8 @@ The Nammayatri backend leverages a polyglot persistence strategy, utilizing diff
     *   **Description:** Records initiated payment requests, amounts, currencies, status, associated persons/merchants, payment links, and mandate details.
     *   **Key Fields:** `id` (PK, Text), `shortId` (Text), `personId` (Text), `merchantId` (Text), `amount` (HighPrecMoney), `currency` (Currency), `status` (TransactionStatus), `paymentServiceOrderId` (Text), `clientAuthTokenEncrypted` (Text, encrypted), `clientAuthTokenHash` (DbHash).
 *   **`payment_transaction`**: Stores details of individual payment transactions.
-    *   **Description:** Records granular transaction details linked to payment orders, including status, payment method, gateway reference, and Juspay response.
-    *   **Key Fields:** `id` (PK, Text), `orderId` (Text, FK to `payment_order`), `status` (TransactionStatus), `amount` (HighPrecMoney), `txnId` (Text), `juspayResponse` (Value, JSON dump).
+    *   **Description:** Records granular transaction details linked to payment orders, including status, payment method, gateway reference, and Qolari response.
+    *   **Key Fields:** `id` (PK, Text), `orderId` (Text, FK to `payment_order`), `status` (TransactionStatus), `amount` (HighPrecMoney), `txnId` (Text), `QolariResponse` (Value, JSON dump).
 *   **`payout_order`**: Stores information about payout orders.
     *   **Description:** Manages financial payouts to drivers or other entities, including status, entity names, and last checked timestamps.
     *   **Key Fields:** `id` (PK, Text), `customerId` (Text), `status` (PayoutOrderStatus), `entityName` (EntityName), `entityIds` (PostgresList Text), `lastStatusCheckedAt` (UTCTime).
@@ -88,7 +88,7 @@ The backend interacts with these databases using a consistent set of Haskell lib
 
 ## 5. Key Interactions and Data Flow Between Databases
 
-The different databases in the Nammayatri backend are not isolated but interact in specific ways to support the overall system functionality.
+The different databases in the Qolari backend are not isolated but interact in specific ways to support the overall system functionality.
 
 ### PostgreSQL and Redis
 

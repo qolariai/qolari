@@ -1,4 +1,4 @@
-# Invoice Generation Feature - Implementation Summary
+﻿# Invoice Generation Feature - Implementation Summary
 
 ## ✅ What Has Been Implemented
 
@@ -65,18 +65,18 @@ POST /rideBooking/generateInvoice
 
 #### Features Implemented:
 - ✅ HTML-based invoice template generation
-- ✅ Professional invoice design with Namma Yatri branding
+- ✅ Professional invoice design with Qolari branding
 - ✅ Customer and merchant details
 - ✅ Detailed booking table (Booking ID, Date, Ride Type, From→To, Amount)
 - ✅ Total summary with ride count and amount
 - ✅ Automatic HTML-to-PDF conversion using `wkhtmltopdf`
 - ✅ Fallback to HTML if PDF conversion fails
-- ✅ Namma Yatri yellow branding (#FFC629)
+- ✅ Qolari yellow branding (#FFC629)
 
 **PDF Content**:
 ```
 ┌─────────────────────────────────────────┐
-│ Namma Yatri              INVOICE        │
+│ Qolari              INVOICE        │
 │                          #INV_12345     │
 │                          Date: Jan 25   │
 ├─────────────────────────────────────────┤
@@ -107,8 +107,8 @@ POST /rideBooking/generateInvoice
 - ✅ Error handling and logging
 
 **Email Content**:
-- Subject: "Your Namma Yatri Invoice - [Invoice ID]"
-- HTML template with Namma Yatri branding
+- Subject: "Your Qolari Invoice - [Invoice ID]"
+- HTML template with Qolari branding
 - PDF invoice attached as `invoice_[ID].pdf`
 - Professional footer and disclaimer
 
@@ -171,7 +171,7 @@ Edit the `fromEmail` in `Tools/Email.hs` if needed:
 
 ```haskell
 -- Change this line in sendInvoiceEmail function:
-fromEmail = "noreply@nammayatri.in"  -- Update to your verified SES email
+fromEmail = "noreply@drive.qolari.com"  -- Update to your verified SES email
 ```
 
 ---
@@ -286,7 +286,7 @@ open Backend/app/rider-platform/rider-app/Main/src/assets/invoice_INV_ABC123.pdf
 ### 6. Check Email Delivery
 
 - Check the inbox of the user's email address
-- Look for email with subject: "Your Namma Yatri Invoice - [Invoice ID]"
+- Look for email with subject: "Your Qolari Invoice - [Invoice ID]"
 - Verify PDF attachment is present and can be downloaded
 - Open PDF and verify all booking details are correct
 

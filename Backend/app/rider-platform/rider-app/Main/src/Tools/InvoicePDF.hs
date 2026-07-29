@@ -108,7 +108,7 @@ generateInvoicePDF invoiceId person bookings merchant startDate endDate mbLogoUr
 
   -- Get temporary directory and create invoice subdirectory
   tempDir <- liftIO getTemporaryDirectory
-  let invoiceDir = tempDir </> "nammayatri_invoices"
+  let invoiceDir = tempDir </> "Qolari_invoices"
   liftIO $ createDirectoryIfMissing True invoiceDir
 
   -- Save HTML file with UTF-8 encoding (important for Rupee symbol ₹ and other Unicode)

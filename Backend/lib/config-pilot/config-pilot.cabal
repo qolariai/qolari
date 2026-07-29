@@ -9,8 +9,8 @@ version:        0.1.0.0
 description:    Shared ConfigPilot framework for type-safe config fetching with dimension-based filtering and dynamic logic rollouts.
 homepage:       https://github.com/qolariai/qolari#readme
 bug-reports:    https://github.com/qolariai/qolari/issues
-author:         nammayatri
-maintainer:     nammayatri
+author:         Qolari
+maintainer:     Qolari
 copyright:      2024 Moving Innovation Technologies Private Limited
 license:        AllRightsReserved
 build-type:     Simple

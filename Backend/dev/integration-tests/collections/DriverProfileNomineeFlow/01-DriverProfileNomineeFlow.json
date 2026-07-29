@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "DriverProfileNomineeFlow",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -42,7 +42,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseURL_namma_P}}/auth",
+        "url": "{{baseURL_qolari_P}}/auth",
         "body": {
           "mode": "raw",
           "raw": "{\"mobileNumber\": \"{{_test_driver_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"{{driver_merchant_id}}\", \"merchantOperatingCity\": \"{{city}}\"}"
@@ -73,7 +73,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
+        "url": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
         "body": {
           "mode": "raw",
           "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-device-nominee\"}"
@@ -108,7 +108,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseURL_namma_P}}/driver/profile",
+        "url": "{{baseURL_qolari_P}}/driver/profile",
         "body": {
           "mode": "raw",
           "raw": "{\"nomineeName\": \"Asha Devi\", \"nomineeRelationship\": \"Spouse\", \"nomineeDob\": \"1990-05-15\", \"address\": \"12 MG Road, Bangalore, Karnataka 560001\", \"addressDocumentType\": \"Passport\", \"addressState\": \"Karnataka\"}"
@@ -141,7 +141,7 @@
             "value": "{{driver_token}}"
           }
         ],
-        "url": "{{baseURL_namma_P}}/driver/profile"
+        "url": "{{baseURL_qolari_P}}/driver/profile"
       },
       "event": [
         {
@@ -173,7 +173,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseURL_namma_P}}/driver/profile",
+        "url": "{{baseURL_qolari_P}}/driver/profile",
         "body": {
           "mode": "raw",
           "raw": "{\"nomineeName\": \"Asha Updated\"}"
@@ -209,7 +209,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseURL_namma_P}}/driver/profile",
+        "url": "{{baseURL_qolari_P}}/driver/profile",
         "body": {
           "mode": "raw",
           "raw": "{\"nomineeAge\": 30}"
@@ -244,7 +244,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseURL_namma_P}}/driver/profile",
+        "url": "{{baseURL_qolari_P}}/driver/profile",
         "body": {
           "mode": "raw",
           "raw": "{\"nomineeRelationship\": \"Friend\"}"
@@ -278,7 +278,7 @@
             "value": "application/json"
           }
         ],
-        "url": "{{baseURL_namma_P}}/driver/profile",
+        "url": "{{baseURL_qolari_P}}/driver/profile",
         "body": {
           "mode": "raw",
           "raw": "{\"nomineeAge\": 10}"

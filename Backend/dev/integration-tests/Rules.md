@@ -1,4 +1,4 @@
-# Integration Test Collection Rules
+﻿# Integration Test Collection Rules
 
 Guidelines for writing and maintaining Newman/Postman integration test collections.
 
@@ -18,7 +18,7 @@ Guidelines for writing and maintaining Newman/Postman integration test collectio
 ## What Goes in Environment Files
 
 **Hardcode (city/merchant config):**
-- Base URLs (`baseUrl_app`, `baseURL_namma_P`, `baseUrl_lts`, `mockServerUrl`, `dashboard_base_url`)
+- Base URLs (`baseUrl_app`, `baseURL_qolari_P`, `baseUrl_lts`, `mockServerUrl`, `dashboard_base_url`)
 - Merchant IDs (`driver_merchant_id`, `bap_merchant_id`, `dashboard_merchant_id`)
 - City name, state, coordinates (`city`, `state`, `origin_lat`, `origin_lon`, `dest_lat`, `dest_lon`)
 - Vehicle config (`vehicle_variant`, `vehicle_class`, `vehicle_category`)
@@ -39,7 +39,7 @@ requests by extracting a field value; when it matches, `response` is deep-merged
 into the handler's default response.
 
 ```json
-{"service": "juspay", "extract": "path.2", "value": "{{payment_order_id}}",
+{"service": "Qolari", "extract": "path.2", "value": "{{payment_order_id}}",
  "match": "/orders", "response": {"status": "CHARGED", "amount": 10.0}}
 ```
 ```json

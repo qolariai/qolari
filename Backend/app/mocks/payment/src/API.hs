@@ -1,8 +1,8 @@
-module API where
+﻿module API where
 
 import Data.Aeson (Value)
 import EulerHS.Prelude hiding (id)
-import qualified Kernel.External.Payment.Juspay.Types.Common as Juspay
+import qualified Kernel.External.Payment.Gateway.Types.Common as Qolari
 import qualified Lib.Payment.Domain.Action as PaymentAction
 import Servant
 
@@ -11,7 +11,7 @@ type ExternalPaymentAPI =
     :> "external"
     :> Capture "merchantShortId" Text
     :> "service"
-    :> "juspay"
+    :> "Qolari"
     :> "payment"
     :> QueryParam "city" Text
     :> QueryParam "serviceType" Text
@@ -24,7 +24,7 @@ type InternalOrderStatusAPI =
     :> "orders"
     :> Capture "orderId" Text
     :> "status"
-    :> Get '[JSON] Juspay.OrderData
+    :> Get '[JSON] Qolari.OrderData
 
 type API = ExternalPaymentAPI :<|> InternalOrderStatusAPI
 

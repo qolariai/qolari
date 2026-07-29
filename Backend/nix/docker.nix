@@ -1,7 +1,7 @@
-{ self, ... }:
+﻿{ self, ... }:
 
 let
-  imageName = "ghcr.io/nammayatri/nammayatri";
+  imageName = "ghcr.io/Qolari/Qolari";
   # self.rev will be non-null only when the working tree is clean
   # This is equivalent to `git rev-parse --short HEAD`
   commitHash = builtins.substring 0 6 (self.rev or "dev");
@@ -14,10 +14,10 @@ in
   config = {
     perSystem = { self', pkgs, lib, config, ... }:
       let
-        nammayatriBinaries =
+        QolariBinaries =
           if localBuild
           then
-            pkgs.runCommand "nammayatri-local"
+            pkgs.runCommand "Qolari-local"
               {
                 nativeBuildInputs = [ pkgs.autoPatchelfHook pkgs.makeWrapper ];
                 buildInputs =
@@ -32,7 +32,7 @@ in
                   --prefix LD_LIBRARY_PATH : "${config.haskellProjects.default.outputs.finalPackages.cac_client}/lib:${pkgs.libsodium}/lib:${pkgs.rdkafka}/lib"
               done
             ''
-          else self'.packages.nammayatri;
+          else self'.packages.Qolari;
       in
       {
         packages = lib.optionalAttrs pkgs.stdenv.isLinux {
@@ -46,7 +46,7 @@ in
                 awscli
                 coreutils
                 bash
-                nammayatriBinaries
+                QolariBinaries
                 gdal
                 postgis
                 curl
@@ -69,7 +69,7 @@ in
                 # Ref: https://hackage.haskell.org/package/x509-system-1.6.7/docs/src/System.X509.Unix.html#getSystemCertificateStore
                 "SYSTEM_CERTIFICATE_PATH=${pkgs.cacert}/etc/ssl/certs/ca-bundle.crt"
               ];
-              Cmd = [ "${nammayatriBinaries}/bin/rider-app-exe" ];
+              Cmd = [ "${QolariBinaries}/bin/rider-app-exe" ];
             };
 
             # Test that the docker image contains contents we expected for
@@ -79,8 +79,8 @@ in
               ls opt/app/swagger
             '';
           }).overrideAttrs (lib.addMetaAttrs {
-            description = "Docker image for nammayatri backend";
-            homepage = "https://github.com/nammayatri/nammayatri/pkgs/container/nammayatri";
+            description = "Docker image for Qolari backend";
+            homepage = "https://github.com/Qolari/Qolari/pkgs/container/Qolari";
           });
         };
       };

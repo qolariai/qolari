@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+﻿{-# LANGUAGE OverloadedStrings #-}
 
 module Main where
 
@@ -6,7 +6,7 @@ import Data.List (dropWhileEnd, isInfixOf, isSuffixOf, sort)
 import Data.List.Extra (dropSuffix)
 import Data.Text (unpack)
 import Kernel.Prelude
-import qualified NammaDSL.App as NammaDSL
+import qualified QolariDSL.App as QolariDSL
 import System.Directory
 import System.Environment (getArgs, setEnv)
 import System.FilePath
@@ -52,27 +52,27 @@ processSpecFolders' isGenAll insideOfSpecDir specFolderPath = do
                   if ".yaml" `isSuffixOf` inputFile
                     then do
                       let inputFilePath = apiFolderPath </> inputFile
-                      fileState <- NammaDSL.getFileState inputFilePath
+                      fileState <- QolariDSL.getFileState inputFilePath
                       -- putStrLn $ show fileState ++ " " ++ inputFilePath
-                      let shouldRunApiGenerator = isGenAll || fileState == NammaDSL.NEW || fileState == NammaDSL.CHANGED
+                      let shouldRunApiGenerator = isGenAll || fileState == QolariDSL.NEW || fileState == QolariDSL.CHANGED
                       when shouldRunApiGenerator $
-                        NammaDSL.runApiGenerator configPath inputFilePath
+                        QolariDSL.runApiGenerator configPath inputFilePath
                       return shouldRunApiGenerator
                     else return False
 
               when (or shouldRunApiGenerators && insideOfSpecDir) $ do
                 let specModules = map (dropSuffix ".yaml") $ filter (".yaml" `isSuffixOf`) apiContents
                 putStrLn $ "run api tree generator for spec modules: " <> (show specModules :: String)
-                NammaDSL.runApiTreeGenerator configPath $ sort specModules
+                QolariDSL.runApiTreeGenerator configPath $ sort specModules
 
               forM_ storageContents $
                 \inputFile -> do
                   when (".yaml" `isSuffixOf` inputFile) $ do
                     let inputFilePath = storageFolderPath </> inputFile
-                    fileState <- NammaDSL.getFileState inputFilePath
+                    fileState <- QolariDSL.getFileState inputFilePath
                     -- putStrLn $ show fileState ++ " " ++ inputFilePath
-                    when (isGenAll || fileState == NammaDSL.NEW || fileState == NammaDSL.CHANGED) $
-                      NammaDSL.runStorageGenerator configPath inputFilePath
+                    when (isGenAll || fileState == QolariDSL.NEW || fileState == QolariDSL.CHANGED) $
+                      QolariDSL.runStorageGenerator configPath inputFilePath
         else processSpecFolders isGenAll isSpecDir entryPath
 
 putStrLn' :: String -> String -> IO ()
@@ -80,7 +80,7 @@ putStrLn' colorCode text = putStrLn $ "\x1b[" ++ colorCode ++ "m" ++ text ++ "\x
 
 main :: IO ()
 main = do
-  putStrLn ("Version " ++ NammaDSL.version)
+  putStrLn ("Version " ++ QolariDSL.version)
   generateAllSpecs <- ("--all" `elem`) <$> getArgs
   maybeGitRoot <- findGitRoot
   let rootDir = fromMaybe (error "Could not find git root") maybeGitRoot

@@ -1,4 +1,4 @@
-{-
+﻿{-
   Finance.FinanceM
 
   A monad transformer that encapsulates the financial context
@@ -462,7 +462,7 @@ roleToInput ctx = \case
   PGPaymentExpense ->
     AccountInput
       { accountType = Expense,
-        counterpartyType = Just PG_PAYMENT_JUSPAY,
+        counterpartyType = Just PG_PAYMENT_Qolari,
         counterpartyId = Just ctx.merchantId,
         subLedger = Nothing,
         currency = ctx.currency,
@@ -472,7 +472,7 @@ roleToInput ctx = \case
   PGPaymentLiability ->
     AccountInput
       { accountType = Liability,
-        counterpartyType = Just PG_PAYMENT_JUSPAY,
+        counterpartyType = Just PG_PAYMENT_Qolari,
         counterpartyId = Just ctx.merchantId,
         subLedger = Nothing,
         currency = ctx.currency,
@@ -482,7 +482,7 @@ roleToInput ctx = \case
   PGPayoutExpense ->
     AccountInput
       { accountType = Expense,
-        counterpartyType = Just PG_PAYOUT_JUSPAY,
+        counterpartyType = Just PG_PAYOUT_Qolari,
         counterpartyId = Just ctx.merchantId,
         subLedger = Nothing,
         currency = ctx.currency,
@@ -492,7 +492,7 @@ roleToInput ctx = \case
   PGPayoutLiability ->
     AccountInput
       { accountType = Liability,
-        counterpartyType = Just PG_PAYOUT_JUSPAY,
+        counterpartyType = Just PG_PAYOUT_Qolari,
         counterpartyId = Just ctx.merchantId,
         subLedger = Nothing,
         currency = ctx.currency,

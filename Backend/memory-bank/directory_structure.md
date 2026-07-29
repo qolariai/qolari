@@ -1,5 +1,5 @@
-Directory structure:
-└── nammayatri-nammayatri/
+﻿Directory structure:
+└── Qolari-Qolari/
     ├── README.md
     ├── crowdin.yml
     ├── crowdin_python_generator_configuration.json
@@ -7,7 +7,7 @@ Directory structure:
     ├── flake.lock
     ├── flake.nix
     ├── LICENSE
-    ├── NammaTagConcept.md
+    ├── QolariTagConcept.md
     ├── om.yaml
     ├── .envrc.backend
     ├── .envrc.frontend
@@ -75,7 +75,7 @@ Directory structure:
     │   │   │   │   │   │   │       ├── Media.yaml
     │   │   │   │   │   │   │       ├── Merchant.yaml
     │   │   │   │   │   │   │       ├── Message.yaml
-    │   │   │   │   │   │   │       ├── NammaTag.yaml
+    │   │   │   │   │   │   │       ├── QolariTag.yaml
     │   │   │   │   │   │   │       ├── Payout.yaml
     │   │   │   │   │   │   │       ├── Revenue.yaml
     │   │   │   │   │   │   │       ├── Ride.yaml
@@ -115,7 +115,7 @@ Directory structure:
     │   │   │   │   │       │       ├── FRFSTicket.yaml
     │   │   │   │   │       │       ├── Invoice.yaml
     │   │   │   │   │       │       ├── Merchant.yaml
-    │   │   │   │   │       │       ├── NammaTag.yaml
+    │   │   │   │   │       │       ├── QolariTag.yaml
     │   │   │   │   │       │       ├── Ride.yaml
     │   │   │   │   │       │       └── System.yaml
     │   │   │   │   │       └── RideBooking/
@@ -191,7 +191,7 @@ Directory structure:
     │   │   │   │               │   │   ├── Media.hs
     │   │   │   │               │   │   ├── Merchant.hs
     │   │   │   │               │   │   ├── Message.hs
-    │   │   │   │               │   │   ├── NammaTag.hs
+    │   │   │   │               │   │   ├── QolariTag.hs
     │   │   │   │               │   │   ├── Payout.hs
     │   │   │   │               │   │   ├── Revenue.hs
     │   │   │   │               │   │   ├── Ride.hs
@@ -209,7 +209,7 @@ Directory structure:
     │   │   │   │               │   │       ├── Media.hs
     │   │   │   │               │   │       ├── Merchant.hs
     │   │   │   │               │   │       ├── Message.hs
-    │   │   │   │               │   │       ├── NammaTag.hs
+    │   │   │   │               │   │       ├── QolariTag.hs
     │   │   │   │               │   │       ├── Payout.hs
     │   │   │   │               │   │       ├── Revenue.hs
     │   │   │   │               │   │       ├── Ride.hs
@@ -231,7 +231,7 @@ Directory structure:
     │   │   │   │                       ├── FRFSTicket.hs
     │   │   │   │                       ├── Invoice.hs
     │   │   │   │                       ├── Merchant.hs
-    │   │   │   │                       ├── NammaTag.hs
+    │   │   │   │                       ├── QolariTag.hs
     │   │   │   │                       ├── Ride.hs
     │   │   │   │                       ├── System.hs
     │   │   │   │                       └── Endpoints/
@@ -240,7 +240,7 @@ Directory structure:
     │   │   │   │                           ├── FRFSTicket.hs
     │   │   │   │                           ├── Invoice.hs
     │   │   │   │                           ├── Merchant.hs
-    │   │   │   │                           ├── NammaTag.hs
+    │   │   │   │                           ├── QolariTag.hs
     │   │   │   │                           ├── Ride.hs
     │   │   │   │                           └── System.hs
     │   │   │   ├── Lib/
@@ -361,7 +361,7 @@ Directory structure:
     │   │   │   │   │   │           │   ├── Media.hs
     │   │   │   │   │   │           │   ├── Merchant.hs
     │   │   │   │   │   │           │   ├── Message.hs
-    │   │   │   │   │   │           │   ├── NammaTag.hs
+    │   │   │   │   │   │           │   ├── QolariTag.hs
     │   │   │   │   │   │           │   ├── Payout.hs
     │   │   │   │   │   │           │   ├── Revenue.hs
     │   │   │   │   │   │           │   ├── Ride.hs
@@ -425,7 +425,7 @@ Directory structure:
     │   │   │   │           │       │   ├── Media.hs
     │   │   │   │           │       │   ├── Merchant.hs
     │   │   │   │           │       │   ├── Message.hs
-    │   │   │   │           │       │   ├── NammaTag.hs
+    │   │   │   │           │       │   ├── QolariTag.hs
     │   │   │   │           │       │   ├── Payout.hs
     │   │   │   │           │       │   ├── Revenue.hs
     │   │   │   │           │       │   ├── Ride.hs
@@ -480,7 +480,7 @@ Directory structure:
     │   │   │       │   │           │   ├── FRFSTicket.hs
     │   │   │       │   │           │   ├── Invoice.hs
     │   │   │       │   │           │   ├── Merchant.hs
-    │   │   │       │   │           │   ├── NammaTag.hs
+    │   │   │       │   │           │   ├── QolariTag.hs
     │   │   │       │   │           │   ├── Ride.hs
     │   │   │       │   │           │   └── System.hs
     │   │   │       │   │           └── RideBooking/
@@ -521,7 +521,7 @@ Directory structure:
     │   │   │               │       │   ├── FRFSTicket.hs
     │   │   │               │       │   ├── Invoice.hs
     │   │   │               │       │   ├── Merchant.hs
-    │   │   │               │       │   ├── NammaTag.hs
+    │   │   │               │       │   ├── QolariTag.hs
     │   │   │               │       │   ├── Ride.hs
     │   │   │               │       │   └── System.hs
     │   │   │               │       └── RideBooking/
@@ -1013,7 +1013,7 @@ Directory structure:
     │   │   │   │       │   │   │   │   │   ├── Media.hs
     │   │   │   │       │   │   │   │   │   ├── Merchant.hs
     │   │   │   │       │   │   │   │   │   ├── Message.hs
-    │   │   │   │       │   │   │   │   │   ├── NammaTag.hs
+    │   │   │   │       │   │   │   │   │   ├── QolariTag.hs
     │   │   │   │       │   │   │   │   │   ├── Payout.hs
     │   │   │   │       │   │   │   │   │   ├── Revenue.hs
     │   │   │   │       │   │   │   │   │   ├── Ride.hs
@@ -1677,7 +1677,7 @@ Directory structure:
     │   │   │   │           │   │   │   │   ├── Media.hs
     │   │   │   │           │   │   │   │   ├── Merchant.hs
     │   │   │   │           │   │   │   │   ├── Message.hs
-    │   │   │   │           │   │   │   │   ├── NammaTag.hs
+    │   │   │   │           │   │   │   │   ├── QolariTag.hs
     │   │   │   │           │   │   │   │   ├── Payout.hs
     │   │   │   │           │   │   │   │   ├── Revenue.hs
     │   │   │   │           │   │   │   │   ├── Ride.hs
@@ -2789,7 +2789,7 @@ Directory structure:
     │   │   │   │   │   │   │   │   │   ├── FRFSTicket.hs
     │   │   │   │   │   │   │   │   │   ├── Invoice.hs
     │   │   │   │   │   │   │   │   │   ├── Merchant.hs
-    │   │   │   │   │   │   │   │   │   ├── NammaTag.hs
+    │   │   │   │   │   │   │   │   │   ├── QolariTag.hs
     │   │   │   │   │   │   │   │   │   ├── Ride.hs
     │   │   │   │   │   │   │   │   │   ├── Route.hs
     │   │   │   │   │   │   │   │   │   ├── System.hs
@@ -3276,7 +3276,7 @@ Directory structure:
     │   │   │   │   │   │   │   │   │   │   ├── FRFSTicket.hs
     │   │   │   │   │   │   │   │   │   │   ├── Invoice.hs
     │   │   │   │   │   │   │   │   │   │   ├── Merchant.hs
-    │   │   │   │   │   │   │   │   │   │   ├── NammaTag.hs
+    │   │   │   │   │   │   │   │   │   │   ├── QolariTag.hs
     │   │   │   │   │   │   │   │   │   │   ├── Ride.hs
     │   │   │   │   │   │   │   │   │   │   └── System.hs
     │   │   │   │   │   │   │   │   │   └── RideBooking/
@@ -4248,7 +4248,7 @@ Directory structure:
     │   │   │   │   ├── 0175-add-merchantId-to-tables.sql
     │   │   │   │   ├── 0178-add-of-locks-to-driver-information.sql
     │   │   │   │   ├── 0180-merchant-payment-method.sql
-    │   │   │   │   ├── 0181-juspay-payments-integration.sql
+    │   │   │   │   ├── 0181-Qolari-payments-integration.sql
     │   │   │   │   ├── 0183-add-place-name-cache.sql
     │   │   │   │   ├── 0184-add-aadhaar-verification.sql
     │   │   │   │   ├── 0185-onRide-inconsistency-resolve.sql
@@ -4260,7 +4260,7 @@ Directory structure:
     │   │   │   │   ├── 0192-transporter-config-update.sql
     │   │   │   │   ├── 0193-add-vehicle-variant-in-config.sql
     │   │   │   │   ├── 0194-remove-driver-location-foriegn-key.sql
-    │   │   │   │   ├── 0195-added-juspay-order-id.sql
+    │   │   │   │   ├── 0195-added-Qolari-order-id.sql
     │   │   │   │   ├── 0196-add-missing-fields-in-payment-order.sql
     │   │   │   │   ├── 0198-add-address-in-gates-special-location.sql
     │   │   │   │   ├── 0200-subscriber-metadata.sql
@@ -4524,7 +4524,7 @@ Directory structure:
     │   │   │   │   ├── 0625-ops-hub.sql
     │   │   │   │   ├── 0666-pooling-app-dynamic-logic-for-local.sql
     │   │   │   │   ├── 0667-reopened-count.sql
-    │   │   │   │   ├── 0668.namma-tag-trigger.sql
+    │   │   │   │   ├── 0668.Qolari-tag-trigger.sql
     │   │   │   │   ├── 0669-upsert-special-location.sql
     │   │   │   │   ├── 0670-add-additional-charges-to-fare-params.sql
     │   │   │   │   ├── 0671-trip-alert-request.sql
@@ -4599,7 +4599,7 @@ Directory structure:
     │   │   │   │   ├── 0055-adding-person-numbers-in-access-matrix.sql
     │   │   │   │   ├── 0056-adding-person-id-in-access-matrix.sql
     │   │   │   │   ├── 0057-add-apis-for-security-deposit.sql
-    │   │   │   │   ├── 0058-namma-tag-access.sql
+    │   │   │   │   ├── 0058-Qolari-tag-access.sql
     │   │   │   │   ├── 0059-subscription-clear-cache-api.sql
     │   │   │   │   ├── 0060-get-aadhar-pan-info-access.sql
     │   │   │   │   ├── 0061-partial-cash-collection-and-exemption.sql
@@ -4691,10 +4691,10 @@ Directory structure:
     │   │   │   │   ├── 1122-make-cipher-text-maybe.sql
     │   │   │   │   ├── 1125-add-merchantId-to-tables.sql
     │   │   │   │   ├── 1127-merchant-payment-method.sql
-    │   │   │   │   ├── 1128-juspay-payments-integration.sql
+    │   │   │   │   ├── 1128-Qolari-payments-integration.sql
     │   │   │   │   ├── 1129-renamed-paymentOrder-personId.sql
     │   │   │   │   ├── 1130_txn_uuid_optional.sql
-    │   │   │   │   ├── 1132-added-juspay-order-id.sql
+    │   │   │   │   ├── 1132-added-Qolari-order-id.sql
     │   │   │   │   ├── 1133-add-missing-fields-in-payment-order.sql
     │   │   │   │   ├── 1136-self-id-uri-merchant.sql
     │   │   │   │   ├── 1137-added-payment-order-merchant-id.sql
@@ -4848,7 +4848,7 @@ Directory structure:
     │   │   │   │   ├── 1391-add-mandatory-col-issue-opt.sql
     │   │   │   │   ├── 1400-delivery-truck.sql
     │   │   │   │   ├── 1401-reopened-count.sql
-    │   │   │   │   ├── 1402.namma-tag-trigger.sql
+    │   │   │   │   ├── 1402.Qolari-tag-trigger.sql
     │   │   │   │   ├── 1403-safety-reasons.sql
     │   │   │   │   ├── 1404-upsert-special-location.sql
     │   │   │   │   ├── 1405-add-nearby-driver-configs.sql
@@ -4864,7 +4864,7 @@ Directory structure:
     │   │   │   │   ├── 1425-add-fraud-auth-check-columns-values-to-merchant-config.sql
     │   │   │   │   ├── 1426-update-suburban-station-translations.sql
     │   │   │   │   ├── 1427-added-pn-for-rewards-in-webhook.sql
-    │   │   │   │   ├── 1428-added-aajuspay-service.sql
+    │   │   │   │   ├── 1428-added-aaQolari-service.sql
     │   │   │   │   ├── 1429-frfs-gtfs-fare-query-backfill.sql
     │   │   │   │   ├── 1430-feed-info-for-chennai.sql
     │   │   │   │   ├── 1431-update-merchant-service-config-for-base-url-for-nandi.sql
@@ -5038,8 +5038,8 @@ Directory structure:
     │   │   │   │   ├── message_translation.sql
     │   │   │   │   ├── meta_data.sql
     │   │   │   │   ├── module_completion_information.sql
-    │   │   │   │   ├── namma_tag.sql
-    │   │   │   │   ├── namma_tag_trigger.sql
+    │   │   │   │   ├── QOLARI_TAG.sql
+    │   │   │   │   ├── QOLARI_TAG_trigger.sql
     │   │   │   │   ├── notification.sql
     │   │   │   │   ├── operation_hub.sql
     │   │   │   │   ├── operation_hub_requests.sql
@@ -5115,7 +5115,7 @@ Directory structure:
     │   │   │   │   ├── API_Management_DriverRegistration.sql
     │   │   │   │   ├── API_Management_Merchant.sql
     │   │   │   │   ├── API_Management_Message.sql
-    │   │   │   │   ├── API_Management_NammaTag.sql
+    │   │   │   │   ├── API_Management_QolariTag.sql
     │   │   │   │   ├── API_Management_Payout.sql
     │   │   │   │   ├── API_Management_Revenue.sql
     │   │   │   │   ├── API_Management_Ride.sql
@@ -5146,7 +5146,7 @@ Directory structure:
     │   │   │   │   ├── Local_API_Management_Media.sql
     │   │   │   │   ├── Local_API_Management_Merchant.sql
     │   │   │   │   ├── Local_API_Management_Message.sql
-    │   │   │   │   ├── Local_API_Management_NammaTag.sql
+    │   │   │   │   ├── Local_API_Management_QolariTag.sql
     │   │   │   │   ├── Local_API_Management_Payout.sql
     │   │   │   │   ├── Local_API_Management_Revenue.sql
     │   │   │   │   ├── Local_API_Management_Ride.sql
@@ -5241,8 +5241,8 @@ Directory structure:
     │   │   │   │   ├── merchant_service_usage_config.sql
     │   │   │   │   ├── merchant_state.sql
     │   │   │   │   ├── multimodal_preferences.sql
-    │   │   │   │   ├── namma_tag.sql
-    │   │   │   │   ├── namma_tag_trigger.sql
+    │   │   │   │   ├── QOLARI_TAG.sql
+    │   │   │   │   ├── QOLARI_TAG_trigger.sql
     │   │   │   │   ├── notification_sounds_config.sql
     │   │   │   │   ├── on_search_event.sql
     │   │   │   │   ├── parcel_details.sql
@@ -5323,7 +5323,7 @@ Directory structure:
     │   │   │   │   ├── API_Management_FRFSTicket.sql
     │   │   │   │   ├── API_Management_Invoice.sql
     │   │   │   │   ├── API_Management_Merchant.sql
-    │   │   │   │   ├── API_Management_NammaTag.sql
+    │   │   │   │   ├── API_Management_QolariTag.sql
     │   │   │   │   ├── API_Management_Ride.sql
     │   │   │   │   ├── API_Management_System.sql
     │   │   │   │   ├── API_RideBooking_Booking.sql
@@ -5350,7 +5350,7 @@ Directory structure:
     │   │   │   │   ├── Local_API_Management_FRFSTicket.sql
     │   │   │   │   ├── Local_API_Management_Invoice.sql
     │   │   │   │   ├── Local_API_Management_Merchant.sql
-    │   │   │   │   ├── Local_API_Management_NammaTag.sql
+    │   │   │   │   ├── Local_API_Management_QolariTag.sql
     │   │   │   │   ├── Local_API_Management_Ride.sql
     │   │   │   │   ├── Local_API_Management_System.sql
     │   │   │   │   ├── Local_API_RideBooking_Booking.sql
@@ -5413,7 +5413,7 @@ Directory structure:
     │   │   │   │   │       ├── management/
     │   │   │   │   │       │   ├── booking.http
     │   │   │   │   │       │   ├── merchant.http
-    │   │   │   │   │       │   └── namma-tag.http
+    │   │   │   │   │       │   └── Qolari-tag.http
     │   │   │   │   │       └── rideBooking/
     │   │   │   │   │           ├── booking.http
     │   │   │   │   │           ├── cancel.http
@@ -5453,7 +5453,7 @@ Directory structure:
     │   │   │   │           │   ├── media.http
     │   │   │   │           │   ├── merchant.http
     │   │   │   │           │   ├── message.http
-    │   │   │   │           │   ├── nammaTag.http
+    │   │   │   │           │   ├── QolariTag.http
     │   │   │   │           │   ├── payout.http
     │   │   │   │           │   ├── revenue.http
     │   │   │   │           │   ├── ride.http
@@ -6120,9 +6120,9 @@ Directory structure:
     │   │   │   │   │   └── Beckn/
     │   │   │   │   │       ├── Interface.hs
     │   │   │   │   │       ├── Interface/
-    │   │   │   │   │       │   ├── Nammayatri.hs
+    │   │   │   │   │       │   ├── Qolari.hs
     │   │   │   │   │       │   └── Types.hs
-    │   │   │   │   │       └── Nammayatri/
+    │   │   │   │   │       └── Qolari/
     │   │   │   │   │           ├── Flow.hs
     │   │   │   │   │           └── Types.hs
     │   │   │   │   └── UrlShortner/
@@ -6229,7 +6229,7 @@ Directory structure:
     │   │       │   └── Storage/
     │   │       │       ├── AppDynamicLogic.yaml
     │   │       │       ├── ChakraQueries.yaml
-    │   │       │       ├── NammaTag.yaml
+    │   │       │       ├── QolariTag.yaml
     │   │       │       ├── TagActionNotificationConfig.yaml
     │   │       │       ├── TimeBoundConfig.yaml
     │   │       │       └── UserData.yaml
@@ -6258,11 +6258,11 @@ Directory structure:
     │   │       │   │       │   └── Queries/
     │   │       │   │       │       ├── AppDynamicLogicElementExtra.hs
     │   │       │   │       │       ├── AppDynamicLogicRolloutExtra.hs
-    │   │       │   │       │       ├── NammaTagExtra.hs
+    │   │       │   │       │       ├── QolariTagExtra.hs
     │   │       │   │       │       ├── TimeBoundConfigExtra.hs
     │   │       │   │       │       ├── UserDataExtra.hs
     │   │       │   │       │       └── Transformers/
-    │   │       │   │       │           └── NammaTag.hs
+    │   │       │   │       │           └── QolariTag.hs
     │   │       │   │       ├── Tools/
     │   │       │   │       │   ├── Error.hs
     │   │       │   │       │   └── Utils.hs
@@ -6284,8 +6284,8 @@ Directory structure:
     │   │       │           │   │   ├── AppDynamicLogicElement.hs
     │   │       │           │   │   ├── AppDynamicLogicRollout.hs
     │   │       │           │   │   ├── ChakraQueries.hs
-    │   │       │           │   │   ├── NammaTag.hs
-    │   │       │           │   │   ├── NammaTagTrigger.hs
+    │   │       │           │   │   ├── QolariTag.hs
+    │   │       │           │   │   ├── QolariTagTrigger.hs
     │   │       │           │   │   ├── TagActionNotificationConfig.hs
     │   │       │           │   │   ├── TimeBoundConfig.hs
     │   │       │           │   │   └── UserData.hs
@@ -6293,23 +6293,23 @@ Directory structure:
     │   │       │           │       ├── AppDynamicLogicElement.hs
     │   │       │           │       ├── AppDynamicLogicRollout.hs
     │   │       │           │       ├── ChakraQueries.hs
-    │   │       │           │       ├── NammaTag.hs
-    │   │       │           │       ├── NammaTagTrigger.hs
+    │   │       │           │       ├── QolariTag.hs
+    │   │       │           │       ├── QolariTagTrigger.hs
     │   │       │           │       ├── TagActionNotificationConfig.hs
     │   │       │           │       ├── TimeBoundConfig.hs
     │   │       │           │       ├── UserData.hs
     │   │       │           │       └── OrphanInstances/
     │   │       │           │           ├── AppDynamicLogicElement.hs
     │   │       │           │           ├── AppDynamicLogicRollout.hs
-    │   │       │           │           ├── NammaTag.hs
+    │   │       │           │           ├── QolariTag.hs
     │   │       │           │           ├── TimeBoundConfig.hs
     │   │       │           │           └── UserData.hs
     │   │       │           └── Types/
     │   │       │               ├── AppDynamicLogicElement.hs
     │   │       │               ├── AppDynamicLogicRollout.hs
     │   │       │               ├── ChakraQueries.hs
-    │   │       │               ├── NammaTag.hs
-    │   │       │               ├── NammaTagTrigger.hs
+    │   │       │               ├── QolariTag.hs
+    │   │       │               ├── QolariTagTrigger.hs
     │   │       │               ├── TagActionNotificationConfig.hs
     │   │       │               ├── TimeBoundConfig.hs
     │   │       │               └── UserData.hs
@@ -6366,7 +6366,7 @@ Directory structure:
     │   │   ├── run-mobility-stack.nix
     │   │   ├── scripts.nix
     │   │   └── services/
-    │   │       ├── nammayatri.nix
+    │   │       ├── Qolari.nix
     │   │       ├── ports.nix
     │   │       └── postgres-with-replica.nix
     │   ├── swagger/
@@ -6433,13 +6433,13 @@ Directory structure:
     │   ├── README.md
     │   ├── asset-store-script.sh
     │   ├── default.nix
-    │   ├── driverJuspayAssets.sh
+    │   ├── driverQolariAssets.sh
     │   ├── format.sh
     │   ├── keyGenerator.py
     │   ├── packages.dhall
     │   ├── translations.json
     │   ├── translator.py
-    │   ├── userJuspayAssets.sh
+    │   ├── userQolariAssets.sh
     │   ├── .eslintrc.json
     │   ├── android-native/
     │   │   ├── bundleFetch.py
@@ -6471,12 +6471,12 @@ Directory structure:
     │   │   │       ├── androidTest/
     │   │   │       │   └── java/
     │   │   │       │       └── in/
-    │   │   │       │           └── juspay/
+    │   │   │       │           └── Qolari/
     │   │   │       │               └── mobility/
     │   │   │       │                   └── ExampleInstrumentedTest.java
     │   │   │       ├── dev/
     │   │   │       │   ├── assets/
-    │   │   │       │   │   └── juspay/
+    │   │   │       │   │   └── Qolari/
     │   │   │       │   │       └── becknbase.html
     │   │   │       │   └── res/
     │   │   │       │       └── values/
@@ -6485,12 +6485,12 @@ Directory structure:
     │   │   │       │   ├── aapleYatriPartner/
     │   │   │       │   │   ├── AndroidManifest.xml
     │   │   │       │   │   ├── assets/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── config.json
-    │   │   │       │   │   │       ├── juspay_assets.json
+    │   │   │       │   │   │       ├── Qolari_assets.json
     │   │   │       │   │   │       └── v1-configuration.js
     │   │   │       │   │   ├── js/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── boot_loader.js
     │   │   │       │   │   │       └── index_bundle.js
     │   │   │       │   │   └── res/
@@ -6575,18 +6575,18 @@ Directory structure:
     │   │   │       │   │           ├── strings.xml
     │   │   │       │   │           └── styles.xml
     │   │   │       │   ├── assets/
-    │   │   │       │   │   └── juspay/
-    │   │   │       │   │       └── juspay_assets.json
+    │   │   │       │   │   └── Qolari/
+    │   │   │       │   │       └── Qolari_assets.json
     │   │   │       │   ├── bridgeDriver/
     │   │   │       │   │   ├── AndroidManifest.xml
     │   │   │       │   │   ├── assets/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── config.json
     │   │   │       │   │   │       ├── index_bundle.js
-    │   │   │       │   │   │       ├── juspay_assets.json
+    │   │   │       │   │   │       ├── Qolari_assets.json
     │   │   │       │   │   │       └── v1-configuration.js
     │   │   │       │   │   ├── js/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── boot_loader.js
     │   │   │       │   │   │       └── index_bundle.js
     │   │   │       │   │   └── res/
@@ -6686,13 +6686,13 @@ Directory structure:
     │   │   │       │   ├── jatriSaathiDriver/
     │   │   │       │   │   ├── AndroidManifest.xml
     │   │   │       │   │   ├── assets/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── config.json
     │   │   │       │   │   │       ├── index_bundle.js
-    │   │   │       │   │   │       ├── juspay_assets.json
+    │   │   │       │   │   │       ├── Qolari_assets.json
     │   │   │       │   │   │       └── v1-configuration.js
     │   │   │       │   │   ├── js/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       └── boot_loader.js
     │   │   │       │   │   └── res/
     │   │   │       │   │       ├── drawable/
@@ -6741,13 +6741,13 @@ Directory structure:
     │   │   │       │   ├── keralaSavaariPartner/
     │   │   │       │   │   ├── AndroidManifest.xml
     │   │   │       │   │   ├── assets/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── config.json
     │   │   │       │   │   │       ├── index_bundle.js
-    │   │   │       │   │   │       ├── juspay_assets.json
+    │   │   │       │   │   │       ├── Qolari_assets.json
     │   │   │       │   │   │       └── v1-configuration.js
     │   │   │       │   │   ├── js/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── boot_loader.js
     │   │   │       │   │   │       └── index_bundle.js
     │   │   │       │   │   └── res/
@@ -6818,13 +6818,13 @@ Directory structure:
     │   │   │       │   ├── manaYatriPartner/
     │   │   │       │   │   ├── AndroidManifest.xml
     │   │   │       │   │   ├── assets/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── config.json
     │   │   │       │   │   │       ├── index_bundle.js
-    │   │   │       │   │   │       ├── juspay_assets.json
+    │   │   │       │   │   │       ├── Qolari_assets.json
     │   │   │       │   │   │       └── v1-configuration.js
     │   │   │       │   │   ├── js/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── boot_loader.js
     │   │   │       │   │   │       └── index_bundle.js
     │   │   │       │   │   └── res/
@@ -6872,16 +6872,16 @@ Directory structure:
     │   │   │       │   │           ├── ic_launcher_debug_background.xml
     │   │   │       │   │           ├── strings.xml
     │   │   │       │   │           └── styles.xml
-    │   │   │       │   ├── nammaYatriPartner/
+    │   │   │       │   ├── QolariPartner/
     │   │   │       │   │   ├── AndroidManifest.xml
     │   │   │       │   │   ├── assets/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── config.json
     │   │   │       │   │   │       ├── index_bundle.js
-    │   │   │       │   │   │       ├── juspay_assets.json
+    │   │   │       │   │   │       ├── Qolari_assets.json
     │   │   │       │   │   │       └── v1-configuration.js
     │   │   │       │   │   ├── js/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── boot_loader.js
     │   │   │       │   │   │       └── index_bundle.js
     │   │   │       │   │   └── res/
@@ -6935,14 +6935,14 @@ Directory structure:
     │   │   │       │   ├── odishaYatriPartner/
     │   │   │       │   │   ├── AndroidManifest.xml
     │   │   │       │   │   ├── assets/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── config.json
     │   │   │       │   │   │       ├── index_bundle.js
-    │   │   │       │   │   │       ├── juspay_assets.json
+    │   │   │       │   │   │       ├── Qolari_assets.json
     │   │   │       │   │   │       ├── payments.zip
     │   │   │       │   │   │       └── v1-configuration.js
     │   │   │       │   │   ├── js/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── boot_loader.js
     │   │   │       │   │   │       └── index_bundle.js
     │   │   │       │   │   └── res/
@@ -7032,13 +7032,13 @@ Directory structure:
     │   │   │       │   │   │   │   ├── Montserrat-SemiBoldItalic.ttf
     │   │   │       │   │   │   │   ├── Montserrat-Thin.ttf
     │   │   │       │   │   │   │   └── Montserrat-ThinItalic.ttf
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       ├── config.json
     │   │   │       │   │   │       ├── index_bundle.js
-    │   │   │       │   │   │       ├── juspay_assets.json
+    │   │   │       │   │   │       ├── Qolari_assets.json
     │   │   │       │   │   │       └── v1-configuration.js
     │   │   │       │   │   ├── js/
-    │   │   │       │   │   │   └── juspay/
+    │   │   │       │   │   │   └── Qolari/
     │   │   │       │   │   │       └── boot_loader.js
     │   │   │       │   │   └── res/
     │   │   │       │   │       ├── drawable/
@@ -7086,13 +7086,13 @@ Directory structure:
     │   │   │       │   └── yatriPartner/
     │   │   │       │       ├── AndroidManifest.xml
     │   │   │       │       ├── assets/
-    │   │   │       │       │   └── juspay/
+    │   │   │       │       │   └── Qolari/
     │   │   │       │       │       ├── config.json
     │   │   │       │       │       ├── index_bundle.js
-    │   │   │       │       │       ├── juspay_assets.json
+    │   │   │       │       │       ├── Qolari_assets.json
     │   │   │       │       │       └── v1-configuration.js
     │   │   │       │       ├── js/
-    │   │   │       │       │   └── juspay/
+    │   │   │       │       │   └── Qolari/
     │   │   │       │       │       └── boot_loader.js
     │   │   │       │       └── res/
     │   │   │       │           ├── drawable/
@@ -7126,7 +7126,7 @@ Directory structure:
     │   │   │       ├── generateHashes/
     │   │   │       │   └── java/
     │   │   │       │       └── in/
-    │   │   │       │           └── juspay/
+    │   │   │       │           └── Qolari/
     │   │   │       │               └── mobility/
     │   │   │       │                   └── Test.java
     │   │   │       ├── main/
@@ -7170,14 +7170,14 @@ Directory structure:
     │   │   │       │   │   │   ├── PlusJakartaSans-SemiBold.ttf
     │   │   │       │   │   │   ├── PlusJakartaSans-SemiBoldItalic.ttf
     │   │   │       │   │   │   └── Seven-Segment.ttf
-    │   │   │       │   │   └── juspay/
+    │   │   │       │   │   └── Qolari/
     │   │   │       │   │       ├── becknbase.html
     │   │   │       │   │       ├── splash_config.json
     │   │   │       │   │       ├── v1-assets_downloader.jsa
     │   │   │       │   │       └── zone_config.json
     │   │   │       │   ├── java/
     │   │   │       │   │   └── in/
-    │   │   │       │   │       └── juspay/
+    │   │   │       │   │       └── Qolari/
     │   │   │       │   │           └── mobility/
     │   │   │       │   │               ├── FirebaseMessaging.java
     │   │   │       │   │               ├── MainActivity.java
@@ -7326,23 +7326,23 @@ Directory structure:
     │   │   │       ├── test/
     │   │   │       │   └── java/
     │   │   │       │       └── in/
-    │   │   │       │           └── juspay/
+    │   │   │       │           └── Qolari/
     │   │   │       │               └── mobility/
     │   │   │       │                   └── ExampleUnitTest.java
     │   │   │       └── user/
     │   │   │           ├── assets/
-    │   │   │           │   └── juspay/
-    │   │   │           │       └── juspay_assets.json
+    │   │   │           │   └── Qolari/
+    │   │   │           │       └── Qolari_assets.json
     │   │   │           ├── bridge/
     │   │   │           │   ├── AndroidManifest.xml
     │   │   │           │   ├── assets/
-    │   │   │           │   │   └── juspay/
+    │   │   │           │   │   └── Qolari/
     │   │   │           │   │       ├── config.json
     │   │   │           │   │       ├── index_bundle.js
-    │   │   │           │   │       ├── juspay_assets.json
+    │   │   │           │   │       ├── Qolari_assets.json
     │   │   │           │   │       └── v1-configuration.js
     │   │   │           │   ├── js/
-    │   │   │           │   │   └── juspay/
+    │   │   │           │   │   └── Qolari/
     │   │   │           │   │       ├── boot_loader.js
     │   │   │           │   │       └── index_bundle.js
     │   │   │           │   └── res/
@@ -7381,12 +7381,12 @@ Directory structure:
     │   │   │           ├── jatriSaathi/
     │   │   │           │   ├── AndroidManifest.xml
     │   │   │           │   ├── assets/
-    │   │   │           │   │   └── juspay/
+    │   │   │           │   │   └── Qolari/
     │   │   │           │   │       ├── config.json
-    │   │   │           │   │       ├── juspay_assets.json
+    │   │   │           │   │       ├── Qolari_assets.json
     │   │   │           │   │       └── v1-configuration.js
     │   │   │           │   ├── js/
-    │   │   │           │   │   └── juspay/
+    │   │   │           │   │   └── Qolari/
     │   │   │           │   │       └── boot_loader.js
     │   │   │           │   └── res/
     │   │   │           │       ├── drawable/
@@ -7419,13 +7419,13 @@ Directory structure:
     │   │   │           ├── manaYatri/
     │   │   │           │   ├── AndroidManifest.xml
     │   │   │           │   ├── assets/
-    │   │   │           │   │   └── juspay/
+    │   │   │           │   │   └── Qolari/
     │   │   │           │   │       ├── config.json
     │   │   │           │   │       ├── index_bundle.js
-    │   │   │           │   │       ├── juspay_assets.json
+    │   │   │           │   │       ├── Qolari_assets.json
     │   │   │           │   │       └── v1-configuration.js
     │   │   │           │   ├── js/
-    │   │   │           │   │   └── juspay/
+    │   │   │           │   │   └── Qolari/
     │   │   │           │   │       ├── boot_loader.js
     │   │   │           │   │       └── index_bundle.js
     │   │   │           │   └── res/
@@ -7455,16 +7455,16 @@ Directory structure:
     │   │   │           │           ├── ic_launcher_debug_background.xml
     │   │   │           │           ├── strings.xml
     │   │   │           │           └── styles.xml
-    │   │   │           ├── nammaYatri/
+    │   │   │           ├── Qolari/
     │   │   │           │   ├── AndroidManifest.xml
     │   │   │           │   ├── assets/
-    │   │   │           │   │   └── juspay/
+    │   │   │           │   │   └── Qolari/
     │   │   │           │   │       ├── config.json
     │   │   │           │   │       ├── index_bundle.js
-    │   │   │           │   │       ├── juspay_assets.json
+    │   │   │           │   │       ├── Qolari_assets.json
     │   │   │           │   │       └── v1-configuration.js
     │   │   │           │   ├── js/
-    │   │   │           │   │   └── juspay/
+    │   │   │           │   │   └── Qolari/
     │   │   │           │   │       ├── boot_loader.js
     │   │   │           │   │       └── index_bundle.js
     │   │   │           │   └── res/
@@ -7497,13 +7497,13 @@ Directory structure:
     │   │   │           ├── odishaYatri/
     │   │   │           │   ├── AndroidManifest.xml
     │   │   │           │   ├── assets/
-    │   │   │           │   │   └── juspay/
+    │   │   │           │   │   └── Qolari/
     │   │   │           │   │       ├── config.json
     │   │   │           │   │       ├── index_bundle.js
-    │   │   │           │   │       ├── juspay_assets.json
+    │   │   │           │   │       ├── Qolari_assets.json
     │   │   │           │   │       └── v1-configuration.js
     │   │   │           │   ├── js/
-    │   │   │           │   │   └── juspay/
+    │   │   │           │   │   └── Qolari/
     │   │   │           │   │       ├── boot_loader.js
     │   │   │           │   │       └── index_bundle.js
     │   │   │           │   └── res/
@@ -7556,13 +7556,13 @@ Directory structure:
     │   │   │           └── yatri/
     │   │   │               ├── AndroidManifest.xml
     │   │   │               ├── assets/
-    │   │   │               │   └── juspay/
+    │   │   │               │   └── Qolari/
     │   │   │               │       ├── config.json
     │   │   │               │       ├── index_bundle.js
-    │   │   │               │       ├── juspay_assets.json
+    │   │   │               │       ├── Qolari_assets.json
     │   │   │               │       └── v1-configuration.js
     │   │   │               ├── js/
-    │   │   │               │   └── juspay/
+    │   │   │               │   └── Qolari/
     │   │   │               │       └── boot_loader.js
     │   │   │               └── res/
     │   │   │                   ├── drawable/
@@ -7608,18 +7608,18 @@ Directory structure:
     │   │   │       ├── androidTest/
     │   │   │       │   └── java/
     │   │   │       │       └── in/
-    │   │   │       │           └── juspay/
+    │   │   │       │           └── Qolari/
     │   │   │       │               └── mobility/
     │   │   │       │                   └── app/
     │   │   │       │                       └── ExampleInstrumentedTest.java
     │   │   │       ├── main/
     │   │   │       │   ├── AndroidManifest.xml
     │   │   │       │   ├── assets/
-    │   │   │       │   │   └── juspay/
+    │   │   │       │   │   └── Qolari/
     │   │   │       │   │       └── ride_request_theme.json
     │   │   │       │   ├── java/
     │   │   │       │   │   └── in/
-    │   │   │       │   │       └── juspay/
+    │   │   │       │   │       └── Qolari/
     │   │   │       │   │           └── mobility/
     │   │   │       │   │               └── app/
     │   │   │       │   │                   ├── BootUpReceiver.java
@@ -7835,13 +7835,13 @@ Directory structure:
     │   │   │       └── test/
     │   │   │           └── java/
     │   │   │               └── in/
-    │   │   │                   └── juspay/
+    │   │   │                   └── Qolari/
     │   │   │                       └── mobility/
     │   │   │                           └── app/
     │   │   │                               └── ExampleUnitTest.java
     │   │   ├── mobility-common/
     │   │   │   ├── consumer-rules.pro
-    │   │   │   ├── juspayAssets.sh
+    │   │   │   ├── QolariAssets.sh
     │   │   │   ├── keep.sh
     │   │   │   ├── proguard-rules.pro
     │   │   │   ├── .gitignore
@@ -7849,11 +7849,11 @@ Directory structure:
     │   │   │       └── main/
     │   │   │           ├── AndroidManifest.xml
     │   │   │           ├── assets/
-    │   │   │           │   └── juspay/
+    │   │   │           │   └── Qolari/
     │   │   │           │       └── v1-assets_downloader.jsa
     │   │   │           ├── java/
     │   │   │           │   └── in/
-    │   │   │           │       └── juspay/
+    │   │   │           │       └── Qolari/
     │   │   │           │           └── mobility/
     │   │   │           │               └── common/
     │   │   │           │                   ├── AudioRecorder.java
@@ -7927,8 +7927,8 @@ Directory structure:
     │   │   │               ├── menu/
     │   │   │               │   └── ny_crop_image_menu.xml
     │   │   │               ├── raw/
-    │   │   │               │   ├── juspay_mobility_common_keep.xml
-    │   │   │               │   ├── juspay_mobilitycommon_keep.xml
+    │   │   │               │   ├── Qolari_mobility_common_keep.xml
+    │   │   │               │   ├── Qolari_mobilitycommon_keep.xml
     │   │   │               │   └── map_style_retro.json
     │   │   │               ├── values/
     │   │   │               │   ├── attrs.xml
@@ -7944,14 +7944,14 @@ Directory structure:
     │   │   │                   └── strings.xml
     │   │   ├── mobility-customer/
     │   │   │   ├── consumer-rules.pro
-    │   │   │   ├── juspayAssets.sh
+    │   │   │   ├── QolariAssets.sh
     │   │   │   ├── keep.sh
     │   │   │   ├── proguard-rules.pro
     │   │   │   ├── .gitignore
     │   │   │   └── src/
     │   │   │       ├── debug/
     │   │   │       │   ├── assets/
-    │   │   │       │   │   └── juspay/
+    │   │   │       │   │   └── Qolari/
     │   │   │       │   │       └── becknbase.html
     │   │   │       │   └── res/
     │   │   │       │       └── values/
@@ -7963,19 +7963,19 @@ Directory structure:
     │   │   │           │   ├── fonts/
     │   │   │           │   │   ├── dummy.ttf
     │   │   │           │   │   └── .gitkeep
-    │   │   │           │   └── juspay/
+    │   │   │           │   └── Qolari/
     │   │   │           │       ├── becknbase.html
     │   │   │           │       ├── config.json
-    │   │   │           │       ├── juspay_assets.json
+    │   │   │           │       ├── Qolari_assets.json
     │   │   │           │       └── v1-configuration.js
     │   │   │           ├── java/
     │   │   │           │   └── in/
-    │   │   │           │       └── juspay/
+    │   │   │           │       └── Qolari/
     │   │   │           │           └── mobility/
     │   │   │           │               └── customer/
     │   │   │           │                   └── MobilityCustomerBridge.java
     │   │   │           ├── js/
-    │   │   │           │   └── juspay/
+    │   │   │           │   └── Qolari/
     │   │   │           │       ├── index_bundle.js
     │   │   │           │       └── tracker.js
     │   │   │           ├── res/
@@ -8004,10 +8004,10 @@ Directory structure:
     │   │   │           └── user/
     │   │   │               ├── mobility_pm/
     │   │   │               │   ├── assets/
-    │   │   │               │   │   └── juspay/
+    │   │   │               │   │   └── Qolari/
     │   │   │               │   │       ├── becknbase.html
     │   │   │               │   │       ├── config.json
-    │   │   │               │   │       ├── juspay_assets.json
+    │   │   │               │   │       ├── Qolari_assets.json
     │   │   │               │   │       └── v1-configuration.js
     │   │   │               │   └── res/
     │   │   │               │       ├── drawable/
@@ -8038,10 +8038,10 @@ Directory structure:
     │   │   │               │   │   ├── fonts/
     │   │   │               │   │   │   ├── dummy.ttf
     │   │   │               │   │   │   └── .gitkeep
-    │   │   │               │   │   └── juspay/
+    │   │   │               │   │   └── Qolari/
     │   │   │               │   │       ├── becknbase.html
     │   │   │               │   │       ├── config.json
-    │   │   │               │   │       ├── juspay_assets.json
+    │   │   │               │   │       ├── Qolari_assets.json
     │   │   │               │   │       └── v1-configuration.js
     │   │   │               │   └── res/
     │   │   │               │       ├── drawable/
@@ -8088,10 +8088,10 @@ Directory structure:
     │   │   │                   │   │   ├── Montserrat-SemiBoldItalic.ttf
     │   │   │                   │   │   ├── Montserrat-Thin.ttf
     │   │   │                   │   │   └── Montserrat-ThinItalic.ttf
-    │   │   │                   │   └── juspay/
+    │   │   │                   │   └── Qolari/
     │   │   │                   │       ├── becknbase.html
     │   │   │                   │       ├── config.json
-    │   │   │                   │       ├── juspay_assets.json
+    │   │   │                   │       ├── Qolari_assets.json
     │   │   │                   │       └── v1-configuration.js
     │   │   │                   └── res/
     │   │   │                       ├── drawable/
@@ -8122,7 +8122,7 @@ Directory structure:
     │   │       └── src/
     │   │           ├── debug/
     │   │           │   ├── assets/
-    │   │           │   │   └── juspay/
+    │   │           │   │   └── Qolari/
     │   │           │   │       └── becknbase.html
     │   │           │   └── res/
     │   │           │       └── values/
@@ -8131,13 +8131,13 @@ Directory structure:
     │   │           └── main/
     │   │               ├── AndroidManifest.xml
     │   │               ├── assets/
-    │   │               │   └── juspay/
+    │   │               │   └── Qolari/
     │   │               │       ├── becknbase.html
     │   │               │       ├── config.json
-    │   │               │       └── juspay_assets.json
+    │   │               │       └── Qolari_assets.json
     │   │               ├── java/
     │   │               │   └── in/
-    │   │               │       └── juspay/
+    │   │               │       └── Qolari/
     │   │               │           └── mobility/
     │   │               │               └── driver/
     │   │               │                   ├── CheckPermissionAutoStart.java
@@ -8779,7 +8779,7 @@ Directory structure:
     │   │       │   │       ├── Handler.purs
     │   │       │   │       ├── ScreenData.purs
     │   │       │   │       └── View.purs
-    │   │       │   ├── NammaSafetyFlow/
+    │   │       │   ├── QolariSafetyFlow/
     │   │       │   │   ├── ComponentConfig.purs
     │   │       │   │   ├── Controller.purs
     │   │       │   │   ├── Handler.purs

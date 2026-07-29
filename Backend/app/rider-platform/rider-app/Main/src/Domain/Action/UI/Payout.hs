@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-deprecations #-}
+﻿{-# OPTIONS_GHC -Wno-deprecations #-}
 
 module Domain.Action.UI.Payout
   ( payoutProcessingLockKey,
@@ -21,7 +21,7 @@ import qualified Domain.Types.VehicleCategory as DV
 import Environment
 import Kernel.Beam.Functions as B (runInReplica)
 import qualified Kernel.External.Payout.Interface.Types as IPayout
-import qualified Kernel.External.Payout.Juspay.Types.Payout as Payout
+import qualified Kernel.External.Payout.Qolari.Types.Payout as Payout
 import Kernel.Prelude
 import Kernel.Types.Id
 import Kernel.Utils.Common

@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-dodgy-exports #-}
+﻿{-# OPTIONS_GHC -Wno-dodgy-exports #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
@@ -64,7 +64,7 @@ updateByPrimaryKey (Domain.Types.SearchRequest.SearchRequest {..}) = do
       Se.Set Beam.currency (Just currency),
       Se.Set Beam.customerCancellationDues customerCancellationDues,
       Se.Set Beam.customerLanguage customerLanguage,
-      Se.Set Beam.customerNammaTags (Lib.Yudhishthira.Tools.Utils.tagsNameValueToTType customerNammaTags),
+      Se.Set Beam.customerQolariTags (Lib.Yudhishthira.Tools.Utils.tagsNameValueToTType customerQolariTags),
       Se.Set Beam.device device,
       Se.Set Beam.disabilityTag disabilityTag,
       Se.Set Beam.distanceUnit (Kernel.Prelude.Just distanceUnit),

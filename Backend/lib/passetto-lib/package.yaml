@@ -1,10 +1,10 @@
 ﻿name: passetto-lib
 version: 0.1.0.0
-github: "nammayatri/nammayatri"
+github: "Qolari/Qolari"
 license: AllRightsReserved
-author: "nammayatri"
-maintainer: "nammayatri"
-copyright: "2024 Juspay Technologies Private Limited"
+author: "Qolari"
+maintainer: "Qolari"
+copyright: "2024 Qolari Technologies"
 
 description: Internal passetto encryption library — in-process crypto using k8s secret keys, with fallback to passetto HTTP service via USE_PASSETTO_LIB env var.
 

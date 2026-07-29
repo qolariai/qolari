@@ -1,7 +1,7 @@
-{
+﻿{
   "info": {
     "name": "STCL Membership - Full Purchase + Cap Guard (5 shares in one go)",
-    "description": "Driver buys all 5 shares in a single submitApplication call, completes Juspay payment via mock CHARGED, verifies membership shows 5 shares in 1 allotment. Edits KYC via updateApplication and asserts via GET /membership. Then asserts that a subsequent buyAdditionalShares (+1) is rejected because the per-driver cap (5) would be exceeded.",
+    "description": "Driver buys all 5 shares in a single submitApplication call, completes Qolari payment via mock CHARGED, verifies membership shows 5 shares in 1 allotment. Edits KYC via updateApplication and asserts via GET /membership. Then asserts that a subsequent buyAdditionalShares (+1) is rejected because the per-driver cap (5) would be exceeded.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "event": [
@@ -63,9 +63,9 @@
           "raw": "{\n    \"mobileNumber\": \"{{_test_driver_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"{{driver_merchant_id}}\",\n    \"merchantOperatingCity\": \"{{city}}\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -104,9 +104,9 @@
           "raw": "{\n    \"otp\": \"{{login_otp}}\",\n    \"deviceToken\": \"stcl-test-device\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -156,9 +156,9 @@
           "raw": "{\n  \"driverId\": \"{{driver_id}}\",\n  \"firstName\": \"Full\",\n  \"lastName\": \"Driver\",\n  \"memberCategory\": \"Driver\",\n  \"numberOfShares\": 5,\n  \"dateOfBirth\": \"1988-07-22\",\n  \"aadharNumber\": \"999999999955\",\n  \"panNumber\": \"FULLD1234F\",\n  \"mobileNumber\": \"{{_test_driver_number}}\",\n  \"emailId\": \"stcl-full-test@example.com\",\n  \"fatherMotherName\": \"Full Father\",\n  \"address\": {\n    \"streetAddress1\": \"50 Outer Ring Road\",\n    \"streetAddress2\": \"Floor 3\",\n    \"city\": \"Bangalore\",\n    \"stateName\": \"Karnataka\",\n    \"postalCode\": \"560100\"\n  },\n  \"addressProofType\": \"AADHAAR\",\n  \"bankDetails\": {\n    \"bankName\": \"HDFC Bank\",\n    \"branch\": \"Whitefield\",\n    \"accountNumber\": \"99999999999999\",\n    \"ifscCode\": \"HDFC0009999\"\n  },\n  \"vehicleInfo\": {\n    \"vehicleType\": \"ThreeWheeler\",\n    \"fuelTypes\": [\"CNG\"]\n  },\n  \"nomineeInfo\": {\n    \"nomineeName\": \"Full Nominee\"\n  },\n  \"declaration\": {\n    \"place\": \"Bangalore\",\n    \"date\": \"2026-01-01\",\n    \"signature\": \"Full Driver\",\n    \"termsAccepted\": true\n  },\n  \"amount\": 500\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/submitApplication",
+          "raw": "{{baseURL_qolari_P}}/submitApplication",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "submitApplication"
@@ -167,7 +167,7 @@
       }
     },
     {
-      "name": "Override Juspay Status (CHARGED, full 5)",
+      "name": "Override Qolari Status (CHARGED, full 5)",
       "event": [
         {
           "listen": "prerequest",
@@ -178,7 +178,7 @@
               "    url: pm.environment.get('mockServerUrl') + '/mock/override',",
               "    method: 'POST',",
               "    header: { 'Content-Type': 'application/json' },",
-              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"juspay\", \"extract\": \"path.2\", \"value\": pm.environment.get('stcl_order_short_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 500.0, \"effective_amount\": 500.0, \"currency\": \"INR\", \"payment_method_type\": \"NB\", \"payment_method\": \"JP_HDFC\"}, \"match\": \"/orders\"}) }",
+              "    body: { mode: 'raw', raw: JSON.stringify({\"service\": \"Qolari\", \"extract\": \"path.2\", \"value\": pm.environment.get('stcl_order_short_id'), \"response\": {\"status\": \"CHARGED\", \"amount\": 500.0, \"effective_amount\": 500.0, \"currency\": \"INR\", \"payment_method_type\": \"NB\", \"payment_method\": \"JP_HDFC\"}, \"match\": \"/orders\"}) }",
               "}, function(){});"
             ],
             "type": "text/javascript"
@@ -208,7 +208,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"service\": \"juspay\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{stcl_order_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 500.0, \"effective_amount\": 500.0, \"currency\": \"INR\", \"payment_method_type\": \"NB\", \"payment_method\": \"JP_HDFC\"}}"
+          "raw": "{\"service\": \"Qolari\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{stcl_order_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 500.0, \"effective_amount\": 500.0, \"currency\": \"INR\", \"payment_method_type\": \"NB\", \"payment_method\": \"JP_HDFC\"}}"
         },
         "url": {
           "raw": "{{mockServerUrl}}/mock/override",
@@ -256,9 +256,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/payment/status/v2/{{stcl_order_short_id}}",
+          "raw": "{{baseURL_qolari_P}}/payment/status/v2/{{stcl_order_short_id}}",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "payment",
@@ -298,9 +298,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/membership",
+          "raw": "{{baseURL_qolari_P}}/membership",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "membership"
@@ -338,9 +338,9 @@
           "raw": "{\n  \"nomineeName\": \"Updated Full Nominee\",\n  \"address\": {\n    \"streetAddress1\": \"99 Updated Road\",\n    \"streetAddress2\": \"Floor 9\",\n    \"city\": \"Bangalore\",\n    \"stateName\": \"Karnataka\",\n    \"postalCode\": \"560200\"\n  }\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/updateApplication",
+          "raw": "{{baseURL_qolari_P}}/updateApplication",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "updateApplication"
@@ -375,9 +375,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/membership",
+          "raw": "{{baseURL_qolari_P}}/membership",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "membership"
@@ -421,9 +421,9 @@
           "raw": "{\n  \"numberOfShares\": 1,\n  \"amount\": 100\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/buyAdditionalShares",
+          "raw": "{{baseURL_qolari_P}}/buyAdditionalShares",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "buyAdditionalShares"
@@ -456,9 +456,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/membership",
+          "raw": "{{baseURL_qolari_P}}/membership",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "membership"

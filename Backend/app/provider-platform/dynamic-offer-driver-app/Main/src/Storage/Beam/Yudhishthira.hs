@@ -20,10 +20,10 @@ import Lib.Yudhishthira.Storage.Beam.AppDynamicLogicAlwaysOn as Reexport
 import Lib.Yudhishthira.Storage.Beam.AppDynamicLogicElement as Reexport
 import Lib.Yudhishthira.Storage.Beam.AppDynamicLogicRollout as Reexport
 import Lib.Yudhishthira.Storage.Beam.ChakraQueries as Reexport
-import Lib.Yudhishthira.Storage.Beam.NammaTag as Reexport
-import Lib.Yudhishthira.Storage.Beam.NammaTagTrigger as Reexport
-import Lib.Yudhishthira.Storage.Beam.NammaTagTriggerV2 as Reexport
-import Lib.Yudhishthira.Storage.Beam.NammaTagV2 as Reexport
+import Lib.Yudhishthira.Storage.Beam.QolariTag as Reexport
+import Lib.Yudhishthira.Storage.Beam.QolariTagTrigger as Reexport
+import Lib.Yudhishthira.Storage.Beam.QolariTagTriggerV2 as Reexport
+import Lib.Yudhishthira.Storage.Beam.QolariTagV2 as Reexport
 import Lib.Yudhishthira.Storage.Beam.TagActionNotificationConfig as Reexport
 import Lib.Yudhishthira.Storage.Beam.TimeBoundConfig as Reexport
 import Lib.Yudhishthira.Storage.Beam.UserData as Reexport
@@ -38,16 +38,16 @@ instance HasSchemaName AppDynamicLogicElementT where
 instance HasSchemaName AppDynamicLogicRolloutT where
   schemaName _ = T.pack currentSchemaName
 
-instance HasSchemaName NammaTagT where
+instance HasSchemaName QolariTagT where
   schemaName _ = T.pack currentSchemaName
 
-instance HasSchemaName NammaTagTriggerT where
+instance HasSchemaName QolariTagTriggerT where
   schemaName _ = T.pack currentSchemaName
 
-instance HasSchemaName NammaTagTriggerV2T where
+instance HasSchemaName QolariTagTriggerV2T where
   schemaName _ = T.pack currentSchemaName
 
-instance HasSchemaName NammaTagV2T where
+instance HasSchemaName QolariTagV2T where
   schemaName _ = T.pack currentSchemaName
 
 instance HasSchemaName ChakraQueriesT where

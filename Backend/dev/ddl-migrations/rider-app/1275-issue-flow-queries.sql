@@ -1,4 +1,4 @@
-------------- Issue Category Table ----------------------------------
+﻿------------- Issue Category Table ----------------------------------
 ALTER TABLE atlas_app.issue_category ADD COLUMN category_type text NOT NULL DEFAULT 'Category';
 ALTER TABLE atlas_app.issue_category ADD COLUMN created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL;
 ALTER TABLE atlas_app.issue_category ADD COLUMN updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL;
@@ -14,7 +14,7 @@ ALTER TABLE atlas_app.issue_category ADD COLUMN is_ticket_required Boolean DEFAU
 -- SET merchant_operating_city_id = (
 --     SELECT id
 --     FROM atlas_app.merchant_operating_city
---     WHERE city = 'Bangalore' AND merchant_short_id = 'NAMMA_YATRI'
+--     WHERE city = 'Bangalore' AND merchant_short_id = 'QOLARI'
 -- );
 
 ALTER TABLE atlas_app.issue_category
@@ -33,7 +33,7 @@ ALTER TABLE atlas_app.issue_option ADD COLUMN show_only_when_user_blocked boolea
 -- SET merchant_operating_city_id = (
 --     SELECT id
 --     FROM atlas_app.merchant_operating_city
---     WHERE city = 'Bangalore' AND merchant_short_id = 'NAMMA_YATRI'
+--     WHERE city = 'Bangalore' AND merchant_short_id = 'QOLARI'
 -- );
 
 ALTER TABLE atlas_app.issue_option
@@ -72,7 +72,7 @@ ALTER TABLE atlas_app.issue_message ADD COLUMN is_active boolean DEFAULT true NO
 -- SET merchant_operating_city_id = (
 --     SELECT id
 --     FROM atlas_app.merchant_operating_city
---     WHERE city = 'Bangalore' AND merchant_short_id = 'NAMMA_YATRI'
+--     WHERE city = 'Bangalore' AND merchant_short_id = 'QOLARI'
 -- );
 
 ALTER TABLE atlas_app.issue_message

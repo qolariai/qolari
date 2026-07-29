@@ -30,7 +30,7 @@ import Lib.ConfigPilot.Interface.Types (getConfig)
 import qualified Storage.CachedQueries.Merchant.RiderConfig as CQRC
 import Storage.ConfigPilot.Config.RiderConfig (RiderConfigDimensions (..))
 
--- | udf1 (user defined field 1) sent in the Juspay session/createOrder request.
+-- | udf1 (user defined field 1) sent in the Qolari session/createOrder request.
 -- Resolves to the customer's device id based on the client OS:
 --   iOS     -> person.deviceId
 --   Android -> person.androidId

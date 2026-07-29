@@ -1,6 +1,6 @@
-# Passetto Encrypt / Decrypt / Hash
+﻿# Passetto Encrypt / Decrypt / Hash
 
-Helper for the NammaYatri dashboard local-testing flow. Generates the encrypted
+Helper for the Qolari dashboard local-testing flow. Generates the encrypted
 blobs (`*_encrypted` columns) and SHA-256 hashes (`*_hash` columns) that match
 production schema for `atlas_bpp_dashboard.person`, `atlas_bap_dashboard.person`,
 etc., using the local `passetto` service plus the dev `encHashSalt`.
@@ -79,7 +79,7 @@ For a dashboard `person` row, you need:
 | `password_hash`           | `sha256(salt + <password>)`, prefix `\x`        |
 
 Existing examples in `Backend/dev/local-testing-data/provider-dashboard.sql`
-(juspay_admin, fleet) demonstrate the final SQL shape.
+(Qolari_admin, fleet) demonstrate the final SQL shape.
 
 ## Gotchas
 

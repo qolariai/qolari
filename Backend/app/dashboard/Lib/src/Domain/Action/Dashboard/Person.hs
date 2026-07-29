@@ -164,8 +164,8 @@ registerRelease _ ReleaseRegisterReq {..} = do
         token = token,
         otpEnabled = False,
         merchantId = Just "merchantId",
-        email = "sidharth.sethu@juspay.in",
-        context = "JUSPAY",
+        email = "sidharth.sethu@Qolari.in",
+        context = "Qolari",
         acl = Just "{\"mjos_manager\":\"RW\"}",
         merchantTrack = Nothing,
         clientConfig = Nothing,
@@ -179,8 +179,8 @@ getProductSpecInfo ::
 getProductSpecInfo _ = do
   return
     GetProductSpecInfoResp
-      { merchant_id = "nammayatriconsumer",
-        client_id = "nammayatriconsumer",
+      { merchant_id = "Qolariconsumer",
+        client_id = "Qolariconsumer",
         platform = "android"
       }
 

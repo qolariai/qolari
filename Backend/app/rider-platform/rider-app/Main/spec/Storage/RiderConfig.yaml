@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   Merchant: Domain.Types.Merchant
   MerchantOperatingCity: Domain.Types.MerchantOperatingCity
   EmailOTPConfig: Email.Types
@@ -472,11 +472,11 @@ RiderConfig:
     enableSupportForSafety: "false"
     videoFileSizeUpperLimit: "15000000"
     enableEmergencyContactAddedMessage: "true"
-    appUrl: "'nammayatri.in/link/rider/rmxw'"
+    appUrl: "'drive.qolari.com/link/rider/rmxw'"
     timeDiffFromUtc: "19800"
     safetyCheckStartTime: "75600"
     safetyCheckEndTime: "21600"
-    trackingShortUrlPattern: "'https://nammayatri.in/t/'"
+    trackingShortUrlPattern: "'https://drive.qolari.com/t/'"
     dashboardMediaFileUrlPattern: "'https://control-center.moving.tech/ops/<RIDES_OR_SOS>/<ID>?merchant=<MERCHANT_SHORT_ID>&city=<CITY_CODE>'"
     specialZoneRadius: "150"
     distanceWeightage: "70"

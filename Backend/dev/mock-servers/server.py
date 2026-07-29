@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-Unified mock server for NammaYatri merchant service providers.
+Unified mock server for Qolari merchant service providers.
 
 Each service handler lives in services/<name>.py with a handle(handler, path, body) function.
 
@@ -33,7 +33,7 @@ from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 from urllib.parse import urlparse
 
 import status_store
-from services import juspay, stripe, paytm, exotel, acko, sos, kapture, whatsapp, mmi, nextbillion, gridline, transit, hyperverge, gullak, openai, cmrl, cris, ebix, mlpricing, ondc, cac, fcm, sms, idfy, google, signzy, sandbox_proxy, sap
+from services import Qolari, stripe, paytm, exotel, acko, sos, kapture, whatsapp, mmi, nextbillion, gridline, transit, hyperverge, gullak, openai, cmrl, cris, ebix, mlpricing, ondc, cac, fcm, sms, idfy, google, signzy, sandbox_proxy, sap
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("mock-server")
@@ -92,7 +92,7 @@ def record_hit(hit):
 
 # Route table: (path substring, module, service name for overrides)
 ROUTES = [
-    ("/juspay",      juspay,      "juspay"),
+    ("/Qolari",      Qolari,      "Qolari"),
     ("/stripe",      stripe,      "stripe"),
     ("/paytm",       paytm,       "paytm"),
     ("/exotel",      exotel,      "exotel"),
@@ -847,7 +847,7 @@ class MockHandler(BaseHTTPRequestHandler):
         """POST /mock/redis/set — write a key/value into Redis (for cache pre-seeding).
 
         Body:
-          {"key": "rider-app-scheduler:NAMMA_YATRI:mobility:fcm_token",
+          {"key": "rider-app-scheduler:qolari:mobility:fcm_token",
            "value": "{\"access_token\":\"fake\",\"expires_in\":32503680000,\"token_type\":\"Bearer\"}",
            "target": "cluster",  # "cluster" (port 30001, with -c) or "standalone" (port 6379) — default "cluster"
            "port": 30001}        # optional — overrides target preset
@@ -1269,7 +1269,7 @@ class _QuietThreadingHTTPServer(ThreadingHTTPServer):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Unified mock server for NammaYatri")
+    parser = argparse.ArgumentParser(description="Unified mock server for Qolari")
     parser.add_argument("--port", type=int, default=8080, help="Port (default: 8080)")
     args = parser.parse_args()
 

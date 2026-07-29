@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "_postman_id": "4f993caa-30c9-4b57-a223-20047896779e",
     "name": "Direct Bus Booking",
@@ -36,7 +36,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"NAMMA_YATRI\"\n}",
+          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"qolari\"\n}",
           "options": {
             "raw": {
               "language": "json"
@@ -667,7 +667,7 @@
           "listen": "prerequest",
           "script": {
             "exec": [
-              "// Wait for rider-app to create the Juspay payment order",
+              "// Wait for rider-app to create the Qolari payment order",
               "const start = Date.now();",
               "while (Date.now() - start < 3000) { /* busy wait */ }"
             ],
@@ -754,13 +754,13 @@
           "script": {
             "exec": [
               "// Register override against the alternate order id form (short_id) so the rule",
-              "// fires whichever id rider-app uses in GET /juspay/orders/{id}",
+              "// fires whichever id rider-app uses in GET /Qolari/orders/{id}",
               "pm.sendRequest({",
               "    url: pm.environment.get('mockServerUrl') + '/mock/override',",
               "    method: 'POST',",
               "    header: { 'Content-Type': 'application/json' },",
               "    body: { mode: 'raw', raw: JSON.stringify({",
-              "        service: 'juspay', extract: 'path.2', match: '/orders',",
+              "        service: 'Qolari', extract: 'path.2', match: '/orders',",
               "        value: pm.environment.get('payment_order_id'),",
               "        response: { status: 'CHARGED', amount: 10.0 }",
               "    }) }",
@@ -794,7 +794,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"service\": \"juspay\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{payment_order_short_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 10.0}}"
+          "raw": "{\"service\": \"Qolari\", \"extract\": \"path.2\", \"match\": \"/orders\", \"value\": \"{{payment_order_short_id}}\", \"response\": {\"status\": \"CHARGED\", \"amount\": 10.0}}"
         },
         "url": {
           "raw": "{{mockServerUrl}}/mock/override",
@@ -816,7 +816,7 @@
           "listen": "prerequest",
           "script": {
             "exec": [
-              "// Extra wait on Master env \u2014 Juspay webhook processing takes longer than local mock",
+              "// Extra wait on Master env \u2014 Qolari webhook processing takes longer than local mock",
               "const waitMs = pm.environment.get('envType') === 'Master' ? 10000 : 5000;",
               "const start = Date.now();",
               "while (Date.now() - start < waitMs) { /* busy wait */ }"
@@ -835,7 +835,7 @@
               "pm.test('Payment status valid', function () {",
               "    pm.expect(d.payment).to.not.be.undefined;",
               "    if (envType === 'Master') {",
-              "        // On Master, payment.status may stay NEW but paymentOrder.status = CHARGED confirms Juspay processed it",
+              "        // On Master, payment.status may stay NEW but paymentOrder.status = CHARGED confirms Qolari processed it",
               "        var paymentOk = ['SUCCESS','CONFIRMING','CONFIRMED'].includes(d.payment.status) ||",
               "                        (d.payment.paymentOrder && d.payment.paymentOrder.status === 'CHARGED');",
               "        pm.expect(paymentOk).to.be.true;",

@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Storage.Queries.OrphanInstances.Person where
@@ -24,7 +24,7 @@ instance FromTType' Beam.Person Domain.Types.Person.Person where
     clientBundleVersion' <- (mapM Kernel.Utils.Version.readVersion (Data.Text.strip <$> clientBundleVersion))
     clientConfigVersion' <- (mapM Kernel.Utils.Version.readVersion (Data.Text.strip <$> clientConfigVersion))
     clientSdkVersion' <- (mapM Kernel.Utils.Version.readVersion (Data.Text.strip <$> clientSdkVersion))
-    customerNammaTags' <- Lib.Yudhishthira.Tools.Utils.tagsNameValueExpiryFromTType customerNammaTags
+    customerQolariTags' <- Lib.Yudhishthira.Tools.Utils.tagsNameValueExpiryFromTType customerQolariTags
     pure $
       Just
         Domain.Types.Person.Person
@@ -49,7 +49,7 @@ instance FromTType' Beam.Person Domain.Types.Person.Person where
             comments = comments,
             createdAt = createdAt,
             currentCity = Kernel.Prelude.snd updateMerchantOpIdAndCity,
-            customerNammaTags = customerNammaTags',
+            customerQolariTags = customerQolariTags',
             customerReferralCode = customerReferralCode,
             dateOfBirth = dateOfBirth,
             description = description,
@@ -74,7 +74,7 @@ instance FromTType' Beam.Person Domain.Types.Person.Person where
             informPoliceSos = fromMaybe False informPoliceSos,
             isNew = isNew,
             isValidRating = isValidRating,
-            juspayCustomerPaymentID = juspayCustomerPaymentID,
+            QolariCustomerPaymentID = QolariCustomerPaymentID,
             language = language,
             lastName = lastName,
             lastUsedVehicleCategories = fromMaybe [] lastUsedVehicleCategories,
@@ -142,7 +142,7 @@ instance ToTType' Beam.Person Domain.Types.Person.Person where
         Beam.comments = comments,
         Beam.createdAt = createdAt,
         Beam.currentCity = Kernel.Prelude.Just currentCity,
-        Beam.customerNammaTags = Lib.Yudhishthira.Tools.Utils.tagsNameValueExpiryToTType customerNammaTags,
+        Beam.customerQolariTags = Lib.Yudhishthira.Tools.Utils.tagsNameValueExpiryToTType customerQolariTags,
         Beam.customerReferralCode = customerReferralCode,
         Beam.dateOfBirth = dateOfBirth,
         Beam.description = description,
@@ -169,7 +169,7 @@ instance ToTType' Beam.Person Domain.Types.Person.Person where
         Beam.informPoliceSos = Just informPoliceSos,
         Beam.isNew = isNew,
         Beam.isValidRating = isValidRating,
-        Beam.juspayCustomerPaymentID = juspayCustomerPaymentID,
+        Beam.QolariCustomerPaymentID = QolariCustomerPaymentID,
         Beam.language = language,
         Beam.lastName = lastName,
         Beam.lastUsedVehicleCategories = Just lastUsedVehicleCategories,

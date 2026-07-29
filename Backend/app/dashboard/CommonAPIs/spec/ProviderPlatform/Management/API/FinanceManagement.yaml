@@ -1,4 +1,4 @@
-# 1. Subscription Purchase list – track subscription revenue and usage
+﻿# 1. Subscription Purchase list – track subscription revenue and usage
 # 2. Fleet Operator list – fleet operator master data and financials
 # 3. Invoice list – invoice metadata and compliance
 # All response fields Maybe so missing data does not break the API.
@@ -230,7 +230,7 @@ types:
     - derive: "HttpInstance"
 
   PgGateway:
-    - enum: "Juspay, BillDesk, RazorPay, CCAvenue"
+    - enum: "Qolari, BillDesk, RazorPay, CCAvenue"
     - derive: "HttpInstance"
 
   PaymentModeFilter:

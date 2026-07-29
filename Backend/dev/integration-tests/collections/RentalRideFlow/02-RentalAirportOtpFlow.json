@@ -1,4 +1,4 @@
-{
+﻿{
 	"info": {
 		"name": "NY Rental Airport OTP Flow (BLR Airport pickup, 4hr/40km package)",
 		"description": "Airport special-zone rental OTP flow: rider books a rental package starting from the Bangalore Airport special zone. Booking returns an OTP, driver starts via otpRide/start.\n\nPrerequisites:\n- BLR Airport special_location seeded (sz_origin_lat/lon inside the polygon).\n- fare_product entries for Rental_RideOtp + chosen vehicle variant at the airport special zone.\n- Bangalore rental policies are seeded (auto-synced from prod). If the airport zone has no Rental_RideOtp fare_product, this test will fail at the 'Has rental SZ quotes' assertion.\n",
@@ -39,7 +39,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}],
 				"body": {"mode": "raw", "raw": "{\"mobileNumber\": \"{{_test_driver_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"{{driver_merchant_id}}\", \"merchantOperatingCity\": \"{{city}}\"}"},
-				"url": {"raw": "{{baseURL_namma_P}}/auth", "host": ["{{baseURL_namma_P}}"], "path": ["auth"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/auth", "host": ["{{baseURL_qolari_P}}"], "path": ["auth"]}
 			}
 		},
 		{
@@ -49,7 +49,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}],
 				"body": {"mode": "raw", "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-device\"}"},
-				"url": {"raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify", "host": ["{{baseURL_namma_P}}"], "path": ["auth", "{{driver_authId}}", "verify"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify", "host": ["{{baseURL_qolari_P}}"], "path": ["auth", "{{driver_authId}}", "verify"]}
 			}
 		},
 		{
@@ -79,7 +79,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{}"},
-				"url": {"raw": "{{baseURL_namma_P}}/plan/{{plan_id}}/subscribe", "host": ["{{baseURL_namma_P}}"], "path": ["plan", "{{plan_id}}", "subscribe"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/plan/{{plan_id}}/subscribe", "host": ["{{baseURL_qolari_P}}"], "path": ["plan", "{{plan_id}}", "subscribe"]}
 			}
 		},
 		{
@@ -89,7 +89,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{\"canSwitchToRental\": true}"},
-				"url": {"raw": "{{baseURL_namma_P}}/driver/profile", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "profile"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/profile", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "profile"]}
 			}
 		},
 		{
@@ -99,7 +99,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{}"},
-				"url": {"raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "setActivity"], "query": [{"key": "active", "value": "true"}, {"key": "mode", "value": "%22ONLINE%22"}]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "setActivity"], "query": [{"key": "active", "value": "true"}, {"key": "mode", "value": "%22ONLINE%22"}]}
 			}
 		},
 		{
@@ -216,7 +216,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{\"specialZoneOtpCode\": \"{{sz_otp}}\", \"point\": {\"lat\": {{sz_origin_lat}}, \"lon\": {{sz_origin_lon}}}}"},
-				"url": {"raw": "{{baseURL_namma_P}}/driver/otpRide/start", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "otpRide", "start"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/otpRide/start", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "otpRide", "start"]}
 			}
 		},
 		{
@@ -229,7 +229,7 @@
 				"method": "POST",
 				"header": [{"key": "Content-Type", "value": "application/json"}, {"key": "token", "value": "{{driver_token}}"}],
 				"body": {"mode": "raw", "raw": "{\"point\": {\"lat\": {{dest_lat}}, \"lon\": {{dest_lon}}}, \"odometer\": {\"value\": 40, \"fileId\": \"test-odometer-end\"}}"},
-				"url": {"raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/end", "host": ["{{baseURL_namma_P}}"], "path": ["driver", "ride", "{{driver_ride_id}}", "end"]}
+				"url": {"raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/end", "host": ["{{baseURL_qolari_P}}"], "path": ["driver", "ride", "{{driver_ride_id}}", "end"]}
 			}
 		},
 		{

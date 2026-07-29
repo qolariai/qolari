@@ -1,8 +1,8 @@
-"""Clone-or-pull the ny-react-native repo (with submodules) into the
+﻿"""Clone-or-pull the ny-react-native repo (with submodules) into the
 default location, or whichever ``NY_RN_PATH`` points at.
 
 We clone over SSH (``git@github.com:…``) rather than HTTPS so the credential
-context carries through to the private ``nammayatri-ios`` submodule —
+context carries through to the private ``Qolari-ios`` submodule —
 HTTPS clones fail at the submodule step the moment the user lacks creds,
 which surfaced as 'submodule update failed' before this was forced on."""
 from __future__ import annotations
@@ -11,7 +11,7 @@ from pathlib import Path
 
 from . import log, sh, ssh
 
-GIT_URL = "git@github.com:nammayatri/ny-react-native"
+GIT_URL = "git@github.com:Qolari/ny-react-native"
 
 
 def clone_or_pull(target: Path) -> None:

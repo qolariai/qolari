@@ -89,12 +89,12 @@ runWithServiceConfigAndName func merchantId merchantOperatingCity serviceName mR
   where
     getPclient vsc = do
       case vsc of
-        Payment.JuspayConfig config -> config.pseudoClientId
+        Payment.PaymentGatewayConfig config -> config.pseudoClientId
         _ -> Nothing
 
     getRoutingId = do
       case serviceName of
-        DMSC.PaymentService Payment.AAJuspay -> mRoutingId
+        DMSC.PaymentService Payment.AAQolari -> mRoutingId
         _ -> Nothing
 
 -- | Fetch the offer SKU productId configured on the merchant's payment service config (if any).
@@ -161,8 +161,8 @@ modifyPaymentServiceByMode :: Payment.PaymentService -> DMPM.PaymentMode -> Paym
 modifyPaymentServiceByMode Payment.Stripe DMPM.LIVE = Payment.Stripe
 modifyPaymentServiceByMode Payment.Stripe DMPM.TEST = Payment.StripeTest
 modifyPaymentServiceByMode Payment.StripeTest _ = Payment.StripeTest
-modifyPaymentServiceByMode Payment.Juspay _ = Payment.Juspay
-modifyPaymentServiceByMode Payment.AAJuspay _ = Payment.AAJuspay
+modifyPaymentServiceByMode Payment.Gateway _ = Payment.Gateway
+modifyPaymentServiceByMode Payment.AAQolari _ = Payment.AAQolari
 modifyPaymentServiceByMode Payment.PaytmEDC _ = Payment.PaytmEDC
 
 runWithServiceConfig ::
@@ -201,7 +201,7 @@ decidePaymentService paymentServiceName clientSdkVersion merchantOpCityId = do
   transporterConfig <- getOneConfig (TransporterConfigDimensions {merchantOperatingCityId = merchantOpCityId.getId}) (Just (SCTC.findByMerchantOpCityId merchantOpCityId Nothing)) >>= fromMaybeM (TransporterConfigNotFound merchantOpCityId.getId)
   let paymentService = case clientSdkVersion of
         Just v
-          | v >= textToVersionDefault transporterConfig.aaEnabledClientSdkVersion -> DMSC.PaymentService Payment.AAJuspay
+          | v >= textToVersionDefault transporterConfig.aaEnabledClientSdkVersion -> DMSC.PaymentService Payment.AAQolari
         _ -> paymentServiceName
   logDebug $ "decidePaymentService: clientSdkVersion " <> show clientSdkVersion
   logDebug $ "decidePaymentService: transporterConfig.aaEnabledClientSdkVersion " <> show (textToVersionDefault transporterConfig.aaEnabledClientSdkVersion)
@@ -222,7 +222,7 @@ decidePaymentServiceForRecurring paymentServiceName driverId merchantOpCityId se
               sixHours = 6 * 60 * 60
           pure $
             if elapsed > sixHours
-              then DMSC.PaymentService Payment.AAJuspay
+              then DMSC.PaymentService Payment.AAQolari
               else paymentServiceName
         Nothing -> pure paymentServiceName
     _ -> pure paymentServiceName

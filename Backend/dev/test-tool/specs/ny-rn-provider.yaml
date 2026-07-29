@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=./_schema.json
+﻿# yaml-language-server: $schema=./_schema.json
 name: ny-rn-provider
 title: NY Driver App (Android)
 icon: assets/icons/mobile.svg
@@ -6,7 +6,7 @@ category: mobile
 tags: [react-native, android, driver]
 
 source:
-  url: https://github.com/nammayatri/ny-react-native
+  url: https://github.com/Qolari/ny-react-native
   ref: main
   destDir: data/ny-react-native
 
@@ -32,7 +32,7 @@ inputs:
   - key: VARIANT
     label: App variant
     type: select
-    options: [nammaYatri, jatriSaathi, bridge, manaYatri, yatri, lynx, bharatTaxi]
+    options: [Qolari, jatriSaathi, bridge, manaYatri, yatri, lynx, bharatTaxi]
     default: lynx
   - key: APP_ID
     label: Android package id
@@ -84,7 +84,7 @@ stages:
       if [ -f configs.zip ]; then unzip -o configs.zip; fi
       conf_dir="configs/master/android/$variant"
       mkdir -p "$conf_dir"
-      cp "configs/master/android/nammaYatri/local.properties" "$conf_dir/local.properties" 2>/dev/null || true
+      cp "configs/master/android/Qolari/local.properties" "$conf_dir/local.properties" 2>/dev/null || true
       cp "${inputs.GOOGLE_SERVICES_JSON}" "$conf_dir/google-services.json"
 
       # Write .env from user input

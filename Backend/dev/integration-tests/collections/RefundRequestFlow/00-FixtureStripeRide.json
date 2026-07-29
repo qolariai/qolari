@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "00-FixtureStripeRide",
     "description": "The FIXTURE: builds the one real Stripe card ride that 01-07 attach to (driver onboarding + Stripe Connect + rider card + search/accept/start/end + ride invoices + COMPLETED). Ends with fail-fast fixture GUARDS so a broken fixture dies here, not downstream: payment_order.id is a real GUID != rideId; BPP ride commission > 0 (else Case-2/agg asserts are vacuous); the RIDE_FARE component cap > 0. No refund actions.",
@@ -146,9 +146,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -186,9 +186,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -432,9 +432,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -578,9 +578,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -628,9 +628,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/bankAccount/link?paymentMode=%22LIVE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/register/bankAccount/link?paymentMode=%22LIVE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -677,9 +677,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/bankAccount/status",
+          "raw": "{{baseURL_qolari_P}}/driver/register/bankAccount/status",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -717,9 +717,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1185,7 +1185,7 @@
               "// Dashboard-compatible poll (the CLI retry hook is unavailable here). Driver-pool fires batches",
               "// every ~22s; the freshly-created test driver may miss the first batch. Poll up to ~50s.",
               "function _resolve(u){ return String(u||'').replace(/\\$\\{[^:}]*:?([^}]*)\\}/g,'$1'); }",
-              "function _url(){ return _resolve(pm.environment.get('baseURL_namma_P')) + '/driver/nearbyRideRequest'; }",
+              "function _url(){ return _resolve(pm.environment.get('baseURL_qolari_P')) + '/driver/nearbyRideRequest'; }",
               "function _finish(d){",
               "  if (d && d.searchRequestsForDriver && d.searchRequestsForDriver.length > 0) {",
               "    var req = d.searchRequestsForDriver[0];",
@@ -1225,9 +1225,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/nearbyRideRequest",
+          "raw": "{{baseURL_qolari_P}}/driver/nearbyRideRequest",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1264,9 +1264,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/searchRequest/quote/respond",
+          "raw": "{{baseURL_qolari_P}}/driver/searchRequest/quote/respond",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1381,9 +1381,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/list?limit=1&isActive=true",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/list?limit=1&isActive=true",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1431,9 +1431,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/start",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/start",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1476,9 +1476,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/end",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/end",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1536,9 +1536,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/subscription/invoices?invoiceType=%22Ride%22&limit=10&offset=0",
+          "raw": "{{baseURL_qolari_P}}/subscription/invoices?invoiceType=%22Ride%22&limit=10&offset=0",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "subscription",
@@ -1751,9 +1751,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/wallet/transactions",
+          "raw": "{{baseURL_qolari_P}}/wallet/transactions",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "wallet",

@@ -1,4 +1,4 @@
-module Lib.Payment.Wallet.Service
+﻿module Lib.Payment.Wallet.Service
   ( LoyaltyReferenceType (..),
     loyaltyReferenceTypeText,
     getOrCreateWalletForPerson,
@@ -56,7 +56,7 @@ mapOrderStatusToWalletStatus = \case
   Payment.CHARGED -> DWP.CHARGED
   Payment.AUTHENTICATION_FAILED -> DWP.FAILED
   Payment.AUTHORIZATION_FAILED -> DWP.FAILED
-  Payment.JUSPAY_DECLINED -> DWP.FAILED
+  Payment.Qolari_DECLINED -> DWP.FAILED
   Payment.CLIENT_AUTH_TOKEN_EXPIRED -> DWP.FAILED
   Payment.AUTO_REFUNDED -> DWP.FAILED
   _ -> DWP.PENDING
@@ -252,7 +252,7 @@ recordLoyaltyHistoryReversal wallet kind domainEntityId = do
       case findReversalOf original.id entriesForWallet of
         Just rev -> pure (Right (AlreadyWritten rev.id))
         Nothing -> do
-          res <- FLedger.createReversal original.id "Juspay loyalty entry reversed"
+          res <- FLedger.createReversal original.id "Qolari loyalty entry reversed"
           pure $ fmap (WrittenNew . (.id)) res
 
 nonReversalEntries :: [FLE.LedgerEntry] -> [FLE.LedgerEntry]

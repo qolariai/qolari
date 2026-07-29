@@ -1,4 +1,4 @@
-@app-host = http://localhost:8013/v2
+﻿@app-host = http://localhost:8013/v2
 
 # @name login
 POST {{app-host}}/auth
@@ -9,7 +9,7 @@ x-client-version: 1.0.0
 {
   "mobileCountryCode": "+91",
   "mobileNumber" : "7777777777",
-  "merchantId" : "JUSPAY.CABS.BAP"
+  "merchantId" : "Qolari.CABS.BAP"
 }
 
 ###

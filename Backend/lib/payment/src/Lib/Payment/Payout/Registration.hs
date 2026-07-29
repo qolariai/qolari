@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
+﻿{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
 
 module Lib.Payment.Payout.Registration
   ( RegistrationResult (..),
@@ -63,13 +63,13 @@ initiateRegistration ::
   Id DCommon.Merchant ->
   Maybe (Id DCommon.MerchantOperatingCity) ->
   Id DCommon.Person ->
-  (PInterface.CreateOrderReq -> m PInterface.CreateOrderResp) -> -- Juspay create order call
+  (PInterface.CreateOrderReq -> m PInterface.CreateOrderResp) -> -- Qolari create order call
   Text -> -- customerPhone
   Text -> -- customerEmail
   Maybe Text -> -- customerFirstName
   Maybe Text -> -- customerLastName
-  Bool -> -- Should be True if SplitEnabled in Juspay Merchant
-  Bool -> -- isAutoRefundEnabled (PayoutConfig flag — when True, Juspay auto-refunds the ₹2 after success)
+  Bool -> -- Should be True if SplitEnabled in Qolari Merchant
+  Bool -> -- isAutoRefundEnabled (PayoutConfig flag — when True, Qolari auto-refunds the ₹2 after success)
   m RegistrationResult
 initiateRegistration merchantId mbMerchantOpCityId personId createOrderCall customerPhone customerEmail customerFirstName customerLastName isSplitEnabled isAutoRefundEnabled = do
   orderId <- generateGUID
@@ -157,9 +157,9 @@ initiateRegistration merchantId mbMerchantOpCityId personId createOrderCall cust
 -- 2. Process Registration Payment (status check / webhook)
 -- ---------------------------------------------------------------------------
 
--- NOTE: Once the Juspay merchant config has auto-refund enabled on the
+-- NOTE: Once the Qolari merchant config has auto-refund enabled on the
 -- create-order session, this function is no longer required for the
--- registration flow. The registration ₹2 is reversed by Juspay itself, and
+-- registration flow. The registration ₹2 is reversed by Qolari itself, and
 -- the AUTO_REFUND_INITIATED / AUTO_REFUND_SUCCEEDED webhooks (handled in
 -- Domain.Action.UI.Payment) drive VPA capture + DriverFee status transitions
 -- directly. Kept for callers that have not yet migrated.
@@ -176,7 +176,7 @@ processRegistrationPayment ::
   ) =>
   Id DOrder.PaymentOrder ->
   Payment.TransactionStatus ->
-  Maybe Text -> -- payerVpa from Juspay response
+  Maybe Text -> -- payerVpa from Qolari response
   Bool -> -- autoRefund
   (DPayment.CreatePayoutServiceReq -> m IPayout.CreatePayoutOrderResp) -> -- payout call
   Text -> -- remark for payout
@@ -227,7 +227,7 @@ processRegistrationPayment orderId transactionStatus mbPayerVpa autoRefund creat
 -- ---------------------------------------------------------------------------
 
 -- NOTE: Manual payout-based refund. Not required when the create-order session
--- carries the auto-refund flag — Juspay reverses the charge automatically and
+-- carries the auto-refund flag — Qolari reverses the charge automatically and
 -- emits AUTO_REFUND_* webhooks. Kept for legacy / non-migrated merchants.
 
 -- | Refund the registration amount to the driver.
@@ -266,7 +266,7 @@ refundRegistrationAmount orderId createPayoutOrderCall remark orderType city pay
       vpa <- case (order.vpa, payoutServiceFlow) of
         (Just v, _) -> pure (Just v)
         (Nothing, Payout.StripeFlow) -> pure Nothing
-        (Nothing, Payout.JuspayFlow) -> do
+        (Nothing, Payout.QolariFlow) -> do
           logError $ "No VPA found on registration order " <> orderId.getId <> ", cannot refund"
           throwError $ InvalidRequest "No VPA captured for this registration order"
 

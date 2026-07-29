@@ -9,8 +9,8 @@ version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/qolariai/qolari#readme>
 homepage:       https://github.com/qolariai/qolari#readme
 bug-reports:    https://github.com/qolariai/qolari/issues
-author:         nammayatri
-maintainer:     nammayatri
+author:         Qolari
+maintainer:     Qolari
 copyright:      2023 Qolari Technologies
 license:        AllRightsReserved
 build-type:     Simple
@@ -106,7 +106,7 @@ library
       API.Types.ProviderPlatform.Management.Endpoints.MediaFileDocument
       API.Types.ProviderPlatform.Management.Endpoints.Merchant
       API.Types.ProviderPlatform.Management.Endpoints.Message
-      API.Types.ProviderPlatform.Management.Endpoints.NammaTag
+      API.Types.ProviderPlatform.Management.Endpoints.QolariTag
       API.Types.ProviderPlatform.Management.Endpoints.Payout
       API.Types.ProviderPlatform.Management.Endpoints.PlanManagement
       API.Types.ProviderPlatform.Management.Endpoints.Revenue
@@ -126,7 +126,7 @@ library
       API.Types.ProviderPlatform.Management.MediaFileDocument
       API.Types.ProviderPlatform.Management.Merchant
       API.Types.ProviderPlatform.Management.Message
-      API.Types.ProviderPlatform.Management.NammaTag
+      API.Types.ProviderPlatform.Management.QolariTag
       API.Types.ProviderPlatform.Management.Payout
       API.Types.ProviderPlatform.Management.PlanManagement
       API.Types.ProviderPlatform.Management.Revenue
@@ -157,7 +157,7 @@ library
       API.Types.RiderPlatform.Management.Endpoints.Invoice
       API.Types.RiderPlatform.Management.Endpoints.Media
       API.Types.RiderPlatform.Management.Endpoints.Merchant
-      API.Types.RiderPlatform.Management.Endpoints.NammaTag
+      API.Types.RiderPlatform.Management.Endpoints.QolariTag
       API.Types.RiderPlatform.Management.Endpoints.Offer
       API.Types.RiderPlatform.Management.Endpoints.Payout
       API.Types.RiderPlatform.Management.Endpoints.Rewards
@@ -171,7 +171,7 @@ library
       API.Types.RiderPlatform.Management.Invoice
       API.Types.RiderPlatform.Management.Media
       API.Types.RiderPlatform.Management.Merchant
-      API.Types.RiderPlatform.Management.NammaTag
+      API.Types.RiderPlatform.Management.QolariTag
       API.Types.RiderPlatform.Management.Offer
       API.Types.RiderPlatform.Management.Payout
       API.Types.RiderPlatform.Management.Rewards

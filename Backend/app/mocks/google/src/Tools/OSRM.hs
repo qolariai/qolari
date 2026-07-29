@@ -59,7 +59,7 @@ data OsrmTable = OsrmTable
 
 -- | OSRM base URL. Reads $OSRM_HOST (e.g. http://localhost:5001) and
 -- falls back to the local osrm-routed default port that
--- nix/services/nammayatri.nix wires up.
+-- nix/services/Qolari.nix wires up.
 osrmBaseUrl :: IO String
 osrmBaseUrl = do
   e <- lookupEnv "OSRM_HOST"

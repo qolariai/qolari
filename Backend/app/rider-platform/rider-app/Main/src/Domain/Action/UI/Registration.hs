@@ -328,7 +328,7 @@ auth ::
   Maybe Bool ->
   m AuthRes
 auth req' mbBundleVersion mbClientVersion mbClientConfigVersion mbRnVersion mbDevice mbXForwardedFor mbSenderHash mbIsDashboardRequest = do
-  let req = if req'.merchantId.getShortId == "YATRI" then req' {merchantId = ShortId "NAMMA_YATRI"} else req'
+  let req = if req'.merchantId.getShortId == "YATRI" then req' {merchantId = ShortId "qolari"} else req'
   mbClientIP <- extractClientIP mbXForwardedFor
   whenJust mbClientIP $ \clientIP -> do
     logInfo $ "Auth request from IP: " <> clientIP <> " for identifier: " <> show req'.mobileNumber
@@ -493,7 +493,7 @@ signatureAuth ::
   Maybe Text ->
   m AuthRes
 signatureAuth req' mbBundleVersion mbClientVersion mbClientConfigVersion mbRnVersion mbDevice = do
-  let req = if req'.merchantId.getShortId == "YATRI" then req' {merchantId = ShortId "NAMMA_YATRI"} else req'
+  let req = if req'.merchantId.getShortId == "YATRI" then req' {merchantId = ShortId "qolari"} else req'
   let identifierType = fromMaybe SP.MOBILENUMBER req.identifierType
   case identifierType of
     SP.CONDUCTORTOKEN -> conductorTokenAuth req mbBundleVersion mbClientVersion mbClientConfigVersion mbRnVersion mbDevice
@@ -852,10 +852,10 @@ buildPerson req identifierType notificationToken clientBundleVersion clientSdkVe
         deviceId = Nothing,
         androidId = Nothing,
         registeredViaPartnerOrgId = mbPartnerOrgId,
-        juspayCustomerPaymentID = Nothing,
+        QolariCustomerPaymentID = Nothing,
         enableOtpLessRide = req.enableOtpLessRide,
         totalRidesCount = Just 0,
-        customerNammaTags = Nothing,
+        customerQolariTags = Nothing,
         informPoliceSos = False,
         payoutVpa = Nothing,
         frequentLocGeohashes = Just [],
@@ -1061,14 +1061,14 @@ createPerson req identifierType notificationToken mbBundleVersion mbClientVersio
   createPersonStats <- makePersonStats person
   Person.create person
   QPS.create createPersonStats
-  addNammaTags person (Y.LoginTagData {id = person.id, gender = req.gender, clientSdkVersion = mbClientVersion, clientBundleVersion = mbBundleVersion, clientReactNativeVersion = mbRnVersion, clientConfigVersion = mbClientConfigVersion, clientDevice = mbDevice})
+  addQolariTags person (Y.LoginTagData {id = person.id, gender = req.gender, clientSdkVersion = mbClientVersion, clientBundleVersion = mbBundleVersion, clientReactNativeVersion = mbRnVersion, clientConfigVersion = mbClientConfigVersion, clientDevice = mbDevice})
   fork "event_tracking: user_onboarded" $
     ET.trackEvent merchant.id merchantOperatingCityId (ET.UserOnboarded person.id.getId (show identifierType) (show currentCity))
   fork "update emergency contact id" $
     whenJust req.mobileNumber $ \mobileNumber -> updatePersonIdForEmergencyContacts person.id mobileNumber merchant.id
   pure person
   where
-    addNammaTags ::
+    addQolariTags ::
       ( EsqDBFlow m r,
         CacheFlow m r,
         ClickhouseFlow m r
@@ -1076,9 +1076,9 @@ createPerson req identifierType notificationToken mbBundleVersion mbClientVersio
       SP.Person ->
       Y.LoginTagData ->
       m ()
-    addNammaTags person tagData = do
-      newPersonTags <- withTryCatch "computeNammaTagsWithExpiry:Login" (LYDL.computeNammaTagsWithExpiryAndDebugLog LYDL.Rider (cast person.merchantOperatingCityId) Yudhishthira.Login Nothing tagData)
-      let tags = nub (fromMaybe [] person.customerNammaTags <> fromMaybe [] (eitherToMaybe newPersonTags))
+    addQolariTags person tagData = do
+      newPersonTags <- withTryCatch "computeQolariTagsWithExpiry:Login" (LYDL.computeQolariTagsWithExpiryAndDebugLog LYDL.Rider (cast person.merchantOperatingCityId) Yudhishthira.Login Nothing tagData)
+      let tags = nub (fromMaybe [] person.customerQolariTags <> fromMaybe [] (eitherToMaybe newPersonTags))
       CQP.updateCustomerTags (Just tags) tagData.id
 
     makePersonStats :: MonadTime m => SP.Person -> m DPS.PersonStats

@@ -1,6 +1,6 @@
-# Namma DSL Tutorial
+﻿# Qolari DSL Tutorial
 
-This tutorial provides a comprehensive guide to understanding and working with the Domain Specific Language (NammaDSL) in the NammaYatri. It covers the creation of YAML files, code generation, and compilation, as well as the syntax for defining APIs and storage.
+This tutorial provides a comprehensive guide to understanding and working with the Domain Specific Language (QolariDSL) in the Qolari. It covers the creation of YAML files, code generation, and compilation, as well as the syntax for defining APIs and storage.
 
 ## Creating YAML Files
 

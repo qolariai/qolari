@@ -188,7 +188,7 @@ tfComplainantContact :: RideBooking -> Maybe Spec.Contact
 tfComplainantContact ridebookingInfo =
   Just $
     Spec.Contact
-      { contactEmail = Just "support@nammayatri.in",
+      { contactEmail = Just "support@drive.qolari.com",
         contactPhone = ridebookingInfo.contactPhone
       }
 

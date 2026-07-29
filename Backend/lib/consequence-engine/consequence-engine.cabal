@@ -9,8 +9,8 @@ version:        0.1.0.0
 description:    Consequence engine library - parses and executes consequence directives from rule-orchestrator via typeclass dispatch
 homepage:       https://github.com/qolariai/qolari#readme
 bug-reports:    https://github.com/qolariai/qolari/issues
-author:         nammayatri
-maintainer:     nammayatri
+author:         Qolari
+maintainer:     Qolari
 copyright:      2026 Moving Innovation Technologies Private Limited
 license:        AllRightsReserved
 build-type:     Simple

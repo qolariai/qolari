@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   Person: Domain.Types.Person
   Ride: Domain.Types.Ride
   Merchant: Domain.Types.Merchant
@@ -6,7 +6,7 @@ imports:
   UTCTime: Kernel.Prelude
   Text: Data.Text
   Money: Kernel.Types.Common
-  PayoutOrderStatus: Kernel.External.Payout.Juspay.Types.Payout
+  PayoutOrderStatus: Kernel.External.Payout.Qolari.Types.Payout
 
 DailyStats:
   tableName: daily_stats

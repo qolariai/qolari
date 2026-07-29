@@ -1,23 +1,23 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
-module Lib.Yudhishthira.Storage.Queries.OrphanInstances.NammaTag where
+module Lib.Yudhishthira.Storage.Queries.OrphanInstances.QolariTag where
 
 import Kernel.Beam.Functions
 import Kernel.External.Encryption
 import Kernel.Prelude
 import Kernel.Types.Error
 import Kernel.Utils.Common (CacheFlow, EsqDBFlow, MonadFlow, fromMaybeM, getCurrentTime)
-import qualified Lib.Yudhishthira.Storage.Beam.NammaTag as Beam
-import Lib.Yudhishthira.Storage.Queries.Transformers.NammaTag
+import qualified Lib.Yudhishthira.Storage.Beam.QolariTag as Beam
+import Lib.Yudhishthira.Storage.Queries.Transformers.QolariTag
 import qualified Lib.Yudhishthira.Types
-import qualified Lib.Yudhishthira.Types.NammaTag
+import qualified Lib.Yudhishthira.Types.QolariTag
 
-instance FromTType' Beam.NammaTag Lib.Yudhishthira.Types.NammaTag.NammaTag where
-  fromTType' (Beam.NammaTagT {..}) = do
+instance FromTType' Beam.QolariTag Lib.Yudhishthira.Types.QolariTag.QolariTag where
+  fromTType' (Beam.QolariTagT {..}) = do
     pure $
       Just
-        Lib.Yudhishthira.Types.NammaTag.NammaTag
+        Lib.Yudhishthira.Types.QolariTag.QolariTag
           { actionEngine = actionEngine,
             category = category,
             description = description,
@@ -30,9 +30,9 @@ instance FromTType' Beam.NammaTag Lib.Yudhishthira.Types.NammaTag.NammaTag where
             updatedAt = updatedAt
           }
 
-instance ToTType' Beam.NammaTag Lib.Yudhishthira.Types.NammaTag.NammaTag where
-  toTType' (Lib.Yudhishthira.Types.NammaTag.NammaTag {..}) = do
-    Beam.NammaTagT
+instance ToTType' Beam.QolariTag Lib.Yudhishthira.Types.QolariTag.QolariTag where
+  toTType' (Lib.Yudhishthira.Types.QolariTag.QolariTag {..}) = do
+    Beam.QolariTagT
       { Beam.actionEngine = actionEngine,
         Beam.category = category,
         Beam.description = description,

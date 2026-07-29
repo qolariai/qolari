@@ -1,8 +1,8 @@
-# access tokens with different roles
+﻿# access tokens with different roles
 @customer = {{bap-dashboard/token/YATRI/customer}}
 @driver = {{bap-dashboard/token/YATRI/driver}}
-@juspay_ops = {{bap-dashboard/token/YATRI/juspay_ops}}
-@juspay_admin = {{bap-dashboard/token/YATRI/juspay_admin}}
+@Qolari_ops = {{bap-dashboard/token/YATRI/Qolari_ops}}
+@Qolari_admin = {{bap-dashboard/token/YATRI/Qolari_admin}}
 @customer_service = {{bap-dashboard/token/YATRI/customer_service}}
 
 # @name healthcheck
@@ -17,5 +17,5 @@ GET {{bap-dashboard-host}}
 
 POST {{bap-dashboard-host}}/bap/YATRI/rideBooking/confirm/rideSearch/{{customerId}}/quotes/{{quoteId}}/confirm
 content-type: application/json
-token: {{juspay_admin}}
+token: {{Qolari_admin}}
 

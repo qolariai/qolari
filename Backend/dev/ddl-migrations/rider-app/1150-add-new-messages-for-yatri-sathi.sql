@@ -1,4 +1,4 @@
-
+﻿
 ALTER TABLE atlas_app.merchant_service_usage_config ALTER COLUMN enable_dashboard_sms SET NOT NULL; -- change merchant id to merchant id of yatri sathi
 
 -- INSERT INTO atlas_app.merchant_message (merchant_id, message_key, message) VALUES
@@ -10,4 +10,4 @@ ALTER TABLE atlas_app.merchant_service_usage_config ALTER COLUMN enable_dashboar
 -- Ride OTP : {#otp#}
 -- Ride Amount : {#amount#}
 
--- - Juspay');  -- change merchant id to merchant id of yatri sathi
+-- - Qolari');  -- change merchant id to merchant id of yatri sathi

@@ -1,4 +1,4 @@
-CREATE TABLE atlas_app.payment_order (
+﻿CREATE TABLE atlas_app.payment_order (
     id character(36) PRIMARY KEY NOT NULL,
     short_id character varying (36) NOT NULL,
     customer_id character(36) NOT NULL REFERENCES atlas_app.person (id),
@@ -33,7 +33,7 @@ CREATE TABLE atlas_app.payment_transaction (
     date_created timestamp with time zone,
     status_id int NOT NULL,
     status character varying(100) NOT NULL,
-    juspay_response text,
+    Qolari_response text,
     created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL
 );

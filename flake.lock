@@ -1,4 +1,4 @@
-{
+﻿{
   "nodes": {
     "amazonka-git": {
       "flake": false,
@@ -102,13 +102,13 @@
       "locked": {
         "lastModified": 1773075832,
         "narHash": "sha256-ig+Rx8RYETGmnfLHXqyvtSf0CUB1IPm/BwLrGctdYno=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "beckn-gateway",
         "rev": "c03d1f9379cfc370da6cd188960fab160141456d",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "beckn-gateway",
         "type": "github"
       }
@@ -118,13 +118,13 @@
       "locked": {
         "lastModified": 1596188445,
         "narHash": "sha256-n/5kFb5msE8NPQZf6bsm8MQh0RGDoOx6EJXoji6FPMs=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "bytestring-lexing",
         "rev": "0a46db1139011736687cb50bbd3877d223bcb737",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "bytestring-lexing",
         "type": "github"
       }
@@ -159,13 +159,13 @@
       "locked": {
         "lastModified": 1682526722,
         "narHash": "sha256-KT6KrzN61amTBoQjI1u+gXYYOaYYMLR4p7lcFLpwqy8=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "cachix-push",
         "rev": "18652f04b2bd28892f13571d6fd42853aaaf7862",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "cachix-push",
         "type": "github"
       }
@@ -174,13 +174,13 @@
       "locked": {
         "lastModified": 1726080112,
         "narHash": "sha256-OcmKmI5lO6ZcJNdZkWK5ObauO8YyazG3nBqGlwC9Y+0=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "cachix-push",
         "rev": "8ed534b817ab110387ff3bc95c211f668d7ccf2f",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "cachix-push",
         "type": "github"
       }
@@ -193,13 +193,13 @@
       "locked": {
         "lastModified": 1682526722,
         "narHash": "sha256-KT6KrzN61amTBoQjI1u+gXYYOaYYMLR4p7lcFLpwqy8=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "cachix-push",
         "rev": "18652f04b2bd28892f13571d6fd42853aaaf7862",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "cachix-push",
         "type": "github"
       }
@@ -231,13 +231,13 @@
       "locked": {
         "lastModified": 1696234101,
         "narHash": "sha256-dDUIny/9kZ0Bx/r/IPa9XRDcNT10XweR1uHqKx1CbAk=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "cereal",
         "rev": "ee7fc69f499e86b8274906ba183b60f4f08457a6",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "cereal",
         "type": "github"
       }
@@ -252,13 +252,13 @@
       "locked": {
         "lastModified": 1699959073,
         "narHash": "sha256-0Ovbd1CzgI4tSCTBe6z/7p8DpbajKyFlyS39hu4xpNY=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "clickhouse-haskell",
         "rev": "5314118b2635724b87f7993da9dc8446602bcd65",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "clickhouse-haskell",
         "type": "github"
       }
@@ -284,13 +284,13 @@
       "locked": {
         "lastModified": 1758918765,
         "narHash": "sha256-PH9gUSWPHMjp8DK9Ij6weRuUcL0s0kEgM16u48Xp9iU=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "common",
         "rev": "3c6f4a5f658fcd053c1f7ec5467d482bd0dc7a0c",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "common",
         "type": "github"
       }
@@ -313,13 +313,13 @@
       "locked": {
         "lastModified": 1703788997,
         "narHash": "sha256-b+OpDYWJEGZXoCFssu1Jd3r0PHokS4dSEKM8X/7Cgvg=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "common",
         "rev": "959ca460fce3289d73364c3003e1f36b96cae0a7",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "common",
         "type": "github"
       }
@@ -347,13 +347,13 @@
       "locked": {
         "lastModified": 1726080673,
         "narHash": "sha256-rZALUTNsH0ZJf7E9uu7PIZNErEG0nApiXouSCuqiKH8=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "common",
         "rev": "b3ab35d3a393ad5b9c587cd60fc3690e7a35ef62",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "common",
         "type": "github"
       }
@@ -376,13 +376,13 @@
       "locked": {
         "lastModified": 1699950488,
         "narHash": "sha256-llyrSKHNFL1FptFykCelRjitl3x0b4JsSkQQyCKVZhU=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "common",
         "rev": "0ae95ce0df4a0c6be221fdbd946f35e54e97ccf5",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "common",
         "type": "github"
       }
@@ -543,13 +543,13 @@
       "locked": {
         "lastModified": 1784068184,
         "narHash": "sha256-FmOV5dATivtMslphm0J6PiY5OoJKc/SI4ML8U+FB8PM=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "Multi-Cloud-DB-Manager",
         "rev": "5b4bafb60825a0f584a8646bbdc9b3e00b45fdee",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "Multi-Cloud-DB-Manager",
         "type": "github"
       }
@@ -557,7 +557,7 @@
     "devenv": {
       "inputs": {
         "flake-compat": [
-          "namma-dsl",
+          "qolari-dsl",
           "common",
           "cachix-push",
           "cachix",
@@ -672,13 +672,13 @@
       "locked": {
         "lastModified": 1690219299,
         "narHash": "sha256-YXz1EjpFkgFAC3txAj/9ItuO0SQBKrOwykBmc9w4qXs=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "euler-events-hs",
         "rev": "214d436a83113c04b6f937c68488abf53beea4e8",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "ref": "main",
         "repo": "euler-events-hs",
         "type": "github"
@@ -706,7 +706,7 @@
           "haskell-flake"
         ],
         "hedis": "hedis",
-        "juspay-extra": "juspay-extra",
+        "qolari-extra": "qolari-extra",
         "nixpkgs": [
           "shared-kernel",
           "nixpkgs"
@@ -732,13 +732,13 @@
       "locked": {
         "lastModified": 1785155093,
         "narHash": "sha256-NiUhGV6Y/nyQu2HT13LLA2Zdy6u92P4A9vd8p9NSmvU=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "euler-hs",
         "rev": "4badf9391c3bf9805bb8b9177c0da6ee49784d58",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "euler-hs",
         "type": "github"
       }
@@ -1495,7 +1495,7 @@
     "gitignore_3": {
       "inputs": {
         "nixpkgs": [
-          "namma-dsl",
+          "qolari-dsl",
           "common",
           "cachix-push",
           "cachix",
@@ -1521,7 +1521,7 @@
     "gitignore_4": {
       "inputs": {
         "nixpkgs": [
-          "namma-dsl",
+          "qolari-dsl",
           "common",
           "pre-commit-hooks-nix",
           "nixpkgs"
@@ -1667,13 +1667,13 @@
       "locked": {
         "lastModified": 1718094618,
         "narHash": "sha256-kXnm2lZ2dbQ9wPdHqTcgOcrW7aENTC4qvMq1YOP0F4A=",
-        "owner": "piyushKumar-1",
+        "owner": "qolariai",
         "repo": "haskell_cac_client",
         "rev": "26bcb2cd5c0c42fe179be733bb694fcd0967a3c4",
         "type": "github"
       },
       "original": {
-        "owner": "piyushKumar-1",
+        "owner": "qolariai",
         "ref": "Testing",
         "repo": "haskell_cac_client",
         "type": "github"
@@ -1744,13 +1744,13 @@
       "locked": {
         "lastModified": 1784659501,
         "narHash": "sha256-ovlZQ5Pe/7QVYSHAxaN3iLIq13bWXbwTWlMOFqWF7rs=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "hedis",
         "rev": "7c8a33b2f69e33e428f983a0b7d68ef9d7ecef86",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "ref": "enh/zone-aware-replica-usage",
         "repo": "hedis",
         "type": "github"
@@ -1795,18 +1795,18 @@
       "locked": {
         "lastModified": 1781617079,
         "narHash": "sha256-NXtj+dgXi4KRO13Sa51HL7eWjWGFeNWZ0egDjuxvCH8=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "json-logic-hs",
         "rev": "dcdd6a603faf7f8b140728fb3511d7498d6ab03f",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "json-logic-hs",
         "type": "github"
       }
     },
-    "juspay-extra": {
+    "qolari-extra": {
       "inputs": {
         "flake-parts": "flake-parts_10",
         "haskell-flake": [
@@ -1819,13 +1819,13 @@
       "locked": {
         "lastModified": 1686322580,
         "narHash": "sha256-EDdBN4Nfm/u+QRDZRv+vb8RfcJZpoToSr9pSBGc9vBI=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "euler-haskell-common",
         "rev": "4892071b7af07e5faa085e7917ab12110399f0e5",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "euler-haskell-common",
         "type": "github"
       }
@@ -1845,13 +1845,13 @@
       "locked": {
         "lastModified": 1771503695,
         "narHash": "sha256-zw8fKOzDCy8W5ccF2ArssCL+Otinpn33xDpBTEyQrT8=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "location-tracking-service",
         "rev": "0e9a41b0ac1b2d58e78e1ef6924309fb2b1e688c",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "location-tracking-service",
         "type": "github"
       }
@@ -1982,21 +1982,21 @@
         "type": "github"
       }
     },
-    "namma-dsl": {
+    "qolari-dsl": {
       "inputs": {
         "common": "common_2"
       },
       "locked": {
         "lastModified": 1784556783,
         "narHash": "sha256-sXOHklnUoRUeVC1igOKKaGNacoQV7CqgfS1rOm9Jboo=",
-        "owner": "nammayatri",
-        "repo": "namma-dsl",
+        "owner": "qolariai",
+        "repo": "qolari-dsl",
         "rev": "c61b5a25e8be42d9306ffa9ca58910e4e588512d",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
-        "repo": "namma-dsl",
+        "owner": "qolariai",
+        "repo": "qolari-dsl",
         "type": "github"
       }
     },
@@ -2004,7 +2004,7 @@
       "inputs": {
         "lowdown-src": "lowdown-src",
         "nixpkgs": [
-          "namma-dsl",
+          "qolari-dsl",
           "common",
           "cachix-push",
           "cachix",
@@ -2039,13 +2039,13 @@
       "locked": {
         "lastModified": 1717084565,
         "narHash": "sha256-zB6eDFFecSHEm6JKXeMDFIzsPICODAsUas/nHWOedkY=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "nix-health",
         "rev": "d83c80c022034b646e84df08b4d591b1f8af7832",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "nix-health",
         "type": "github"
       }
@@ -3257,13 +3257,13 @@
       "locked": {
         "lastModified": 1768368277,
         "narHash": "sha256-5Ho1qmnUt0JEaR1gJ3kvQCV2xsWNc8wfAWUZ1FGb0Qg=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "notification-service",
         "rev": "02e4346bcde205442268ee1e581591b4270b84a5",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "notification-service",
         "type": "github"
       }
@@ -3318,13 +3318,13 @@
       "locked": {
         "lastModified": 1722080814,
         "narHash": "sha256-l42/tDSf2qe82ah6XKveinKkVgRs11bmyendBEfYX8Y=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "passetto",
         "rev": "a1e0a291115125de01458f8830f781b868bf5eb4",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "ref": "use-crypton",
         "repo": "passetto",
         "type": "github"
@@ -3335,13 +3335,13 @@
       "locked": {
         "lastModified": 1657005302,
         "narHash": "sha256-iNdX1XMryrQ3IYmAgTI1wiBJ6Y+k265Snoluk4aMe7I=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "passetto",
         "rev": "bb92cf1dd9699662d2a7bb96cd6a6aed6f20e8ff",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "passetto",
         "rev": "bb92cf1dd9699662d2a7bb96cd6a6aed6f20e8ff",
         "type": "github"
@@ -3350,7 +3350,7 @@
     "pre-commit-hooks": {
       "inputs": {
         "flake-compat": [
-          "namma-dsl",
+          "qolari-dsl",
           "common",
           "cachix-push",
           "cachix",
@@ -3360,7 +3360,7 @@
         "flake-utils": "flake-utils_6",
         "gitignore": "gitignore_3",
         "nixpkgs": [
-          "namma-dsl",
+          "qolari-dsl",
           "common",
           "cachix-push",
           "cachix",
@@ -3695,13 +3695,13 @@
       "locked": {
         "lastModified": 1687373886,
         "narHash": "sha256-KWxG4SyXo39yG+7b1H0ULKzVu8Z1Hj8KCqS0rQKw3qU=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "prometheus-haskell",
         "rev": "f1d996bb317d0a50450ace2b4ae08b5afdf22955",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "ref": "more-proc-metrics",
         "repo": "prometheus-haskell",
         "type": "github"
@@ -3720,13 +3720,13 @@
       "locked": {
         "lastModified": 1687373886,
         "narHash": "sha256-KWxG4SyXo39yG+7b1H0ULKzVu8Z1Hj8KCqS0rQKw3qU=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "prometheus-haskell",
         "rev": "f1d996bb317d0a50450ace2b4ae08b5afdf22955",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "ref": "more-proc-metrics",
         "repo": "prometheus-haskell",
         "type": "github"
@@ -3747,7 +3747,7 @@
         ],
         "json-logic-hs": "json-logic-hs",
         "location-tracking-service": "location-tracking-service",
-        "namma-dsl": "namma-dsl",
+        "qolari-dsl": "qolari-dsl",
         "nixpkgs": [
           "common",
           "nixpkgs"
@@ -3776,13 +3776,13 @@
       "locked": {
         "lastModified": 1712193152,
         "narHash": "sha256-flsXt92BrijmpbzW2cvO181t9x5w651hFndFnNoyBMU=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "rust-flake",
         "rev": "eddd86d1a47c8b4078e5da59866bac26b5726c47",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "rust-flake",
         "type": "github"
       }
@@ -3930,13 +3930,13 @@
       "locked": {
         "lastModified": 1706179382,
         "narHash": "sha256-uhv/uKOwu1IfFnYyFFB4k5dMrYcorjs1DCd6ehm9ReA=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "haskell-sequelize",
         "rev": "38a8266d1bfa0ade37aa6b3ded2e1435f6839e7e",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "ref": "backend/decoupled-drainer-changes",
         "repo": "haskell-sequelize",
         "type": "github"
@@ -3963,13 +3963,13 @@
       "locked": {
         "lastModified": 1693308844,
         "narHash": "sha256-JDOCKKR8kREeKd7/nMPNPhT2F/bGADxyoy3B7GWWKw8=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "services-flake",
         "rev": "b93a612aa7057fbb395c79a915672f9b6567ffea",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "services-flake",
         "type": "github"
       }
@@ -3978,13 +3978,13 @@
       "locked": {
         "lastModified": 1703776472,
         "narHash": "sha256-eN1GGH9ErtAKMvVyp+GleJxaoTHfe3mTbtSiRxkmtbM=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "services-flake",
         "rev": "2211042f3e04de6b105f8d70c0be6213a2127d88",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "services-flake",
         "type": "github"
       }
@@ -3993,13 +3993,13 @@
       "locked": {
         "lastModified": 1717893266,
         "narHash": "sha256-pC/B4DnjcvaM1WPKm6rZe+0x3OfGdpRmTTb8mdTg1Kw=",
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "services-flake",
         "rev": "3e68d66e04bb26443249b20fd89646b9f89993f1",
         "type": "github"
       },
       "original": {
-        "owner": "juspay",
+        "owner": "qolariai",
         "repo": "services-flake",
         "type": "github"
       }
@@ -4023,13 +4023,13 @@
       "locked": {
         "lastModified": 1785248307,
         "narHash": "sha256-YxGJ9g3qimSAhxNQJzWMIakDky41ovWKR1Ird27WwUI=",
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "shared-kernel",
         "rev": "bdb9aca0279bd093760ada7997b08eab02bd1fc7",
         "type": "github"
       },
       "original": {
-        "owner": "nammayatri",
+        "owner": "qolariai",
         "repo": "shared-kernel",
         "type": "github"
       }

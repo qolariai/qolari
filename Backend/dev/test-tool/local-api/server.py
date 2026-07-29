@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
 Local System API
 
@@ -63,11 +63,11 @@ PORT = 7083
 
 # ── Paths ──
 SCRIPT_DIR = Path(__file__).resolve().parent
-PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent.parent  # nammayatri/
+PROJECT_ROOT = SCRIPT_DIR.parent.parent.parent.parent  # Qolari/
 
 KNOWN_REPOS: dict = {
-    "nammayatri/ny-react-native": PROJECT_ROOT / "data" / "ny-react-native",
-    "nammayatri/control-center":  PROJECT_ROOT / "data" / "control-center",
+    "Qolari/ny-react-native": PROJECT_ROOT / "data" / "ny-react-native",
+    "Qolari/control-center":  PROJECT_ROOT / "data" / "control-center",
 }
 
 # ── Control-center launcher ──
@@ -258,10 +258,10 @@ NY_RN_MAX_LOG_LINES = 4000
 NY_RN_READY_SENTINEL = "ny-react-native: launched"
 
 NY_RN_DEFAULT_VARIANTS = {
-    "customer": ["Bridge", "NammaYatri", "Yatri", "ManaYatri", "YatriSathi", "Lynx", "BharatTaxi"],
-    "driver":   ["nammaYatri", "jatriSaathi", "bridge", "manaYatri", "yatri", "lynx", "bharatTaxi"],
+    "customer": ["Bridge", "Qolari", "Yatri", "ManaYatri", "YatriSathi", "Lynx", "BharatTaxi"],
+    "driver":   ["Qolari", "jatriSaathi", "bridge", "manaYatri", "yatri", "lynx", "bharatTaxi"],
 }
-NY_RN_DEFAULT_VARIANT_BY_APP = {"customer": "Bridge", "driver": "nammaYatri"}
+NY_RN_DEFAULT_VARIANT_BY_APP = {"customer": "Bridge", "driver": "Qolari"}
 
 
 def _ny_rn_repo_dir() -> Path:
@@ -949,7 +949,7 @@ MACHINE_STATE_EXCLUDES = [
 # decides whether a deploy is needed — adding an entry here automatically stops
 # it from triggering a redeploy.
 REMOTE_EXCLUDES = BUILD_STATE_EXCLUDES + MACHINE_STATE_EXCLUDES
-REMOTE_DEFAULT_DIR = "/tmp/nammayatri"
+REMOTE_DEFAULT_DIR = "/tmp/Qolari"
 # A dev-box is shared, so its stack resolves free ports at startup and puts caddy
 # in front of them. Locally nothing has to coexist, so the fixed ports.nix map is
 # used and nothing (registry / Caddyfile) is generated.
@@ -1006,7 +1006,7 @@ def _ensure_ssh_key() -> tuple[str, str]:
     os.makedirs(os.path.dirname(key_path), exist_ok=True)
     subprocess.run(
         ["ssh-keygen", "-t", "ed25519", "-f", key_path,
-         "-N", "", "-C", f"{os.environ.get('USER', 'user')}@nammayatri"],
+         "-N", "", "-C", f"{os.environ.get('USER', 'user')}@Qolari"],
         capture_output=True, check=True,
     )
     with open(key_path + ".pub") as f:
@@ -1329,7 +1329,7 @@ def _devbox_resolve(force_new: bool = False) -> dict:
     host = machine.get("bestIp") or ""
 
     ssh_user = machine.get("user") or saved.get("sshUser") or ""
-    remote_dir = f"/tmp/{dev_id}/nammayatri"
+    remote_dir = f"/tmp/{dev_id}/Qolari"
 
     # Persist the connection coordinates too: this file is the ONLY local record
     # of where the devbox is. get_devbox_ports() reads host/sshUser/sshPort/
@@ -1608,7 +1608,7 @@ def _register_dev_user(ssh_user: str, host: str, port: int, identity: str | None
         return users[dev_name]
 
     entry = {
-        "dir": f"/tmp/{dev_name}/nammayatri",
+        "dir": f"/tmp/{dev_name}/Qolari",
     }
     users[dev_name] = entry
     registry["users"] = users
@@ -1699,7 +1699,7 @@ def get_devbox_ports(force: bool = False, host_override: str | None = None) -> d
         user = (saved.get("sshUser") or "").strip()
         ssh_port = int(saved.get("sshPort") or 22)
         remote_dir = (saved.get("remoteDir")
-                      or (f"/tmp/{saved['id']}/nammayatri" if saved.get("id") else ""))
+                      or (f"/tmp/{saved['id']}/Qolari" if saved.get("id") else ""))
         source = f"{user}@{host}:{remote_dir}/{DEVBOX_PORTS_RELPATH}"
         if not user or not remote_dir:
             result = {"source": source, "host": host, "ports": {},
@@ -1941,7 +1941,7 @@ def _ssh_argv(user: str, host: str, port: int, identity: str | None, want_tty: b
 
 # ── Service log viewer ────────────────────────────────────────────────────────
 # The stack writes each service's log as <workspace>/<name>.log. On a dev-box
-# those live on the remote machine (/tmp/<devId>/nammayatri/*.log), out of the
+# those live on the remote machine (/tmp/<devId>/Qolari/*.log), out of the
 # developer's reach — these two endpoints list them and tail a chosen one over
 # SSH (or read them locally when running the stack on this machine).
 _LOG_NAME_RE = re.compile(r"^[A-Za-z0-9._-]+\.log$")

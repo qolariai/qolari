@@ -1,5 +1,5 @@
-# Finance Kernel - PG Payment Settlement Report Table
-# Namma-DSL YAML specification
+﻿# Finance Kernel - PG Payment Settlement Report Table
+# qolari-dsl YAML specification
 #
 # Purpose:
 #   One row per line in the Payment Gateway's payment settlement file.
@@ -61,7 +61,7 @@ PgPaymentSettlementReport:
     id: Id PgPaymentSettlementReport
 
     # --- Transaction identity ---
-    orderId: Text                                  # PG order ID (Juspay orderId / shortId)
+    orderId: Text                                  # PG order ID (Qolari orderId / shortId)
     txnId: Maybe Text                              # PG transaction ID
     rrn: Maybe Text                                # Bank Reference Number
     utr: Maybe Text                                # Unique Transaction Reference from bank
@@ -84,7 +84,7 @@ PgPaymentSettlementReport:
     uniqueSplitId: Maybe Text                      # Split leg identifier within an order
 
     # --- Payment method details ---
-    paymentGateway: Maybe Text                     # e.g. JUSPAY, RAZORPAY
+    paymentGateway: Maybe Text                     # e.g. Qolari, RAZORPAY
     pgApprovalCode : Maybe Text                    # PG approval code
     paymentMethod: Maybe PaymentMethod             # UPI | CREDIT_CARD | ...
     paymentMethodSubType: Maybe Text               # e.g. "UPI-Bank Account", "VISA Debit"

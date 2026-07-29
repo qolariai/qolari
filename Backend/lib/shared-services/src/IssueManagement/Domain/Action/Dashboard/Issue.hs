@@ -1,4 +1,4 @@
-{-# LANGUAGE ScopedTypeVariables #-}
+﻿{-# LANGUAGE ScopedTypeVariables #-}
 
 module IssueManagement.Domain.Action.Dashboard.Issue where
 
@@ -72,8 +72,8 @@ getDefaultMerchantOperatingCityId issueHandle identifier =
     <&> (.id)
   where
     shortId = case identifier of
-      DRIVER -> ShortId "NAMMA_YATRI_PARTNER"
-      CUSTOMER -> ShortId "NAMMA_YATRI"
+      DRIVER -> ShortId "qolari_PARTNER"
+      CUSTOMER -> ShortId "qolari"
 
 checkMerchantCityAccess :: BeamFlow m r => ShortId Merchant -> Context.City -> DIR.IssueReport -> Maybe Person -> ServiceHandle m -> m MerchantOperatingCity
 checkMerchantCityAccess merchantShortId opCity issueReport mbPerson issueHandle = do
@@ -1929,7 +1929,7 @@ copyAllDefaultIssueCategories merchantShortId city issueHandle identifier = do
     issueHandle.findMOCityByMerchantShortIdAndCity merchantShortId city
       >>= fromMaybeM (MerchantOperatingCityNotFound $ "merchant-short-Id-" <> merchantShortId.getShortId <> "-city-" <> show city)
   defaultMoc <-
-    issueHandle.findMOCityByMerchantShortIdAndCity (ShortId "NAMMA_YATRI") (Context.City "Bangalore")
+    issueHandle.findMOCityByMerchantShortIdAndCity (ShortId "qolari") (Context.City "Bangalore")
       >>= fromMaybeM (MerchantOperatingCityNotFound "Default Bangalore MOC not found")
   defaultCategories <- CQIC.findAllActiveByMerchantOpCityIdAndLanguage defaultMoc.id ENGLISH identifier
   let toCopy = filter (\(cat, _) -> cat.showInDefault == Just True) defaultCategories

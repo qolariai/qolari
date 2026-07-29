@@ -1,4 +1,4 @@
-let common = ./common.dhall
+﻿let common = ./common.dhall
 
 let sec = ./secrets/dynamic-offer-driver-app.dhall
 
@@ -132,7 +132,7 @@ let smsConfig =
         }
       , useFakeSms = Some 7891
       , url = "http://localhost:${mockServerPort}/sms"
-      , sender = "JUSPAY"
+      , sender = "Qolari"
       }
 
 let sampleKafkaConfig
@@ -273,7 +273,7 @@ let registryMap =
       , { mapKey = "localhost/beckn/cab/v1/da4e23a5-3ce6-4c37-8b9b-41377c3c1a52"
         , mapValue = "http://localhost:${mockRegistryPort}/"
         }
-      , { mapKey = "JUSPAY.BG.1"
+      , { mapKey = "Qolari.BG.1"
         , mapValue = "http://localhost:${mockRegistryPort}/"
         }
       ]
@@ -588,11 +588,11 @@ in  { esqDBCfg
     , ondcGatewayUrl = common.ondcGatewayUrl
     , nyRegistryUrl = common.nyRegistryUrl
     , nyGatewayUrl = common.nyGatewayUrl
-    , nammayatriRegistryConfig = common.nammayatriRegistryConfig
+    , QolariRegistryConfig = common.QolariRegistryConfig
     , urlShortnerConfig = common.urlShortnerConfig
     , vocalyticsCnfg = VocaliticsConfig
     , meterRideReferralLink =
-        "https://nammayatri.in/refer?referrer=utm_source%3DChennai%26utm_medium%3Dqrcode%26utm_term%3Dreferral%26utm_content%3Dcoins%26utm_campaign%{referralCode}%26anid%3Dadmob&id=in.juspay.nammayatri"
+        "https://drive.qolari.com/refer?referrer=utm_source%3DChennai%26utm_medium%3Dqrcode%26utm_term%3Dreferral%26utm_content%3Dcoins%26utm_campaign%{referralCode}%26anid%3Dadmob&id=com.qolari.drive"
     , minDistanceBetweenTwoPoints = +25
     , inMemConfig
     , driverFleetLocationListAPIRateLimitOptions

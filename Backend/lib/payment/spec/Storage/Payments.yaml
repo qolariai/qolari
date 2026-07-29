@@ -1,11 +1,11 @@
-imports:
+﻿imports:
   UTCTime: Kernel.Prelude
   ShortId: Kernel.Types.Id
   HighPrecMoney: Kernel.Types.Common
   Currency: Kernel.Types.Common
   Price: Kernel.Types.Common
   PaymentOrder: Lib.Payment.Domain.Types.PaymentOrder
-  AccountDetailsType: Kernel.External.Payout.Juspay.Types.Payout
+  AccountDetailsType: Kernel.External.Payout.Qolari.Types.Payout
   EntityName: Lib.Payment.Domain.Types.Common
   EncryptedHashedField: Kernel.External.Encryption
   DbHash: Kernel.External.Encryption

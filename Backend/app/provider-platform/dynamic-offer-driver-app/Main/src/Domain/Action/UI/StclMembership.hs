@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wwarn=unused-imports #-}
+﻿{-# OPTIONS_GHC -Wwarn=unused-imports #-}
 
 module Domain.Action.UI.StclMembership (postSubmitApplication, postBuyAdditionalShares, putUpdateApplication, getMembership, stclMemberShipOrderStatusHandler) where
 
@@ -109,7 +109,7 @@ postSubmitApplication (mbDriverId, merchantId, merchantOperatingCityId) req = Ac
 
   -- Fetch gatewayReferenceId from merchant service config
   mbGatewayReferenceId <- do
-    mbServiceConfig <- getOneConfig (MerchantServiceConfigDimensions {merchantOperatingCityId = merchantOperatingCityId.getId, merchantId = Nothing, serviceName = Just (DMSC.MembershipPaymentService PaymentService.Juspay)}) (Just (maybeToList <$> CQMSC.findByServiceAndCity (DMSC.MembershipPaymentService PaymentService.Juspay) merchantOperatingCityId))
+    mbServiceConfig <- getOneConfig (MerchantServiceConfigDimensions {merchantOperatingCityId = merchantOperatingCityId.getId, merchantId = Nothing, serviceName = Just (DMSC.MembershipPaymentService PaymentService.Qolari)}) (Just (maybeToList <$> CQMSC.findByServiceAndCity (DMSC.MembershipPaymentService PaymentService.Qolari) merchantOperatingCityId))
     case mbServiceConfig of
       Just serviceConfig -> case serviceConfig.serviceConfig of
         DMSC.MembershipPaymentServiceConfig paymentServiceConfig ->
@@ -119,7 +119,7 @@ postSubmitApplication (mbDriverId, merchantId, merchantOperatingCityId) req = Ac
 
   -- Create PaymentTypes.CreateOrderReq
   nwAddress <- asks (.nwAddress)
-  offerBasket <- TPayment.mkOfferBasket merchantOperatingCityId (Just $ DMSC.MembershipPaymentService PaymentService.Juspay) amount
+  offerBasket <- TPayment.mkOfferBasket merchantOperatingCityId (Just $ DMSC.MembershipPaymentService PaymentService.Qolari) amount
   let createOrderReq =
         PaymentTypes.CreateOrderReq
           { orderId = orderId,
@@ -274,7 +274,7 @@ postBuyAdditionalShares (mbDriverId, merchantId, merchantOperatingCityId) req = 
     decryptedMobile <- decrypt mbMobileNumber
 
     mbGatewayReferenceId <- do
-      mbServiceConfig <- getOneConfig (MerchantServiceConfigDimensions {merchantOperatingCityId = merchantOperatingCityId.getId, merchantId = Nothing, serviceName = Just (DMSC.MembershipPaymentService PaymentService.Juspay)}) (Just (maybeToList <$> CQMSC.findByServiceAndCity (DMSC.MembershipPaymentService PaymentService.Juspay) merchantOperatingCityId))
+      mbServiceConfig <- getOneConfig (MerchantServiceConfigDimensions {merchantOperatingCityId = merchantOperatingCityId.getId, merchantId = Nothing, serviceName = Just (DMSC.MembershipPaymentService PaymentService.Qolari)}) (Just (maybeToList <$> CQMSC.findByServiceAndCity (DMSC.MembershipPaymentService PaymentService.Qolari) merchantOperatingCityId))
       case mbServiceConfig of
         Just serviceConfig -> case serviceConfig.serviceConfig of
           DMSC.MembershipPaymentServiceConfig paymentServiceConfig ->
@@ -308,11 +308,11 @@ postBuyAdditionalShares (mbDriverId, merchantId, merchantOperatingCityId) req = 
 
     case mbResumable of
       Just (existing, existingOrder) -> do
-        -- Same intent as the in-flight order: re-issue the same CreateOrderResp (same Juspay orderId) so
+        -- Same intent as the in-flight order: re-issue the same CreateOrderResp (same Qolari orderId) so
         -- the frontend resumes the existing payment screen. createOrderService recognises the orderId and
         -- returns the stored payment links — see Lib.Payment.Domain.Action.createOrderService.
         nwAddress <- asks (.nwAddress)
-        offerBasket <- TPayment.mkOfferBasket merchantOperatingCityId (Just $ DMSC.MembershipPaymentService PaymentService.Juspay) existingOrder.amount
+        offerBasket <- TPayment.mkOfferBasket merchantOperatingCityId (Just $ DMSC.MembershipPaymentService PaymentService.Qolari) existingOrder.amount
         let resumeReq =
               PaymentTypes.CreateOrderReq
                 { orderId = existing.id.getId,
@@ -362,7 +362,7 @@ postBuyAdditionalShares (mbDriverId, merchantId, merchantOperatingCityId) req = 
         applicationId <- generateGUIDText
 
         nwAddress <- asks (.nwAddress)
-        offerBasket <- TPayment.mkOfferBasket merchantOperatingCityId (Just $ DMSC.MembershipPaymentService PaymentService.Juspay) resolvedReqAmount
+        offerBasket <- TPayment.mkOfferBasket merchantOperatingCityId (Just $ DMSC.MembershipPaymentService PaymentService.Qolari) resolvedReqAmount
 
         let createOrderReq =
               PaymentTypes.CreateOrderReq

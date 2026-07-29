@@ -1,4 +1,4 @@
--- | Consumer-side handlers for RideEndedEvent.
+﻿-- | Consumer-side handlers for RideEndedEvent.
 --
 -- Each handler replaces one of the original synchronous calls / forks in EndRide.hs
 -- and EndRide/Internal.hs. The handler looks up the Ride and Booking from the event's
@@ -9,7 +9,7 @@
 module Processor.RideEvents.Handlers
   ( handleAnalyticsKafka,
     handleRideInterpolation,
-    handleNammaTags,
+    handleQolariTags,
     handleFleetOperatorStats,
     handleGpsTollBehavior,
     handleRCStatsReminders,
@@ -170,10 +170,10 @@ handleRideInterpolation ev = withRideAndBooking ev $ \ride _booking -> do
     $ pushToKafka rideInterpolationData "ride-interpolated-waypoints" ride.id.getId
 
 ------------------------------------------------------------
--- P1b-3 : LYDL Namma Tags
+-- P1b-3 : LYDL Qolari Tags
 ------------------------------------------------------------
 
-handleNammaTags ::
+handleQolariTags ::
   ( CacheFlow m r,
     Esq.EsqDBFlow m r,
     Esq.EsqDBReplicaFlow m r,
@@ -184,7 +184,7 @@ handleNammaTags ::
   ) =>
   RideEndedEvent ->
   m ()
-handleNammaTags ev = withRideAndBooking ev $ \ride booking -> do
+handleQolariTags ev = withRideAndBooking ev $ \ride booking -> do
   thresholdConfig <- fetchTransporterConfig ride
   mbDriver <- QPerson.findById ride.driverId
   mbRiderDetails <- join <$> QRiderDetails.findById `mapM` booking.riderId
@@ -210,8 +210,8 @@ handleNammaTags ev = withRideAndBooking ev $ \ride booking -> do
       rideDurationSeconds =
         maybe 0 (\tStart -> max 0 $ roundToIntegral (diffUTCTime now tStart)) ride.tripStartTime
   void $
-    withTryCatch "ride-events:computeNammaTags" $
-      LYDL.computeNammaTagsWithDebugLog
+    withTryCatch "ride-events:computeQolariTags" $
+      LYDL.computeQolariTagsWithDebugLog
         LYDL.Driver
         (cast booking.merchantOperatingCityId)
         Yudhishthira.RideEnd

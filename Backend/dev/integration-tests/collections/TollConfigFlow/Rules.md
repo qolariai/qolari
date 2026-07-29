@@ -1,4 +1,4 @@
-# TollConfigFlow — Integration Test Rules
+﻿# TollConfigFlow — Integration Test Rules
 
 Provider-dashboard toll CRUD with **GeoJSON LineString and Polygon** geometry objects only. Legacy `{start,end}` LineSegment gates are rejected on create but may still exist in DB from older rows.
 
@@ -18,7 +18,7 @@ Provider-dashboard toll CRUD with **GeoJSON LineString and Polygon** geometry ob
      psql -h localhost -p 5434 -U atlas_superuser -d atlas_dev \
        -f Backend/dev/local-testing-data/provider-dashboard.sql
      ```
-4. **Environment files:** `Local/Local_NY_Bangalore.postman_environment.json`, `Local/Local_BT_Delhi.postman_environment.json` — use `dashboard_token` `local-admin-token-bangalore-namma-yatri` (JUSPAY_ADMIN).
+4. **Environment files:** `Local/Local_NY_Bangalore.postman_environment.json`, `Local/Local_BT_Delhi.postman_environment.json` — use `dashboard_token` `local-admin-token-bangalore-qolari` (Qolari_ADMIN).
 
 ## Running
 

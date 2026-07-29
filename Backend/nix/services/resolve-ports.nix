@@ -1,10 +1,10 @@
-# resolve-ports.nix — Nix wrapper around the resolve-ports shell logic.
+﻿# resolve-ports.nix — Nix wrapper around the resolve-ports shell logic.
 #
 # Probes each port in the base ports.nix for availability and substitutes free
 # alternatives, then emits the resolved ports as a JSON object {"name":port,...}
 # on STDOUT (all diagnostics go to STDERR). The run-mobility-stack-dev preflight
 # captures that JSON and (a) records it in the devbox registry under DEVBOX_KEY —
-# nammayatri.nix + the Caddyfile read the ports from there — and (b) publishes it
+# Qolari.nix + the Caddyfile read the ports from there — and (b) publishes it
 # at <workspace>/data/ports.json, which is what test-context-api and the test
 # dashboard's local-api read. There is no data/ports-resolved.nix file.
 #
@@ -41,10 +41,10 @@ pkgs.writeShellApplication {
     _registry_count=0
     REGISTRY="/tmp/devbox-registry.json"
     # Our registry key: DEVBOX_KEY from the preflight, else derive from a devbox
-    # path (/tmp/<name>/nammayatri → <name>) for standalone invocation.
+    # path (/tmp/<name>/Qolari → <name>) for standalone invocation.
     MY_DEV_NAME="''${DEVBOX_KEY:-}"
     if [[ -z "$MY_DEV_NAME" ]]; then
-      MY_DEV_NAME=$(echo "''${FLAKE_ROOT}" | sed -n 's|^/tmp/\([^/]*\)/nammayatri.*|\1|p')
+      MY_DEV_NAME=$(echo "''${FLAKE_ROOT}" | sed -n 's|^/tmp/\([^/]*\)/Qolari.*|\1|p')
     fi
     if [[ -f "$REGISTRY" ]] && [[ -n "$MY_DEV_NAME" ]]; then
       # Extract all ports from every developer EXCEPT ourselves.

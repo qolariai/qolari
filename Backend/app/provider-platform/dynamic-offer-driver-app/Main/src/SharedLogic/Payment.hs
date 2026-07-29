@@ -33,7 +33,7 @@ import qualified Kernel.Beam.Functions as B
 import Kernel.External.Encryption
 import qualified Kernel.External.Payment.Interface as Payment
 import Kernel.External.Payment.Interface.Types
-import Kernel.External.Payment.Juspay.Types.CreateOrder (clientId, payload)
+import Kernel.External.Payment.Gateway.Types.CreateOrder (clientId, payload)
 import qualified Kernel.External.Payment.Types as PaymentTypes
 import Kernel.External.Types (ServiceFlow)
 import Kernel.Prelude
@@ -134,7 +134,7 @@ createOrder (driverId, merchantId, opCity) serviceName (driverFees, driverFeesTo
   genInvoiceId <- generateGUID
   genShortInvoiceId <- generateShortId
   now <- getCurrentTime
-  let driverEmail = fromMaybe "test@juspay.in" driver.email
+  let driverEmail = fromMaybe "test@Qolari.in" driver.email
       (invoiceId, invoiceShortId) = fromMaybe (genInvoiceId, genShortInvoiceId.getShortId) existingInvoice
       amount = sum $ (\pendingFees -> roundToHalf pendingFees.currency (pendingFees.govtCharges + pendingFees.platformFee.fee + pendingFees.platformFee.cgst + pendingFees.platformFee.sgst + fromMaybe 0 pendingFees.cancellationPenaltyAmount)) <$> driverFees
       invoices = mkInvoiceAgainstDriverFee invoiceId.getId invoiceShortId now (mbMandateOrder <&> (.maxAmount)) invoicePaymentMode <$> driverFees
@@ -180,7 +180,7 @@ createOrder (driverId, merchantId, opCity) serviceName (driverFees, driverFeesTo
       commonPersonId = cast @DP.Person @DPayment.Person driver.id
   (createOrderCall, pseudoClientId) <- TPayment.createOrder merchantId opCity paymentServiceName (Just driver.id.getId) -- api call
   mCreateOrderRes <-
-    if (isJust existingInvoice && amount < 1) -- In case driver fee was cleared with coins and remaining amount is less than 1 (Juspay create order fails)
+    if (isJust existingInvoice && amount < 1) -- In case driver fee was cleared with coins and remaining amount is less than 1 (Qolari create order fails)
       then pure Nothing
       else DPayment.createOrderService commonMerchantId (Just $ cast opCity) commonPersonId Nothing mbEntityName DOrder.Normal False createOrderReq createOrderCall Nothing False Nothing
   case mCreateOrderRes of
@@ -421,10 +421,10 @@ createOrderV2 (personId, merchantId, merchantOperatingCityId) createOrderReq mbP
   -- PaymentServiceType for createOrderService (STCL, Normal, etc.)
   let paymentServiceType = fromMaybe DOrder.STCL mbPaymentServiceType
 
-  -- ServiceName for decidePaymentService (which payment provider: Juspay, Stripe, etc.)
+  -- ServiceName for decidePaymentService (which payment provider: Qolari, Stripe, etc.)
   -- Using MembershipPaymentService to fetch MembershipPaymentServiceConfig from merchant_service_config
   defaultPaymentServiceName <- case paymentServiceType of
-    DOrder.STCL -> pure (DMSC.MembershipPaymentService PaymentTypes.Juspay)
+    DOrder.STCL -> pure (DMSC.MembershipPaymentService PaymentTypes.Qolari)
     _ -> throwError $ InternalError $ "Unhandled Payment Service Type, " <> show paymentServiceType
 
   -- Decide payment service provider based on person's clientSdkVersion
@@ -490,7 +490,7 @@ createWalletTopupOrder (driverId, merchantId, mocId) amount mbExistingOrderId = 
             orderShortId = orderShortId,
             amount = amount,
             customerId = driver.id.getId,
-            customerEmail = fromMaybe "test@juspay.in" driver.email,
+            customerEmail = fromMaybe "test@Qolari.in" driver.email,
             customerPhone = driverPhone,
             customerFirstName = Just driver.firstName,
             customerLastName = driver.lastName,

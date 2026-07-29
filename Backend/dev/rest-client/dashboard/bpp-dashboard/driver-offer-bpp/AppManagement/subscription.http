@@ -1,9 +1,9 @@
-# access tokens with different roles
-@customer = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer}}
-@driver = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/driver}}
-@juspay_ops = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_ops}}
-@juspay_admin = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_admin}}
-@customer_service = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer_service}}
+﻿# access tokens with different roles
+@customer = {{bpp-dashboard/token/qolari_PARTNER/customer}}
+@driver = {{bpp-dashboard/token/qolari_PARTNER/driver}}
+@Qolari_ops = {{bpp-dashboard/token/qolari_PARTNER/Qolari_ops}}
+@Qolari_admin = {{bpp-dashboard/token/qolari_PARTNER/Qolari_admin}}
+@customer_service = {{bpp-dashboard/token/qolari_PARTNER/customer_service}}
 
 # @name healthcheck
 GET {{bpp-dashboard-host}}
@@ -13,6 +13,6 @@ GET {{bpp-dashboard-host}}
 # @name ListPlan
 @driverId1 = favorit-auto1-0000000000000000000000
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/plan/{{driverId1}}/list
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/plan/{{driverId1}}/list
 content-type: application/json
-token: {{juspay_admin}}
+token: {{Qolari_admin}}

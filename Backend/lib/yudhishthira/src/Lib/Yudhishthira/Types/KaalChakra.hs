@@ -1,4 +1,4 @@
-{-# LANGUAGE DerivingVia #-}
+﻿{-# LANGUAGE DerivingVia #-}
 {-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE StandaloneKindSignatures #-}
 
@@ -12,7 +12,7 @@ import Kernel.Utils.Dhall (FromDhall)
 import Kernel.Utils.TH (mkHttpInstancesForEnum)
 import Lib.Yudhishthira.Types.Common
 
-data NammaTagChakra = NammaTagChakra
+data QolariTagChakra = QolariTagChakra
   { tagCategory :: Text,
     tagName :: Text,
     description :: Maybe Text,

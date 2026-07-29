@@ -1,6 +1,6 @@
-# RewardsFlow — Integration Test Rules
+﻿# RewardsFlow — Integration Test Rules
 
-BAP rider-dashboard **Rewards** management APIs and rider unlock flow for **NAMMA_YATRI** (Bangalore) and **BHARAT_TAXI** (Delhi).
+BAP rider-dashboard **Rewards** management APIs and rider unlock flow for **qolari** (Bangalore) and **BHARAT_TAXI** (Delhi).
 
 ## Prerequisites
 
@@ -22,7 +22,7 @@ BAP rider-dashboard **Rewards** management APIs and rider unlock flow for **NAMM
 ```bash
 cd Backend/dev/integration-tests
 ./run-tests.sh rewards                  # all cities
-./run-tests.sh rewards NY_Bangalore     # Namma Yatri Bangalore only
+./run-tests.sh rewards NY_Bangalore     # Qolari Bangalore only
 ./run-tests.sh rewards BT_Delhi         # Bharat Taxi Delhi only
 ./run-tests.sh rewards BT_Delhi 01-RewardsDashboardCrud
 ```

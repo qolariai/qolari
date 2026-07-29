@@ -1,8 +1,8 @@
-# Dashboard Services
+﻿# Dashboard Services
 
 ## Overview
 
-Namma Yatri has multiple dashboard services for operations management.
+Qolari has multiple dashboard services for operations management.
 
 ## Dashboard Packages
 
@@ -57,4 +57,4 @@ apis:
 ## Related Docs
 
 - Architecture overview: `01-architecture-overview.md`
-- API spec format: `07-namma-dsl.md`
+- API spec format: `07-qolari-dsl.md`

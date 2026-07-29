@@ -1,9 +1,9 @@
-# access tokens with different roles
-@customer = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer}}
-@driver = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/driver}}
-@juspay_ops = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_ops}}
-@juspay_admin = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_admin}}
-@customer_service = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer_service}}
+﻿# access tokens with different roles
+@customer = {{bpp-dashboard/token/qolari_PARTNER/customer}}
+@driver = {{bpp-dashboard/token/qolari_PARTNER/driver}}
+@Qolari_ops = {{bpp-dashboard/token/qolari_PARTNER/Qolari_ops}}
+@Qolari_admin = {{bpp-dashboard/token/qolari_PARTNER/Qolari_admin}}
+@customer_service = {{bpp-dashboard/token/qolari_PARTNER/customer_service}}
 
 # @name healthcheck
 GET {{bpp-dashboard-host}}
@@ -12,8 +12,8 @@ GET {{bpp-dashboard-host}}
 
 # @name merchantUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "name" : "merchantName",
@@ -48,16 +48,16 @@ content-type: application/json
 
 # @name merchantCommonConfig
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/config/common
-token: {{juspay_admin}}
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/config/common
+token: {{Qolari_admin}}
 content-type: application/json
 
 ###
 
 # @name merchantCommonConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/config/common/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/config/common/update
+token: {{Qolari_admin}}
 content-type: application/json
 
   { "pickupLocThreshold" : {"value" : 1},
@@ -79,16 +79,16 @@ content-type: application/json
 
 # @name driverPoolConfig
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/config/driverPool?tripDistance=10000
-token: {{juspay_admin}}
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/config/driverPool?tripDistance=10000
+token: {{Qolari_admin}}
 content-type: application/json
 
 ###
 
 # @name driverPoolConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/config/driverPool/update?tripDistance=10000
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/config/driverPool/update?tripDistance=10000
+token: {{Qolari_admin}}
 content-type: application/json
 
   { "minRadiusOfSearch" : {"value" : 21},
@@ -110,8 +110,8 @@ content-type: application/json
 
 # @name driverPoolConfigCreate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/config/driverPool/create?tripDistance=40000
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/config/driverPool/create?tripDistance=40000
+token: {{Qolari_admin}}
 content-type: application/json
 
   { "minRadiusOfSearch" : 41,
@@ -136,16 +136,16 @@ content-type: application/json
 
 # @name driverIntelligentPoolConfig
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/config/driverIntelligentPool
-token: {{juspay_admin}}
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/config/driverIntelligentPool
+token: {{Qolari_admin}}
 content-type: application/json
 
 ###
 
 # @name driverIntelligentPoolConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/config/driverIntelligentPool/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/config/driverIntelligentPool/update
+token: {{Qolari_admin}}
 content-type: application/json
 
   { "availabilityTimeWeightage" : {"value" : 61},
@@ -180,16 +180,16 @@ content-type: application/json
 
 # @name onboardingDocumentConfig
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/config/onboardingDocument?documentType="DL"
-token: {{juspay_admin}}
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/config/onboardingDocument?documentType="DL"
+token: {{Qolari_admin}}
 content-type: application/json
 
 ###
 
 # @name onboardingDocumentConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/config/onboardingDocument/update?documentType="RC"
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/config/onboardingDocument/update?documentType="RC"
+token: {{Qolari_admin}}
 content-type: application/json
 
   { "checkExtraction" : {"value" : false},
@@ -203,8 +203,8 @@ content-type: application/json
 
 # @name onboardingDocumentConfigCreate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/config/onboardingDocument/create?documentType="RCInsurance"
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/config/onboardingDocument/create?documentType="RCInsurance"
+token: {{Qolari_admin}}
 content-type: application/json
 
   { "checkExtraction" : false,
@@ -218,16 +218,16 @@ content-type: application/json
 
 # @name merchanServiceUsageConfig
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/serviceUsageConfig
-token: {{juspay_admin}}
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/serviceUsageConfig
+token: {{Qolari_admin}}
 content-type: application/json
 
 ###
 
 # @name merchantGoogleConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/serviceConfig/maps/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/serviceConfig/maps/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "Google",
@@ -242,8 +242,8 @@ content-type: application/json
 
 # @name merchantRealGoogleConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/serviceConfig/maps/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/serviceConfig/maps/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "Google",
@@ -258,8 +258,8 @@ content-type: application/json
 
 # @name merchantOSRMConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/serviceConfig/maps/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/serviceConfig/maps/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "OSRM",
@@ -273,8 +273,8 @@ content-type: application/json
 
 # @name merchantMMIConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/serviceConfig/maps/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/serviceConfig/maps/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "MMI",
@@ -292,8 +292,8 @@ content-type: application/json
 
 # @name mapsServiceUsageConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/serviceUsageConfig/maps/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/serviceUsageConfig/maps/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "getDistances" : "Google",
@@ -308,8 +308,8 @@ content-type: application/json
 
 # @name merchantMyValueFirstConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/serviceConfig/sms/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/serviceConfig/sms/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "MyValueFirst",
@@ -324,8 +324,8 @@ content-type: application/json
 
 # @name merchantExotelSmsConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/serviceConfig/sms/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/serviceConfig/sms/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "serviceName" : "ExotelSms",
@@ -341,8 +341,8 @@ content-type: application/json
 
 # @name smsServiceUsageConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/serviceUsageConfig/sms/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/serviceUsageConfig/sms/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "smsProvidersPriorityList" : ["ExotelSms","MyValueFirst"]
@@ -352,8 +352,8 @@ content-type: application/json
 
 # @name merchantIdfyVerificationConfigUpdate
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/serviceConfig/verification/update
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/serviceConfig/verification/update
+token: {{Qolari_admin}}
 content-type: application/json
 
 { "accountId" : "xxxxxxx",
@@ -376,8 +376,8 @@ content-type: application/json
 
 # @name postMerchantSpecialLocationUpsert
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/specialLocation/upsert?specialLocationId=9h8016d0-f9cd-4f9f-886f-bc4cbh6a86e5
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/specialLocation/upsert?specialLocationId=9h8016d0-f9cd-4f9f-886f-bc4cbh6a86e5
+token: {{Qolari_admin}}
 content-type: application/x-www-form-urlencoded
 
 file=null
@@ -390,8 +390,8 @@ file=null
 
 # @name postMerchantSpecialLocationGatesUpsert
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/merchant/specialLocation/9h8016d0-f9cd-4f9f-886f-bc4cbh6a86e5/gates/upsert
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/merchant/specialLocation/9h8016d0-f9cd-4f9f-886f-bc4cbh6a86e5/gates/upsert
+token: {{Qolari_admin}}
 content-type: application/x-www-form-urlencoded
 
 file=null

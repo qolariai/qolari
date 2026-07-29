@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
+﻿{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
 
 module Lib.Payment.PGFee
   ( PGFeeType (..),
@@ -23,13 +23,13 @@ import qualified Lib.Finance.Storage.Beam.BeamFlow as BeamFlow
 data PGFeeType = PGPayment | PGPayout
   deriving (Eq, Show, Generic)
 
--- | Fee configuration extracted from JuspayConfig by the domain.
+-- | Fee configuration extracted from PaymentGatewayConfig by the domain.
 --   Passed alongside the payment/payout callback.
 data PGFeeConfig = PGFeeConfig
   { pgBaseFee :: HighPrecMoney,
     pgGstRate :: Double,
     pgFeeCurrency :: Currency,
-    pgGstinOfParty :: Maybe Text -- GSTIN of the PG provider (e.g., Juspay)
+    pgGstinOfParty :: Maybe Text -- GSTIN of the PG provider (e.g., Qolari)
   }
   deriving (Eq, Show, Generic)
 

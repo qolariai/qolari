@@ -1,4 +1,4 @@
-# Progress Tracking
+﻿# Progress Tracking
 
 ## What Works (Current State)
 
@@ -96,7 +96,7 @@
 **Tasks:**
 
 **Phase 1: Core NYRegular Subscription Management (`rider-app`)**
-*   [X] **Task 1.1 (DB & Haskell):** Define `ny_regular_subscriptions` schema using Namma DSL in `spec/Storage/`. Generate SQL migration and Haskell Beam/domain types.
+*   [X] **Task 1.1 (DB & Haskell):** Define `ny_regular_subscriptions` schema using Qolari DSL in `spec/Storage/`. Generate SQL migration and Haskell Beam/domain types.
     *   Haskell Types / (SQL Types):
     *   `id`: `Id NyRegularSubscription` (PK, character(36))
     *   `userId`: `Id Person` (character(36))
@@ -119,7 +119,7 @@
     *   `updatedAt`: `UTCTime` (timestamp with time zone)
     *   `metadata`: `Maybe Value` (nullable, json)
     *   (Implicit `merchant_id`, `merchant_operating_city_id` auto-added by DSL generator)
-*   [X] **Task 1.2 (DB & Haskell):** Define `ny_regular_instance_log` schema using Namma DSL in `spec/Storage/`. Generate SQL migration and Haskell Beam/domain types.
+*   [X] **Task 1.2 (DB & Haskell):** Define `ny_regular_instance_log` schema using Qolari DSL in `spec/Storage/`. Generate SQL migration and Haskell Beam/domain types.
     *   Haskell Types / (SQL Types):
     *   `instanceTransactionId`: `Text` (PK, text)
     *   `nyRegularSubscriptionId`: `Id NyRegularSubscription` (character(36), indexed via SecondaryKey)
@@ -339,11 +339,11 @@
     -   Deeper dive into Kafka event flows and consumer logic.
     -   Frontend application architecture and state management.
     -   The `memory-bank/backend_parsing.md` file (intended for detailed parsing logs) was not found and will be created with the ride booking flow analysis.
-12. **Processed NammaDSL Documentation (June 20, 2025):**
-    *   Received and analyzed the NammaDSL documentation.
+12. **Processed QolariDSL Documentation (June 20, 2025):**
+    *   Received and analyzed the QolariDSL documentation.
     *   Summarized syntax for API DSL and Storage DSL.
-    *   Created `memory-bank/namma_dsl_rules.md` to store these rules.
-    *   Updated `techContext.md` to reference NammaDSL.
+    *   Created `memory-bank/qolari_dsl_rules.md` to store these rules.
+    *   Updated `techContext.md` to reference QolariDSL.
 13. **Planned NYRegular (Recurring Rides) Feature (June 20, 2025):**
     *   Incorporated peer's context and refined the plan for the NYRegular feature.
     *   Key design decisions documented:

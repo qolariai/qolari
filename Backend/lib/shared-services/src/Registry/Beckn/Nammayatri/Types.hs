@@ -12,9 +12,9 @@
   General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 -}
 
-module Registry.Beckn.Nammayatri.Types
+module Registry.Beckn.Qolari.Types
   ( module Reexport,
-    module Registry.Beckn.Nammayatri.Types,
+    module Registry.Beckn.Qolari.Types,
   )
 where
 

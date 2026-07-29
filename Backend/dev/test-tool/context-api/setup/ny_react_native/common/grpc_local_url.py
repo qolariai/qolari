@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """Point the provider Android app's gRPC client at the local
 notification-service (process-compose entry `notification-service`,
 gRPC on :50051) instead of the upstream prod default
@@ -10,7 +10,7 @@ Two on-disk references in the provider:
      that Firebase Remote Config seeds defaults with on first launch.
      Without rewriting this, the app remembers the prod URL across
      installs (Remote Config persists in shared prefs).
-  2. android/app/src/main/java/in/juspay/mobility/services/GRPCService.kt
+  2. android/app/src/main/java/in/Qolari/mobility/services/GRPCService.kt
      — hardcoded fallback used when Remote Config has nothing yet.
 
 iOS has no native gRPC client in the provider source — only the
@@ -64,7 +64,7 @@ def patch_remote_config_xml(app_dir: Path) -> bool:
 def patch_grpc_service_kt(app_dir: Path) -> bool:
     target = (
         app_dir / "android" / "app" / "src" / "main" / "java"
-        / "in" / "juspay" / "mobility" / "services" / "GRPCService.kt"
+        / "in" / "Qolari" / "mobility" / "services" / "GRPCService.kt"
     )
     if not target.is_file():
         return False

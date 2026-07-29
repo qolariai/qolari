@@ -21,7 +21,7 @@ module Domain.Action.UI.Payment
     getStatus,
     getStatusS2S,
     getOrder,
-    juspayWebhookHandler,
+    QolariWebhookHandler,
     paytmEdcCallbackHandler,
     PaytmEdcCallbackReq (..),
     rideBookingOrderStatusHandler,
@@ -68,7 +68,7 @@ import Kernel.Beam.Functions as B
 import Kernel.External.Encryption
 import qualified Kernel.External.Payment.Interface as KPayment
 import qualified Kernel.External.Payment.Interface.Events.Types as PEInterface
-import qualified Kernel.External.Payment.Interface.Juspay as Juspay
+import qualified Kernel.External.Payment.Interface.Qolari as Qolari
 import qualified Kernel.External.Payment.Interface.Stripe as Stripe
 import qualified Kernel.External.Payment.Interface.Types as Payment
 import qualified Kernel.External.Payment.Stripe.Types.Common as Stripe
@@ -181,7 +181,7 @@ createRideBookingPaymentOrder :: DRB.Booking -> Flow (Maybe Payment.CreateOrderR
 createRideBookingPaymentOrder booking = do
   person <- QP.findById booking.riderId >>= fromMaybeM (PersonNotFound booking.riderId.getId)
   let merchantOperatingCityId = booking.merchantOperatingCityId
-  customerEmail <- fromMaybe "noreply@nammayatri.in" <$> mapM decrypt person.email
+  customerEmail <- fromMaybe "noreply@drive.qolari.com" <$> mapM decrypt person.email
   customerPhone <- person.mobileNumber & fromMaybeM (PersonFieldNotPresent "mobileNumber") >>= decrypt
   staticCustomerId <- SLUtils.getStaticCustomerId person customerPhone
   paymentOrderId <- generateGUID
@@ -359,7 +359,7 @@ pollPaytmEdcPaymentStatus merchantId _merchantOperatingCityId personId orderId =
       Payment.CHARGED -> True
       Payment.AUTHENTICATION_FAILED -> True
       Payment.AUTHORIZATION_FAILED -> True
-      Payment.JUSPAY_DECLINED -> True
+      Payment.Qolari_DECLINED -> True
       Payment.CANCELLED -> True
       Payment.CLIENT_AUTH_TOKEN_EXPIRED -> True
       _ -> False
@@ -563,7 +563,7 @@ fetchPaymentServiceConfig merchantShortId mbCity mbServiceType mbPlaceId service
     Just (DMSC.MultiModalPaymentServiceConfig vsc) -> pure vsc
     Just (DMSC.PassPaymentServiceConfig vsc) -> pure vsc
     Just (DMSC.ParkingPaymentServiceConfig vsc) -> pure vsc
-    Just (DMSC.JuspayWalletServiceConfig vsc) -> pure vsc
+    Just (DMSC.PaymentWalletServiceConfig vsc) -> pure vsc
     _ -> throwError $ InternalError "Unknown Service Config"
   where
     getPaymentServiceByType = \case
@@ -574,11 +574,11 @@ fetchPaymentServiceConfig merchantShortId mbCity mbServiceType mbPlaceId service
       Just Payment.FRFSMultiModalBooking -> DMSC.MultiModalPaymentService service
       Just Payment.FRFSPassPurchase -> DMSC.PassPaymentService service
       Just Payment.ParkingBooking -> DMSC.ParkingPaymentService service
-      Just DOrder.Wallet -> DMSC.JuspayWalletService service
+      Just DOrder.Wallet -> DMSC.PaymentWalletService service
       Just DOrder.RideBooking -> DMSC.PaymentService service
       _ -> DMSC.PaymentService service
 
-juspayWebhookHandler ::
+QolariWebhookHandler ::
   ShortId DM.Merchant ->
   Maybe Context.City ->
   Maybe Payment.PaymentServiceType ->
@@ -586,10 +586,10 @@ juspayWebhookHandler ::
   BasicAuthData ->
   Value ->
   Flow AckResponse
-juspayWebhookHandler merchantShortId mbCity mbServiceType mbPlaceId authData value = do
-  (paymentServiceConfig, merchantOperatingCity) <- fetchPaymentServiceConfig merchantShortId mbCity mbServiceType mbPlaceId Payment.Juspay
+QolariWebhookHandler merchantShortId mbCity mbServiceType mbPlaceId authData value = do
+  (paymentServiceConfig, merchantOperatingCity) <- fetchPaymentServiceConfig merchantShortId mbCity mbServiceType mbPlaceId Payment.Gateway
   let commonMerchantOperatingCityId = Kernel.Types.Id.cast @DMOC.MerchantOperatingCity @DPayment.MerchantOperatingCity merchantOperatingCity.id
-  orderWebhookResponse <- Juspay.orderStatusWebhook paymentServiceConfig (DPayment.juspayWebhookService commonMerchantOperatingCityId) authData value
+  orderWebhookResponse <- Qolari.orderStatusWebhook paymentServiceConfig (DPayment.QolariWebhookService commonMerchantOperatingCityId) authData value
   osr <- case orderWebhookResponse of
     Nothing -> throwError $ InternalError "Order Contents not found."
     Just osr' -> pure osr'
@@ -870,7 +870,7 @@ postWalletRecharge (personId, merchantId) req = do
             orderShortId = operationId.getShortId,
             amount = fromIntegral req.pointsAmount,
             customerId = person.id.getId,
-            customerEmail = fromMaybe "growth@nammayatri.in" personEmail,
+            customerEmail = fromMaybe "growth@drive.qolari.com" personEmail,
             customerPhone = personPhone,
             customerFirstName = person.firstName,
             customerLastName = person.lastName,

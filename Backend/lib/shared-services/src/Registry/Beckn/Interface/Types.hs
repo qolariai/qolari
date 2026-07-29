@@ -24,7 +24,7 @@ import Kernel.Types.Common
 import qualified Kernel.Types.Registry as Beckn
 import Kernel.Utils.Common
 import Kernel.Utils.JSON (removeNullFields)
-import qualified Registry.Beckn.Nammayatri.Types as NyT
+import qualified Registry.Beckn.Qolari.Types as NyT
 
 data RegistryReq a = RegistryReq
   { uniqueKeyId :: Text,
@@ -50,7 +50,7 @@ newtype UpdateSubscriberResp
   = UpdSubResNY NyT.UpdateCitiesRes
 
 buildAddCityNyReq ::
-  HasFlowEnv m r '["nammayatriRegistryConfig" ::: NyT.RegistryConfig] =>
+  HasFlowEnv m r '["QolariRegistryConfig" ::: NyT.RegistryConfig] =>
   NonEmpty Beckn.City ->
   Text ->
   Text ->
@@ -58,7 +58,7 @@ buildAddCityNyReq ::
   Beckn.Domain ->
   m UpdateSubscriberReq
 buildAddCityNyReq newCities uniqueKeyId subscriberId subscriberType domain = do
-  NyT.RegistryConfig {..} <- asks (.nammayatriRegistryConfig)
+  NyT.RegistryConfig {..} <- asks (.QolariRegistryConfig)
   pure $
     RegistryReq
       { _data =

@@ -1,4 +1,4 @@
-module API.UI.CancelSearch (API, handler, cancelSearch') where
+﻿module API.UI.CancelSearch (API, handler, cancelSearch') where
 
 import qualified Domain.Types.Estimate as DEstimate
 import qualified Domain.Types.Merchant as Merchant
@@ -53,9 +53,9 @@ cancelSearchV2 (personId, merchantId) estimateId = withFlowHandlerAPIPersonId pe
 rejectUpgrade :: (Id DPerson.Person, Id Merchant.Merchant) -> Id DEstimate.Estimate -> FlowHandler CancelAPIResponse
 rejectUpgrade (personId, merchantId) estimateId = withFlowHandlerAPIPersonId personId . withPersonIdLogTag personId $ do
   person <- QP.findById personId >>= fromMaybeM (PersonNotFound personId.getId)
-  let personTags = fromMaybe [] person.customerNammaTags
+  let personTags = fromMaybe [] person.customerQolariTags
   unless (rejectUpgradeTag `Yudhishthira.elemTagNameValue` personTags) $ do
-    rejectUpgradeTagWithExpiry <- Yudhishthira.fetchNammaTagExpiry (cast person.merchantOperatingCityId) rejectUpgradeTag
+    rejectUpgradeTagWithExpiry <- Yudhishthira.fetchQolariTagExpiry (cast person.merchantOperatingCityId) rejectUpgradeTag
     CQPerson.updateCustomerTags (Just $ personTags <> [rejectUpgradeTagWithExpiry]) person.id
   cancelSearch' (personId, merchantId) estimateId
 

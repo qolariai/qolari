@@ -883,7 +883,7 @@ createPaymentOrder bookings merchantOperatingCityId merchantId amount person pay
             orderShortId = orderShortId,
             amount = amount,
             customerId = staticCustomerId,
-            customerEmail = fromMaybe "growth@nammayatri.in" personEmail,
+            customerEmail = fromMaybe "growth@drive.qolari.com" personEmail,
             customerPhone = personPhone,
             customerFirstName = person.firstName,
             customerLastName = person.lastName,

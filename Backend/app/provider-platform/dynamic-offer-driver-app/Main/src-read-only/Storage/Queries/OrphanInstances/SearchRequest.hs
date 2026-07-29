@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Storage.Queries.OrphanInstances.SearchRequest where
@@ -56,7 +56,7 @@ instance FromTType' Beam.SearchRequest Domain.Types.SearchRequest.SearchRequest 
             currency = fromMaybe Kernel.Types.Common.INR currency,
             customerCancellationDues = customerCancellationDues,
             customerLanguage = customerLanguage,
-            customerNammaTags = Lib.Yudhishthira.Tools.Utils.tagsNameValueFromTType customerNammaTags,
+            customerQolariTags = Lib.Yudhishthira.Tools.Utils.tagsNameValueFromTType customerQolariTags,
             device = device,
             disabilityTag = disabilityTag,
             distanceUnit = Kernel.Prelude.fromMaybe Kernel.Types.Common.Meter distanceUnit,
@@ -126,7 +126,7 @@ instance ToTType' Beam.SearchRequest Domain.Types.SearchRequest.SearchRequest wh
         Beam.currency = Just currency,
         Beam.customerCancellationDues = customerCancellationDues,
         Beam.customerLanguage = customerLanguage,
-        Beam.customerNammaTags = Lib.Yudhishthira.Tools.Utils.tagsNameValueToTType customerNammaTags,
+        Beam.customerQolariTags = Lib.Yudhishthira.Tools.Utils.tagsNameValueToTType customerQolariTags,
         Beam.device = device,
         Beam.disabilityTag = disabilityTag,
         Beam.distanceUnit = Kernel.Prelude.Just distanceUnit,

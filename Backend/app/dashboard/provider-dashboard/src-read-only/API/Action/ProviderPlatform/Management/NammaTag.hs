@@ -1,15 +1,15 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
-module API.Action.ProviderPlatform.Management.NammaTag
+module API.Action.ProviderPlatform.Management.QolariTag
   ( API,
     handler,
   )
 where
 
 import qualified API.Types.ProviderPlatform.Management
-import qualified API.Types.ProviderPlatform.Management.NammaTag
-import qualified Domain.Action.ProviderPlatform.Management.NammaTag
+import qualified API.Types.ProviderPlatform.Management.QolariTag
+import qualified Domain.Action.ProviderPlatform.Management.QolariTag
 import qualified "lib-dashboard" Domain.Types.Merchant
 import qualified "lib-dashboard" Environment
 import EulerHS.Prelude hiding (sortOn)
@@ -24,436 +24,436 @@ import Servant
 import Storage.Beam.CommonInstances ()
 import Tools.Auth.Api
 
-type API = ("nammaTag" :> (PostNammaTagTagCreate :<|> PostNammaTagTagVerify :<|> PostNammaTagTagUpdate :<|> DeleteNammaTagTagDelete :<|> GetNammaTagTagAll :<|> GetNammaTagTagDetails :<|> PostNammaTagQueryCreate :<|> PostNammaTagQueryUpdate :<|> DeleteNammaTagQueryDelete :<|> GetNammaTagQueryDetails :<|> PostNammaTagAppDynamicLogicVerify :<|> GetNammaTagAppDynamicLogic :<|> PostNammaTagRunJob :<|> GetNammaTagTimeBounds :<|> PostNammaTagTimeBoundsCreate :<|> DeleteNammaTagTimeBoundsDelete :<|> GetNammaTagAppDynamicLogicGetLogicRollout :<|> PostNammaTagAppDynamicLogicUpsertLogicRollout :<|> GetNammaTagAppDynamicLogicVersions :<|> GetNammaTagAppDynamicLogicDomains :<|> GetNammaTagAppDynamicLogicDomainsAndEvents :<|> GetNammaTagAppDynamicLogicGetDomainSchema :<|> GetNammaTagQueryAll :<|> PostNammaTagConfigPilotGetVersion :<|> PostNammaTagConfigPilotGetConfig :<|> PostNammaTagConfigPilotCreateUiConfig :<|> GetNammaTagConfigPilotAllConfigs :<|> GetNammaTagConfigPilotConfigDetails :<|> GetNammaTagConfigPilotGetTableData :<|> GetNammaTagConfigPilotAllUiConfigs :<|> GetNammaTagConfigPilotUiConfigDetails :<|> GetNammaTagConfigPilotGetUiTableData :<|> GetNammaTagConfigPilotAlwaysOnList :<|> PostNammaTagConfigPilotActionChange :<|> PostNammaTagConfigPilotGetPatchedElement :<|> PostNammaTagConfigPilotGetConfigWithDimensions :<|> GetNammaTagConfigPilotGetDimensionSchema :<|> PostNammaTagConfigPilotCreateRow :<|> GetNammaTagBehaviorVisibility))
+type API = ("QolariTag" :> (PostQolariTagTagCreate :<|> PostQolariTagTagVerify :<|> PostQolariTagTagUpdate :<|> DeleteQolariTagTagDelete :<|> GetQolariTagTagAll :<|> GetQolariTagTagDetails :<|> PostQolariTagQueryCreate :<|> PostQolariTagQueryUpdate :<|> DeleteQolariTagQueryDelete :<|> GetQolariTagQueryDetails :<|> PostQolariTagAppDynamicLogicVerify :<|> GetQolariTagAppDynamicLogic :<|> PostQolariTagRunJob :<|> GetQolariTagTimeBounds :<|> PostQolariTagTimeBoundsCreate :<|> DeleteQolariTagTimeBoundsDelete :<|> GetQolariTagAppDynamicLogicGetLogicRollout :<|> PostQolariTagAppDynamicLogicUpsertLogicRollout :<|> GetQolariTagAppDynamicLogicVersions :<|> GetQolariTagAppDynamicLogicDomains :<|> GetQolariTagAppDynamicLogicDomainsAndEvents :<|> GetQolariTagAppDynamicLogicGetDomainSchema :<|> GetQolariTagQueryAll :<|> PostQolariTagConfigPilotGetVersion :<|> PostQolariTagConfigPilotGetConfig :<|> PostQolariTagConfigPilotCreateUiConfig :<|> GetQolariTagConfigPilotAllConfigs :<|> GetQolariTagConfigPilotConfigDetails :<|> GetQolariTagConfigPilotGetTableData :<|> GetQolariTagConfigPilotAllUiConfigs :<|> GetQolariTagConfigPilotUiConfigDetails :<|> GetQolariTagConfigPilotGetUiTableData :<|> GetQolariTagConfigPilotAlwaysOnList :<|> PostQolariTagConfigPilotActionChange :<|> PostQolariTagConfigPilotGetPatchedElement :<|> PostQolariTagConfigPilotGetConfigWithDimensions :<|> GetQolariTagConfigPilotGetDimensionSchema :<|> PostQolariTagConfigPilotCreateRow :<|> GetQolariTagBehaviorVisibility))
 
 handler :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Environment.FlowServer API)
-handler merchantId city = postNammaTagTagCreate merchantId city :<|> postNammaTagTagVerify merchantId city :<|> postNammaTagTagUpdate merchantId city :<|> deleteNammaTagTagDelete merchantId city :<|> getNammaTagTagAll merchantId city :<|> getNammaTagTagDetails merchantId city :<|> postNammaTagQueryCreate merchantId city :<|> postNammaTagQueryUpdate merchantId city :<|> deleteNammaTagQueryDelete merchantId city :<|> getNammaTagQueryDetails merchantId city :<|> postNammaTagAppDynamicLogicVerify merchantId city :<|> getNammaTagAppDynamicLogic merchantId city :<|> postNammaTagRunJob merchantId city :<|> getNammaTagTimeBounds merchantId city :<|> postNammaTagTimeBoundsCreate merchantId city :<|> deleteNammaTagTimeBoundsDelete merchantId city :<|> getNammaTagAppDynamicLogicGetLogicRollout merchantId city :<|> postNammaTagAppDynamicLogicUpsertLogicRollout merchantId city :<|> getNammaTagAppDynamicLogicVersions merchantId city :<|> getNammaTagAppDynamicLogicDomains merchantId city :<|> getNammaTagAppDynamicLogicDomainsAndEvents merchantId city :<|> getNammaTagAppDynamicLogicGetDomainSchema merchantId city :<|> getNammaTagQueryAll merchantId city :<|> postNammaTagConfigPilotGetVersion merchantId city :<|> postNammaTagConfigPilotGetConfig merchantId city :<|> postNammaTagConfigPilotCreateUiConfig merchantId city :<|> getNammaTagConfigPilotAllConfigs merchantId city :<|> getNammaTagConfigPilotConfigDetails merchantId city :<|> getNammaTagConfigPilotGetTableData merchantId city :<|> getNammaTagConfigPilotAllUiConfigs merchantId city :<|> getNammaTagConfigPilotUiConfigDetails merchantId city :<|> getNammaTagConfigPilotGetUiTableData merchantId city :<|> getNammaTagConfigPilotAlwaysOnList merchantId city :<|> postNammaTagConfigPilotActionChange merchantId city :<|> postNammaTagConfigPilotGetPatchedElement merchantId city :<|> postNammaTagConfigPilotGetConfigWithDimensions merchantId city :<|> getNammaTagConfigPilotGetDimensionSchema merchantId city :<|> postNammaTagConfigPilotCreateRow merchantId city :<|> getNammaTagBehaviorVisibility merchantId city
+handler merchantId city = postQolariTagTagCreate merchantId city :<|> postQolariTagTagVerify merchantId city :<|> postQolariTagTagUpdate merchantId city :<|> deleteQolariTagTagDelete merchantId city :<|> getQolariTagTagAll merchantId city :<|> getQolariTagTagDetails merchantId city :<|> postQolariTagQueryCreate merchantId city :<|> postQolariTagQueryUpdate merchantId city :<|> deleteQolariTagQueryDelete merchantId city :<|> getQolariTagQueryDetails merchantId city :<|> postQolariTagAppDynamicLogicVerify merchantId city :<|> getQolariTagAppDynamicLogic merchantId city :<|> postQolariTagRunJob merchantId city :<|> getQolariTagTimeBounds merchantId city :<|> postQolariTagTimeBoundsCreate merchantId city :<|> deleteQolariTagTimeBoundsDelete merchantId city :<|> getQolariTagAppDynamicLogicGetLogicRollout merchantId city :<|> postQolariTagAppDynamicLogicUpsertLogicRollout merchantId city :<|> getQolariTagAppDynamicLogicVersions merchantId city :<|> getQolariTagAppDynamicLogicDomains merchantId city :<|> getQolariTagAppDynamicLogicDomainsAndEvents merchantId city :<|> getQolariTagAppDynamicLogicGetDomainSchema merchantId city :<|> getQolariTagQueryAll merchantId city :<|> postQolariTagConfigPilotGetVersion merchantId city :<|> postQolariTagConfigPilotGetConfig merchantId city :<|> postQolariTagConfigPilotCreateUiConfig merchantId city :<|> getQolariTagConfigPilotAllConfigs merchantId city :<|> getQolariTagConfigPilotConfigDetails merchantId city :<|> getQolariTagConfigPilotGetTableData merchantId city :<|> getQolariTagConfigPilotAllUiConfigs merchantId city :<|> getQolariTagConfigPilotUiConfigDetails merchantId city :<|> getQolariTagConfigPilotGetUiTableData merchantId city :<|> getQolariTagConfigPilotAlwaysOnList merchantId city :<|> postQolariTagConfigPilotActionChange merchantId city :<|> postQolariTagConfigPilotGetPatchedElement merchantId city :<|> postQolariTagConfigPilotGetConfigWithDimensions merchantId city :<|> getQolariTagConfigPilotGetDimensionSchema merchantId city :<|> postQolariTagConfigPilotCreateRow merchantId city :<|> getQolariTagBehaviorVisibility merchantId city
 
-type PostNammaTagTagCreate =
+type PostQolariTagTagCreate =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_TAG_CREATE)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagTagCreate
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_TAG_CREATE)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagTagCreate
   )
 
-type PostNammaTagTagVerify =
+type PostQolariTagTagVerify =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_TAG_VERIFY)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagTagVerify
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_TAG_VERIFY)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagTagVerify
   )
 
-type PostNammaTagTagUpdate =
+type PostQolariTagTagUpdate =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_TAG_UPDATE)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagTagUpdate
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_TAG_UPDATE)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagTagUpdate
   )
 
-type DeleteNammaTagTagDelete =
+type DeleteQolariTagTagDelete =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.DELETE_NAMMA_TAG_TAG_DELETE)
-      :> API.Types.ProviderPlatform.Management.NammaTag.DeleteNammaTagTagDelete
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.DELETE_QOLARI_TAG_TAG_DELETE)
+      :> API.Types.ProviderPlatform.Management.QolariTag.DeleteQolariTagTagDelete
   )
 
-type GetNammaTagTagAll =
+type GetQolariTagTagAll =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_TAG_ALL)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagTagAll
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_TAG_ALL)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagTagAll
   )
 
-type GetNammaTagTagDetails =
+type GetQolariTagTagDetails =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_TAG_DETAILS)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagTagDetails
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_TAG_DETAILS)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagTagDetails
   )
 
-type PostNammaTagQueryCreate =
+type PostQolariTagQueryCreate =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_QUERY_CREATE)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagQueryCreate
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_QUERY_CREATE)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagQueryCreate
   )
 
-type PostNammaTagQueryUpdate =
+type PostQolariTagQueryUpdate =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_QUERY_UPDATE)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagQueryUpdate
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_QUERY_UPDATE)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagQueryUpdate
   )
 
-type DeleteNammaTagQueryDelete =
+type DeleteQolariTagQueryDelete =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.DELETE_NAMMA_TAG_QUERY_DELETE)
-      :> API.Types.ProviderPlatform.Management.NammaTag.DeleteNammaTagQueryDelete
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.DELETE_QOLARI_TAG_QUERY_DELETE)
+      :> API.Types.ProviderPlatform.Management.QolariTag.DeleteQolariTagQueryDelete
   )
 
-type GetNammaTagQueryDetails =
+type GetQolariTagQueryDetails =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_QUERY_DETAILS)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagQueryDetails
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_QUERY_DETAILS)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagQueryDetails
   )
 
-type PostNammaTagAppDynamicLogicVerify =
+type PostQolariTagAppDynamicLogicVerify =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_APP_DYNAMIC_LOGIC_VERIFY)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagAppDynamicLogicVerify
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_APP_DYNAMIC_LOGIC_VERIFY)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagAppDynamicLogicVerify
   )
 
-type GetNammaTagAppDynamicLogic =
+type GetQolariTagAppDynamicLogic =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_APP_DYNAMIC_LOGIC)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagAppDynamicLogic
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_APP_DYNAMIC_LOGIC)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagAppDynamicLogic
   )
 
-type PostNammaTagRunJob =
+type PostQolariTagRunJob =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_RUN_JOB)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagRunJob
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_RUN_JOB)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagRunJob
   )
 
-type GetNammaTagTimeBounds =
+type GetQolariTagTimeBounds =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_TIME_BOUNDS)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagTimeBounds
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_TIME_BOUNDS)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagTimeBounds
   )
 
-type PostNammaTagTimeBoundsCreate =
+type PostQolariTagTimeBoundsCreate =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_TIME_BOUNDS_CREATE)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagTimeBoundsCreate
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_TIME_BOUNDS_CREATE)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagTimeBoundsCreate
   )
 
-type DeleteNammaTagTimeBoundsDelete =
+type DeleteQolariTagTimeBoundsDelete =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.DELETE_NAMMA_TAG_TIME_BOUNDS_DELETE)
-      :> API.Types.ProviderPlatform.Management.NammaTag.DeleteNammaTagTimeBoundsDelete
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.DELETE_QOLARI_TAG_TIME_BOUNDS_DELETE)
+      :> API.Types.ProviderPlatform.Management.QolariTag.DeleteQolariTagTimeBoundsDelete
   )
 
-type GetNammaTagAppDynamicLogicGetLogicRollout =
+type GetQolariTagAppDynamicLogicGetLogicRollout =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_APP_DYNAMIC_LOGIC_GET_LOGIC_ROLLOUT)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagAppDynamicLogicGetLogicRollout
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_APP_DYNAMIC_LOGIC_GET_LOGIC_ROLLOUT)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagAppDynamicLogicGetLogicRollout
   )
 
-type PostNammaTagAppDynamicLogicUpsertLogicRollout =
+type PostQolariTagAppDynamicLogicUpsertLogicRollout =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_APP_DYNAMIC_LOGIC_UPSERT_LOGIC_ROLLOUT)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagAppDynamicLogicUpsertLogicRollout
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_APP_DYNAMIC_LOGIC_UPSERT_LOGIC_ROLLOUT)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagAppDynamicLogicUpsertLogicRollout
   )
 
-type GetNammaTagAppDynamicLogicVersions =
+type GetQolariTagAppDynamicLogicVersions =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_APP_DYNAMIC_LOGIC_VERSIONS)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagAppDynamicLogicVersions
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_APP_DYNAMIC_LOGIC_VERSIONS)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagAppDynamicLogicVersions
   )
 
-type GetNammaTagAppDynamicLogicDomains =
+type GetQolariTagAppDynamicLogicDomains =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_APP_DYNAMIC_LOGIC_DOMAINS)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagAppDynamicLogicDomains
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_APP_DYNAMIC_LOGIC_DOMAINS)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagAppDynamicLogicDomains
   )
 
-type GetNammaTagAppDynamicLogicDomainsAndEvents =
+type GetQolariTagAppDynamicLogicDomainsAndEvents =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_APP_DYNAMIC_LOGIC_DOMAINS_AND_EVENTS)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagAppDynamicLogicDomainsAndEvents
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_APP_DYNAMIC_LOGIC_DOMAINS_AND_EVENTS)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagAppDynamicLogicDomainsAndEvents
   )
 
-type GetNammaTagAppDynamicLogicGetDomainSchema =
+type GetQolariTagAppDynamicLogicGetDomainSchema =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_APP_DYNAMIC_LOGIC_GET_DOMAIN_SCHEMA)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagAppDynamicLogicGetDomainSchema
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_APP_DYNAMIC_LOGIC_GET_DOMAIN_SCHEMA)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagAppDynamicLogicGetDomainSchema
   )
 
-type GetNammaTagQueryAll =
+type GetQolariTagQueryAll =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_QUERY_ALL)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagQueryAll
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_QUERY_ALL)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagQueryAll
   )
 
-type PostNammaTagConfigPilotGetVersion =
+type PostQolariTagConfigPilotGetVersion =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_CONFIG_PILOT_GET_VERSION)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagConfigPilotGetVersion
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_CONFIG_PILOT_GET_VERSION)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagConfigPilotGetVersion
   )
 
-type PostNammaTagConfigPilotGetConfig =
+type PostQolariTagConfigPilotGetConfig =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_CONFIG_PILOT_GET_CONFIG)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagConfigPilotGetConfig
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_CONFIG_PILOT_GET_CONFIG)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagConfigPilotGetConfig
   )
 
-type PostNammaTagConfigPilotCreateUiConfig =
+type PostQolariTagConfigPilotCreateUiConfig =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_CONFIG_PILOT_CREATE_UI_CONFIG)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagConfigPilotCreateUiConfig
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_CONFIG_PILOT_CREATE_UI_CONFIG)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagConfigPilotCreateUiConfig
   )
 
-type GetNammaTagConfigPilotAllConfigs =
+type GetQolariTagConfigPilotAllConfigs =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_CONFIG_PILOT_ALL_CONFIGS)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagConfigPilotAllConfigs
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_CONFIG_PILOT_ALL_CONFIGS)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagConfigPilotAllConfigs
   )
 
-type GetNammaTagConfigPilotConfigDetails =
+type GetQolariTagConfigPilotConfigDetails =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_CONFIG_PILOT_CONFIG_DETAILS)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagConfigPilotConfigDetails
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_CONFIG_PILOT_CONFIG_DETAILS)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagConfigPilotConfigDetails
   )
 
-type GetNammaTagConfigPilotGetTableData =
+type GetQolariTagConfigPilotGetTableData =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_CONFIG_PILOT_GET_TABLE_DATA)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagConfigPilotGetTableData
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_CONFIG_PILOT_GET_TABLE_DATA)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagConfigPilotGetTableData
   )
 
-type GetNammaTagConfigPilotAllUiConfigs =
+type GetQolariTagConfigPilotAllUiConfigs =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_CONFIG_PILOT_ALL_UI_CONFIGS)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagConfigPilotAllUiConfigs
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_CONFIG_PILOT_ALL_UI_CONFIGS)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagConfigPilotAllUiConfigs
   )
 
-type GetNammaTagConfigPilotUiConfigDetails =
+type GetQolariTagConfigPilotUiConfigDetails =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_CONFIG_PILOT_UI_CONFIG_DETAILS)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagConfigPilotUiConfigDetails
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_CONFIG_PILOT_UI_CONFIG_DETAILS)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagConfigPilotUiConfigDetails
   )
 
-type GetNammaTagConfigPilotGetUiTableData =
+type GetQolariTagConfigPilotGetUiTableData =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_CONFIG_PILOT_GET_UI_TABLE_DATA)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagConfigPilotGetUiTableData
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_CONFIG_PILOT_GET_UI_TABLE_DATA)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagConfigPilotGetUiTableData
   )
 
-type GetNammaTagConfigPilotAlwaysOnList =
+type GetQolariTagConfigPilotAlwaysOnList =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_CONFIG_PILOT_ALWAYS_ON_LIST)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagConfigPilotAlwaysOnList
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_CONFIG_PILOT_ALWAYS_ON_LIST)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagConfigPilotAlwaysOnList
   )
 
-type PostNammaTagConfigPilotActionChange =
+type PostQolariTagConfigPilotActionChange =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_CONFIG_PILOT_ACTION_CHANGE)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagConfigPilotActionChange
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_CONFIG_PILOT_ACTION_CHANGE)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagConfigPilotActionChange
   )
 
-type PostNammaTagConfigPilotGetPatchedElement =
+type PostQolariTagConfigPilotGetPatchedElement =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_CONFIG_PILOT_GET_PATCHED_ELEMENT)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagConfigPilotGetPatchedElement
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_CONFIG_PILOT_GET_PATCHED_ELEMENT)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagConfigPilotGetPatchedElement
   )
 
-type PostNammaTagConfigPilotGetConfigWithDimensions =
+type PostQolariTagConfigPilotGetConfigWithDimensions =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_CONFIG_PILOT_GET_CONFIG_WITH_DIMENSIONS)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagConfigPilotGetConfigWithDimensions
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_CONFIG_PILOT_GET_CONFIG_WITH_DIMENSIONS)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagConfigPilotGetConfigWithDimensions
   )
 
-type GetNammaTagConfigPilotGetDimensionSchema =
+type GetQolariTagConfigPilotGetDimensionSchema =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_CONFIG_PILOT_GET_DIMENSION_SCHEMA)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagConfigPilotGetDimensionSchema
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_CONFIG_PILOT_GET_DIMENSION_SCHEMA)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagConfigPilotGetDimensionSchema
   )
 
-type PostNammaTagConfigPilotCreateRow =
+type PostQolariTagConfigPilotCreateRow =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.POST_NAMMA_TAG_CONFIG_PILOT_CREATE_ROW)
-      :> API.Types.ProviderPlatform.Management.NammaTag.PostNammaTagConfigPilotCreateRow
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.POST_QOLARI_TAG_CONFIG_PILOT_CREATE_ROW)
+      :> API.Types.ProviderPlatform.Management.QolariTag.PostQolariTagConfigPilotCreateRow
   )
 
-type GetNammaTagBehaviorVisibility =
+type GetQolariTagBehaviorVisibility =
   ( ApiAuth
       'DRIVER_OFFER_BPP_MANAGEMENT
       'DSL
-      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.NAMMA_TAG / 'API.Types.ProviderPlatform.Management.NammaTag.GET_NAMMA_TAG_BEHAVIOR_VISIBILITY)
-      :> API.Types.ProviderPlatform.Management.NammaTag.GetNammaTagBehaviorVisibility
+      ('PROVIDER_MANAGEMENT / 'API.Types.ProviderPlatform.Management.QOLARI_TAG / 'API.Types.ProviderPlatform.Management.QolariTag.GET_QOLARI_TAG_BEHAVIOR_VISIBILITY)
+      :> API.Types.ProviderPlatform.Management.QolariTag.GetQolariTagBehaviorVisibility
   )
 
-postNammaTagTagCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateNammaTagRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.CreateNammaTagResponse)
-postNammaTagTagCreate merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagTagCreate merchantShortId opCity apiTokenInfo req
+postQolariTagTagCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateQolariTagRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.CreateQolariTagResponse)
+postQolariTagTagCreate merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagTagCreate merchantShortId opCity apiTokenInfo req
 
-postNammaTagTagVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.VerifyNammaTagRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.VerifyNammaTagResponse)
-postNammaTagTagVerify merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagTagVerify merchantShortId opCity apiTokenInfo req
+postQolariTagTagVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.VerifyQolariTagRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.VerifyQolariTagResponse)
+postQolariTagTagVerify merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagTagVerify merchantShortId opCity apiTokenInfo req
 
-postNammaTagTagUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UpdateNammaTagRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagTagUpdate merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagTagUpdate merchantShortId opCity apiTokenInfo req
+postQolariTagTagUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UpdateQolariTagRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagTagUpdate merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagTagUpdate merchantShortId opCity apiTokenInfo req
 
-deleteNammaTagTagDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Text -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-deleteNammaTagTagDelete merchantShortId opCity apiTokenInfo tagName = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.deleteNammaTagTagDelete merchantShortId opCity apiTokenInfo tagName
+deleteQolariTagTagDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Text -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+deleteQolariTagTagDelete merchantShortId opCity apiTokenInfo tagName = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.deleteQolariTagTagDelete merchantShortId opCity apiTokenInfo tagName
 
-getNammaTagTagAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Environment.FlowHandler [Lib.Yudhishthira.Types.NammaTagDetailsResp])
-getNammaTagTagAll merchantShortId opCity apiTokenInfo = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagTagAll merchantShortId opCity apiTokenInfo
+getQolariTagTagAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Environment.FlowHandler [Lib.Yudhishthira.Types.QolariTagDetailsResp])
+getQolariTagTagAll merchantShortId opCity apiTokenInfo = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagTagAll merchantShortId opCity apiTokenInfo
 
-getNammaTagTagDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Text -> Environment.FlowHandler Lib.Yudhishthira.Types.NammaTagDetailsResp)
-getNammaTagTagDetails merchantShortId opCity apiTokenInfo tagName = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagTagDetails merchantShortId opCity apiTokenInfo tagName
+getQolariTagTagDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Text -> Environment.FlowHandler Lib.Yudhishthira.Types.QolariTagDetailsResp)
+getQolariTagTagDetails merchantShortId opCity apiTokenInfo tagName = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagTagDetails merchantShortId opCity apiTokenInfo tagName
 
-postNammaTagQueryCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueriesAPIEntity -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagQueryCreate merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagQueryCreate merchantShortId opCity apiTokenInfo req
+postQolariTagQueryCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueriesAPIEntity -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagQueryCreate merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagQueryCreate merchantShortId opCity apiTokenInfo req
 
-postNammaTagQueryUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueryUpdateReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagQueryUpdate merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagQueryUpdate merchantShortId opCity apiTokenInfo req
+postQolariTagQueryUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueryUpdateReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagQueryUpdate merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagQueryUpdate merchantShortId opCity apiTokenInfo req
 
-deleteNammaTagQueryDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueryDeleteReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-deleteNammaTagQueryDelete merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.deleteNammaTagQueryDelete merchantShortId opCity apiTokenInfo req
+deleteQolariTagQueryDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ChakraQueryDeleteReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+deleteQolariTagQueryDelete merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.deleteQolariTagQueryDelete merchantShortId opCity apiTokenInfo req
 
-getNammaTagQueryDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.Chakra -> Kernel.Prelude.Text -> Environment.FlowHandler Lib.Yudhishthira.Types.ChakraQueriesAPIEntity)
-getNammaTagQueryDetails merchantShortId opCity apiTokenInfo chakra queryName = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagQueryDetails merchantShortId opCity apiTokenInfo chakra queryName
+getQolariTagQueryDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.Chakra -> Kernel.Prelude.Text -> Environment.FlowHandler Lib.Yudhishthira.Types.ChakraQueriesAPIEntity)
+getQolariTagQueryDetails merchantShortId opCity apiTokenInfo chakra queryName = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagQueryDetails merchantShortId opCity apiTokenInfo chakra queryName
 
-postNammaTagAppDynamicLogicVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.AppDynamicLogicReq -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicResp)
-postNammaTagAppDynamicLogicVerify merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagAppDynamicLogicVerify merchantShortId opCity apiTokenInfo req
+postQolariTagAppDynamicLogicVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.AppDynamicLogicReq -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicResp)
+postQolariTagAppDynamicLogicVerify merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagAppDynamicLogicVerify merchantShortId opCity apiTokenInfo req
 
-getNammaTagAppDynamicLogic :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Int -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler [Lib.Yudhishthira.Types.GetLogicsResp])
-getNammaTagAppDynamicLogic merchantShortId opCity apiTokenInfo version domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagAppDynamicLogic merchantShortId opCity apiTokenInfo version domain
+getQolariTagAppDynamicLogic :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Int -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler [Lib.Yudhishthira.Types.GetLogicsResp])
+getQolariTagAppDynamicLogic merchantShortId opCity apiTokenInfo version domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagAppDynamicLogic merchantShortId opCity apiTokenInfo version domain
 
-postNammaTagRunJob :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.RunKaalChakraJobReq -> Environment.FlowHandler Lib.Yudhishthira.Types.RunKaalChakraJobRes)
-postNammaTagRunJob merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagRunJob merchantShortId opCity apiTokenInfo req
+postQolariTagRunJob :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.RunKaalChakraJobReq -> Environment.FlowHandler Lib.Yudhishthira.Types.RunKaalChakraJobRes)
+postQolariTagRunJob merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagRunJob merchantShortId opCity apiTokenInfo req
 
-getNammaTagTimeBounds :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.TimeBoundResp)
-getNammaTagTimeBounds merchantShortId opCity apiTokenInfo domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagTimeBounds merchantShortId opCity apiTokenInfo domain
+getQolariTagTimeBounds :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.TimeBoundResp)
+getQolariTagTimeBounds merchantShortId opCity apiTokenInfo domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagTimeBounds merchantShortId opCity apiTokenInfo domain
 
-postNammaTagTimeBoundsCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateTimeBoundRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagTimeBoundsCreate merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagTimeBoundsCreate merchantShortId opCity apiTokenInfo req
+postQolariTagTimeBoundsCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateTimeBoundRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagTimeBoundsCreate merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagTimeBoundsCreate merchantShortId opCity apiTokenInfo req
 
-deleteNammaTagTimeBoundsDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Kernel.Prelude.Text -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-deleteNammaTagTimeBoundsDelete merchantShortId opCity apiTokenInfo domain name = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.deleteNammaTagTimeBoundsDelete merchantShortId opCity apiTokenInfo domain name
+deleteQolariTagTimeBoundsDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Kernel.Prelude.Text -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+deleteQolariTagTimeBoundsDelete merchantShortId opCity apiTokenInfo domain name = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.deleteQolariTagTimeBoundsDelete merchantShortId opCity apiTokenInfo domain name
 
-getNammaTagAppDynamicLogicGetLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Bool -> Kernel.Prelude.Maybe Kernel.Prelude.Text -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler [Lib.Yudhishthira.Types.LogicRolloutObject])
-getNammaTagAppDynamicLogicGetLogicRollout merchantShortId opCity apiTokenInfo activeOnly timeBound domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagAppDynamicLogicGetLogicRollout merchantShortId opCity apiTokenInfo activeOnly timeBound domain
+getQolariTagAppDynamicLogicGetLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Bool -> Kernel.Prelude.Maybe Kernel.Prelude.Text -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler [Lib.Yudhishthira.Types.LogicRolloutObject])
+getQolariTagAppDynamicLogicGetLogicRollout merchantShortId opCity apiTokenInfo activeOnly timeBound domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagAppDynamicLogicGetLogicRollout merchantShortId opCity apiTokenInfo activeOnly timeBound domain
 
-postNammaTagAppDynamicLogicUpsertLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicRolloutReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagAppDynamicLogicUpsertLogicRollout merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagAppDynamicLogicUpsertLogicRollout merchantShortId opCity apiTokenInfo req
+postQolariTagAppDynamicLogicUpsertLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicRolloutReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagAppDynamicLogicUpsertLogicRollout merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagAppDynamicLogicUpsertLogicRollout merchantShortId opCity apiTokenInfo req
 
-getNammaTagAppDynamicLogicVersions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Int -> Kernel.Prelude.Maybe Kernel.Prelude.Int -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicVersionResp)
-getNammaTagAppDynamicLogicVersions merchantShortId opCity apiTokenInfo limit offset domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagAppDynamicLogicVersions merchantShortId opCity apiTokenInfo limit offset domain
+getQolariTagAppDynamicLogicVersions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Int -> Kernel.Prelude.Maybe Kernel.Prelude.Int -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicVersionResp)
+getQolariTagAppDynamicLogicVersions merchantShortId opCity apiTokenInfo limit offset domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagAppDynamicLogicVersions merchantShortId opCity apiTokenInfo limit offset domain
 
-getNammaTagAppDynamicLogicDomains :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicDomainResp)
-getNammaTagAppDynamicLogicDomains merchantShortId opCity apiTokenInfo = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagAppDynamicLogicDomains merchantShortId opCity apiTokenInfo
+getQolariTagAppDynamicLogicDomains :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicDomainResp)
+getQolariTagAppDynamicLogicDomains merchantShortId opCity apiTokenInfo = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagAppDynamicLogicDomains merchantShortId opCity apiTokenInfo
 
-getNammaTagAppDynamicLogicDomainsAndEvents :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Bool -> Environment.FlowHandler Lib.Yudhishthira.Types.NammaTagEventsOrNammaTagNamesResp)
-getNammaTagAppDynamicLogicDomainsAndEvents merchantShortId opCity apiTokenInfo fetchNammaTagNames = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagAppDynamicLogicDomainsAndEvents merchantShortId opCity apiTokenInfo fetchNammaTagNames
+getQolariTagAppDynamicLogicDomainsAndEvents :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Bool -> Environment.FlowHandler Lib.Yudhishthira.Types.QolariTagEventsOrQolariTagNamesResp)
+getQolariTagAppDynamicLogicDomainsAndEvents merchantShortId opCity apiTokenInfo fetchQolariTagNames = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagAppDynamicLogicDomainsAndEvents merchantShortId opCity apiTokenInfo fetchQolariTagNames
 
-getNammaTagAppDynamicLogicGetDomainSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.DomainSchemaResp)
-getNammaTagAppDynamicLogicGetDomainSchema merchantShortId opCity apiTokenInfo domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagAppDynamicLogicGetDomainSchema merchantShortId opCity apiTokenInfo domain
+getQolariTagAppDynamicLogicGetDomainSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.DomainSchemaResp)
+getQolariTagAppDynamicLogicGetDomainSchema merchantShortId opCity apiTokenInfo domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagAppDynamicLogicGetDomainSchema merchantShortId opCity apiTokenInfo domain
 
-getNammaTagQueryAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.Chakra -> Environment.FlowHandler Lib.Yudhishthira.Types.ChakraQueryResp)
-getNammaTagQueryAll merchantShortId opCity apiTokenInfo chakra = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagQueryAll merchantShortId opCity apiTokenInfo chakra
+getQolariTagQueryAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.Chakra -> Environment.FlowHandler Lib.Yudhishthira.Types.ChakraQueryResp)
+getQolariTagQueryAll merchantShortId opCity apiTokenInfo chakra = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagQueryAll merchantShortId opCity apiTokenInfo chakra
 
-postNammaTagConfigPilotGetVersion :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.UiConfigGetVersionResponse)
-postNammaTagConfigPilotGetVersion merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagConfigPilotGetVersion merchantShortId opCity apiTokenInfo req
+postQolariTagConfigPilotGetVersion :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.UiConfigGetVersionResponse)
+postQolariTagConfigPilotGetVersion merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagConfigPilotGetVersion merchantShortId opCity apiTokenInfo req
 
-postNammaTagConfigPilotGetConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.UiConfigResponse)
-postNammaTagConfigPilotGetConfig merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagConfigPilotGetConfig merchantShortId opCity apiTokenInfo req
+postQolariTagConfigPilotGetConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.UiConfigResponse)
+postQolariTagConfigPilotGetConfig merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagConfigPilotGetConfig merchantShortId opCity apiTokenInfo req
 
-postNammaTagConfigPilotCreateUiConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateConfigRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagConfigPilotCreateUiConfig merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagConfigPilotCreateUiConfig merchantShortId opCity apiTokenInfo req
+postQolariTagConfigPilotCreateUiConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.CreateConfigRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagConfigPilotCreateUiConfig merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagConfigPilotCreateUiConfig merchantShortId opCity apiTokenInfo req
 
-getNammaTagConfigPilotAllConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Bool -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigType])
-getNammaTagConfigPilotAllConfigs merchantShortId opCity apiTokenInfo underExperiment = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagConfigPilotAllConfigs merchantShortId opCity apiTokenInfo underExperiment
+getQolariTagConfigPilotAllConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Bool -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigType])
+getQolariTagConfigPilotAllConfigs merchantShortId opCity apiTokenInfo underExperiment = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagConfigPilotAllConfigs merchantShortId opCity apiTokenInfo underExperiment
 
-getNammaTagConfigPilotConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigDetailsResp])
-getNammaTagConfigPilotConfigDetails merchantShortId opCity apiTokenInfo tableName = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagConfigPilotConfigDetails merchantShortId opCity apiTokenInfo tableName
+getQolariTagConfigPilotConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigDetailsResp])
+getQolariTagConfigPilotConfigDetails merchantShortId opCity apiTokenInfo tableName = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagConfigPilotConfigDetails merchantShortId opCity apiTokenInfo tableName
 
-getNammaTagConfigPilotGetTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
-getNammaTagConfigPilotGetTableData merchantShortId opCity apiTokenInfo tableName = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagConfigPilotGetTableData merchantShortId opCity apiTokenInfo tableName
+getQolariTagConfigPilotGetTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
+getQolariTagConfigPilotGetTableData merchantShortId opCity apiTokenInfo tableName = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagConfigPilotGetTableData merchantShortId opCity apiTokenInfo tableName
 
-getNammaTagConfigPilotAllUiConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Bool -> Environment.FlowHandler [Lib.Yudhishthira.Types.LogicDomain])
-getNammaTagConfigPilotAllUiConfigs merchantShortId opCity apiTokenInfo underExperiment = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagConfigPilotAllUiConfigs merchantShortId opCity apiTokenInfo underExperiment
+getQolariTagConfigPilotAllUiConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Maybe Kernel.Prelude.Bool -> Environment.FlowHandler [Lib.Yudhishthira.Types.LogicDomain])
+getQolariTagConfigPilotAllUiConfigs merchantShortId opCity apiTokenInfo underExperiment = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagConfigPilotAllUiConfigs merchantShortId opCity apiTokenInfo underExperiment
 
-getNammaTagConfigPilotUiConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigDetailsResp])
-getNammaTagConfigPilotUiConfigDetails merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagConfigPilotUiConfigDetails merchantShortId opCity apiTokenInfo req
+getQolariTagConfigPilotUiConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigDetailsResp])
+getQolariTagConfigPilotUiConfigDetails merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagConfigPilotUiConfigDetails merchantShortId opCity apiTokenInfo req
 
-getNammaTagConfigPilotGetUiTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
-getNammaTagConfigPilotGetUiTableData merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagConfigPilotGetUiTableData merchantShortId opCity apiTokenInfo req
+getQolariTagConfigPilotGetUiTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
+getQolariTagConfigPilotGetUiTableData merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagConfigPilotGetUiTableData merchantShortId opCity apiTokenInfo req
 
-getNammaTagConfigPilotAlwaysOnList :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.AlwaysOnListResp)
-getNammaTagConfigPilotAlwaysOnList merchantShortId opCity apiTokenInfo domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagConfigPilotAlwaysOnList merchantShortId opCity apiTokenInfo domain
+getQolariTagConfigPilotAlwaysOnList :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.AlwaysOnListResp)
+getQolariTagConfigPilotAlwaysOnList merchantShortId opCity apiTokenInfo domain = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagConfigPilotAlwaysOnList merchantShortId opCity apiTokenInfo domain
 
-postNammaTagConfigPilotActionChange :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ActionChangeRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagConfigPilotActionChange merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagConfigPilotActionChange merchantShortId opCity apiTokenInfo req
+postQolariTagConfigPilotActionChange :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ActionChangeRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagConfigPilotActionChange merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagConfigPilotActionChange merchantShortId opCity apiTokenInfo req
 
-postNammaTagConfigPilotGetPatchedElement :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.GetPatchedElementReq -> Environment.FlowHandler Lib.Yudhishthira.Types.GetPatchedElementResp)
-postNammaTagConfigPilotGetPatchedElement merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagConfigPilotGetPatchedElement merchantShortId opCity apiTokenInfo req
+postQolariTagConfigPilotGetPatchedElement :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.GetPatchedElementReq -> Environment.FlowHandler Lib.Yudhishthira.Types.GetPatchedElementResp)
+postQolariTagConfigPilotGetPatchedElement merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagConfigPilotGetPatchedElement merchantShortId opCity apiTokenInfo req
 
-postNammaTagConfigPilotGetConfigWithDimensions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigPilotGetConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
-postNammaTagConfigPilotGetConfigWithDimensions merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagConfigPilotGetConfigWithDimensions merchantShortId opCity apiTokenInfo req
+postQolariTagConfigPilotGetConfigWithDimensions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigPilotGetConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
+postQolariTagConfigPilotGetConfigWithDimensions merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagConfigPilotGetConfigWithDimensions merchantShortId opCity apiTokenInfo req
 
-getNammaTagConfigPilotGetDimensionSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler Lib.Yudhishthira.Types.DomainSchemaResp)
-getNammaTagConfigPilotGetDimensionSchema merchantShortId opCity apiTokenInfo configType = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagConfigPilotGetDimensionSchema merchantShortId opCity apiTokenInfo configType
+getQolariTagConfigPilotGetDimensionSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler Lib.Yudhishthira.Types.DomainSchemaResp)
+getQolariTagConfigPilotGetDimensionSchema merchantShortId opCity apiTokenInfo configType = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagConfigPilotGetDimensionSchema merchantShortId opCity apiTokenInfo configType
 
-postNammaTagConfigPilotCreateRow :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigPilotCreateRowRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagConfigPilotCreateRow merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.postNammaTagConfigPilotCreateRow merchantShortId opCity apiTokenInfo req
+postQolariTagConfigPilotCreateRow :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Lib.Yudhishthira.Types.ConfigPilotCreateRowRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagConfigPilotCreateRow merchantShortId opCity apiTokenInfo req = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.postQolariTagConfigPilotCreateRow merchantShortId opCity apiTokenInfo req
 
-getNammaTagBehaviorVisibility :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Text -> Kernel.Prelude.Text -> Environment.FlowHandler Lib.BehaviorTracker.Types.EntityBehaviorVisibility)
-getNammaTagBehaviorVisibility merchantShortId opCity apiTokenInfo entityType entityId = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.NammaTag.getNammaTagBehaviorVisibility merchantShortId opCity apiTokenInfo entityType entityId
+getQolariTagBehaviorVisibility :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> ApiTokenInfo -> Kernel.Prelude.Text -> Kernel.Prelude.Text -> Environment.FlowHandler Lib.BehaviorTracker.Types.EntityBehaviorVisibility)
+getQolariTagBehaviorVisibility merchantShortId opCity apiTokenInfo entityType entityId = withFlowHandlerAPI' $ Domain.Action.ProviderPlatform.Management.QolariTag.getQolariTagBehaviorVisibility merchantShortId opCity apiTokenInfo entityType entityId

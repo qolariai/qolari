@@ -1,4 +1,4 @@
-# Public Transport System Backend
+﻿# Public Transport System Backend
 
 ## Documentation
 
@@ -12,7 +12,7 @@
 ## Additional Resources
 For specific implementation details or API documentation, please refer to respective sections in the docs folder.
 
-This is the sub-project containing backend code written in [haskell] powering [nammayatri] servers.
+This is the sub-project containing backend code written in [haskell] powering [Qolari] servers.
 
 ## Getting Started
 
@@ -22,13 +22,13 @@ To build or develop the project, you need to install the following.
 
 #### Nix
 
-We use [Nix](https://nixos.asia/en/nix) to build and develop the [Namamayatri][nammayatri] project. To prepare your system for a pleasant [Nix-based development](https://nixos.asia/en/dev), follow these four steps:
+We use [Nix](https://nixos.asia/en/nix) to build and develop the [Qolari][Qolari] project. To prepare your system for a pleasant [Nix-based development](https://nixos.asia/en/dev), follow these four steps:
 
 1. [Install **Nix**](https://nixos.asia/en/install)
-1. [Install **direnv**](https://github.com/juspay/nixos-unified-template)[^direnv] (select `home-manager` template)
+1. [Install **direnv**](https://github.com/qolariai/nixos-unified-template)[^direnv] (select `home-manager` template)
 1. Enter the Nix devshell by running `ln -s .envrc.backend .envrc && direnv allow` in the project directory.
 
-[^direnv]: You want this to facilitate a nice Nix develoment environment. Read more about direnv [here](https://nixos.asia/en/direnv). Even though `direnv` is not strictly required to develop nammayatri, if you do not use `direnv` you would have to remember to manually restart the `nix develop` shell, and know when exactly to do this each time. Also, you need setup the binary cache manually.
+[^direnv]: You want this to facilitate a nice Nix develoment environment. Read more about direnv [here](https://nixos.asia/en/direnv). Even though `direnv` is not strictly required to develop Qolari, if you do not use `direnv` you would have to remember to manually restart the `nix develop` shell, and know when exactly to do this each time. Also, you need setup the binary cache manually.
 
 ### Building
 
@@ -39,12 +39,12 @@ Once you have installed all the necessary tools and dependencies, we can proceed
 To compile the backend, use the following command:
 
 ```sh
-nix build .#nammayatri
+nix build .#Qolari
 ```
 
 This should produce a `./result` symlink in the current directory, containing all backend binaries under `./result/bin`.
 
-**🚧 Warning 🚧**: The `nix build` command should _only_ build the nammayatri project and it should finish in a matter of minutes. If not, you must not have setup the Nix cache properly. Consult [the steps further above](#nix).
+**🚧 Warning 🚧**: The `nix build` command should _only_ build the Qolari project and it should finish in a matter of minutes. If not, you must not have setup the Nix cache properly. Consult [the steps further above](#nix).
 
 #### Building the docker image
 
@@ -58,12 +58,12 @@ docker load -i $(nix build .#dockerImage --no-link --print-out-paths)
 
 #### Setting up a development environment
 
-**🚨 Attention 🚨**: If you were using *stack* to develop Nammayatri in the past, you must **completely erase** that git working copy, and start from a fresh clone of this repository before working with Nix. You might also want to remove your cache folders `~/.cache/cabal` and `~/.cabal/hie-bios`.
+**🚨 Attention 🚨**: If you were using *stack* to develop Qolari in the past, you must **completely erase** that git working copy, and start from a fresh clone of this repository before working with Nix. You might also want to remove your cache folders `~/.cache/cabal` and `~/.cabal/hie-bios`.
 
 To set up your development environment for backend, you should setup and use direnv[^de-ns] by running the following from repository root:
 
 ```sh
-cd ~/Projects/nammayatri
+cd ~/Projects/Qolari
 ln -sf .envrc.backend .envrc  # Run this only once.
 direnv allow                 # Run this only once.
 ```
@@ -72,7 +72,7 @@ direnv allow                 # Run this only once.
 
 **🚧 Warning 🚧**: Entering the nix develop shell (using `direnv allow`, for example) should not compile anything and it should finish in a matter of minutes (after downloading the binaries from our Nix cache). If not, you must not have setup the Nix cache properly. Consult [the steps further above](#nix).
 
-This will drop you into a [shell environment][nix-shell] containing all project dependencies. Inside the nix shell, run `,` to see the available commands specific to nammayatri development.
+This will drop you into a [shell environment][nix-shell] containing all project dependencies. Inside the nix shell, run `,` to see the available commands specific to Qolari development.
 
 To compile the project, use [cabal]:
 
@@ -130,7 +130,7 @@ Backend-only via Nix (slower; full Nix build, no cabal):
 ```sh
 , run-mobility-stack-nix
 # Or (if you are not in the git repo):
-nix run github:nammayatri/nammyatri#run-mobility-stack-nix
+nix run github:Qolari/nammyatri#run-mobility-stack-nix
 ```
 
 For a deep dive on what each piece does — including the SSH **Remote Stack**
@@ -162,7 +162,7 @@ External dependencies of the project are usually specified in [`inputs`](https:/
 The specific revisions of these Git repos are pinned in the `flake.lock` file. If you want to update, say, shared-kernel to a particular commit, run:
 
 ```sh
-nix flake lock --update-input shared-kernel --override-input shared-kernel github:nammayatri/shared-kernel/f8a79646de474d1a103365e27677778f278b100f
+nix flake lock --update-input shared-kernel --override-input shared-kernel github:Qolari/shared-kernel/f8a79646de474d1a103365e27677778f278b100f
 ```
 
 If you just want to advance the pinned commit to the HEAD of the `main` branch, run instead:
@@ -181,7 +181,7 @@ You can also change the flake input to point a local checkout. To do this, chang
 }
 ```
 
-Now, if you run `nix build` or any of the other nix commands, it will use the local shared-kernel to compile nammayatri against. Whenever you change the contents of `/Users/myname/Projects/shared-kernel`,  you **must** run `nix flake lock --update-input shared-kernel` again, so the current project will use the new contents.
+Now, if you run `nix build` or any of the other nix commands, it will use the local shared-kernel to compile Qolari against. Whenever you change the contents of `/Users/myname/Projects/shared-kernel`,  you **must** run `nix flake lock --update-input shared-kernel` again, so the current project will use the new contents.
 
 #### Visual Studio Code
 
@@ -269,7 +269,7 @@ test-context-api (see [Local vs devbox](#local-vs-devbox--dynamic-ports) below).
   prerequest scripts over PTY.
 - **mock-server (8080)** *(runs with the stack)* and the per-service mock binaries
   (`mock-registry`, `mock-fcm`, `mock-sms`, `mock-google`, …) stand in for
-  external integrations (Juspay / Stripe / FCM / SMS / Beckn registry / …) so
+  external integrations (Qolari / Stripe / FCM / SMS / Beckn registry / …) so
   flows run offline.
 
 ##### Config sync — a Prod/Master-identical environment
@@ -412,10 +412,10 @@ If the above steps don't solve the issue, this could be due to [a bug in the VSC
 
 Run `nix run github:nix-community/nix-melt` to navigate and find that transitive flake input specifying the dependency you are looking for. You can also inspect the `flake.lock` file.
 
-[nammayatri]: https://www.nammayatri.in/
+[Qolari]: https://www.drive.qolari.com/
 [haskell]: https://www.haskell.org/
 [arion]: https://github.com/hercules-ci/arion
-[services-flake]: https://github.com/juspay/services-flake
+[services-flake]: https://github.com/qolariai/services-flake
 [cabal]: https://cabal.readthedocs.io/
 [nix-shell]: https://nixos.wiki/wiki/Development_environment_with_nix-shell
 

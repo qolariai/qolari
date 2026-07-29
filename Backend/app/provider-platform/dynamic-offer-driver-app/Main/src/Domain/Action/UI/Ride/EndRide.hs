@@ -606,7 +606,7 @@ endRideHandler handle@ServiceHandle {..} rideId req = do
     priorRidesSameCustomer <- QRide.countPriorCompletedRidesWithSameCustomer (cast driverId) booking.riderId updRide'.id merchantLocalDay thresholdConfig.sameRiderDriverRideCountLookbackDays
     let shouldBlockCoinsForSameRiderFlow = riderBlockedForCoins || priorRidesSameCustomer > thresholdConfig.sameRiderDriverRideCountThreshold
     when shouldBlockCoinsForSameRiderFlow $ QRiderDetails.flagRiderForCoinZero booking.riderId
-    -- Namma-tags computation moved to kafka-consumers RIDE_EVENTS_CONSUMER. Tags are
+    -- Qolari-tags computation moved to kafka-consumers RIDE_EVENTS_CONSUMER. Tags are
     -- written back to the ride asynchronously by the handler.
     let updRide = updRide'
     QRide.incrementDriverRiderRideCountForDay (cast driverId) booking.riderId

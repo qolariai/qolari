@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "_postman_id": "cf3a4b2e-08cf-4e5d-9b1a-7c2f31e08d54",
     "name": "CF3-CancellationDueOnNextRide",
@@ -218,14 +218,14 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_BPP_Dashboard_Internal}}/{{dashboard_merchant_id}}/{{dashboard_city}}/nammaTag/appDynamicLogic/verify",
+          "raw": "{{baseURL_BPP_Dashboard_Internal}}/{{dashboard_merchant_id}}/{{dashboard_city}}/QolariTag/appDynamicLogic/verify",
           "host": [
             "{{baseURL_BPP_Dashboard_Internal}}"
           ],
           "path": [
             "{{dashboard_merchant_id}}",
             "{{dashboard_city}}",
-            "nammaTag",
+            "QolariTag",
             "appDynamicLogic",
             "verify"
           ]
@@ -272,14 +272,14 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_BPP_Dashboard_Internal}}/{{dashboard_merchant_id}}/{{dashboard_city}}/nammaTag/appDynamicLogic/upsertLogicRollout",
+          "raw": "{{baseURL_BPP_Dashboard_Internal}}/{{dashboard_merchant_id}}/{{dashboard_city}}/QolariTag/appDynamicLogic/upsertLogicRollout",
           "host": [
             "{{baseURL_BPP_Dashboard_Internal}}"
           ],
           "path": [
             "{{dashboard_merchant_id}}",
             "{{dashboard_city}}",
-            "nammaTag",
+            "QolariTag",
             "appDynamicLogic",
             "upsertLogicRollout"
           ]
@@ -643,9 +643,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -683,9 +683,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -929,9 +929,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1075,9 +1075,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1125,9 +1125,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/bankAccount/link?paymentMode=%22LIVE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/register/bankAccount/link?paymentMode=%22LIVE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1174,9 +1174,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/register/bankAccount/status",
+          "raw": "{{baseURL_qolari_P}}/driver/register/bankAccount/status",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1214,9 +1214,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1682,7 +1682,7 @@
               "// Dashboard-compatible poll (the CLI retry hook is unavailable here). Driver-pool fires batches",
               "// every ~22s; the freshly-created test driver may miss the first batch. Poll up to ~50s.",
               "function _resolve(u){ return String(u||'').replace(/\\$\\{[^:}]*:?([^}]*)\\}/g,'$1'); }",
-              "function _url(){ return _resolve(pm.environment.get('baseURL_namma_P')) + '/driver/nearbyRideRequest'; }",
+              "function _url(){ return _resolve(pm.environment.get('baseURL_qolari_P')) + '/driver/nearbyRideRequest'; }",
               "function _finish(d){",
               "  if (d && d.searchRequestsForDriver && d.searchRequestsForDriver.length > 0) {",
               "    var req = d.searchRequestsForDriver[0];",
@@ -1722,9 +1722,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/nearbyRideRequest",
+          "raw": "{{baseURL_qolari_P}}/driver/nearbyRideRequest",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1761,9 +1761,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/searchRequest/quote/respond",
+          "raw": "{{baseURL_qolari_P}}/driver/searchRequest/quote/respond",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1879,9 +1879,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/list?limit=1&isActive=true",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/list?limit=1&isActive=true",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -1938,9 +1938,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/arrived/pickup",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/arrived/pickup",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -2061,9 +2061,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/cancel",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/cancel",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -2386,9 +2386,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -2647,7 +2647,7 @@
               "// Dashboard-compatible poll (the CLI retry hook is unavailable here). Driver-pool fires batches",
               "// every ~22s; the freshly-created test driver may miss the first batch. Poll up to ~50s.",
               "function _resolve(u){ return String(u||'').replace(/\\$\\{[^:}]*:?([^}]*)\\}/g,'$1'); }",
-              "function _url(){ return _resolve(pm.environment.get('baseURL_namma_P')) + '/driver/nearbyRideRequest'; }",
+              "function _url(){ return _resolve(pm.environment.get('baseURL_qolari_P')) + '/driver/nearbyRideRequest'; }",
               "function _finish(d){",
               "  if (d && d.searchRequestsForDriver && d.searchRequestsForDriver.length > 0) {",
               "    var req = d.searchRequestsForDriver[0];",
@@ -2687,9 +2687,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/nearbyRideRequest",
+          "raw": "{{baseURL_qolari_P}}/driver/nearbyRideRequest",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -2726,9 +2726,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/searchRequest/quote/respond",
+          "raw": "{{baseURL_qolari_P}}/driver/searchRequest/quote/respond",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -2844,9 +2844,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/list?limit=1&isActive=true",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/list?limit=1&isActive=true",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -2894,9 +2894,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/start",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/start",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -2939,9 +2939,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/end",
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/end",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",

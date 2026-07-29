@@ -1,4 +1,4 @@
-# @name healthcheck
+﻿# @name healthcheck
 
 @empty =
 @clickhouse-kafka = http://localhost:8123
@@ -80,7 +80,7 @@ FORMAT JSON
 
 # @name rideRoute
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/Kochi/ride/{{rideId}}/route
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/Kochi/ride/{{rideId}}/route
 token: {{dashboardToken}}
 
 ###

@@ -1,4 +1,4 @@
-module Lib.Dashcam.Domain.Cautio.Flow where
+﻿module Lib.Dashcam.Domain.Cautio.Flow where
 
 import EulerHS.Types as Euler
 import Kernel.External.Encryption
@@ -13,7 +13,7 @@ import Servant hiding (throwError)
 
 type CautioInstallationStatus =
   "api"
-    :> "namma-yatri"
+    :> "qolari"
     :> "installation-status"
     :> ReqBody '[JSON] Cautio.InstallationStatusReq
     :> Post '[JSON] [Cautio.InstallationRespEntity]

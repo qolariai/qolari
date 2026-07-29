@@ -9,8 +9,8 @@ version:        0.1.0.0
 description:    Internal passetto encryption library — in-process crypto using k8s secret keys, with fallback to passetto HTTP service via USE_PASSETTO_LIB env var.
 homepage:       https://github.com/qolariai/qolari#readme
 bug-reports:    https://github.com/qolariai/qolari/issues
-author:         nammayatri
-maintainer:     nammayatri
+author:         Qolari
+maintainer:     Qolari
 copyright:      2024 Qolari Technologies
 license:        AllRightsReserved
 build-type:     Simple

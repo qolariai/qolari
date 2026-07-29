@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "NY Edit Flow (Destination)",
     "description": "End-to-end mid-ride edit flow",
@@ -60,8 +60,8 @@
           "raw": "{\n    \"mobileNumber\": \"{{_test_driver_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"{{driver_merchant_id}}\",\n    \"merchantOperatingCity\": \"{{city}}\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth"]
         }
       }
@@ -93,8 +93,8 @@
           "raw": "{\n    \"otp\": \"{{login_otp}}\",\n    \"deviceToken\": \"test-device\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth", "{{driver_authId}}", "verify"]
         }
       }
@@ -209,8 +209,8 @@
         ],
         "body": { "mode": "raw", "raw": "" },
         "url": {
-          "raw": "{{baseURL_namma_P}}/plan/18911beb-28ba-456d-8cca-4d019461d2b0/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/plan/18911beb-28ba-456d-8cca-4d019461d2b0/subscribe?serviceName=%22YATRI_SUBSCRIPTION%22",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["plan", "18911beb-28ba-456d-8cca-4d019461d2b0", "subscribe"],
           "query": [{ "key": "serviceName", "value": "%22YATRI_SUBSCRIPTION%22" }]
         }
@@ -279,8 +279,8 @@
         ],
         "body": { "mode": "raw", "raw": "" },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/setActivity?active=true&mode=%22ONLINE%22",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "setActivity"],
           "query": [
             { "key": "active", "value": "true" },
@@ -311,7 +311,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"NAMMA_YATRI\"\n}"
+          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"qolari\"\n}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -548,8 +548,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/nearbyRideRequest",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/nearbyRideRequest",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "nearbyRideRequest"]
         }
       }
@@ -578,8 +578,8 @@
           "raw": "{\"searchTryId\": \"{{searchTryId}}\", \"offeredFare\": null, \"response\": \"Accept\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/searchRequest/quote/respond",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/searchRequest/quote/respond",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "searchRequest", "quote", "respond"]
         }
       }
@@ -687,8 +687,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/list?limit=1&isActive=true",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/ride/list?limit=1&isActive=true",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "ride", "list"],
           "query": [
             { "key": "limit", "value": "1" },
@@ -910,8 +910,8 @@
           "raw": "{\"rideOtp\": \"{{ride_otp}}\", \"point\": {\"lat\": {{new_pickup_lat}}, \"lon\": {{new_pickup_lon}}}}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/start",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/start",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "ride", "{{driver_ride_id}}", "start"]
         }
       }
@@ -1109,8 +1109,8 @@
           "raw": "{\"action\": \"ACCEPT\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/edit/result/{{destBppBurId}}",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/edit/result/{{destBppBurId}}",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["edit", "result", "{{destBppBurId}}"]
         }
       }
@@ -1232,8 +1232,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/list?limit=1&isActive=true",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/ride/list?limit=1&isActive=true",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "ride", "list"],
           "query": [
             { "key": "limit", "value": "1" },
@@ -1275,8 +1275,8 @@
           "raw": "{\"point\": {\"lat\": 12.9816, \"lon\": 77.6512}}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/{{driver_ride_id}}/end",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/ride/{{driver_ride_id}}/end",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "ride", "{{driver_ride_id}}", "end"]
         }
       }
@@ -1314,8 +1314,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/ride/list?limit=5&isActive=false",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/driver/ride/list?limit=5&isActive=false",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["driver", "ride", "list"],
           "query": [
             { "key": "limit", "value": "5" },

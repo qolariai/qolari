@@ -1,10 +1,10 @@
 ﻿name: mock-payment
 version: 0.1.0.0
-github: "nammayatri/nammayatri"
+github: "Qolari/Qolari"
 license: AllRightsReserved
-author: "nammayatri"
-maintainer: "nammayatri"
-copyright: "2024 Juspay Technologies Private Limited"
+author: "Qolari"
+maintainer: "Qolari"
+copyright: "2024 Qolari Technologies"
 
 flags:
   Local:

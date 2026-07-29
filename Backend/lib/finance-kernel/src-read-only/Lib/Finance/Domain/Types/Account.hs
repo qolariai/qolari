@@ -1,4 +1,4 @@
-{-# LANGUAGE ApplicativeDo #-}
+﻿{-# LANGUAGE ApplicativeDo #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Lib.Finance.Domain.Types.Account where
@@ -38,8 +38,8 @@ data CounterpartyType
   | GOVERNMENT_DIRECT
   | GOVERNMENT_INDIRECT
   | AIRPORT
-  | PG_PAYMENT_JUSPAY
-  | PG_PAYOUT_JUSPAY
+  | PG_PAYMENT_Qolari
+  | PG_PAYOUT_Qolari
   | RIDER
   | LOYALTY_WALLET
   deriving (Eq, Ord, Show, Read, Generic, ToJSON, FromJSON, ToSchema, ToParamSchema)

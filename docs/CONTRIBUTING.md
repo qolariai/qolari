@@ -1,8 +1,8 @@
-# Contributing to Namma Yatri
+﻿# Contributing to Qolari
 
 ## Code of Conduct
 
-The nammayatri project adheres to the [Code of Conduct][coc].
+The Qolari project adheres to the [Code of Conduct][coc].
 This describes the _minimum_ behavior expected from all contributors.
 
 [coc]: https://haskell.foundation/guidelines-for-respectful-communication/
@@ -14,8 +14,8 @@ Please use Github issues only for reporting bugs and detailed feature requests. 
 For any issue, there are fundamentally three ways an individual can contribute:
 
 1. By opening the issue for discussion: For instance, if you believe that you
-   have discovered a bug in nammayatri, creating a new issue in [the
-   nammayatri/nammayatri issue tracker][issue] is the way to report it.
+   have discovered a bug in Qolari, creating a new issue in [the
+   Qolari/Qolari issue tracker][issue] is the way to report it.
 
 2. By helping to triage the issue: This can be done by providing supporting
    details (a test case that demonstrates a bug), providing suggestions on how
@@ -24,9 +24,9 @@ For any issue, there are fundamentally three ways an individual can contribute:
 3. By helping to resolve the issue: Typically this is done either in the form of
    demonstrating that the issue reported is not a problem after all, or more
    often, by opening a Pull Request that changes some bit of something in
-   nammayatri in a concrete and reviewable manner.
+   Qolari in a concrete and reviewable manner.
 
-[issue]: https://github.com/nammayatri/nammayatri/issues
+[issue]: https://github.com/Qolari/Qolari/issues
 
 
 ### Asking for General Help
@@ -37,11 +37,11 @@ having problems, you can [open a discussion] asking for help.
 In exchange for receiving help, we ask that you contribute back a documentation
 PR that helps others avoid the problems that you encountered.
 
-[open a discussion]: https://github.com/nammayatri/nammayatri/discussions/new
+[open a discussion]: https://github.com/Qolari/Qolari/discussions/new
 
 ### Submitting a Bug Report
 
-When opening a new issue in the nammayatri issue tracker, you will be presented
+When opening a new issue in the Qolari issue tracker, you will be presented
 with a basic template that should be filled in.
 If you believe that you have uncovered a bug, please fill out this form,
 following the template to the best of your ability.
@@ -83,7 +83,7 @@ In the majority of cases, issues are resolved by opening a Pull Request.
 The process for opening and reviewing a Pull Request is similar to that of
 opening and triaging issues, but carries with it a necessary review and approval
 workflow that ensures that the proposed changes meet the minimal quality and
-functional guidelines of the nammayatri project.
+functional guidelines of the Qolari project.
 
 ### Commit message convention
 Try to create commits with smaller changes that are correct and compile. This
@@ -177,9 +177,9 @@ Request page.
 
 ## Reviewing Pull Requests
 
-**Any nammayatri community member is welcome to review any pull request**.
+**Any Qolari community member is welcome to review any pull request**.
 
-All nammayatri contributors who choose to review and provide feedback on Pull
+All Qolari contributors who choose to review and provide feedback on Pull
 Requests have a responsibility to both the project and the individual making the
 contribution.
 Reviews and feedback must be helpful, insightful, and geared towards improving
@@ -210,9 +210,9 @@ Do not succumb to that temptation.
 
 Focus first on the most significant aspects of the change:
 
-1. Does this change make sense for nammayatri?
+1. Does this change make sense for Qolari?
    Does this change cover all points as mentioned in the Github issue?
-2. Does this change make nammayatri better, even if only incrementally?
+2. Does this change make Qolari better, even if only incrementally?
 3. Are there clear bugs or larger scale issues that need attending to?
 4. Is the commit message readable and correct?
    If it contains a breaking change is it clear enough?
@@ -231,7 +231,7 @@ The first impression you give to a new contributor never does.
 
 Nits (requests for small changes that are not essential) are fine, but try to
 avoid stalling the Pull Request.
-Most nits can typically be fixed by the nammayatri collaborator landing the
+Most nits can typically be fixed by the Qolari collaborator landing the
 Pull Request but they can also be an opportunity for the contributor to learn a
 bit more about the project.
 
@@ -246,8 +246,8 @@ with the appropriate reason to keep the conversation flow concise and relevant.
 
 Be aware that _how_ you communicate requests and reviews in your feedback can
 have a significant impact on the success of the Pull Request.
-Yes, we may land a particular change that makes nammayatri better, but the
-individual might just not want to have anything to do with nammayatri ever
+Yes, we may land a particular change that makes Qolari better, but the
+individual might just not want to have anything to do with Qolari ever
 again.
 The goal is not just having good code.
 
@@ -269,6 +269,6 @@ _Adapted from the [Node.js contributing guide][node]_.
 <br>
 <hr>
 
-_Many of the convention/guidelines are adapted from [juspay/hyperswitch][juspay/hyperswitch]_.
+_Many of the convention/guidelines are adapted from [Qolari/hyperswitch][Qolari/hyperswitch]_.
 
-[juspay/hyperswitch]: https://github.com/juspay/hyperswitch/blob/main/docs/CONTRIBUTING.md
+[Qolari/hyperswitch]: https://github.com/qolariai/hyperswitch/blob/main/docs/CONTRIBUTING.md

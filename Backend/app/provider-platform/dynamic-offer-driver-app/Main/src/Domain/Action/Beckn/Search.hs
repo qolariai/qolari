@@ -149,7 +149,7 @@ data DSearchReq = DSearchReq
     device :: Maybe Text,
     stops :: [DSearchReqLocation],
     customerLanguage :: Maybe Maps.Language,
-    customerNammaTags :: Maybe [LYT.TagNameValue],
+    customerQolariTags :: Maybe [LYT.TagNameValue],
     isReallocationEnabled :: Maybe Bool,
     isMeterRideSearch :: Maybe Bool,
     fareParametersInRateCard :: Maybe Bool,
@@ -349,7 +349,7 @@ handler ValidatedDSearchReq {..} sReq = do
   triggerSearchEvent SearchEventData {searchRequest = searchReq, merchantId = merchantId'}
   void $ QSR.createDSReq searchReq
 
-  fork "Add Namma Tags" $ do
+  fork "Add Qolari Tags" $ do
     let tagData =
           Y.TagData
             { searchRequest = searchReq,
@@ -357,7 +357,7 @@ handler ValidatedDSearchReq {..} sReq = do
               specialLocationTag = spcllocationTag,
               specialLocationName = allFarePoliciesProduct.specialLocationName
             }
-    addNammaTags tagData
+    addQolariTags tagData
   fork "Updating Demand Hotspots on search" $ do
     DemandHotspots.updateDemandHotspotsOnSearch searchReq.id merchantOpCityId transporterConfig sReq.pickupLocation
 
@@ -498,9 +498,9 @@ handler ValidatedDSearchReq {..} sReq = do
                   maxAllowed = min (min det.maxAdditionalKmsLimit.getKilometers includedKm) (det.totalAdditionalKmsLimit.getKilometers - includedKm)
                in distInKm - includedKm <= maxAllowed
 
-    addNammaTags :: Y.TagData -> Flow ()
-    addNammaTags tagData = do
-      newSearchTags <- withTryCatch "computeNammaTags:Search" (LYDL.computeNammaTagsWithDebugLog LYDL.Driver (cast tagData.searchRequest.merchantOperatingCityId) Yudhishthira.Search (Just tagData.searchRequest.transactionId) tagData)
+    addQolariTags :: Y.TagData -> Flow ()
+    addQolariTags tagData = do
+      newSearchTags <- withTryCatch "computeQolariTags:Search" (LYDL.computeQolariTagsWithDebugLog LYDL.Driver (cast tagData.searchRequest.merchantOperatingCityId) Yudhishthira.Search (Just tagData.searchRequest.transactionId) tagData)
       let tags = tagData.searchRequest.searchTags <> eitherToMaybe newSearchTags
       QSR.updateSearchTags tags tagData.searchRequest.id
 
@@ -784,7 +784,7 @@ buildQuote merchantOpCityId searchRequest transporterId pickupTime isScheduled r
   quoteId <- Id <$> generateGUID
   void $ cacheFarePolicyByQuoteId quoteId.getId fullFarePolicy
   now <- getCurrentTime
-  -- Keeping quote expiry as search request expiry. Slack discussion: https://juspay.slack.com/archives/C0139KHBFU1/p1683349807003679
+  -- Keeping quote expiry as search request expiry. Slack discussion: https://Qolari.slack.com/archives/C0139KHBFU1/p1683349807003679
   searchRequestExpirationSeconds <- asks (.searchRequestExpirationSeconds)
   let validTill = searchRequestExpirationSeconds `addUTCTime` now
       estimatedFinishTime = (\duration -> fromIntegral duration `addUTCTime` now) <$> mbDuration

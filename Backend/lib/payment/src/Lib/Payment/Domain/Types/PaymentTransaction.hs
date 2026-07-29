@@ -41,7 +41,7 @@ data PaymentTransaction = PaymentTransaction
     dateCreated :: Maybe UTCTime,
     statusId :: Int,
     status :: Payment.TransactionStatus,
-    juspayResponse :: Maybe Text, -- webhook resp dump
+    QolariResponse :: Maybe Text, -- webhook resp dump
     mandateStatus :: Maybe Payment.MandateStatus,
     mandateStartDate :: Maybe UTCTime,
     mandateEndDate :: Maybe UTCTime,

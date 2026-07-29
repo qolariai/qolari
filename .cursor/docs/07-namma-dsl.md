@@ -1,8 +1,8 @@
-# NammaDSL Code Generation
+﻿# QolariDSL Code Generation
 
 ## Overview
 
-NammaDSL uses YAML specification files as the source of truth for APIs and database schemas. The generator (`alchemist` package) produces Haskell code from these specs.
+QolariDSL uses YAML specification files as the source of truth for APIs and database schemas. The generator (`alchemist` package) produces Haskell code from these specs.
 
 **Generator source**: `app/alchemist/` (package: `alchemist`)
 **Documentation**: `app/alchemist/README.md`

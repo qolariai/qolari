@@ -1,5 +1,5 @@
--- Seed an operation hub for the OperationHubFlow integration tests
--- (NAMMA_YATRI_PARTNER / Bangalore)
+﻿-- Seed an operation hub for the OperationHubFlow integration tests
+-- (QOLARI_PARTNER / Bangalore)
 --
 -- Usage:
 --   psql -h localhost -p 5434 -U atlas_driver_offer_bpp_user -d atlas_dev -f setup-local-operation-hub.sql
@@ -18,7 +18,7 @@ SELECT
   now(),
   now()
 FROM atlas_driver_offer_bpp.merchant_operating_city moc
-WHERE moc.merchant_short_id = 'NAMMA_YATRI_PARTNER'
+WHERE moc.merchant_short_id = 'QOLARI_PARTNER'
   AND moc.city = 'Bangalore'
 ON CONFLICT (id) DO NOTHING;
 

@@ -1,4 +1,4 @@
-# International Onboarding Collections
+﻿# International Onboarding Collections
 
 End-to-end onboarding for the **BRIDGE_*/* international deployments** (Helsinki
 is the reference city). Consolidates the four-file `HelsinkiOnboarding/` layout
@@ -11,7 +11,7 @@ model (`verified` · `approved` · `enabled` · `blocked` + sticky
 
 | # | File | Persona | Ends with |
 |---|---|---|---|
-| 01 | `01-FleetOwnerOnboarding.json` | Fleet owner (self-onboards, 4 FLEET_BUSINESS docs) | fleet verified + approved + enabled by JUSPAY_ADMIN doc-approve |
+| 01 | `01-FleetOwnerOnboarding.json` | Fleet owner (self-onboards, 4 FLEET_BUSINESS docs) | fleet verified + approved + enabled by Qolari_ADMIN doc-approve |
 | 02 | `02-AddDriver.json` | Fleet owner adds a driver (driver-app OTP path) | driver profile created, onboardingAs=INDIVIDUAL until vehicle-link |
 | 03 | `03-AddVehicle.json` | Fleet owner adds a vehicle to the driver | driver onboardingAs=FLEET_DRIVER (via addVehicle?fleetOwnerId), VRC verified+approved, driver enabled |
 
@@ -29,7 +29,7 @@ Same as `HelsinkiOnboarding/`:
    payment methods.
 2. **Local-testing-data seeds** — re-run `provider-dashboard.sql` /
    `rider-dashboard.sql` after any `test-context-api` restart. Grants the
-   `local-admin-token-bangalore-namma-yatri` dev token cross-merchant access
+   `local-admin-token-bangalore-qolari` dev token cross-merchant access
    to BRIDGE_FINLAND_PARTNER.
 3. **Helsinki feature migrations** (already-existing SQLs, run once per
    fresh DB): `0001-helsinki-online-payment-offers`,

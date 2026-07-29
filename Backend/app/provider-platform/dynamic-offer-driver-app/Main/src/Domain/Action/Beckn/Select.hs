@@ -100,7 +100,7 @@ handler merchant sReq searchReq estimates = do
             { isPetRide = sReq.isPetRide
             -- ,estimates = estimates uncomment this line if you want to use estimates in select tag data
             }
-    addNammaTags tagData searchReq
+    addQolariTags tagData searchReq
   tripQuoteDetails <-
     estimates `forM` \estimate -> do
       QDQ.setInactiveAllDQByEstId estimate.id now
@@ -172,8 +172,8 @@ validateRequest merchantId sReq = do
       searchReq <- QSR.findById estimate.requestId >>= fromMaybeM (SearchRequestNotFound estimate.requestId.getId)
       return (merchant, searchReq, [estimate] <> xs)
 
-addNammaTags :: Y.SelectTagData -> DSR.SearchRequest -> Flow ()
-addNammaTags tagData sReq = do
-  newSearchTags <- withTryCatch "computeNammaTags:Select" (LYDL.computeNammaTagsWithDebugLog LYDL.Driver (cast sReq.merchantOperatingCityId) Yudhishthira.Select (Just sReq.transactionId) tagData)
+addQolariTags :: Y.SelectTagData -> DSR.SearchRequest -> Flow ()
+addQolariTags tagData sReq = do
+  newSearchTags <- withTryCatch "computeQolariTags:Select" (LYDL.computeQolariTagsWithDebugLog LYDL.Driver (cast sReq.merchantOperatingCityId) Yudhishthira.Select (Just sReq.transactionId) tagData)
   let tags = sReq.searchTags <> eitherToMaybe newSearchTags
   QSR.updateSearchTags tags sReq.id

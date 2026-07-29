@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+﻿import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './CollectionRunner.css';
 import {
   CollectionGroup, CollectionEnvironment, CollectionSuite,
@@ -25,7 +25,7 @@ const INTERNATIONAL_CITIES = ['Helsinki', 'Amsterdam'];
 
 // Unified post-step grace. Logs and mock-hits captures start together before
 // the step runs and close together after `done()` + this many milliseconds.
-// Long enough to catch BPP-side async fan-out (confirm → juspay session,
+// Long enough to catch BPP-side async fan-out (confirm → Qolari session,
 // allocator scheduling, rider-app forks); short enough not to dominate step
 // latency.
 const STEP_CAPTURE_GRACE_MS = 1000;
@@ -41,7 +41,7 @@ const MOCK_HITS_HANDSHAKE_TIMEOUT_MS = 500;
 
 // Default inter-step wait. Even with per-step capture grace, fast steps can
 // finish before the backend's async fan-out (beckn callbacks, allocator,
-// juspay session creation triggered by confirm) settles. This wait gives the
+// Qolari session creation triggered by confirm) settles. This wait gives the
 // previous step's tail / SSE one extra beat to drain before the next step
 // tears the tail down. Visible in collection logs as `[wait] 2s …`.
 const INTER_STEP_WAIT_MS = 2000;
@@ -545,7 +545,7 @@ export const CollectionRunner: React.FC<Props> = ({ onLog }) => {
 
       const start = performance.now();
       // Open service-log tail + mock-hits stream together BEFORE the step so
-      // they capture async fan-out (beckn callbacks, BPP juspay session,
+      // they capture async fan-out (beckn callbacks, BPP Qolari session,
       // rider-app forks) that lands after the HTTP response.
       const capture = await startStepCapture(selectedEnvType);
       const result = await callPostmanStep(step, storesRef.current, stepFilesRef.current[step.id]);

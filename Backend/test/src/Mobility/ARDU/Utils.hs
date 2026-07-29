@@ -145,8 +145,8 @@ resetDriver driver = runARDUFlow "" $ do
     TDQ.setInactiveBySTId activeQuote.searchTryId
   let newFlowStatus = DDriverMode.getDriverFlowStatus (Just TDrInfo.OFFLINE) False
   transporterConfig <-
-    SCTC.findByMerchantOpCityId Fixtures.nammaYatriPartnerMerchantOperatingCityId Nothing
-      >>= fromMaybeM (TransporterConfigNotFound Fixtures.nammaYatriPartnerMerchantOperatingCityId.getId)
+    SCTC.findByMerchantOpCityId Fixtures.QolariPartnerMerchantOperatingCityId Nothing
+      >>= fromMaybeM (TransporterConfigNotFound Fixtures.QolariPartnerMerchantOperatingCityId.getId)
   driverInfo <- QDI.findById (cast driver.driverId) >>= fromMaybeM DriverInfoNotFound
   DDriverMode.updateDriverModeAndFlowStatus (cast driver.driverId) transporterConfig False (Just TDrInfo.OFFLINE) newFlowStatus driverInfo Nothing Nothing
   QTDrInfo.updateOnRide False (cast driver.driverId)
@@ -373,9 +373,9 @@ search'Confirm appToken driver searchReq' = do
 changeCachedMapsConfig :: Maps.MapsServiceConfig -> IO ()
 changeCachedMapsConfig googleCfg = runARDUFlow "change cached maps config" $ do
   let serviceConfig = TDMSC.MapsServiceConfig googleCfg
-  nammaYatriPartnerServiceConfig <- TDMSC.buildMerchantServiceConfig Fixtures.nammaYatriPartnerMerchantId serviceConfig (Id "mobility-opcity")
+  QolariPartnerServiceConfig <- TDMSC.buildMerchantServiceConfig Fixtures.QolariPartnerMerchantId serviceConfig (Id "mobility-opcity")
   otherMerchant2ServiceConfig <- TDMSC.buildMerchantServiceConfig Fixtures.otherMerchant2Id serviceConfig (Id "mobility-opcity")
-  TCQMSC.cacheMerchantServiceConfig "mobility-opcity" nammaYatriPartnerServiceConfig
+  TCQMSC.cacheMerchantServiceConfig "mobility-opcity" QolariPartnerServiceConfig
   TCQMSC.cacheMerchantServiceConfig "mobility-opcity" otherMerchant2ServiceConfig
 
 clearCachedMapsConfig :: IO ()

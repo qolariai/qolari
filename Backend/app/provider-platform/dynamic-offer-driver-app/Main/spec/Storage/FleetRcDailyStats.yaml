@@ -1,9 +1,9 @@
-imports:
+﻿imports:
   Merchant: Domain.Types.Merchant
   MerchantOperatingCity: Domain.Types.MerchantOperatingCity
   UTCTime: Kernel.Prelude
   Money: Kernel.Types.Common
-  PayoutOrderStatus: Kernel.External.Payout.Juspay.Types.Payout
+  PayoutOrderStatus: Kernel.External.Payout.Qolari.Types.Payout
   Person: Domain.Types.Person
 
 FleetRcDailyStats:

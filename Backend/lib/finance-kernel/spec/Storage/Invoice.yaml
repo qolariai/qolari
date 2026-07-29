@@ -1,5 +1,5 @@
-# Finance Kernel - Invoice & Invoice Ledger Link Tables
-# Namma-DSL YAML specification
+﻿# Finance Kernel - Invoice & Invoice Ledger Link Tables
+# qolari-dsl YAML specification
 
 imports:
   UTCTime: Kernel.Prelude

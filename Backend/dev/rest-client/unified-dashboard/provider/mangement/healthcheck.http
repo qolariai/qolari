@@ -1,4 +1,4 @@
-
+﻿
 @unified-dashboard-admin = unified-dashboard-admin
 @driver-offer-bpp-host = http://localhost:8016
 @unified-dashboard-helper-token = unified-dashboard-admin
@@ -7,12 +7,12 @@
 ###
 
 # @name healthCheck
-GET {{unified-dashboard-host}}/dashboard/NAMMA_YATRI/KOCHI/provider/management/healthCheck/test
+GET {{unified-dashboard-host}}/dashboard/qolari/KOCHI/provider/management/healthCheck/test
 token: {{unified-dashboard-admin}}}
 
 ###
 
 # @name healthCheckHelper
 
-GET {{driver-offer-bpp-host}}/unified-dashboard/NAMMA_YATRI/KOCHI/management/healthCheck/test
+GET {{driver-offer-bpp-host}}/unified-dashboard/qolari/KOCHI/management/healthCheck/test
 token: {{unified-dashboard-helper-token}}

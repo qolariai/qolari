@@ -1,4 +1,4 @@
-module Storage.Queries.PersonExtra where
+﻿module Storage.Queries.PersonExtra where
 
 import Control.Applicative ((<|>))
 import qualified Data.Time as T
@@ -333,8 +333,8 @@ findCityInfoById personId = do
   person <- findByPId personId
   case person of
     Nothing -> pure Nothing
-    Just Person {id = pid, currentCity = city, merchantOperatingCityId = mocId, customerNammaTags = tags} ->
-      pure $ Just $ PersonCityInformation {personId = pid, currentCity = city, merchantOperatingCityId = mocId, customerNammaTags = tags}
+    Just Person {id = pid, currentCity = city, merchantOperatingCityId = mocId, customerQolariTags = tags} ->
+      pure $ Just $ PersonCityInformation {personId = pid, currentCity = city, merchantOperatingCityId = mocId, customerQolariTags = tags}
 
 updateEmergencyInfo ::
   (MonadFlow m, EsqDBFlow m r) =>

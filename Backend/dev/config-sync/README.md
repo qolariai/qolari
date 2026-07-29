@@ -1,6 +1,6 @@
-# Config Sync
+﻿# Config Sync
 
-Three-phase, file-based config transfer between Nammayatri environments
+Three-phase, file-based config transfer between Qolari environments
 (`prod`, `prod_international`, `master`, `env` → `local`/`master`).
 
 The whole workflow is driven by `config_transfer.py`:

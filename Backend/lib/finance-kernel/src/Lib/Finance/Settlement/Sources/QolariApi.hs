@@ -1,22 +1,22 @@
-{-# LANGUAGE OverloadedStrings #-}
+﻿{-# LANGUAGE OverloadedStrings #-}
 
--- | Fetches the Juspay portal transaction-export CSV directly via
+-- | Fetches the Qolari portal transaction-export CSV directly via
 -- @<portalBaseUrl>/api/q/download@.
 --
 -- Unlike SFTP/Email sources this doesn't rely on the PG pushing a settlement
 -- file — it pulls the portal's own transaction dashboard export, scoped to
 -- one IST day at a time. Auth is an OAuth Bearer token stored encrypted in
--- 'JuspayApiConfig'; the token has a ~90 day expiry and must be rotated
+-- 'QolariApiConfig'; the token has a ~90 day expiry and must be rotated
 -- manually. A 401/403 (or an HTML response, which the portal returns on
 -- auth failure) surfaces as a @Left@ so the job logs and re-schedules
 -- rather than silently ingesting garbage.
 --
 -- Dedup mirrors the SFTP model: a synthetic per-day filename
--- @juspay_portal_YYYY-MM-DD.csv@ is tracked in @settlement_file_info@.
+-- @Qolari_portal_YYYY-MM-DD.csv@ is tracked in @settlement_file_info@.
 -- A COMPLETED row for today's window short-circuits the fetch to an empty
 -- CSV (0 rows ingested, no meta); a PENDING row is reused so partial
 -- failures re-run against the same tracker id.
-module Lib.Finance.Settlement.Sources.JuspayApi
+module Lib.Finance.Settlement.Sources.QolariApi
   ( fetchSettlementFile,
     yesterdayIstUtcBounds,
     buildQueryPayload,
@@ -40,7 +40,7 @@ import Data.Time
     utcToLocalTime,
   )
 import Kernel.External.Encryption
-import Kernel.External.Settlement.Types (JuspayApiConfig (..))
+import Kernel.External.Settlement.Types (QolariApiConfig (..))
 import Kernel.Prelude
 import Kernel.Types.Id (Id (..))
 import Kernel.Utils.Common (generateGUID, getCurrentTime, logInfo)
@@ -62,13 +62,13 @@ fetchSettlementFile ::
   Text ->
   Text ->
   Text ->
-  JuspayApiConfig ->
+  QolariApiConfig ->
   m (Either Text (LBS.ByteString, Maybe SftpFetchMeta))
 fetchSettlementFile merchantId merchantOperatingCityId paymentGatewayName config = do
   now <- getCurrentTime
   let (startUtc, endUtc) = yesterdayIstUtcBounds now
       dayLabel = formatTime defaultTimeLocale "%Y-%m-%d" startUtc
-      trackerFileName = T.pack $ "juspay_portal_" <> dayLabel <> ".csv"
+      trackerFileName = T.pack $ "Qolari_portal_" <> dayLabel <> ".csv"
   mbExisting <-
     QSFI.findByMerchantCityGatewayAndFileName
       merchantId
@@ -78,7 +78,7 @@ fetchSettlementFile merchantId merchantOperatingCityId paymentGatewayName config
   case mbExisting of
     Just row | row.status == COMPLETED -> do
       logInfo $
-        "JuspayApi.fetchSettlementFile: window already COMPLETED, skipping. "
+        "QolariApi.fetchSettlementFile: window already COMPLETED, skipping. "
           <> "fileName="
           <> trackerFileName
           <> " trackedFileId="
@@ -86,7 +86,7 @@ fetchSettlementFile merchantId merchantOperatingCityId paymentGatewayName config
       pure $ Right ("", Nothing)
     Just row -> do
       logInfo $
-        "JuspayApi.fetchSettlementFile: reusing PENDING tracker "
+        "QolariApi.fetchSettlementFile: reusing PENDING tracker "
           <> "fileName="
           <> trackerFileName
           <> " trackedFileId="
@@ -111,7 +111,7 @@ fetchSettlementFile merchantId merchantOperatingCityId paymentGatewayName config
               }
       QSFI.create row
       logInfo $
-        "JuspayApi.fetchSettlementFile: created new tracker "
+        "QolariApi.fetchSettlementFile: created new tracker "
           <> "fileName="
           <> trackerFileName
           <> " trackedFileId="
@@ -120,7 +120,7 @@ fetchSettlementFile merchantId merchantOperatingCityId paymentGatewayName config
 
 pullAndReturn ::
   (EncFlow m r, MonadIO m) =>
-  JuspayApiConfig ->
+  QolariApiConfig ->
   UTCTime ->
   UTCTime ->
   Id SettlementFileInfo ->
@@ -141,15 +141,15 @@ pullAndReturn config startUtc endUtc trackedFileId = do
 
 pullPortalCsv ::
   (EncFlow m r, MonadIO m) =>
-  JuspayApiConfig ->
+  QolariApiConfig ->
   UTCTime ->
   UTCTime ->
   m (Either Text LBS.ByteString)
 pullPortalCsv config startUtc endUtc = do
   token <- decrypt config.oauthToken
-  let queryJson = buildQueryPayload config.juspayMerchantId startUtc endUtc
+  let queryJson = buildQueryPayload config.QolariMerchantId startUtc endUtc
       filenameHint =
-        "juspay_portal_" <> formatTime defaultTimeLocale "%Y-%m-%d" startUtc <> ".csv"
+        "Qolari_portal_" <> formatTime defaultTimeLocale "%Y-%m-%d" startUtc <> ".csv"
       baseUrlStr = T.unpack (showBaseUrl config.portalBaseUrl)
       url = baseUrlStr <> "/api/q/download"
       ua =
@@ -188,7 +188,7 @@ pullPortalCsv config startUtc endUtc = do
     ExitFailure code ->
       pure $
         Left $
-          "Juspay portal /api/q/download failed (curl exit " <> T.pack (P.show code) <> "): "
+          "Qolari portal /api/q/download failed (curl exit " <> T.pack (P.show code) <> "): "
             <> T.pack stderr
     ExitSuccess -> do
       let bodyBs = LBSC.pack stdout
@@ -196,7 +196,7 @@ pullPortalCsv config startUtc endUtc = do
         then
           pure $
             Left
-              "Juspay portal returned HTML instead of CSV — likely expired OAuth token (JuspayApiConfig.oauthToken)"
+              "Qolari portal returned HTML instead of CSV — likely expired OAuth token (QolariApiConfig.oauthToken)"
         else pure $ Right bodyBs
 
 -- | Portal auth failures return an HTML login page with 200 OK. Detect by
@@ -233,7 +233,7 @@ yesterdayIstUtcBounds now =
 -- Column set covers what the portal parser currently reads; extend the
 -- @metrics@ list here if the parser starts consuming additional columns.
 buildQueryPayload :: Text -> UTCTime -> UTCTime -> A.Value
-buildQueryPayload juspayMerchantId startUtc endUtc =
+buildQueryPayload QolariMerchantId startUtc endUtc =
   A.object
     [ "metrics" A..= metrics,
       "domain" A..= ("txn" :: Text),
@@ -246,7 +246,7 @@ buildQueryPayload juspayMerchantId startUtc endUtc =
         A..= A.object
           [ "field" A..= ("merchant_id" :: Text),
             "condition" A..= ("In" :: Text),
-            "val" A..= [juspayMerchantId]
+            "val" A..= [QolariMerchantId]
           ],
       "with"
         A..= [ istColumn "txn_last_modified",
@@ -262,7 +262,7 @@ buildQueryPayload juspayMerchantId startUtc endUtc =
     metricNames =
       [ "order_id",
         "txn_uuid",
-        "juspay_txn_id",
+        "Qolari_txn_id",
         "epg_txn_id",
         "rrn",
         "amount",

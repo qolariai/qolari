@@ -57,7 +57,7 @@ cachePersonCityInfo :: (CacheFlow m r, MonadFlow m) => PersonCityInformation -> 
 cachePersonCityInfo personCityInfo = do
   expTime <- fromIntegral <$> asks (.cacheConfig.configsExpTime)
   let idKey = makeIdKey personCityInfo.personId
-      tagsNubbed = (personCityInfo {customerNammaTags = nub <$> personCityInfo.customerNammaTags} :: PersonCityInformation)
+      tagsNubbed = (personCityInfo {customerQolariTags = nub <$> personCityInfo.customerQolariTags} :: PersonCityInformation)
   Hedis.setExp idKey tagsNubbed expTime
 
 clearCityInfoCache :: (CacheFlow m r, MonadFlow m) => Id Person -> m ()

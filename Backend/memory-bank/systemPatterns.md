@@ -1,4 +1,4 @@
-# System Patterns & Architecture
+﻿# System Patterns & Architecture
 
 ## Overall Architecture
 
@@ -104,7 +104,7 @@ The system follows a sophisticated microservices pattern with clear domain bound
 - **beckn-services**: Common BECKN service logic and utilities
 - **shared-services**: URL shortener, issue management, registry services
 - **location-updates**: Real-time tracking with geospatial calculations
-- **payment**: Juspay payment gateway abstractions
+- **payment**: Qolari payment gateway abstractions
 - **scheduler**: Redis-based job scheduling system
 - **producer**: Kafka event production services
 - **yudhishthira**: Decision engine for business rules
@@ -115,7 +115,7 @@ The system follows a sophisticated microservices pattern with clear domain bound
 - **Cache**: Redis (single + cluster) for sessions, location data
 - **Message Queue**: Kafka with multiple topics (location-updates, broadcast-messages)
 - **Maps**: OSRM for routing, snap-to-road, geospatial calculations
-- **Payments**: Juspay (payment + payout), multiple webhook integrations
+- **Payments**: Qolari (payment + payout), multiple webhook integrations
 - **Verification**: Idfy, HyperVerge for document verification
 - **Communication**: SMS services, FCM notifications, Exophone calls
 - **Storage**: S3 for file uploads and document storage
@@ -173,7 +173,7 @@ The system follows a sophisticated microservices pattern with clear domain bound
 ## Detailed System Patterns
 
 ### 1. System Architecture Overview
-The Namma Yatri backend is structured as a collection of microservices/packages, primarily written in Haskell. It appears to be event-driven, utilizing Kafka for message consumption. The architecture separates concerns into rider platform, provider platform, dashboards, Kafka consumers, mocks, and utility services.
+The Qolari backend is structured as a collection of microservices/packages, primarily written in Haskell. It appears to be event-driven, utilizing Kafka for message consumption. The architecture separates concerns into rider platform, provider platform, dashboards, Kafka consumers, mocks, and utility services.
 The frontend consists of UI components for customers (riders) and drivers, likely interacting with the backend via APIs. Mobile applications are native Android and iOS.
 Nix is used for overall environment and build management, suggesting a focus on reproducible builds and dependency management.
 

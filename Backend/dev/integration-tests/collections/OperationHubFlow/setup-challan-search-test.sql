@@ -1,4 +1,4 @@
--- Seed ChallanSearch_Signzy merchant service config for integration tests.
+﻿-- Seed ChallanSearch_Signzy merchant service config for integration tests.
 -- Points to the local mock server at localhost:8080/signzy.
 --
 -- Usage:
@@ -19,7 +19,7 @@ SELECT
   now(),
   now()
 FROM atlas_driver_offer_bpp.merchant_operating_city moc
-WHERE moc.merchant_short_id = 'NAMMA_YATRI_PARTNER'
+WHERE moc.merchant_short_id = 'QOLARI_PARTNER'
   AND moc.city = 'Bangalore'
 ON CONFLICT (id) DO NOTHING;
 
@@ -35,7 +35,7 @@ SELECT
   now(),
   now()
 FROM atlas_driver_offer_bpp.merchant_operating_city moc
-WHERE moc.merchant_short_id = 'NAMMA_YATRI_PARTNER'
+WHERE moc.merchant_short_id = 'QOLARI_PARTNER'
   AND moc.city = 'Bangalore'
 ON CONFLICT (service_name, merchant_operating_city_id) DO UPDATE
   SET config_json = EXCLUDED.config_json,
@@ -47,7 +47,7 @@ ON CONFLICT (service_name, merchant_operating_city_id) DO UPDATE
 UPDATE atlas_driver_offer_bpp.merchant_service_usage_config muc
 SET challan_providers_priority_list = '{Signzy}', updated_at = now()
 FROM atlas_driver_offer_bpp.merchant_operating_city moc
-WHERE moc.merchant_short_id = 'NAMMA_YATRI_PARTNER'
+WHERE moc.merchant_short_id = 'QOLARI_PARTNER'
   AND moc.city = 'Bangalore'
   AND muc.merchant_operating_city_id = moc.id;
 

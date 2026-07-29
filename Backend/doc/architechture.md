@@ -1,10 +1,10 @@
-# Architecture
+﻿# Architecture
 There are few layers in this project
 
 ## Product layer
 Product layer is the topmost layer, all endpoints and business logic belongs to it. Endpoints return type `FlowHandler` which you can construct with `withFlowHandlerBecknAPI` and `withFlowHandlerAPI`. For the distinction between these two see [Error handling](./error-handling.md)
 
-Under the hood we use [EulerHS](https://github.com/juspay/euler-hs/src/master/)' `Flow` type. But all of our code in this layer is written polymorphically in `m` with some constraints. These constraints can be:
+Under the hood we use [EulerHS](https://github.com/qolariai/euler-hs/src/master/)' `Flow` type. But all of our code in this layer is written polymorphically in `m` with some constraints. These constraints can be:
 * `MonadReader r m` is used for accessing environment. Each app has different environment, all of the library function should work in any environment. To constraint an environment currently we use `HasField` and our custom `HasFields`.
 * `Log` is an mtl-style logging interface
 * EulerHS' `MonadFlow` is an interface for EulerHS' `Flow` type

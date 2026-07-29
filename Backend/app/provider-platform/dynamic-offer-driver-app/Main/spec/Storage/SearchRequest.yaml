@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   Merchant: Domain.Types.Merchant
   MerchantOperatingCity: Domain.Types.MerchantOperatingCity
   RiderDetails: Domain.Types.RiderDetails
@@ -76,7 +76,7 @@ SearchRequest:
     roundTrip: Maybe Bool
     isAdvanceBookingEnabled: Bool
     isDashboardRequest: Bool
-    customerNammaTags: "Maybe [TagNameValue]"
+    customerQolariTags: "Maybe [TagNameValue]"
     searchTags: "Maybe [TagNameValue]"
     startTime: UTCTime
     createdAt: UTCTime
@@ -108,7 +108,7 @@ SearchRequest:
     distanceUnit: Maybe DistanceUnit
     isDashboardRequest: Maybe Bool
     configInExperimentVersions: Maybe Value
-    customerNammaTags: "Maybe [Text]"
+    customerQolariTags: "Maybe [Text]"
     searchTags: "Maybe [Text]"
     preferSafetyPlus: Maybe Bool
     userBundleVersion: Maybe Text
@@ -144,7 +144,7 @@ SearchRequest:
     distanceUnit: Kernel.Prelude.Just|I
     isDashboardRequest: Just isDashboardRequest|E
     configInExperimentVersions: Just $ toJSON configInExperimentVersions|E
-    customerNammaTags: Lib.Yudhishthira.Tools.Utils.tagsNameValueToTType
+    customerQolariTags: Lib.Yudhishthira.Tools.Utils.tagsNameValueToTType
     searchTags: Lib.Yudhishthira.Tools.Utils.tagsNameValueToTType
     preferSafetyPlus: Kernel.Prelude.Just|I
     userOsType: userClientDevice <&> (.deviceType)|E
@@ -177,7 +177,7 @@ SearchRequest:
     distanceUnit: Kernel.Prelude.fromMaybe Kernel.Types.Common.Meter|I
     isDashboardRequest: fromMaybe False isDashboardRequest|E
     configInExperimentVersions: fromMaybe [] (Kernel.Utils.JSON.valueToMaybe =<< configInExperimentVersions)|E
-    customerNammaTags: Lib.Yudhishthira.Tools.Utils.tagsNameValueFromTType
+    customerQolariTags: Lib.Yudhishthira.Tools.Utils.tagsNameValueFromTType
     searchTags: Lib.Yudhishthira.Tools.Utils.tagsNameValueFromTType
     preferSafetyPlus: fromMaybe False preferSafetyPlus|E
     userClientDevice: Kernel.Utils.Version.mkClientDevice userOsType userOsVersion userModelName userManufacturer|E

@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-deprecations #-}
+﻿{-# OPTIONS_GHC -Wno-deprecations #-}
 
 module Lib.Payment.Storage.HistoryQueries.PaymentTransaction
   ( create,
@@ -16,7 +16,7 @@ module Lib.Payment.Storage.HistoryQueries.PaymentTransaction
   )
 where
 
-import Kernel.External.Payment.Juspay.Types
+import Kernel.External.Payment.Gateway.Types
 import Kernel.Prelude
 import Kernel.Types.Id
 import Kernel.Utils.Common

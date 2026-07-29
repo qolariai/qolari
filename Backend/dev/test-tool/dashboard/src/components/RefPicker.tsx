@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+﻿import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { LOCAL_API_BASE as PROXY_BASE } from '../config';
 
 interface RefSummary {
@@ -23,7 +23,7 @@ interface RefsPayload {
 }
 
 interface RefPickerProps {
-  /** GitHub repo, e.g. "nammayatri/ny-react-native" — must match a key
+  /** GitHub repo, e.g. "Qolari/ny-react-native" — must match a key
    *  in server.py's KNOWN_REPOS map. */
   repo: string;
   /** The currently chosen ref (controlled). Empty string → "use whatever

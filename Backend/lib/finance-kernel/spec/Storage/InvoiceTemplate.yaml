@@ -1,5 +1,5 @@
-# Finance Kernel - InvoiceTemplate Table
-# Namma-DSL YAML specification
+﻿# Finance Kernel - InvoiceTemplate Table
+# qolari-dsl YAML specification
 
 imports:
   UTCTime: Kernel.Prelude

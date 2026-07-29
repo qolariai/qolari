@@ -1,5 +1,5 @@
--- This is coppied from
--- https://bitbucket.org/juspay/passetto-hs/src/0c3162aec9569d25355b13c0de1efb1c23cc6f74/service/pgsql/create_schema.sql#create_schema.sql
+﻿-- This is coppied from
+-- https://bitbucket.org/Qolari/passetto-hs/src/0c3162aec9569d25355b13c0de1efb1c23cc6f74/service/pgsql/create_schema.sql#create_schema.sql
 -- and should be keeped synced with it.
 
 -- SCHEMA: Passetto

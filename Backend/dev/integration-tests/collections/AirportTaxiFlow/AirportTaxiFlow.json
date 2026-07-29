@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "Airport Taxi Flow",
     "description": "Delhi BHARAT_TAXI Airport Taxi booth flow test including Ride Search, Quotes, Rider Registration, Profile Update, Booking Confirmation, and Booking Details verification.",
@@ -30,7 +30,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"email\": \"juspay_admin@dashboard.com\",\n    \"password\": \"juspay_admin\"\n}"
+          "raw": "{\n    \"email\": \"Qolari_admin@dashboard.com\",\n    \"password\": \"Qolari_admin\"\n}"
         },
         "url": {
           "raw": "{{bap_dashboard_url}}/user/login",

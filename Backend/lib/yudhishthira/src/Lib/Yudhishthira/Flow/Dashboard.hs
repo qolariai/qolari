@@ -1,4 +1,4 @@
-module Lib.Yudhishthira.Flow.Dashboard where
+﻿module Lib.Yudhishthira.Flow.Dashboard where
 
 import qualified ConfigPilotFrontend.Common as CPFC
 import qualified ConfigPilotFrontend.Flow as CPF
@@ -32,8 +32,8 @@ import qualified Lib.Yudhishthira.Storage.Queries.AppDynamicLogicRollout as LYSQ
 import qualified Lib.Yudhishthira.Storage.Queries.AppDynamicLogicRolloutExtra as LYSQADLRE
 import qualified Lib.Yudhishthira.Storage.Queries.ChakraQueries as QChakraQueries
 import qualified Lib.Yudhishthira.Storage.Queries.ChakraQueries as SQCQ
-import qualified Lib.Yudhishthira.Storage.Queries.NammaTagTriggerV2 as QNTTV2
-import qualified Lib.Yudhishthira.Storage.Queries.NammaTagV2 as QNTV2
+import qualified Lib.Yudhishthira.Storage.Queries.QolariTagTriggerV2 as QNTTV2
+import qualified Lib.Yudhishthira.Storage.Queries.QolariTagV2 as QNTV2
 import Lib.Yudhishthira.Tools.Error
 import Lib.Yudhishthira.Tools.Utils
 import qualified Lib.Yudhishthira.Types
@@ -43,21 +43,21 @@ import qualified Lib.Yudhishthira.Types.AppDynamicLogicElement as DTADLE
 import Lib.Yudhishthira.Types.AppDynamicLogicRollout
 import qualified Lib.Yudhishthira.Types.ChakraQueries
 import qualified Lib.Yudhishthira.Types.ChakraQueries as LYTCQ
-import qualified Lib.Yudhishthira.Types.NammaTagTriggerV2 as DNTTV2
-import qualified Lib.Yudhishthira.Types.NammaTagV2 as DNTv2
+import qualified Lib.Yudhishthira.Types.QolariTagTriggerV2 as DNTTV2
+import qualified Lib.Yudhishthira.Types.QolariTagV2 as DNTv2
 import Lib.Yudhishthira.Types.TimeBoundConfig
 import qualified System.Environment as Se
 
-postTagCreate :: forall m r. BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Lib.Yudhishthira.Types.CreateNammaTagRequest -> m Kernel.Types.APISuccess.APISuccess
+postTagCreate :: forall m r. BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Lib.Yudhishthira.Types.CreateQolariTagRequest -> m Kernel.Types.APISuccess.APISuccess
 postTagCreate merchantOpCityId tagRequest = do
   now <- getCurrentTime
-  let nammaTag = mkNammaTag now
-  mbNammaTagTriggers <- buildNammaTagTriggers now
-  checkForDuplicacy nammaTag.name
+  let QolariTag = mkQolariTag now
+  mbQolariTagTriggers <- buildQolariTagTriggers now
+  checkForDuplicacy QolariTag.name
 
-  QNTV2.create nammaTag
-  QNTTV2.deleteAllByMerchantOperatingCityIdAndTagName merchantOpCityId nammaTag.name -- Just in case if old data persists
-  whenJust mbNammaTagTriggers (QNTTV2.createMany . NE.toList)
+  QNTV2.create QolariTag
+  QNTTV2.deleteAllByMerchantOperatingCityIdAndTagName merchantOpCityId QolariTag.name -- Just in case if old data persists
+  whenJust mbQolariTagTriggers (QNTTV2.createMany . NE.toList)
   pure Kernel.Types.APISuccess.Success
   where
     checkForDuplicacy name = do
@@ -65,12 +65,12 @@ postTagCreate merchantOpCityId tagRequest = do
         Just _ -> throwError (TagAlreadyExists name)
         Nothing -> pure ()
 
-    mkNammaTag now = do
+    mkQolariTag now = do
       let createdAt = now
           updatedAt = now
       case tagRequest of
-        Lib.Yudhishthira.Types.ApplicationTag Lib.Yudhishthira.Types.NammaTagApplication {..} ->
-          DNTv2.NammaTagV2
+        Lib.Yudhishthira.Types.ApplicationTag Lib.Yudhishthira.Types.QolariTagApplication {..} ->
+          DNTv2.QolariTagV2
             { merchantOperatingCityId = merchantOpCityId,
               category = tagCategory,
               info = DNTv2.Application,
@@ -82,8 +82,8 @@ postTagCreate merchantOpCityId tagRequest = do
               validity = tagValidity,
               ..
             }
-        Lib.Yudhishthira.Types.KaalChakraTag Lib.Yudhishthira.Types.NammaTagChakra {..} ->
-          DNTv2.NammaTagV2
+        Lib.Yudhishthira.Types.KaalChakraTag Lib.Yudhishthira.Types.QolariTagChakra {..} ->
+          DNTv2.QolariTagV2
             { merchantOperatingCityId = merchantOpCityId,
               category = tagCategory,
               info = DNTv2.KaalChakra (DNTv2.KaalChakraTagInfo tagChakra),
@@ -95,8 +95,8 @@ postTagCreate merchantOpCityId tagRequest = do
               validity = tagValidity,
               ..
             }
-        Lib.Yudhishthira.Types.ManualTag Lib.Yudhishthira.Types.NammaTagManual {..} ->
-          DNTv2.NammaTagV2
+        Lib.Yudhishthira.Types.ManualTag Lib.Yudhishthira.Types.QolariTagManual {..} ->
+          DNTv2.QolariTagV2
             { merchantOperatingCityId = merchantOpCityId,
               category = tagCategory,
               info = DNTv2.Manual,
@@ -109,35 +109,35 @@ postTagCreate merchantOpCityId tagRequest = do
               ..
             }
 
-    buildNammaTagTriggers :: UTCTime -> m (Maybe (NE.NonEmpty DNTTV2.NammaTagTriggerV2))
-    buildNammaTagTriggers now = case tagRequest of
-      Lib.Yudhishthira.Types.ApplicationTag Lib.Yudhishthira.Types.NammaTagApplication {..} -> do
+    buildQolariTagTriggers :: UTCTime -> m (Maybe (NE.NonEmpty DNTTV2.QolariTagTriggerV2))
+    buildQolariTagTriggers now = case tagRequest of
+      Lib.Yudhishthira.Types.ApplicationTag Lib.Yudhishthira.Types.QolariTagApplication {..} -> do
         let createdAt = now
             updatedAt = now
         unless (length tagStages == length (NE.nub tagStages)) $
           throwError (InvalidRequest "Tag stages should be unique")
-        pure . Just $ tagStages <&> \event -> DNTTV2.NammaTagTriggerV2 {merchantOperatingCityId = merchantOpCityId, event, tagName, ..}
+        pure . Just $ tagStages <&> \event -> DNTTV2.QolariTagTriggerV2 {merchantOperatingCityId = merchantOpCityId, event, tagName, ..}
       _ -> pure Nothing
 
-postTagUpdate :: forall m r. BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Lib.Yudhishthira.Types.UpdateNammaTagRequest -> m Kernel.Types.APISuccess.APISuccess
+postTagUpdate :: forall m r. BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Lib.Yudhishthira.Types.UpdateQolariTagRequest -> m Kernel.Types.APISuccess.APISuccess
 postTagUpdate merchantOpCityId tagRequest = do
   tag <- QNTV2.findByPrimaryKey merchantOpCityId tagRequest.tagName >>= fromMaybeM (InvalidRequest "Tag not found in the system, please create the tag")
   now <- getCurrentTime
 
-  let updatedTag = mkUpdateNammaTagEntity tag now
-  mbNammaTagTriggers <- buildNammaTagTriggers tag now
+  let updatedTag = mkUpdateQolariTagEntity tag now
+  mbQolariTagTriggers <- buildQolariTagTriggers tag now
 
   QNTV2.updateByPrimaryKey updatedTag
-  whenJust mbNammaTagTriggers \nammaTagTriggers -> do
+  whenJust mbQolariTagTriggers \QolariTagTriggers -> do
     QNTTV2.deleteAllByMerchantOperatingCityIdAndTagName merchantOpCityId tagRequest.tagName
-    QNTTV2.createMany (NE.toList nammaTagTriggers)
+    QNTTV2.createMany (NE.toList QolariTagTriggers)
   return Kernel.Types.APISuccess.Success
   where
-    mkUpdateNammaTagEntity tag now = do
+    mkUpdateQolariTagEntity tag now = do
       let validity = case tagRequest.resetTagValidity of
             Just True -> Nothing
             _ -> tagRequest.tagValidity <|> tag.validity
-      DNTv2.NammaTagV2
+      DNTv2.QolariTagV2
         { merchantOperatingCityId = merchantOpCityId,
           category = fromMaybe tag.category tagRequest.tagCategory,
           info = mkTagInfo tag,
@@ -155,8 +155,8 @@ postTagUpdate merchantOpCityId tagRequest = do
       DNTv2.KaalChakra (DNTv2.KaalChakraTagInfo tagChakra) -> DNTv2.KaalChakra (DNTv2.KaalChakraTagInfo (fromMaybe tagChakra tagRequest.tagChakra))
       DNTv2.Manual -> DNTv2.Manual
 
-    buildNammaTagTriggers :: DNTv2.NammaTagV2 -> UTCTime -> m (Maybe (NE.NonEmpty DNTTV2.NammaTagTriggerV2))
-    buildNammaTagTriggers tag now = do
+    buildQolariTagTriggers :: DNTv2.QolariTagV2 -> UTCTime -> m (Maybe (NE.NonEmpty DNTTV2.QolariTagTriggerV2))
+    buildQolariTagTriggers tag now = do
       case tag.info of
         DNTv2.Application -> do
           let createdAt = now
@@ -164,7 +164,7 @@ postTagUpdate merchantOpCityId tagRequest = do
           whenJust tagRequest.tagStages $ \events -> do
             unless (length events == length (NE.nub events)) $
               throwError (InvalidRequest "Tag stages should be unique")
-          pure $ tagRequest.tagStages <&> fmap \event -> DNTTV2.NammaTagTriggerV2 {merchantOperatingCityId = merchantOpCityId, event, tagName = tagRequest.tagName, ..}
+          pure $ tagRequest.tagStages <&> fmap \event -> DNTTV2.QolariTagTriggerV2 {merchantOperatingCityId = merchantOpCityId, event, tagName = tagRequest.tagName, ..}
         _ -> do
           whenJust tagRequest.tagStages $ \_ -> throwError (InvalidRequest "tagStage relevant only for application tags")
           pure Nothing
@@ -305,7 +305,7 @@ queryDelete queryRequest = do
   SQCQ.deleteByPrimaryKey queryRequest.chakra queryRequest.queryName
   return Kernel.Types.APISuccess.Success
 
-verifyTag :: BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Lib.Yudhishthira.Types.TagNameValue -> m (Maybe DNTv2.NammaTagV2)
+verifyTag :: BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Lib.Yudhishthira.Types.TagNameValue -> m (Maybe DNTv2.QolariTagV2)
 verifyTag merchantOpCityId (Lib.Yudhishthira.Types.TagNameValue fullTag) = do
   case T.splitOn "#" fullTag of
     [name, tagValueText] -> do
@@ -386,8 +386,8 @@ data VerifyTagData = VerifyTagData
 verifyEventLogic :: (BeamFlow m r, ToJSON a) => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Lib.Yudhishthira.Types.ApplicationEvent -> [Value] -> a -> m Lib.Yudhishthira.Types.RunLogicResp
 verifyEventLogic merchantOpCityId event logics data_ = do
   result <- runLogics logics data_
-  nammaTagsTrigger <- QNTTV2.findAllByMerchantOperatingCityIdAndEvent merchantOpCityId event
-  nammaTags <- QNTV2.findAllByMerchantOperatingCityIdAndNames merchantOpCityId (nammaTagsTrigger <&> (.tagName))
+  QolariTagsTrigger <- QNTTV2.findAllByMerchantOperatingCityIdAndEvent merchantOpCityId event
+  QolariTags <- QNTV2.findAllByMerchantOperatingCityIdAndNames merchantOpCityId (QolariTagsTrigger <&> (.tagName))
   let allTags =
         foldl'
           ( \(VerifyTagData tagsAcc isAnyText rangeAcc) x ->
@@ -397,7 +397,7 @@ verifyEventLogic merchantOpCityId event logics data_ = do
                 Lib.Yudhishthira.Types.Range start end -> VerifyTagData tagsAcc isAnyText ((start, end) : rangeAcc)
           )
           (VerifyTagData [] False [])
-          nammaTags
+          QolariTags
   if result.result `elem` allTags.possibleTags || isString result.result || any (inRange result.result) allTags.possibleRanges
     then return result
     else throwError $ InvalidRequest $ "Returned result is not possible tag values, got -> " <> show result
@@ -823,8 +823,8 @@ getAppDynamicLogicVersions merchantOpCityId mbLimit mbOffset domain_ = do
               ..
             }
 
-getNammaTagQueryAll :: BeamFlow m r => Lib.Yudhishthira.Types.Chakra -> m Lib.Yudhishthira.Types.ChakraQueryResp
-getNammaTagQueryAll chakra_ = do
+getQolariTagQueryAll :: BeamFlow m r => Lib.Yudhishthira.Types.Chakra -> m Lib.Yudhishthira.Types.ChakraQueryResp
+getQolariTagQueryAll chakra_ = do
   chakraQueries <- QChakraQueries.findAllByChakra chakra_
   return $ (\LYTCQ.ChakraQueries {..} -> Lib.Yudhishthira.Types.ChakraQueriesAPIEntity {chakra, queryName, queryResults, queryText, queryType = fromMaybe Lib.Yudhishthira.Types.CLICKHOUSE queryType}) <$> chakraQueries
 
@@ -861,13 +861,13 @@ buildVersionStatusMap rollouts =
       (_, Just LYT.DISCARDED) -> Just LYT.DISCARDED
       _ -> Nothing
 
-getNammaTagConfigPilotAllConfigs ::
+getQolariTagConfigPilotAllConfigs ::
   BeamFlow m r =>
   Id Lib.Yudhishthira.Types.MerchantOperatingCity ->
   Maybe Bool ->
   Lib.Yudhishthira.Types.ConfigTypeChoice ->
   m [Lib.Yudhishthira.Types.ConfigType]
-getNammaTagConfigPilotAllConfigs merchantOpCityId mbUnderExp configChoice = do
+getQolariTagConfigPilotAllConfigs merchantOpCityId mbUnderExp configChoice = do
   case mbUnderExp of
     Just True -> do
       allRollouts <- CADLR.fetchAllConfigsByMerchantOpCityId merchantOpCityId -- can fall thru KV and go to DB (Currently Not Called Anywhere)
@@ -893,8 +893,8 @@ getNammaTagConfigPilotAllConfigs merchantOpCityId mbUnderExp configChoice = do
       let configTypes :: [Lib.Yudhishthira.Types.ConfigType] = Lib.Yudhishthira.Types.allValues
       return configTypes
 
-getNammaTagConfigPilotAllUiConfigs :: BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Maybe Bool -> Lib.Yudhishthira.Types.ConfigTypeChoice -> m [Lib.Yudhishthira.Types.LogicDomain]
-getNammaTagConfigPilotAllUiConfigs merchantOpCityId mbUnderExp configChoice = do
+getQolariTagConfigPilotAllUiConfigs :: BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Maybe Bool -> Lib.Yudhishthira.Types.ConfigTypeChoice -> m [Lib.Yudhishthira.Types.LogicDomain]
+getQolariTagConfigPilotAllUiConfigs merchantOpCityId mbUnderExp configChoice = do
   case mbUnderExp of
     Just True -> do
       allRollouts <- CADLR.fetchAllConfigsByMerchantOpCityId merchantOpCityId -- can fall thru KV and go to DB if KV Enabled (Currently Not Called Anywhere)
@@ -917,8 +917,8 @@ getNammaTagConfigPilotAllUiConfigs merchantOpCityId mbUnderExp configChoice = do
       let configTypes :: [Lib.Yudhishthira.Types.LogicDomain] = filter isUIConfig Lib.Yudhishthira.Types.allValues
       return configTypes
 
-getNammaTagConfigPilotConfigDetails :: BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Lib.Yudhishthira.Types.LogicDomain -> m [Lib.Yudhishthira.Types.ConfigDetailsResp]
-getNammaTagConfigPilotConfigDetails merchantOpCityId domain' = do
+getQolariTagConfigPilotConfigDetails :: BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Lib.Yudhishthira.Types.LogicDomain -> m [Lib.Yudhishthira.Types.ConfigDetailsResp]
+getQolariTagConfigPilotConfigDetails merchantOpCityId domain' = do
   allConfigRollouts <- LYSQADLR.findRunningByMerchantOpCityAndDomain merchantOpCityId domain'
   let runningConfigRollouts = filter (\rollout -> rollout.isBaseVersion == Just True || rollout.percentageRollout /= 0 || rollout.experimentStatus == Just LYT.RUNNING) allConfigRollouts
       -- canRevert is true only for the current base version that was promoted via conclude
@@ -940,8 +940,8 @@ getNammaTagConfigPilotConfigDetails merchantOpCityId domain' = do
             canRevert = isBaseVersion == Just True && experimentStatus == Just LYT.CONCLUDED && hasDemotedBase
           }
 
-getNammaTagConfigPilotUiConfigDetails :: BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Lib.Yudhishthira.Types.LogicDomain -> m [Lib.Yudhishthira.Types.ConfigDetailsResp]
-getNammaTagConfigPilotUiConfigDetails merchantOpCityId domain' = do
+getQolariTagConfigPilotUiConfigDetails :: BeamFlow m r => Id Lib.Yudhishthira.Types.MerchantOperatingCity -> Lib.Yudhishthira.Types.LogicDomain -> m [Lib.Yudhishthira.Types.ConfigDetailsResp]
+getQolariTagConfigPilotUiConfigDetails merchantOpCityId domain' = do
   configRollouts <- CADLR.findByMerchantOpCityAndDomain merchantOpCityId domain'
   let hasDemotedBase = any (\r -> r.isBaseVersion /= Just True && r.experimentStatus == Just LYT.CONCLUDED) configRollouts
   mapM (makeConfigDetailResp hasDemotedBase) configRollouts
@@ -960,8 +960,8 @@ getNammaTagConfigPilotUiConfigDetails merchantOpCityId domain' = do
             canRevert = isBaseVersion == Just True && experimentStatus == Just LYT.CONCLUDED && hasDemotedBase
           }
 
-getNammaTagConfigPilotAlwaysOnList :: (BeamFlow m r, CacheFlow m r) => Id LYT.MerchantOperatingCity -> LYT.LogicDomain -> m LYT.AlwaysOnListResp
-getNammaTagConfigPilotAlwaysOnList merchantOpCityId domain' = do
+getQolariTagConfigPilotAlwaysOnList :: (BeamFlow m r, CacheFlow m r) => Id LYT.MerchantOperatingCity -> LYT.LogicDomain -> m LYT.AlwaysOnListResp
+getQolariTagConfigPilotAlwaysOnList merchantOpCityId domain' = do
   baseRollout <- CADLR.findBaseRolloutByMerchantOpCityAndDomain merchantOpCityId domain'
   alwaysOnRows <- CADLAO.findByMerchantOpCityAndDomainOrdered merchantOpCityId domain'
   patchInfos <- mapM (makeAlwaysOnPatchInfo domain') alwaysOnRows
@@ -984,8 +984,8 @@ getNammaTagConfigPilotAlwaysOnList merchantOpCityId domain' = do
             versionDescription = mRollout >>= (.versionDescription)
           }
 
-postNammaTagConfigPilotActionChange :: (BeamFlow m r, EsqDBFlow m r, CacheFlow m r) => Maybe (Id LYT.Merchant) -> Id LYT.MerchantOperatingCity -> LYT.ActionChangeRequest -> (Id LYT.MerchantOperatingCity -> LYT.ConcludeReq -> [A.Value] -> Maybe (Id LYT.Merchant) -> Kernel.Types.Beckn.Context.City -> m ()) -> (LYT.LogicDomain -> Id LYT.MerchantOperatingCity -> Id Lib.Yudhishthira.Types.Merchant -> Kernel.Types.Beckn.Context.City -> m LYT.TableDataResp) -> Kernel.Types.Beckn.Context.City -> m Kernel.Types.APISuccess.APISuccess
-postNammaTagConfigPilotActionChange mbMerchantId merchantOpCityId req handleConfigDBUpdate' _giveConfigs opCity = do
+postQolariTagConfigPilotActionChange :: (BeamFlow m r, EsqDBFlow m r, CacheFlow m r) => Maybe (Id LYT.Merchant) -> Id LYT.MerchantOperatingCity -> LYT.ActionChangeRequest -> (Id LYT.MerchantOperatingCity -> LYT.ConcludeReq -> [A.Value] -> Maybe (Id LYT.Merchant) -> Kernel.Types.Beckn.Context.City -> m ()) -> (LYT.LogicDomain -> Id LYT.MerchantOperatingCity -> Id Lib.Yudhishthira.Types.Merchant -> Kernel.Types.Beckn.Context.City -> m LYT.TableDataResp) -> Kernel.Types.Beckn.Context.City -> m Kernel.Types.APISuccess.APISuccess
+postQolariTagConfigPilotActionChange mbMerchantId merchantOpCityId req handleConfigDBUpdate' _giveConfigs opCity = do
   case req of
     LYT.Conclude concludeReq -> do
       expRollout <- LYSQADLR.findByPrimaryKey concludeReq.domain (cast merchantOpCityId) "Unbounded" concludeReq.version >>= fromMaybeM (InvalidRequest $ "Rollout not found for Domain: " <> show concludeReq.domain <> " City: " <> show merchantOpCityId <> " TimeBounds: " <> "Unbounded" <> " Version: " <> show concludeReq.version)
@@ -1157,7 +1157,7 @@ pushConfigHistory domain version merchantOpCityId configsJson = do
         Right resp -> do
           return resp.result
 
-postNammaTagConfigPilotGetPatchedElement :: BeamFlow m r => Id LYT.MerchantOperatingCity -> LYT.GetPatchedElementReq -> m Lib.Yudhishthira.Types.GetPatchedElementResp
-postNammaTagConfigPilotGetPatchedElement _ req = do
+postQolariTagConfigPilotGetPatchedElement :: BeamFlow m r => Id LYT.MerchantOperatingCity -> LYT.GetPatchedElementReq -> m Lib.Yudhishthira.Types.GetPatchedElementResp
+postQolariTagConfigPilotGetPatchedElement _ req = do
   appDynamicLogicElement <- QADLE.findByPrimaryKey req.domain 0 req.version >>= fromMaybeM (InvalidRequest $ "No AppDynamicLogicElement found for domain " <> show req.domain <> " and version " <> show req.version)
   return $ Lib.Yudhishthira.Types.GetPatchedElementResp $ appDynamicLogicElement.patchedElement

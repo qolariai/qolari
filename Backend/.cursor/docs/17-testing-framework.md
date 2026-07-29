@@ -1,6 +1,6 @@
-# Testing Framework
+﻿# Testing Framework
 
-Complete architecture of the NammaYatri local testing infrastructure: config sync, integration tests, mock servers, and test tools.
+Complete architecture of the Qolari local testing infrastructure: config sync, integration tests, mock servers, and test tools.
 
 ## Overview
 
@@ -73,7 +73,7 @@ python config_transfer.py show-patches --from master --to local
 #### Global Replacements
 String find/replace on raw JSON file content:
 ```json
-{"find": "https://api.juspay.in", "replace": "http://localhost:8080/juspay"}
+{"find": "https://api.Qolari.in", "replace": "http://localhost:8080/Qolari"}
 ```
 
 #### Dimension Overrides
@@ -82,10 +82,10 @@ Per-table, per-row field overrides applied at import time:
 {
   "atlas_app": {
     "merchant_service_config": [{
-      "where": {"service_name": "Payment_Juspay"},
+      "where": {"service_name": "Payment_Qolari"},
       "merge_json": {
         "config_json": {
-          "url": "http://localhost:8080/juspay",
+          "url": "http://localhost:8080/Qolari",
           "apiKey": "ENCRYPT:S\"mock-api-key\"",
           "password": "ENCRYPT:S\"mock-password\""
         }
@@ -207,11 +207,11 @@ Directories:
   ride combo; checks Customer/Driver/FleetOwner/AggregatedCommission invoices
   via `/financeManagement/financeInvoiceList`.
 
-Auth model: the dev `JUSPAY_ADMIN` (`local-testing-data/provider-dashboard.sql`
-seed, token `local-admin-token-bangalore-namma-yatri`) already has cross-merchant
+Auth model: the dev `Qolari_ADMIN` (`local-testing-data/provider-dashboard.sql`
+seed, token `local-admin-token-bangalore-qolari`) already has cross-merchant
 + cross-city access (via `merchant_access CROSS JOIN
 unnest(supported_operating_cities)`). No separate "Admin Fleet" persona — that
-role is the same JUSPAY_ADMIN scoped to BRIDGE_FINLAND_PARTNER via
+role is the same Qolari_ADMIN scoped to BRIDGE_FINLAND_PARTNER via
 `/user/switchMerchantAndCity`, which every collection calls first.
 
 Run:
@@ -246,7 +246,7 @@ Unified Python HTTP server that mocks all external service integrations.
 server.py                    # Router + middleware (override system)
 status_store.py              # In-memory store + override matching engine
 services/
-├── juspay.py               # Payment orders, offers, refunds
+├── Qolari.py               # Payment orders, offers, refunds
 ├── stripe.py               # Full Stripe v1 API (21 endpoints, stateful)
 ├── paytm.py                # PayTM payment
 ├── cmrl.py                 # Chennai Metro (AES-CBC encrypted, auth tokens)
@@ -282,7 +282,7 @@ value and deep-merging the configured `response` into the handler's default resp
 ```json
 POST /mock/override
 {
-  "service": "juspay",
+  "service": "Qolari",
   "extract": "path.2",
   "value": "order-uuid-123",
   "match": "/orders",

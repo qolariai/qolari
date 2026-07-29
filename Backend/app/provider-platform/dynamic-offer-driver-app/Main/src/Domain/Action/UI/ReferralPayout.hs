@@ -1,4 +1,4 @@
-module Domain.Action.UI.ReferralPayout where
+﻿module Domain.Action.UI.ReferralPayout where
 
 import qualified API.Types.UI.ReferralPayout
 import Data.Text hiding (elem, filter, map)
@@ -176,8 +176,8 @@ postPayoutUpdateVpa (mbPersonId, _merchantId, merchantOpCityId) req = ActorInfo.
   unless (payoutConfig.vpaVerificationMode == DPC.API_BASED) $
     throwError $ InvalidRequest "VPA update via API is not enabled. Please use the registration payment flow."
   person <- QP.findById personId >>= fromMaybeM (PersonNotFound personId.getId)
-  -- Verify VPA using Juspay API
-  paymentServiceName <- TPayment.decidePaymentService (DEMSC.PaymentService PaymentTypes.Juspay) person.clientSdkVersion person.merchantOperatingCityId
+  -- Verify VPA using Qolari API
+  paymentServiceName <- TPayment.decidePaymentService (DEMSC.PaymentService PaymentTypes.Qolari) person.clientSdkVersion person.merchantOperatingCityId
   let verifyVPAReq =
         KT.VerifyVPAReq
           { orderId = Nothing,
@@ -230,10 +230,10 @@ getPayoutRegistrationWithActor (mbPersonId, merchantId, merchantOpCityId) = do
 
   -- Get person details for creating the payment order
   driverPhone <- person.mobileNumber & fromMaybeM (PersonFieldNotPresent "mobileNumber") >>= decrypt
-  let driverEmail = fromMaybe "test@juspay.in" person.email
+  let driverEmail = fromMaybe "test@Qolari.in" person.email
 
-  -- Get Juspay createOrder call
-  paymentServiceName <- TPayment.decidePaymentService (DEMSC.PaymentService PaymentTypes.Juspay) person.clientSdkVersion person.merchantOperatingCityId
+  -- Get Qolari createOrder call
+  paymentServiceName <- TPayment.decidePaymentService (DEMSC.PaymentService PaymentTypes.Qolari) person.clientSdkVersion person.merchantOperatingCityId
   (createOrderCall, _pseudoClientId) <- TPayment.createOrder merchantId merchantOpCityId paymentServiceName (Just person.id.getId)
 
   -- Get MerchantServiceConfig to check if split is enabled
@@ -282,7 +282,7 @@ postPayoutCreateOrder (mbPersonId, merchantId, merchantOpCityId) req = ActorInfo
   person <- QP.findById personId >>= fromMaybeM (InvalidRequest "Person not found")
   (payoutServiceFlow, payoutServiceName, mbPersonBankAccount) <- TP.getCreatePayoutServiceFlow TP.MerchantServiceUsageConfigOption DEMSC.PayoutService person.clientSdkVersion merchantOpCityId person.id
   let payoutVpaValid = case payoutServiceFlow of
-        IPayout.JuspayFlow -> isJust req.customerVpa
+        IPayout.QolariFlow -> isJust req.customerVpa
         IPayout.StripeFlow -> True
   unless payoutVpaValid $ throwError (InvalidRequest "customerVpa required")
   let entityName = DLP.MANUAL

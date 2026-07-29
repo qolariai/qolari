@@ -1186,7 +1186,7 @@ createPrepaidSubscriptionOrder serviceName driverId merchantId merchantOpCityId 
   orderShortId <- generateShortId
   nwAddress <- asks (.nwAddress)
   offerBasket <- Payment.mkOfferBasket merchantOpCityId (Just subscriptionConfig.paymentServiceName) effectivePlanFee
-  let driverEmail = fromMaybe "test@juspay.in" driver.email
+  let driverEmail = fromMaybe "test@Qolari.in" driver.email
       amount = effectivePlanFee
       createOrderReq =
         Payment.CreateOrderReq

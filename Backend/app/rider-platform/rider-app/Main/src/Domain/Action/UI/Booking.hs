@@ -325,7 +325,7 @@ bookingListV2 (personId, merchantId) mbLimit mbOffset mbBookingOffset mbJourneyO
 
         pure (entitiesWithSource, Just finalBookingOffset, Nothing, Just finalPassOffset, hasMoreData)
       Just SRB.JourneyRequest -> do
-        -- Journeys (NammaTransit) should only be included for PERSONAL billing category and NORMAL ride type
+        -- Journeys (QolariTransit) should only be included for PERSONAL billing category and NORMAL ride type
         let shouldIncludeJourneys = shouldIncludeJourneysForFilters billingCategoryList rideTypeList
         allJourneys <-
           if shouldIncludeJourneys
@@ -345,7 +345,7 @@ bookingListV2 (personId, merchantId) mbLimit mbOffset mbBookingOffset mbJourneyO
           awaitableFork "bookingListV2->getBookingList" $
             getBookingList (Just personId, merchantId) Nothing False integralLimit mbInitialBookingOffset Nothing Nothing Nothing mbFromDate' mbToDate' mbBookingStatusList Nothing
 
-        -- Journeys (NammaTransit) should only be included for PERSONAL billing category and NORMAL ride type
+        -- Journeys (QolariTransit) should only be included for PERSONAL billing category and NORMAL ride type
         let shouldIncludeJourneys = shouldIncludeJourneysForFilters billingCategoryList rideTypeList
         journeyListFork <-
           awaitableFork "bookingListV2->getJourneyList" $
@@ -399,7 +399,7 @@ bookingListV2 (personId, merchantId) mbLimit mbOffset mbBookingOffset mbJourneyO
     integralLimit = Just (fromIntegral limit)
     limitIntMaybe = Just limit :: Maybe Int
 
-    -- Journeys (NammaTransit) should only be included when:
+    -- Journeys (QolariTransit) should only be included when:
     -- 1. billingCategoryList contains PERSONAL or is empty
     -- 2. rideTypeList contains NORMAL or is empty
     shouldIncludeJourneysForFilters :: [SLT.BillingCategory] -> [SLT.RideType] -> Bool

@@ -1,4 +1,4 @@
-module Domain.Action.UI.TicketService where
+﻿module Domain.Action.UI.TicketService where
 
 import qualified API.Types.Dashboard.AppManagement.Tickets
 import qualified API.Types.Dashboard.AppManagement.Tickets as Tickets
@@ -344,7 +344,7 @@ postTicketPlacesBookWithActor (mbPersonId, merchantId) placeId req = do
             orderShortId = ticketBooking.shortId.getShortId,
             amount = amount.amount,
             customerId = staticCustomerId,
-            customerEmail = fromMaybe "growth@nammayatri.in" personEmail,
+            customerEmail = fromMaybe "growth@drive.qolari.com" personEmail,
             customerPhone = personPhone,
             customerFirstName = person.firstName,
             customerLastName = person.lastName,
@@ -781,7 +781,7 @@ getTicketBookingsDetails (_mbPersonId, merchantId') shortId_ = do
             isApiCallSuccess = Nothing,
             idAssignedByServiceProvider = Nothing,
             initiatedBy = Nothing,
-            referenceType = Nothing, -- Juspay does not report a reference type
+            referenceType = Nothing, -- Qolari does not report a reference type
             completedAt = Nothing,
             actualRefundedAmount = Just amount,
             createdAt = now,
@@ -1310,7 +1310,7 @@ getTicketBookingsStatus (mbPersonId, merchantId) _shortId@(Kernel.Types.Id.Short
                 intializeRefundProcess ticketBooking'.shortId (Just ticketBooking'.ticketPlaceId) totalRefundAmount merchantId ticketBooking'.merchantOperatingCityId (Just person.id.getId) person.clientSdkVersion
                 QTB.updateStatusByShortId DTTB.RefundInitiated _shortId
                 QTicketBookingService.updateAllStatusByBookingId DTB.Failed ticketBooking'.id
-          when (status `elem` [Payment.AUTHENTICATION_FAILED, Payment.AUTHORIZATION_FAILED, Payment.JUSPAY_DECLINED]) $ do
+          when (status `elem` [Payment.AUTHENTICATION_FAILED, Payment.AUTHORIZATION_FAILED, Payment.Qolari_DECLINED]) $ do
             QTB.updateStatusByShortId DTTB.Failed _shortId
             QTicketBookingService.updateAllStatusByBookingId DTB.Failed ticketBooking'.id
             mapM_

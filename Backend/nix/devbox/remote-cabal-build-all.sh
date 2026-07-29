@@ -1,6 +1,6 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # Standalone port of the `cabal-build` process body
-# (Backend/nix/services/nammayatri.nix cabal-build) for use by
+# (Backend/nix/services/Qolari.nix cabal-build) for use by
 # `, run-cabal-build-devbox`. The ONLY functional change vs. the process-compose
 # version is TARGETS="all" (build every package) instead of the enumerated
 # service exes. Keeps the unshare CI namespace so the restored dist-newstyle
@@ -31,7 +31,7 @@ if [ ! -f .ci-project-root ] && [ -d dist-newstyle/build ]; then
   SETUP_CFG=$(find dist-newstyle -name "setup-config" -type f -print -quit 2>/dev/null || true)
   if [ -n "$SETUP_CFG" ]; then
     DETECTED_ROOT=$(strings "$SETUP_CFG" \
-      | grep -m1 -oE '/[^ "]+/nammayatri/Backend' \
+      | grep -m1 -oE '/[^ "]+/Qolari/Backend' \
       | sed 's|/Backend.*|/Backend|' || true)
     if [ -n "$DETECTED_ROOT" ] && [ "$DETECTED_ROOT" != "$(pwd)" ]; then
       echo "$DETECTED_ROOT" > .ci-project-root

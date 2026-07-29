@@ -9,8 +9,8 @@ version:        0.1.0.0
 description:    Please see the README on GitHub at <https://github.com/qolariai/qolari#readme>
 homepage:       https://github.com/qolariai/qolari#readme
 bug-reports:    https://github.com/qolariai/qolari/issues
-author:         nammayatri
-maintainer:     nammayatri
+author:         Qolari
+maintainer:     Qolari
 copyright:      2023 Qolari Technologies
 license:        AllRightsReserved
 build-type:     Simple
@@ -69,7 +69,7 @@ library
       Domain.Action.ProviderPlatform.Management.MediaFileDocument
       Domain.Action.ProviderPlatform.Management.Merchant
       Domain.Action.ProviderPlatform.Management.Message
-      Domain.Action.ProviderPlatform.Management.NammaTag
+      Domain.Action.ProviderPlatform.Management.QolariTag
       Domain.Action.ProviderPlatform.Management.Payout
       Domain.Action.ProviderPlatform.Management.PlanManagement
       Domain.Action.ProviderPlatform.Management.Revenue
@@ -134,7 +134,7 @@ library
       API.Action.ProviderPlatform.Management.MediaFileDocument
       API.Action.ProviderPlatform.Management.Merchant
       API.Action.ProviderPlatform.Management.Message
-      API.Action.ProviderPlatform.Management.NammaTag
+      API.Action.ProviderPlatform.Management.QolariTag
       API.Action.ProviderPlatform.Management.Payout
       API.Action.ProviderPlatform.Management.PlanManagement
       API.Action.ProviderPlatform.Management.Revenue

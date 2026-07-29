@@ -1,9 +1,9 @@
-# access tokens with different roles
-@customer = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer}}
-@driver = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/driver}}
-@juspay_ops = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_ops}}
-@juspay_admin = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/juspay_admin}}
-@customer_service = {{bpp-dashboard/token/NAMMA_YATRI_PARTNER/customer_service}}
+﻿# access tokens with different roles
+@customer = {{bpp-dashboard/token/qolari_PARTNER/customer}}
+@driver = {{bpp-dashboard/token/qolari_PARTNER/driver}}
+@Qolari_ops = {{bpp-dashboard/token/qolari_PARTNER/Qolari_ops}}
+@Qolari_admin = {{bpp-dashboard/token/qolari_PARTNER/Qolari_admin}}
+@customer_service = {{bpp-dashboard/token/qolari_PARTNER/customer_service}}
 
 @fleet_owner = 88ef2a2a-b014-4a86-b1c0-e453e8b0b688
 
@@ -35,7 +35,7 @@ GET {{bpp-dashboard-host}}
 #     )
 # ON CONFLICT DO NOTHING;
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/fleet/getAllVehicle
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/fleet/getAllVehicle
 ?limit=10
 &offset=0
 token: {{customer_service}}
@@ -47,8 +47,8 @@ token: {{customer_service}}
 # INSERT INTO atlas_bpp_dashboard.fleet_member_association (fleet_member_id, fleet_owner_id, enabled, is_fleet_owner) VALUES
 #   ('3680f4b5-dce4-4d03-aa8c-5405690e87bd', 'favorit-fleet-owner-0000000000000000', true, true);
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/fleet/sendJoiningOtp
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/fleet/sendJoiningOtp
+token: {{Qolari_admin}}
 content-type: application/json
 
 {
@@ -56,7 +56,7 @@ content-type: application/json
     "lastName": "Fleet",
     "mobileNumber": "2211111130",
     "mobileCountryCode": "+91",
-    "email": "driver111@nammayatri.in"
+    "email": "driver111@drive.qolari.com"
 }
 
 ###
@@ -65,8 +65,8 @@ content-type: application/json
 
 @authId={{postDriverFleetrSendJoiningOtp.response.body.authId}}
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/fleet/verifyJoiningOtp?authId={{authId}}
-token: {{juspay_admin}}
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/fleet/verifyJoiningOtp?authId={{authId}}
+token: {{Qolari_admin}}
 content-type: application/json
 
 {   "mobileCountryCode": "+91",
@@ -83,7 +83,7 @@ content-type: application/json
 # existing driver id = favorit-auto2-0000000000000000000000
 # existing driver mobile = 2345678901
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/fleet/addDrivers
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/fleet/addDrivers
 token: {{fleet_owner}}
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
@@ -107,7 +107,7 @@ ExistingDriver, 2345678901, CAR, 6666666666
 
 @existingDriverToken = favorit-auto2-0000000000000000-token
 
-POST {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/fleet/addDrivers
+POST {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/fleet/addDrivers
 token: {{rental_fleet_owner}}
 Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
 
@@ -132,5 +132,5 @@ content-type: application/json
 
 ###
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/KOCHI/driver/stats?entityId={{driverId}}
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/KOCHI/driver/stats?entityId={{driverId}}
 token: {{fleet_owner}}

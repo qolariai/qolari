@@ -6,12 +6,12 @@
 
 name:           rider-app
 version:        0.1.0.0
-synopsis:       The nammayatri rider application
+synopsis:       The Qolari rider application
 description:    Please see the README on GitHub at <https://github.com/qolariai/qolari#readme>
 homepage:       https://github.com/qolariai/qolari#readme
 bug-reports:    https://github.com/qolariai/qolari/issues
-author:         nammayatri
-maintainer:     nammayatri
+author:         Qolari
+maintainer:     Qolari
 copyright:      2023 Qolari Technologies
 license:        AllRightsReserved
 build-type:     Simple
@@ -213,7 +213,7 @@ library
       Domain.Action.Dashboard.IssueManagement.IssueList
       Domain.Action.Dashboard.Media
       Domain.Action.Dashboard.Merchant
-      Domain.Action.Dashboard.NammaTag
+      Domain.Action.Dashboard.QolariTag
       Domain.Action.Dashboard.Offer
       Domain.Action.Dashboard.Payout
       Domain.Action.Dashboard.Rewards
@@ -868,7 +868,7 @@ library
       API.Action.Dashboard.Management.Invoice
       API.Action.Dashboard.Management.Media
       API.Action.Dashboard.Management.Merchant
-      API.Action.Dashboard.Management.NammaTag
+      API.Action.Dashboard.Management.QolariTag
       API.Action.Dashboard.Management.Offer
       API.Action.Dashboard.Management.Payout
       API.Action.Dashboard.Management.Rewards

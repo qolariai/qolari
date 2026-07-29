@@ -1,4 +1,4 @@
-# MSIL Onboarding Collections
+﻿# MSIL Onboarding Collections
 
 End-to-end onboarding for the **MSIL_PARTNER / Delhi** environment. Mirrors the
 Postman collections used against the c2 sandbox (`MSIL Driver Onboarding` +
@@ -26,10 +26,10 @@ picking specific request ranges via `--folder` / `--iteration-data` in newman.
 1. **Local mobility stack running** — `, run-mobility-stack-dev` (Postgres,
    Redis, Kafka, mock server on `:8080`, dashboard on `:8018`, driver-app on
    `:8016`).
-2. **JUSPAY_ADMIN cross-merchant access** for `MSIL_PARTNER` — re-run
+2. **Qolari_ADMIN cross-merchant access** for `MSIL_PARTNER` — re-run
    `dev/local-testing-data/provider-dashboard.sql` after any restart of
    `test-context-api`. The seed grants
-   `local-admin-token-bangalore-namma-yatri` cross-merchant access; the flow
+   `local-admin-token-bangalore-qolari` cross-merchant access; the flow
    still calls `POST /user/switchMerchantAndCity` to scope it to MSIL_PARTNER/Delhi.
 3. **Fake-SMS OTP** — `transporter_config.useFakeSms = true` and OTP `7891`
    for MSIL_PARTNER/Delhi (matches the value baked into the master seeds).
@@ -92,7 +92,7 @@ newman run collections/MSILOnboarding/03-AddVehicle.json \
   `fleet_owner_information` (columns: `verified`, `approved`, `enabled`,
   `disabled_reason_flag`, `onboarding_as`).
 - **No Bank Account / Payout wiring.** MSIL uses `fleet/payout/account`
-  (Juspay), not Stripe. Not modeled here — add if payout-onboarding
+  (Qolari), not Stripe. Not modeled here — add if payout-onboarding
   regressions become in-scope for the refactor.
 - **No Idfy/HVSDK verification mock.** Aadhaar/PAN verify calls
   (`/onboarding/verify/…`) hit the real onboarding handler which calls

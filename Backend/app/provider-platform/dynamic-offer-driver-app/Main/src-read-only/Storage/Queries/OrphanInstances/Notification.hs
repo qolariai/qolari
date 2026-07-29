@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Storage.Queries.OrphanInstances.Notification where
@@ -25,7 +25,7 @@ instance FromTType' Beam.Notification Domain.Types.Notification.Notification whe
             description = description,
             driverFeeId = Kernel.Types.Id.Id driverFeeId,
             id = Kernel.Types.Id.Id id,
-            juspayProvidedId = juspayProvidedId,
+            QolariProvidedId = QolariProvidedId,
             lastStatusCheckedAt = lastStatusCheckedAt,
             lastUpdated = lastUpdated,
             mandateId = Kernel.Types.Id.Id mandateId,
@@ -50,7 +50,7 @@ instance ToTType' Beam.Notification Domain.Types.Notification.Notification where
         Beam.description = description,
         Beam.driverFeeId = Kernel.Types.Id.getId driverFeeId,
         Beam.id = Kernel.Types.Id.getId id,
-        Beam.juspayProvidedId = juspayProvidedId,
+        Beam.QolariProvidedId = QolariProvidedId,
         Beam.lastStatusCheckedAt = lastStatusCheckedAt,
         Beam.lastUpdated = lastUpdated,
         Beam.mandateId = Kernel.Types.Id.getId mandateId,

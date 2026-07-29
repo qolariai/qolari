@@ -1,5 +1,5 @@
-# Finance Kernel - State Machine Tables
-# Namma-DSL YAML specification
+﻿# Finance Kernel - State Machine Tables
+# qolari-dsl YAML specification
 
 imports:
   UTCTime: Kernel.Prelude

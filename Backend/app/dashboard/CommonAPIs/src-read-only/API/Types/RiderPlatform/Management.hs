@@ -1,4 +1,4 @@
-{-# LANGUAGE StandaloneKindSignatures #-}
+﻿{-# LANGUAGE StandaloneKindSignatures #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module API.Types.RiderPlatform.Management where
@@ -11,7 +11,7 @@ import qualified API.Types.RiderPlatform.Management.FRFSTicket
 import qualified API.Types.RiderPlatform.Management.Invoice
 import qualified API.Types.RiderPlatform.Management.Media
 import qualified API.Types.RiderPlatform.Management.Merchant
-import qualified API.Types.RiderPlatform.Management.NammaTag
+import qualified API.Types.RiderPlatform.Management.QolariTag
 import qualified API.Types.RiderPlatform.Management.Offer
 import qualified API.Types.RiderPlatform.Management.Payout
 import qualified API.Types.RiderPlatform.Management.Rewards
@@ -36,7 +36,7 @@ data ManagementUserActionType
   | INVOICE API.Types.RiderPlatform.Management.Invoice.InvoiceUserActionType
   | MEDIA API.Types.RiderPlatform.Management.Media.MediaUserActionType
   | MERCHANT API.Types.RiderPlatform.Management.Merchant.MerchantUserActionType
-  | NAMMA_TAG API.Types.RiderPlatform.Management.NammaTag.NammaTagUserActionType
+  | QOLARI_TAG API.Types.RiderPlatform.Management.QolariTag.QolariTagUserActionType
   | OFFER API.Types.RiderPlatform.Management.Offer.OfferUserActionType
   | PAYOUT API.Types.RiderPlatform.Management.Payout.PayoutUserActionType
   | REWARDS API.Types.RiderPlatform.Management.Rewards.RewardsUserActionType
@@ -58,7 +58,7 @@ instance Text.Show.Show ManagementUserActionType where
     INVOICE e -> "INVOICE/" <> show e
     MEDIA e -> "MEDIA/" <> show e
     MERCHANT e -> "MERCHANT/" <> show e
-    NAMMA_TAG e -> "NAMMA_TAG/" <> show e
+    QOLARI_TAG e -> "QOLARI_TAG/" <> show e
     OFFER e -> "OFFER/" <> show e
     PAYOUT e -> "PAYOUT/" <> show e
     REWARDS e -> "REWARDS/" <> show e
@@ -134,10 +134,10 @@ instance Text.Read.Read ManagementUserActionType where
                      ) <-
                      Text.Read.readsPrec (app_prec + 1) r1
                ]
-            ++ [ ( NAMMA_TAG v1,
+            ++ [ ( QOLARI_TAG v1,
                    r2
                  )
-                 | r1 <- stripPrefix "NAMMA_TAG/" r,
+                 | r1 <- stripPrefix "QOLARI_TAG/" r,
                    ( v1,
                      r2
                      ) <-

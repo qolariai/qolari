@@ -1,4 +1,4 @@
-# NammaYatri Testing Framework
+﻿# Qolari Testing Framework
 
 Complete architecture of the local testing infrastructure covering config sync, integration tests, mock servers, and test tools.
 
@@ -25,7 +25,7 @@ Backend/dev/
 └── test-tool/            # Dashboard UI + context API for manual testing
 ```
 
-The testing framework enables fully local end-to-end testing of the NammaYatri platform by:
+The testing framework enables fully local end-to-end testing of the Qolari platform by:
 1. **Syncing real production config** (fare policies, merchant settings, service configs) from master to local with URL/credential patching
 2. **Mocking all external services** (payment gateways, metro APIs, SMS providers, etc.) with a single Python server that supports response overrides
 3. **Running automated test suites** via Newman that cover ride booking, ticket booking, payments, cancellations, refunds, and failure scenarios
@@ -115,7 +115,7 @@ Simple string find/replace on raw JSON content. Applied during the **patch** ste
 ```json
 {
   "global_replacements": [
-    {"find": "https://api.juspay.in", "replace": "http://localhost:8080/juspay"},
+    {"find": "https://api.Qolari.in", "replace": "http://localhost:8080/Qolari"},
     {"find": "https://maps.googleapis.com/maps/api/", "replace": "http://localhost:8019/"},
     {"find": "https://quickticketapi.chennaimetrorail.org/api", "replace": "http://localhost:8080/cmrl"},
     {"find": "/beckn/beckn/", "replace": "/beckn/"}
@@ -147,10 +147,10 @@ Per-table, per-row field overrides. Applied during the **import** step. Supports
         "set": {"unique_key_id": "eval:{merchant_id}"}
       }],
       "merchant_service_config": [{
-        "where": {"service_name": "Payment_Juspay"},
+        "where": {"service_name": "Payment_Qolari"},
         "merge_json": {
           "config_json": {
-            "url": "http://localhost:8080/juspay",
+            "url": "http://localhost:8080/Qolari",
             "apiKey": "ENCRYPT:S\"mock-api-key\"",
             "password": "ENCRYPT:S\"mock-password\""
           }
@@ -255,7 +255,7 @@ See `Rules.md` for full guidelines.
 - **Collection variables** (generated per run): phone numbers, reg numbers, auth tokens, booking/search IDs
 
 **Dashboard Access:**
-- One admin token (`local-admin-token-bangalore-namma-yatri`) stored in all environments
+- One admin token (`local-admin-token-bangalore-qolari`) stored in all environments
 - Collections call `POST {{dashboard_base_url}}/user/switchMerchantAndCity` to get a city-specific token
 - The returned `authToken` replaces `dashboard_token` for subsequent dashboard API calls
 
@@ -345,7 +345,7 @@ Single Python HTTP server (port 8080) that mocks all external service integratio
                        │           ▼                   │
                        │  ┌────────────────────────┐   │
                        │  │  Route to handler:      │   │
-                       │  │  /juspay → juspay.py   │   │
+                       │  │  /Qolari → Qolari.py   │   │
                        │  │  /stripe → stripe.py   │   │
                        │  │  /cmrl   → cmrl.py     │   │
                        │  │  /cris   → cris.py     │   │
@@ -365,7 +365,7 @@ Single Python HTTP server (port 8080) that mocks all external service integratio
 
 | Service | Route | Features |
 |---------|-------|----------|
-| **Juspay** | `/juspay` | Orders, offers, refunds. Auto-stores refund on POST /orders/{id}/refunds |
+| **Qolari** | `/Qolari` | Orders, offers, refunds. Auto-stores refund on POST /orders/{id}/refunds |
 | **Stripe** | `/stripe` | Full v1 API (21 endpoints), stateful, form-urlencoded, test cards |
 | **CMRL** | `/cmrl` | V1+V2 auth, fare, tickets. AES-256-CBC encrypted responses |
 | **CRIS** | `/cris` | Auth, route fare, book journey. AES-256-ECB encrypted, agent key derivation |
@@ -393,14 +393,14 @@ default response.
 
 ```
 Collection captures payment_order_id from GET /frfs/booking/{id}/status
-    → POST /mock/override {service: juspay, extract: path.2, match: /orders,
+    → POST /mock/override {service: Qolari, extract: path.2, match: /orders,
                            value: <orderId>, response: {status: CHARGED}}
-        → Next GET /juspay/orders/<orderId> returns status=CHARGED
+        → Next GET /Qolari/orders/<orderId> returns status=CHARGED
 ```
 
 ```json
 POST /mock/override
-{"service": "juspay", "extract": "path.2", "value": "{{payment_order_id}}",
+{"service": "Qolari", "extract": "path.2", "value": "{{payment_order_id}}",
  "match": "/orders", "response": {"status": "CHARGED", "amount": 150}}
 
 GET /mock/override

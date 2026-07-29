@@ -82,7 +82,7 @@ handler merchantId = do
     :<|> DriverInfoByPhoneNumber.handler merchantId
   where
     getCity = \case
-      "NAMMA_YATRI_PARTNER" -> City.City "Bangalore"
+      "qolari_PARTNER" -> City.City "Bangalore"
       "YATRI_PARTNER" -> City.City "Kochi"
       "JATRI_SAATHI_PARTNER" -> City.City "Kolkata"
       _ -> City.City "AnyCity"

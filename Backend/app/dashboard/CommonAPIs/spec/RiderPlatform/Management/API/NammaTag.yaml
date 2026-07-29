@@ -1,9 +1,9 @@
-imports:
+﻿imports:
   User: Dashboard.Common
   ConfigPilotGetConfigRequest: Lib.Yudhishthira.Types
   ConfigPilotCreateRowRequest: Lib.Yudhishthira.Types
-  CreateNammaTagRequest: Lib.Yudhishthira.Types
-  UpdateNammaTagRequest: Lib.Yudhishthira.Types
+  CreateQolariTagRequest: Lib.Yudhishthira.Types
+  UpdateQolariTagRequest: Lib.Yudhishthira.Types
   APISuccess: Kernel.Types.APISuccess
   ChakraQueriesAPIEntity: Lib.Yudhishthira.Types
   ChakraQueryUpdateReq: Lib.Yudhishthira.Types
@@ -35,15 +35,15 @@ imports:
   AlwaysOnListResp: Lib.Yudhishthira.Types
   UiConfigGetVersionResponse: Lib.Yudhishthira.Types
   UiDevicePlatformReq: Lib.Yudhishthira.Types
-  VerifyNammaTagRequest: Lib.Yudhishthira.Types
-  VerifyNammaTagResponse: Lib.Yudhishthira.Types
-  NammaTagV2: Lib.Yudhishthira.Types.NammaTagV2
-  NammaTagDetailsResp: Lib.Yudhishthira.Types
+  VerifyQolariTagRequest: Lib.Yudhishthira.Types
+  VerifyQolariTagResponse: Lib.Yudhishthira.Types
+  QolariTagV2: Lib.Yudhishthira.Types.QolariTagV2
+  QolariTagDetailsResp: Lib.Yudhishthira.Types
   Value: Data.Aeson
-  NammaTagEventsOrNammaTagNamesResp: Lib.Yudhishthira.Types
+  QolariTagEventsOrQolariTagNamesResp: Lib.Yudhishthira.Types
 
 
-module: NammaTag
+module: QolariTag
 
 types: {}
 
@@ -52,27 +52,27 @@ apis:
       endpoint: /tag/create
       auth: ApiAuthV2
       request:
-        type: CreateNammaTagRequest
+        type: CreateQolariTagRequest
       response:
         type: APISuccess
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG CREATE_NAMMA_TAG
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG CREATE_QOLARI_TAG
   - POST:
       endpoint: /tag/update
       auth: ApiAuthV2
       request:
-        type: UpdateNammaTagRequest
+        type: UpdateQolariTagRequest
       response:
         type: APISuccess
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG CREATE_NAMMA_TAG
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG CREATE_QOLARI_TAG
   - POST:
       endpoint: /tag/verify
       auth: ApiAuthV2
       request:
-        type: VerifyNammaTagRequest
+        type: VerifyQolariTagRequest
       response:
-        type: VerifyNammaTagResponse
+        type: VerifyQolariTagResponse
   - DELETE:
       endpoint: /tag/delete
       auth: ApiAuthV2
@@ -81,19 +81,19 @@ apis:
       response:
         type: APISuccess
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG CREATE_NAMMA_TAG
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG CREATE_QOLARI_TAG
   - GET:
       endpoint: /tag/all
       auth: ApiAuthV2
       response:
-        type: "[NammaTagDetailsResp]"
+        type: "[QolariTagDetailsResp]"
   - GET:
       endpoint: /tag/details
       auth: ApiAuthV2
       mandatoryQuery:
         tagName: Text
       response:
-        type: NammaTagDetailsResp
+        type: QolariTagDetailsResp
   - POST:
       endpoint: /query/create
       auth: ApiAuthV2
@@ -102,7 +102,7 @@ apis:
       response:
         type: APISuccess
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG CREATE_CHAKRA_QUERY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG CREATE_CHAKRA_QUERY
   - POST:
       endpoint: /query/update
       auth: ApiAuthV2
@@ -133,7 +133,7 @@ apis:
       response:
         type: AppDynamicLogicResp
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_VERIFY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_VERIFY
   - GET:
       endpoint: /appDynamicLogic
       auth: ApiAuthV2
@@ -144,7 +144,7 @@ apis:
       response:
         type: "[GetLogicsResp]"
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_VERIFY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_VERIFY
   - POST:
       endpoint: /runJob
       auth: ApiAuthV2
@@ -153,7 +153,7 @@ apis:
       response:
         type: RunKaalChakraJobRes
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG RUN_KAAL_CHAKRA_JOB
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG RUN_KAAL_CHAKRA_JOB
   - GET:
       endpoint: /timeBounds
       auth: ApiAuthV2
@@ -162,7 +162,7 @@ apis:
       response:
         type: TimeBoundResp
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG TIME_BOUNDS
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG TIME_BOUNDS
   - POST:
       endpoint: /timeBounds/create
       auth: ApiAuthV2
@@ -171,7 +171,7 @@ apis:
       response:
         type: APISuccess
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG TIME_BOUNDS
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG TIME_BOUNDS
   - DELETE:
       endpoint: /timeBounds/delete
       auth: ApiAuthV2
@@ -181,7 +181,7 @@ apis:
       response:
         type: APISuccess
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG TIME_BOUNDS
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG TIME_BOUNDS
   - GET:
       endpoint: /appDynamicLogic/getLogicRollout
       auth: ApiAuthV2
@@ -193,7 +193,7 @@ apis:
       response:
         type: "[LogicRolloutObject]"
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_ROLLOUT
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_ROLLOUT
   - POST:
       endpoint: /appDynamicLogic/upsertLogicRollout
       auth: ApiAuthV2
@@ -202,7 +202,7 @@ apis:
       response:
         type: APISuccess
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_ROLLOUT
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_ROLLOUT
   - GET:
       endpoint: /appDynamicLogic/versions
       auth: ApiAuthV2
@@ -214,21 +214,21 @@ apis:
       response:
         type: AppDynamicLogicVersionResp
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_VERIFY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_VERIFY
   - GET:
       endpoint: /appDynamicLogic/domains
       auth: ApiAuthV2
       response:
         type: AppDynamicLogicDomainResp
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_VERIFY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_VERIFY
   - GET:
       endpoint: /appDynamicLogic/domainsAndEvents
       auth: ApiAuthV2
       query:
-        fetchNammaTagNames: Bool
+        fetchQolariTagNames: Bool
       response:
-        type: NammaTagEventsOrNammaTagNamesResp
+        type: QolariTagEventsOrQolariTagNamesResp
   - GET:
       endpoint: /appDynamicLogic/getDomainSchema
       auth: ApiAuthV2
@@ -244,7 +244,7 @@ apis:
       response:
         type: ChakraQueryResp
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG GET_CHAKRA_QUERY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG GET_CHAKRA_QUERY
   - POST:
       endpoint: /{customerId}/updateCustomerTag
       auth: ApiAuthV2
@@ -255,7 +255,7 @@ apis:
       response:
         type: APISuccess
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG MANUAL_TAG_UPDATE
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG MANUAL_TAG_UPDATE
   - POST:
       endpoint: /configPilot/getVersion
       auth: ApiAuthV2
@@ -264,7 +264,7 @@ apis:
       response:
         type: UiConfigGetVersionResponse
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG POST_RETRIEVE_VERSION
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG POST_RETRIEVE_VERSION
   - POST:
       endpoint: /configPilot/getConfig
       auth: ApiAuthV2
@@ -273,7 +273,7 @@ apis:
       response:
         type: UiConfigResponse
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG POST_RETRIEVE_CONFIG
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG POST_RETRIEVE_CONFIG
   - POST:
       endpoint: /configPilot/createUiConfig
       auth: ApiAuthV2
@@ -282,7 +282,7 @@ apis:
       response:
         type: APISuccess
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG CREATE_UI_CONFIG
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG CREATE_UI_CONFIG
   - GET:
       endpoint: /configPilot/allConfigs/
       auth: ApiAuthV2
@@ -291,7 +291,7 @@ apis:
       response:
         type: "[ConfigType]"
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_VERIFY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_VERIFY
   - GET:
       endpoint: /configPilot/configDetails
       auth: ApiAuthV2
@@ -300,7 +300,7 @@ apis:
       response:
         type: "[ConfigDetailsResp]"
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_VERIFY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_VERIFY
   - GET:
       endpoint: /configPilot/getTableData
       auth: ApiAuthV2
@@ -309,7 +309,7 @@ apis:
       response:
         type: TableDataResp
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_VERIFY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_VERIFY
   - GET:
       endpoint: /configPilot/allUiConfigs
       auth: ApiAuthV2
@@ -318,7 +318,7 @@ apis:
       response:
         type: "[LogicDomain]"
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_VERIFY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_VERIFY
   - GET:
       endpoint: /configPilot/uiConfigDetails
       auth: ApiAuthV2
@@ -327,7 +327,7 @@ apis:
       response:
         type: "[ConfigDetailsResp]"
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_VERIFY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_VERIFY
   - GET:
       endpoint: /configPilot/getUiTableData
       auth: ApiAuthV2
@@ -336,7 +336,7 @@ apis:
       response:
         type: TableDataResp
       migrate:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_VERIFY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_VERIFY
   - GET:
       endpoint: /configPilot/alwaysOnList
       auth: ApiAuthV2
@@ -353,7 +353,7 @@ apis:
         type: APISuccess
       migrate:
         endpointV2:
-        userActionType: ApiAuth APP_BACKEND_MANAGEMENT NAMMA_TAG APP_DYNAMIC_LOGIC_VERIFY
+        userActionType: ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG APP_DYNAMIC_LOGIC_VERIFY
   - POST:
       endpoint: /configPilot/getConfigWithDimensions
       auth: ApiAuthV2

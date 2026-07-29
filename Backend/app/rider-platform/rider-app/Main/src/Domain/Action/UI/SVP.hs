@@ -1,4 +1,4 @@
-module Domain.Action.UI.SVP
+﻿module Domain.Action.UI.SVP
   ( getSvpQr,
     getSvpPublicKey,
     postSvpGate,
@@ -224,7 +224,7 @@ getSvpQr (Just riderId, merchantId) mbLat mbLon = do
   person <- QPersonBase.findById riderId >>= fromMaybeM (PersonNotFound (getId riderId))
   decMobile <- mapM decrypt person.mobileNumber
   let mobile = encodeMobile (fromMaybe "0000000000" decMobile)
-  -- Fetch live balance from Juspay wallet API
+  -- Fetch live balance from Qolari wallet API
   balancePaisa <- do
     let balanceReq = Wallet.WalletBalanceReq {customerId = getId riderId, requireHistory = Just False}
     walletResp <- LoyaltyWallet.svpWalletBalance merchantId person.merchantOperatingCityId balanceReq
@@ -293,7 +293,7 @@ handleEntry ::
   m API.GateCallbackResp
 handleEntry mobileNum mId stationCode entryTime = do
   person <- findRiderByMobile mobileNum mId
-  -- Fetch live balance from Juspay wallet API
+  -- Fetch live balance from Qolari wallet API
   balance <- do
     let balanceReq = Wallet.WalletBalanceReq {customerId = getId person.id, requireHistory = Just False}
     walletResp <- LoyaltyWallet.svpWalletBalance person.merchantId person.merchantOperatingCityId balanceReq

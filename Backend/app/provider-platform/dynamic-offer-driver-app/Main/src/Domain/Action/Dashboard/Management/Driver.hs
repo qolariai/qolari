@@ -1019,7 +1019,7 @@ postDriverUpdateSpecialLocWarrior merchantShortId opCity driverId req = do
   whenJust preferredPrimarySpecialLocationId validatePreferredSpecialLocId
   mapM_ validatePreferredSpecialLocId preferredSecondarySpecialLocIds
 
-  metroWarriorTagValidity <- Yudhishthira.fetchNammaTagValidity (cast merchantOpCityId) $ LYT.TagName "MetroWarrior"
+  metroWarriorTagValidity <- Yudhishthira.fetchQolariTagValidity (cast merchantOpCityId) $ LYT.TagName "MetroWarrior"
   now <- getCurrentTime
   let enabledAt = if req.isSpecialLocWarrior then Just now else Nothing
   QDriverInfo.updateSpecialLocWarriorInfo req.isSpecialLocWarrior preferredPrimarySpecialLocationId preferredSecondarySpecialLocIds enabledAt personId

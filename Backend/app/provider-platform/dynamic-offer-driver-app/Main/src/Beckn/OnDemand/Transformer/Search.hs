@@ -62,7 +62,7 @@ buildSearchReqRaw messageId bapSubscriberId bapSubscriberUrl req context actualB
   let bapId_ = bapSubscriberId
       bapUri_ = newBapUri_
       customerLanguage_ = Beckn.OnDemand.Utils.Search.buildCustomerLanguage req
-      customerNammaTags_ = Beckn.OnDemand.Utils.Search.buildCustomerNammaTags req
+      customerQolariTags_ = Beckn.OnDemand.Utils.Search.buildCustomerQolariTags req
       isDashboardRequest_ = Beckn.OnDemand.Utils.Search.checkIfDashboardSearch req
       device_ = Nothing
       disabilityTag_ = Beckn.OnDemand.Utils.Search.buildDisabilityTag req
@@ -121,7 +121,7 @@ buildSearchReqRaw messageId bapSubscriberId bapSubscriberUrl req context actualB
         bapId = bapId_,
         bapUri = bapUri_,
         customerLanguage = customerLanguage_,
-        customerNammaTags = customerNammaTags_,
+        customerQolariTags = customerQolariTags_,
         customerPhoneNum = customerPhoneNum_,
         isDashboardRequest = fromMaybe False isDashboardRequest_,
         roundTrip = fromMaybe False isRoundTrip_,

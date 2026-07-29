@@ -1,7 +1,7 @@
-{-# LANGUAGE StandaloneDeriving #-}
+﻿{-# LANGUAGE StandaloneDeriving #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
-module Lib.Yudhishthira.Storage.Beam.NammaTag where
+module Lib.Yudhishthira.Storage.Beam.QolariTag where
 
 import qualified Data.Aeson
 import qualified Database.Beam as B
@@ -10,15 +10,15 @@ import Kernel.Prelude
 import qualified Kernel.Prelude
 import qualified Kernel.Types.Common
 import qualified Lib.Yudhishthira.Types
-import qualified Lib.Yudhishthira.Types.NammaTag
+import qualified Lib.Yudhishthira.Types.QolariTag
 import Tools.Beam.UtilsTH
 
-data NammaTagT f = NammaTagT
+data QolariTagT f = QolariTagT
   { actionEngine :: (B.C f (Kernel.Prelude.Maybe Data.Aeson.Value)),
     category :: (B.C f Kernel.Prelude.Text),
     description :: (B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Text)),
     chakra :: (B.C f (Kernel.Prelude.Maybe Lib.Yudhishthira.Types.Chakra)),
-    tagType :: (B.C f Lib.Yudhishthira.Types.NammaTag.TagType),
+    tagType :: (B.C f Lib.Yudhishthira.Types.QolariTag.TagType),
     name :: (B.C f Kernel.Prelude.Text),
     rangeEnd :: (B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Double)),
     rangeStart :: (B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Double)),
@@ -31,12 +31,12 @@ data NammaTagT f = NammaTagT
   }
   deriving (Generic, B.Beamable)
 
-instance B.Table NammaTagT where
-  data PrimaryKey NammaTagT f = NammaTagId (B.C f Kernel.Prelude.Text) deriving (Generic, B.Beamable)
-  primaryKey = NammaTagId . name
+instance B.Table QolariTagT where
+  data PrimaryKey QolariTagT f = QolariTagId (B.C f Kernel.Prelude.Text) deriving (Generic, B.Beamable)
+  primaryKey = QolariTagId . name
 
-type NammaTag = NammaTagT Identity
+type QolariTag = QolariTagT Identity
 
-$(enableKVPG (''NammaTagT) [('name)] [])
+$(enableKVPG (''QolariTagT) [('name)] [])
 
-$(mkTableInstancesGenericSchema (''NammaTagT) "namma_tag")
+$(mkTableInstancesGenericSchema (''QolariTagT) "QOLARI_TAG")

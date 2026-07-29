@@ -1,4 +1,4 @@
-# Technical Context
+﻿# Technical Context
 
 ## Core Technologies
 
@@ -59,8 +59,8 @@ cabal test all
 
 ### External Integration Details
 **Payment & Financial:**
-- Juspay payment gateway (multiple webhook endpoints)
-- Juspay payout system with mandate execution
+- Qolari payment gateway (multiple webhook endpoints)
+- Qolari payout system with mandate execution
 - Manual payment link generation
 
 **Verification Services:**
@@ -206,7 +206,7 @@ nix flake lock --update-input shared-kernel
         *   The `run-generator` script typically handles `hpack` calls, updating `.cabal` files.
         *   If a module is deleted manually or if `hpack` doesn't correctly remove a reference, the `.cabal` file might need manual editing to remove the orphaned module from `exposed-modules` or `other-modules`.
 
-3.  **API and Code Naming Conventions (for Namma DSL):**
+3.  **API and Code Naming Conventions (for Qolari DSL):**
     *   **API Endpoint Paths (YAML)**: Use camelCase for path segments (e.g., `/nyRegular/subscriptionDetails/`) rather than hyphens, as hyphens can interfere with DSL processing or function name generation.
     *   **Generated Haskell Function Names**: The DSL derives Haskell function names from endpoint paths. Ensure paths are structured to produce valid and unique Haskell identifiers. For example, `GET /module/entity/{id}` might generate `getModuleEntityById`.
     *   **Function Name Uniqueness**: If multiple GET (or other HTTP methods) endpoints target similar base paths (e.g., `/entities` and `/entities/{id}`), ensure the generator can distinguish them to create unique function names. Modifying paths (e.g., `/entityDetails/{id}`) or using `operationId` in the YAML (if supported by the DSL) can help.
@@ -261,7 +261,7 @@ nix flake lock --update-input shared-kernel
 ### 2. Development Environment & Setup
 -   **Common Prerequisite:**
     -   Nix: [Install Nix](https://nixos.asia/en/install)
-    -   Direnv: [Install direnv](https://github.com/juspay/nixos-unified-template) (home-manager template recommended)
+    -   Direnv: [Install direnv](https://github.com/qolariai/nixos-unified-template) (home-manager template recommended)
 -   **Backend Setup:**
     1.  `ln -s .envrc.backend .envrc` (from project root, once)
     2.  `direnv allow` (from project root, once)
@@ -325,7 +325,7 @@ nix flake lock --update-input shared-kernel
     -   Data transformation functions between database representations and domain types.
     -   Boilerplate for CRUD operations or specific queries.
     -   Servant API type definitions and potentially server/client stubs.
-    -   **NammaDSL**: The custom Domain Specific Language used for defining API and Storage specifications in YAML. It drives the code generation process for Haskell types, Beam mappings, queries, and API definitions. (See `memory-bank/namma_dsl_rules.md` for syntax and usage).
+    -   **QolariDSL**: The custom Domain Specific Language used for defining API and Storage specifications in YAML. It drives the code generation process for Haskell types, Beam mappings, queries, and API definitions. (See `memory-bank/qolari_dsl_rules.md` for syntax and usage).
 
 ### 6. Configuration Management
 -   **Dhall:** Used for static service configuration, providing a typed and programmable configuration language (`dhall-configs/`).
@@ -358,5 +358,5 @@ nix flake lock --update-input shared-kernel
 -   **Android Studio:**
     -   Used for building and running the native Android application.
 -   **Git:** (Implied as version control, specific workflow not detailed in these READMEs but mentioned in root README).
--   **Shell Scripts:** Used for specific tasks like Android bundling (`bundling.sh`) and updating Juspay assets.
+-   **Shell Scripts:** Used for specific tasks like Android bundling (`bundling.sh`) and updating Qolari assets.
 -   **Comma Commands (`,`)**: Custom aliases/scripts available within the Nix develop shell for common development tasks (e.g., `, ghcid`, `, run-mobility-stack-dev`).

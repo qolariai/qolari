@@ -1,4 +1,4 @@
-import json
+﻿import json
 import os
 import re
 import sys
@@ -58,7 +58,7 @@ def load_env(collection_dir: str, env_subdir: str = 'Local') -> dict:
 def _infer_service(raw_url: str) -> str:
     if '{{baseURL_BPP_Dashboard' in raw_url or '{{dashboard_base_url' in raw_url:
         return 'provider-dashboard'
-    if '{{baseURL_namma_P' in raw_url or '{{baseUrl_lts' in raw_url:
+    if '{{baseURL_qolari_P' in raw_url or '{{baseUrl_lts' in raw_url:
         return 'driver'
     return 'rider'
 

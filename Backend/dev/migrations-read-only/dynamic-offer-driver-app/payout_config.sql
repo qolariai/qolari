@@ -1,4 +1,4 @@
-CREATE TABLE atlas_driver_offer_bpp.payout_config ();
+﻿CREATE TABLE atlas_driver_offer_bpp.payout_config ();
 
 ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN batch_limit integer NOT NULL default 10;
 ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN is_payout_enabled boolean NOT NULL default False;
@@ -10,7 +10,7 @@ ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN payout_registration_
 ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN payout_registration_fee double precision NOT NULL default 1.0;
 ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN payout_registration_sgst double precision NOT NULL default 0;
 ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN referral_reward_amount_per_ride double precision NOT NULL default 100.0;
-ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN remark text NOT NULL default 'Referral Reward From Nammayatri';
+ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN remark text NOT NULL default 'Referral Reward From Qolari';
 ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN threshold_payout_amount_per_person double precision NOT NULL default 1000.0;
 ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN time_diff integer NOT NULL default 86400;
 ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN vehicle_category text NOT NULL;

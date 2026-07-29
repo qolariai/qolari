@@ -1,4 +1,4 @@
--- Seed the Aarokya PartnerSdk service config for rider-app.
+﻿-- Seed the Aarokya PartnerSdk service config for rider-app.
 --
 -- Required so rider-app's POST /aarokya/contributorToken can resolve the Aarokya
 -- backend URL + platform Basic-auth credential. Tools.PartnerSdk.generateContributorToken
@@ -28,10 +28,10 @@ INSERT INTO atlas_app.merchant_service_config
   (merchant_id, merchant_operating_city_id, service_name, config_json)
 SELECT m.merchant_id, m.id, 'PartnerSdk_Aarokya',
   json_build_object(
-      'url', 'https://aarokya.sandbox.juspay.in/'
+      'url', 'https://aarokya.sandbox.Qolari.in/'
     , 'basicToken', '0.1.0|2|S5jEpEGqTAXxcL1ZEFp1GoEaBglJ/cUiLwhnqFLy1xAjFY7n1CSdxRfk0G7QDX5rbL/jcn1g3fAzFtIFegI='
     , 'platformId', '019db4e2-5458-7e42-a1fb-91eec5d83bac'
   )
 FROM atlas_app.merchant_operating_city m
-WHERE m.merchant_short_id = 'NAMMA_YATRI' AND m.city = 'Kochi'
+WHERE m.merchant_short_id = 'QOLARI' AND m.city = 'Kochi'
 ON CONFLICT DO NOTHING;

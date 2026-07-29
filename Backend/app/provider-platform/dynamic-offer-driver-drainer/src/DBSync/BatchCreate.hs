@@ -1,9 +1,9 @@
-{-# LANGUAGE BangPatterns #-}
+﻿{-# LANGUAGE BangPatterns #-}
 
 -- |
 -- Module      : DBSync.BatchCreate
 -- Description : Optimized batch processing for database operations in the drainer
--- Copyright   : (c) Namma Yatri Platform, 2025
+-- Copyright   : (c) Qolari Platform, 2025
 -- License     : AllRightsReserved
 --
 -- This module provides high-performance batch processing for database CREATE operations.

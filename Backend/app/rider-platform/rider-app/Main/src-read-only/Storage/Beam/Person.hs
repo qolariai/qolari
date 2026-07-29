@@ -1,4 +1,4 @@
-{-# LANGUAGE StandaloneDeriving #-}
+﻿{-# LANGUAGE StandaloneDeriving #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Storage.Beam.Person where
@@ -47,7 +47,7 @@ data PersonT f = PersonT
     comments :: B.C f (Kernel.Prelude.Maybe [Kernel.Prelude.Text]),
     createdAt :: B.C f Kernel.Prelude.UTCTime,
     currentCity :: B.C f (Kernel.Prelude.Maybe Kernel.Types.Beckn.Context.City),
-    customerNammaTags :: B.C f (Kernel.Prelude.Maybe [Kernel.Prelude.Text]),
+    customerQolariTags :: B.C f (Kernel.Prelude.Maybe [Kernel.Prelude.Text]),
     customerReferralCode :: B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Text),
     dateOfBirth :: B.C f (Kernel.Prelude.Maybe Kernel.Prelude.UTCTime),
     description :: B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Text),
@@ -74,7 +74,7 @@ data PersonT f = PersonT
     informPoliceSos :: B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Bool),
     isNew :: B.C f Kernel.Prelude.Bool,
     isValidRating :: B.C f Kernel.Prelude.Bool,
-    juspayCustomerPaymentID :: B.C f (Kernel.Prelude.Maybe Kernel.External.Payment.Interface.Types.CustomerId),
+    QolariCustomerPaymentID :: B.C f (Kernel.Prelude.Maybe Kernel.External.Payment.Interface.Types.CustomerId),
     language :: B.C f (Kernel.Prelude.Maybe Kernel.External.Maps.Language),
     lastName :: B.C f (Kernel.Prelude.Maybe Kernel.Prelude.Text),
     lastUsedVehicleCategories :: B.C f (Kernel.Prelude.Maybe [BecknV2.OnDemand.Enums.VehicleCategory]),

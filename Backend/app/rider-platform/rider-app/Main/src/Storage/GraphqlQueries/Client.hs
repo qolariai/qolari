@@ -1,5 +1,5 @@
-{-
- Copyright 2025-26, Juspay India Pvt Ltd
+﻿{-
+ Copyright 2025-26, Qolari Technologies
 
  This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License
 

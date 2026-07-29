@@ -1,4 +1,4 @@
-{-# LANGUAGE ApplicativeDo #-}
+﻿{-# LANGUAGE ApplicativeDo #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
 module Domain.Types.Extra.Notification (Payment.NotificationStatus (..)) where
@@ -8,7 +8,7 @@ import Database.Beam.Backend (BeamSqlBackend, FromBackendRow, HasSqlValueSyntax 
 import Database.Beam.MySQL ()
 import Database.Beam.Postgres (Postgres)
 import Database.PostgreSQL.Simple.FromField (FromField, fromField)
-import qualified Kernel.External.Payment.Juspay.Types as Payment
+import qualified Kernel.External.Payment.Gateway.Types as Payment
 import Kernel.Prelude hiding (Generic)
 import Kernel.Types.Common hiding (id)
 

@@ -1,4 +1,4 @@
-{-# LANGUAGE ApplicativeDo #-}
+﻿{-# LANGUAGE ApplicativeDo #-}
 {-# OPTIONS_GHC -Wno-dodgy-exports #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
@@ -22,7 +22,7 @@ data Notification = Notification
     description :: Kernel.Prelude.Text,
     driverFeeId :: Kernel.Types.Id.Id Domain.Types.DriverFee.DriverFee,
     id :: Kernel.Types.Id.Id Domain.Types.Notification.Notification,
-    juspayProvidedId :: Kernel.Prelude.Text,
+    QolariProvidedId :: Kernel.Prelude.Text,
     lastStatusCheckedAt :: Kernel.Prelude.Maybe Kernel.Prelude.UTCTime,
     lastUpdated :: Kernel.Prelude.UTCTime,
     mandateId :: Kernel.Types.Id.Id Domain.Types.Mandate.Mandate,

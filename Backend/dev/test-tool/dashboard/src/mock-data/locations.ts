@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Mock Location Data — Pickup and Drop locations grouped by city.
  * Used across search, estimates, and other location-based APIs.
  */
@@ -39,7 +39,7 @@ export const kochiLocations: LocationPreset[] = [
   },
 ];
 
-// ===================== BANGALORE (NAMMA_YATRI) =====================
+// ===================== BANGALORE (qolari) =====================
 export const bangaloreLocations: LocationPreset[] = [
   {
     name: 'Koramangala 4th Block',

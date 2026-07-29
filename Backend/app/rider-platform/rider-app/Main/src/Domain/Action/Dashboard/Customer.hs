@@ -333,7 +333,7 @@ postCustomerApplyOffer merchantShortId opCity req = do
     throwError (InvalidRequest $ "Offer code " <> req.offerCode <> " is not eligible for customer")
   now <- getCurrentTime
   let tag = LYTU.mkTagNameValueExpiry (LYT.TagName SOffer.autoApplyOfferTagName) (LYT.TextValue req.offerCode) (Just $ Hours req.validityHours) now
-      newTags = LYTU.removeTagNameValue person.customerNammaTags tag ++ [tag]
+      newTags = LYTU.removeTagNameValue person.customerQolariTags tag ++ [tag]
   CQPerson.updateCustomerTags (Just newTags) person.id
   logTagInfo "dashboard -> applyOffer : " (show person.id <> " offerCode: " <> req.offerCode)
   pure Success

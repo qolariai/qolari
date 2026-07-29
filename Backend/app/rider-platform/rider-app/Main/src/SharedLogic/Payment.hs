@@ -1,4 +1,4 @@
-module SharedLogic.Payment where
+﻿module SharedLogic.Payment where
 
 import qualified API.Types.UI.RidePayment as APIRidePayment
 import qualified Beckn.ACL.Cancel as ACL
@@ -133,7 +133,7 @@ fallbackOrderStatusHandler paymentStatusResp = do
         Payment.AUTHORIZING -> DPayment.FulfillmentPending
         Payment.COD_INITIATED -> DPayment.FulfillmentPending
         Payment.STARTED -> DPayment.FulfillmentPending
-        Payment.JUSPAY_DECLINED -> DPayment.FulfillmentPending
+        Payment.Qolari_DECLINED -> DPayment.FulfillmentPending
         Payment.AUTHORIZATION_FAILED -> DPayment.FulfillmentPending
         Payment.AUTHENTICATION_FAILED -> DPayment.FulfillmentPending
         Payment.PARTIAL_CHARGED -> DPayment.FulfillmentPending
@@ -888,7 +888,7 @@ makePaymentIntent merchantId merchantOpCityId paymentMode personId mbRideId mbEx
           incrementAuthCall piId amount applicationFeeAmount =
             TPayment.updateAmountInPaymentIntent merchantId merchantOpCityId paymentMode piId amount applicationFeeAmount
       nwAddress <- asks (.nwAddress)
-      -- Build the offer basket so a Juspay-configured createPaymentIntent carries the real SKU basket.
+      -- Build the offer basket so a Qolari-configured createPaymentIntent carries the real SKU basket.
       -- On Stripe the basket has no wire representation and is dropped by createPayment.
       offerBasket <- TPayment.mkOfferBasket merchantId merchantOpCityId Nothing paymentServiceType effectiveAmount 1
       let serviceReq =

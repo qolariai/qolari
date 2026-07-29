@@ -1,10 +1,10 @@
--- Self-seed for the FaceMatchOnboardingFlow integration suite.
+﻿-- Self-seed for the FaceMatchOnboardingFlow integration suite.
 --
--- Creates a DEDICATED test opCity (NAMMA_YATRI / Ahmedabad) configured for the NON-SDK IDfy
+-- Creates a DEDICATED test opCity (QOLARI / Ahmedabad) configured for the NON-SDK IDfy
 -- document path so the selfie<->document face match actually runs, WITHOUT touching the real
 -- Bangalore opCity (which uses the HyperVerge SDK path and is relied on by other suites).
 --
--- It clones the Bangalore/NAMMA config into a new opCity and flips:
+-- It clones the Bangalore/Qolari config into a new opCity and flips:
 --   * merchant_service_usage_config.pan_verification_service -> Idfy   (route PAN through callIdfy -> verifyPanFlow gate)
 --   * merchant_service_usage_config.face_match_service        -> Idfy   (server-side /compare/face)
 --   * document_verification_config.face_match_source_doc      -> ProfilePhoto (the feature toggle)
@@ -19,9 +19,9 @@
 
 DO $$
 DECLARE
-  src text := 'f067bccf-5b34-fb51-a5a3-9d6fa6baac26';   -- Bangalore / NAMMA opCity (clone source)
+  src text := 'f067bccf-5b34-fb51-a5a3-9d6fa6baac26';   -- Bangalore / Qolari opCity (clone source)
   dst text := 'fa11ec00-0000-0000-0000-0facematch00';   -- dedicated face-match test opCity
-  newcity text := 'Ahmedabad';                          -- a valid Context.City NAMMA does not already use
+  newcity text := 'Ahmedabad';                          -- a valid Context.City Qolari does not already use
 BEGIN
   IF EXISTS (SELECT 1 FROM atlas_driver_offer_bpp.merchant_operating_city WHERE id = dst) THEN
     RAISE NOTICE 'face-match test opCity already present (%); skipping', dst;
@@ -54,5 +54,5 @@ BEGIN
   UPDATE _dvc SET is_image_validation_required = true WHERE document_type IN ('DriverLicense','PanCard','AadhaarCard');
   INSERT INTO atlas_driver_offer_bpp.document_verification_config SELECT * FROM _dvc;
 
-  RAISE NOTICE 'created face-match test opCity % (% / NAMMA)', dst, newcity;
+  RAISE NOTICE 'created face-match test opCity % (% / Qolari)', dst, newcity;
 END $$;

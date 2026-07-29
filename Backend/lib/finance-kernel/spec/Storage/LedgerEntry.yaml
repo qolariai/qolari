@@ -1,5 +1,5 @@
-# Finance Kernel - Ledger Entry Table
-# Namma-DSL YAML specification
+﻿# Finance Kernel - Ledger Entry Table
+# qolari-dsl YAML specification
 
 imports:
   UTCTime: Kernel.Prelude

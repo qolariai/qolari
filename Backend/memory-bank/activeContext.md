@@ -1,4 +1,4 @@
-# Active Context
+﻿# Active Context
 
 ## Current Work Focus
 
@@ -34,7 +34,7 @@
 
 ### Technical Insights
 - **Haskell Benefits**: Type safety for critical business logic, extensive use of Template Haskell.
-- **NammaDSL**: A custom DSL is used for API and Storage specifications, streamlining code generation.
+- **QolariDSL**: A custom DSL is used for API and Storage specifications, streamlining code generation.
 - **Nix Advantages**: Reproducible builds and development environments.
 - **Multi-package Strategy**: Enables focused development and testing.
 - **External Dependencies**: Careful management through flake inputs.
@@ -149,7 +149,7 @@
 
 
 4.  **NYRegular Feature Implementation**
-    *   Finalize NammaDSL schemas for `NyRegularSubscription` and `NyRegularInstanceLog`.
+    *   Finalize QolariDSL schemas for `NyRegularSubscription` and `NyRegularInstanceLog`.
     *   Detail the API contracts for NYRegular management.
     *   Elaborate on error handling and notification strategy for the scheduler jobs.
 

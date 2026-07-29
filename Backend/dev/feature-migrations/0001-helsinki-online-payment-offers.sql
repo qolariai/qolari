@@ -1,4 +1,4 @@
--- Helsinki (BRIDGE_FINLAND) — 10% Discount offer for first ride (Online Payment)
+﻿-- Helsinki (BRIDGE_FINLAND) — 10% Discount offer for first ride (Online Payment)
 -- Eligible only for customers with 0 previous offer applications
 
 DO $$
@@ -52,13 +52,13 @@ BEGIN
 
   RAISE NOTICE 'Helsinki online payment 10%% discount offer created: %', v_offer_id;
 
-  -- Enable useDomainOffers in Payment_Stripe, Payment_StripeTest, Payment_Juspay for Helsinki
+  -- Enable useDomainOffers in Payment_Stripe, Payment_StripeTest, Payment_Qolari for Helsinki
   UPDATE atlas_app.merchant_service_config
   SET config_json = config_json::jsonb || '{"useDomainOffers": true}'::jsonb,
       updated_at = now()
   WHERE merchant_id = v_merchant_id
     AND merchant_operating_city_id = v_city_id
-    AND service_name IN ('Payment_Stripe', 'Payment_StripeTest', 'Payment_Juspay');
+    AND service_name IN ('Payment_Stripe', 'Payment_StripeTest', 'Payment_Qolari');
 
-  RAISE NOTICE 'Helsinki: useDomainOffers set to true for Stripe/StripeTest/Juspay';
+  RAISE NOTICE 'Helsinki: useDomainOffers set to true for Stripe/StripeTest/Qolari';
 END $$;

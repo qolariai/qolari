@@ -1,15 +1,15 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
-module API.Action.Dashboard.Management.NammaTag
-  ( API.Types.RiderPlatform.Management.NammaTag.API,
+module API.Action.Dashboard.Management.QolariTag
+  ( API.Types.RiderPlatform.Management.QolariTag.API,
     handler,
   )
 where
 
-import qualified API.Types.RiderPlatform.Management.NammaTag
+import qualified API.Types.RiderPlatform.Management.QolariTag
 import qualified Dashboard.Common
-import qualified Domain.Action.Dashboard.NammaTag
+import qualified Domain.Action.Dashboard.QolariTag
 import qualified Domain.Types.Merchant
 import qualified Environment
 import EulerHS.Prelude
@@ -22,119 +22,119 @@ import qualified Lib.Yudhishthira.Types
 import Servant
 import Tools.Auth
 
-handler :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Environment.FlowServer API.Types.RiderPlatform.Management.NammaTag.API)
-handler merchantId city = postNammaTagTagCreate merchantId city :<|> postNammaTagTagUpdate merchantId city :<|> postNammaTagTagVerify merchantId city :<|> deleteNammaTagTagDelete merchantId city :<|> getNammaTagTagAll merchantId city :<|> getNammaTagTagDetails merchantId city :<|> postNammaTagQueryCreate merchantId city :<|> postNammaTagQueryUpdate merchantId city :<|> deleteNammaTagQueryDelete merchantId city :<|> getNammaTagQueryDetails merchantId city :<|> postNammaTagAppDynamicLogicVerify merchantId city :<|> getNammaTagAppDynamicLogic merchantId city :<|> postNammaTagRunJob merchantId city :<|> getNammaTagTimeBounds merchantId city :<|> postNammaTagTimeBoundsCreate merchantId city :<|> deleteNammaTagTimeBoundsDelete merchantId city :<|> getNammaTagAppDynamicLogicGetLogicRollout merchantId city :<|> postNammaTagAppDynamicLogicUpsertLogicRollout merchantId city :<|> getNammaTagAppDynamicLogicVersions merchantId city :<|> getNammaTagAppDynamicLogicDomains merchantId city :<|> getNammaTagAppDynamicLogicDomainsAndEvents merchantId city :<|> getNammaTagAppDynamicLogicGetDomainSchema merchantId city :<|> getNammaTagQueryAll merchantId city :<|> postNammaTagUpdateCustomerTag merchantId city :<|> postNammaTagConfigPilotGetVersion merchantId city :<|> postNammaTagConfigPilotGetConfig merchantId city :<|> postNammaTagConfigPilotCreateUiConfig merchantId city :<|> getNammaTagConfigPilotAllConfigs merchantId city :<|> getNammaTagConfigPilotConfigDetails merchantId city :<|> getNammaTagConfigPilotGetTableData merchantId city :<|> getNammaTagConfigPilotAllUiConfigs merchantId city :<|> getNammaTagConfigPilotUiConfigDetails merchantId city :<|> getNammaTagConfigPilotGetUiTableData merchantId city :<|> getNammaTagConfigPilotAlwaysOnList merchantId city :<|> postNammaTagConfigPilotActionChange merchantId city :<|> postNammaTagConfigPilotGetConfigWithDimensions merchantId city :<|> getNammaTagConfigPilotGetDimensionSchema merchantId city :<|> postNammaTagConfigPilotCreateRow merchantId city
+handler :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Environment.FlowServer API.Types.RiderPlatform.Management.QolariTag.API)
+handler merchantId city = postQolariTagTagCreate merchantId city :<|> postQolariTagTagUpdate merchantId city :<|> postQolariTagTagVerify merchantId city :<|> deleteQolariTagTagDelete merchantId city :<|> getQolariTagTagAll merchantId city :<|> getQolariTagTagDetails merchantId city :<|> postQolariTagQueryCreate merchantId city :<|> postQolariTagQueryUpdate merchantId city :<|> deleteQolariTagQueryDelete merchantId city :<|> getQolariTagQueryDetails merchantId city :<|> postQolariTagAppDynamicLogicVerify merchantId city :<|> getQolariTagAppDynamicLogic merchantId city :<|> postQolariTagRunJob merchantId city :<|> getQolariTagTimeBounds merchantId city :<|> postQolariTagTimeBoundsCreate merchantId city :<|> deleteQolariTagTimeBoundsDelete merchantId city :<|> getQolariTagAppDynamicLogicGetLogicRollout merchantId city :<|> postQolariTagAppDynamicLogicUpsertLogicRollout merchantId city :<|> getQolariTagAppDynamicLogicVersions merchantId city :<|> getQolariTagAppDynamicLogicDomains merchantId city :<|> getQolariTagAppDynamicLogicDomainsAndEvents merchantId city :<|> getQolariTagAppDynamicLogicGetDomainSchema merchantId city :<|> getQolariTagQueryAll merchantId city :<|> postQolariTagUpdateCustomerTag merchantId city :<|> postQolariTagConfigPilotGetVersion merchantId city :<|> postQolariTagConfigPilotGetConfig merchantId city :<|> postQolariTagConfigPilotCreateUiConfig merchantId city :<|> getQolariTagConfigPilotAllConfigs merchantId city :<|> getQolariTagConfigPilotConfigDetails merchantId city :<|> getQolariTagConfigPilotGetTableData merchantId city :<|> getQolariTagConfigPilotAllUiConfigs merchantId city :<|> getQolariTagConfigPilotUiConfigDetails merchantId city :<|> getQolariTagConfigPilotGetUiTableData merchantId city :<|> getQolariTagConfigPilotAlwaysOnList merchantId city :<|> postQolariTagConfigPilotActionChange merchantId city :<|> postQolariTagConfigPilotGetConfigWithDimensions merchantId city :<|> getQolariTagConfigPilotGetDimensionSchema merchantId city :<|> postQolariTagConfigPilotCreateRow merchantId city
 
-postNammaTagTagCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.CreateNammaTagRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagTagCreate a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagTagCreate a3 a2 a1
+postQolariTagTagCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.CreateQolariTagRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagTagCreate a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagTagCreate a3 a2 a1
 
-postNammaTagTagUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.UpdateNammaTagRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagTagUpdate a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagTagUpdate a3 a2 a1
+postQolariTagTagUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.UpdateQolariTagRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagTagUpdate a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagTagUpdate a3 a2 a1
 
-postNammaTagTagVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.VerifyNammaTagRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.VerifyNammaTagResponse)
-postNammaTagTagVerify a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagTagVerify a3 a2 a1
+postQolariTagTagVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.VerifyQolariTagRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.VerifyQolariTagResponse)
+postQolariTagTagVerify a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagTagVerify a3 a2 a1
 
-deleteNammaTagTagDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Text -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-deleteNammaTagTagDelete a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.deleteNammaTagTagDelete a3 a2 a1
+deleteQolariTagTagDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Text -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+deleteQolariTagTagDelete a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.deleteQolariTagTagDelete a3 a2 a1
 
-getNammaTagTagAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Environment.FlowHandler [Lib.Yudhishthira.Types.NammaTagDetailsResp])
-getNammaTagTagAll a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagTagAll a2 a1
+getQolariTagTagAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Environment.FlowHandler [Lib.Yudhishthira.Types.QolariTagDetailsResp])
+getQolariTagTagAll a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagTagAll a2 a1
 
-getNammaTagTagDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Text -> Environment.FlowHandler Lib.Yudhishthira.Types.NammaTagDetailsResp)
-getNammaTagTagDetails a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagTagDetails a3 a2 a1
+getQolariTagTagDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Text -> Environment.FlowHandler Lib.Yudhishthira.Types.QolariTagDetailsResp)
+getQolariTagTagDetails a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagTagDetails a3 a2 a1
 
-postNammaTagQueryCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ChakraQueriesAPIEntity -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagQueryCreate a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagQueryCreate a3 a2 a1
+postQolariTagQueryCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ChakraQueriesAPIEntity -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagQueryCreate a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagQueryCreate a3 a2 a1
 
-postNammaTagQueryUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ChakraQueryUpdateReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagQueryUpdate a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagQueryUpdate a3 a2 a1
+postQolariTagQueryUpdate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ChakraQueryUpdateReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagQueryUpdate a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagQueryUpdate a3 a2 a1
 
-deleteNammaTagQueryDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ChakraQueryDeleteReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-deleteNammaTagQueryDelete a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.deleteNammaTagQueryDelete a3 a2 a1
+deleteQolariTagQueryDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ChakraQueryDeleteReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+deleteQolariTagQueryDelete a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.deleteQolariTagQueryDelete a3 a2 a1
 
-getNammaTagQueryDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.Chakra -> Kernel.Prelude.Text -> Environment.FlowHandler Lib.Yudhishthira.Types.ChakraQueriesAPIEntity)
-getNammaTagQueryDetails a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagQueryDetails a4 a3 a2 a1
+getQolariTagQueryDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.Chakra -> Kernel.Prelude.Text -> Environment.FlowHandler Lib.Yudhishthira.Types.ChakraQueriesAPIEntity)
+getQolariTagQueryDetails a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagQueryDetails a4 a3 a2 a1
 
-postNammaTagAppDynamicLogicVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.AppDynamicLogicReq -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicResp)
-postNammaTagAppDynamicLogicVerify a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagAppDynamicLogicVerify a3 a2 a1
+postQolariTagAppDynamicLogicVerify :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.AppDynamicLogicReq -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicResp)
+postQolariTagAppDynamicLogicVerify a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagAppDynamicLogicVerify a3 a2 a1
 
-getNammaTagAppDynamicLogic :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler [Lib.Yudhishthira.Types.GetLogicsResp])
-getNammaTagAppDynamicLogic a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagAppDynamicLogic a4 a3 a2 a1
+getQolariTagAppDynamicLogic :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler [Lib.Yudhishthira.Types.GetLogicsResp])
+getQolariTagAppDynamicLogic a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagAppDynamicLogic a4 a3 a2 a1
 
-postNammaTagRunJob :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.RunKaalChakraJobReq -> Environment.FlowHandler Lib.Yudhishthira.Types.RunKaalChakraJobRes)
-postNammaTagRunJob a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagRunJob a3 a2 a1
+postQolariTagRunJob :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.RunKaalChakraJobReq -> Environment.FlowHandler Lib.Yudhishthira.Types.RunKaalChakraJobRes)
+postQolariTagRunJob a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagRunJob a3 a2 a1
 
-getNammaTagTimeBounds :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.TimeBoundResp)
-getNammaTagTimeBounds a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagTimeBounds a3 a2 a1
+getQolariTagTimeBounds :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.TimeBoundResp)
+getQolariTagTimeBounds a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagTimeBounds a3 a2 a1
 
-postNammaTagTimeBoundsCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.CreateTimeBoundRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagTimeBoundsCreate a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagTimeBoundsCreate a3 a2 a1
+postQolariTagTimeBoundsCreate :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.CreateTimeBoundRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagTimeBoundsCreate a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagTimeBoundsCreate a3 a2 a1
 
-deleteNammaTagTimeBoundsDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.LogicDomain -> Kernel.Prelude.Text -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-deleteNammaTagTimeBoundsDelete a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.deleteNammaTagTimeBoundsDelete a4 a3 a2 a1
+deleteQolariTagTimeBoundsDelete :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.LogicDomain -> Kernel.Prelude.Text -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+deleteQolariTagTimeBoundsDelete a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.deleteQolariTagTimeBoundsDelete a4 a3 a2 a1
 
-getNammaTagAppDynamicLogicGetLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Kernel.Prelude.Maybe (Kernel.Prelude.Text) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler [Lib.Yudhishthira.Types.LogicRolloutObject])
-getNammaTagAppDynamicLogicGetLogicRollout a5 a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagAppDynamicLogicGetLogicRollout a5 a4 a3 a2 a1
+getQolariTagAppDynamicLogicGetLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Kernel.Prelude.Maybe (Kernel.Prelude.Text) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler [Lib.Yudhishthira.Types.LogicRolloutObject])
+getQolariTagAppDynamicLogicGetLogicRollout a5 a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagAppDynamicLogicGetLogicRollout a5 a4 a3 a2 a1
 
-postNammaTagAppDynamicLogicUpsertLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.LogicRolloutReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagAppDynamicLogicUpsertLogicRollout a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagAppDynamicLogicUpsertLogicRollout a3 a2 a1
+postQolariTagAppDynamicLogicUpsertLogicRollout :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.LogicRolloutReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagAppDynamicLogicUpsertLogicRollout a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagAppDynamicLogicUpsertLogicRollout a3 a2 a1
 
-getNammaTagAppDynamicLogicVersions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicVersionResp)
-getNammaTagAppDynamicLogicVersions a5 a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagAppDynamicLogicVersions a5 a4 a3 a2 a1
+getQolariTagAppDynamicLogicVersions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Kernel.Prelude.Maybe (Kernel.Prelude.Int) -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicVersionResp)
+getQolariTagAppDynamicLogicVersions a5 a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagAppDynamicLogicVersions a5 a4 a3 a2 a1
 
-getNammaTagAppDynamicLogicDomains :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicDomainResp)
-getNammaTagAppDynamicLogicDomains a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagAppDynamicLogicDomains a2 a1
+getQolariTagAppDynamicLogicDomains :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Environment.FlowHandler Lib.Yudhishthira.Types.AppDynamicLogicDomainResp)
+getQolariTagAppDynamicLogicDomains a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagAppDynamicLogicDomains a2 a1
 
-getNammaTagAppDynamicLogicDomainsAndEvents :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Environment.FlowHandler Lib.Yudhishthira.Types.NammaTagEventsOrNammaTagNamesResp)
-getNammaTagAppDynamicLogicDomainsAndEvents a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagAppDynamicLogicDomainsAndEvents a3 a2 a1
+getQolariTagAppDynamicLogicDomainsAndEvents :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Environment.FlowHandler Lib.Yudhishthira.Types.QolariTagEventsOrQolariTagNamesResp)
+getQolariTagAppDynamicLogicDomainsAndEvents a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagAppDynamicLogicDomainsAndEvents a3 a2 a1
 
-getNammaTagAppDynamicLogicGetDomainSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.DomainSchemaResp)
-getNammaTagAppDynamicLogicGetDomainSchema a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagAppDynamicLogicGetDomainSchema a3 a2 a1
+getQolariTagAppDynamicLogicGetDomainSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.DomainSchemaResp)
+getQolariTagAppDynamicLogicGetDomainSchema a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagAppDynamicLogicGetDomainSchema a3 a2 a1
 
-getNammaTagQueryAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.Chakra -> Environment.FlowHandler Lib.Yudhishthira.Types.ChakraQueryResp)
-getNammaTagQueryAll a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagQueryAll a3 a2 a1
+getQolariTagQueryAll :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.Chakra -> Environment.FlowHandler Lib.Yudhishthira.Types.ChakraQueryResp)
+getQolariTagQueryAll a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagQueryAll a3 a2 a1
 
-postNammaTagUpdateCustomerTag :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Types.Id.Id Dashboard.Common.User -> Lib.Yudhishthira.Types.UpdateTagReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagUpdateCustomerTag a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagUpdateCustomerTag a4 a3 a2 a1
+postQolariTagUpdateCustomerTag :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Types.Id.Id Dashboard.Common.User -> Lib.Yudhishthira.Types.UpdateTagReq -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagUpdateCustomerTag a4 a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagUpdateCustomerTag a4 a3 a2 a1
 
-postNammaTagConfigPilotGetVersion :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.UiConfigGetVersionResponse)
-postNammaTagConfigPilotGetVersion a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagConfigPilotGetVersion a3 a2 a1
+postQolariTagConfigPilotGetVersion :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.UiConfigGetVersionResponse)
+postQolariTagConfigPilotGetVersion a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagConfigPilotGetVersion a3 a2 a1
 
-postNammaTagConfigPilotGetConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.UiConfigResponse)
-postNammaTagConfigPilotGetConfig a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagConfigPilotGetConfig a3 a2 a1
+postQolariTagConfigPilotGetConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.UiConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.UiConfigResponse)
+postQolariTagConfigPilotGetConfig a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagConfigPilotGetConfig a3 a2 a1
 
-postNammaTagConfigPilotCreateUiConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.CreateConfigRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagConfigPilotCreateUiConfig a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagConfigPilotCreateUiConfig a3 a2 a1
+postQolariTagConfigPilotCreateUiConfig :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.CreateConfigRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagConfigPilotCreateUiConfig a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagConfigPilotCreateUiConfig a3 a2 a1
 
-getNammaTagConfigPilotAllConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigType])
-getNammaTagConfigPilotAllConfigs a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagConfigPilotAllConfigs a3 a2 a1
+getQolariTagConfigPilotAllConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigType])
+getQolariTagConfigPilotAllConfigs a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagConfigPilotAllConfigs a3 a2 a1
 
-getNammaTagConfigPilotConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigDetailsResp])
-getNammaTagConfigPilotConfigDetails a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagConfigPilotConfigDetails a3 a2 a1
+getQolariTagConfigPilotConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigDetailsResp])
+getQolariTagConfigPilotConfigDetails a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagConfigPilotConfigDetails a3 a2 a1
 
-getNammaTagConfigPilotGetTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
-getNammaTagConfigPilotGetTableData a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagConfigPilotGetTableData a3 a2 a1
+getQolariTagConfigPilotGetTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
+getQolariTagConfigPilotGetTableData a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagConfigPilotGetTableData a3 a2 a1
 
-getNammaTagConfigPilotAllUiConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Environment.FlowHandler [Lib.Yudhishthira.Types.LogicDomain])
-getNammaTagConfigPilotAllUiConfigs a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagConfigPilotAllUiConfigs a3 a2 a1
+getQolariTagConfigPilotAllUiConfigs :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Kernel.Prelude.Maybe (Kernel.Prelude.Bool) -> Environment.FlowHandler [Lib.Yudhishthira.Types.LogicDomain])
+getQolariTagConfigPilotAllUiConfigs a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagConfigPilotAllUiConfigs a3 a2 a1
 
-getNammaTagConfigPilotUiConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigDetailsResp])
-getNammaTagConfigPilotUiConfigDetails a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagConfigPilotUiConfigDetails a3 a2 a1
+getQolariTagConfigPilotUiConfigDetails :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.FlowHandler [Lib.Yudhishthira.Types.ConfigDetailsResp])
+getQolariTagConfigPilotUiConfigDetails a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagConfigPilotUiConfigDetails a3 a2 a1
 
-getNammaTagConfigPilotGetUiTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
-getNammaTagConfigPilotGetUiTableData a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagConfigPilotGetUiTableData a3 a2 a1
+getQolariTagConfigPilotGetUiTableData :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.UiDevicePlatformReq -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
+getQolariTagConfigPilotGetUiTableData a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagConfigPilotGetUiTableData a3 a2 a1
 
-getNammaTagConfigPilotAlwaysOnList :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.AlwaysOnListResp)
-getNammaTagConfigPilotAlwaysOnList a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagConfigPilotAlwaysOnList a3 a2 a1
+getQolariTagConfigPilotAlwaysOnList :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.LogicDomain -> Environment.FlowHandler Lib.Yudhishthira.Types.AlwaysOnListResp)
+getQolariTagConfigPilotAlwaysOnList a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagConfigPilotAlwaysOnList a3 a2 a1
 
-postNammaTagConfigPilotActionChange :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ActionChangeRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagConfigPilotActionChange a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagConfigPilotActionChange a3 a2 a1
+postQolariTagConfigPilotActionChange :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ActionChangeRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagConfigPilotActionChange a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagConfigPilotActionChange a3 a2 a1
 
-postNammaTagConfigPilotGetConfigWithDimensions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ConfigPilotGetConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
-postNammaTagConfigPilotGetConfigWithDimensions a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagConfigPilotGetConfigWithDimensions a3 a2 a1
+postQolariTagConfigPilotGetConfigWithDimensions :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ConfigPilotGetConfigRequest -> Environment.FlowHandler Lib.Yudhishthira.Types.TableDataResp)
+postQolariTagConfigPilotGetConfigWithDimensions a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagConfigPilotGetConfigWithDimensions a3 a2 a1
 
-getNammaTagConfigPilotGetDimensionSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler Lib.Yudhishthira.Types.DomainSchemaResp)
-getNammaTagConfigPilotGetDimensionSchema a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.getNammaTagConfigPilotGetDimensionSchema a3 a2 a1
+getQolariTagConfigPilotGetDimensionSchema :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ConfigType -> Environment.FlowHandler Lib.Yudhishthira.Types.DomainSchemaResp)
+getQolariTagConfigPilotGetDimensionSchema a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.getQolariTagConfigPilotGetDimensionSchema a3 a2 a1
 
-postNammaTagConfigPilotCreateRow :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ConfigPilotCreateRowRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
-postNammaTagConfigPilotCreateRow a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.NammaTag.postNammaTagConfigPilotCreateRow a3 a2 a1
+postQolariTagConfigPilotCreateRow :: (Kernel.Types.Id.ShortId Domain.Types.Merchant.Merchant -> Kernel.Types.Beckn.Context.City -> Lib.Yudhishthira.Types.ConfigPilotCreateRowRequest -> Environment.FlowHandler Kernel.Types.APISuccess.APISuccess)
+postQolariTagConfigPilotCreateRow a3 a2 a1 = withDashboardFlowHandlerAPI $ Domain.Action.Dashboard.QolariTag.postQolariTagConfigPilotCreateRow a3 a2 a1

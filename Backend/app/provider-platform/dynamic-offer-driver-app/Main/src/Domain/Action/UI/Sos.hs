@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wwarn=unused-imports #-}
+﻿{-# OPTIONS_GHC -Wwarn=unused-imports #-}
 
 module Domain.Action.UI.Sos
   ( getSosGetDetails,
@@ -132,7 +132,7 @@ getSosGetDetails (mbPersonId, _, _) rideId_ = do
 buildDriverSosTrackLink :: Maybe Text -> ShortId DRide.Ride -> Text
 buildDriverSosTrackLink mbPattern rideId =
   case mbPattern of
-    Nothing -> "https://nammayatri.in/p/?vp=shareRide&rideId=" <> rideId.getShortId
+    Nothing -> "https://drive.qolari.com/p/?vp=shareRide&rideId=" <> rideId.getShortId
     Just urlPattern -> Notify.buildTemplate [("vp", "shareRide")] urlPattern <> rideId.getShortId
 
 driverGetName :: Person.Person -> Text

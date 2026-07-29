@@ -1,4 +1,4 @@
-module Domain.Action.UI.CustomerReferral where
+﻿module Domain.Action.UI.CustomerReferral where
 
 import API.Types.UI.CustomerReferral
 import qualified Domain.Action.Beckn.Common as Common
@@ -156,7 +156,7 @@ processBacklogReferralPayout personId vpa merchantOpCityId = do
           phoneNo <- mapM decrypt person.mobileNumber
           emailId <- mapM decrypt person.email
           uid <- generateGUID
-          let payoutServiceFlow = Payout.JuspayFlow -- Stripe payouts are not supported
+          let payoutServiceFlow = Payout.QolariFlow -- Stripe payouts are not supported
           let createPayoutOrderReq = Payout.mkCreatePayoutServiceReq uid amount payoutConfig.currency phoneNo emailId person.id.getId payoutConfig.remark person.firstName (Just vpa) payoutConfig.orderType payoutServiceFlow Nothing
           logDebug $ "create payoutOrder with riderId: " <> person.id.getId <> " | amount: " <> show amount <> " | orderId: " <> show uid
           let createPayoutOrderCall = TPayout.createPayoutOrder person.clientSdkVersion person.merchantId merchantOpCityId (Just person.id.getId)

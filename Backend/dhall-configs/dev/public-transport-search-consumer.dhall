@@ -1,8 +1,8 @@
-let common = ./common.dhall
+﻿let common = ./common.dhall
 
 let main = ./public-transport-rider-platform.dhall
 
-let juspayGatewayUrl =
+let QolariGatewayUrl =
       "http://localhost:${Natural/show (env:BECKN_GATEWAY_PORT ? 8015)}/v1"
 
 let kafkaConsumerCfgs =
@@ -25,7 +25,7 @@ in  { esqDBCfg = main.esqDBCfg
     , graceTerminationPeriod = +90
     , bapId = main.selfId
     , bapURI = main.selfURI
-    , gatewayUrl = juspayGatewayUrl
+    , gatewayUrl = QolariGatewayUrl
     , httpClientOptions = main.httpClientOptions
     , shortDurationRetryCfg = main.shortDurationRetryCfg
     , longDurationRetryCfg = main.longDurationRetryCfg

@@ -9,8 +9,8 @@ version:        0.1.0.0
 description:    Thin package whose sole purpose is to pull in both rider-dashboard and provider-dashboard so a single cabal repl covers the entire dashboard dep tree.
 homepage:       https://github.com/qolariai/qolari#readme
 bug-reports:    https://github.com/qolariai/qolari/issues
-author:         nammayatri
-maintainer:     nammayatri
+author:         Qolari
+maintainer:     Qolari
 copyright:      2023 Qolari Technologies
 license:        AllRightsReserved
 build-type:     Simple

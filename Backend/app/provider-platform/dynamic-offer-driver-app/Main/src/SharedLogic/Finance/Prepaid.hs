@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
+﻿{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
 
 module SharedLogic.Finance.Prepaid
   ( counterpartyDriver,
@@ -768,7 +768,7 @@ creditPrepaidBalance counterpartyType ownerId creditAmount paidAmount mbTdsRate 
                     isVat = False,
                     issuedToTaxNo = invoiceParams.gstinOfParty,
                     issuedByTaxNo = invoiceParams.merchantGstin,
-                    paymentMode = Just "ONLINE", -- subscription paid via Juspay autopay/manual
+                    paymentMode = Just "ONLINE", -- subscription paid via Qolari autopay/manual
                     periodStart = Nothing,
                     periodEnd = Nothing
                   }

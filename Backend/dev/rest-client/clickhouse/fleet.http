@@ -1,4 +1,4 @@
- # UPDATE atlas_driver_offer_bpp.ride_details set fleet_owner_id = '0c414eb2-7ced-4557-bd55-801afbb61a94';
+﻿ # UPDATE atlas_driver_offer_bpp.ride_details set fleet_owner_id = '0c414eb2-7ced-4557-bd55-801afbb61a94';
  # for testing local you have to create a fleetowner then assign all access to the required api. I filled some dummy data in
  # ride_details table for testing purpose
  # please change fleet owner Id and dashboard token accordingly
@@ -25,7 +25,7 @@
 
 # @name FleetTotalEarning
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/Kochi/driver/fleet/totalEarning
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/Kochi/driver/fleet/totalEarning
   ?from=2024-01-01T07:02:42Z
   &to=2024-02-22T08:02:42Z
 token: {{dashboardToken}}

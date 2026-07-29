@@ -1,8 +1,8 @@
-_:
+﻿_:
 
 let
   arionProjectConfiguration = { pkgs, ... }: {
-    project.name = "nammayatri-svc";
+    project.name = "Qolari-svc";
     # Note: This attr-set might be not needed now
     #       after latest arion version update.
     #       see docker-compose.volumes attr-set.

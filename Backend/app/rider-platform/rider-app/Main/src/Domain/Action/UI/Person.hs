@@ -68,7 +68,7 @@ makePersonAPIEntity Person {..} disability isSafetyCenterDisabled safetySettings
       clientVersion = clientSdkVersion,
       hasCompletedMockSafetyDrill = safetySettings.hasCompletedMockSafetyDrill,
       hasCompletedSafetySetup = safetySettings.hasCompletedSafetySetup,
-      customerTags = YUtils.convertTags $ fromMaybe [] customerNammaTags,
+      customerTags = YUtils.convertTags $ fromMaybe [] customerQolariTags,
       ..
     }
 
@@ -76,6 +76,6 @@ data PersonCityInformation = PersonCityInformation
   { personId :: Id Person,
     currentCity :: Context.City,
     merchantOperatingCityId :: Id DMOC.MerchantOperatingCity,
-    customerNammaTags :: Maybe [YTypes.TagNameValueExpiry]
+    customerQolariTags :: Maybe [YTypes.TagNameValueExpiry]
   }
   deriving (Generic, Show, FromJSON, ToJSON)

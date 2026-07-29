@@ -1,9 +1,9 @@
 ﻿name: dashboard-repl-check
 version: 0.1.0.0
-github: "nammayatri/nammayatri"
+github: "Qolari/Qolari"
 license: AllRightsReserved
-author: "nammayatri"
-maintainer: "nammayatri"
+author: "Qolari"
+maintainer: "Qolari"
 copyright: "2026 Qolari Technologies"
 
 description: Thin package whose sole purpose is to pull in both rider-dashboard and provider-dashboard so a single cabal repl covers the entire dashboard dep tree.

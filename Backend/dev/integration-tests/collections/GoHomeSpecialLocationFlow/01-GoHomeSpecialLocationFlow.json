@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "GoHomeSpecialLocationFlow",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
@@ -32,7 +32,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": "{{baseURL_namma_P}}/auth",
+        "url": "{{baseURL_qolari_P}}/auth",
         "body": {
           "mode": "raw",
           "raw": "{\"mobileNumber\": \"{{_test_driver_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"{{driver_merchant_id}}\", \"merchantOperatingCity\": \"{{city}}\"}"
@@ -58,7 +58,7 @@
       "request": {
         "method": "POST",
         "header": [{ "key": "Content-Type", "value": "application/json" }],
-        "url": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
+        "url": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
         "body": {
           "mode": "raw",
           "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-device-gohome\"}"
@@ -164,7 +164,7 @@
           { "key": "Content-Type", "value": "application/json" },
           { "key": "token", "value": "{{driver_token}}" }
         ],
-        "url": "{{baseURL_namma_P}}/driver/goHome/add",
+        "url": "{{baseURL_qolari_P}}/driver/goHome/add",
         "body": {
           "mode": "raw",
           "raw": "{\"position\": {\"lat\": {{blocked_home_lat}}, \"lon\": {{blocked_home_lon}}}, \"address\": \"Airport - should be blocked\", \"tag\": \"GoHomeBlockedAirport\"}"
@@ -191,7 +191,7 @@
           { "key": "Content-Type", "value": "application/json" },
           { "key": "token", "value": "{{driver_token}}" }
         ],
-        "url": "{{baseURL_namma_P}}/driver/goHome/add",
+        "url": "{{baseURL_qolari_P}}/driver/goHome/add",
         "body": {
           "mode": "raw",
           "raw": "{\"position\": {\"lat\": {{allowed_home_lat}}, \"lon\": {{allowed_home_lon}}}, \"address\": \"Koramangala - allowed\", \"tag\": \"GoHomeAllowedHome\"}"
@@ -214,7 +214,7 @@
       "request": {
         "method": "GET",
         "header": [{ "key": "token", "value": "{{driver_token}}" }],
-        "url": "{{baseURL_namma_P}}/driver/goHome/get"
+        "url": "{{baseURL_qolari_P}}/driver/goHome/get"
       },
       "event": [
         {

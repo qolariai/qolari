@@ -150,8 +150,8 @@ setDriversActive isActive mode = do
   let drivers = [furthestDriver, closestDriver, suvDriver, sedanDriver, hatchbackDriver, driverWithOldLocation]
   let newFlowStatus = DDriverMode.getDriverFlowStatus mode isActive
   transporterConfig <-
-    SCTC.findByMerchantOpCityId Fixtures.nammaYatriPartnerMerchantOperatingCityId Nothing
-      >>= fromMaybeM (TransporterConfigNotFound Fixtures.nammaYatriPartnerMerchantOperatingCityId.getId)
+    SCTC.findByMerchantOpCityId Fixtures.QolariPartnerMerchantOperatingCityId Nothing
+      >>= fromMaybeM (TransporterConfigNotFound Fixtures.QolariPartnerMerchantOperatingCityId.getId)
   forM_
     drivers
     ( \driver -> do

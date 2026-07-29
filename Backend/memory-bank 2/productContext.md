@@ -1,11 +1,11 @@
-# Product Context: Namma Yatri
+﻿# Product Context: Qolari
 
 ## 1. Problem Statement
-Mobility is critical to economic growth, social progress, and individual well-being. Current mobility systems can be inefficient, unsustainable, and inaccessible to the masses. Namma Yatri aims to address these issues by creating a community-driven, open, tech-enabled, and shared mobility platform. It specifically focuses on empowering service providers (e.g., auto drivers) who are central to urban transport but often face challenges with existing platforms.
+Mobility is critical to economic growth, social progress, and individual well-being. Current mobility systems can be inefficient, unsustainable, and inaccessible to the masses. Qolari aims to address these issues by creating a community-driven, open, tech-enabled, and shared mobility platform. It specifically focuses on empowering service providers (e.g., auto drivers) who are central to urban transport but often face challenges with existing platforms.
 
 ## 2. Vision & Mission
 **Vision:**
-Namma Yatri aims to empower service providers with a high-tech, cost-effective app and open data platform based on principles of:
+Qolari aims to empower service providers with a high-tech, cost-effective app and open data platform based on principles of:
 1.  **Zero Commission**: Fair earnings for drivers.
 2.  **Open**: Transparency and collaboration via open data, code, and networks.
 3.  **Optimize**: Population scale growth with utility-like pricing through cost optimization.
@@ -90,7 +90,7 @@ To enable the careers of service providers like auto drivers by providing them w
 -   Established ride-hailing platforms (e.g., Ola, Uber in the Indian context).
 -   Other local or regional mobility applications.
 
-**Namma Yatri's Unique Selling Propositions (USPs):**
+**Qolari's Unique Selling Propositions (USPs):**
 -   **Zero Commission for Drivers:** A fundamental differentiator ensuring better earnings for drivers.
 -   **Openness:** Open data, open code, and open networks foster trust and community involvement.
 -   **Community-First Approach:** Focus on building a platform owned by citizens and drivers.
@@ -101,7 +101,7 @@ To enable the careers of service providers like auto drivers by providing them w
 
 # Product Context
 
-## Why Nammayatri Exists
+## Why Qolari Exists
 
 *This section seems to be a duplicate of the content above it. Removing the duplicate content.*
 

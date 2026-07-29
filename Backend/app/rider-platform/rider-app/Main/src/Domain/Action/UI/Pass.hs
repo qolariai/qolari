@@ -1,4 +1,4 @@
-module Domain.Action.UI.Pass
+﻿module Domain.Action.UI.Pass
   ( getMultimodalPassAvailablePasses,
     postMultimodalPassSelect,
     postMultimodalPassV2Select,
@@ -334,7 +334,7 @@ purchasePassWithPayment isDashboard person pass merchantId personId mbStartDay m
   mbPaymentOrder <-
     if pass.amount > 0
       then do
-        customerEmail <- fromMaybe "noreply@nammayatri.in" <$> mapM decrypt person.email
+        customerEmail <- fromMaybe "noreply@drive.qolari.com" <$> mapM decrypt person.email
         customerPhone <- person.mobileNumber & fromMaybeM (PersonFieldNotPresent "mobileNumber") >>= decrypt
         -- Get split settlement details
         let itemDetails =
@@ -544,7 +544,7 @@ buildPassAPIEntity mbLanguage person pass = do
             "city" A..= (show person.currentCity :: Text),
             "merchantOperatingCityId" A..= (person.merchantOperatingCityId.getId :: Text),
             "hasDisability" A..= person.hasDisability,
-            "customerNammaTags" A..= person.customerNammaTags,
+            "customerQolariTags" A..= person.customerQolariTags,
             "aadhaarVerified" A..= (person.aadhaarVerified :: Bool),
             "enabled" A..= (person.enabled :: Bool),
             "blocked" A..= (person.blocked :: Bool),
@@ -849,7 +849,7 @@ passOrderStatusHandler paymentOrderId _merchantId status = do
       -- There can be a CHARGED transaction for Same Order even on Failure, so we should not mark the Pass as FAILED.
       -- Payment.AUTHENTICATION_FAILED -> Just DPurchasedPass.Failed
       -- Payment.AUTHORIZATION_FAILED -> Just DPurchasedPass.Failed
-      -- Payment.JUSPAY_DECLINED -> Just DPurchasedPass.Failed
+      -- Payment.Qolari_DECLINED -> Just DPurchasedPass.Failed
       Payment.CANCELLED -> Just DPurchasedPass.Failed
       Payment.AUTO_REFUNDED -> Just DPurchasedPass.Refunded
       _ -> Nothing

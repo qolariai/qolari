@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   UTCTime: Kernel.Prelude
   Seconds: Kernel.Types.Common
   MerchantOperatingCity: Domain.Types.MerchantOperatingCity
@@ -175,10 +175,10 @@ SubscriptionConfig:
     sendInAppFcmNotifications: "false"
     subscriptionDown: "false"
     allowDueAddition: "false"
-    paymentServiceName: "'Payment_Juspay'"
+    paymentServiceName: "'Payment_Qolari'"
     isTriggeredAtEndRide: "true"
     allowDriverFeeCalcSchedule: "false"
-    payoutServiceName: "'Payout_Juspay'"
+    payoutServiceName: "'Payout_Qolari'"
     autopayEnabled: "true"
     showManualPlansInUI: "false"
     sendManualPaymentLinkJobMaxDelay: "43200"

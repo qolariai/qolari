@@ -1,4 +1,4 @@
-# TwoFactorAuthFlow — Fix Summary
+﻿# TwoFactorAuthFlow — Fix Summary
 
 ## What this flow tests
 
@@ -33,9 +33,9 @@ has `bpp_short_id`, not `bap_short_id`. So `{{bap_short_id}}` resolved to an emp
 "Enable 2FA mandatory on merchant before running this flow".
 
 **Root cause**: The BHARAT_TAXI merchant in the local DB had `is2fa_mandatory = false`.
-The `juspay_admin` user has role `JUSPAY_ADMIN` → `dashboard_access_type = DASHBOARD_ADMIN`.
+The `Qolari_admin` user has role `Qolari_ADMIN` → `dashboard_access_type = DASHBOARD_ADMIN`.
 The merchant's `two_factor_mandatory_for_roles = [DASHBOARD_USER]` — admin role is excluded.
-So `is2FARequiredForPerson` returned `false` for `juspay_admin`.
+So `is2FARequiredForPerson` returned `false` for `Qolari_admin`.
 
 **Fix**: Feature migration `0023-enable-2fa-mandatory-for-bharat-taxi.sql`
 ```sql
@@ -55,7 +55,7 @@ This makes 2FA mandatory for all users of this merchant regardless of role.
 
 **Fix**: Clear the Redis key manually between runs:
 ```bash
-redis-cli -p 30002 DEL "dashboard:Email:juspay_admin@dashboard.com:hitsCount"
+redis-cli -p 30002 DEL "dashboard:Email:Qolari_admin@dashboard.com:hitsCount"
 ```
 
 ---

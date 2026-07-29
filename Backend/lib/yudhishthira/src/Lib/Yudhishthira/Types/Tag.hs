@@ -1,4 +1,4 @@
-module Lib.Yudhishthira.Types.Tag where
+﻿module Lib.Yudhishthira.Types.Tag where
 
 import Kernel.Prelude
 import Kernel.Types.Common
@@ -9,7 +9,7 @@ data TagValue
   | ArrayValue [Text]
   deriving (Show, Read, Generic, ToJSON, FromJSON, ToSchema)
 
-data NammaTagResponse = NammaTagResponse
+data QolariTagResponse = QolariTagResponse
   { tagName :: Text,
     tagValue :: TagValue,
     tagCategory :: Text,

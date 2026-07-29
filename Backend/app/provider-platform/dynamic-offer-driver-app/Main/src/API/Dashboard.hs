@@ -86,7 +86,7 @@ handler =
   where
     getCity = \case
       -- this is temporary, will be removed after successful deployment
-      "NAMMA_YATRI_PARTNER" -> Context.City "Bangalore"
+      "qolari_PARTNER" -> Context.City "Bangalore"
       "YATRI_PARTNER" -> Context.City "Kochi"
       "JATRI_SAATHI_PARTNER" -> Context.City "Kolkata"
       "PASSCULTURE_PARTNER" -> Context.City "Paris"

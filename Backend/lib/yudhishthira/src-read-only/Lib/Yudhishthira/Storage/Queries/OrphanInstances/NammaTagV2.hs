@@ -1,7 +1,7 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
-module Lib.Yudhishthira.Storage.Queries.OrphanInstances.NammaTagV2 where
+module Lib.Yudhishthira.Storage.Queries.OrphanInstances.QolariTagV2 where
 
 import Kernel.Beam.Functions
 import Kernel.External.Encryption
@@ -9,16 +9,16 @@ import Kernel.Prelude
 import Kernel.Types.Error
 import qualified Kernel.Types.Id
 import Kernel.Utils.Common (CacheFlow, EsqDBFlow, MonadFlow, fromMaybeM, getCurrentTime)
-import qualified Lib.Yudhishthira.Storage.Beam.NammaTagV2 as Beam
-import Lib.Yudhishthira.Storage.Queries.Transformers.NammaTagV2
+import qualified Lib.Yudhishthira.Storage.Beam.QolariTagV2 as Beam
+import Lib.Yudhishthira.Storage.Queries.Transformers.QolariTagV2
 import qualified Lib.Yudhishthira.Types
-import qualified Lib.Yudhishthira.Types.NammaTagV2
+import qualified Lib.Yudhishthira.Types.QolariTagV2
 
-instance FromTType' Beam.NammaTagV2 Lib.Yudhishthira.Types.NammaTagV2.NammaTagV2 where
-  fromTType' (Beam.NammaTagV2T {..}) = do
+instance FromTType' Beam.QolariTagV2 Lib.Yudhishthira.Types.QolariTagV2.QolariTagV2 where
+  fromTType' (Beam.QolariTagV2T {..}) = do
     pure $
       Just
-        Lib.Yudhishthira.Types.NammaTagV2.NammaTagV2
+        Lib.Yudhishthira.Types.QolariTagV2.QolariTagV2
           { actionEngine = actionEngine,
             category = category,
             description = description,
@@ -32,9 +32,9 @@ instance FromTType' Beam.NammaTagV2 Lib.Yudhishthira.Types.NammaTagV2.NammaTagV2
             updatedAt = updatedAt
           }
 
-instance ToTType' Beam.NammaTagV2 Lib.Yudhishthira.Types.NammaTagV2.NammaTagV2 where
-  toTType' (Lib.Yudhishthira.Types.NammaTagV2.NammaTagV2 {..}) = do
-    Beam.NammaTagV2T
+instance ToTType' Beam.QolariTagV2 Lib.Yudhishthira.Types.QolariTagV2.QolariTagV2 where
+  toTType' (Lib.Yudhishthira.Types.QolariTagV2.QolariTagV2 {..}) = do
+    Beam.QolariTagV2T
       { Beam.actionEngine = actionEngine,
         Beam.category = category,
         Beam.description = description,

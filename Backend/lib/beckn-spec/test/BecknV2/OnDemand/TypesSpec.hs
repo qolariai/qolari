@@ -1,4 +1,4 @@
-{-# LANGUAGE DeriveDataTypeable #-}
+﻿{-# LANGUAGE DeriveDataTypeable #-}
 
 module BecknV2.OnDemand.TypesSpec (spec) where
 
@@ -1077,9 +1077,9 @@ sampleContext :: Spec.Context
 sampleContext =
   Spec.Context
     { contextAction = Just "search",
-      contextBapId = Just "bap.nammayatri.in",
-      contextBapUri = Just "https://bap.nammayatri.in",
-      contextBppId = Just "bpp.nammayatri.in",
+      contextBapId = Just "bap.drive.qolari.com",
+      contextBapUri = Just "https://bap.drive.qolari.com",
+      contextBppId = Just "bpp.drive.qolari.com",
       contextBppUri = Nothing,
       contextDomain = Just "ONDC:TRV10",
       contextKey = Nothing,

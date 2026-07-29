@@ -332,7 +332,7 @@ authWithOtp ::
   Maybe Text ->
   Flow AuthWithOtpRes
 authWithOtp isDashboard req' mbBundleVersion mbClientVersion mbClientConfigVersion mbReactBundleVersion mbClientId mbDevice mbSenderHash mbXForwardedFor = do
-  let req = if req'.merchantId == "2e8eac28-9854-4f5d-aea6-a2f6502cfe37" then req' {merchantId = "7f7896dd-787e-4a0b-8675-e9e6fe93bb8f", merchantOperatingCity = Just (City.City "Kochi")} :: AuthReq else req' ---   "2e8eac28-9854-4f5d-aea6-a2f6502cfe37" -> YATRI_PARTNER_MERCHANT_ID  , "7f7896dd-787e-4a0b-8675-e9e6fe93bb8f" -> NAMMA_YATRI_PARTNER_MERCHANT_ID
+  let req = if req'.merchantId == "2e8eac28-9854-4f5d-aea6-a2f6502cfe37" then req' {merchantId = "7f7896dd-787e-4a0b-8675-e9e6fe93bb8f", merchantOperatingCity = Just (City.City "Kochi")} :: AuthReq else req' ---   "2e8eac28-9854-4f5d-aea6-a2f6502cfe37" -> YATRI_PARTNER_MERCHANT_ID  , "7f7896dd-787e-4a0b-8675-e9e6fe93bb8f" -> qolari_PARTNER_MERCHANT_ID
   deploymentVersion <- asks (.version)
   cloudType <- asks (.cloudType)
   runRequestValidation validateInitiateLoginReq req
@@ -585,7 +585,7 @@ makePerson req transporterConfig mbBundleVersion mbClientVersion mbClientConfigV
       -- Conductor/driver identified by the GIMS badge token (set on the Person right
       -- after this); no email or mobile is captured for the employeeId login.
       SP.GIMS_EMPLOYEE_ID_PASSWORD -> pure (Nothing, Nothing, Nothing)
-  safetyCohortNewTag <- Yudhishthira.fetchNammaTagExpiry (cast merchantOperatingCityId) $ LYT.TagNameValue "SafetyCohort#New"
+  safetyCohortNewTag <- Yudhishthira.fetchQolariTagExpiry (cast merchantOperatingCityId) $ LYT.TagNameValue "SafetyCohort#New"
   return $
     SP.Person
       { id = pid,

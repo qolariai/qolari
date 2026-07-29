@@ -1,4 +1,4 @@
-module Tools.LoyaltyWallet
+﻿module Tools.LoyaltyWallet
   ( loyaltyInfo,
     svpWalletPosting,
     svpWalletBalance,
@@ -11,7 +11,7 @@ import qualified Domain.Types.MerchantServiceConfig as DMSC
 import qualified Kernel.External.Payment.Interface as Payment
 import qualified Kernel.External.Wallet.Interface as Wallet
 import qualified Kernel.External.Wallet.Interface.Types as WalletTypes
-import qualified Kernel.External.Wallet.Juspay.Config as JuspayWallet
+import qualified Kernel.External.Wallet.PaymentGateway.Config as PaymentWallet
 import Kernel.Prelude
 import Kernel.Tools.Metrics.CoreMetrics (CoreMetrics)
 import Kernel.Types.Error
@@ -33,22 +33,22 @@ loyaltyInfo ::
   Id DMOC.MerchantOperatingCity ->
   m WalletTypes.LoyaltyInfoResponse
 loyaltyInfo customerId merchantId merchantOperatingCityId = do
-  let serviceName = DMSC.MultiModalPaymentService Payment.Juspay
+  let serviceName = DMSC.MultiModalPaymentService Payment.Gateway
   merchantServiceConfig <-
     getOneConfig (MerchantServiceConfigDimensions {merchantOperatingCityId = merchantOperatingCityId.getId, merchantId = merchantId.getId, serviceName = Just serviceName}) (Just (maybeToList <$> CQMSC.findByMerchantOpCityIdAndService merchantId merchantOperatingCityId (serviceName)))
-      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "MultiModalPayment" (show Payment.Juspay))
+      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "MultiModalPayment" (show Payment.Gateway))
   case merchantServiceConfig.serviceConfig of
     DMSC.MultiModalPaymentServiceConfig paymentCfg ->
       case paymentCfg of
-        Payment.JuspayConfig juspayCfg -> do
-          let loyaltyCfg = JuspayWallet.LoyaltyCfg {baseUrl = juspayCfg.url, apiKey = juspayCfg.apiKey, merchantId = juspayCfg.merchantId}
+        Payment.PaymentGatewayConfig QolariCfg -> do
+          let loyaltyCfg = PaymentWallet.LoyaltyCfg {baseUrl = QolariCfg.url, apiKey = QolariCfg.apiKey, merchantId = QolariCfg.merchantId}
           let req =
                 WalletTypes.LoyaltyInfoRequest
                   { customer = WalletTypes.CustomerRequest {customerId = customerId},
                     order =
                       Just $
                         WalletTypes.OrderRequest
-                          { merchantId = juspayCfg.merchantId,
+                          { merchantId = QolariCfg.merchantId,
                             currency = "INR",
                             amount = "0"
                           }
@@ -98,10 +98,10 @@ runWithMultiModalConfig ::
   req ->
   m resp
 runWithMultiModalConfig func merchantId merchantOperatingCityId req = do
-  let serviceName = DMSC.MultiModalPaymentService Payment.Juspay
+  let serviceName = DMSC.MultiModalPaymentService Payment.Gateway
   merchantServiceConfig <-
     getOneConfig (MerchantServiceConfigDimensions {merchantOperatingCityId = merchantOperatingCityId.getId, merchantId = merchantId.getId, serviceName = Just serviceName}) (Just (maybeToList <$> CQMSC.findByMerchantOpCityIdAndService merchantId merchantOperatingCityId (serviceName)))
-      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "MultiModalPayment" (show Payment.Juspay))
+      >>= fromMaybeM (MerchantServiceConfigNotFound merchantId.getId "MultiModalPayment" (show Payment.Gateway))
   case merchantServiceConfig.serviceConfig of
     DMSC.MultiModalPaymentServiceConfig paymentCfg -> func paymentCfg req
     _ -> throwError $ InternalError "Unknown Service Config for SVP wallet"

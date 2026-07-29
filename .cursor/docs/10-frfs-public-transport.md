@@ -1,8 +1,8 @@
-# FRFS — Public Transport (Metro / Bus)
+﻿# FRFS — Public Transport (Metro / Bus)
 
 ## Overview
 
-FRFS (Fare & Retail Financial Services) handles public transport: metro, bus, and subway. Unlike ride-hailing, FRFS is **BAP-only** — BPPs are external transit operators (CMRL, CRIS, EBIX), with no driver-side component in Namma Yatri.
+FRFS (Fare & Retail Financial Services) handles public transport: metro, bus, and subway. Unlike ride-hailing, FRFS is **BAP-only** — BPPs are external transit operators (CMRL, CRIS, EBIX), with no driver-side component in Qolari.
 
 ## Architecture
 

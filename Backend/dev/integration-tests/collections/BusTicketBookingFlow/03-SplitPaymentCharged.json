@@ -1,9 +1,9 @@
-{
+﻿{
   "info": {
     "_postman_id": "6c2a18b2-7c0a-4f1f-9d4e-2c3a1b4d5e6f",
     "name": "Bus Split Payment Charged Flow",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": "End-to-end Chennai bus ticket flow where the Juspay order_status returns CHARGED with two txn_list entries (UPI + LOYALTYOS7) mirroring a real split-payment response. Verifies (a) the booking confirms with a usable ticket and (b) BOTH txn_list entries are persisted as payment_transaction rows by the txnList iteration in Lib.Payment.Domain.Action.orderStatusService."
+    "description": "End-to-end Chennai bus ticket flow where the Qolari order_status returns CHARGED with two txn_list entries (UPI + LOYALTYOS7) mirroring a real split-payment response. Verifies (a) the booking confirms with a usable ticket and (b) BOTH txn_list entries are persisted as payment_transaction rows by the txnList iteration in Lib.Payment.Domain.Action.orderStatusService."
   },
   "item": [
     {
@@ -32,7 +32,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"NAMMA_YATRI\"\n}",
+          "raw": "{\n    \"mobileNumber\": \"{{_test_rider_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"qolari\"\n}",
           "options": { "raw": { "language": "json" } }
         },
         "url": {
@@ -330,7 +330,7 @@
           "listen": "prerequest",
           "script": {
             "exec": [
-              "// Wait for rider-app to create the Juspay payment order",
+              "// Wait for rider-app to create the Qolari payment order",
               "const start = Date.now();",
               "while (Date.now() - start < 3000) { /* busy wait */ }"
             ],
@@ -374,13 +374,13 @@
       "response": []
     },
     {
-      "name": "Override Juspay Status (CHARGED + split txn_list)",
+      "name": "Override Qolari Status (CHARGED + split txn_list)",
       "event": [
         {
           "listen": "prerequest",
           "script": {
             "exec": [
-              "// Build a CHARGED Juspay order_status override carrying TWO txn_list entries:",
+              "// Build a CHARGED Qolari order_status override carrying TWO txn_list entries:",
               "//   1. UPI / UPI_PAY (effective_amount 5)",
               "//   2. REWARD / LOYALTYOS7 (effective_amount 8)",
               "// mirroring the real split-payment response (Rs 5 paid via UPI + Rs 8 redeemed in loyalty points = Rs 13).",
@@ -393,7 +393,7 @@
               "var paymentShort = pm.environment.get('payment_order_short_id') || '';",
               "var paymentId = pm.environment.get('payment_order_id') || '';",
               "var body = {",
-              "    service: 'juspay',",
+              "    service: 'Qolari',",
               "    id: [paymentShort, paymentId],",
               "    status: 'CHARGED',",
               "    data: {",
@@ -543,7 +543,7 @@
               "var d = pm.response.json();",
               "console.log('Payment status:', d.status, 'orderId:', d.orderId);",
               "// d.orderId is the internal payment_order UUID — the foreign key used by payment_transaction.order_id.",
-              "// (d.payment.paymentOrder.id captured earlier is the Juspay service order id, NOT this.)",
+              "// (d.payment.paymentOrder.id captured earlier is the Qolari service order id, NOT this.)",
               "if (d.orderId) pm.environment.set('test_payment_order_uuid', d.orderId);",
               "pm.test('Status code is 200', function () { pm.response.to.have.status(200); });",
               "pm.test('Payment is CHARGED', function () { pm.expect(d.status).to.eql('CHARGED'); });",

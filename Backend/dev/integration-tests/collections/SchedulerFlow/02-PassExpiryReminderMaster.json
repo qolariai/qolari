@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "Pass Expiry Reminder Master",
     "description": "Tests PassExpiryReminderMaster scheduler job: seed an Active pass with endDate=today+N, trigger the master job, verify the rider received a PASS_EXPIRY_REMINDER push via mock-fcm. Negative case verifies riders with a PreBooked pass are excluded.",
@@ -170,7 +170,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"key\":\"rider-app-scheduler:NAMMA_YATRI:mobility:fcm_token\",\"value\":\"{\\\"access_token\\\":\\\"fake-dev-token\\\",\\\"expires_in\\\":32503680000,\\\"token_type\\\":\\\"Bearer\\\"}\",\"target\":\"cluster\"}"
+          "raw": "{\"key\":\"rider-app-scheduler:qolari:mobility:fcm_token\",\"value\":\"{\\\"access_token\\\":\\\"fake-dev-token\\\",\\\"expires_in\\\":32503680000,\\\"token_type\\\":\\\"Bearer\\\"}\",\"target\":\"cluster\"}"
         },
         "url": {
           "raw": "{{mockServerUrl}}/mock/redis/set",
@@ -400,7 +400,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_pos_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_pos_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -479,7 +479,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_neg_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_neg_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -1087,7 +1087,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_d1_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_d1_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -1166,7 +1166,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_d2_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_d2_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -1245,7 +1245,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_multi_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_multi_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -1324,7 +1324,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_today_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_today_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -1403,7 +1403,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_expired_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_expired_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -1482,7 +1482,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_d_neg_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_d_neg_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -2308,7 +2308,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_p1_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_p1_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -2387,7 +2387,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_p2_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_p2_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -2466,7 +2466,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_p3_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_p3_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -2545,7 +2545,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_p4_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_p4_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",
@@ -2624,7 +2624,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"mobileNumber\": \"{{_p5_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"NAMMA_YATRI\"}"
+          "raw": "{\"mobileNumber\": \"{{_p5_rider_number}}\", \"mobileCountryCode\": \"+91\", \"merchantId\": \"qolari\"}"
         },
         "url": {
           "raw": "{{baseUrl_app}}/auth",

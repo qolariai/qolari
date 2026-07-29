@@ -630,7 +630,7 @@ computePayoutFee (Just feeConfig) amount =
     DTConf.PERCENTAGE -> SPayment.roundToTwoDecimalPlaces $ amount * feeConfig.feeValue / 100
     DTConf.FIXED -> min feeConfig.feeValue amount -- fee cannot exceed the amount
 
--- | Create a PayoutRequest (INITIATED), then call Juspay createPayoutService (→ PROCESSING).
+-- | Create a PayoutRequest (INITIATED), then call Qolari createPayoutService (→ PROCESSING).
 --   No ledger entry here — that happens in the webhook handler on SUCCESS.
 initiateWalletPayout ::
   ( EncFlow m r,
@@ -655,7 +655,7 @@ initiateWalletPayout ctx payoutableBalance payoutType coverageFrom coverageTo re
   merchantOperatingCity <- CQMOC.findById (Kernel.Types.Id.cast ctx.person.merchantOperatingCityId) >>= fromMaybeM (MerchantOperatingCityNotFound ctx.person.merchantOperatingCityId.getId)
   (payoutServiceFlow, payoutServiceName, mbPersonBankAccount) <- Payout.getCreatePayoutServiceFlow (Payout.SubscriptionConfigOption PREPAID_SUBSCRIPTION) DEMSC.PayoutService ctx.person.clientSdkVersion ctx.person.merchantOperatingCityId ctx.person.id
   vpa <- case payoutServiceFlow of
-    IPayout.JuspayFlow -> Just <$> resolvePayoutVpa ctx
+    IPayout.QolariFlow -> Just <$> resolvePayoutVpa ctx
     IPayout.StripeFlow -> pure Nothing
   let fee = computePayoutFee ctx.transporterConfig.driverWalletConfig.payoutFee payoutableBalance
       -- Floor (not round-half-up) to whole cents so the disbursed amount never exceeds the

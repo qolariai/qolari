@@ -1,11 +1,11 @@
-"""Request-matching override system for the mock server.
+﻿"""Request-matching override system for the mock server.
 
 POST /mock/override registers a rule that fires when a future request to the
 named service has an extracted field equal to `value`. The rule's `response`
 dict is then deep-merged into the handler's default response.
 
   POST /mock/override {
-    "service": "juspay",
+    "service": "Qolari",
     "extract": "path.2",                  // where to find the value in the request
     "value": "ord_abc123",                 // exact match required
     "match": "/orders",                    // optional path-substring gate

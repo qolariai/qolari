@@ -1,11 +1,11 @@
-let ondclogsUrl = "https://logs.ondc.in"
+﻿let ondclogsUrl = "https://logs.ondc.in"
 
 let ondcTokenMap
     : List
         { mapKey : { merchantId : Text, domain : Text }
         , mapValue : { token : Text, ondcUrl : Text }
         }
-    = [ { mapKey = { merchantId = "NAMMA_YATRI", domain = "MOBILITY" }
+    = [ { mapKey = { merchantId = "qolari", domain = "MOBILITY" }
         , mapValue = { token = "abcd123", ondcUrl = ondclogsUrl }
         }
       , { mapKey = { merchantId = "YATRI", domain = "MOBILITY" }

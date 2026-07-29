@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # MSIL TDS Cohort Matrix Test
 #
 # Exhaustively verifies the materialized TDS rate for every cohort in the new
@@ -65,7 +65,7 @@ DRIVER_APP_URL="${DRIVER_APP_URL:-http://localhost:8016}"
 IDFY_WEBHOOK_SECRET="${IDFY_WEBHOOK_SECRET:-xxxxxxx}"
 
 MSIL_MERCHANT_ID="${MSIL_MERCHANT_ID:-7f7896dd-787e-4a0b-8675-e9e6fe93bb8f}"
-MSIL_MERCHANT_SHORT_ID="${MSIL_MERCHANT_SHORT_ID:-NAMMA_YATRI_PARTNER}"
+MSIL_MERCHANT_SHORT_ID="${MSIL_MERCHANT_SHORT_ID:-qolari_PARTNER}"
 MSIL_DELHI_MOC_ID="${MSIL_DELHI_MOC_ID:-f067bccf-5b34-fb51-a5a3-9d6fa6baac26}"
 MSIL_DELHI_CITY="${MSIL_DELHI_CITY:-Bangalore}"
 

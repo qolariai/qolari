@@ -1,8 +1,8 @@
-# Multi-Cloud Architecture
+﻿# Multi-Cloud Architecture
 
 ## Overview
 
-Namma Yatri operates across AWS and GCP clouds. Understanding data flow between clouds is critical for debugging.
+Qolari operates across AWS and GCP clouds. Understanding data flow between clouds is critical for debugging.
 
 ## Cloud Model
 

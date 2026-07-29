@@ -1,4 +1,4 @@
--- Grant JUSPAY_ADMIN (role_id 37947162-3b5d-4ed6-bcac-08841be1534d) full access to
+﻿-- Grant Qolari_ADMIN (role_id 37947162-3b5d-4ed6-bcac-08841be1534d) full access to
 -- the MerchantDocument CRUD dashboard APIs.
 -- Without these entries the provider-dashboard returns 403 ACCESS_DENIED for all
 -- Dashboard: Create/List/Update/Delete MerchantDocument steps in the integration test.

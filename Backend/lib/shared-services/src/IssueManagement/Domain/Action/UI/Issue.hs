@@ -1,4 +1,4 @@
-module IssueManagement.Domain.Action.UI.Issue where
+﻿module IssueManagement.Domain.Action.UI.Issue where
 
 import qualified AWS.S3 as S3
 import Control.Applicative ((<|>))
@@ -186,8 +186,8 @@ getIssueCategory (personId, _, merchantOpCityId) mbLanguage issueHandle identifi
         }
 
     shortId = case identifier of
-      DRIVER -> ShortId "NAMMA_YATRI_PARTNER"
-      CUSTOMER -> ShortId "NAMMA_YATRI"
+      DRIVER -> ShortId "qolari_PARTNER"
+      CUSTOMER -> ShortId "qolari"
 
 getIssueOption ::
   ( BeamFlow m r,

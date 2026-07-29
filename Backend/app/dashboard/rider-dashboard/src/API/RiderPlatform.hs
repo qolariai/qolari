@@ -65,7 +65,7 @@ handler merchantId = do
     :<|> Person.handler merchantId
   where
     getCity = \case
-      "NAMMA_YATRI" -> City.City "Bangalore"
+      "qolari" -> City.City "Bangalore"
       "YATRI" -> City.City "Kochi"
       "JATRI_SAATHI" -> City.City "Kolkata"
       _ -> City.City "AnyCity"

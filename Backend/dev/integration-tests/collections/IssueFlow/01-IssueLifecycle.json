@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "Issue Lifecycle Flow (BAP + BPP)",
     "description": "End-to-end Issue/IssueCategory lifecycle across rider-app (BAP) and dynamic-offer-driver-app (BPP). Exercises dashboard CRUD (category/option/message/translation), UI consumption from rider and driver, in-app chat (UI + dashboard sides), and config-update PATCH semantics (regression for the merchantName/supportEmail drop bug).",
@@ -580,8 +580,8 @@
           "raw": "{\n    \"mobileNumber\": \"{{_test_driver_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"7f7896dd-787e-4a0b-8675-e9e6fe93bb8f\",\n    \"merchantOperatingCity\": \"{{city}}\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth"]
         }
       },
@@ -611,8 +611,8 @@
           "raw": "{\n    \"otp\": \"{{login_otp}}\",\n    \"deviceToken\": \"issue-flow-driver-device\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth", "{{driver_authId}}", "verify"]
         }
       },
@@ -705,8 +705,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/issue/category",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/issue/category",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["issue", "category"],
           "query": []
         }
@@ -775,8 +775,8 @@
           "raw": "{\n    \"mediaFiles\": [],\n    \"optionId\": \"{{bpp_issue_option_id}}\",\n    \"categoryId\": \"{{bpp_issue_category_id}}\",\n    \"description\": \"IssueFlow driver-side test report {{_test_run_suffix}}\",\n    \"chats\": null,\n    \"createTicket\": false\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/issue",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/issue",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["issue"],
           "query": []
         }
@@ -810,8 +810,8 @@
           "raw": "{\n    \"text\": \"Hi from driver {{_test_run_suffix}}\",\n    \"mediaFileIds\": null\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/issue/{{bpp_issue_report_id}}/chat/message",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/issue/{{bpp_issue_report_id}}/chat/message",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["issue", "{{bpp_issue_report_id}}", "chat", "message"]
         }
       },
@@ -837,8 +837,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/issue/{{bpp_issue_report_id}}/chat/messages",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/issue/{{bpp_issue_report_id}}/chat/messages",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["issue", "{{bpp_issue_report_id}}", "chat", "messages"]
         }
       },

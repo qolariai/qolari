@@ -1,4 +1,4 @@
-{-# LANGUAGE StandaloneKindSignatures #-}
+﻿{-# LANGUAGE StandaloneKindSignatures #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module API.Types.ProviderPlatform.Management.Endpoints.FinanceManagement where
@@ -266,7 +266,7 @@ data PayoutListRes = PayoutListRes {totalItems :: Kernel.Prelude.Int, payouts ::
   deriving anyclass (ToJSON, FromJSON, ToSchema)
 
 data PgGateway
-  = Juspay
+  = Qolari
   | BillDesk
   | RazorPay
   | CCAvenue

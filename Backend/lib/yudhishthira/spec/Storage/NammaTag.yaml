@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   TagRule: Lib.Yudhishthira.Types
   Chakra: Lib.Yudhishthira.Types
   ApplicationEvent: Lib.Yudhishthira.Types
@@ -7,8 +7,8 @@ imports:
   Hours: Kernel.Types.Common
   Value: Data.Aeson
 
-NammaTag:
-  tableName: namma_tag
+QolariTag:
+  tableName: QOLARI_TAG
   types:
     TagInfo:
       enum: "Application, KaalChakra KaalChakraTagInfo, Manual"
@@ -77,8 +77,8 @@ NammaTag:
   beamInstance: MakeTableInstancesGenericSchema
   defaultQueryTypeConstraint: "(Lib.Yudhishthira.Storage.Beam.BeamFlow.BeamFlow m r)"
 
-NammaTagV2:
-  tableName: namma_tag_v2
+QolariTagV2:
+  tableName: QOLARI_TAG_v2
   types:
     TagInfo:
       enum: "Application, KaalChakra KaalChakraTagInfo, Manual"
@@ -153,8 +153,8 @@ NammaTagV2:
   beamInstance: MakeTableInstancesGenericSchema
   defaultQueryTypeConstraint: "(Lib.Yudhishthira.Storage.Beam.BeamFlow.BeamFlow m r)"
 
-NammaTagTrigger:
-  tableName: namma_tag_trigger
+QolariTagTrigger:
+  tableName: QOLARI_TAG_trigger
   fields:
     tagName: Text
     event: ApplicationEvent
@@ -174,8 +174,8 @@ NammaTagTrigger:
       kvFunction: deleteWithKV
       where: tagName
 
-NammaTagTriggerV2:
-  tableName: namma_tag_trigger_v2
+QolariTagTriggerV2:
+  tableName: QOLARI_TAG_trigger_v2
   fields:
     merchantOperatingCityId: Id MerchantOperatingCity
     tagName: Text

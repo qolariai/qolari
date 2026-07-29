@@ -1,4 +1,4 @@
-
+﻿
 @unified-dashboard-admin = unified-dashboard-admin
 @app-host = http://localhost:8013
 @unified-dashboard-helper-token = unified-dashboard-admin
@@ -7,12 +7,12 @@
 ###
 
 # @name healthCheck
-GET {{unified-dashboard-host}}/dashboard/NAMMA_YATRI/KOCHI/rider/rideBooking/healthCheck/test
+GET {{unified-dashboard-host}}/dashboard/qolari/KOCHI/rider/rideBooking/healthCheck/test
 token: {{unified-dashboard-admin}}}
 
 ###
 
 # @name healthCheckHelper
 
-GET {{app-host}}/unified-dashboard/NAMMA_YATRI/KOCHI/rideBooking/healthCheck/test
+GET {{app-host}}/unified-dashboard/qolari/KOCHI/rideBooking/healthCheck/test
 token: {{unified-dashboard-helper-token}}

@@ -1,4 +1,4 @@
-{ inputs, ... }:
+﻿{ inputs, ... }:
 {
   perSystem = perSystem@{ inputs', self', pkgs, lib, ... }:
     let
@@ -13,7 +13,7 @@
         namespace = "load-test";
         log_location = "${name}.log";
       };
-      waitForNammayatri = {
+      waitForQolari = {
         depends_on."load-test-init".condition = "process_completed_successfully";
       };
     in
@@ -28,10 +28,10 @@
 
       process-compose.load-test-dev = {
         imports = [
-          (import ../nix/services/nammayatri.nix { inherit (perSystem) config self' inputs'; inherit inputs; })
+          (import ../nix/services/Qolari.nix { inherit (perSystem) config self' inputs'; inherit inputs; })
         ];
         apiServer = false;
-        services.nammayatri.enable = true;
+        services.Qolari.enable = true;
 
         preHook = ''
           rm -rf Backend/load-test/output
@@ -45,7 +45,7 @@
         '';
 
         settings.processes = {
-          # Disable nammayatri processes we don't need for load test
+          # Disable Qolari processes we don't need for load test
           driver-offer-allocator-exe.disabled = true;
           dynamic-offer-driver-drainer-exe.disabled = true;
           rider-app-drainer-exe.disabled = true;
@@ -68,7 +68,7 @@
           create-drivers = {
             imports = [
               common
-              waitForNammayatri
+              waitForQolari
             ];
             command = pkgs.writeShellApplication {
               name = "create-drivers";
@@ -83,7 +83,7 @@
           auth = {
             imports = [
               common
-              waitForNammayatri
+              waitForQolari
             ];
             command = pkgs.writeShellApplication {
               name = "auth";
@@ -99,7 +99,7 @@
           share-otp = {
             imports = [
               common
-              waitForNammayatri
+              waitForQolari
             ];
             command = pkgs.writeShellApplication {
               name = "share-otp";
@@ -114,7 +114,7 @@
           update-location-service = {
             imports = [
               common
-              waitForNammayatri
+              waitForQolari
             ];
             command = pkgs.writeShellApplication {
               name = "location-update";
@@ -128,7 +128,7 @@
           load-test-rider = {
             imports = [
               common
-              waitForNammayatri
+              waitForQolari
             ];
             command = pkgs.writeShellApplication {
               name = "load-test-rider";
@@ -142,7 +142,7 @@
           load-test-driver = {
             imports = [
               common
-              waitForNammayatri
+              waitForQolari
             ];
             command = pkgs.writeShellApplication {
               name = "load-test-driver";

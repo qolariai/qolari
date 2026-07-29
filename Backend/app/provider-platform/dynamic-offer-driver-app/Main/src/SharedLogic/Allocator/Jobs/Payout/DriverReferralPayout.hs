@@ -199,7 +199,7 @@ callPayoutHandler DS.DailyStats {..} _driverInfo payoutVpa payoutConfigList stat
       merchantOperatingCity <- CQMOC.findById (cast person.merchantOperatingCityId) >>= fromMaybeM (MerchantOperatingCityNotFound person.merchantOperatingCityId.getId)
       (payoutServiceFlow, payoutServiceName, mbPersonBankAccount) <- TP.getCreatePayoutServiceFlow TP.MerchantServiceUsageConfigOption DEMSC.PayoutService person.clientSdkVersion person.merchantOperatingCityId person.id
       let payoutVpaValid = case payoutServiceFlow of
-            IPayout.JuspayFlow -> isJust payoutVpa
+            IPayout.QolariFlow -> isJust payoutVpa
             IPayout.StripeFlow -> True
       if payoutVpaValid
         then do
@@ -295,7 +295,7 @@ processScheduledRegistrationRefunds merchantOpCityId payoutConfigList = do
       person <- QPerson.findById driverId >>= fromMaybeM (PersonNotFound driverId.getId)
       (payoutServiceFlow, payoutServiceName, mbPersonBankAccount) <- TP.getCreatePayoutServiceFlow TP.MerchantServiceUsageConfigOption DEMSC.PayoutService person.clientSdkVersion person.merchantOperatingCityId person.id
       let payoutVpaValid = case payoutServiceFlow of
-            IPayout.JuspayFlow -> driverInfo.payoutVpaStatus == Just DI.VIA_WEBHOOK && isJust driverInfo.payoutVpa
+            IPayout.QolariFlow -> driverInfo.payoutVpaStatus == Just DI.VIA_WEBHOOK && isJust driverInfo.payoutVpa
             IPayout.StripeFlow -> True
       when payoutVpaValid $ do
         fork ("processing registration refund for DriverId: " <> driverId.getId) $ do

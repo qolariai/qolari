@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=./_schema.json
+﻿# yaml-language-server: $schema=./_schema.json
 name: ny-rn-consumer
 title: NY Consumer App (Android)
 icon: assets/icons/mobile.svg
@@ -6,7 +6,7 @@ category: mobile
 tags: [react-native, android, consumer]
 
 source:
-  url: https://github.com/nammayatri/ny-react-native
+  url: https://github.com/Qolari/ny-react-native
   ref: main
   destDir: data/ny-react-native
 
@@ -39,7 +39,7 @@ inputs:
   - key: VARIANT
     label: App variant
     type: select
-    options: [Bridge, NammaYatri, Yatri, ManaYatri, YatriSathi, Lynx, BharatTaxi]
+    options: [Bridge, Qolari, Yatri, ManaYatri, YatriSathi, Lynx, BharatTaxi]
     default: Lynx
     required: true
   - key: APP_ID
@@ -54,8 +54,8 @@ inputs:
       google.maps.api.key=
       org.gradle.jvmargs=
       CONFIG_URL="https://api.sandbox.moving.tech/dev/app/v2"
-      MERCHANT_ID="NAMMA_YATRI"
-      CLIENT_ID=nammayatribap
+      MERCHANT_ID="qolari"
+      CLIENT_ID=Qolaribap
       LOG_URL=""
       GOOGLE_AD_MOB_ID=
       FACEBOOK_APP_ID=NA

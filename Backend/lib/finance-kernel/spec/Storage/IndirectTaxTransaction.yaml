@@ -1,5 +1,5 @@
-# Finance Kernel - Indirect Tax Transaction Table
-# Namma-DSL YAML specification
+﻿# Finance Kernel - Indirect Tax Transaction Table
+# qolari-dsl YAML specification
 
 imports:
   UTCTime: Kernel.Prelude

@@ -1,4 +1,4 @@
-# STCL Membership — Share Top-Up
+﻿# STCL Membership — Share Top-Up
 
 How a driver who already bought N shares can buy more shares later, without breaking the global "shares are continuous" invariant or any existing API.
 
@@ -55,7 +55,7 @@ The endpoint:
 | Validates | No PENDING row already in flight; `sum(existing SUBMITTED shares) + numberOfShares ≤ 5`; `numberOfShares > 0`. |
 | Resolves amount | If `amount` is in the request, use it. Otherwise compute `pricePerShare (₹100) × numberOfShares`. |
 | Creates a new row with `status = PENDING` | Copies KYC/address/bank from the latest SUBMITTED row; sets `numberOfShares` to the requested delta. |
-| Creates a Juspay payment order | Identical to the first-purchase flow. |
+| Creates a Qolari payment order | Identical to the first-purchase flow. |
 | Returns `CreateOrderResp` | Frontend opens the payment screen. |
 | On `CHARGED` webhook | `stclMemberShipOrderStatusHandler` calls `updateApplicationAndShareCounts`, which atomically claims the next contiguous range from Redis (e.g., 12–14) and flips the row to `SUBMITTED`. |
 
@@ -72,14 +72,14 @@ The webhook code is **completely unchanged** — it doesn't know or care whether
 Inside `postBuyAdditionalShares` (the top-up endpoint):
 
 1. **At most one fresh PENDING in flight.** If the driver already has a `PENDING` row younger than `pendingStaleMinutes` (15 min), we look at whether the new request *matches* the in-flight order:
-   - **Same `numberOfShares` AND same resolved `amount`** → re-issue the existing payment order (same Juspay `orderId`). The frontend gets back a `CreateOrderResp` with the same payment links the driver got the first time, so they resume the in-flight payment instead of starting a second one.
+   - **Same `numberOfShares` AND same resolved `amount`** → re-issue the existing payment order (same Qolari `orderId`). The frontend gets back a `CreateOrderResp` with the same payment links the driver got the first time, so they resume the in-flight payment instead of starting a second one.
    - **Different `numberOfShares` or `amount`** → the driver's intent has changed (e.g., they originally requested 1 share by mistake and now want 2). We retire the in-flight `PENDING` as `REJECTED` and create a fresh order with the new quantity / amount. Silently replaying the old payment link would have charged them for the wrong number of shares.
    - If the existing `PENDING` is older than the stale window, we treat it as abandoned (driver closed the payment app and never came back) and retire it as `REJECTED` so the new request can proceed.
 
    Either way a stuck payment never permanently blocks future top-ups, and the cap check still ignores PENDING shares so over-allocation is impossible.
 2. **Total stays ≤ 5.** Sum of `numberOfShares` across all the driver's `SUBMITTED` rows + the new requested shares must be ≤ 5. Otherwise the request is rejected before any payment order is created. (PENDING shares don't count — they only become real when the webhook flips the row to SUBMITTED.)
 
-The resume path is provided "for free" by `Lib.Payment.Domain.Action.createOrderService`: when called with an `orderId` that already exists in `payment_order`, it returns the stored `CreateOrderResp` (`paymentLinks`, `sdkPayload`, etc.) instead of hitting Juspay again.
+The resume path is provided "for free" by `Lib.Payment.Domain.Action.createOrderService`: when called with an `orderId` that already exists in `payment_order`, it returns the stored `CreateOrderResp` (`paymentLinks`, `sdkPayload`, etc.) instead of hitting Qolari again.
 
 `postSubmitApplication` keeps its original guard: it rejects any driver who already has a SUBMITTED application (so a driver wanting to top up gets steered to the new endpoint).
 
@@ -166,7 +166,7 @@ Because `updateApplication` now touches `updatedAt` on older rows, we changed th
 
 - **First purchase:** call `POST /submitApplication` with the full KYC/address/bank payload (unchanged).
 - **Top-up:** call `POST /buyAdditionalShares` with only `{ numberOfShares, amount, paymentServiceType }`. The server reads KYC/address/bank from the driver's most recent SUBMITTED row.
-- Both endpoints return a `CreateOrderResp` with the Juspay payment screen URL. Same payment UX in both cases.
+- Both endpoints return a `CreateOrderResp` with the Qolari payment screen URL. Same payment UX in both cases.
 - After successful payment, `GET /membership` returns `numberOfShares = total`, with per-purchase allotments in `shareAllotments`.
 - Server enforces: cap of 5 total, only one PENDING at a time.
 - Legacy fields `applicationCount` / `shareStartCount` / `shareEndCount` are still in the `GET /membership` response (populated from the latest allotment) and will be removed in a later release. New code should read `shareAllotments`.

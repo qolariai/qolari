@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -600,7 +600,7 @@ pre.code .ok { color: #3fb950; }
       <div class="card pain">
         <div class="ctitle"><span class="dot o"></span> Opaque mocks</div>
         <div class="stat">~½ day lost per new integration</div>
-        <div class="cbody">Idfy / Juspay / OSRM — wire shapes live in tribal memory. Upstream changes break us silently.</div>
+        <div class="cbody">Idfy / Qolari / OSRM — wire shapes live in tribal memory. Upstream changes break us silently.</div>
         <div class="ex">"What's the response shape for verify_with_source? Who integrated it last?"</div>
         <div class="cmp"><span class="t now">today: grep + slack archaeology</span><span class="t fix">→ captured + schema'd</span></div>
       </div>
@@ -775,7 +775,7 @@ pre.code .ok { color: #3fb950; }
                 </div>
                 <div class="cr-node">
                   <div class="cr-node-header"><span class="cr-tag cr-tag-system">system</span><span>Dashboard Approve · operator</span></div>
-                  <div class="cr-step cr-step-pass"><div class="cr-step-header"><span class="cr-dot cr-dot-pass"></span><span class="cr-step-method">POST</span><span class="cr-step-name">/bpp/driver-offer/NAMMA_YATRI_PARTNER/Bangalore/driver/documents/update</span><span class="cr-duration">128ms</span><span class="cr-status-code">200</span></div></div>
+                  <div class="cr-step cr-step-pass"><div class="cr-step-header"><span class="cr-dot cr-dot-pass"></span><span class="cr-step-method">POST</span><span class="cr-step-name">/bpp/driver-offer/QOLARI_PARTNER/Bangalore/driver/documents/update</span><span class="cr-duration">128ms</span><span class="cr-status-code">200</span></div></div>
                 </div>
                 <div class="cr-node">
                   <div class="cr-node-header"><span class="cr-tag cr-tag-driver">driver</span><span>Go Online</span></div>
@@ -984,7 +984,7 @@ $ test-tool perf diff <span class="s">--against</span> <span class="p">v2026.05.
                 <label><span>User</span><input value="ubuntu" readonly /></label>
                 <label><span>Port</span><input value="22" readonly /></label>
                 <label><span>Identity file</span><input value="~/.ssh/id_ed25519" readonly /></label>
-                <label><span>Remote dir</span><input value="/tmp/nammayatri" readonly /></label>
+                <label><span>Remote dir</span><input value="/tmp/Qolari" readonly /></label>
                 <label><span>Copy mode</span><input value="rsync" readonly /></label>
               </div>
               <div class="rsp-actions2">
@@ -1088,7 +1088,7 @@ $ test-tool perf diff <span class="s">--against</span> <span class="p">v2026.05.
         <ul class="ck o">
           <li>Postgres + Redis + Kafka pre-warmed with synced config</li>
           <li>All other backend services: driver-offer, allocator, dashboards, providers</li>
-          <li>Mock registry · idfy · juspay · osrm · sms · fcm</li>
+          <li>Mock registry · idfy · Qolari · osrm · sms · fcm</li>
           <li>Reverse proxy with a single public endpoint (next slide)</li>
         </ul>
         <div class="tiny" style="color: #d29922; margin-top: auto;">spec'd per merchant · pooled · ~$0.40 / dev / day</div>
@@ -1256,7 +1256,7 @@ $ test-tool perf diff <span class="s">--against</span> <span class="p">v2026.05.
               <!-- Detail panel for selected NY Consumer App -->
               <div class="tool-section">
                 <h3 class="tool-h3">Source</h3>
-                <div class="source-line"><b>URL:</b> <code>https://github.com/nammayatri/ny-react-native</code></div>
+                <div class="source-line"><b>URL:</b> <code>https://github.com/qolariai/ny-react-native</code></div>
                 <div class="source-line"><b>ref:</b> <code>main</code> &nbsp; <b>destDir:</b> <code>data/ny-react-native</code></div>
               </div>
 
@@ -1268,7 +1268,7 @@ $ test-tool perf diff <span class="s">--against</span> <span class="p">v2026.05.
                 </div>
                 <div class="input-row">
                   <label>App variant <span class="req">*</span></label>
-                  <div class="field">Lynx <span style="color:#6b7186;font-size:11px;margin-left:auto;">[ Bridge · NammaYatri · Yatri · ManaYatri · YatriSathi · Lynx · BharatTaxi ]</span></div>
+                  <div class="field">Lynx <span style="color:#6b7186;font-size:11px;margin-left:auto;">[ Bridge · Qolari · Yatri · ManaYatri · YatriSathi · Lynx · BharatTaxi ]</span></div>
                 </div>
                 <div class="input-row">
                   <label>Android package id <span class="req">*</span></label>
@@ -1276,11 +1276,11 @@ $ test-tool perf diff <span class="s">--against</span> <span class="p">v2026.05.
                 </div>
                 <div class="input-row">
                   <label>Client ID (local.properties) <span class="req">*</span></label>
-                  <div class="field">nammayatribap</div>
+                  <div class="field">qolaribap</div>
                 </div>
                 <div class="input-row">
                   <label>Backend Merchant ID <span class="req">*</span></label>
-                  <div class="field">BRIDGE_FINLAND <span style="color:#6b7186;font-size:11px;margin-left:auto;">[ BRIDGE_FINLAND · NAMMA_YATRI · BHARAT_TAXI ]</span></div>
+                  <div class="field">BRIDGE_FINLAND <span style="color:#6b7186;font-size:11px;margin-left:auto;">[ BRIDGE_FINLAND · QOLARI · BHARAT_TAXI ]</span></div>
                 </div>
                 <div class="input-row">
                   <label>Config URL <span class="req">*</span></label>
@@ -1400,7 +1400,7 @@ $ test-tool perf diff <span class="s">--against</span> <span class="p">v2026.05.
 <span style="color:#bc8cff">category</span>: mobile
 <span style="color:#bc8cff">tags</span>: [react-native, android, consumer]
 <span style="color:#bc8cff">source</span>:
-  url: https://github.com/nammayatri/ny-react-native
+  url: https://github.com/qolariai/ny-react-native
   ref: main
   destDir: data/ny-react-native
 <span style="color:#bc8cff">ports</span>:
@@ -1414,7 +1414,7 @@ $ test-tool perf diff <span class="s">--against</span> <span class="p">v2026.05.
     type: <span style="color:#3fb950">file</span>  required: <span style="color:#3fb950">true</span>
   - key: VARIANT
     type: <span style="color:#3fb950">select</span>
-    options: [Bridge, NammaYatri, Yatri,
+    options: [Bridge, Qolari, Yatri,
       ManaYatri, YatriSathi, Lynx, BharatTaxi]
     default: Lynx
   - key: APP_ID …
@@ -1487,7 +1487,7 @@ $ test-tool perf diff <span class="s">--against</span> <span class="p">v2026.05.
             <div class="flow-group">
               <div class="flow-group-title">Upstreams</div>
               <div class="flow-item active"><span>idfy</span><span class="flow-item-dot dot-pass">●</span></div>
-              <div class="flow-item"><span>juspay</span><span class="flow-item-dot dot-pass">●</span></div>
+              <div class="flow-item"><span>Qolari</span><span class="flow-item-dot dot-pass">●</span></div>
               <div class="flow-item"><span>osrm</span><span class="flow-item-dot dot-pass">●</span></div>
               <div class="flow-item"><span>sms-gateway</span><span class="flow-item-dot dot-pass">●</span></div>
               <div class="flow-item"><span>fcm</span><span class="flow-item-dot dot-pending">●</span></div>
@@ -1496,8 +1496,8 @@ $ test-tool perf diff <span class="s">--against</span> <span class="p">v2026.05.
             <div class="flow-group">
               <div class="flow-group-title">Schemas (inferred)</div>
               <div class="flow-item"><span>idfy / verify · v2.3</span><span class="flow-item-dot dot-pass">●</span></div>
-              <div class="flow-item"><span>juspay / txns · v1.8</span><span class="flow-item-dot dot-pass">●</span></div>
-              <div class="flow-item"><span>juspay / refund · v1.0</span><span class="flow-item-dot dot-running">●</span></div>
+              <div class="flow-item"><span>Qolari / txns · v1.8</span><span class="flow-item-dot dot-pass">●</span></div>
+              <div class="flow-item"><span>Qolari / refund · v1.0</span><span class="flow-item-dot dot-running">●</span></div>
             </div>
           </div>
           <div class="content">
@@ -1539,7 +1539,7 @@ $ test-tool perf diff <span class="s">--against</span> <span class="p">v2026.05.
               <div class="log-panel-body">
                 <div class="log-entry-header"><span class="log-time">10:24:04</span><span class="log-msg log-req">POST idfy/verify · 200 · 218ms</span></div>
                 <div class="log-entry-header"><span class="log-time">10:24:04</span><span class="log-msg log-warn">schema · +1 new field</span></div>
-                <div class="log-entry-header"><span class="log-time">10:24:05</span><span class="log-msg log-req">POST juspay/txns · 200 · 142ms</span></div>
+                <div class="log-entry-header"><span class="log-time">10:24:05</span><span class="log-msg log-req">POST Qolari/txns · 200 · 142ms</span></div>
                 <div class="log-entry-header"><span class="log-time">10:24:06</span><span class="log-msg log-req">POST osrm/route · 200 · 38ms</span></div>
                 <div class="log-entry-header"><span class="log-time">10:24:07</span><span class="log-msg log-error">POST fcm/send · 401 · invalid mock token</span></div>
                 <div class="log-entry-header"><span class="log-time">10:24:08</span><span class="log-msg log-success">capture stored · artifacts/mocks/…</span></div>
@@ -1820,7 +1820,7 @@ $ test-tool perf diff <span class="s">--against</span> <span class="p">v2026.05.
       <path fill="#268C6E" d="M28.14 28.02c-2.17 2.14-5.05 3.32-8.11 3.32s-5.94-1.18-8.11-3.32c-1.59-1.57-2.65-3.51-3.11-5.63H4.47c.51 3.25 2.04 6.24 4.43 8.61 2.97 2.94 6.92 4.55 11.13 4.55 4.2 0 8.16-1.61 11.13-4.55 2.4-2.37 3.92-5.36 4.43-8.61h-4.34c-.46 2.12-1.52 4.06-3.11 5.63z"/>
     </svg>
     <h1 style="font-size: 72px;">Questions?</h1>
-    <p class="lede" style="text-align: center;">Full Stack Dev Box · <span class="chip b">Backend/dev/test-tool/dashboard</span><br/>github.com/nammayatri/nammayatri</p>
+    <p class="lede" style="text-align: center;">Full Stack Dev Box · <span class="chip b">Backend/dev/test-tool/dashboard</span><br/>github.com/Qolari/Qolari</p>
     <div style="display:flex; gap:8px; margin-top: 14px; flex-wrap: wrap; justify-content: center;">
       <span class="chip b">khuzema</span>
       <span class="chip g">slack · #dev-experience</span>

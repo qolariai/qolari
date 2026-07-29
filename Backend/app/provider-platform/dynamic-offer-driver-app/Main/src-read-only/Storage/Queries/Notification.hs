@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-dodgy-exports #-}
+﻿{-# OPTIONS_GHC -Wno-dodgy-exports #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
@@ -49,7 +49,7 @@ updateByPrimaryKey (Domain.Types.Notification.Notification {..}) = do
     [ Se.Set Beam.dateCreated dateCreated,
       Se.Set Beam.description description,
       Se.Set Beam.driverFeeId (Kernel.Types.Id.getId driverFeeId),
-      Se.Set Beam.juspayProvidedId juspayProvidedId,
+      Se.Set Beam.QolariProvidedId QolariProvidedId,
       Se.Set Beam.lastStatusCheckedAt lastStatusCheckedAt,
       Se.Set Beam.lastUpdated lastUpdated,
       Se.Set Beam.mandateId (Kernel.Types.Id.getId mandateId),

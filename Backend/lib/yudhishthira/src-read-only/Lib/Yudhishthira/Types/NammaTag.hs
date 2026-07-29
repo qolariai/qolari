@@ -1,7 +1,7 @@
-{-# LANGUAGE ApplicativeDo #-}
+﻿{-# LANGUAGE ApplicativeDo #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
-module Lib.Yudhishthira.Types.NammaTag where
+module Lib.Yudhishthira.Types.QolariTag where
 
 import Data.Aeson
 import Kernel.Prelude
@@ -9,11 +9,11 @@ import qualified Kernel.Types.Common
 import qualified Lib.Yudhishthira.Types
 import qualified Tools.Beam.UtilsTH
 
-data NammaTag = NammaTag
+data QolariTag = QolariTag
   { actionEngine :: Kernel.Prelude.Maybe Data.Aeson.Value,
     category :: Kernel.Prelude.Text,
     description :: Kernel.Prelude.Maybe Kernel.Prelude.Text,
-    info :: Lib.Yudhishthira.Types.NammaTag.TagInfo,
+    info :: Lib.Yudhishthira.Types.QolariTag.TagInfo,
     name :: Kernel.Prelude.Text,
     possibleValues :: Lib.Yudhishthira.Types.TagValues,
     rule :: Lib.Yudhishthira.Types.TagRule,
@@ -25,7 +25,7 @@ data NammaTag = NammaTag
 
 newtype KaalChakraTagInfo = KaalChakraTagInfo {chakra :: Lib.Yudhishthira.Types.Chakra} deriving (Generic, Show, ToJSON, FromJSON, ToSchema, Eq, Ord, Read)
 
-data TagInfo = Application | KaalChakra Lib.Yudhishthira.Types.NammaTag.KaalChakraTagInfo | Manual deriving (Eq, Ord, Show, Read, Generic, ToJSON, FromJSON, ToSchema)
+data TagInfo = Application | KaalChakra Lib.Yudhishthira.Types.QolariTag.KaalChakraTagInfo | Manual deriving (Eq, Ord, Show, Read, Generic, ToJSON, FromJSON, ToSchema)
 
 data TagType = ApplicationTag | KaalChakraTag | ManualTag deriving (Eq, Ord, Show, Read, Generic, ToJSON, FromJSON, ToSchema)
 

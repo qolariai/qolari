@@ -82,8 +82,8 @@ scheduledTDSDistribution Job {id, jobInfo} = withLogTag ("JobId-" <> id.getId) d
   fromEmail <- case transporterConfig.tdsFromEmail of
     Just e -> pure e
     Nothing -> do
-      logWarning "tdsFromEmail not configured in TransporterConfig; using fallback noreply-tds@nammayatri.in"
-      pure "noreply-tds@nammayatri.in"
+      logWarning "tdsFromEmail not configured in TransporterConfig; using fallback noreply-tds@drive.qolari.com"
+      pure "noreply-tds@drive.qolari.com"
 
   -- Fetch PENDING records scoped to this merchant operating city
   records <- QTDSExtra.findAllByStatusWithLimit (Just batchSize) Nothing opCityId PENDING
@@ -196,7 +196,7 @@ sendTDSCertificate fromEmail record pdfFile recipientEmail = do
           <> record.assessmentYear
           <> ".\n\n"
           <> "This is a system-generated email. Please do not reply.\n\n"
-          <> "Regards,\nNammayatri"
+          <> "Regards,\nQolari"
       attachmentName = pdfFile.fileName
 
   emailServiceConfig <- asks (.emailServiceConfig)

@@ -1,7 +1,7 @@
-{
+﻿{
   "info": {
     "_postman_id": "international-onboarding-02-add-driver",
-    "name": "International Onboarding 02 - Add Driver (JUSPAY_ADMIN dashboard path)",
+    "name": "International Onboarding 02 - Add Driver (Qolari_ADMIN dashboard path)",
     "description": "Onboards a driver via the proven driver-app OTP path. Under the new refactor, when this driver is later linked to a fleet (via addVehicle?fleetOwnerId=... in flow 03), `syncDriverOnboardingAsWithFDA` flips DI.onboardingAs to FLEET_DRIVER; this flow itself leaves onboardingAs=INDIVIDUAL until that link happens. The dashboard document-approve chain drives verified/approved through `processOnboardingEvent(PersonDocChanged)` \u2192 `recomputeDriverVerifiedAndEnabled`. Ported from HelsinkiOnboarding/03-AddDriver_AdminPath.json.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
@@ -50,9 +50,9 @@
           "raw": "{\"mobileNumber\": \"{{driver_mobile}}\", \"mobileCountryCode\": \"{{country_code}}\", \"merchantId\": \"{{driver_merchant_id}}\", \"merchantOperatingCity\": \"{{city}}\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
+          "raw": "{{baseURL_qolari_P}}/auth",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth"
@@ -90,9 +90,9 @@
           "raw": "{\"otp\": \"{{login_otp}}\", \"deviceToken\": \"test-driver-helsinki\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "auth",
@@ -132,9 +132,9 @@
           "raw": "{\"firstName\": \"Driver{{driver_name_suffix}}\", \"lastName\": \"Test\", \"email\": \"driver-{{driver_mobile}}@helsinki.test\"}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/profile",
+          "raw": "{{baseURL_qolari_P}}/driver/profile",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",
@@ -170,9 +170,9 @@
           }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/driver/profile",
+          "raw": "{{baseURL_qolari_P}}/driver/profile",
           "host": [
-            "{{baseURL_namma_P}}"
+            "{{baseURL_qolari_P}}"
           ],
           "path": [
             "driver",

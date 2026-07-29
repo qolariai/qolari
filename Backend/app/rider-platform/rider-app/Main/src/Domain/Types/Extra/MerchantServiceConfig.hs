@@ -1,4 +1,4 @@
-module Domain.Types.Extra.MerchantServiceConfig where
+﻿module Domain.Types.Extra.MerchantServiceConfig where
 
 import qualified Data.List as List
 import Domain.Types.Common (UsageSafety (..))
@@ -64,7 +64,7 @@ data ServiceName
   | PayoutService Payout.PayoutService
   | MultiModalService MultiModal.MultiModalService
   | WalletService GW.WalletService
-  | JuspayWalletService Payment.PaymentService
+  | PaymentWalletService Payment.PaymentService
   | MultiModalStaticDataService MultiModal.MultiModalService
   | InsuranceService Insurance.InsuranceService
   | SOSService SOS.SOSService
@@ -98,7 +98,7 @@ instance Show ServiceName where
   show (PayoutService s) = "Payout_" <> show s
   show (MultiModalService s) = "MultiModal_" <> show s
   show (WalletService s) = "Wallet_" <> show s
-  show (JuspayWalletService s) = "JuspayWallet_" <> show s
+  show (PaymentWalletService s) = "PaymentWallet_" <> show s
   show (MultiModalStaticDataService s) = "MultiModalStaticData_" <> show s
   show (InsuranceService s) = "Insurance_" <> show s
   show (SOSService s) = "SOS_" <> show s
@@ -192,8 +192,8 @@ instance Read ServiceName where
                  | r1 <- stripPrefix "Wallet_" r,
                    (v1, r2) <- readsPrec (app_prec + 1) r1
                ]
-            ++ [ (JuspayWalletService v1, r2)
-                 | r1 <- stripPrefix "JuspayWallet_" r,
+            ++ [ (PaymentWalletService v1, r2)
+                 | r1 <- stripPrefix "PaymentWallet_" r,
                    (v1, r2) <- readsPrec (app_prec + 1) r1
                ]
             ++ [ (MultiModalStaticDataService v1, r2)
@@ -250,7 +250,7 @@ data ServiceConfigD (s :: UsageSafety)
   | PayoutServiceConfig !PayoutServiceConfig
   | MultiModalServiceConfig !MultiModal.MultiModalServiceConfig
   | WalletServiceConfig !GW.WalletServiceConfig
-  | JuspayWalletServiceConfig !PaymentServiceConfig
+  | PaymentWalletServiceConfig !PaymentServiceConfig
   | MultiModalStaticDataServiceConfig !MultiModal.MultiModalServiceConfig
   | InsuranceServiceConfig !Insurance.InsuranceConfig
   | SOSServiceConfig !SOSInterface.SOSServiceConfig
@@ -291,7 +291,7 @@ instance Show (ServiceConfigD 'Safe) where
   show (PayoutServiceConfig cfg) = "PayoutServiceConfig " <> show cfg
   show (MultiModalServiceConfig cfg) = "MultiModalServiceConfig " <> show cfg
   show (WalletServiceConfig cfg) = "WalletServiceConfig " <> show cfg
-  show (JuspayWalletServiceConfig cfg) = "JuspayWalletServiceConfig " <> show cfg
+  show (PaymentWalletServiceConfig cfg) = "PaymentWalletServiceConfig " <> show cfg
   show (MultiModalStaticDataServiceConfig cfg) = "MultiModalStaticDataServiceConfig " <> show cfg
   show (InsuranceServiceConfig cfg) = "InsuranceServiceConfig " <> show cfg
   show (SOSServiceConfig cfg) = "SOSServiceConfig " <> show cfg
@@ -322,7 +322,7 @@ instance Show (ServiceConfigD 'Unsafe) where
   show (PayoutServiceConfig cfg) = "PayoutServiceConfig " <> show cfg
   show (MultiModalServiceConfig cfg) = "MultiModalServiceConfig " <> show cfg
   show (WalletServiceConfig cfg) = "WalletServiceConfig " <> show cfg
-  show (JuspayWalletServiceConfig cfg) = "JuspayWalletServiceConfig " <> show cfg
+  show (PaymentWalletServiceConfig cfg) = "PaymentWalletServiceConfig " <> show cfg
   show (MultiModalStaticDataServiceConfig cfg) = "MultiModalStaticDataServiceConfig " <> show cfg
   show (InsuranceServiceConfig cfg) = "InsuranceServiceConfig " <> show cfg
   show (SOSServiceConfig cfg) = "SOSServiceConfig " <> show cfg

@@ -1,6 +1,6 @@
-# Nammayatri Backend - File Structure Overview
+﻿# Qolari Backend - File Structure Overview
 
-The Nammayatri backend project is organized into a multi-package Cabal project, primarily structured under the `Backend/` directory. This structure facilitates modularity, separation of concerns, and independent development/deployment of microservices.
+The Qolari backend project is organized into a multi-package Cabal project, primarily structured under the `Backend/` directory. This structure facilitates modularity, separation of concerns, and independent development/deployment of microservices.
 
 ## 1. Top-Level Directories
 

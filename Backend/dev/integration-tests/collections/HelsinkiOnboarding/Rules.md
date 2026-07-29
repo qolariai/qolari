@@ -1,4 +1,4 @@
-# Helsinki Onboarding Collections
+﻿# Helsinki Onboarding Collections
 
 End-to-end onboarding for the **BRIDGE_FINLAND_PARTNER / Helsinki** environment.
 Built to feed `InternationalRideBookingFlow/*` collections downstream (a real onboarded
@@ -14,7 +14,7 @@ ledger/invoice generation post-ride.
    python config_transfer.py --from prod_international --to local
    ```
 2. **Local-testing-data seeds** (re-run on every `test-context-api` restart;
-   guarantees the JUSPAY_ADMIN dev token + cross-merchant access):
+   guarantees the Qolari_ADMIN dev token + cross-merchant access):
    - `Backend/dev/local-testing-data/provider-dashboard.sql`
    - `Backend/dev/local-testing-data/rider-dashboard.sql`
 3. **Helsinki feature migrations** (already-existing files; run once per fresh DB):
@@ -33,10 +33,10 @@ the above; running individual collections directly is supported for debugging.
 
 After config-sync + local-testing-data seeds:
 
-- **JUSPAY_ADMIN** seeded person `3680f4b5-dce4-4d03-aa8c-5405690e87bd`
-  (email `juspay_admin@dashboard.com`, password `juspay_admin`).
+- **Qolari_ADMIN** seeded person `3680f4b5-dce4-4d03-aa8c-5405690e87bd`
+  (email `Qolari_admin@dashboard.com`, password `Qolari_admin`).
 - A dev `registration_token` row pins token
-  `local-admin-token-bangalore-namma-yatri` to that admin **plus** cross-merchant
+  `local-admin-token-bangalore-qolari` to that admin **plus** cross-merchant
   access (including `BRIDGE_FINLAND_PARTNER`) via the seed's
   `INSERT INTO merchant_access ... CROSS JOIN unnest(supported_operating_cities)`.
 - Every collection starts with **`/user/switchMerchantAndCity`** to re-scope the
@@ -44,8 +44,8 @@ After config-sync + local-testing-data seeds:
   back into `dashboard_token`.
 
 This is why there is no separate "Admin Fleet" collection — that persona is the
-seeded JUSPAY_ADMIN under merchant-scoped access. The role-creation Q from the plan
-(Q2: "Same as JUSPAY_ADMIN, merchant-scoped") is satisfied by the seed.
+seeded Qolari_ADMIN under merchant-scoped access. The role-creation Q from the plan
+(Q2: "Same as Qolari_ADMIN, merchant-scoped") is satisfied by the seed.
 
 ## Env-variable Propagation
 
@@ -93,7 +93,7 @@ and nested `ApproveDetails = CommonDocument …`. Mirrors `test-doc-status-flow.
 
 ## Things this collection does **not** do (intentional)
 
-- Does not bootstrap the JUSPAY_ADMIN — relies on config-sync + local-testing-data.
+- Does not bootstrap the Qolari_ADMIN — relies on config-sync + local-testing-data.
 - Does not invoke Stripe onboarding — that is `02-StripeOnboarding.json` (next).
 - Does not assert `fleet_owner_information.docs_verification_status` via SQL —
   the API-level assertion in step 16 (all 4 docs listed) is the proxy; SQL-level
@@ -157,7 +157,7 @@ VAT rates, online payment offers) that aren't permanently desired in prod.
 
 | Step | Source of correctness | Verdict |
 |---|---|---|
-| A.01 `/user/switchMerchantAndCity` | `merchant.supported_operating_cities` from sync + `local-testing-data/provider-dashboard.sql` re-run (orchestrator Phase 0) gives JUSPAY_ADMIN cross-merchant access | 🟢 |
+| A.01 `/user/switchMerchantAndCity` | `merchant.supported_operating_cities` from sync + `local-testing-data/provider-dashboard.sql` re-run (orchestrator Phase 0) gives Qolari_ADMIN cross-merchant access | 🟢 |
 | A.03 step 1 switch | Same as A.01 | 🟢 |
 | A.03 step 2-3 `/fleet/v2/login/otp` + `/verify/otp` | OTP `7891` matches via `dynamic-offer-driver-app.sql` seed `registration_token.auth_value='7891'` for all merchants | 🟢 |
 | A.03 step 4 `/fleet/v2/register` | No Helsinki-specific config required | 🟢 |
@@ -277,7 +277,7 @@ some are documented limitations the test will surface at first runtime.
 
 Independent of this Postman flow, the new `Backend/dev/test-tool/` (commit
 `004a3f4128`, May 2026) spins up real client UIs you can click through:
-- `control-center-frontend.yaml` → port 4002 (the JUSPAY admin dashboard UI)
+- `control-center-frontend.yaml` → port 4002 (the Qolari admin dashboard UI)
 - `control-center-backend.yaml` → port 4001
 - `ny-rn-provider.yaml` → driver React Native app
 - `ny-rn-consumer.yaml` → consumer React Native app
@@ -297,7 +297,7 @@ intended UX behavior.
 - Step A.04/01 (Stripe link) — the dashboard's `checkRequestorAccessToFleet`
   derives `requestorId` from the token. With `fleet_owner_token`, the requestor
   IS the fleet owner; the FLEET_OWNER / FLEET_BUSINESS role branch is hit.
-  If you'd rather call as JUSPAY_ADMIN, swap the token to `dashboard_token`
+  If you'd rather call as Qolari_ADMIN, swap the token to `dashboard_token`
   and add `&requestorId=<admin_driver_app_person_id>` — but note the admin's
   driver-app person ID needs to exist; the dev seed only creates dashboard
   person. The fleet-owner-as-requestor path is the cleaner one.

@@ -1,4 +1,4 @@
-# Complete Ride Flow — 8 Phases
+﻿# Complete Ride Flow — 8 Phases
 
 This document describes the end-to-end ride lifecycle, from search to completion and rating.
 
@@ -121,7 +121,7 @@ This document describes the end-to-end ride lifecycle, from search to completion
 | BAP receives final fare | rider-app | `Beckn/ACL/OnUpdate.hs` |
 | Payment initiated | rider-app | `Domain/Action/UI/Payment.hs` |
 | Payment processing | rider-app | `SharedLogic/Payment.hs` |
-| Juspay webhook | rider-app | `Domain/Action/UI/Payment.hs` (juspayWebhookHandler) |
+| Qolari webhook | rider-app | `Domain/Action/UI/Payment.hs` (QolariWebhookHandler) |
 | Driver fee computed | driver-app | `SharedLogic/DriverFee.hs` |
 | Ride synced | driver-app | `SharedLogic/SyncRide.hs` |
 

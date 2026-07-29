@@ -1,4 +1,4 @@
-{ inputs, ... }:
+﻿{ inputs, ... }:
 {
   imports = [
     ./nix/debug.nix
@@ -85,7 +85,7 @@
         projectRoot = ./.;
         imports = [
           inputs.beckn-gateway.haskellFlakeProjectModules.output
-          # inputs.namma-dsl.haskellFlakeProjectModules.output
+          # inputs.qolari-dsl.haskellFlakeProjectModules.output
           inputs.haskell-cac.haskellFlakeProjectModules.output
         ];
         # "packages" and "apps" are excluded from autoWire so we can filter out
@@ -121,7 +121,7 @@
           streamly.source = "0.8.3";
           unicode-data.source = "0.3.1";
           zip-archive.source = inputs.zip-archive-hs;
-          namma-dsl.source = inputs.namma-dsl + /lib/namma-dsl;
+          qolari-dsl.source = inputs.qolari-dsl + /lib/qolari-dsl;
           json-logic-hs.source = inputs.json-logic-hs;
           google-cloud-pubsub.source = inputs.google-cloud-haskell + /lib/google-cloud-pubsub;
           google-cloud-common.source = inputs.google-cloud-haskell + /lib/google-cloud-common;
@@ -140,7 +140,7 @@
           kafka-consumers.custom = cacConfig;
           driver-offer-allocator.custom = cacConfig;
           rider-dashboard.custom = cacConfig;
-          namma-dsl.libraryProfiling = false;
+          qolari-dsl.libraryProfiling = false;
           location-updates.check = false;
           singletons-th.jailbreak = true;
           singletons-base = {
@@ -179,10 +179,10 @@
               (lib.attrValues allHaskellPackages));
         in
         filteredHaskellPackages // {
-          # The final nammayatri package containing the various executables and
+          # The final Qolari package containing the various executables and
           # configuration files.
-          nammayatri = pkgs.symlinkJoin {
-            name = "nammayatri";
+          Qolari = pkgs.symlinkJoin {
+            name = "Qolari";
             paths = localCabalPackages;
             postBuild = ''
               # Prepare /opt/app layout for Docker image.
@@ -206,7 +206,7 @@
 
       devShells.backend = pkgs.mkShell {
         name = builtins.traceVerbose "devShells.backend" "ny-backend";
-        meta.description = "Backend development environment for nammayatri";
+        meta.description = "Backend development environment for Qolari";
         packages = with pkgs; [
           redis # redis-cli is used in scripts.nix
           openssh # sftp binary for SFTP upload support

@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useRef, useMemo, useEffect } from 'react';
+﻿import React, { useState, useCallback, useRef, useMemo, useEffect } from 'react';
 import { ConfigBar } from './components/ConfigBar';
 import { RideFlowTree } from './components/RideFlowTree';
 import { CollectionRunner } from './components/CollectionRunner';
@@ -344,7 +344,7 @@ const TEST_IMAGE_BASE64 = 'iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQ
 
 function buildFleetOnboardingSteps(requiresAdminApproval: boolean): Record<string, Step[]> {
   const fleetPath = (ctx: Record<string, any>, suffix: string) =>
-    `/bpp/driver-offer/${ctx.merchantShortId || 'NAMMA_YATRI_PARTNER'}/${ctx.fleetCity || 'Kochi'}/${suffix}`;
+    `/bpp/driver-offer/${ctx.merchantShortId || 'qolari_PARTNER'}/${ctx.fleetCity || 'Kochi'}/${suffix}`;
 
   // Admin-approval steps: admin logs in, fetches unverified accounts and approves
   const adminApprovalSteps: Record<string, Step[]> = {
@@ -560,7 +560,7 @@ function App() {
   // Fleet onboarding state
   const [fleetType, setFleetType] = useState<'NORMAL_FLEET' | 'BUSINESS_FLEET'>('NORMAL_FLEET');
   const [fleetMobile, setFleetMobile] = useState(() => `99999${String(Date.now()).slice(-5)}`);
-  const [merchantShortId, setMerchantShortId] = useState('NAMMA_YATRI_PARTNER');
+  const [merchantShortId, setMerchantShortId] = useState('qolari_PARTNER');
   const [requiresAdminApproval, setRequiresAdminApproval] = useState(false);
   const [adminEmail, setAdminEmail] = useState('admin@msil.test');
   const [adminPassword, setAdminPassword] = useState('msil1234');

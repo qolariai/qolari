@@ -38,7 +38,7 @@ data PaymentTransactionT f = PaymentTransactionT
     dateCreated :: B.C f (Maybe UTCTime),
     statusId :: B.C f Int,
     status :: B.C f Payment.TransactionStatus,
-    juspayResponse :: B.C f (Maybe Text),
+    QolariResponse :: B.C f (Maybe Text),
     mandateStatus :: B.C f (Maybe Payment.MandateStatus),
     mandateStartDate :: B.C f (Maybe UTCTime),
     mandateEndDate :: B.C f (Maybe UTCTime),

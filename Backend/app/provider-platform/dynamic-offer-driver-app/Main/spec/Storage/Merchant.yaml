@@ -1,4 +1,4 @@
-imports:
+﻿imports:
   City: Kernel.Types.Beckn.Context
   IndianState: Kernel.Types.Beckn.Context
   Country: Kernel.Types.Beckn.Context
@@ -674,8 +674,8 @@ MerchantServiceUsageConfig:
   fromTType:
     llmChatCompletion: Kernel.Prelude.fromMaybe ChatCompletion.Types.AzureOpenAI|I
     categoryBasedVerificationPriorityList: Kernel.Utils.JSON.valueToMaybe =<< categoryBasedVerificationPriorityList|E
-    createPayoutOrder: fromMaybe (Kernel.External.Payout.Types.Juspay)|I
-    payoutOrderStatus: fromMaybe (Kernel.External.Payout.Types.Juspay)|I
+    createPayoutOrder: fromMaybe (Kernel.External.Payout.Types.Qolari)|I
+    payoutOrderStatus: fromMaybe (Kernel.External.Payout.Types.Qolari)|I
     faceMatchService: Kernel.Prelude.fromMaybe Kernel.External.Verification.Types.Idfy|I
 
   toTType:
@@ -750,8 +750,8 @@ MerchantServiceUsageConfig:
     createBankAccount: "'Stripe'"
     retryBankAccountLink: "'Stripe'"
     getBankAccount: "'Stripe'"
-    createPayoutOrder: "'Juspay'"
-    payoutOrderStatus: "'Juspay'"
+    createPayoutOrder: "'Qolari'"
+    payoutOrderStatus: "'Qolari'"
     backgroundVerification: "'Checkr'"
     sdkVerificationService: "'HyperVerge'"
     getDistancesForScheduledRides: "'OSRM'"
@@ -1914,8 +1914,8 @@ TransporterConfig:
     vehicleCategoryExcludedFromVerification: "'{TOTO}'"
     videoFileSizeUpperLimit: 15000000
     enableSupportForSafety: "false"
-    trackingShortUrlPattern: "'https://nammayatri.in/p/?vp={#vp#}&rideId='"
-    dashboardMediaFileUrlPattern: "'https://nammayatri.in/p/<FILE_PATH>'"
+    trackingShortUrlPattern: "'https://drive.qolari.com/p/?vp={#vp#}&rideId='"
+    dashboardMediaFileUrlPattern: "'https://drive.qolari.com/p/<FILE_PATH>'"
     knowledgeCenterSopTypes: "'[]' :: json"
     allowFarePolicyUpdateBelowMinBaseFare: "true"
     driverSearchBlacklistDurationSeconds: "3600"
@@ -2210,7 +2210,7 @@ PayoutConfig:
     payoutRegistrationFee: "1.0"
     payoutRegistrationCgst: "0"
     payoutRegistrationSgst: "0"
-    remark: "'Referral Reward From Nammayatri'"
+    remark: "'Referral Reward From Qolari'"
     orderType: "'FULFILL_ONLY'"
   constraints:
     merchantOperatingCityId: PrimaryKey

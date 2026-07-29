@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-dodgy-exports #-}
+﻿{-# OPTIONS_GHC -Wno-dodgy-exports #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
@@ -7,7 +7,7 @@ module Lib.Payment.Storage.Queries.PayoutOrder (module Lib.Payment.Storage.Queri
 import Kernel.Beam.Functions
 import Kernel.External.Encryption
 import qualified Kernel.External.Payout.Interface.Types
-import qualified Kernel.External.Payout.Juspay.Types.Payout
+import qualified Kernel.External.Payout.Qolari.Types.Payout
 import Kernel.Prelude
 import qualified Kernel.Prelude
 import Kernel.Types.Error
@@ -31,12 +31,12 @@ findById id = do findOneWithKV [Se.Is Beam.id $ Se.Eq (Kernel.Types.Id.getId id)
 findByOrderId :: (Lib.Payment.Storage.Beam.BeamFlow.BeamFlow m r) => (Kernel.Prelude.Text -> m (Maybe Lib.Payment.Domain.Types.PayoutOrder.PayoutOrder))
 findByOrderId orderId = do findOneWithKV [Se.Is Beam.orderId $ Se.Eq orderId]
 
-updatePayoutOrderStatus :: (Lib.Payment.Storage.Beam.BeamFlow.BeamFlow m r) => (Kernel.External.Payout.Juspay.Types.Payout.PayoutOrderStatus -> Kernel.Prelude.Text -> m ())
+updatePayoutOrderStatus :: (Lib.Payment.Storage.Beam.BeamFlow.BeamFlow m r) => (Kernel.External.Payout.Qolari.Types.Payout.PayoutOrderStatus -> Kernel.Prelude.Text -> m ())
 updatePayoutOrderStatus status orderId = do _now <- getCurrentTime; updateOneWithKV [Se.Set Beam.status status, Se.Set Beam.updatedAt _now] [Se.Is Beam.orderId $ Se.Eq orderId]
 
 updatePayoutOrderStatusAndTransferStatus ::
   (Lib.Payment.Storage.Beam.BeamFlow.BeamFlow m r) =>
-  (Kernel.External.Payout.Juspay.Types.Payout.PayoutOrderStatus -> Kernel.Prelude.Maybe Kernel.External.Payout.Interface.Types.TransferStatus -> Kernel.Prelude.Text -> m ())
+  (Kernel.External.Payout.Qolari.Types.Payout.PayoutOrderStatus -> Kernel.Prelude.Maybe Kernel.External.Payout.Interface.Types.TransferStatus -> Kernel.Prelude.Text -> m ())
 updatePayoutOrderStatusAndTransferStatus status transferStatus orderId = do
   _now <- getCurrentTime
   updateOneWithKV [Se.Set Beam.status status, Se.Set Beam.transferStatus transferStatus, Se.Set Beam.updatedAt _now] [Se.Is Beam.orderId $ Se.Eq orderId]

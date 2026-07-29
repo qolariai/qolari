@@ -1,4 +1,4 @@
-module Domain.Action.Dashboard.Management.FinanceManagement
+﻿module Domain.Action.Dashboard.Management.FinanceManagement
   ( getFinanceManagementSubscriptionPurchaseList,
     getFinanceManagementInvoiceList,
     getFinanceManagementFinanceInvoiceList,
@@ -1460,7 +1460,7 @@ getFinanceManagementFinancePaymentGatewayTransactionList merchantShortId opCity 
     matchesPgGatewayFilter Nothing _ = True
     matchesPgGatewayFilter (Just gwFilter) mbActualValue =
       let expectedValue = case gwFilter of
-            API.Juspay -> "juspay"
+            API.Qolari -> "Qolari"
             API.BillDesk -> "billdesk"
             API.RazorPay -> "razorpay"
             API.CCAvenue -> "ccavenue"

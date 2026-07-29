@@ -1,4 +1,4 @@
-module App.Types where
+﻿module App.Types where
 
 import qualified Data.HashMap.Strict as HM
 import qualified Data.IORef
@@ -33,7 +33,7 @@ data AppCfg = AppCfg
   { port :: Int,
     loggerConfig :: LoggerConfig,
     graceTerminationPeriod :: Seconds,
-    juspayWebhookBaseUrl :: BaseUrl,
+    QolariWebhookBaseUrl :: BaseUrl,
     esqDBCfg :: EsqDBConfig,
     hedisCfg :: HedisCfg
   }
@@ -43,7 +43,7 @@ data AppEnv = AppEnv
   { port :: Int,
     loggerConfig :: LoggerConfig,
     graceTerminationPeriod :: Seconds,
-    juspayWebhookBaseUrl :: BaseUrl,
+    QolariWebhookBaseUrl :: BaseUrl,
     isShuttingDown :: Shutdown,
     loggerEnv :: LoggerEnv,
     version :: Metrics.DeploymentVersion,

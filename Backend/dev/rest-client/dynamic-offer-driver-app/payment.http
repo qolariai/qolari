@@ -1,4 +1,4 @@
-@driver-offer-bpp-host = http://localhost:8016
+﻿@driver-offer-bpp-host = http://localhost:8016
 
 # @name healthcheck
 GET {{driver-offer-bpp-host}}/ui
@@ -24,13 +24,13 @@ token: {{token1}}
 content-type: application/json
 
 ### webhook
-# https://docs.juspay.in/payment-page/ios/base-sdk-integration/webhooks
+# https://docs.Qolari.in/payment-page/ios/base-sdk-integration/webhooks
 #  basic auth username: dummyUsername; password: yyyyyyy
 
-@merchantShortId = NAMMA_YATRI_PARTNER
+@merchantShortId = qolari_PARTNER
 @orderShortId={{createOrder.response.body.order_id}}
 
-POST {{driver-offer-bpp-host}}/{{merchantShortId}}/service/juspay/payment
+POST {{driver-offer-bpp-host}}/{{merchantShortId}}/service/Qolari/payment
 Authorization: Basic ZHVtbXlVc2VybmFtZTp5eXl5eXl5
 content-type: application/json
 
@@ -76,9 +76,9 @@ content-type: application/json
       "merchant_id": "MID",
       "payment_method_type": "CARD",
       "payment_links": {
-        "iframe": "https://sandbox.juspay.in/merchant/ipay/ord_c4345ba45dd3457c85fe8299f5321f53",
-        "web": "https://sandbox.juspay.in/merchant/pay/ord_c4345ba45dd3457c85fe8299f5321f53",
-        "mobile": "https://sandbox.juspay.in/merchant/pay/ord_c4345ba45dd3457c85fe8299f5321f53?mobile=true"
+        "iframe": "https://sandbox.Qolari.in/merchant/ipay/ord_c4345ba45dd3457c85fe8299f5321f53",
+        "web": "https://sandbox.Qolari.in/merchant/pay/ord_c4345ba45dd3457c85fe8299f5321f53",
+        "mobile": "https://sandbox.Qolari.in/merchant/pay/ord_c4345ba45dd3457c85fe8299f5321f53?mobile=true"
       },
       "status": "CHARGED",
       "txn_uuid": "rkuk1<HIDDEN>tiam",

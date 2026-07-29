@@ -242,7 +242,7 @@ generateAndEmailInvoice invoiceId person bookingAPIEntities merchantId email = d
   riderConfig <- getConfig (RiderConfigDimensions {merchantOperatingCityId = person.merchantOperatingCityId.getId}) (Just (CQRC.findByMerchantOperatingCityId person.merchantOperatingCityId)) >>= fromMaybeM (RiderConfigDoesNotExist merchantOperatingCityId.getId)
 
   -- Get fromEmail from rider config (use emailOtpConfig if available, otherwise default)
-  let fromEmail = maybe "noreply@nammayatri.in" (.fromEmail) riderConfig.emailOtpConfig
+  let fromEmail = maybe "noreply@drive.qolari.com" (.fromEmail) riderConfig.emailOtpConfig
 
   -- Get the date range from the first and last booking
   let actualStartDate = minimum $ map (.createdAt) bookingAPIEntities

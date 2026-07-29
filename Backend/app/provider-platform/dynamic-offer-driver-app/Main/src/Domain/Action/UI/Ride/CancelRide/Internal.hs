@@ -17,7 +17,7 @@ module Domain.Action.UI.Ride.CancelRide.Internal
     cancelRideTransaction,
     createCancellationLedgerEntries,
     applyCancellationLedgerAction,
-    updateNammaTagsForCancelledRide,
+    updateQolariTagsForCancelledRide,
     driverDistanceToPickup,
     getCancellationCharges,
     customerCancellationChargesCalculation,
@@ -187,7 +187,7 @@ cancelRideImpl rideId rideEndedBy bookingCReason isForceReallocation doCancellat
               CQM.findById merchantId
                 >>= fromMaybeM (MerchantNotFound merchantId.getId)
             transporterConfig <- getOneConfig (TransporterConfigDimensions {merchantOperatingCityId = booking.merchantOperatingCityId.getId}) (Just (SCTC.findByMerchantOpCityId booking.merchantOperatingCityId Nothing)) >>= fromMaybeM (TransporterConfigNotFound booking.merchantOperatingCityId.getId)
-            rideTags <- updateNammaTagsForCancelledRide booking ride bookingCReason transporterConfig
+            rideTags <- updateQolariTagsForCancelledRide booking ride bookingCReason transporterConfig
             noShowCharges <- withTryCatch "noShowCharges:cancelRideImpl" $ do
               if transporterConfig.canAddCancellationFee
                 then do
@@ -334,7 +334,7 @@ cancelRideTransaction booking ride bookingCReason merchant rideEndedBy mbCharges
     _ -> do
       logError "cancelRideTransaction: riderId in booking or cancellationFee is not present"
 
-updateNammaTagsForCancelledRide ::
+updateQolariTagsForCancelledRide ::
   ( EsqDBFlow m r,
     CacheFlow m r,
     Esq.EsqDBReplicaFlow m r,
@@ -349,7 +349,7 @@ updateNammaTagsForCancelledRide ::
   SBCR.BookingCancellationReason ->
   DTC.TransporterConfig ->
   m [LYT.TagNameValue]
-updateNammaTagsForCancelledRide booking ride bookingCReason transporterConfig = do
+updateQolariTagsForCancelledRide booking ride bookingCReason transporterConfig = do
   now <- getCurrentTime
   mbCallStatus <- QCallStatus.findOneByEntityId (Just ride.id.getId)
   let callAtemptByDriver = isJust mbCallStatus
@@ -365,9 +365,9 @@ updateNammaTagsForCancelledRide booking ride bookingCReason transporterConfig = 
             merchantOperatingCityId = booking.merchantOperatingCityId,
             ..
           }
-  nammaTags <- withTryCatch "computeNammaTags:RideCancel" (LYDL.computeNammaTagsWithDebugLog LYDL.Driver (cast booking.merchantOperatingCityId) Yudhishthira.RideCancel (Just booking.transactionId) tagData)
-  logDebug $ "Tags for cancelled ride, rideId: " <> ride.id.getId <> " tagresults:" <> show (eitherToMaybe nammaTags) <> "| tagdata: " <> show tagData
-  let allTags = ride.rideTags <> eitherToMaybe nammaTags
+  QolariTags <- withTryCatch "computeQolariTags:RideCancel" (LYDL.computeQolariTagsWithDebugLog LYDL.Driver (cast booking.merchantOperatingCityId) Yudhishthira.RideCancel (Just booking.transactionId) tagData)
+  logDebug $ "Tags for cancelled ride, rideId: " <> ride.id.getId <> " tagresults:" <> show (eitherToMaybe QolariTags) <> "| tagdata: " <> show tagData
+  let allTags = ride.rideTags <> eitherToMaybe QolariTags
   QRide.updateRideTags allTags ride.id
   let tags = fromMaybe [] allTags
   when (maybe False (`elem` validCancellationPenaltyReasonCodes transporterConfig) bookingCReason.reasonCode && validUserNoShowCancellation `notElem` tags) $

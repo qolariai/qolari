@@ -1,7 +1,7 @@
-module Lib.Yudhishthira.Tools.DebugLog
+﻿module Lib.Yudhishthira.Tools.DebugLog
   ( runLogicsWithDebugLog,
-    computeNammaTagsWithDebugLog,
-    computeNammaTagsWithExpiryAndDebugLog,
+    computeQolariTagsWithDebugLog,
+    computeQolariTagsWithExpiryAndDebugLog,
     setJsonLogicDebugFlags,
     checkDebugLogFlags,
     SetJsonLogicDebugReq (..),
@@ -32,16 +32,16 @@ import Lib.Yudhishthira.Tools.Utils (mkTagNameValue, mkTagNameValueExpiry, runLo
 import qualified Lib.Yudhishthira.Types as LYT
 import qualified Lib.Yudhishthira.Types.Application as YA
 
--- | Validated identifier: either a dynamic-logic domain or a NammaTag application event.
+-- | Validated identifier: either a dynamic-logic domain or a QolariTag application event.
 data DebugLogIdentifier
   = LogicDomainId LYT.LogicDomain
-  | NammaTagEventId YA.ApplicationEvent
+  | QolariTagEventId YA.ApplicationEvent
   deriving (Generic, Show, ToJSON, FromJSON, ToSchema)
 
 -- | Convert a typed identifier to the Text key used in Redis.
 debugLogIdentifierToText :: DebugLogIdentifier -> Text
 debugLogIdentifierToText (LogicDomainId domain) = T.pack $ show domain
-debugLogIdentifierToText (NammaTagEventId event) = T.pack $ show event
+debugLogIdentifierToText (QolariTagEventId event) = T.pack $ show event
 
 -- | Identifies which app triggered the debug log
 data CallerApp = Rider | Driver
@@ -193,8 +193,8 @@ runLogicsWithDebugLog callerApp mocId domain mbEntityTransactionId logics data_ 
         insertJsonLogicTransaction callerApp domainStr mbEntityTransactionId inputVal logicVal outputVal
   return resp
 
--- | Wrapper around computeNammaTags with debug logging
-computeNammaTagsWithDebugLog ::
+-- | Wrapper around computeQolariTags with debug logging
+computeQolariTagsWithDebugLog ::
   ( MonadFlow m,
     Metrics.CoreMetrics m,
     EsqDBFlow m r,
@@ -209,25 +209,25 @@ computeNammaTagsWithDebugLog ::
   Maybe Text -> -- optional entityTransactionId
   a ->
   m [LYT.TagNameValue]
-computeNammaTagsWithDebugLog callerApp merchantOpCityId event mbEntityTransactionId sourceData_ = do
+computeQolariTagsWithDebugLog callerApp merchantOpCityId event mbEntityTransactionId sourceData_ = do
   let sourceData = A.toJSON sourceData_
   let req = LYT.YudhishthiraDecideReq {merchantOperatingCityId = merchantOpCityId, source = LYT.Application event, sourceData}
   resp <- Event.yudhishthiraDecide req
   let tags = resp.tags <&> (\tag -> mkTagNameValue (LYT.TagName tag.tagName) tag.tagValue)
   -- Debug log in forked thread
   let eventStr = T.pack $ show event
-  fork "nammaTagDebugLog" $ do
+  fork "QolariTagDebugLog" $ do
     shouldLog <- checkDebugLogFlags merchantOpCityId eventStr
     when shouldLog $ do
       let inputVal = sourceData
-      let logicVal = A.String "NammaTag"
+      let logicVal = A.String "QolariTag"
       let outputVal = A.toJSON (resp.tags <&> (\t -> A.object ["tagName" A..= t.tagName, "tagValue" A..= (T.pack $ show t.tagValue)]))
-      handle (\(e :: SomeException) -> logWarning $ "NammaTag debug log to ClickHouse failed: " <> show e) $
+      handle (\(e :: SomeException) -> logWarning $ "QolariTag debug log to ClickHouse failed: " <> show e) $
         insertJsonLogicTransaction callerApp eventStr mbEntityTransactionId inputVal logicVal outputVal
   pure tags
 
--- | Wrapper around computeNammaTagsWithExpiry with debug logging
-computeNammaTagsWithExpiryAndDebugLog ::
+-- | Wrapper around computeQolariTagsWithExpiry with debug logging
+computeQolariTagsWithExpiryAndDebugLog ::
   ( MonadFlow m,
     Metrics.CoreMetrics m,
     EsqDBFlow m r,
@@ -242,7 +242,7 @@ computeNammaTagsWithExpiryAndDebugLog ::
   Maybe Text -> -- optional entityTransactionId
   a ->
   m [LYT.TagNameValueExpiry]
-computeNammaTagsWithExpiryAndDebugLog callerApp merchantOpCityId event mbEntityTransactionId sourceData_ = do
+computeQolariTagsWithExpiryAndDebugLog callerApp merchantOpCityId event mbEntityTransactionId sourceData_ = do
   let sourceData = A.toJSON sourceData_
   let req = LYT.YudhishthiraDecideReq {merchantOperatingCityId = merchantOpCityId, source = LYT.Application event, sourceData}
   resp <- Event.yudhishthiraDecide req
@@ -250,12 +250,12 @@ computeNammaTagsWithExpiryAndDebugLog callerApp merchantOpCityId event mbEntityT
   let tags = resp.tags <&> (\tag -> mkTagNameValueExpiry (LYT.TagName tag.tagName) tag.tagValue tag.tagValidity now)
   -- Debug log in forked thread
   let eventStr = T.pack $ show event
-  fork "nammaTagExpiryDebugLog" $ do
+  fork "QolariTagExpiryDebugLog" $ do
     shouldLog <- checkDebugLogFlags merchantOpCityId eventStr
     when shouldLog $ do
       let inputVal = sourceData
-      let logicVal = A.String "NammaTag"
+      let logicVal = A.String "QolariTag"
       let outputVal = A.toJSON (resp.tags <&> (\t -> A.object ["tagName" A..= t.tagName, "tagValue" A..= (T.pack $ show t.tagValue)]))
-      handle (\(e :: SomeException) -> logWarning $ "NammaTag debug log to ClickHouse failed: " <> show e) $
+      handle (\(e :: SomeException) -> logWarning $ "QolariTag debug log to ClickHouse failed: " <> show e) $
         insertJsonLogicTransaction callerApp eventStr mbEntityTransactionId inputVal logicVal outputVal
   pure tags

@@ -1,9 +1,9 @@
-#!/usr/bin/env bash
+﻿#!/usr/bin/env bash
 # Remote orchestrator for `, run-cabal-build-devbox`. Invoked over `ssh -tt` on
 # the dev-box after the local repo has been rsync'd and Backend/.ci-cache-sha
 # written. Runs cache-restore (download the CI dist-newstyle from MinIO) then
 # `cabal build all`, streaming to the caller's terminal.
-#   $1 = absolute path of the deployed Backend dir (…/nammayatri/Backend)
+#   $1 = absolute path of the deployed Backend dir (…/Qolari/Backend)
 #   $2 = clean flag: "1" → cabal clean (wipe dist-newstyle) before cache-restore
 set -euo pipefail
 

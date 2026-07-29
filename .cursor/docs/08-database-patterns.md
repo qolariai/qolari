@@ -1,8 +1,8 @@
-# Database Patterns
+﻿# Database Patterns
 
 ## Overview
 
-Namma Yatri uses PostgreSQL as the primary database, Redis for caching, and a KV connector layer that abstracts both.
+Qolari uses PostgreSQL as the primary database, Redis for caching, and a KV connector layer that abstracts both.
 
 ## Query Modules
 
@@ -127,8 +127,8 @@ toTType:
 SQL files numbered sequentially:
 ```
 dev/migrations/rider-app/1021-saved-locations.sql
-dev/migrations/rider-app/1128-juspay-payments-integration.sql
-dev/migrations/dynamic-offer-driver-app/0181-juspay-payments-integration.sql
+dev/migrations/rider-app/1128-Qolari-payments-integration.sql
+dev/migrations/dynamic-offer-driver-app/0181-Qolari-payments-integration.sql
 ```
 
 ## Transaction Handling
@@ -158,6 +158,6 @@ ClickHouse is used for analytics and event tracking:
 
 ## Related Docs
 
-- Code generation: `07-namma-dsl.md`
+- Code generation: `07-qolari-dsl.md`
 - Multi-cloud / KV connector: `12-multi-cloud.md`
 - Conventions: `15-conventions.md`

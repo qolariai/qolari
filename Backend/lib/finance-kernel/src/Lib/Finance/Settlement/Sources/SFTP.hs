@@ -1,4 +1,4 @@
-{-# LANGUAGE RecordWildCards #-}
+﻿{-# LANGUAGE RecordWildCards #-}
 
 module Lib.Finance.Settlement.Sources.SFTP
   ( fetchSettlementFile,
@@ -42,7 +42,7 @@ data SftpFetchMeta = SftpFetchMeta
     firstDataRowIndex :: Int,
     dataRowsDelivered :: Int,
     -- | 'True' when the fetch delivered a full logical unit in one shot and
-    -- resumption-by-row-index doesn't apply (e.g. Juspay portal API's whole-day
+    -- resumption-by-row-index doesn't apply (e.g. Qolari portal API's whole-day
     -- pull). Ingestion short-circuits the SFTP chunking branch and always
     -- flips the tracker to COMPLETED after storage, regardless of row counts.
     atomicPull :: Bool
@@ -319,7 +319,7 @@ controlMasterArgs =
   [ "-o",
     "ControlMaster=auto",
     "-o",
-    "ControlPath=/tmp/nammayatri-sftp-%C.sock",
+    "ControlPath=/tmp/Qolari-sftp-%C.sock",
     "-o",
     "ControlPersist=300"
   ]

@@ -1,4 +1,4 @@
-# Shared Libraries (`lib/`)
+﻿# Shared Libraries (`lib/`)
 
 All shared libraries live under `Backend/lib/`. They provide cross-cutting concerns used by multiple services.
 
@@ -30,7 +30,7 @@ BECKN service utilities — HTTP clients for making Beckn protocol calls.
 ### payment
 **Path**: `lib/payment/`
 
-Juspay payment gateway integration:
+Qolari payment gateway integration:
 | Module | Purpose |
 |--------|---------|
 | `src/Lib/Payment/API.hs` | Payment API definitions |
@@ -41,7 +41,7 @@ Juspay payment gateway integration:
 | `src-read-only/` | Generated types and queries |
 
 Key functions in `Domain/Action.hs`:
-- `juspayWebhookService` — Webhook handler
+- `QolariWebhookService` — Webhook handler
 - `createOrderService` — Payment order creation
 - `orderStatusService` — Payment status checks
 - `createRefundService` — Refund processing

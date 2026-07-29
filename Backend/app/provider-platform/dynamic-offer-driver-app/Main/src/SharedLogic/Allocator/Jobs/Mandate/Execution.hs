@@ -1,4 +1,4 @@
-module SharedLogic.Allocator.Jobs.Mandate.Execution where
+﻿module SharedLogic.Allocator.Jobs.Mandate.Execution where
 
 import qualified Control.Monad.Catch as C
 import Data.List (nubBy)
@@ -18,7 +18,7 @@ import Domain.Types.TransporterConfig
 import Kernel.Beam.Functions as B
 import Kernel.External.Payment.Interface.Types (SplitSettlementDetails (..))
 import qualified Kernel.External.Payment.Interface.Types as PaymentInterface
-import qualified Kernel.External.Payment.Juspay.Types as JuspayTypes
+import qualified Kernel.External.Payment.Gateway.Types as QolariTypes
 import Kernel.Prelude
 import qualified Kernel.Storage.Esqueleto as Esq
 import Kernel.Streaming.Kafka.Producer.Types (HasKafkaProducer)
@@ -86,7 +86,7 @@ startMandateExecutionForDriver Job {id, jobInfo} = withLogTag ("JobId-" <> id.ge
       else do
         let driverIdsWithPendingFee = driverFees <&> (.driverId)
         driverIdsAndDriverPlanToNotify <- driverIdAndDriverPlanTuple <$> QDP.findAllByDriverIdsPaymentModeAndServiceName driverIdsWithPendingFee AUTOPAY serviceName (Just DI.ACTIVE)
-        successfulNotifications <- nubBy (\x y -> x.driverFeeId == y.driverFeeId) <$> QNTF.findAllByDriverFeeIdAndStatus (driverFees <&> (.id)) JuspayTypes.SUCCESS --- notification_success instead of success in shared kernel---
+        successfulNotifications <- nubBy (\x y -> x.driverFeeId == y.driverFeeId) <$> QNTF.findAllByDriverFeeIdAndStatus (driverFees <&> (.id)) QolariTypes.SUCCESS --- notification_success instead of success in shared kernel---
         let mapDriverFeeById_ = Map.fromList (map (\driverFee_ -> (driverFee_.id, driverFee_)) driverFees)
             mapDriverPlanByDriverId = Map.fromList driverIdsAndDriverPlanToNotify
         driverExecutionRequests <- mapMaybe identity <$> sequence (mapExecutionRequestAndInvoice mapDriverFeeById_ mapDriverPlanByDriverId executionDate' subscriptionConfig successfulNotifications)

@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-orphans #-}
+﻿{-# OPTIONS_GHC -Wno-orphans #-}
 
 module Handler where
 
@@ -14,7 +14,7 @@ import Data.UUID.V4 as UUIDV4
 import EulerHS.Prelude hiding (id)
 import Kernel.Beam.Lib.UtilsTH (HasSchemaName (..))
 import qualified Kernel.External.Payment.Interface.Types as Payment
-import qualified Kernel.External.Payment.Juspay.Types as Juspay
+import qualified Kernel.External.Payment.Gateway.Types as Qolari
 import qualified Kernel.Storage.Beam.SystemConfigs as BeamSC
 import Kernel.Types.Beckn.Ack (AckResponse (..))
 import Kernel.Types.Common
@@ -136,13 +136,13 @@ externalPaymentHandler merchantShortId mCity mServiceType paymentStatusResp =
               . show
               <$> UUIDV4.nextRandom
 
-        AppEnv {juspayWebhookBaseUrl = envJuspayUrl} <- ask
-        let juspayBaseUrl = showBaseUrl envJuspayUrl
+        AppEnv {QolariWebhookBaseUrl = envQolariUrl} <- ask
+        let QolariBaseUrl = showBaseUrl envQolariUrl
             baseWebhookUrl =
-              juspayBaseUrl
+              QolariBaseUrl
                 <> "/"
                 <> T.unpack merchantShortId
-                <> "/service/juspay/payment"
+                <> "/service/Qolari/payment"
 
             cityParam =
               maybe "" (\c -> "?city=" <> T.unpack c) mCity
@@ -163,7 +163,7 @@ externalPaymentHandler merchantShortId mCity mServiceType paymentStatusResp =
           Nothing -> pure (Nothing, Nothing)
 
         let paymentMethod = mTxn >>= DTxn.paymentMethod
-            paymentGatewayResponse = mTxn >>= DTxn.juspayResponse >>= parsePaymentGatewayResponse
+            paymentGatewayResponse = mTxn >>= DTxn.QolariResponse >>= parsePaymentGatewayResponse
             respMessage = mTxn >>= DTxn.respMessage
             respCode = mTxn >>= DTxn.respCode
             gatewayReferenceId = mTxn >>= DTxn.gatewayReferenceId
@@ -171,19 +171,19 @@ externalPaymentHandler merchantShortId mCity mServiceType paymentStatusResp =
             amountRefunded = Just $ sum $ map (.amount) $ filter (\r -> r.status == Payment.REFUND_SUCCESS) refunds
 
             webhookPayload =
-              buildJuspayWebhookPayload
+              buildQolariWebhookPayload
                 orderShortId
                 status
                 bankErrorMessage
                 bankErrorCode
-                (map toJuspayRefundsData refunds)
+                (map toQolariRefundsData refunds)
                 payerVpa
-                (fmap toJuspayCardInfo card)
+                (fmap toQolariCardInfo card)
                 paymentMethodType
                 txnUUID
                 txnId
                 effectAmount
-                (fmap (map toJuspayOffer) offers)
+                (fmap (map toQolariOffer) offers)
                 amount
                 now
                 eventId
@@ -199,7 +199,7 @@ externalPaymentHandler merchantShortId mCity mServiceType paymentStatusResp =
         logInfo $ "Mock Payment: Webhook Payload: " <> T.pack (show webhookPayload)
 
         logInfo $
-          "Mock Payment: Calling Juspay Sandbox Webhook: "
+          "Mock Payment: Calling Qolari Sandbox Webhook: "
             <> T.pack webhookUrl
 
         manager <- liftIO TLS.newTlsManager
@@ -223,11 +223,11 @@ externalPaymentHandler merchantShortId mCity mServiceType paymentStatusResp =
               statusCode $ HTTP.responseStatus response
 
         logInfo $
-          "Mock Payment: Juspay response status: "
+          "Mock Payment: Qolari response status: "
             <> T.pack (show respStatusCode)
 
         logInfo $
-          "Mock Payment: Juspay response body: "
+          "Mock Payment: Qolari response body: "
             <> TE.decodeUtf8 (LBS.toStrict responseBody)
 
         if respStatusCode >= 200 && respStatusCode < 300
@@ -247,32 +247,32 @@ externalPaymentHandler merchantShortId mCity mServiceType paymentStatusResp =
         throwError $
           InternalError "Expected PaymentStatus constructor"
 
-buildJuspayWebhookPayload ::
+buildQolariWebhookPayload ::
   ShortId a ->
   Payment.TransactionStatus ->
   Maybe Text ->
   Maybe Text ->
-  [Juspay.RefundsData] ->
+  [Qolari.RefundsData] ->
   Maybe Text ->
-  Maybe Juspay.CardInfo ->
+  Maybe Qolari.CardInfo ->
   Maybe Text ->
   Maybe Text ->
   Maybe Text ->
   Maybe HighPrecMoney ->
-  Maybe [Juspay.Offer] ->
+  Maybe [Qolari.Offer] ->
   HighPrecMoney ->
   UTCTime ->
   Text ->
   Maybe Text ->
-  Maybe Juspay.PaymentGatewayResponse ->
+  Maybe Qolari.PaymentGatewayResponse ->
   Maybe Text ->
   Maybe Text ->
   Maybe Text ->
   Maybe UTCTime ->
   Maybe HighPrecMoney ->
   Maybe Payment.SplitSettlementResponse ->
-  Juspay.WebhookReq
-buildJuspayWebhookPayload
+  Qolari.WebhookReq
+buildQolariWebhookPayload
   orderShortId
   transactionStatus
   bankErrorMessage
@@ -296,15 +296,15 @@ buildJuspayWebhookPayload
   dateCreated
   amountRefunded
   splitSettlementResponse =
-    Juspay.WebhookReq
+    Qolari.WebhookReq
       { id = eventId,
         date_created = now,
         event_name = statusToPaymentStatus transactionStatus,
         content =
-          Juspay.OrderAndNotificationStatusContent
+          Qolari.OrderAndNotificationStatusContent
             { order =
                 Just
-                  Juspay.OrderData
+                  Qolari.OrderData
                     { order_id = getShortId orderShortId,
                       txn_uuid = txnUUID,
                       txn_id = txnId,
@@ -335,7 +335,7 @@ buildJuspayWebhookPayload
                       links = Nothing,
                       amount_refunded = fmap (realToFrac . getHighPrecMoney) amountRefunded,
                       refunds = Just refunds,
-                      split_settlement_response = splitSettlementResponse >>= toJuspaySplitSettlementResponse,
+                      split_settlement_response = splitSettlementResponse >>= toQolariSplitSettlementResponse,
                       effective_amount =
                         fmap
                           (realToFrac . getHighPrecMoney)
@@ -353,7 +353,7 @@ buildJuspayWebhookPayload
 
 internalOrderStatusHandler ::
   Text ->
-  FlowHandler Juspay.OrderData
+  FlowHandler Qolari.OrderData
 internalOrderStatusHandler orderShortId =
   withFlowHandlerAPI' $ do
     mOrder <- QOrder.findByShortId (ShortId orderShortId)
@@ -363,18 +363,18 @@ internalOrderStatusHandler orderShortId =
         mTxn <- HQTxn.findNewTransactionByOrderId orderId
         refunds <- HQRefunds.findAllByOrderId orderShortId'
         offers <- QOffer.findByPaymentOrder orderId
-        buildJuspayOrderData order mTxn refunds offers
+        buildQolariOrderData order mTxn refunds offers
       Nothing ->
         throwError $ InternalError ("Order not found: " <> orderShortId)
 
-buildJuspayOrderData ::
+buildQolariOrderData ::
   (MonadFlow m) =>
   DOrder.PaymentOrder ->
   Maybe DTxn.PaymentTransaction ->
   [DRefunds.Refunds] ->
   [DOffer.PaymentOrderOffer] ->
-  m Juspay.OrderData
-buildJuspayOrderData order mTxn refunds offers = do
+  m Qolari.OrderData
+buildQolariOrderData order mTxn refunds offers = do
   let txnId = mTxn >>= DTxn.txnId
       txnUUID = mTxn >>= DTxn.txnUUID
       respMessage = mTxn >>= DTxn.respMessage
@@ -391,7 +391,7 @@ buildJuspayOrderData order mTxn refunds offers = do
         } = order
 
   pure $
-    Juspay.OrderData
+    Qolari.OrderData
       { order_id =
           getShortId orderShortIdVal,
         txn_uuid = txnUUID,
@@ -406,7 +406,7 @@ buildJuspayOrderData order mTxn refunds offers = do
         payment_method_type =
           mTxn >>= DTxn.paymentMethodType,
         payment_method = mTxn >>= DTxn.paymentMethod,
-        payment_gateway_response = mTxn >>= DTxn.juspayResponse >>= (decode . LBS.fromStrict . TE.encodeUtf8),
+        payment_gateway_response = mTxn >>= DTxn.QolariResponse >>= (decode . LBS.fromStrict . TE.encodeUtf8),
         resp_message = respMessage,
         resp_code = respCode,
         gateway_reference_id = gatewayRefId,
@@ -427,11 +427,11 @@ buildJuspayOrderData order mTxn refunds offers = do
         additional_info = Nothing,
         links = Nothing,
         amount_refunded = Just $ realToFrac $ getHighPrecMoney totalRefundedAmount,
-        refunds = Just $ map domainRefundToJuspay refunds,
-        split_settlement_response = mTxn >>= DTxn.splitSettlementResponse >>= toJuspaySplitSettlementResponse,
+        refunds = Just $ map domainRefundToQolari refunds,
+        split_settlement_response = mTxn >>= DTxn.splitSettlementResponse >>= toQolariSplitSettlementResponse,
         effective_amount =
           fmap (realToFrac . getHighPrecMoney) orderEffectAmount,
-        offers = Just $ map domainOfferToJuspay offers,
+        offers = Just $ map domainOfferToQolari offers,
         txn_detail = Nothing,
         loyalty_info = Nothing,
         txn_list = Nothing
@@ -447,20 +447,20 @@ buildJuspayOrderData order mTxn refunds offers = do
         0
         refunds
 
-    domainOfferToJuspay :: DOffer.PaymentOrderOffer -> Juspay.Offer
-    domainOfferToJuspay offer =
-      Juspay.Offer
+    domainOfferToQolari :: DOffer.PaymentOrderOffer -> Qolari.Offer
+    domainOfferToQolari offer =
+      Qolari.Offer
         { offer_id = Just offer.offer_id,
           offer_code = Just offer.offer_code,
           status = offer.status
         }
 
-    domainRefundToJuspay :: DRefunds.Refunds -> Juspay.RefundsData
-    domainRefundToJuspay refund =
-      Juspay.RefundsData
+    domainRefundToQolari :: DRefunds.Refunds -> Qolari.RefundsData
+    domainRefundToQolari refund =
+      Qolari.RefundsData
         { id = refund.idAssignedByServiceProvider,
           amount = realToFrac refund.refundAmount,
-          status = toJuspayRefundStatus refund.status,
+          status = toQolariRefundStatus refund.status,
           error_message = refund.errorMessage,
           error_code = refund.errorCode,
           initiated_by = refund.initiatedBy,
@@ -468,11 +468,11 @@ buildJuspayOrderData order mTxn refunds offers = do
           arn = refund.arn
         }
 
-statusToPaymentStatus :: Payment.TransactionStatus -> Juspay.PaymentStatus
+statusToPaymentStatus :: Payment.TransactionStatus -> Qolari.PaymentStatus
 statusToPaymentStatus = \case
-  Payment.CHARGED -> Juspay.ORDER_SUCCEEDED
-  Payment.AUTO_REFUNDED -> Juspay.ORDER_REFUNDED
-  _ -> Juspay.ORDER_FAILED
+  Payment.CHARGED -> Qolari.ORDER_SUCCEEDED
+  Payment.AUTO_REFUNDED -> Qolari.ORDER_REFUNDED
+  _ -> Qolari.ORDER_FAILED
 
 statusToEventName :: Payment.TransactionStatus -> Payment.PaymentStatus
 statusToEventName = \case
@@ -487,7 +487,7 @@ statusToId = \case
   Payment.CHARGED -> 21
   Payment.AUTHENTICATION_FAILED -> 22
   Payment.AUTHORIZATION_FAILED -> 23
-  Payment.JUSPAY_DECLINED -> 24
+  Payment.Qolari_DECLINED -> 24
   Payment.AUTHORIZING -> 25
   Payment.COD_INITIATED -> 26
   Payment.STARTED -> 27
@@ -496,21 +496,21 @@ statusToId = \case
   Payment.CANCELLED -> 30
   Payment.PARTIAL_CHARGED -> 31
 
-toJuspayRefundStatus :: Payment.RefundStatus -> Juspay.RefundStatus
-toJuspayRefundStatus = \case
-  Payment.REFUND_PENDING -> Juspay.REFUND_PENDING
-  Payment.REFUND_FAILURE -> Juspay.REFUND_FAILURE
-  Payment.REFUND_SUCCESS -> Juspay.REFUND_SUCCESS
-  Payment.MANUAL_REVIEW -> Juspay.MANUAL_REVIEW
-  Payment.REFUND_CANCELED -> Juspay.REFUND_FAILURE
-  Payment.REFUND_REQUIRES_ACTION -> Juspay.REFUND_PENDING
+toQolariRefundStatus :: Payment.RefundStatus -> Qolari.RefundStatus
+toQolariRefundStatus = \case
+  Payment.REFUND_PENDING -> Qolari.REFUND_PENDING
+  Payment.REFUND_FAILURE -> Qolari.REFUND_FAILURE
+  Payment.REFUND_SUCCESS -> Qolari.REFUND_SUCCESS
+  Payment.MANUAL_REVIEW -> Qolari.MANUAL_REVIEW
+  Payment.REFUND_CANCELED -> Qolari.REFUND_FAILURE
+  Payment.REFUND_REQUIRES_ACTION -> Qolari.REFUND_PENDING
 
-toJuspayRefundsData :: Payment.RefundsData -> Juspay.RefundsData
-toJuspayRefundsData Payment.RefundsData {..} =
-  Juspay.RefundsData
+toQolariRefundsData :: Payment.RefundsData -> Qolari.RefundsData
+toQolariRefundsData Payment.RefundsData {..} =
+  Qolari.RefundsData
     { id = idAssignedByServiceProvider,
       amount = realToFrac amount,
-      status = toJuspayRefundStatus status,
+      status = toQolariRefundStatus status,
       error_message = errorMessage,
       error_code = errorCode,
       initiated_by = initiatedBy,
@@ -518,9 +518,9 @@ toJuspayRefundsData Payment.RefundsData {..} =
       arn = arn
     }
 
-toJuspayCardInfo :: Payment.CardInfo -> Juspay.CardInfo
-toJuspayCardInfo Payment.CardInfo {..} =
-  Juspay.CardInfo
+toQolariCardInfo :: Payment.CardInfo -> Qolari.CardInfo
+toQolariCardInfo Payment.CardInfo {..} =
+  Qolari.CardInfo
     { card_type = cardType,
       last_four_digits = lastFourDigits,
       name_on_card = nameOnCard,
@@ -529,28 +529,28 @@ toJuspayCardInfo Payment.CardInfo {..} =
       card_issuer = cardIssuer
     }
 
-toJuspayOffer :: Payment.Offer -> Juspay.Offer
-toJuspayOffer Payment.Offer {..} =
-  Juspay.Offer
+toQolariOffer :: Payment.Offer -> Qolari.Offer
+toQolariOffer Payment.Offer {..} =
+  Qolari.Offer
     { offer_id = offerId,
       offer_code = offerCode,
       status = status
     }
 
-parsePaymentGatewayResponse :: Text -> Maybe Juspay.PaymentGatewayResponse
+parsePaymentGatewayResponse :: Text -> Maybe Qolari.PaymentGatewayResponse
 parsePaymentGatewayResponse val = decode (LBS.fromStrict $ TE.encodeUtf8 val)
 
-toJuspaySplitSettlementResponse :: Payment.SplitSettlementResponse -> Maybe Juspay.SplitSettlementResponse
-toJuspaySplitSettlementResponse resp =
+toQolariSplitSettlementResponse :: Payment.SplitSettlementResponse -> Maybe Qolari.SplitSettlementResponse
+toQolariSplitSettlementResponse resp =
   Just $
-    Juspay.SplitSettlementResponse
-      { split_details = fmap (map toJuspaySplitDetailsResponse) resp.splitDetails,
+    Qolari.SplitSettlementResponse
+      { split_details = fmap (map toQolariSplitDetailsResponse) resp.splitDetails,
         split_applied = resp.splitApplied
       }
 
-toJuspaySplitDetailsResponse :: Payment.SplitDetailsResponse -> Juspay.SplitDetailsResponse
-toJuspaySplitDetailsResponse detail =
-  Juspay.SplitDetailsResponse
+toQolariSplitDetailsResponse :: Payment.SplitDetailsResponse -> Qolari.SplitDetailsResponse
+toQolariSplitDetailsResponse detail =
+  Qolari.SplitDetailsResponse
     { sub_vendor_id = detail.subVendorId,
       amount = detail.amount,
       merchant_commission = detail.merchantCommission,

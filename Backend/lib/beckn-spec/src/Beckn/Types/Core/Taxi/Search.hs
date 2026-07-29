@@ -54,7 +54,7 @@ instance FromJSON SearchMessage where
 -- searchMessageJSONOptions =
 --   defaultOptions
 --     { fieldLabelModifier = \case
---         "routeInfo" -> "./nammayatri/routeInfo"
+--         "routeInfo" -> "./Qolari/routeInfo"
 --         a -> a,
 --       omitNothingFields = True
 --     }

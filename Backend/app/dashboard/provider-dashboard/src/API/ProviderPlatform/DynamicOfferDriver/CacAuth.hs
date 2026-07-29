@@ -50,7 +50,7 @@ cacAuthHandler mbToken = withFlowHandlerAPI' $ do
       return $
         Common.CacUser
           { username = "admin",
-            email = "admin@juspay.in",
+            email = "admin@Qolari.in",
             auth_type = "Bearer",
             ..
           }

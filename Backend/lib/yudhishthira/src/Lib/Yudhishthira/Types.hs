@@ -1,4 +1,4 @@
-{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+﻿{-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE InstanceSigs #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
@@ -11,12 +11,12 @@ module Lib.Yudhishthira.Types
     ChakraQueryDeleteReq (..),
     Source (..),
     SourceData,
-    CreateNammaTagRequest (..),
-    CreateNammaTagResponse (..),
-    CreateNammaApplicationTagResponse (..),
+    CreateQolariTagRequest (..),
+    CreateQolariTagResponse (..),
+    CreateQolariApplicationTagResponse (..),
     CreateTagResp (..),
-    VerifyNammaTagRequest (..),
-    VerifyNammaTagResponse (..),
+    VerifyQolariTagRequest (..),
+    VerifyQolariTagResponse (..),
     LogicDomain (..),
     InvoiceTemplateScope (..),
     AppDynamicLogicReq (..),
@@ -41,7 +41,7 @@ module Lib.Yudhishthira.Types
     RedisQueryConfig (..),
     BatchMode (..),
     RedisOp (..),
-    UpdateNammaTagRequest (..),
+    UpdateQolariTagRequest (..),
     GetLogicsResp (..),
     LogicRolloutObject (..),
     RolloutVersion (..),
@@ -77,8 +77,8 @@ module Lib.Yudhishthira.Types
     UiConfigGetVersionResponse (..),
     GetPatchedElementReq (..),
     GetPatchedElementResp (..),
-    NammaTagEventsOrNammaTagNamesResp (..),
-    NammaTagDetailsResp (..),
+    QolariTagEventsOrQolariTagNamesResp (..),
+    QolariTagDetailsResp (..),
     AlwaysOnPatchInfo (..),
     AlwaysOnListResp (..),
     ConfigPilotGetConfigRequest (..),
@@ -118,12 +118,12 @@ class Enumerable a where
 instance Enumerable ApplicationEvent where
   allValues = [minBound .. maxBound]
 
-data NammaTagEventsOrNammaTagNamesResp
-  = NammaTagEvents [ApplicationEvent]
-  | NammaTagNames [Text]
+data QolariTagEventsOrQolariTagNamesResp
+  = QolariTagEvents [ApplicationEvent]
+  | QolariTagNames [Text]
   deriving (Show, Read, Generic, ToJSON, FromJSON, ToSchema)
 
-data NammaTagDetailsResp = NammaTagDetailsResp
+data QolariTagDetailsResp = QolariTagDetailsResp
   { actionEngine :: Maybe Value,
     category :: Text,
     description :: Maybe Text,
@@ -146,16 +146,16 @@ data Source
 
 type SourceData = Value -- json to be decoded in the respective tag
 
-data CreateNammaTagRequest
-  = ApplicationTag NammaTagApplication
-  | KaalChakraTag NammaTagChakra
-  | ManualTag NammaTagManual
+data CreateQolariTagRequest
+  = ApplicationTag QolariTagApplication
+  | KaalChakraTag QolariTagChakra
+  | ManualTag QolariTagManual
   deriving (Show, Read, Generic, ToJSON, FromJSON, ToSchema)
 
-instance HideSecrets CreateNammaTagRequest where
+instance HideSecrets CreateQolariTagRequest where
   hideSecrets = identity
 
-data UpdateNammaTagRequest = UpdateNammaTagRequest
+data UpdateQolariTagRequest = UpdateQolariTagRequest
   { tagCategory :: Maybe Text,
     tagName :: Text,
     description :: Maybe Text,
@@ -169,7 +169,7 @@ data UpdateNammaTagRequest = UpdateNammaTagRequest
   }
   deriving (Show, Generic, ToJSON, FromJSON, ToSchema)
 
-instance HideSecrets UpdateNammaTagRequest where
+instance HideSecrets UpdateQolariTagRequest where
   hideSecrets = identity
 
 data ChakraQueriesAPIEntity = ChakraQueriesAPIEntity
@@ -267,7 +267,7 @@ data YudhishthiraDecideReq = YudhishthiraDecideReq
   deriving (Show, Read, Generic, ToJSON, FromJSON, ToSchema)
 
 newtype YudhishthiraDecideResp = YudhishthiraDecideResp
-  { tags :: [NammaTagResponse]
+  { tags :: [QolariTagResponse]
   }
   deriving stock (Show, Read, Generic)
   deriving anyclass (ToJSON, FromJSON, ToSchema)
@@ -713,32 +713,32 @@ data RunLogicResp = RunLogicResp
   }
   deriving (Show, Read, Generic, ToJSON, FromJSON, ToSchema)
 
-data CreateTagResp = ApplicationTagRes CreateNammaApplicationTagResponse | Success deriving (Show, Read, Generic, ToJSON, FromJSON, ToSchema)
+data CreateTagResp = ApplicationTagRes CreateQolariApplicationTagResponse | Success deriving (Show, Read, Generic, ToJSON, FromJSON, ToSchema)
 
 type LogicRolloutReq = [LogicRolloutObject]
 
 instance HideSecrets CreateTagResp where
   hideSecrets = identity
 
-newtype CreateNammaTagResponse = CreateNammaTagResponse
+newtype CreateQolariTagResponse = CreateQolariTagResponse
   { results :: NonEmpty CreateTagResp
   }
   deriving stock (Show, Read, Generic)
   deriving anyclass (ToJSON, FromJSON, ToSchema)
 
-instance HideSecrets CreateNammaTagResponse where
+instance HideSecrets CreateQolariTagResponse where
   hideSecrets = identity
 
-data CreateNammaApplicationTagResponse = CreateNammaApplicationTagResponse
+data CreateQolariApplicationTagResponse = CreateQolariApplicationTagResponse
   { executionResultOnDefaultData :: RunLogicResp,
     defaultDataUsed :: Value
   }
   deriving (Show, Read, Generic, ToJSON, FromJSON, ToSchema)
 
-instance HideSecrets CreateNammaApplicationTagResponse where
+instance HideSecrets CreateQolariApplicationTagResponse where
   hideSecrets = identity
 
-data VerifyNammaTagRequest = VerifyNammaTagRequest
+data VerifyQolariTagRequest = VerifyQolariTagRequest
   { logic :: Value,
     logicData :: Maybe Value,
     source :: Source,
@@ -746,16 +746,16 @@ data VerifyNammaTagRequest = VerifyNammaTagRequest
   }
   deriving (Show, Read, Generic, ToJSON, FromJSON, ToSchema)
 
-instance HideSecrets VerifyNammaTagRequest where
+instance HideSecrets VerifyQolariTagRequest where
   hideSecrets = identity
 
-data VerifyNammaTagResponse = VerifyNammaTagResponse
+data VerifyQolariTagResponse = VerifyQolariTagResponse
   { executionResult :: RunLogicResp,
     dataUsed :: Value
   }
   deriving (Show, Read, Generic, ToJSON, FromJSON, ToSchema)
 
-instance HideSecrets VerifyNammaTagResponse where
+instance HideSecrets VerifyQolariTagResponse where
   hideSecrets = identity
 
 instance HideSecrets LogicRolloutReq where

@@ -1,4 +1,4 @@
-module Lib.Yudhishthira.Event where
+﻿module Lib.Yudhishthira.Event where
 
 import qualified Data.Aeson as A
 import Data.Scientific
@@ -9,11 +9,11 @@ import Kernel.Types.Common
 import Kernel.Types.Id
 import Kernel.Utils.Common
 import Lib.Yudhishthira.Storage.Beam.BeamFlow
-import qualified Lib.Yudhishthira.Storage.Queries.NammaTagTriggerV2 as SQNTTV2
-import qualified Lib.Yudhishthira.Storage.Queries.NammaTagV2 as SQNTV2
+import qualified Lib.Yudhishthira.Storage.Queries.QolariTagTriggerV2 as SQNTTV2
+import qualified Lib.Yudhishthira.Storage.Queries.QolariTagV2 as SQNTV2
 import Lib.Yudhishthira.Tools.Utils (mkTagNameValue, mkTagNameValueExpiry)
 import Lib.Yudhishthira.Types
-import qualified Lib.Yudhishthira.Types.NammaTagV2 as DNTv2
+import qualified Lib.Yudhishthira.Types.QolariTagV2 as DNTv2
 
 yudhishthiraDecide ::
   ( MonadFlow m,
@@ -27,33 +27,33 @@ yudhishthiraDecide ::
   m YudhishthiraDecideResp
 yudhishthiraDecide req = do
   let merchantOpCityId = req.merchantOperatingCityId
-  nammaTags <-
+  QolariTags <-
     case req.source of
       Application event -> do
-        nammaTagsTrigger <- SQNTTV2.findAllByMerchantOperatingCityIdAndEvent merchantOpCityId event
-        let tagNames = nammaTagsTrigger <&> (.tagName)
+        QolariTagsTrigger <- SQNTTV2.findAllByMerchantOperatingCityIdAndEvent merchantOpCityId event
+        let tagNames = QolariTagsTrigger <&> (.tagName)
         when (null tagNames) $
           logWarning $ "No triggers found for event: " <> show event
-        nammaTags <- SQNTV2.findAllByMerchantOperatingCityIdAndNames merchantOpCityId tagNames
-        let missedTags = filter (`notElem` (nammaTags <&> (.name))) tagNames
+        QolariTags <- SQNTV2.findAllByMerchantOperatingCityIdAndNames merchantOpCityId tagNames
+        let missedTags = filter (`notElem` (QolariTags <&> (.name))) tagNames
         unless (null missedTags) $
           logError $ "Some tags missing for event: " <> show event <> "; tags: " <> show missedTags
-        pure nammaTags
+        pure QolariTags
       KaalChakra chakra -> SQNTV2.findAllByChakra merchantOpCityId chakra
-  logDebug $ "NammaTags for source <> " <> show req.source <> ": " <> show nammaTags
+  logDebug $ "QolariTags for source <> " <> show req.source <> ": " <> show QolariTags
   logDebug $ "SourceData: " <> show req.sourceData
-  tags <- convertToTagResponses nammaTags
+  tags <- convertToTagResponses QolariTags
   return $ YudhishthiraDecideResp {..}
   where
     convertToTagResponses ::
       (MonadFlow m) =>
-      [DNTv2.NammaTagV2] ->
-      m [NammaTagResponse]
+      [DNTv2.QolariTagV2] ->
+      m [QolariTagResponse]
     convertToTagResponses tags = do
       mbTagResponses <- mapM convertToTagResponse tags
       return $ catMaybes mbTagResponses
 
-    convertToTagResponse :: (MonadFlow m) => DNTv2.NammaTagV2 -> m (Maybe NammaTagResponse)
+    convertToTagResponse :: (MonadFlow m) => DNTv2.QolariTagV2 -> m (Maybe QolariTagResponse)
     convertToTagResponse tag = do
       let tagValidity = tag.validity
       mbRespValue <-
@@ -80,7 +80,7 @@ yudhishthiraDecide req = do
       return $
         mbTagValue
           <&> \tagValue ->
-            NammaTagResponse
+            QolariTagResponse
               { tagName = tag.name,
                 tagValue,
                 tagCategory = tag.category,
@@ -91,7 +91,7 @@ yudhishthiraDecide req = do
     extractText (A.String txt) = Just txt
     extractText _ = Nothing
 
-computeNammaTags ::
+computeQolariTags ::
   ( MonadFlow m,
     Metrics.CoreMetrics m,
     EsqDBFlow m r,
@@ -103,13 +103,13 @@ computeNammaTags ::
   ApplicationEvent ->
   a ->
   m [TagNameValue]
-computeNammaTags merchantOpCityId event sourceData_ = do
+computeQolariTags merchantOpCityId event sourceData_ = do
   let sourceData = A.toJSON sourceData_
   let req = YudhishthiraDecideReq {merchantOperatingCityId = merchantOpCityId, source = Application event, sourceData}
   resp <- yudhishthiraDecide req
   pure $ resp.tags <&> (\tag -> mkTagNameValue (TagName tag.tagName) tag.tagValue)
 
-computeNammaTagsWithExpiry ::
+computeQolariTagsWithExpiry ::
   ( MonadFlow m,
     Metrics.CoreMetrics m,
     EsqDBFlow m r,
@@ -121,7 +121,7 @@ computeNammaTagsWithExpiry ::
   ApplicationEvent ->
   a ->
   m [TagNameValueExpiry]
-computeNammaTagsWithExpiry merchantOpCityId event sourceData_ = do
+computeQolariTagsWithExpiry merchantOpCityId event sourceData_ = do
   let sourceData = A.toJSON sourceData_
   let req = YudhishthiraDecideReq {merchantOperatingCityId = merchantOpCityId, source = Application event, sourceData}
   resp <- yudhishthiraDecide req

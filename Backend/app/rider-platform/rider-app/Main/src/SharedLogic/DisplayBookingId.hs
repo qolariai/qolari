@@ -53,7 +53,7 @@ formatDate :: UTCTime -> Text
 formatDate utcTime = T.pack $ formatTime defaultTimeLocale "%d%m%y" utcTime
 
 -- | Get abbreviation from merchant short ID (first letter of each word)
--- e.g., "NAMMA_YATRI" -> "NY", "BOOTH_TAXI" -> "BT"
+-- e.g., "qolari" -> "NY", "BOOTH_TAXI" -> "BT"
 getMerchantAbbreviation :: ShortId DM.Merchant -> Text
 getMerchantAbbreviation (ShortId shortId) =
   T.concat $ map (T.take 1) $ T.splitOn "_" shortId

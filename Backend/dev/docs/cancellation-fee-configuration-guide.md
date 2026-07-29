@@ -1,13 +1,13 @@
-# Cancellation Fee Configuration Guide
+﻿# Cancellation Fee Configuration Guide
 
 ## Overview
 
-When a ride is cancelled (by rider or driver), a cancellation fee + tax can be charged to the rider. The fee and tax amounts are configurable via dynamic logic; eligibility (time/wait thresholds) is gated by NammaTags. The system supports both online (card/Stripe) and cash payment modes.
+When a ride is cancelled (by rider or driver), a cancellation fee + tax can be charged to the rider. The fee and tax amounts are configurable via dynamic logic; eligibility (time/wait thresholds) is gated by QolariTags. The system supports both online (card/Stripe) and cash payment modes.
 
 > **Reference migration:** `dev/feature-migrations/0034-cancellation-fee-consolidated.sql` is the single, idempotent example that wires the full feature for one city (supersedes the older `0005`/`0011`/`0031` files). Use it as the template for enabling a new city.
 
 **Division of responsibility (important):**
-- **NammaTags gate eligibility** — the time/wait thresholds (driver waited ≥ 3 min for no-show; rider cancelled ≥ 3 min after booking) live *only* in the tag `rule_engine`.
+- **QolariTags gate eligibility** — the time/wait thresholds (driver waited ≥ 3 min for no-show; rider cancelled ≥ 3 min after booking) live *only* in the tag `rule_engine`.
 - **Dynamic logic sets amounts only** — no redundant threshold/reason re-checks; the driver-vs-rider amount is selected by `cancelledBy`.
 
 ## How It Works
@@ -16,7 +16,7 @@ When a ride is cancelled (by rider or driver), a cancellation fee + tax can be c
 Rider/Driver cancels ride
     |
     v
-NammaTag validates eligibility (CustomerCancellation / CustomerNoShowCancellation)
+QolariTag validates eligibility (CustomerCancellation / CustomerNoShowCancellation)
     |
     v (if Valid)
 Dynamic Logic computes fee + tax (USER-CANCELLATION-DUES)
@@ -38,7 +38,7 @@ UPDATE atlas_driver_offer_bpp.transporter_config
 SET can_add_cancellation_fee = true,  -- false = no cancellation fee at all (single master switch)
     -- Cancellation reason code(s) that qualify a DRIVER cancellation as a penalizable no-show.
     -- Configurable; falls back to CUSTOMER_NO_SHOW when NULL. Keep in sync with the
-    -- CustomerNoShowCancellation NammaTag rule_engine (Layer 2), which compares the same reason.
+    -- CustomerNoShowCancellation QolariTag rule_engine (Layer 2), which compares the same reason.
     valid_cancellation_penalty_reasons = '{CUSTOMER_NO_SHOW}',
     -- Payment instruments exempt from the cancellation fee. For an exempt instrument the BPP
     -- computes NO fee and sends none to the BAP (no ledger/invoice entries at all).
@@ -47,9 +47,9 @@ SET can_add_cancellation_fee = true,  -- false = no cancellation fee at all (sin
 WHERE merchant_operating_city_id = '<city_id>';
 ```
 
-### Layer 2: NammaTag Gates (BPP)
+### Layer 2: QolariTag Gates (BPP)
 
-NammaTags decide **whether** cancellation charges should apply. Two separate tags control two independent flows:
+QolariTags decide **whether** cancellation charges should apply. Two separate tags control two independent flows:
 
 | Tag Name | Who Cancels | Purpose |
 |----------|-------------|---------|
@@ -60,7 +60,7 @@ Each tag evaluates a rule engine expression and returns `Valid` or `Invalid`. On
 
 **Enable rider cancellation charges:**
 ```sql
-INSERT INTO atlas_driver_offer_bpp.namma_tag_v2 (
+INSERT INTO atlas_driver_offer_bpp.QOLARI_TAG_v2 (
   category, description, tag_type, merchant_operating_city_id, name, tags, rule_engine, created_at, updated_at
 ) VALUES (
   'CustomerCancellationValidity',
@@ -74,14 +74,14 @@ INSERT INTO atlas_driver_offer_bpp.namma_tag_v2 (
 ) ON CONFLICT (merchant_operating_city_id, name) DO UPDATE SET rule_engine = EXCLUDED.rule_engine, updated_at = now();
 
 -- Register trigger so tag is evaluated on every RideCancel event
-INSERT INTO atlas_driver_offer_bpp.namma_tag_trigger_v2 (event, merchant_operating_city_id, tag_name, created_at, updated_at)
+INSERT INTO atlas_driver_offer_bpp.QOLARI_TAG_trigger_v2 (event, merchant_operating_city_id, tag_name, created_at, updated_at)
 VALUES ('RideCancel', '<city_id>', 'CustomerCancellation', now(), now())
 ON CONFLICT (event, merchant_operating_city_id, tag_name) DO NOTHING;
 ```
 
 **Enable driver no-show charges:**
 ```sql
-INSERT INTO atlas_driver_offer_bpp.namma_tag_v2 (
+INSERT INTO atlas_driver_offer_bpp.QOLARI_TAG_v2 (
   category, description, tag_type, merchant_operating_city_id, name, tags, rule_engine, created_at, updated_at
 ) VALUES (
   'CustomerNoShowCancellationValidity',
@@ -94,7 +94,7 @@ INSERT INTO atlas_driver_offer_bpp.namma_tag_v2 (
   now(), now()
 ) ON CONFLICT (merchant_operating_city_id, name) DO UPDATE SET rule_engine = EXCLUDED.rule_engine, updated_at = now();
 
-INSERT INTO atlas_driver_offer_bpp.namma_tag_trigger_v2 (event, merchant_operating_city_id, tag_name, created_at, updated_at)
+INSERT INTO atlas_driver_offer_bpp.QOLARI_TAG_trigger_v2 (event, merchant_operating_city_id, tag_name, created_at, updated_at)
 VALUES ('RideCancel', '<city_id>', 'CustomerNoShowCancellation', now(), now())
 ON CONFLICT (event, merchant_operating_city_id, tag_name) DO NOTHING;
 ```
@@ -189,7 +189,7 @@ Orders execute as a **pipeline** — each order can read and override values set
 {"cat":[{"var":""},{"cancellationChargesTax":0.72}]}
 ```
 
-Because the NammaTags already gate eligibility (reason, source, wait time), the dynamic logic does **not** re-check those conditions — it only picks the amount by `cancelledBy`. Order 0/1 set the rider-cancellation amount as the default; orders 2/3 override it for driver no-show.
+Because the QolariTags already gate eligibility (reason, source, wait time), the dynamic logic does **not** re-check those conditions — it only picks the amount by `cancelledBy`. Order 0/1 set the rider-cancellation amount as the default; orders 2/3 override it for driver no-show.
 
 **Order 2 — Override charge for driver no-show (100 EUR):**
 ```json
@@ -253,7 +253,7 @@ Follow `0034-cancellation-fee-consolidated.sql` as the template. The pieces:
 
 1. **BPP transporter_config**: `can_add_cancellation_fee = true`, `valid_cancellation_penalty_reasons`, `cancellation_fee_payment_method_exceptions`, `driver_wallet_config`, `invoice_config`, `tax_config`
 2. **BPP merchant**: `prepaid_subscription_and_wallet_enabled = true`
-3. **BPP namma_tag_v2**: Add `CustomerCancellation` and/or `CustomerNoShowCancellation` tags + `RideCancel` triggers (thresholds live here)
+3. **BPP QOLARI_TAG_v2**: Add `CustomerCancellation` and/or `CustomerNoShowCancellation` tags + `RideCancel` triggers (thresholds live here)
 4. **BPP app_dynamic_logic_element**: base amount (order 0/1) + driver no-show override (order 2/3), amounts only
 5. **BPP app_dynamic_logic_rollout**: Rollout at 100%
 6. **BAP rider_config**: `immediate_capture_driver_cancellation_fee`, `immediate_capture_rider_cancellation_fee`, `settle_cancellation_fee_before_next_ride`, `invoice_config`

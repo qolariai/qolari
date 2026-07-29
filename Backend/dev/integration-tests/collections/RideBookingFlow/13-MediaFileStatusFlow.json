@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "Media File Upload Status Flow",
     "description": "Tests MediaFile upload status across dashboard, driver, and rider APIs: addLink (synchronous COMPLETED), uploadFile (fork+PENDING->COMPLETED), issue media upload (fork+PENDING->COMPLETED), merchant onboarding upload (fork+PENDING->COMPLETED with status guard on getFile), and getMediaMediaImage status guard.",
@@ -252,8 +252,8 @@
       "request": {
         "method": "POST",
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth"]
         },
         "header": [
@@ -283,8 +283,8 @@
       "request": {
         "method": "POST",
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{_test_driver_auth_id}}/verify",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth/{{_test_driver_auth_id}}/verify",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth", "{{_test_driver_auth_id}}", "verify"]
         },
         "header": [
@@ -316,8 +316,8 @@
       "request": {
         "method": "POST",
         "url": {
-          "raw": "{{baseURL_namma_P}}/issue/upload",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/issue/upload",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["issue", "upload"]
         },
         "header": [
@@ -409,7 +409,7 @@
         ],
         "body": {
           "mode": "raw",
-          "raw": "{\"merchantId\": \"NAMMA_YATRI\", \"city\": \"{{city}}\"}"
+          "raw": "{\"merchantId\": \"qolari\", \"city\": \"{{city}}\"}"
         }
       },
       "event": [
@@ -432,9 +432,9 @@
       "request": {
         "method": "GET",
         "url": {
-          "raw": "{{baseURL_BAP_Dashboard}}/bap/NAMMA_YATRI/{{city}}/onboarding/TICKET_MERCHANT_ONBOARDING/start",
+          "raw": "{{baseURL_BAP_Dashboard}}/bap/qolari/{{city}}/onboarding/TICKET_MERCHANT_ONBOARDING/start",
           "host": ["{{baseURL_BAP_Dashboard}}"],
-          "path": ["bap", "NAMMA_YATRI", "{{city}}", "onboarding", "TICKET_MERCHANT_ONBOARDING", "start"]
+          "path": ["bap", "qolari", "{{city}}", "onboarding", "TICKET_MERCHANT_ONBOARDING", "start"]
         },
         "header": [
           {"key": "token", "value": "{{_rider_dashboard_token}}"}
@@ -465,9 +465,9 @@
       "request": {
         "method": "POST",
         "url": {
-          "raw": "{{baseURL_BAP_Dashboard}}/bap/NAMMA_YATRI/{{city}}/onboarding/step/{{_onboarding_step_id}}/test-doc/uploadFile",
+          "raw": "{{baseURL_BAP_Dashboard}}/bap/qolari/{{city}}/onboarding/step/{{_onboarding_step_id}}/test-doc/uploadFile",
           "host": ["{{baseURL_BAP_Dashboard}}"],
-          "path": ["bap", "NAMMA_YATRI", "{{city}}", "onboarding", "step", "{{_onboarding_step_id}}", "test-doc", "uploadFile"]
+          "path": ["bap", "qolari", "{{city}}", "onboarding", "step", "{{_onboarding_step_id}}", "test-doc", "uploadFile"]
         },
         "header": [
           {"key": "token", "value": "{{_rider_dashboard_token}}"}
@@ -504,9 +504,9 @@
       "request": {
         "method": "GET",
         "url": {
-          "raw": "{{baseURL_BAP_Dashboard}}/bap/NAMMA_YATRI/{{city}}/onboarding/{{_onboarding_id}}/file/{{_onboarding_file_id}}",
+          "raw": "{{baseURL_BAP_Dashboard}}/bap/qolari/{{city}}/onboarding/{{_onboarding_id}}/file/{{_onboarding_file_id}}",
           "host": ["{{baseURL_BAP_Dashboard}}"],
-          "path": ["bap", "NAMMA_YATRI", "{{city}}", "onboarding", "{{_onboarding_id}}", "file", "{{_onboarding_file_id}}"]
+          "path": ["bap", "qolari", "{{city}}", "onboarding", "{{_onboarding_id}}", "file", "{{_onboarding_file_id}}"]
         },
         "header": [
           {"key": "token", "value": "{{_rider_dashboard_token}}"}

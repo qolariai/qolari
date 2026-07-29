@@ -1,4 +1,4 @@
-# Rider App (BAP) Deep Dive
+﻿# Rider App (BAP) Deep Dive
 
 **Package**: `rider-app` | **Port**: 8013 | **Path**: `app/rider-platform/rider-app/`
 **Schema**: `atlas_app`
@@ -52,7 +52,7 @@ app/rider-platform/rider-app/Main/
 ### Payment
 | Module | Purpose |
 |--------|---------|
-| `Payment.hs` | Payment processing, Juspay webhooks |
+| `Payment.hs` | Payment processing, Qolari webhooks |
 | `RidePayment.hs` | Ride-specific payments |
 | `Invoice.hs` | Invoice generation |
 | `InvoiceGeneration.hs` | Invoice PDF generation |

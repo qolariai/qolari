@@ -17,10 +17,10 @@ module Registry.Beckn.Interface where
 import Kernel.Prelude
 import Kernel.Tools.Metrics.CoreMetrics
 import Kernel.Utils.Common
-import qualified Registry.Beckn.Interface.Nammayatri as Ny
+import qualified Registry.Beckn.Interface.Qolari as Ny
 import Registry.Beckn.Interface.Types
-import qualified Registry.Beckn.Nammayatri.Flow as Flow
-import Registry.Beckn.Nammayatri.Types as NyRegistry
+import qualified Registry.Beckn.Qolari.Flow as Flow
+import Registry.Beckn.Qolari.Types as NyRegistry
 
 updateSubscriber :: (MonadFlow m, CoreMetrics m, HasRequestId r, MonadReader r m) => UpdateSubscriberReq -> m UpdateSubscriberResp
 updateSubscriber updSubReq = case updSubReq._data of

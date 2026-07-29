@@ -1,4 +1,4 @@
-{-# LANGUAGE OverloadedStrings #-}
+﻿{-# LANGUAGE OverloadedStrings #-}
 
 module RewardsEvaluatorTests (tests) where
 
@@ -148,7 +148,7 @@ tests =
         -- from 2 rather than reusing it: 3.
         let existingUnderCap = [mkUnlock "c1" DRU.Active 1, mkUnlock "c1" DRU.Reclaimed 2]
         QRUE.nextUnlockDecision cohort existingUnderCap candidate @?= Just 3,
-      -- unlockSeq is nullable (NammaDSL forbids a NOT NULL new column); rows
+      -- unlockSeq is nullable (QolariDSL forbids a NOT NULL new column); rows
       -- written before this migration have unlockSeq = Nothing and must be
       -- treated as occupying seq 1, both for blocking non-repeatable re-unlocks
       -- and for next-seq computation on repeatable cohorts.
@@ -215,7 +215,7 @@ mkUnlock :: Text -> DRU.UnlockStatus -> Int -> DRU.RewardUnlock
 mkUnlock cohortId status seqNo = mkUnlockWithSeq cohortId status (Just seqNo)
 
 -- | A row with unlockSeq = Nothing, as written before the unlockSeq column
--- existed (NammaDSL forbids a NOT NULL new column, so unlockSeq is nullable
+-- existed (QolariDSL forbids a NOT NULL new column, so unlockSeq is nullable
 -- and pre-migration rows are never backfilled).
 mkLegacyUnlock :: Text -> DRU.UnlockStatus -> DRU.RewardUnlock
 mkLegacyUnlock cohortId status = mkUnlockWithSeq cohortId status Nothing

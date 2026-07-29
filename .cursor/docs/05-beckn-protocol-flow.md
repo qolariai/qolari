@@ -1,8 +1,8 @@
-# BECKN Protocol Flow
+﻿# BECKN Protocol Flow
 
 ## Overview
 
-Namma Yatri implements the BECKN/ONDC protocol with two sides:
+Qolari implements the BECKN/ONDC protocol with two sides:
 - **BAP** (Beckn Application Platform) = rider-app (customer side)
 - **BPP** (Beckn Provider Platform) = dynamic-offer-driver-app (driver side)
 

@@ -1,4 +1,4 @@
-let common = ./common.dhall
+﻿let common = ./common.dhall
 
 let sec = ./secrets/rider-app.dhall
 
@@ -98,7 +98,7 @@ let smsConfig =
         }
       , useFakeSms = Some 7891
       , url = "http://localhost:${mockServerPort}/sms"
-      , sender = "JUSPAY"
+      , sender = "Qolari"
       }
 
 let InfoBIPConfig =
@@ -107,7 +107,7 @@ let InfoBIPConfig =
       , token = common.InfoBIPConfig.token
       , url = "https://gye1yw.api.infobip.com"
       , webhookurl = "http://localhost:${riderAppPort}/v2/update/status"
-      , sender = "JUSPAY"
+      , sender = "Qolari"
       }
 
 let sampleKafkaConfig
@@ -508,7 +508,7 @@ in  { esqDBCfg
     , nyRegistryUrl = common.nyRegistryUrl
     , nyGatewayUrl = common.nyGatewayUrl
     , ltsCfg = LocationTrackingeServiceConfig
-    , nammayatriRegistryConfig = common.nammayatriRegistryConfig
+    , QolariRegistryConfig = common.QolariRegistryConfig
     , googleSAPrivateKey = sec.googleSAPrivateKey
     , locationTrackingServiceKey = sec.locationTrackingServiceKey
     , zendeskWebhookToken = sec.zendeskWebhookToken

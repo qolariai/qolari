@@ -1,6 +1,6 @@
-# Test Stack
+﻿# Test Stack
 
-This directory is the entire integration-test surface for nammayatri: the React
+This directory is the entire integration-test surface for Qolari: the React
 dashboard you point a browser at, the Python HTTP servers that back it, and the
 process-compose entries that boot them. The Postman collections + mock servers
 they drive live one level up, in `Backend/dev/`.
@@ -45,7 +45,7 @@ at whichever host the stack runs on (`localStorage.ny.contextApiBase`).
   │  , run-mobility-stack-dev   (local OR devbox)                 │
   │                                                                │
   │   test-context-api (7082)        mock-server (8080)            │
-  │   • /api/collections             Juspay/Stripe/FCM/SMS/…       │
+  │   • /api/collections             Qolari/Stripe/FCM/SMS/…       │
   │   • /api/config-sync                                           │
   │   • /api/terminal/{...} (PTY)    rider-app (8013)              │
   │   • DB resets / log tailing      driver-app (8016)             │
@@ -82,7 +82,7 @@ Path: `Backend/dev/integration-tests/collections/<Suite>/`
 ### `mock-servers/` — request mocks for external services
 Path: `Backend/dev/mock-servers/`, port `8080`, process namespace `test`.
 
-A single Python service that mocks Juspay / Stripe / PayTM / Acko / SOS /
+A single Python service that mocks Qolari / Stripe / PayTM / Acko / SOS /
 WhatsApp / CMRL / CRIS / FCM / SMS / etc. The Postman collections target it
 via `{{mockServerUrl}}` and `{{mock_fcm_url}}`. Comes up with the backend stack
 (`, run-mobility-stack-dev`, profiles `backend`/`full`); on Master/cloud envs it
@@ -194,8 +194,8 @@ If you want the previous "everything in one process-compose UI" experience:
 This is the same set of processes as before, just under the new name.
 
 ### Profiles in nix
-Each command maps to a single `services.nammayatri.profile` value, applied to
-the same `Backend/nix/services/nammayatri.nix` module:
+Each command maps to a single `services.Qolari.profile` value, applied to
+the same `Backend/nix/services/Qolari.nix` module:
 
 | Command                       | profile         | Processes                                                   |
 |-------------------------------|-----------------|-------------------------------------------------------------|
@@ -214,7 +214,7 @@ The **Remote Stack** tab in the dashboard lets you target an SSH-reachable host.
 
 1. Pick **Host** (use `localhost` for a local PTY; no SSH, no rsync), **User**,
    **Port**, optional **Identity file**, and **Remote dir** (default
-   `/tmp/nammayatri`).
+   `/tmp/Qolari`).
 2. Choose **Copy mode**: `rsync` (default) or `skip`. Skip is useful when the
    remote already has the repo checked out at the right commit.
 3. Click **Deploy** — rsyncs the local repo to the remote, excluding `.git`,
@@ -246,7 +246,7 @@ into it, resize the window, and stop it from the dashboard.
 | 8017  | rider-dashboard                    | `rider-dashboard-exe`|
 | 8018  | provider-dashboard                 | `provider-dashboard-exe` |
 | 8020  | mock-registry                      | `mock-registry`      |
-| 8080  | mock-server (Juspay/FCM/SMS/…)     | `mock-server`        |
+| 8080  | mock-server (Qolari/FCM/SMS/…)     | `mock-server`        |
 | 5434  | Postgres (atlas_dev)               | `db-primary`         |
 | 6379 / 30001 | Redis standalone / cluster  | `redis` / `cluster1` |
 

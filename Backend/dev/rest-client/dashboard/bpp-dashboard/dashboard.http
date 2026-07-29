@@ -1,10 +1,10 @@
-# @name healthcheck
+﻿# @name healthcheck
 GET {{bpp-dashboard-host}}
 
 ###
 
 # use this creds for testing different roles:
-# name = customer, driver, juspay_ops, juspay_admin, customer_service
+# name = customer, driver, Qolari_ops, Qolari_admin, customer_service
 # email = name@dashboard.com, password = name
 
 # @name login
@@ -13,8 +13,8 @@ POST {{bpp-dashboard-host}}/user/login
 content-type: application/json
 
 {
-  "email" : "juspay_admin@dashboard.com",
-  "password" : "juspay_admin",
+  "email" : "Qolari_admin@dashboard.com",
+  "password" : "Qolari_admin",
   "merchantId" : "YATRI_PARTNER"
 }
 
@@ -32,7 +32,7 @@ token: {{token}}
   "email" : "xyzss@gmail.com",
   "mobileNumber" : "9876543200",
   "mobileCountryCode" : "+91",
-  "passwordHash" : "juspay@adminadad"
+  "passwordHash" : "Qolari@adminadad"
 }
 
 ###
@@ -126,7 +126,7 @@ content-type: application/json
 token: {{token}}
 
 {
-  "merchantId" : "NAMMA_YATRI_PARTNER"
+  "merchantId" : "qolari_PARTNER"
 }
 
 ###
@@ -138,7 +138,7 @@ content-type: application/json
 token: {{token}}
 
 {
-  "merchantId" : "NAMMA_YATRI_PARTNER"
+  "merchantId" : "qolari_PARTNER"
 }
 
 ###
@@ -155,7 +155,7 @@ token: {{yatriPartnerCustomerToken}}
 
 # @name driverOfferCustomerLogin
 
-# name = customer, driver, juspay_ops, juspay_admin, customer_service
+# name = customer, driver, Qolari_ops, Qolari_admin, customer_service
 @customerLogin = customer_service
 
 POST {{bpp-dashboard-host}}/user/login
@@ -164,7 +164,7 @@ content-type: application/json
 {
   "email" : "{{customerLogin}}@dashboard.com",
   "password" : "{{customerLogin}}",
-  "merchantId" : "NAMMA_YATRI_PARTNER"
+  "merchantId" : "qolari_PARTNER"
 }
 
 ###
@@ -183,7 +183,7 @@ token: {{driverOfferCustomerToken}}
 
 # @name driverList
 
-GET {{bpp-dashboard-host}}/bpp/driver-offer/NAMMA_YATRI_PARTNER/driver/list
+GET {{bpp-dashboard-host}}/bpp/driver-offer/qolari_PARTNER/driver/list
   ?limit=10
   &offset=0
 content-type: application/json

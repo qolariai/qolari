@@ -1,7 +1,7 @@
-# Active Context: Namma Yatri Memory Bank Population
+﻿# Active Context: Qolari Memory Bank Population
 
 ## Current Work Focus
-The primary focus has been on understanding the Namma Yatri project structure, key entities, and technical architecture by analyzing various source code files (`.yaml` specifications, Haskell domain types, shared logic, and query modules). This understanding is being used to populate the core Memory Bank documents (`projectbrief.md`, `productContext.md`, `systemPatterns.md`, `techContext.md`).
+The primary focus has been on understanding the Qolari project structure, key entities, and technical architecture by analyzing various source code files (`.yaml` specifications, Haskell domain types, shared logic, and query modules). This understanding is being used to populate the core Memory Bank documents (`projectbrief.md`, `productContext.md`, `systemPatterns.md`, `techContext.md`).
 
 ## Recent Changes & Learnings
 -   **Directory Structure Analysis:** The provided comprehensive directory structure has been analyzed to understand the overall project layout, identify key components (Backend, Frontend, docs, dev, lib, etc.), and locate relevant files for deeper inspection. This initial structural overview was crucial for navigating the codebase.
@@ -107,22 +107,22 @@ The following modules and their roles in the ride booking flow have been analyze
 -   Await further instructions for analyzing other system aspects (e.g., payment processing, post-booking flows like tracking/cancellation, or specific feature implementations).
 
 ---
-## Current Work Focus (NammaDSL Documentation Processing - June 20, 2025)
-Processing and summarizing the provided NammaDSL documentation to create a dedicated ruleset in the memory bank. This will aid in understanding and working with the YAML-based API and Storage specifications.
+## Current Work Focus (QolariDSL Documentation Processing - June 20, 2025)
+Processing and summarizing the provided QolariDSL documentation to create a dedicated ruleset in the memory bank. This will aid in understanding and working with the YAML-based API and Storage specifications.
 
-## Recent Changes & Learnings (NammaDSL Documentation Processing - June 20, 2025)
--   Received NammaDSL documentation detailing syntax for API and Storage specifications.
+## Recent Changes & Learnings (QolariDSL Documentation Processing - June 20, 2025)
+-   Received QolariDSL documentation detailing syntax for API and Storage specifications.
 -   Key aspects understood:
     -   General workflow: YAML creation in `spec/` -> Code Generation (`run-generator`) -> Compilation.
     -   API DSL: Structure for defining modules, types (records, enums, newtypes), API endpoints (path, method, auth, request/response, params, headers), and migration notes.
     -   Storage DSL: Structure for defining data types (tables), fields, constraints, Beam types/fields, SQL types, default values, queries (Beam and cached), and data transformers (`fromTType`/`toTType`).
     -   Common elements: `imports`, `importPackageOverrides`, `types`.
     -   Specialized features: `WithId` extensions for linked domain types, constant type suffixes for queries, various `extraOperations` for generator control.
--   Created `memory-bank/namma_dsl_rules.md` to store a summarized version of these rules.
--   Updated `memory-bank/techContext.md` to reference NammaDSL and the new rules file.
+-   Created `memory-bank/qolari_dsl_rules.md` to store a summarized version of these rules.
+-   Updated `memory-bank/techContext.md` to reference QolariDSL and the new rules file.
 
-## Next Steps (Post NammaDSL Documentation)
--   Finalize memory bank updates related to NammaDSL.
+## Next Steps (Post QolariDSL Documentation)
+-   Finalize memory bank updates related to QolariDSL.
 -   Await further instructions.
 
 ---
@@ -155,7 +155,7 @@ Planning the implementation of the "NYRegular" (recurring/scheduled rides) featu
 -   **Key Refinement:** The BAP's `on_search` handler, rather than a separate polling mechanism in the Child Job, will drive the automated `select` action. This makes the automation more integrated with the reactive Beckn flow.
 
 ## Next Steps (NYRegular Feature)
--   Finalize the NammaDSL schemas for `NyRegularSubscription` and `NyRegularInstanceLog` based on the peer's provided context.
+-   Finalize the QolariDSL schemas for `NyRegularSubscription` and `NyRegularInstanceLog` based on the peer's provided context.
 -   Detail the API contracts for NYRegular management.
 -   Elaborate on the error handling and notification strategy for the scheduler jobs.
 -   Consider edge cases (e.g., payment failure for automated bookings, user pausing a subscription close to trigger time).

@@ -1,6 +1,6 @@
-#!/usr/bin/env python3
+﻿#!/usr/bin/env python3
 """
-NammayYatri Config Transfer
+QolariyYatri Config Transfer
 
 Three-step workflow, all file-based:
 
@@ -1700,7 +1700,7 @@ _AUDIT_SAFE_DOMAINS = {
     # CDN / static assets
     "firebasestorage.googleapis.com", "fonts.googleapis.com",
     "cdn.britannica.com", "sandbox.assets.moving.tech",
-    "assets.moving.tech", "assets.juspay.in", "ny.assets.juspay.in",
+    "assets.moving.tech", "assets.Qolari.in", "ny.assets.Qolari.in",
     "raw.githubusercontent.com",
     # Content / docs
     "docs.google.com",
@@ -1709,9 +1709,9 @@ _AUDIT_SAFE_DOMAINS = {
     "play.google.com", "apps.apple.com", "dl.flipkart.com",
     "manayatri.page.link", "yatrisathi.page.link",
     # Consumer-facing websites
-    "nammayatri.in", "www.nammayatri.in",
+    "drive.qolari.com", "www.drive.qolari.com",
     "manayatri.in", "yatrisathi.in", "odishayatri.in",
-    "www.getyatri.com", "app-nammayatri.redbus.in",
+    "www.getyatri.com", "app-Qolari.redbus.in",
     "web.yatrisathi.in", "www.chennaione.in",
     "metro-terms.triffy.in",
     # Social media
@@ -1724,7 +1724,7 @@ _AUDIT_SAFE_DOMAINS = {
     "www.ondcTextApi.com", "sandbox.assets.moving.techmaster",
     "webhook.site", "www.google.com",
     # Misc — bitbucket/internal (not API)
-    "bitbucket.juspay.net",
+    "bitbucket.Qolari.net",
     # Dead/test endpoints in registry (third-party BPP stubs)
     "cabs.dev.bap.urownsite.xyz", "fmd-test.free.beeceptor.com",
     "shop.pinpark.co.in", "api-d2c.marutisuzukicollatex.com",
@@ -2318,7 +2318,7 @@ def cmd_show_patches(args):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="NammayYatri Config Transfer",
+        description="QolariyYatri Config Transfer",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Three-step workflow:

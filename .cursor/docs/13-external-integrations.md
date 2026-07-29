@@ -1,12 +1,12 @@
-# External Integrations
+﻿# External Integrations
 
 ## Overview
 
-Namma Yatri integrates with 21+ external services. This doc maps each integration to its code location.
+Qolari integrates with 21+ external services. This doc maps each integration to its code location.
 
 ## Payment
 
-### Juspay (Primary Payment Gateway)
+### Qolari (Primary Payment Gateway)
 
 | Component | Location |
 |-----------|----------|
@@ -21,8 +21,8 @@ Namma Yatri integrates with 21+ external services. This doc maps each integratio
 | Driver fee logic | `app/provider-platform/dynamic-offer-driver-app/Main/src/SharedLogic/DriverFee.hs` |
 
 Key functions:
-- `juspayWebhookHandler` — Webhook endpoint (both rider & driver apps)
-- `juspayWebhookHandlerV2` — V2 webhook (driver-app only)
+- `QolariWebhookHandler` — Webhook endpoint (both rider & driver apps)
+- `QolariWebhookHandlerV2` — V2 webhook (driver-app only)
 - `createOrderService` — Create payment order
 - `orderStatusService` — Check payment status
 - `createRefundService` — Process refund

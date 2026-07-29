@@ -23,7 +23,7 @@ where
 import qualified Data.Aeson as A
 import Kernel.Beam.Functions
 import qualified Kernel.External.Payment.Interface.Types as KPayment
-import Kernel.External.Payment.Juspay.Types
+import Kernel.External.Payment.Gateway.Types
 import Kernel.Prelude
 import Kernel.Types.Id
 import Kernel.Utils.Common
@@ -49,7 +49,7 @@ updateMultiple transaction = do
       Se.Set BeamPT.gatewayReferenceId transaction.gatewayReferenceId,
       Se.Set BeamPT.amount transaction.amount,
       Se.Set BeamPT.currency transaction.currency,
-      Se.Set BeamPT.juspayResponse transaction.juspayResponse,
+      Se.Set BeamPT.QolariResponse transaction.QolariResponse,
       Se.Set BeamPT.mandateStatus transaction.mandateStatus,
       Se.Set BeamPT.mandateStartDate transaction.mandateStartDate,
       Se.Set BeamPT.mandateEndDate transaction.mandateEndDate,

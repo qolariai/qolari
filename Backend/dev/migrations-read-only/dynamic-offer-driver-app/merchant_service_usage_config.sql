@@ -1,4 +1,4 @@
-CREATE TABLE atlas_driver_offer_bpp.merchant_service_usage_config ();
+﻿CREATE TABLE atlas_driver_offer_bpp.merchant_service_usage_config ();
 
 ALTER TABLE atlas_driver_offer_bpp.merchant_service_usage_config ADD COLUMN aadhaar_verification_service character varying(30) NOT NULL;
 ALTER TABLE atlas_driver_offer_bpp.merchant_service_usage_config ADD COLUMN auto_complete character varying(30) NOT NULL;
@@ -99,8 +99,8 @@ ALTER TABLE atlas_driver_offer_bpp.merchant_service_usage_config ADD COLUMN cate
 
 ------- SQL updates -------
 
-ALTER TABLE atlas_driver_offer_bpp.merchant_service_usage_config ADD COLUMN payout_order_status text  default 'Juspay';
-ALTER TABLE atlas_driver_offer_bpp.merchant_service_usage_config ADD COLUMN create_payout_order text  default 'Juspay';
+ALTER TABLE atlas_driver_offer_bpp.merchant_service_usage_config ADD COLUMN payout_order_status text  default 'Gateway';
+ALTER TABLE atlas_driver_offer_bpp.merchant_service_usage_config ADD COLUMN create_payout_order text  default 'Gateway';
 
 
 

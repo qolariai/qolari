@@ -255,7 +255,7 @@ endRideTransaction driverId booking ride mbFareParams mbRiderDetailsId newFarePa
   let validRide = isValidRide ride
   -- Publish RideEndedEvent to Redis Stream "ride.events.shard<N>". kafka-consumers
   -- RIDE_EVENTS_CONSUMER fans this out to: analytics Kafka events, ride-interpolation,
-  -- namma tags, fleet/operator stats, GPS-toll-behavior, RC stats reminders, ride-end
+  -- Qolari tags, fleet/operator stats, GPS-toll-behavior, RC stats reminders, ride-end
   -- notifications, and leaderboard updates. Best-effort publish (direct xAdd); failures
   -- here never affect ride completion.
   -- Referral FCM and driver-to-driver referral reward moved to kafka-consumers

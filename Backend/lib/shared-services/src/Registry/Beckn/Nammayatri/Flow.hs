@@ -12,20 +12,20 @@
   General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 -}
 
-module Registry.Beckn.Nammayatri.Flow where
+module Registry.Beckn.Qolari.Flow where
 
 import Kernel.Prelude
 import Kernel.Tools.Metrics.CoreMetrics
 import Kernel.Types.Error
 import Kernel.Utils.Common
-import Registry.Beckn.Nammayatri.Types
+import Registry.Beckn.Qolari.Types
 
 updateCities :: (MonadFlow m, CoreMetrics m, HasRequestId r, MonadReader r m) => Text -> BaseUrl -> UpdateCitiesReq -> m UpdateCitiesRes
 updateCities apiKey url req = do
-  callAPI url (updateCitiesClient (Just apiKey) req) "updateCitiesNammayatriRegistry" updateCitiesAPI
-    >>= fromEitherM (ExternalAPICallError (Just "UPDATE_CITIES_NAMMAYATRI_REGISTRY_FAILED") url)
+  callAPI url (updateCitiesClient (Just apiKey) req) "updateCitiesQolariRegistry" updateCitiesAPI
+    >>= fromEitherM (ExternalAPICallError (Just "UPDATE_CITIES_Qolari_REGISTRY_FAILED") url)
 
 createSubscriber :: (MonadFlow m, CoreMetrics m, HasRequestId r, MonadReader r m) => BaseUrl -> Subscriber -> m AckResponse
 createSubscriber url req = do
-  callAPI url (createSubscriberClient req) "createSubscriberNammayatriRegistry" createAPI
-    >>= fromEitherM (ExternalAPICallError (Just "CREATE_SUBSCRIBER_NAMMAYATRI_REGISTRY_FAILED") url)
+  callAPI url (createSubscriberClient req) "createSubscriberQolariRegistry" createAPI
+    >>= fromEitherM (ExternalAPICallError (Just "CREATE_SUBSCRIBER_Qolari_REGISTRY_FAILED") url)

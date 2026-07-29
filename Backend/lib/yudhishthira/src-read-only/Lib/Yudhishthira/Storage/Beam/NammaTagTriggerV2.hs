@@ -1,7 +1,7 @@
-{-# LANGUAGE StandaloneDeriving #-}
+﻿{-# LANGUAGE StandaloneDeriving #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
-module Lib.Yudhishthira.Storage.Beam.NammaTagTriggerV2 where
+module Lib.Yudhishthira.Storage.Beam.QolariTagTriggerV2 where
 
 import qualified Database.Beam as B
 import Kernel.External.Encryption
@@ -10,7 +10,7 @@ import qualified Kernel.Prelude
 import qualified Lib.Yudhishthira.Types
 import Tools.Beam.UtilsTH
 
-data NammaTagTriggerV2T f = NammaTagTriggerV2T
+data QolariTagTriggerV2T f = QolariTagTriggerV2T
   { createdAt :: (B.C f Kernel.Prelude.UTCTime),
     event :: (B.C f Lib.Yudhishthira.Types.ApplicationEvent),
     merchantOperatingCityId :: (B.C f Kernel.Prelude.Text),
@@ -19,12 +19,12 @@ data NammaTagTriggerV2T f = NammaTagTriggerV2T
   }
   deriving (Generic, B.Beamable)
 
-instance B.Table NammaTagTriggerV2T where
-  data PrimaryKey NammaTagTriggerV2T f = NammaTagTriggerV2Id (B.C f Lib.Yudhishthira.Types.ApplicationEvent) (B.C f Kernel.Prelude.Text) (B.C f Kernel.Prelude.Text) deriving (Generic, B.Beamable)
-  primaryKey = NammaTagTriggerV2Id <$> event <*> merchantOperatingCityId <*> tagName
+instance B.Table QolariTagTriggerV2T where
+  data PrimaryKey QolariTagTriggerV2T f = QolariTagTriggerV2Id (B.C f Lib.Yudhishthira.Types.ApplicationEvent) (B.C f Kernel.Prelude.Text) (B.C f Kernel.Prelude.Text) deriving (Generic, B.Beamable)
+  primaryKey = QolariTagTriggerV2Id <$> event <*> merchantOperatingCityId <*> tagName
 
-type NammaTagTriggerV2 = NammaTagTriggerV2T Identity
+type QolariTagTriggerV2 = QolariTagTriggerV2T Identity
 
-$(enableKVPG (''NammaTagTriggerV2T) [('event), ('merchantOperatingCityId), ('tagName)] [])
+$(enableKVPG (''QolariTagTriggerV2T) [('event), ('merchantOperatingCityId), ('tagName)] [])
 
-$(mkTableInstancesGenericSchema (''NammaTagTriggerV2T) "namma_tag_trigger_v2")
+$(mkTableInstancesGenericSchema (''QolariTagTriggerV2T) "QOLARI_TAG_trigger_v2")

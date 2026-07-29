@@ -1,11 +1,11 @@
-CREATE TABLE atlas_driver_offer_bpp.notification ();
+﻿CREATE TABLE atlas_driver_offer_bpp.notification ();
 
 ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN created_at timestamp with time zone NOT NULL default CURRENT_TIMESTAMP;
 ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN date_created timestamp with time zone NOT NULL;
 ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN description text NOT NULL;
 ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN driver_fee_id character varying (255) NOT NULL;
 ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN id character varying(36) NOT NULL;
-ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN juspay_provided_id character varying (255) NOT NULL;
+ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN Qolari_provided_id character varying (255) NOT NULL;
 ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN last_status_checked_at timestamp with time zone ;
 ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN last_updated timestamp with time zone NOT NULL;
 ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN mandate_id character varying (255) NOT NULL;

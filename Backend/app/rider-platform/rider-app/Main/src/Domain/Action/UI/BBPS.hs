@@ -1,4 +1,4 @@
-{-# OPTIONS_GHC -Wno-unused-imports #-}
+﻿{-# OPTIONS_GHC -Wno-unused-imports #-}
 {-# OPTIONS_GHC -Wno-unused-local-binds #-}
 
 module Domain.Action.UI.BBPS
@@ -98,7 +98,7 @@ postBbpsCreateOrder (mbPersonId, merchantId) req = ActorInfo.withMbPersonIdActor
             orderShortId = refShortId.getShortId,
             amount = bbpsAmount,
             customerId = staticCustomerId,
-            customerEmail = fromMaybe "growth@nammayatri.in" personEmail,
+            customerEmail = fromMaybe "growth@drive.qolari.com" personEmail,
             customerPhone = req.mobileNumber,
             customerFirstName = person.firstName,
             customerLastName = person.lastName,
@@ -340,7 +340,7 @@ txnStatusToBBPSStatus = \case
   Payment.CHARGED -> DBBPS.CONFIRMATION_PENDING
   Payment.AUTHENTICATION_FAILED -> DBBPS.FAILED
   Payment.AUTHORIZATION_FAILED -> DBBPS.FAILED
-  Payment.JUSPAY_DECLINED -> DBBPS.FAILED
+  Payment.Qolari_DECLINED -> DBBPS.FAILED
   Payment.AUTHORIZING -> DBBPS.PENDING
   Payment.COD_INITIATED -> DBBPS.REFUNDED
   Payment.STARTED -> DBBPS.PENDING

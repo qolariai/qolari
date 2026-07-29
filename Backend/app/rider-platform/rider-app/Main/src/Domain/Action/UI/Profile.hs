@@ -388,7 +388,7 @@ getPersonDetails (personId, _) toss tenant' context includeProfileImage mbBundle
       )
       vehicleTypes
   logInfo $ "[Profile.getPersonDetails] findIntegratedBPPConfigs done, count=" <> show (length integratedBPPConfigs)
-  let isMultimodalRider = getIsMultimodalRider riderConfig.enableMultiModalForAllUsers decPerson.customerNammaTags integratedBPPConfigs
+  let isMultimodalRider = getIsMultimodalRider riderConfig.enableMultiModalForAllUsers decPerson.customerQolariTags integratedBPPConfigs
   -- Check if customer is temporarily blocked and should be unblocked
   fork "Check and unblock customer if temporary block expired" $ do
     when person.blocked $ do
@@ -437,7 +437,7 @@ getPersonDetails (personId, _) toss tenant' context includeProfileImage mbBundle
             isPayoutEnabled = mbPayoutConfig <&> (.isPayoutEnabled),
             cancellationRate = cancellationPerc,
             publicTransportVersion = if null gtfsVersion then Nothing else Just (T.intercalate (T.pack "#") gtfsVersion <> (maybe "" (\version -> "#" <> show version) riderConfig.domainPublicTransportDataVersion)),
-            customerTags = YUtils.convertTags $ fromMaybe [] customerNammaTags,
+            customerTags = YUtils.convertTags $ fromMaybe [] customerQolariTags,
             profilePicture = if includeProfileImageParam == Just True then profilePicture else Nothing,
             ..
           }
@@ -518,9 +518,9 @@ updatePerson personId merchantId req mbRnVersion mbBundleVersion mbClientVersion
             & filter (\p -> not (T.null p) && not ("#" `T.isInfixOf` p) && not ("&" `T.isInfixOf` p))
         newTags =
           if null normalizedPrefs
-            then Just $ YUtils.removeTagName person.customerNammaTags driverPreferenceTagName
-            else Just $ YUtils.replaceTagNameValue person.customerNammaTags (LYT.TagNameValueExpiry $ "driverPreference#" <> T.intercalate "&" normalizedPrefs)
-    unless ((YUtils.showRawTags <$> newTags) == (YUtils.showRawTags <$> person.customerNammaTags)) $
+            then Just $ YUtils.removeTagName person.customerQolariTags driverPreferenceTagName
+            else Just $ YUtils.replaceTagNameValue person.customerQolariTags (LYT.TagNameValueExpiry $ "driverPreference#" <> T.intercalate "&" normalizedPrefs)
+    unless ((YUtils.showRawTags <$> newTags) == (YUtils.showRawTags <$> person.customerQolariTags)) $
       QPerson.updateCustomerTags newTags personId
   pure APISuccess.Success
 

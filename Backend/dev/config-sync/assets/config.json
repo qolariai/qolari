@@ -1,4 +1,4 @@
-{
+﻿{
   "_comment": "Config tables registry with primary key dimensions for upsert. Curated from YAML specs + migrations + Beam schemas.",
   "_last_reviewed": "2026-03-26",
   "atlas_app": {
@@ -415,16 +415,16 @@
     "common_driver_onboarding_documents": {
       "dim": []
     },
-    "namma_tag": {
+    "QOLARI_TAG": {
       "dim": []
     },
-    "namma_tag_v2": {
+    "QOLARI_TAG_v2": {
       "dim": []
     },
-    "namma_tag_trigger": {
+    "QOLARI_TAG_trigger": {
       "dim": []
     },
-    "namma_tag_trigger_v2": {
+    "QOLARI_TAG_trigger_v2": {
       "dim": []
     },
     "app_dynamic_logic_element": {

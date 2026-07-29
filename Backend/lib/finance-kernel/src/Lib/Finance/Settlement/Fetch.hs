@@ -1,4 +1,4 @@
-module Lib.Finance.Settlement.Fetch
+﻿module Lib.Finance.Settlement.Fetch
   ( fetchSettlementCsv,
     settlementServiceToPaymentGatewayName,
     SftpFetchMeta (..),
@@ -15,7 +15,7 @@ import Kernel.Tools.Metrics.CoreMetrics (CoreMetrics)
 import Kernel.Utils.Servant.Client (HasRequestId)
 import Lib.Finance.Settlement.ParserTypeMap (resolveSplitCustomerType)
 import qualified Lib.Finance.Settlement.Sources.Email as EmailSource
-import qualified Lib.Finance.Settlement.Sources.JuspayApi as JuspayApiSource
+import qualified Lib.Finance.Settlement.Sources.QolariApi as QolariApiSource
 import Lib.Finance.Settlement.Sources.SFTP (SftpFetchMeta (..))
 import qualified Lib.Finance.Settlement.Sources.SFTP as SFTPSource
 import Lib.Finance.Storage.Beam.BeamFlow (BeamFlow)
@@ -58,14 +58,14 @@ fetchSettlementCsv SettlementServiceConfig {..} merchantId merchantOperatingCity
         Right (bs, meta, splitTy) -> Right (bs, Just meta, Just splitTy)
     -- Portal-API pull returns a full IST-day export in one call. Dedup is
     -- day-level via a synthetic settlement_file_info row (fileName
-    -- juspay_portal_YYYY-MM-DD.csv): the source returns @Nothing@ meta and
+    -- Qolari_portal_YYYY-MM-DD.csv): the source returns @Nothing@ meta and
     -- empty bytes when the day is already COMPLETED, otherwise @Just meta@
     -- so the ingestion pipeline finalizes the tracker to COMPLETED post-store.
     -- No split-customer-type mapping (the portal parser dispatches on source,
     -- not parserTypeMap).
-    JuspayApiSourceConfig apiCfg -> do
+    QolariApiSourceConfig apiCfg -> do
       eCsv <-
-        JuspayApiSource.fetchSettlementFile
+        QolariApiSource.fetchSettlementFile
           merchantId
           merchantOperatingCityId
           (settlementServiceToPaymentGatewayName settlementService)

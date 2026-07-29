@@ -1,4 +1,4 @@
-module Storage.Queries.Transformers.MerchantServiceConfig where
+﻿module Storage.Queries.Transformers.MerchantServiceConfig where
 
 import qualified Data.Aeson as A
 import qualified Domain.Types.MerchantServiceConfig as Domain
@@ -17,7 +17,7 @@ import qualified Kernel.External.Notification as Notification
 import Kernel.External.Notification.Interface.Types as Notification
 import qualified Kernel.External.PartnerSdk.Interface.Types as PartnerSdk
 import qualified Kernel.External.Payment.Interface as Payment
-import qualified Kernel.External.Payment.Interface.Juspay as Juspay
+import qualified Kernel.External.Payment.Interface.Qolari as Qolari
 import qualified Kernel.External.Payment.Stripe.Config as Stripe
 import qualified Kernel.External.Payout.Interface as Payout
 import qualified Kernel.External.SMS.Interface as Sms
@@ -84,7 +84,7 @@ getServiceConfigFromDomain serviceName configJSON = do
     Domain.MultiModalService MultiModal.GoogleTransit -> Domain.MultiModalServiceConfig . MultiModal.GoogleTransitConfig <$> valueToMaybe configJSON
     Domain.MultiModalService MultiModal.OTPTransit -> Domain.MultiModalServiceConfig . MultiModal.OTPTransitConfig <$> valueToMaybe configJSON
     Domain.WalletService GW.GoogleWallet -> Domain.WalletServiceConfig . GW.GoogleWalletConfig <$> valueToMaybe configJSON
-    Domain.JuspayWalletService paymentServiceName -> Domain.JuspayWalletServiceConfig <$> mkPaymentServiceConfig configJSON paymentServiceName
+    Domain.PaymentWalletService paymentServiceName -> Domain.PaymentWalletServiceConfig <$> mkPaymentServiceConfig configJSON paymentServiceName
     Domain.MultiModalStaticDataService MultiModal.GoogleTransit -> Domain.MultiModalStaticDataServiceConfig . MultiModal.GoogleTransitConfig <$> valueToMaybe configJSON
     Domain.MultiModalStaticDataService MultiModal.OTPTransit -> Domain.MultiModalStaticDataServiceConfig . MultiModal.OTPTransitConfig <$> valueToMaybe configJSON
     Domain.InsuranceService Insurance.Acko -> Domain.InsuranceServiceConfig . Insurance.AckoInsuranceConfig <$> valueToMaybe configJSON
@@ -102,16 +102,16 @@ getServiceConfigFromDomain serviceName configJSON = do
 
 mkPaymentServiceConfig :: A.Value -> Payment.PaymentService -> Maybe Payment.PaymentServiceConfig
 mkPaymentServiceConfig configJSON = \case
-  Payment.Juspay -> Payment.JuspayConfig <$> valueToMaybe configJSON
-  Payment.AAJuspay -> Payment.JuspayConfig <$> valueToMaybe configJSON
+  Payment.Gateway -> Payment.PaymentGatewayConfig <$> valueToMaybe configJSON
+  Payment.AAQolari -> Payment.PaymentGatewayConfig <$> valueToMaybe configJSON
   Payment.Stripe -> Payment.StripeConfig <$> valueToMaybe configJSON
   Payment.StripeTest -> Payment.StripeConfig <$> valueToMaybe configJSON
   Payment.PaytmEDC -> Payment.PaytmEDCConfig <$> valueToMaybe configJSON
 
 mkPayoutServiceConfig :: A.Value -> Payout.PayoutService -> Maybe Payout.PayoutServiceConfig
 mkPayoutServiceConfig configJSON = \case
-  Payout.Juspay -> Payout.JuspayConfig <$> valueToMaybe configJSON
-  Payout.AAJuspay -> Payout.JuspayConfig <$> valueToMaybe configJSON
+  Payout.Qolari -> Payout.PaymentGatewayConfig <$> valueToMaybe configJSON
+  Payout.AAQolari -> Payout.PaymentGatewayConfig <$> valueToMaybe configJSON
   Payout.Stripe -> Payout.StripeConfig <$> valueToMaybe configJSON
   Payout.StripeTest -> Payout.StripeConfig <$> valueToMaybe configJSON
 
@@ -155,7 +155,7 @@ getServiceNameConfigJson = \case
   Domain.MultiModalPaymentServiceConfig paymentCfg -> first Domain.MultiModalPaymentService $ getPaymentServiceConfigJson paymentCfg
   Domain.PassPaymentServiceConfig paymentCfg -> first Domain.PassPaymentService $ getPaymentServiceConfigJson paymentCfg
   Domain.ParkingPaymentServiceConfig paymentCfg -> case paymentCfg of
-    Payment.JuspayConfig cfg -> (Domain.ParkingPaymentService Payment.Juspay, toJSON cfg) -- why Juspay.AA not used?
+    Payment.PaymentGatewayConfig cfg -> (Domain.ParkingPaymentService Payment.Gateway, toJSON cfg) -- why Qolari.AA not used?
     Payment.StripeConfig cfg -> case cfg.serviceMode of
       Just Stripe.Live -> (Domain.ParkingPaymentService Payment.Stripe, toJSON cfg)
       Just Stripe.Test -> (Domain.ParkingPaymentService Payment.StripeTest, toJSON cfg)
@@ -180,7 +180,7 @@ getServiceNameConfigJson = \case
     MultiModal.OTPTransitConfig cfg -> (Domain.MultiModalService MultiModal.OTPTransit, toJSON cfg)
   Domain.WalletServiceConfig walletCfg -> case walletCfg of
     GW.GoogleWalletConfig cfg -> (Domain.WalletService GW.GoogleWallet, toJSON cfg)
-  Domain.JuspayWalletServiceConfig paymentCfg -> first Domain.JuspayWalletService $ getPaymentServiceConfigJson paymentCfg
+  Domain.PaymentWalletServiceConfig paymentCfg -> first Domain.PaymentWalletService $ getPaymentServiceConfigJson paymentCfg
   Domain.MultiModalStaticDataServiceConfig multiModalStaticDataCfg -> case multiModalStaticDataCfg of
     MultiModal.GoogleTransitConfig cfg -> (Domain.MultiModalStaticDataService MultiModal.GoogleTransit, toJSON cfg)
     MultiModal.OTPTransitConfig cfg -> (Domain.MultiModalStaticDataService MultiModal.OTPTransit, toJSON cfg)
@@ -201,9 +201,9 @@ getServiceNameConfigJson = \case
 
 getPaymentServiceConfigJson :: Payment.PaymentServiceConfig -> (Payment.PaymentService, A.Value)
 getPaymentServiceConfigJson = \case
-  Payment.JuspayConfig cfg -> case cfg.serviceMode of
-    Just Juspay.AA -> (Payment.AAJuspay, toJSON cfg)
-    _ -> (Payment.Juspay, toJSON cfg)
+  Payment.PaymentGatewayConfig cfg -> case cfg.serviceMode of
+    Just Qolari.AA -> (Payment.AAQolari, toJSON cfg)
+    _ -> (Payment.Gateway, toJSON cfg)
   Payment.StripeConfig cfg -> case cfg.serviceMode of
     Just Stripe.Live -> (Payment.Stripe, toJSON cfg)
     Just Stripe.Test -> (Payment.StripeTest, toJSON cfg)
@@ -212,7 +212,7 @@ getPaymentServiceConfigJson = \case
 
 getPayoutServiceConfigJson :: Payout.PayoutServiceConfig -> (Payout.PayoutService, A.Value)
 getPayoutServiceConfigJson = \case
-  Payout.JuspayConfig cfg -> (Payout.Juspay, toJSON cfg)
+  Payout.PaymentGatewayConfig cfg -> (Payout.Qolari, toJSON cfg)
   Payout.StripeConfig cfg -> case cfg.serviceMode of
     Just Stripe.Live -> (Payout.Stripe, toJSON cfg)
     Just Stripe.Test -> (Payout.StripeTest, toJSON cfg)

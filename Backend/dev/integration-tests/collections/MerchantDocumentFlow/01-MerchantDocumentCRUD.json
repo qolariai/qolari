@@ -1,4 +1,4 @@
-{
+﻿{
   "info": {
     "name": "Merchant Document CRUD Flow",
     "description": "Full CRUD lifecycle via Dashboard APIs + Provider UI read verification. Creates a merchant document, verifies via dashboard list and provider UI get, updates it, verifies the update, deletes it, and confirms deletion.",
@@ -83,8 +83,8 @@
           "raw": "{\n    \"mobileNumber\": \"{{_test_driver_number}}\",\n    \"mobileCountryCode\": \"+91\",\n    \"merchantId\": \"{{merchantId}}\",\n    \"merchantOperatingCity\": \"{{city}}\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth"]
         }
       },
@@ -114,8 +114,8 @@
           "raw": "{\n    \"otp\": \"{{login_otp}}\",\n    \"deviceToken\": \"merchant-doc-test-device\"\n}"
         },
         "url": {
-          "raw": "{{baseURL_namma_P}}/auth/{{driver_authId}}/verify",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/auth/{{driver_authId}}/verify",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["auth", "{{driver_authId}}", "verify"]
         }
       },
@@ -244,8 +244,8 @@
           { "key": "token", "value": "{{driver_token}}" }
         ],
         "url": {
-          "raw": "{{baseURL_namma_P}}/merchant/document/list?role=\"Driver\"&language=en",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/merchant/document/list?role=\"Driver\"&language=en",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["merchant", "document", "list"],
           "query": [
             { "key": "role", "value": "\"Driver\"" },
@@ -274,8 +274,8 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseURL_namma_P}}/merchant/document/TermsAndConditions?merchantId={{merchantId}}&language=en&merchantCity={{city}}",
-          "host": ["{{baseURL_namma_P}}"],
+          "raw": "{{baseURL_qolari_P}}/merchant/document/TermsAndConditions?merchantId={{merchantId}}&language=en&merchantCity={{city}}",
+          "host": ["{{baseURL_qolari_P}}"],
           "path": ["merchant", "document", "TermsAndConditions"],
           "query": [
             { "key": "merchantId", "value": "{{merchantId}}" },
