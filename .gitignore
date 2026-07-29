@@ -1,0 +1,28 @@
+# Credenciais e segredos — NUNCA commitar
+aceder.txt
+*.env
+.env.*
+!.env.example
+
+# SO
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Dependências (futuro)
+node_modules/
+vendor/
+
+# Build
+dist/
+build/
+.next/
+
+# Logs
+*.log
