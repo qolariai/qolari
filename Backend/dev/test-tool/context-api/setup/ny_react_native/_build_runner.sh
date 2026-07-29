@@ -556,7 +556,7 @@ for app in "${APPS[@]}"; do
       echo "  iOS builds need this submodule (consumer for podspecs, provider for spec source repo)."
       echo "  Re-clone the parent repo over SSH so submodule auth carries through:"
       echo "    rm -rf $NY_RN_DIR && git clone --recurse-submodules git@github.com:Qolari/ny-react-native $NY_RN_DIR"
-      echo "  Or set NY_RN_PATH=/Users/khuzemakhomosi/Documents/ny-react-native if you have a working checkout."
+      echo "  Or set NY_RN_PATH=/path/to/ny-react-native if you have a working checkout."
       exit 5
     fi
     if [ "$app" = "consumer" ]; then
@@ -567,7 +567,7 @@ for app in "${APPS[@]}"; do
         echo "  The consumer iOS Podfile expects podspecs under Qolari-ios/mobility-customer/."
         echo "  Re-clone the parent repo over SSH so submodule auth carries through:"
         echo "    rm -rf $NY_RN_DIR && git clone --recurse-submodules git@github.com:Qolari/ny-react-native $NY_RN_DIR"
-        echo "  Or set NY_RN_PATH=/Users/khuzemakhomosi/Documents/ny-react-native if you have a working checkout."
+        echo "  Or set NY_RN_PATH=/path/to/ny-react-native if you have a working checkout."
         echo "  If the submodule populated but this dir is genuinely absent,"
         echo "  the branch ny-react-native is on may not ship mobility-customer yet."
         exit 5

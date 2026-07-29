@@ -15,11 +15,11 @@ let ltsPort = Natural/show (env:LOCATION_TRACKING_SERVICE_PORT ? 8081)
 let mockRegistryPort = Natural/show (env:MOCK_REGISTRY_PORT ? 8020)
 
 let sosAlertsTopicARN =
-      "arn:aws:chatbot::463356420488:chat-configuration/slack-channel/sos-notifications"
+      "arn:aws:chatbot::000000000000:chat-configuration/slack-channel/sos-notifications"
 
 let slackNotificationConfig =
       { snsTopicArn = Some sosAlertsTopicARN
-      , gcpProjectId = Some "ny-sandbox"
+      , gcpProjectId = Some "qolari-sandbox"
       , gcpTopicId = Some "slack-alerts"
       , isForcedAWS = True
       }
