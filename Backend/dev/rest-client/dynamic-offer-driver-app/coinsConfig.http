@@ -1,4 +1,4 @@
-﻿@token1 = {{driver-offer-bpp-auto-token1}}
+@token1 = {{driver-offer-bpp-auto-token1}}
 @adminToken = favorit-admin-0000000000000000-token
 @driver-offer-bpp-host = http://localhost:8016
 @Qolari_admin = {{bpp-dashboard/token/qolari_PARTNER/Qolari_admin}}

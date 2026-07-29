@@ -1,4 +1,4 @@
-﻿{
+{
  "info": {
   "name": "NY Phone Share Consent Flow",
   "description": "E2E: rider consent gates driver access to the rider's real mobile number. Requires transporter_config.driver_calling_option = 'DirectCall' (seeded by run-tests.sh). Ride 1: consent unset -> masked. Ride 2: consent true -> real number. Ride 3: consent revoked -> masked again (consent applies from the next ride).",

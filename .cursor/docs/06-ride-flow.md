@@ -1,4 +1,4 @@
-﻿# Complete Ride Flow — 8 Phases
+# Complete Ride Flow — 8 Phases
 
 This document describes the end-to-end ride lifecycle, from search to completion and rating.
 

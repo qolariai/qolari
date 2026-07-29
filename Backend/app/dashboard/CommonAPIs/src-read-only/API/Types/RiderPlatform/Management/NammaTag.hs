@@ -1,4 +1,4 @@
-﻿{-# OPTIONS_GHC -Wno-unused-imports #-}
+{-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module API.Types.RiderPlatform.Management.QolariTag (module ReExport) where
 

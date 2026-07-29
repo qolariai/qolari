@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_driver_offer_bpp.payment_order (
+CREATE TABLE atlas_driver_offer_bpp.payment_order (
     id character(36) PRIMARY KEY NOT NULL,
     short_id character varying (36) NOT NULL,
     person_id character(36) NOT NULL REFERENCES atlas_driver_offer_bpp.person (id),

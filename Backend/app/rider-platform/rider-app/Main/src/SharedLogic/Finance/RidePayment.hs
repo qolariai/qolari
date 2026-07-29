@@ -1,4 +1,4 @@
-﻿{-
+{-
   Finance integration for rider-side (BAP) ride payments.
 
   ┌────────────────────────────────────────────────────────────────────────────┐

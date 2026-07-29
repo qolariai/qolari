@@ -1,4 +1,4 @@
-﻿module API where
+module API where
 
 import Data.Aeson (Value)
 import EulerHS.Prelude hiding (id)

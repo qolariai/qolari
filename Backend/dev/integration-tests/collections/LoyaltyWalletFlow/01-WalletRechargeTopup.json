@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Wallet Recharge - Topup Earn (test-Zumgy8FTRw)",
     "description": "Recharges the loyalty wallet via /payment/wallet/recharge, overrides the Qolari order-status mock to return CHARGED with a TOPUP earn of 500 points for the configured programId, then triggers the order-status check. Verifies the wallet balance reflects the topup.",

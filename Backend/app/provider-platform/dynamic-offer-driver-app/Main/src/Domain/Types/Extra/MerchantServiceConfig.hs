@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE ApplicativeDo #-}
+{-# LANGUAGE ApplicativeDo #-}
 
 module Domain.Types.Extra.MerchantServiceConfig where
 

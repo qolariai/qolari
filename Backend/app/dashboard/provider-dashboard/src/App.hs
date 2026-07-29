@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE UndecidableInstances #-}
+{-# LANGUAGE UndecidableInstances #-}
 
 {-
  Copyright 2026, Qolari Technologies

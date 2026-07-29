@@ -1,4 +1,4 @@
-﻿# QolariTag Concept
+# QolariTag Concept
 
 ## Use Cases
 

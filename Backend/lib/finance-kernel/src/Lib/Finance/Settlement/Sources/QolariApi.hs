@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 -- | Fetches the Qolari portal transaction-export CSV directly via
 -- @<portalBaseUrl>/api/q/download@.

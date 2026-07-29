@@ -1,4 +1,4 @@
-﻿module Lib.Payment.Wallet.Service
+module Lib.Payment.Wallet.Service
   ( LoyaltyReferenceType (..),
     loyaltyReferenceTypeText,
     getOrCreateWalletForPerson,

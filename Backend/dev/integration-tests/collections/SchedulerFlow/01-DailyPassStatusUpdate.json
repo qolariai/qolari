@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Daily Pass Status Update",
     "description": "Tests DailyPassStatusUpdate scheduler job: purchase passes via API, mock payment, override status, trigger scheduler, verify transitions (Active->Expired, PreBooked->Active).",

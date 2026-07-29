@@ -1,4 +1,4 @@
-﻿imports:
+imports:
   Text: Data.Text
   Maybe: Data.Maybe
   PassCategory: Domain.Types.PassCategory

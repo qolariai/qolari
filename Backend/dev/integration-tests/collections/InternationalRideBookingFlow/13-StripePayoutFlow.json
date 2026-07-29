@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Stripe Payout Flow (Sufficient Balance)",
     "description": "End-to-end payout after a completed ride: ride earns driver wallet balance \u2192 POST /wallet/payout triggers Stripe transfer (platform \u2192 Fleet VA) + payout (Fleet VA \u2192 driver bank). Fleet VA has sufficient EUR balance \u2014 no top-up required. Asserts payout_order created with non-FAILED status and merchant_top_up_amount IS NULL.",

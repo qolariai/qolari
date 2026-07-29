@@ -1,4 +1,4 @@
-﻿# Qolari Multimodal Journey System - Documentation Index
+# Qolari Multimodal Journey System - Documentation Index
 
 ## Overview
 

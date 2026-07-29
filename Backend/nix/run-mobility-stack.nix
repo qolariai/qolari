@@ -1,4 +1,4 @@
-﻿# Process-compose packages for the Qolari stack.
+# Process-compose packages for the Qolari stack.
 #
 # Four top-level configs, each importing the shared Qolari service module
 # (Backend/nix/services/Qolari.nix) with a different `profile`:

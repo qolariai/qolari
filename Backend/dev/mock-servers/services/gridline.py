@@ -1,4 +1,4 @@
-﻿"""Gridline (Aadhaar/bank account verification) mock."""
+"""Gridline (Aadhaar/bank account verification) mock."""
 
 import json
 import logging

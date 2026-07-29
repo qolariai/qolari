@@ -1,4 +1,4 @@
-﻿module API.UI.CancelSearch (API, handler, cancelSearch') where
+module API.UI.CancelSearch (API, handler, cancelSearch') where
 
 import qualified Domain.Types.Estimate as DEstimate
 import qualified Domain.Types.Merchant as Merchant

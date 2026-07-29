@@ -1,4 +1,4 @@
-﻿{-# OPTIONS_GHC -Wno-deprecations #-}
+{-# OPTIONS_GHC -Wno-deprecations #-}
 
 {-
  Copyright 2026, Qolari Technologies

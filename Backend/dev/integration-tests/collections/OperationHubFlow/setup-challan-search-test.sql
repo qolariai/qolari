@@ -1,4 +1,4 @@
-﻿-- Seed ChallanSearch_Signzy merchant service config for integration tests.
+-- Seed ChallanSearch_Signzy merchant service config for integration tests.
 -- Points to the local mock server at localhost:8080/signzy.
 --
 -- Usage:

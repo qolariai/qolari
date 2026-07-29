@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_driver_offer_bpp.notification ();
+CREATE TABLE atlas_driver_offer_bpp.notification ();
 
 ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN created_at timestamp with time zone NOT NULL default CURRENT_TIMESTAMP;
 ALTER TABLE atlas_driver_offer_bpp.notification ADD COLUMN date_created timestamp with time zone NOT NULL;

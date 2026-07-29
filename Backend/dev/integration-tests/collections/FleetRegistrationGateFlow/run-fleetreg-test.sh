@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # Self-seeding integration test for the FleetRegistration verified-gate.
 # Runs the newman collection, then tears down the run's test fleet owner (PG + KV).
 # The FleetRegistration fleet-doc-config rows are left in place (feature config; the

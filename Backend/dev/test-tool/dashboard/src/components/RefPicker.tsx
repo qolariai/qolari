@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { LOCAL_API_BASE as PROXY_BASE } from '../config';
 
 interface RefSummary {

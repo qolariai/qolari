@@ -1,4 +1,4 @@
-﻿{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
+{-# OPTIONS_GHC -Wno-ambiguous-fields #-}
 
 module SharedLogic.Finance.Prepaid
   ( counterpartyDriver,

@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "No Show Cancellation - Driver Cancels (CUSTOMER_NO_SHOW) (Cash Payment)",
     "description": "End-to-end cash-ride driver no-show: search -> assign (Cash) -> driver arrives -> wait no-show window -> driver cancels with CUSTOMER_NO_SHOW -> cancellation fee becomes overdue dues -> rider gets due amount (== configured policy) -> clears dues via Stripe -> verify dues cleared.",

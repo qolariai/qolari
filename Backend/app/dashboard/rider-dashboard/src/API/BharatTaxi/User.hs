@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE AllowAmbiguousTypes #-}
+{-# LANGUAGE AllowAmbiguousTypes #-}
 
 {-
  Copyright 2026, Qolari Technologies

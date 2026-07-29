@@ -1,4 +1,4 @@
-﻿"""Launcher spec parsing + templating.
+"""Launcher spec parsing + templating.
 
 Reads YAML files from Backend/dev/test-tool/specs/*.yaml. Each spec describes
 how to run an external repo as a launcher (ports, inputs, stages, workflows,

@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE RecordWildCards #-}
 
 module Lib.Finance.Settlement.Sources.SFTP
   ( fetchSettlementFile,

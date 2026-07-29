@@ -1,4 +1,4 @@
-﻿# Finance Kernel - Settlement File Info
+# Finance Kernel - Settlement File Info
 # qolari-dsl YAML specification
 #
 # Tracks ingestion state per settlement report file (SFTP, email, etc.): which

@@ -1,4 +1,4 @@
-﻿# Common backend scripts available in devshell.
+# Common backend scripts available in devshell.
 #
 # We use https://github.com/Platonic-Systems/mission-control
 _:

@@ -1,4 +1,4 @@
-﻿# Haskell Conventions
+# Haskell Conventions
 
 ## Module Organization
 

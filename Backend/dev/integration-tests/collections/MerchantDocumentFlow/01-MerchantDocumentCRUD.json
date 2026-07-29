@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Merchant Document CRUD Flow",
     "description": "Full CRUD lifecycle via Dashboard APIs + Provider UI read verification. Creates a merchant document, verifies via dashboard list and provider UI get, updates it, verifies the update, deletes it, and confirms deletion.",

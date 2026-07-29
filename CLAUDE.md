@@ -1,4 +1,4 @@
-﻿# CLAUDE.md
+# CLAUDE.md
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 Detailed topic docs live in `.cursor/docs/` — read the relevant one(s) for your current task.

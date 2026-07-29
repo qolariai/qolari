@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_driver_offer_bpp.QOLARI_TAG_trigger ();
+CREATE TABLE atlas_driver_offer_bpp.QOLARI_TAG_trigger ();
 
 ALTER TABLE atlas_driver_offer_bpp.QOLARI_TAG_trigger ADD COLUMN event text NOT NULL;
 ALTER TABLE atlas_driver_offer_bpp.QOLARI_TAG_trigger ADD COLUMN tag_name text NOT NULL;

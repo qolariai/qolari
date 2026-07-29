@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Online Ride With Tip After End",
     "description": "End-to-end ride with tip: search \u2192 assign \u2192 start \u2192 end \u2192 verify ride invoice (no tip) \u2192 addTip \u2192 verify NEW invoice with Tip line (old voided)",

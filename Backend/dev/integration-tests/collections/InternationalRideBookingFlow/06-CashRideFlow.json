@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Ride Booking (Cash Payment)",
     "description": "End-to-end ride with cash payment: search \u2192 assign \u2192 start \u2192 end. Driver collects cash directly from rider; no payment capture on platform. Stripe rider-side setup steps (customer, payment methods) remain in the flow as harmless no-ops.",

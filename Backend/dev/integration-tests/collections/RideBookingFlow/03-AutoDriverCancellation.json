@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "NY Auto Driver Cancellation + Reallocation",
     "description": "2 drivers: D1 gets ride, cancels -> D2 gets reallocated ride -> completes",

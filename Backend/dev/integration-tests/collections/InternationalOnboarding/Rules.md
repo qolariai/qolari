@@ -1,4 +1,4 @@
-﻿# International Onboarding Collections
+# International Onboarding Collections
 
 End-to-end onboarding for the **BRIDGE_*/* international deployments** (Helsinki
 is the reference city). Consolidates the four-file `HelsinkiOnboarding/` layout

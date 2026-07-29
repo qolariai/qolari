@@ -1,4 +1,4 @@
-﻿{
+{
 	"info": {
 		"name": "NY Rental Ride Flow (Bangalore, 4hr/40km package)",
 		"description": "End-to-end Rental flow (4-hour, 40km package in Bangalore):\n  Driver onboard -> Rider auth -> Rental search (no destination) -> Get quotes (onRentalCab) -> Confirm quote -> Driver OTP-starts -> End ride -> Verify completed.\n\nPrerequisites:\n- Bangalore rental FarePolicy + fare_product seeded for the chosen vehicle variant (auto-synced from prod via config-sync/prod_to_local_sql; Bangalore has Auto/Hatchback/Sedan/SUV/Taxi rental).\n- Rental quotes don't carry a destination; the test ends the ride at a synthetic drop location for verification only.\n",

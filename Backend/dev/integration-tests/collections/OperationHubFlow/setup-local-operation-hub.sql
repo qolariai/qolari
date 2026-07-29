@@ -1,4 +1,4 @@
-﻿-- Seed an operation hub for the OperationHubFlow integration tests
+-- Seed an operation hub for the OperationHubFlow integration tests
 -- (QOLARI_PARTNER / Bangalore)
 --
 -- Usage:

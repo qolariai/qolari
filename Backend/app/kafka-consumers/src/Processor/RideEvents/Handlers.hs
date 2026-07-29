@@ -1,4 +1,4 @@
-﻿-- | Consumer-side handlers for RideEndedEvent.
+-- | Consumer-side handlers for RideEndedEvent.
 --
 -- Each handler replaces one of the original synchronous calls / forks in EndRide.hs
 -- and EndRide/Internal.hs. The handler looks up the Ride and Booking from the event's

@@ -1,4 +1,4 @@
-﻿{-# OPTIONS_GHC -Wno-unused-imports #-}
+{-# OPTIONS_GHC -Wno-unused-imports #-}
 {-# OPTIONS_GHC -Wno-unused-local-binds #-}
 
 module Domain.Action.UI.BBPS

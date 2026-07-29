@@ -1,4 +1,4 @@
-﻿-- {"api":"PostQolariTagTagCreate","migration":"userActionType","param":"ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG CREATE_QOLARI_TAG","schema":"atlas_bap_dashboard"}
+-- {"api":"PostQolariTagTagCreate","migration":"userActionType","param":"ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG CREATE_QOLARI_TAG","schema":"atlas_bap_dashboard"}
 INSERT INTO atlas_bap_dashboard.access_matrix (id, role_id, api_entity, user_access_type, user_action_type) ( SELECT atlas_bap_dashboard.uuid_generate_v4(), T1.role_id, 'DSL', 'USER_FULL_ACCESS', 'RIDER_MANAGEMENT/QOLARI_TAG/POST_QOLARI_TAG_TAG_CREATE' FROM atlas_bap_dashboard.access_matrix AS T1 WHERE T1.user_access_type = 'USER_FULL_ACCESS' AND T1.api_entity = 'QOLARI_TAG' AND T1.user_action_type = 'CREATE_QOLARI_TAG' ) ON CONFLICT DO NOTHING;
 
 -- {"api":"PostQolariTagTagUpdate","migration":"userActionType","param":"ApiAuth APP_BACKEND_MANAGEMENT QOLARI_TAG CREATE_QOLARI_TAG","schema":"atlas_bap_dashboard"}

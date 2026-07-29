@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Dashboard Email Verification Flow",
     "description": "Shared dashboard email verification: login -> send OTP -> verify OTP (any dashboard user), plus negative cases (invalid email, wrong OTP, wrong length OTP, expired/missing OTP, no auth)",

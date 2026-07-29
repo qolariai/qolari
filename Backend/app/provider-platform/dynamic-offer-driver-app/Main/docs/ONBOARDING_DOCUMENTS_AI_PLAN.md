@@ -1,4 +1,4 @@
-﻿# AI Plan: Driver Onboarding Document Flows
+# AI Plan: Driver Onboarding Document Flows
 
 Structured plan for implementing Pan onboarding, DriverGSTIN changes, and UDYAM certificate. Use this with the QolariDSL generator (YAML → `src-read-only`), and implement business logic in `src/`.
 

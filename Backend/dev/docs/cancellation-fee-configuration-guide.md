@@ -1,4 +1,4 @@
-﻿# Cancellation Fee Configuration Guide
+# Cancellation Fee Configuration Guide
 
 ## Overview
 

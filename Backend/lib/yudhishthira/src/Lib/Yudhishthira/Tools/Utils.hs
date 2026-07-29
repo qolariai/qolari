@@ -1,4 +1,4 @@
-﻿module Lib.Yudhishthira.Tools.Utils where
+module Lib.Yudhishthira.Tools.Utils where
 
 import qualified Data.Aeson as A
 import qualified Data.Aeson.Key as A

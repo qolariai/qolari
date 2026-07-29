@@ -1,4 +1,4 @@
-﻿{-
+{-
   Placeholder for qolari-dsl generated code.
   Run the qolari-dsl script to generate Beam types, storage queries, etc.
 -}

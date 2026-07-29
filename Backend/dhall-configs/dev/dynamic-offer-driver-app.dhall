@@ -1,4 +1,4 @@
-﻿let common = ./common.dhall
+let common = ./common.dhall
 
 let sec = ./secrets/dynamic-offer-driver-app.dhall
 

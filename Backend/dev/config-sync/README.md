@@ -1,4 +1,4 @@
-﻿# Config Sync
+# Config Sync
 
 Three-phase, file-based config transfer between Qolari environments
 (`prod`, `prod_international`, `master`, `env` → `local`/`master`).

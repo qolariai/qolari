@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE TypeApplications #-}
+{-# LANGUAGE TypeApplications #-}
 {-
  Copyright 2026, Qolari Technologies
 

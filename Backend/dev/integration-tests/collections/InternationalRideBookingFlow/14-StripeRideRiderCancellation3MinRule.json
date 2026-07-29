@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Rider Cancellation 3-Min Rule (Stripe Payment)",
     "description": "End-to-end rider 3-min cancellation: search → assign → wait 3+ min → rider cancels → verify cancellation fee charged via Stripe, finance ledger settled",

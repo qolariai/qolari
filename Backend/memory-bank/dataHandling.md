@@ -1,4 +1,4 @@
-﻿# Qolari Backend - Data Flow and Handling
+# Qolari Backend - Data Flow and Handling
 
 This document describes how data flows between different modules and systems (both internal and external) within the Qolari backend, based on the analysis of the codebase.
 

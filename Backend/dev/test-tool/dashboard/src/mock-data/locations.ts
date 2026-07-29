@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Mock Location Data — Pickup and Drop locations grouped by city.
  * Used across search, estimates, and other location-based APIs.
  */

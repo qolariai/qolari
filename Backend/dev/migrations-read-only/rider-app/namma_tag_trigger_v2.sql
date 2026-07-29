@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_app.QOLARI_TAG_trigger_v2 ();
+CREATE TABLE atlas_app.QOLARI_TAG_trigger_v2 ();
 
 ALTER TABLE atlas_app.QOLARI_TAG_trigger_v2 ADD COLUMN event text NOT NULL;
 ALTER TABLE atlas_app.QOLARI_TAG_trigger_v2 ADD COLUMN merchant_operating_city_id character varying(36) NOT NULL;

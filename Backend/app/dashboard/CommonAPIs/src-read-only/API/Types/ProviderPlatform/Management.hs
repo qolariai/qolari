@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE StandaloneKindSignatures #-}
+{-# LANGUAGE StandaloneKindSignatures #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module API.Types.ProviderPlatform.Management where

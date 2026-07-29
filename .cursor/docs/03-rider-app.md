@@ -1,4 +1,4 @@
-﻿# Rider App (BAP) Deep Dive
+# Rider App (BAP) Deep Dive
 
 **Package**: `rider-app` | **Port**: 8013 | **Path**: `app/rider-platform/rider-app/`
 **Schema**: `atlas_app`

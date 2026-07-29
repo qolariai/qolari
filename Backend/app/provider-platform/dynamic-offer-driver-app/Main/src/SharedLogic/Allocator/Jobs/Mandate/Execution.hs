@@ -1,4 +1,4 @@
-﻿module SharedLogic.Allocator.Jobs.Mandate.Execution where
+module SharedLogic.Allocator.Jobs.Mandate.Execution where
 
 import qualified Control.Monad.Catch as C
 import Data.List (nubBy)

@@ -1,4 +1,4 @@
-﻿imports:
+imports:
   Person: Domain.Types.Person
   Ride: Domain.Types.Ride
   Merchant: Domain.Types.Merchant

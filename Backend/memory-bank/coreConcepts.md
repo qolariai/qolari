@@ -1,4 +1,4 @@
-﻿# Qolari Backend - Core Concepts
+# Qolari Backend - Core Concepts
 
 This document outlines fundamental concepts related to types, flow, Domain-Specific Languages (DSLs), and data handling within the Qolari backend, based on the analysis of the codebase.
 

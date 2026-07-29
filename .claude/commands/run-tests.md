@@ -1,4 +1,4 @@
-﻿# Run Integration Tests with RCA
+# Run Integration Tests with RCA
 
 You are running Qolari integration tests and performing root cause analysis on failures.
 

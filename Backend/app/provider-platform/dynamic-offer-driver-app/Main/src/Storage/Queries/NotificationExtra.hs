@@ -1,4 +1,4 @@
-﻿module Storage.Queries.NotificationExtra where
+module Storage.Queries.NotificationExtra where
 
 import Data.Time (UTCTime (UTCTime, utctDay), secondsToDiffTime)
 import qualified Domain.Types.DriverFee as DF

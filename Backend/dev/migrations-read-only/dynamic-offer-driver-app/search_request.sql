@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_driver_offer_bpp.search_request ();
+CREATE TABLE atlas_driver_offer_bpp.search_request ();
 
 ALTER TABLE atlas_driver_offer_bpp.search_request ADD COLUMN area text ;
 ALTER TABLE atlas_driver_offer_bpp.search_request ADD COLUMN auto_assign_enabled boolean  default false;

@@ -1,4 +1,4 @@
-﻿# Triggers QolariDSL code generation for:
+# Triggers QolariDSL code generation for:
 #   src-read-only/API/Types/UI/RiderPreferences.hs      -- wire request/response types
 #   src-read-only/API/Action/UI/RiderPreferences.hs     -- Servant route type + handler glue
 # Business logic stub generated at:

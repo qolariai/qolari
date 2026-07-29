@@ -1,4 +1,4 @@
-﻿"""Clone-or-pull the ny-react-native repo (with submodules) into the
+"""Clone-or-pull the ny-react-native repo (with submodules) into the
 default location, or whichever ``NY_RN_PATH`` points at.
 
 We clone over SSH (``git@github.com:…``) rather than HTTPS so the credential

@@ -1,4 +1,4 @@
-﻿# Shared Libraries (`lib/`)
+# Shared Libraries (`lib/`)
 
 All shared libraries live under `Backend/lib/`. They provide cross-cutting concerns used by multiple services.
 

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Debug runner for Qolari integration tests.
 Wraps Newman to capture per-API service logs.

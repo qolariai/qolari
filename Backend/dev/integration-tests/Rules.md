@@ -1,4 +1,4 @@
-﻿# Integration Test Collection Rules
+# Integration Test Collection Rules
 
 Guidelines for writing and maintaining Newman/Postman integration test collections.
 

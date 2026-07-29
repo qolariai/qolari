@@ -1,4 +1,4 @@
-﻿module SharedLogic.Payment where
+module SharedLogic.Payment where
 
 import qualified API.Types.UI.RidePayment as APIRidePayment
 import qualified Beckn.ACL.Cancel as ACL

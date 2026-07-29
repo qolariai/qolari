@@ -1,4 +1,4 @@
-﻿module Lib.Yudhishthira.Flow.Dashboard where
+module Lib.Yudhishthira.Flow.Dashboard where
 
 import qualified ConfigPilotFrontend.Common as CPFC
 import qualified ConfigPilotFrontend.Flow as CPF

@@ -1,4 +1,4 @@
-﻿# Mock Servers
+# Mock Servers
 
 Unified mock server for Qolari merchant service providers.
 

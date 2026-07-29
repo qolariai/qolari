@@ -1,4 +1,4 @@
-﻿# Qolari Documentation Index
+# Qolari Documentation Index
 
 This directory contains chunked documentation for the Qolari backend. Each doc covers a specific topic with exact file paths relative to `Backend/`.
 

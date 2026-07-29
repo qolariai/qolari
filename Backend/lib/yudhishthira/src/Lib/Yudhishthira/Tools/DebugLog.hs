@@ -1,4 +1,4 @@
-﻿module Lib.Yudhishthira.Tools.DebugLog
+module Lib.Yudhishthira.Tools.DebugLog
   ( runLogicsWithDebugLog,
     computeQolariTagsWithDebugLog,
     computeQolariTagsWithExpiryAndDebugLog,

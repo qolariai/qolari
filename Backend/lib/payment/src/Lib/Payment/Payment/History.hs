@@ -1,4 +1,4 @@
-﻿module Lib.Payment.Payment.History
+module Lib.Payment.Payment.History
   ( recordPaymentHistory,
     getStatusMessage,
   )

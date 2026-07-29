@@ -1,4 +1,4 @@
-﻿# Qolari Backend - System Architecture
+# Qolari Backend - System Architecture
 
 The Qolari backend is a comprehensive mobility platform built in Haskell, implementing the BECKN/ONDC protocol. It follows a microservices architecture with over 40 services, designed for scalability, high performance, and reliability.
 

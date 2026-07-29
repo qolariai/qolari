@@ -1,4 +1,4 @@
-﻿# yaml-language-server: $schema=./_schema.json
+# yaml-language-server: $schema=./_schema.json
 name: control-center-backend
 title: Control Center — Backend
 icon: assets/icons/control-center.svg

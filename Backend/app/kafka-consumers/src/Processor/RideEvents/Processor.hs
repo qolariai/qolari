@@ -1,4 +1,4 @@
-﻿-- | Top-level fan-out processor for RideEndedEvent.
+-- | Top-level fan-out processor for RideEndedEvent.
 --
 -- Each handler is wrapped in an idempotency guard so re-delivery (XCLAIM after idle,
 -- consumer restart) is a no-op. Handler failures propagate up to the transport, which

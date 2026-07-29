@@ -1,4 +1,4 @@
-﻿# resolve-ports.nix — Nix wrapper around the resolve-ports shell logic.
+# resolve-ports.nix — Nix wrapper around the resolve-ports shell logic.
 #
 # Probes each port in the base ports.nix for availability and substitutes free
 # alternatives, then emits the resolved ports as a JSON object {"name":port,...}

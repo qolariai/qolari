@@ -1,4 +1,4 @@
-﻿{
+{
 	"info": {
 		"name": "NY Intercity Ride Flow (Bangalore -> Mysore, OneWay)",
 		"description": "End-to-end Intercity flow (one-way Bangalore -> Mysore):\n  Driver onboard -> Rider auth -> InterCity search -> Get quotes (onIntercityCab) -> Confirm quote -> Driver gets OTP from booking -> Driver OTP-starts ride -> End ride -> Verify completed.\n\nPrerequisites:\n- Bangalore intercity FarePolicy + fare_product seeded for the chosen vehicle variant (auto-synced from prod via config-sync/prod_to_local_sql).\n- Special-zone OTP path: Intercity_OneWayRideOtp trip category must resolve to a quote for the chosen origin/destination pair.\n",

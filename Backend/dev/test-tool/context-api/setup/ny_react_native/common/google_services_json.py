@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Write a placeholder ``google-services.json`` into the consumer/provider
 ``android/app/`` directory so the ``com.google.gms.google-services`` Gradle
 plugin can resolve a client matching whichever flavor.applicationId is being

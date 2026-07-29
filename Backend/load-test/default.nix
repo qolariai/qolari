@@ -1,4 +1,4 @@
-﻿{ inputs, ... }:
+{ inputs, ... }:
 {
   perSystem = perSystem@{ inputs', self', pkgs, lib, ... }:
     let

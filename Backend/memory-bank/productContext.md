@@ -1,4 +1,4 @@
-﻿# Product Context: Qolari
+# Product Context: Qolari
 
 ## 1. Problem Statement
 Mobility is critical to economic growth, social progress, and individual well-being. Current mobility systems can be inefficient, unsustainable, and inaccessible to the masses. Qolari aims to address these issues by creating a community-driven, open, tech-enabled, and shared mobility platform. It specifically focuses on empowering service providers (e.g., auto drivers) who are central to urban transport but often face challenges with existing platforms.

@@ -1,4 +1,4 @@
-﻿# Passetto Encrypt / Decrypt / Hash
+# Passetto Encrypt / Decrypt / Hash
 
 Helper for the Qolari dashboard local-testing flow. Generates the encrypted
 blobs (`*_encrypted` columns) and SHA-256 hashes (`*_hash` columns) that match

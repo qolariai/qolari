@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "STCL Membership - Full Purchase + Cap Guard (5 shares in one go)",
     "description": "Driver buys all 5 shares in a single submitApplication call, completes Qolari payment via mock CHARGED, verifies membership shows 5 shares in 1 allotment. Edits KYC via updateApplication and asserts via GET /membership. Then asserts that a subsequent buyAdditionalShares (+1) is rejected because the per-driver cap (5) would be exceeded.",

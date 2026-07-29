@@ -1,4 +1,4 @@
-﻿-- Seed QolariWallet_Qolari merchant_service_config row for Chennai with
+-- Seed QolariWallet_Qolari merchant_service_config row for Chennai with
 -- a loyaltyProgramMap entry mapping the test programId to LOYALTY_WALLET.
 -- Required for the LoyaltyWalletFlow integration tests:
 --   loadLoyaltyProgramMap looks up service_name = 'QolariWallet_Qolari' and

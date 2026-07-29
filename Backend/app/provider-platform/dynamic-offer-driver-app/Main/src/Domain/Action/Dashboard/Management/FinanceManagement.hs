@@ -1,4 +1,4 @@
-﻿module Domain.Action.Dashboard.Management.FinanceManagement
+module Domain.Action.Dashboard.Management.FinanceManagement
   ( getFinanceManagementSubscriptionPurchaseList,
     getFinanceManagementInvoiceList,
     getFinanceManagementFinanceInvoiceList,

@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Challan Search on Vehicle Inspection Approval",
     "description": "End-to-end test: registers a driver, creates a VRC via register/rc with vehicleDetails (sync path), creates an ONBOARDING_INSPECTION hub request, approves it, and verifies that the Signzy challan search fires and updates pending_challan (json {pendingChallanCount, errorMessage}) on the VRC.\n\nPrerequisites:\n  1. Run setup-challan-search-test.sql to seed ChallanSearch_Signzy config\n  2. Mock server running on localhost:8080 with signzy mock service",

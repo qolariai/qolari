@@ -1,4 +1,4 @@
-﻿-- Rewards dashboard integration tests: access_matrix + enable flag for NY/BT.
+-- Rewards dashboard integration tests: access_matrix + enable flag for NY/BT.
 -- Idempotent — safe to re-run before ./run-tests.sh rewards
 
 -- Access matrix (Qolari_ADMIN role from rider-dashboard.sql)

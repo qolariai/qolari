@@ -1,4 +1,4 @@
-﻿-- Grant Qolari_OPS and Qolari_ADMIN roles access to /bap/{merchantId}/person/bulkCreate.
+-- Grant Qolari_OPS and Qolari_ADMIN roles access to /bap/{merchantId}/person/bulkCreate.
 -- Endpoint gate is DashboardAuth 'DASHBOARD_USER at the type level; this row seeds the
 -- fine-grained AccessMatrix check that verifyAccessLevel does at handler entry.
 -- ON CONFLICT DO NOTHING because migrations re-run on every deploy.

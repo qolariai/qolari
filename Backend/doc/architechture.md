@@ -1,4 +1,4 @@
-﻿# Architecture
+# Architecture
 There are few layers in this project
 
 ## Product layer

@@ -1,4 +1,4 @@
-﻿let ondclogsUrl = "https://logs.ondc.in"
+let ondclogsUrl = "https://logs.ondc.in"
 
 let ondcTokenMap
     : List

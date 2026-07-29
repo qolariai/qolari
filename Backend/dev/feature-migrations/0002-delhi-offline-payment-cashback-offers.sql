@@ -1,4 +1,4 @@
-﻿-- Delhi (BHARAT_TAXI) — 10% Cashback offer for first ride (Offline/Cash Payment)
+-- Delhi (BHARAT_TAXI) — 10% Cashback offer for first ride (Offline/Cash Payment)
 -- Eligible only for customers with 0 previous offer applications
 
 DO $$

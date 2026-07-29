@@ -1,4 +1,4 @@
-﻿{
+{
 	"info": {
 		"name": "NY Add Baggage Flow (RideOTP)",
 		"description": "RideOTP flow + add baggage before ride starts: search in special zone -> confirm quote -> add baggage (fare recalculated) -> verify booking fare changed -> driver starts with OTP -> end.\n\nPrerequisites: same as 08-RideOtpFlow.json. AddBaggage endpoint must be wired and a fare policy with non-zero perLuggageCharge must be configured for the booked vehicle tier in the special zone.",

@@ -1,4 +1,4 @@
-﻿let globalCommon = ../generic/common.dhall
+let globalCommon = ../generic/common.dhall
 
 let appCfg = ./dynamic-offer-driver-app.dhall
 

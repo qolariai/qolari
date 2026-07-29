@@ -1,4 +1,4 @@
-﻿"""CAC (Superposition) remote-config mock.
+"""CAC (Superposition) remote-config mock.
 
 Returns a flat config object that Qolari consumer/provider apps fetch
 at boot to override baked-in defaults. Routes:

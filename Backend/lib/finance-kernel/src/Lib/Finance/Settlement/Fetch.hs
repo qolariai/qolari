@@ -1,4 +1,4 @@
-﻿module Lib.Finance.Settlement.Fetch
+module Lib.Finance.Settlement.Fetch
   ( fetchSettlementCsv,
     settlementServiceToPaymentGatewayName,
     SftpFetchMeta (..),

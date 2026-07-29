@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_app.person ();
+CREATE TABLE atlas_app.person ();
 
 ALTER TABLE atlas_app.person ADD COLUMN aadhaar_verified boolean NOT NULL default false;
 ALTER TABLE atlas_app.person ADD COLUMN backend_app_version text ;

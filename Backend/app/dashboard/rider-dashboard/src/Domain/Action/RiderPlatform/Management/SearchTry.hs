@@ -1,4 +1,4 @@
-﻿{-# OPTIONS_GHC -Wwarn=unused-imports #-}
+{-# OPTIONS_GHC -Wwarn=unused-imports #-}
 
 module Domain.Action.RiderPlatform.Management.SearchTry
   ( postSearchTryRecentSearchTries,

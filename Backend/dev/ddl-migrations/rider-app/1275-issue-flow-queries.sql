@@ -1,4 +1,4 @@
-﻿------------- Issue Category Table ----------------------------------
+------------- Issue Category Table ----------------------------------
 ALTER TABLE atlas_app.issue_category ADD COLUMN category_type text NOT NULL DEFAULT 'Category';
 ALTER TABLE atlas_app.issue_category ADD COLUMN created_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL;
 ALTER TABLE atlas_app.issue_category ADD COLUMN updated_at timestamp with time zone DEFAULT CURRENT_TIMESTAMP NOT NULL;

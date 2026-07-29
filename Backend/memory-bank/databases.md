@@ -1,4 +1,4 @@
-﻿# Qolari Backend - Database Overview
+# Qolari Backend - Database Overview
 
 The Qolari backend leverages a polyglot persistence strategy, utilizing different database technologies tailored to specific data storage, retrieval, and processing needs. This document details the key databases used, their primary roles, and how they are integrated and utilized within the project.
 

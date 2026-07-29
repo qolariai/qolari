@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Online Ride: Tip Before Ride End Should Fail",
     "description": "Verifies BAP rejects addTip while ride is STARTED (not COMPLETED). After ride end, addTip succeeds and invoice regenerates.",

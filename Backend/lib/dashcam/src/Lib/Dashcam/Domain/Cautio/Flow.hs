@@ -1,4 +1,4 @@
-﻿module Lib.Dashcam.Domain.Cautio.Flow where
+module Lib.Dashcam.Domain.Cautio.Flow where
 
 import EulerHS.Types as Euler
 import Kernel.External.Encryption

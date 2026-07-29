@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "NY Inter-City Ride Flow",
     "description": "End-to-end inter-city ride: fresh driver (CAR/SEDAN) + rider -> INTER_CITY search with stops -> assign -> start -> end. Uses same environment as CabRideFlow.",

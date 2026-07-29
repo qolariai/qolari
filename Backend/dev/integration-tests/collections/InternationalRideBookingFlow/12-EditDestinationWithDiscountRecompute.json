@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "EditDestination With Discount Recompute (% Offer)",
     "description": "Online ride with % offer; after StartRide rider edits destination, driver accepts, then we assert Ride.commission / discount_amount were all recomputed against the new fare. After EndRide, asserts the new finance fields on rideList and that VATInput ledger entries have NULL concerned_individual_id.",

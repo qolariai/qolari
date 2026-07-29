@@ -1,4 +1,4 @@
-﻿# @name healthcheck
+# @name healthcheck
 
 @empty =
 @clickhouse-kafka = http://localhost:8123

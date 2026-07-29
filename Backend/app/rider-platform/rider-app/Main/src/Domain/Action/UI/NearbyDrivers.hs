@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE BangPatterns #-}
+{-# LANGUAGE BangPatterns #-}
 {-
  Copyright 2026, Qolari Technologies
 

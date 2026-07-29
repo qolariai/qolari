@@ -1,4 +1,4 @@
-﻿# BECKN Protocol Flow
+# BECKN Protocol Flow
 
 ## Overview
 

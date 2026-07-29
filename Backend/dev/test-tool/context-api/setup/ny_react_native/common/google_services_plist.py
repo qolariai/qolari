@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """iOS counterpart of ``google_services_json``: drop a placeholder
 ``GoogleService-Info.plist`` into ``consumer/ios/`` and into every
 ``consumer/ios/<Variant>/Plist/`` directory we find.

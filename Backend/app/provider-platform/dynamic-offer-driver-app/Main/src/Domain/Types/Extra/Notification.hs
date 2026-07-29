@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE ApplicativeDo #-}
+{-# LANGUAGE ApplicativeDo #-}
 {-# OPTIONS_GHC -Wno-orphans #-}
 
 module Domain.Types.Extra.Notification (Payment.NotificationStatus (..)) where

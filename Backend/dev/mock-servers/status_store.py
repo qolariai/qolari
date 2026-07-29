@@ -1,4 +1,4 @@
-﻿"""Request-matching override system for the mock server.
+"""Request-matching override system for the mock server.
 
 POST /mock/override registers a rule that fires when a future request to the
 named service has an extracted field equal to `value`. The rule's `response`

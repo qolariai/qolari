@@ -1,4 +1,4 @@
-﻿-- Helsinki (BRIDGE_FINLAND) — 10% Discount offer for first ride (Online Payment)
+-- Helsinki (BRIDGE_FINLAND) — 10% Discount offer for first ride (Online Payment)
 -- Eligible only for customers with 0 previous offer applications
 
 DO $$

@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE ApplicativeDo #-}
+{-# LANGUAGE ApplicativeDo #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Domain.Types.SearchRequest where

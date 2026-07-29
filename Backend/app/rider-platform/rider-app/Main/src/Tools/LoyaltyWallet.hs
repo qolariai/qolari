@@ -1,4 +1,4 @@
-﻿module Tools.LoyaltyWallet
+module Tools.LoyaltyWallet
   ( loyaltyInfo,
     svpWalletPosting,
     svpWalletBalance,

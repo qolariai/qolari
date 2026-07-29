@@ -1,4 +1,4 @@
-﻿# STCL Membership — Share Top-Up
+# STCL Membership — Share Top-Up
 
 How a driver who already bought N shares can buy more shares later, without breaking the global "shares are continuous" invariant or any existing API.
 

@@ -1,4 +1,4 @@
-﻿let sec = ./secrets/common.dhall
+let sec = ./secrets/common.dhall
 
 let globalCommon = ../generic/common.dhall
 

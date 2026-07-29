@@ -1,4 +1,4 @@
-﻿# Multimodal Journey System - Architecture Overview
+# Multimodal Journey System - Architecture Overview
 
 ## Table of Contents
 1. [System Overview](#system-overview)

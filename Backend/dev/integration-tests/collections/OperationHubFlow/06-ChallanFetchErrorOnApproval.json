@@ -1,4 +1,4 @@
-﻿{
+{
 	"info": {
 		"name": "Challan Fetch Error on Vehicle Approval (3P failure capture)",
 		"description": "E2E test that the challan-fetch FAILURE is captured and persisted. Mirrors the success flow (register driver+RC, inspection request, approve) but points the ChallanSearch_Signzy provider URL at a dead port so the forked getPendingChallanCount throws; the fork's Left branch then stores pending_challan = {pendingChallanCount: null, errorMessage: <err>}. Asserts the error is persisted (errorMessage non-null, pendingChallanCount null). Final step restores the working provider config. RUN SERIALLY (mutates the shared ChallanSearch_Signzy merchant_service_config).",

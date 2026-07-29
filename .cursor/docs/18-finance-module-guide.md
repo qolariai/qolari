@@ -1,4 +1,4 @@
-﻿# Qolari Finance Module — Driver-Side Guide
+# Qolari Finance Module — Driver-Side Guide
 
 A practical walk-through of the double-entry accounting model that powers the
 driver wallet, earnings, payouts, and the BPP (driver-app) ride lifecycle.

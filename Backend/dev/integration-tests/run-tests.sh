@@ -1,4 +1,4 @@
-﻿#!/bin/bash
+#!/bin/bash
 # Run Qolari integration tests against local dev environment
 #
 # Usage:

@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "NY Auto Ride Load Test",
     "description": "Load-test variant of NY Auto Ride Flow.\nPhone numbers and reg plates are drawn from the load_test_* env lists (or seeded directly by the Python load-test runner). All request steps are identical to 01-AutoRideFlow.",

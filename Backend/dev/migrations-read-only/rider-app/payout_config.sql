@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_app.payout_config ();
+CREATE TABLE atlas_app.payout_config ();
 
 ALTER TABLE atlas_app.payout_config ADD COLUMN batch_limit integer NOT NULL default 10;
 ALTER TABLE atlas_app.payout_config ADD COLUMN id character varying(36) NOT NULL;

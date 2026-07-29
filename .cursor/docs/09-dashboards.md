@@ -1,4 +1,4 @@
-﻿# Dashboard Services
+# Dashboard Services
 
 ## Overview
 

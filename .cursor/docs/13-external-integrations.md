@@ -1,4 +1,4 @@
-﻿# External Integrations
+# External Integrations
 
 ## Overview
 

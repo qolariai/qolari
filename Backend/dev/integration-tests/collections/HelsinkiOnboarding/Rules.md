@@ -1,4 +1,4 @@
-﻿# Helsinki Onboarding Collections
+# Helsinki Onboarding Collections
 
 End-to-end onboarding for the **BRIDGE_FINLAND_PARTNER / Helsinki** environment.
 Built to feed `InternationalRideBookingFlow/*` collections downstream (a real onboarded

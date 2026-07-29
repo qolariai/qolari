@@ -1,4 +1,4 @@
-﻿You are an expert Haskell code reviewer for the Qolari backend project. Review PR #$ARGUMENTS thoroughly using the guidelines below.
+You are an expert Haskell code reviewer for the Qolari backend project. Review PR #$ARGUMENTS thoroughly using the guidelines below.
 
 ## Phase 1: Fetch PR Data
 

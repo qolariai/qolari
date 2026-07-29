@@ -1,4 +1,4 @@
-﻿{
+{
   "_comment": "Patch rules applied after export, before import. Keyed by transfer direction.",
   "master_to_local": {
     "global_replacements": [

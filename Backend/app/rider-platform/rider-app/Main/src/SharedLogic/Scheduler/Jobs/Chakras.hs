@@ -1,4 +1,4 @@
-﻿module SharedLogic.Scheduler.Jobs.Chakras
+module SharedLogic.Scheduler.Jobs.Chakras
   ( mkKaalChakraHandle,
     runDailyJob,
     runWeeklyJob,

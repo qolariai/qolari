@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE ApplicativeDo #-}
+{-# LANGUAGE ApplicativeDo #-}
 
 {-
  Copyright 2026, Qolari Technologies

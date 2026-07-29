@@ -1,4 +1,4 @@
-﻿module Storage.Queries.Transformers.MerchantServiceConfig where
+module Storage.Queries.Transformers.MerchantServiceConfig where
 
 import ChatCompletion.Interface.Types as CIT
 import ChatCompletion.Types

@@ -1,4 +1,4 @@
-﻿module Domain.Action.UI.CustomerReferral where
+module Domain.Action.UI.CustomerReferral where
 
 import API.Types.UI.CustomerReferral
 import qualified Domain.Action.Beckn.Common as Common

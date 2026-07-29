@@ -1,4 +1,4 @@
-﻿# hpack defaults
+# hpack defaults
 # Ref: https://github.com/sol/hpack#defaults
 
 # Workaround for segfault on macOS

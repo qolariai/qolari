@@ -1,4 +1,4 @@
-﻿# 🚖 Qolari
+# 🚖 Qolari
 
 **Open and Driver Centric Mobility Platform**
 

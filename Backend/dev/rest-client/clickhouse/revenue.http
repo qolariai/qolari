@@ -1,4 +1,4 @@
-﻿# run migration for dev testing:
+# run migration for dev testing:
 
 # UPDATE atlas_bpp_dashboard.access_matrix
 # 	SET user_access_type='USER_FULL_ACCESS'

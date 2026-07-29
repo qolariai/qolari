@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "NY Taxi Ride Flow",
     "description": "End-to-end taxi/sedan ride: search -> assign -> start -> end",

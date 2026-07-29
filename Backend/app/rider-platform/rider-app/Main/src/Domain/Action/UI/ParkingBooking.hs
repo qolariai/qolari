@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE TypeApplications #-}
+{-# LANGUAGE TypeApplications #-}
 
 module Domain.Action.UI.ParkingBooking (postMultimodalParkingBook, postMultimodalParkingMarshalCreate, parkingBookingOrderStatusHandler) where
 

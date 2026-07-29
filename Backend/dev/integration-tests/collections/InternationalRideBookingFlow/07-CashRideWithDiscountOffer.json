@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Cash Ride Booking Offers (10% First Ride Discount)",
     "description": "End-to-end cash ride with domain offer: search \u2192 see discount offer \u2192 select with offer and Cash instrument \u2192 ride \u2192 driver collects post-discount fare in cash. Discount still flows via BAP ledger (absorbs discount + VAT-on-discount split).",

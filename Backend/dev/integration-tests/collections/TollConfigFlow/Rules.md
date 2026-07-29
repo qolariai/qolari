@@ -1,4 +1,4 @@
-﻿# TollConfigFlow — Integration Test Rules
+# TollConfigFlow — Integration Test Rules
 
 Provider-dashboard toll CRUD with **GeoJSON LineString and Polygon** geometry objects only. Legacy `{start,end}` LineSegment gates are rejected on create but may still exist in DB from older rows.
 

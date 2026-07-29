@@ -1,4 +1,4 @@
-﻿{
+{
 	"info": {
 		"name": "Qolari OrderStatus txnList Iteration",
 		"description": "Exercises the txnList iteration in Lib.Payment.Domain.Action.orderStatusService. Creates a wallet recharge payment order, overrides the mock Qolari response so /orders/<id> returns CHARGED with a txn_list containing two transactions, then triggers /payment/<orderId>/status. Verifies that BOTH txn_list entries are upserted into payment_transaction with the right per-txn fields (payment_method = JP_HDFC for one, LOYALTYOS7 for the other) — proving the iteration uses per-txn fields, not the top-level order fields.",

@@ -1,4 +1,4 @@
-﻿# @name healthcheck
+# @name healthcheck
 GET {{bap-dashboard-host}}
 
 ###

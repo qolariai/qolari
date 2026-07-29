@@ -1,4 +1,4 @@
-﻿module Lib.Yudhishthira.Types.Application where
+module Lib.Yudhishthira.Types.Application where
 
 import Kernel.Beam.Lib.UtilsTH
 import Kernel.Prelude

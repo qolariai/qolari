@@ -1,4 +1,4 @@
-﻿imports:
+imports:
   Day: Data.Time.Calendar
   HighPrecMoney: Kernel.Types.Common
   VehicleCategory: BecknV2.OnDemand.Enums

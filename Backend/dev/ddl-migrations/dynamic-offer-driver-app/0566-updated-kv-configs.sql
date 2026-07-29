@@ -1,4 +1,4 @@
-﻿-- Please be careful while running this query in production.
+-- Please be careful while running this query in production.
 -- To ensure backward compatibility, keep the existing fields unchanged.
 -- Make sure all tables, except those enabled for KV, are included in the 'disableForKV' field.
 -- Update the TTL as per the old data.

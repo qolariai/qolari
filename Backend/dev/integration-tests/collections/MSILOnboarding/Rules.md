@@ -1,4 +1,4 @@
-﻿# MSIL Onboarding Collections
+# MSIL Onboarding Collections
 
 End-to-end onboarding for the **MSIL_PARTNER / Delhi** environment. Mirrors the
 Postman collections used against the c2 sandbox (`MSIL Driver Onboarding` +

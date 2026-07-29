@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "NY Ride OTP Flow (Special Zone)",
     "description": "End-to-end RideOTP flow: fresh driver + rider -> onboard -> search in special zone -> quote (no estimate) -> confirm -> OTP assigned -> driver starts with OTP -> end.\n\nPrerequisites:\n- Special location geometry must be seeded in the special-zone DB\n- fare_product with trip_category='OneWay_OneWayRideOtp' must exist for the pickup area\n- Environment must have sz_origin_lat/sz_origin_lon within a special zone\n- If no special zone is configured, this test will fail at the 'Has quotes' assertion",

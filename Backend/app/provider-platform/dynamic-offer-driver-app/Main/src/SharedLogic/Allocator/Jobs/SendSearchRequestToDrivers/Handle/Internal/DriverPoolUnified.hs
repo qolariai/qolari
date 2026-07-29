@@ -1,4 +1,4 @@
-﻿module SharedLogic.Allocator.Jobs.SendSearchRequestToDrivers.Handle.Internal.DriverPoolUnified where
+module SharedLogic.Allocator.Jobs.SendSearchRequestToDrivers.Handle.Internal.DriverPoolUnified where
 
 import Control.Monad.Extra (partitionM)
 import Data.Aeson

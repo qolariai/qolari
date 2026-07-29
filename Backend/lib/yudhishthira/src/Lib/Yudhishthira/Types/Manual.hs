@@ -1,4 +1,4 @@
-﻿module Lib.Yudhishthira.Types.Manual where
+module Lib.Yudhishthira.Types.Manual where
 
 import Kernel.Prelude
 import Kernel.Types.Common

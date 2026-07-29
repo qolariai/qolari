@@ -1,4 +1,4 @@
-﻿{-# OPTIONS_GHC -Wno-orphans #-}
+{-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wwarn=unused-imports #-}
 
 module Domain.Action.Dashboard.RideBooking.MultiModal (getMultiModalList, postMultiModalSendMessage, postMultiModalSendDirectMessage, postMultiModalAddComment, getMultiModalGetComments) where

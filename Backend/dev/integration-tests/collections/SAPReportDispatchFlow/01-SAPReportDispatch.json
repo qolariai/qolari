@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "SAP Report Dispatch",
     "description": "Tests SAPReportDispatch scheduler job: seeds past-dated subscription purchases + PG settlement reports + IndirectTaxTransaction, triggers the scheduler, verifies sap_journal_entry rows.",

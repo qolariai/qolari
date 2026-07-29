@@ -1,4 +1,4 @@
-﻿# Contributing to Qolari
+# Contributing to Qolari
 
 ## Code of Conduct
 

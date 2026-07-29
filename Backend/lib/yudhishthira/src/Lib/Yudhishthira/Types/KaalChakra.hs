@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE DerivingVia #-}
+{-# LANGUAGE DerivingVia #-}
 {-# LANGUAGE InstanceSigs #-}
 {-# LANGUAGE StandaloneKindSignatures #-}
 

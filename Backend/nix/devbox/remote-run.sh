@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # Remote orchestrator for `, run-cabal-build-devbox`. Invoked over `ssh -tt` on
 # the dev-box after the local repo has been rsync'd and Backend/.ci-cache-sha
 # written. Runs cache-restore (download the CI dist-newstyle from MinIO) then

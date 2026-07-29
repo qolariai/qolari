@@ -1,4 +1,4 @@
-﻿{-# OPTIONS_GHC -Wno-deprecations #-}
+{-# OPTIONS_GHC -Wno-deprecations #-}
 
 module Lib.Payment.Storage.HistoryQueries.PaymentTransaction
   ( create,

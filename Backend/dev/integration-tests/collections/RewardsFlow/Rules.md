@@ -1,4 +1,4 @@
-﻿# RewardsFlow — Integration Test Rules
+# RewardsFlow — Integration Test Rules
 
 BAP rider-dashboard **Rewards** management APIs and rider unlock flow for **qolari** (Bangalore) and **BHARAT_TAXI** (Delhi).
 

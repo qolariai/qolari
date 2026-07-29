@@ -1,4 +1,4 @@
-﻿Directory structure:
+Directory structure:
 └── Qolari-Qolari/
     ├── README.md
     ├── crowdin.yml

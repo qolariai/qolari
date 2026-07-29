@@ -1,4 +1,4 @@
-﻿# Progress: Qolari Memory Bank Population
+# Progress: Qolari Memory Bank Population
 
 ## What Works (Completed Steps)
 1.  **Initial Setup:** Memory Bank file structure created.

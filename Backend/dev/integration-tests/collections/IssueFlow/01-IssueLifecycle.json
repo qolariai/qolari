@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Issue Lifecycle Flow (BAP + BPP)",
     "description": "End-to-end Issue/IssueCategory lifecycle across rider-app (BAP) and dynamic-offer-driver-app (BPP). Exercises dashboard CRUD (category/option/message/translation), UI consumption from rider and driver, in-app chat (UI + dashboard sides), and config-update PATCH semantics (regression for the merchantName/supportEmail drop bug).",

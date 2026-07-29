@@ -1,4 +1,4 @@
-﻿-- Self-seed for the FaceMatchOnboardingFlow integration suite.
+-- Self-seed for the FaceMatchOnboardingFlow integration suite.
 --
 -- Creates a DEDICATED test opCity (QOLARI / Ahmedabad) configured for the NON-SDK IDfy
 -- document path so the selfie<->document face match actually runs, WITHOUT touching the real

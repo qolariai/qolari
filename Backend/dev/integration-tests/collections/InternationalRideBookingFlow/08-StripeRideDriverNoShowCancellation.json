@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "No Show Cancellation - Driver Cancels (CUSTOMER_NO_SHOW) (Stripe Payment)",
     "description": "End-to-end driver no-show: search \u2192 assign \u2192 driver arrives \u2192 wait no-show window \u2192 driver cancels with CUSTOMER_NO_SHOW \u2192 verify rider charged via Stripe, finance ledger settled",

@@ -1,4 +1,4 @@
-﻿module SharedLogic.FRFSStatus where
+module SharedLogic.FRFSStatus where
 
 import API.Types.UI.FRFSTicketService
 import qualified API.Types.UI.FRFSTicketService as FRFSTicketService

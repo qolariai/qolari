@@ -1,4 +1,4 @@
-﻿@driver-offer-bpp-host = http://localhost:8016
+@driver-offer-bpp-host = http://localhost:8016
 
 # @name healthcheck
 GET {{driver-offer-bpp-host}}/ui

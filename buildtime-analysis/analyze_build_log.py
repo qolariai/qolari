@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Optimized build log analyzer for Nix builds with Haskell compilation tracking.
 """

@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_app.rider_config ();
+CREATE TABLE atlas_app.rider_config ();
 
 ALTER TABLE atlas_app.rider_config ADD COLUMN app_url text NOT NULL default 'drive.qolari.com/link/rider/rmxw';
 ALTER TABLE atlas_app.rider_config ADD COLUMN enable_emergency_contact_added_message boolean NOT NULL default true;

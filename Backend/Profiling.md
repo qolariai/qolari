@@ -1,4 +1,4 @@
-﻿# Profiling Setup for Qolari Project
+# Profiling Setup for Qolari Project
 
 <!-- Author: Vijay Gupta -->
 

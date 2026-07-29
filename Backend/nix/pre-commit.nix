@@ -1,4 +1,4 @@
-﻿# https://pre-commit.com/ hooks defined in Nix
+# https://pre-commit.com/ hooks defined in Nix
 # cf. https://github.com/cachix/pre-commit-hooks.nix
 { pkgs, lib, ... }:
 

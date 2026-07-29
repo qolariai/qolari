@@ -1,4 +1,4 @@
-﻿module IssueManagement.Domain.Action.UI.Issue where
+module IssueManagement.Domain.Action.UI.Issue where
 
 import qualified AWS.S3 as S3
 import Control.Applicative ((<|>))

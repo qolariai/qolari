@@ -1,4 +1,4 @@
-﻿module Domain.Action.UI.SpecialLocationWarrior
+module Domain.Action.UI.SpecialLocationWarrior
   ( getSpecialLocationListCategory,
     getGetInfoSpecialLocWarrior,
     postUpdateInfoSpecialLocWarrior,

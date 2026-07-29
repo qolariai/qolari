@@ -1,4 +1,4 @@
-﻿# yaml-language-server: $schema=./_schema.json
+# yaml-language-server: $schema=./_schema.json
 name: ny-rn-consumer
 title: NY Consumer App (Android)
 icon: assets/icons/mobile.svg

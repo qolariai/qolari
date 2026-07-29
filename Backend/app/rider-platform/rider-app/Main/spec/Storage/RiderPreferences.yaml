@@ -1,4 +1,4 @@
-﻿# Triggers QolariDSL code generation for:
+# Triggers QolariDSL code generation for:
 #   src-read-only/Domain/Types/RiderPreferences.hs       -- the table record type
 #   src-read-only/Storage/Beam/RiderPreferences.hs       -- the Beam table definition
 #   src-read-only/Storage/Queries/RiderPreferences.hs    -- generated KV queries

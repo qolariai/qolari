@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_driver_offer_bpp.subscription_config ();
+CREATE TABLE atlas_driver_offer_bpp.subscription_config ();
 
 ALTER TABLE atlas_driver_offer_bpp.subscription_config ADD COLUMN allow_driver_fee_calc_schedule boolean NOT NULL default false;
 ALTER TABLE atlas_driver_offer_bpp.subscription_config ADD COLUMN allow_due_addition boolean NOT NULL default false;

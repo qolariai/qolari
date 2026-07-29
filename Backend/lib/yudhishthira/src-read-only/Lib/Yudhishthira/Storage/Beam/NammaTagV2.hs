@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE StandaloneDeriving #-}
+{-# LANGUAGE StandaloneDeriving #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Lib.Yudhishthira.Storage.Beam.QolariTagV2 where

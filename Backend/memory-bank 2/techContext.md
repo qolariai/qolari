@@ -1,4 +1,4 @@
-﻿# Tech Context: Qolari
+# Tech Context: Qolari
 
 ## 1. Core Technologies
 -   **Backend:**

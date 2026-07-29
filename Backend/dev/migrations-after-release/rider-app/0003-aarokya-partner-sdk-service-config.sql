@@ -1,4 +1,4 @@
-﻿-- Seed the Aarokya PartnerSdk service config for rider-app.
+-- Seed the Aarokya PartnerSdk service config for rider-app.
 --
 -- Required so rider-app's POST /aarokya/contributorToken can resolve the Aarokya
 -- backend URL + platform Basic-auth credential. Tools.PartnerSdk.generateContributorToken

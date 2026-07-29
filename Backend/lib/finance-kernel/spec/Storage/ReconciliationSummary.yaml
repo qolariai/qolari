@@ -1,4 +1,4 @@
-﻿# Finance Kernel - Reconciliation Summary Table
+# Finance Kernel - Reconciliation Summary Table
 # One row per chunk × (domain, source, target) × (merchant, opCity).
 # Regenerate Beam + read-only queries after editing.
 # qolari-dsl YAML specification

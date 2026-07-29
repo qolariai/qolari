@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Fleet Driver Name & Association",
     "description": "End-to-end test: registers driver + fleet owner, creates fleet association via joining OTP, then tests updateName set/clear/restore and verifies driverAssociation response includes firstName, middleName, lastName fields",

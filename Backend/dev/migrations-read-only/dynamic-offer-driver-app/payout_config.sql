@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_driver_offer_bpp.payout_config ();
+CREATE TABLE atlas_driver_offer_bpp.payout_config ();
 
 ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN batch_limit integer NOT NULL default 10;
 ALTER TABLE atlas_driver_offer_bpp.payout_config ADD COLUMN is_payout_enabled boolean NOT NULL default False;

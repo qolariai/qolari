@@ -1,4 +1,4 @@
-﻿{
+{
 	"info": {
 		"name": "NY Intercity Airport OTP Flow (BLR Airport -> Mysore)",
 		"description": "Airport special-zone intercity OTP flow: rider books a one-way intercity ride from the Bangalore Airport special zone to Mysore. Booking returns an OTP, driver starts the ride via otpRide/start without an allocation phase.\n\nPrerequisites:\n- BLR Airport special_location seeded with gates/polygon (sz_origin_lat/lon must fall inside).\n- fare_product entries for InterCity_OneWayRideOtp + the chosen vehicle variant at this special zone (auto-synced from prod).\n- If the airport special zone has no Intercity_RideOtp fare_product, this test will fail at 'Has quotes' assertion.\n",

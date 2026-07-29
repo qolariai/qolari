@@ -1,4 +1,4 @@
-﻿# Reconciliation Framework
+# Reconciliation Framework
 
 A recipe-driven framework in `finance-kernel` for cross-checking financial data across sources (DSR, PG settlements, ledger, subscriptions, driver_fees, payment_orders, etc.). Each recon is a single declarative `Recipe` value; the shared runner handles chunking, locking, persistence, and — via the sweep — re-checking previously-broken entries.
 

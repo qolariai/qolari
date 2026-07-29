@@ -1,4 +1,4 @@
-﻿module Domain.Types.Extra.WalletTransaction
+module Domain.Types.Extra.WalletTransaction
   ( mapWalletStatus,
   )
 where

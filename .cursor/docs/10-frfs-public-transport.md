@@ -1,4 +1,4 @@
-﻿# FRFS — Public Transport (Metro / Bus)
+# FRFS — Public Transport (Metro / Bus)
 
 ## Overview
 

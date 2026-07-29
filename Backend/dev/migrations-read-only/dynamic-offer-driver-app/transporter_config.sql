@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_driver_offer_bpp.transporter_config ();
+CREATE TABLE atlas_driver_offer_bpp.transporter_config ();
 
 ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN aadhaar_image_resize_config json ;
 ALTER TABLE atlas_driver_offer_bpp.transporter_config ADD COLUMN aadhaar_verification_required boolean NOT NULL default false;

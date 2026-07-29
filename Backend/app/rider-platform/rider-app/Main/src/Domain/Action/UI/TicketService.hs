@@ -1,4 +1,4 @@
-﻿module Domain.Action.UI.TicketService where
+module Domain.Action.UI.TicketService where
 
 import qualified API.Types.Dashboard.AppManagement.Tickets
 import qualified API.Types.Dashboard.AppManagement.Tickets as Tickets

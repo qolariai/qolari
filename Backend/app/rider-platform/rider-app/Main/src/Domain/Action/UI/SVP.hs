@@ -1,4 +1,4 @@
-﻿module Domain.Action.UI.SVP
+module Domain.Action.UI.SVP
   ( getSvpQr,
     getSvpPublicKey,
     postSvpGate,

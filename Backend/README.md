@@ -1,4 +1,4 @@
-﻿# Public Transport System Backend
+# Public Transport System Backend
 
 ## Documentation
 

@@ -1,4 +1,4 @@
-﻿# System Patterns & Architecture
+# System Patterns & Architecture
 
 ## Overall Architecture
 

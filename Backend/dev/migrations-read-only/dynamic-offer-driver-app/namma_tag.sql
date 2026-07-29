@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_driver_offer_bpp.QOLARI_TAG ();
+CREATE TABLE atlas_driver_offer_bpp.QOLARI_TAG ();
 
 ALTER TABLE atlas_driver_offer_bpp.QOLARI_TAG ADD COLUMN category text NOT NULL;
 ALTER TABLE atlas_driver_offer_bpp.QOLARI_TAG ADD COLUMN description text ;

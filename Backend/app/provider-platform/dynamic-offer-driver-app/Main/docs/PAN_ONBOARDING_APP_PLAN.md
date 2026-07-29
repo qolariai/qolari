@@ -1,4 +1,4 @@
-﻿# PAN Onboarding (App and Dashboard) – Full Plan
+# PAN Onboarding (App and Dashboard) – Full Plan
 
 This document is the **complete** plan for PAN onboarding: **App** (HyperVerge) and **Dashboard** (Idfy `pan_aadhaar_link`), plus shared storage and tests. The main [ONBOARDING_DOCUMENTS_AI_PLAN.md](./ONBOARDING_DOCUMENTS_AI_PLAN.md) points here for all PAN onboarding details.
 

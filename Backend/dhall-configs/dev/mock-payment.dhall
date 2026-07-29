@@ -1,4 +1,4 @@
-﻿-- Mock Payment Server Configuration
+-- Mock Payment Server Configuration
 let common = ./common.dhall
 
 in  { port = Natural/toInteger (env:SERVICE_PORT ? 8091)

@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "00-FixtureStripeRide",
     "description": "The FIXTURE: builds the one real Stripe card ride that 01-07 attach to (driver onboarding + Stripe Connect + rider card + search/accept/start/end + ride invoices + COMPLETED). Ends with fail-fast fixture GUARDS so a broken fixture dies here, not downstream: payment_order.id is a real GUID != rideId; BPP ride commission > 0 (else Case-2/agg asserts are vacuous); the RIDE_FARE component cap > 0. No refund actions.",

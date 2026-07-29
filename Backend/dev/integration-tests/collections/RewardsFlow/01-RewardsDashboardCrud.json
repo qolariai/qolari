@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Rewards Dashboard CRUD",
     "description": "BAP rider-dashboard Rewards APIs: campaign lifecycle (create → cohort → pool upload → activate → read → edit → pause → end).\n\nEnvironments: Local_NY_Bangalore (qolari), Local_BT_Delhi (BHARAT_TAXI).\n\nPrerequisites: see RewardsFlow/Rules.md. ./run-tests.sh rewards auto-seeds rewards-dashboard-setup.sql + rider-dashboard.sql.",

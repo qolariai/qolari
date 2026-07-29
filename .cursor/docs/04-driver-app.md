@@ -1,4 +1,4 @@
-﻿# Driver App (BPP) Deep Dive
+# Driver App (BPP) Deep Dive
 
 **Package**: `dynamic-offer-driver-app` | **Port**: 8016 | **Path**: `app/provider-platform/dynamic-offer-driver-app/`
 **Schema**: `atlas_driver_offer_bpp`

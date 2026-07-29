@@ -1,4 +1,4 @@
-﻿module Lib.Yudhishthira.Event where
+module Lib.Yudhishthira.Event where
 
 import qualified Data.Aeson as A
 import Data.Scientific

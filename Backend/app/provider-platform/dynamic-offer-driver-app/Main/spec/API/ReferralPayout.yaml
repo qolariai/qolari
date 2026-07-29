@@ -1,4 +1,4 @@
-﻿imports:
+imports:
   MerchantOperatingCity: Domain.Types.MerchantOperatingCity
   Merchant: Domain.Types.Merchant
   Person: Domain.Types.Person

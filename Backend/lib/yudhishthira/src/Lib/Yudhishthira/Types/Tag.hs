@@ -1,4 +1,4 @@
-﻿module Lib.Yudhishthira.Types.Tag where
+module Lib.Yudhishthira.Types.Tag where
 
 import Kernel.Prelude
 import Kernel.Types.Common

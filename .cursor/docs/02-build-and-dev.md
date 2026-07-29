@@ -1,4 +1,4 @@
-﻿# Build & Development
+# Build & Development
 
 ## Environment Setup (One-Time)
 

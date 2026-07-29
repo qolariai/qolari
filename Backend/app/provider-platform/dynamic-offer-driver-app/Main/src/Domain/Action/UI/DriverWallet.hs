@@ -1,4 +1,4 @@
-﻿{-# OPTIONS_GHC -Wno-orphans #-}
+{-# OPTIONS_GHC -Wno-orphans #-}
 
 {-
  Copyright 2026, Qolari Technologies

@@ -1,4 +1,4 @@
-﻿module Domain.Types.Extra.MerchantServiceConfig where
+module Domain.Types.Extra.MerchantServiceConfig where
 
 import qualified Data.List as List
 import Domain.Types.Common (UsageSafety (..))

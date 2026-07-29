@@ -1,4 +1,4 @@
-﻿# Project Brief: Qolari
+# Project Brief: Qolari
 
 ## 1. Project Overview
 Qolari is an open and driver-centric mobility platform. It aims to empower service providers (like auto drivers) with a high-tech, cost-effective app and open data platform. The main goals are to ensure fair earnings for drivers (zero commission), foster transparency and collaboration through open platforms/code/networks, achieve population scale growth with utility-like pricing, support multimodal transport, and promote shared mobility.

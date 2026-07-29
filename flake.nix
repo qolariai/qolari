@@ -1,4 +1,4 @@
-﻿{
+{
   nixConfig = {
     max-call-depth = "1000000";
   };

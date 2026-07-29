@@ -1,4 +1,4 @@
-﻿# yaml-language-server: $schema=./_schema.json
+# yaml-language-server: $schema=./_schema.json
 name: ny-rn-provider
 title: NY Driver App (Android)
 icon: assets/icons/mobile.svg

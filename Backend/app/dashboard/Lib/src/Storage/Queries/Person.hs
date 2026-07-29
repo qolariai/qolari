@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE AllowAmbiguousTypes #-}
+{-# LANGUAGE AllowAmbiguousTypes #-}
 {-# LANGUAGE TypeApplications #-}
 {-
  Copyright 2026, Qolari Technologies

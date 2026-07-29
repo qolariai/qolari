@@ -1,4 +1,4 @@
-﻿# IssueFlow
+# IssueFlow
 
 Integration test for the rider-app (BAP) and dynamic-offer-driver-app (BPP)
 Issue / IssueCategory APIs introduced under the shared

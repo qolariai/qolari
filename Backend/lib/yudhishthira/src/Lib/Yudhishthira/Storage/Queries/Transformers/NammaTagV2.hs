@@ -1,4 +1,4 @@
-﻿{-# OPTIONS_GHC -Wno-orphans #-}
+{-# OPTIONS_GHC -Wno-orphans #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module Lib.Yudhishthira.Storage.Queries.Transformers.QolariTagV2 where

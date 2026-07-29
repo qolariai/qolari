@@ -1,4 +1,4 @@
-﻿imports:
+imports:
   UTCTime: Kernel.Prelude
   HighPrecMoney: Kernel.Types.Common
   Currency: Kernel.Types.Common

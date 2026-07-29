@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # Standalone port of the `cabal-build` process body
 # (Backend/nix/services/Qolari.nix cabal-build) for use by
 # `, run-cabal-build-devbox`. The ONLY functional change vs. the process-compose

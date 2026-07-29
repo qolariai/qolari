@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # check_migrations.sh — validate dev/migrations + dev/migrations-read-only
 # without booting the full stack. Boots a standalone Postgres-with-postgis
 # against the existing dev data dir, recreates atlas_dev, runs all seeds in

@@ -1,4 +1,4 @@
-﻿# Testing Framework
+# Testing Framework
 
 Complete architecture of the Qolari local testing infrastructure: config sync, integration tests, mock servers, and test tools.
 

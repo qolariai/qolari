@@ -1,4 +1,4 @@
-﻿imports:
+imports:
   Text: Data.Text
   Maybe: Data.Maybe
   Station: Domain.Types.Station

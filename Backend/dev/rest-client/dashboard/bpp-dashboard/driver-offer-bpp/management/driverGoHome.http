@@ -1,4 +1,4 @@
-﻿# access tokens with different roles
+# access tokens with different roles
 @customer = {{bpp-dashboard/token/qolari_PARTNER/customer}}
 @driver = {{bpp-dashboard/token/qolari_PARTNER/driver}}
 @Qolari_ops = {{bpp-dashboard/token/qolari_PARTNER/Qolari_ops}}

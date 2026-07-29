@@ -1,4 +1,4 @@
-﻿module SharedLogic.Allocator.Jobs.Mandate.Notification (sendPDNNotificationToDriver) where
+module SharedLogic.Allocator.Jobs.Mandate.Notification (sendPDNNotificationToDriver) where
 
 import Control.Monad.Extra (mapMaybeM)
 import qualified Data.Map as M

@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "OTP Negative Flows",
     "description": "Negative flow tests for OTP auth via SMS.\n\nTests: wrong OTP, wrong OTP format, already verified token, resend limit exceeded, invalid phone number.\n\nSkipped (impractical locally): OTP expiry (3 min wait), rate limit (driver=20/sec, rider=8000/sec).\n\nAuto-detects rider (port 8013, /v2/auth) vs driver (port 8016, /ui/auth) from baseUrl_internal.\nRequires: useFakeSms = Some 7891 (default local dev).\n\nResend OTP tests (steps 06-10) require real SMS provider credentials and are SKIPPED by default.\nSet enable_real_sms_tests=true in your environment file to run them.",

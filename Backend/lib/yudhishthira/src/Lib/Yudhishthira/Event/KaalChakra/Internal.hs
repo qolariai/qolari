@@ -1,4 +1,4 @@
-﻿module Lib.Yudhishthira.Event.KaalChakra.Internal
+module Lib.Yudhishthira.Event.KaalChakra.Internal
   ( Handle (..),
     kaalChakraEvent,
     clearEventData,

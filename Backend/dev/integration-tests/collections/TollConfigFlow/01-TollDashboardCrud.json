@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Toll Dashboard CRUD",
     "description": "Provider dashboard toll APIs: GeoJSON LineString + Polygon gates (upsert only). Legacy LineSegment create is rejected; legacy rows may still exist in DB.\n\nEnvironments: Local_NY_Bangalore (qolari_PARTNER), Local_BT_Delhi (BHARAT_TAXI_PARTNER). Gate coords come from env (toll_* vars).\n\nPrerequisites: see TollConfigFlow/Rules.md. ./run-tests.sh toll-config auto-seeds access_matrix + provider-dashboard.sql.\n",

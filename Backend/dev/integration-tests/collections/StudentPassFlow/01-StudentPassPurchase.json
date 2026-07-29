@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Student Pass Purchase Flow",
     "description": "Tests PR #13586 (Student Pass). Flow: register PassOrganization (dashboard) \u2192 student submits PassDetails with CSV-derived routeDetails \u2192 admin verifies CLG_VERIFIED then MTC_VERIFIED \u2192 student lists Available Passes (verificationStatus=MTC_VERIFIED enables tier pricing) \u2192 student purchases the StudentPass via /multimodal/pass/v2/{passId}/select \u2192 mock Qolari CHARGED \u2192 verify in /multimodal/pass/list.",

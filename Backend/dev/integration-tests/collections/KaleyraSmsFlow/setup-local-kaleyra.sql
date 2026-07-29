@@ -1,4 +1,4 @@
-﻿-- Local Kaleyra SMS setup for testing with QOLARI merchant
+-- Local Kaleyra SMS setup for testing with QOLARI merchant
 -- Replace only <YOUR_API_KEY> and <YOUR_SID> with real Kaleyra credentials
 --
 -- Usage:

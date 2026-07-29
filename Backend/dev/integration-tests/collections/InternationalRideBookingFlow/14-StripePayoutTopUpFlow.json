@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Stripe Payout Flow (Fleet VA Top-Up)",
     "description": "Payout where Fleet VA (connected account) has insufficient EUR balance to cover the payout amount. The platform tops up the transfer to cover the shortfall. Asserts payout_order created with non-FAILED status and merchant_top_up_amount IS NOT NULL (top-up was recorded).\n\nMock setup: Fleet VA balance = 50 cents EUR (far below any ride fare). Platform balance = 100,000 cents EUR (sufficient for adjusted transfer). Requires mock server to support `header.Stripe-Account` extraction to route fleet-VA and platform balance calls to different responses.",

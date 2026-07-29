@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Airport Taxi App Flow (Special Zone)",
     "description": "Real app-level airport taxi flow: fresh driver + rider onboard through the actual apps (not the dashboard booth proxy), search from an airport special zone, get a queue-based quote+OTP (no upfront driver assignment), and whichever driver enters the rider's OTP claims the ride -> starts -> ends.\n\nThis mirrors how a real airport taxi rank queue works: the rider books and receives an OTP; the driver at the front of the physical queue enters that OTP to claim the ride at ride-start time.\n\nPrerequisites:\n- Special zone geometry must be seeded for the pickup point (see AirportTaxiFlow collection notes for common geometry issues)\n- A fare_product with trip_category='OneWay_OneWayRideOtp' must exist for the special zone's pickup area\n- Environment must have sz_origin_lat/sz_origin_lon within an enabled airport special zone\n- If no special zone is configured / geom_geo_json is stale, this will fail at the 'Has quotes for special zone' assertion with empty quotes",

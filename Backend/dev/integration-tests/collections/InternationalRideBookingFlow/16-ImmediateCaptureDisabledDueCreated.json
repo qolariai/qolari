@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Immediate Capture Disabled - Manual Due Created",
     "description": "End-to-end rider 3-min cancellation: search \u2192 assign \u2192 wait 3+ min \u2192 rider cancels \u2192 verify cancellation fee charged via Stripe, finance ledger settled",

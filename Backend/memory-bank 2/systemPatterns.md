@@ -1,4 +1,4 @@
-﻿# System Patterns: Qolari
+# System Patterns: Qolari
 
 ## 1. System Architecture Overview
 The Qolari backend is structured as a collection of microservices/packages, primarily written in Haskell. It appears to be event-driven, utilizing Kafka for message consumption. The architecture separates concerns into rider platform, provider platform, dashboards, Kafka consumers, mocks, and utility services.

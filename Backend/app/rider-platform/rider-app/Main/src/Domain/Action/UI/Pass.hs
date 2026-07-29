@@ -1,4 +1,4 @@
-﻿module Domain.Action.UI.Pass
+module Domain.Action.UI.Pass
   ( getMultimodalPassAvailablePasses,
     postMultimodalPassSelect,
     postMultimodalPassV2Select,

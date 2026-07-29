@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Terminal } from './Terminal';
 import { LOCAL_API_BASE } from '../config';
 import {

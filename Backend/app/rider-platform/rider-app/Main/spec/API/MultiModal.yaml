@@ -1,4 +1,4 @@
-﻿imports:
+imports:
   Int64: Data.Int
   Journey: Domain.Types.Journey
   SearchRequest: Domain.Types.SearchRequest

@@ -1,4 +1,4 @@
-﻿module Domain.Action.UI.ReferralPayout where
+module Domain.Action.UI.ReferralPayout where
 
 import qualified API.Types.UI.ReferralPayout
 import Data.Text hiding (elem, filter, map)

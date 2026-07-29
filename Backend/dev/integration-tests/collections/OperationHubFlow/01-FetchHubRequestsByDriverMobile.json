@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Fetch Hub Requests by Driver Mobile Number",
     "description": "End-to-end test: registers a fleet owner (creator) and a driver, creates an inspection request linking the driver, then verifies the new mbDriverMobileNumber query param correctly filters requests by the driver's mobile number \u2014 and that the existing mbMobileNumber (creator search) still works.\n\nPrerequisite: run setup-local-operation-hub.sql to seed the operation hub:\n  psql -h localhost -p 5434 -U atlas_driver_offer_bpp_user -d atlas_dev -f setup-local-operation-hub.sql",

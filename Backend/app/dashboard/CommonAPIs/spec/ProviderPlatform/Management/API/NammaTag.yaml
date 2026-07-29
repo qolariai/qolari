@@ -1,4 +1,4 @@
-﻿imports:
+imports:
   CreateQolariTagRequest: Lib.Yudhishthira.Types
   UpdateQolariTagRequest: Lib.Yudhishthira.Types
   APISuccess: Kernel.Types.APISuccess

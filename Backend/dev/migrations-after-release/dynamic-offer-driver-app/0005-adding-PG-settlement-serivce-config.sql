@@ -1,4 +1,4 @@
-﻿INSERT INTO atlas_driver_offer_bpp.merchant_service_config (
+INSERT INTO atlas_driver_offer_bpp.merchant_service_config (
     merchant_id,
     merchant_operating_city_id,
     service_name,

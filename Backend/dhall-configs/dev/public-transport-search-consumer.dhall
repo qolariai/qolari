@@ -1,4 +1,4 @@
-﻿let common = ./common.dhall
+let common = ./common.dhall
 
 let main = ./public-transport-rider-platform.dhall
 

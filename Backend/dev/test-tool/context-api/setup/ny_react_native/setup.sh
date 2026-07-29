@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # Thin shim — defers to the Python orchestrator under
 #   Backend/dev/test-tool/context-api/setup/ny_react_native/__main__.py
 # which in turn execs the inner build runner inside a nix shell with the

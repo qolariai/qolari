@@ -1,4 +1,4 @@
-﻿# Test Stack
+# Test Stack
 
 This directory is the entire integration-test surface for Qolari: the React
 dashboard you point a browser at, the Python HTTP servers that back it, and the

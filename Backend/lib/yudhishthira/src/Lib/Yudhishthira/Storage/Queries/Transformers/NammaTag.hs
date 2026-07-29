@@ -1,4 +1,4 @@
-﻿module Lib.Yudhishthira.Storage.Queries.Transformers.QolariTag where
+module Lib.Yudhishthira.Storage.Queries.Transformers.QolariTag where
 
 import qualified Data.Aeson
 import Kernel.Prelude

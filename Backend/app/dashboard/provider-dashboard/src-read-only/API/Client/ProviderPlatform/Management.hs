@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE AllowAmbiguousTypes #-}
+{-# LANGUAGE AllowAmbiguousTypes #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 
 module API.Client.ProviderPlatform.Management where

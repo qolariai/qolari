@@ -1,4 +1,4 @@
-﻿# access tokens with different roles
+# access tokens with different roles
 @customer = {{bap-dashboard/token/YATRI/customer}}
 @driver = {{bap-dashboard/token/YATRI/driver}}
 @Qolari_ops = {{bap-dashboard/token/YATRI/Qolari_ops}}

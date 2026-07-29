@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # Clone-or-pull the control-center frontend and run `npm run dev` against
 # the local Qolari stack. Invoked by test-context-api when the user
 # clicks "Launch Control Center" in the test-dashboard.

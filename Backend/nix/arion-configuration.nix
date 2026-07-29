@@ -1,4 +1,4 @@
-﻿_:
+_:
 
 let
   arionProjectConfiguration = { pkgs, ... }: {

@@ -1,4 +1,4 @@
-﻿# Multi-Cloud Architecture
+# Multi-Cloud Architecture
 
 ## Overview
 

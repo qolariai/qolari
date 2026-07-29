@@ -1,4 +1,4 @@
-﻿# Invoice Generation Feature - Implementation Summary
+# Invoice Generation Feature - Implementation Summary
 
 ## ✅ What Has Been Implemented
 

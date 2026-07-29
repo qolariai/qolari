@@ -1,4 +1,4 @@
-﻿# Qolari Backend - Key Modules and Functionality
+# Qolari Backend - Key Modules and Functionality
 
 This document outlines the key Haskell modules and their primary functionalities within the Qolari backend, based on the analysis of the codebase.
 

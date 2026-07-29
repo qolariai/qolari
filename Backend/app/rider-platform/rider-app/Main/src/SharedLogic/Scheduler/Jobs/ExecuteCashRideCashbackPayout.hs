@@ -1,4 +1,4 @@
-﻿module SharedLogic.Scheduler.Jobs.ExecuteCashRideCashbackPayout where
+module SharedLogic.Scheduler.Jobs.ExecuteCashRideCashbackPayout where
 
 import Domain.Types.PayoutConfig (PayoutConfig)
 import Domain.Types.Person (Person)

@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Online Ride Booking (Stripe Payment)",
     "description": "End-to-end ride with Stripe online payment: search \u2192 payment setup \u2192 assign \u2192 start \u2192 end \u2192 payment capture",

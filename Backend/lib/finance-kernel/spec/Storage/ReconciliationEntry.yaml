@@ -1,4 +1,4 @@
-﻿# Finance Kernel - Reconciliation Entry Table
+# Finance Kernel - Reconciliation Entry Table
 # One row per (source record, chunk) — domain-neutral schema. The recipe
 # framework in Lib.Finance.Reconciliation writes into this shape.
 # Regenerate Beam + read-only queries after editing.

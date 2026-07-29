@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # Inner build runner — exec'd inside the nix shell from
 # ny-react-native-setup.sh. Reads everything from env vars (no positional args).
 set -euo pipefail

@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "07-RideNearby",
     "description": "Integration test for GET /{driverId}/nearby.\nSetup: registers 5 drivers at origin_lat/lon + 5 riders who each do a search from the same origin.\nAsserts: nearbyDriverCount >= 4 (other 4 drivers visible to driver1), nearbyCustomerCount >= 5.",

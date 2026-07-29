@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "PAN Hard Check Flow",
     "description": "Verifies the merchant-level individual-PAN check (transporter_config.individual_pan_check). On PAN uploads (app + dashboard), a business PAN (4th char != 'P') must be rejected for individual drivers (role=DRIVER) and individual fleet owners (role=FLEET_OWNER) with 'Business PAN card not be accepted please upload individual PAN'; an individual PAN (4th char == 'P') must pass the gate. FLEET_BUSINESS and other roles are exempt. Self-contained: resolves ids + sets the flag + seeds the fleet-owner FOI row via the mock-server SQL endpoints (works in both the 7070 UI and newman CLI). The check fires before the image is read, so the verify steps use a dummy imageId — no upload needed.",

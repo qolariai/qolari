@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """Point the provider Android app's gRPC client at the local
 notification-service (process-compose entry `notification-service`,
 gRPC on :50051) instead of the upstream prod default

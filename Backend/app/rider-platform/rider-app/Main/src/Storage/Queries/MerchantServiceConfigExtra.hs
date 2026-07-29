@@ -1,4 +1,4 @@
-﻿module Storage.Queries.MerchantServiceConfigExtra where
+module Storage.Queries.MerchantServiceConfigExtra where
 
 import qualified Data.Aeson as A
 import Domain.Types.Merchant

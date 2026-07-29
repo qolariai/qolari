@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Postman Collection Parser
  *
  * Converts Postman v2.1.0 collection JSON into dashboard Step[]/TreeNode[]

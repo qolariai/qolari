@@ -1,4 +1,4 @@
-﻿module Lib.JourneyModule.Types where
+module Lib.JourneyModule.Types where
 
 import API.Types.RiderPlatform.Management.FRFSTicket
 import qualified API.Types.UI.FRFSTicketService as FRFSTicketServiceAPI

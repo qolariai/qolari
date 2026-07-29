@@ -1,4 +1,4 @@
-﻿"""ny-react-native launcher orchestrator.
+"""ny-react-native launcher orchestrator.
 
 Driven by env vars (set by test-context-api before Popen):
     NY_RN_APP       customer | driver | both

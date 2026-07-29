@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE ScopedTypeVariables #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module IssueManagement.Domain.Action.Dashboard.Issue where
 

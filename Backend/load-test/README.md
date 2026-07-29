@@ -1,4 +1,4 @@
-﻿# Qolari Load Testing
+# Qolari Load Testing
 
 Load testing is automatted via Nix.
 

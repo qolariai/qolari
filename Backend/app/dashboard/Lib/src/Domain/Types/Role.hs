@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE StandaloneKindSignatures #-}
+{-# LANGUAGE StandaloneKindSignatures #-}
 
 {-
  Copyright 2026, Qolari Technologies

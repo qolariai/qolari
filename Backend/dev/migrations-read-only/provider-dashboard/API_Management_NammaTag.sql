@@ -1,4 +1,4 @@
-﻿-- {"api":"PostQolariTagTagCreate","migration":"endpointV2","param":null,"schema":"atlas_bpp_dashboard"}
+-- {"api":"PostQolariTagTagCreate","migration":"endpointV2","param":null,"schema":"atlas_bpp_dashboard"}
 UPDATE atlas_bpp_dashboard.transaction
   SET endpoint = 'PROVIDER_MANAGEMENT/QOLARI_TAG/POST_QOLARI_TAG_TAG_CREATE'
   WHERE endpoint = 'QolariTagAPI PostQolariTagTagCreateEndpoint';

@@ -1,4 +1,4 @@
-﻿# Active Context: Qolari Memory Bank Population
+# Active Context: Qolari Memory Bank Population
 
 ## Current Work Focus
 The primary focus has been on understanding the Qolari project structure, key entities, and technical architecture by analyzing various source code files (`.yaml` specifications, Haskell domain types, shared logic, and query modules). This understanding is being used to populate the core Memory Bank documents (`projectbrief.md`, `productContext.md`, `systemPatterns.md`, `techContext.md`).

@@ -1,4 +1,4 @@
-﻿-- Seed invoice_template rows for Lynx (Helsinki) on both BAP + BPP schemas.
+-- Seed invoice_template rows for Lynx (Helsinki) on both BAP + BPP schemas.
 -- These are the HTML bodies for the config-driven invoice PDF pipeline; the
 -- companion JL rules (which produce the variable bindings consumed here) are
 -- seeded separately via control-center's DynamicLogicPage post-deploy, not SQL.

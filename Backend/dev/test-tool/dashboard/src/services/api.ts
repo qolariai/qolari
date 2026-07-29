@@ -1,4 +1,4 @@
-﻿import axios, { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { Config, Step } from '../types';
 import { ApiDef } from '../api-catalog/types';
 import { ParsedStep } from './postman-parser';

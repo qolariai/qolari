@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "NY Change Service Tier Flow (RideOTP)",
     "description": "RideOTP flow + change service tier before ride starts: search in special zone -> confirm quote -> get higher-tier quotes -> confirm tier change -> driver starts with OTP -> end.\n\nPrerequisites: same as 08-RideOtpFlow.json + change service tier APIs must be wired.",

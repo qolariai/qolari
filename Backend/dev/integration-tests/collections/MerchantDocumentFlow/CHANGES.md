@@ -1,4 +1,4 @@
-﻿# MerchantDocumentFlow — Fix Summary
+# MerchantDocumentFlow — Fix Summary
 
 ## What this flow tests
 

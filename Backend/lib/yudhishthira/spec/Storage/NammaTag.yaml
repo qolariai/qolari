@@ -1,4 +1,4 @@
-﻿imports:
+imports:
   TagRule: Lib.Yudhishthira.Types
   Chakra: Lib.Yudhishthira.Types
   ApplicationEvent: Lib.Yudhishthira.Types

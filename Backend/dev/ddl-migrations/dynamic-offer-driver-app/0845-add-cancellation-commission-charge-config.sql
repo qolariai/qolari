@@ -1,4 +1,4 @@
-﻿-- Commission-on-cancellation rate for dues folded into the next ride's fare.
+-- Commission-on-cancellation rate for dues folded into the next ride's fare.
 -- Same FareChargeConfig JSON shape as its 0379 siblings, e.g.
 -- {"value":"15%","appliesOn":["CustomerCancellationChargeComponent"]}.
 -- NULL => computeConfiguredCharge returns 0 => no cancellation commission.

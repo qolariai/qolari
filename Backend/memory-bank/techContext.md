@@ -1,4 +1,4 @@
-﻿# Technical Context
+# Technical Context
 
 ## Core Technologies
 

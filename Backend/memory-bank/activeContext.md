@@ -1,4 +1,4 @@
-﻿# Active Context
+# Active Context
 
 ## Current Work Focus
 

@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_driver_offer_bpp.QOLARI_TAG_v2 ();
+CREATE TABLE atlas_driver_offer_bpp.QOLARI_TAG_v2 ();
 
 ALTER TABLE atlas_driver_offer_bpp.QOLARI_TAG_v2 ADD COLUMN action_engine json ;
 ALTER TABLE atlas_driver_offer_bpp.QOLARI_TAG_v2 ADD COLUMN category text NOT NULL;

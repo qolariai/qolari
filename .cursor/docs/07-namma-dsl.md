@@ -1,4 +1,4 @@
-﻿# QolariDSL Code Generation
+# QolariDSL Code Generation
 
 ## Overview
 

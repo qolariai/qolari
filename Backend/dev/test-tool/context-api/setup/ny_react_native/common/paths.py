@@ -1,4 +1,4 @@
-﻿"""Project / repo path resolution. Reads env vars set by the bash shim
+"""Project / repo path resolution. Reads env vars set by the bash shim
 (or by server.py). Centralised so every other module asks here instead
 of redo'ing path math."""
 from __future__ import annotations

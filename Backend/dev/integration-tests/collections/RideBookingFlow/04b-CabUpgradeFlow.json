@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "NY Taxi Upgrade Flow",
     "description": "End-to-end taxi/sedan ride that exercises the within-family tier upgrade signal at ride_assigned: rider books the LOWEST-priority tier available, a higher-tier driver (Sedan per the env) accepts via downgrade-to-serve, and the rider-side Ride entity must carry isTierUpgrade=true + assignedServiceTierName from the BPP.",

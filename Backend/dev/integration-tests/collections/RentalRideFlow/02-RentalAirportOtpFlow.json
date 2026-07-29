@@ -1,4 +1,4 @@
-﻿{
+{
 	"info": {
 		"name": "NY Rental Airport OTP Flow (BLR Airport pickup, 4hr/40km package)",
 		"description": "Airport special-zone rental OTP flow: rider books a rental package starting from the Bangalore Airport special zone. Booking returns an OTP, driver starts via otpRide/start.\n\nPrerequisites:\n- BLR Airport special_location seeded (sz_origin_lat/lon inside the polygon).\n- fare_product entries for Rental_RideOtp + chosen vehicle variant at the airport special zone.\n- Bangalore rental policies are seeded (auto-synced from prod). If the airport zone has no Rental_RideOtp fare_product, this test will fail at the 'Has rental SZ quotes' assertion.\n",

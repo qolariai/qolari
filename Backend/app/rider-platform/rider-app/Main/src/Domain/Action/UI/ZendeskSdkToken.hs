@@ -1,4 +1,4 @@
-﻿module Domain.Action.UI.ZendeskSdkToken (postProfileZendeskSdkToken) where
+module Domain.Action.UI.ZendeskSdkToken (postProfileZendeskSdkToken) where
 
 import qualified API.Types.UI.ZendeskSdkToken as Types
 import qualified Data.Map.Strict as M

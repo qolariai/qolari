@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_app.merchant_service_usage_config ();
+CREATE TABLE atlas_app.merchant_service_usage_config ();
 
 ALTER TABLE atlas_app.merchant_service_usage_config ADD COLUMN aadhaar_verification_service character varying(30) NOT NULL;
 ALTER TABLE atlas_app.merchant_service_usage_config ADD COLUMN auto_complete character varying(30) NOT NULL;

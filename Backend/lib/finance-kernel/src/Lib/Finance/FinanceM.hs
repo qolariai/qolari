@@ -1,4 +1,4 @@
-﻿{-
+{-
   Finance.FinanceM
 
   A monad transformer that encapsulates the financial context

@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE ApplicativeDo #-}
+{-# LANGUAGE ApplicativeDo #-}
 {-# OPTIONS_GHC -Wno-dodgy-exports #-}
 {-# OPTIONS_GHC -Wno-unused-imports #-}
 

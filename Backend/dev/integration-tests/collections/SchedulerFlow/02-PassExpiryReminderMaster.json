@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Pass Expiry Reminder Master",
     "description": "Tests PassExpiryReminderMaster scheduler job: seed an Active pass with endDate=today+N, trigger the master job, verify the rider received a PASS_EXPIRY_REMINDER push via mock-fcm. Negative case verifies riders with a PreBooked pass are excluded.",

@@ -1,4 +1,4 @@
-﻿from locust import HttpUser, task
+from locust import HttpUser, task
 import time
 import requests
 import json

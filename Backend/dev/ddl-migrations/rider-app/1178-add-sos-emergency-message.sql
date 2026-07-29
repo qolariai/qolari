@@ -1,4 +1,4 @@
-﻿
+
 
 ALTER TABLE atlas_app.person
   ADD COLUMN trigger_support boolean NOT NULL default true;

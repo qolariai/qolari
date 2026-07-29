@@ -1,4 +1,4 @@
-﻿# process-compose module for running the Qolari stack
+# process-compose module for running the Qolari stack
 ny:
 { config, pkgs, lib, ... }:
 let

@@ -1,4 +1,4 @@
-﻿-- Bootstrap roles for atlas_bpp_dashboard.
+-- Bootstrap roles for atlas_bpp_dashboard.
 -- Required by QolariDSL-generated dev/migrations-read-only/provider-dashboard/*.sql
 -- which INSERT access_matrix rows referencing these role IDs.
 INSERT INTO atlas_bpp_dashboard.role (id, name, dashboard_access_type, description, created_at, updated_at) VALUES

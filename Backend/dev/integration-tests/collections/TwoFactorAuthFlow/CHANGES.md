@@ -1,4 +1,4 @@
-﻿# TwoFactorAuthFlow — Fix Summary
+# TwoFactorAuthFlow — Fix Summary
 
 ## What this flow tests
 

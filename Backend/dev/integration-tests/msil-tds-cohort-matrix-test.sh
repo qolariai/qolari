@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env bash
+#!/usr/bin/env bash
 # MSIL TDS Cohort Matrix Test
 #
 # Exhaustively verifies the materialized TDS rate for every cohort in the new

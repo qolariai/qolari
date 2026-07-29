@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "Media File Upload Status Flow",
     "description": "Tests MediaFile upload status across dashboard, driver, and rider APIs: addLink (synchronous COMPLETED), uploadFile (fork+PENDING->COMPLETED), issue media upload (fork+PENDING->COMPLETED), merchant onboarding upload (fork+PENDING->COMPLETED with status guard on getFile), and getMediaMediaImage status guard.",

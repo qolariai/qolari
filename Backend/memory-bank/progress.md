@@ -1,4 +1,4 @@
-﻿# Progress Tracking
+# Progress Tracking
 
 ## What Works (Current State)
 

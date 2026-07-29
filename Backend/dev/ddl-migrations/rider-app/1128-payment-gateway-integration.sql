@@ -1,4 +1,4 @@
-﻿CREATE TABLE atlas_app.payment_order (
+CREATE TABLE atlas_app.payment_order (
     id character(36) PRIMARY KEY NOT NULL,
     short_id character varying (36) NOT NULL,
     customer_id character(36) NOT NULL REFERENCES atlas_app.person (id),

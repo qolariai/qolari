@@ -1,4 +1,4 @@
-﻿module Storage.Queries.PersonExtra where
+module Storage.Queries.PersonExtra where
 
 import Control.Applicative ((<|>))
 import qualified Data.Time as T

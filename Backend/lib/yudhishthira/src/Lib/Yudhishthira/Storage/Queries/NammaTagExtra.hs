@@ -1,4 +1,4 @@
-﻿module Lib.Yudhishthira.Storage.Queries.QolariTagExtra where
+module Lib.Yudhishthira.Storage.Queries.QolariTagExtra where
 
 import Kernel.Beam.Functions
 import Kernel.Prelude

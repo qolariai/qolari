@@ -1,4 +1,4 @@
-﻿module SharedLogic.RuleBasedTierUpgrade
+module SharedLogic.RuleBasedTierUpgrade
   ( computeEligibleUpgradeTiers,
   )
 where

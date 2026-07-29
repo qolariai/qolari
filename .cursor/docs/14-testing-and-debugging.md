@@ -1,4 +1,4 @@
-﻿# Debugging
+# Debugging
 
 ## Mock Services
 

@@ -1,4 +1,4 @@
-﻿{
+{
     "rest-client.environmentVariables": {
         "$shared": {
             "fmd/domain": "nic2004:60232"

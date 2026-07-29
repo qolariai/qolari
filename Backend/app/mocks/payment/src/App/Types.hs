@@ -1,4 +1,4 @@
-﻿module App.Types where
+module App.Types where
 
 import qualified Data.HashMap.Strict as HM
 import qualified Data.IORef

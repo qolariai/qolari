@@ -1,4 +1,4 @@
-﻿"""Qolari payment gateway mock — orders, offers, payouts, mandates.
+"""Qolari payment gateway mock — orders, offers, payouts, mandates.
 
 The `response` dict from POST /mock/override is deep-merged into responses.
 This lets test collections override any response field:

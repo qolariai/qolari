@@ -1,4 +1,4 @@
-﻿{-# LANGUAGE DeriveDataTypeable #-}
+{-# LANGUAGE DeriveDataTypeable #-}
 
 module BecknV2.OnDemand.TypesSpec (spec) where
 

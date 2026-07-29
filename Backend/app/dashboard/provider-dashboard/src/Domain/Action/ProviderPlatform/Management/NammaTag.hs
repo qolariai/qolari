@@ -1,4 +1,4 @@
-﻿{-# OPTIONS_GHC -Wno-orphans #-}
+{-# OPTIONS_GHC -Wno-orphans #-}
 
 module Domain.Action.ProviderPlatform.Management.QolariTag
   ( postQolariTagTagCreate,

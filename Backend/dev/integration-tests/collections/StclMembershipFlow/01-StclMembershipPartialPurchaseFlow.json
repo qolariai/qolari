@@ -1,4 +1,4 @@
-﻿{
+{
   "info": {
     "name": "STCL Membership - Partial Purchase + Top-Up (2 shares then +3)",
     "description": "Driver buys 2 shares via submitApplication, completes Qolari payment via mock CHARGED, verifies membership shows 2 shares in 1 allotment. Then edits KYC via updateApplication (asserted via GET /membership). Then tops up 3 more shares via buyAdditionalShares, completes its payment, verifies membership now reports 5 total shares across 2 allotments with the updated KYC. Exercises submitApplication, buyAdditionalShares, updateApplication, GET /membership, and the payment-status webhook path.",

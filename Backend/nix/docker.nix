@@ -1,4 +1,4 @@
-﻿{ self, ... }:
+{ self, ... }:
 
 let
   imageName = "ghcr.io/Qolari/Qolari";

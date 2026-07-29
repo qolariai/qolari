@@ -1,4 +1,4 @@
-﻿imports:
+imports:
   User: Dashboard.Common
   ConfigPilotGetConfigRequest: Lib.Yudhishthira.Types
   ConfigPilotCreateRowRequest: Lib.Yudhishthira.Types
