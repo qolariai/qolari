@@ -121,7 +121,7 @@ export default function QolariFoodPage() {
         {/* Demo + Downloads */}
         <section className="mb-16">
           <h2 className="text-2xl font-bold mb-8">{t("demoLive")}</h2>
-          <div className="grid gap-6 md:grid-cols-2">
+          <div className="grid gap-6 md:grid-cols-3">
             <Card>
               <CardHeader>
                 <CardTitle className="text-lg">{t("adminPanel")}</CardTitle>
@@ -139,14 +139,24 @@ export default function QolariFoodPage() {
                   <ExternalLink className="mr-2 h-4 w-4" />
                   food.qolari.com
                 </a>
+              </CardContent>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-lg">{t("clientWeb")}</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-3">
+                <p className="text-sm text-muted-foreground">
+                  {td("userApp")} — Web
+                </p>
                 <a
                   href="https://food-web.qolari.com"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={cn(buttonVariants({ variant: "outline" }), "w-full")}
+                  className={cn(buttonVariants(), "w-full")}
                 >
                   <ExternalLink className="mr-2 h-4 w-4" />
-                  {t("website")} (React)
+                  food-web.qolari.com
                 </a>
               </CardContent>
             </Card>
