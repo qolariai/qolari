@@ -25,6 +25,7 @@ Thumbs.db
 
 # Secrets — NUNCA commitar
 aceder.txt
+deploy/run-deploy.sh
 
 # IDE desktop (Electron) — repo separado
 ide/
