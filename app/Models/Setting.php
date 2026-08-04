@@ -56,9 +56,12 @@ class Setting extends Model
 
     public static function set(string $key, ?string $value, bool $isSecret = false): void
     {
-        static::updateOrCreate(
-            ['key' => $key],
-            ['value' => $value, 'is_secret' => $isSecret, 'updated_at' => now()]
-        );
+        // Ordem importa: is_secret tem de estar definido ANTES de value,
+        // senao o mutator setValueAttribute nao encripta (mas a leitura desencripta → null)
+        $setting = static::firstOrNew(['key' => $key]);
+        $setting->is_secret = $isSecret;
+        $setting->value = $value;
+        $setting->updated_at = now();
+        $setting->save();
     }
 }
