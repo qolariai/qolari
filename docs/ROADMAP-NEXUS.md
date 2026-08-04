@@ -15,6 +15,19 @@
 | **0.5** Estratégia de fork | ✅ FEITO | 3 commits no backend (`c5037a2`, `332b7ee`, `d7b4ed0`) + 3 no IDE (`0f17b69` rebrand/auth-gate, `1de9738` lockdown, `764052c` docs) sobre upstream `ceb4890`. Sync mensal com rebase documentado em `ide/AGENTS.md`. |
 | **0.6** Validação hands-on desktop | ⏸️ PENDENTE | Requer sessão interativa com o build. |
 
+### Fase 1 — Tiers Nexus (2026-08-04)
+
+| Item | Estado | Notas |
+|---|---|---|
+| **1.1** 4 tiers na BD | ✅ FEITO | Seeder idempotente: `nexus-high` (Kimi K2.7 Code), `nexus-medium` (DeepSeek V4 Pro), `nexus-low` (Qwen3 Coder), `nexus-vision` (Gemini 2.0 Flash) + aliases legacy. ⚠️ IDs dos motores a validar contra o catálogo OpenRouter quando houver API key (sem key em dev). |
+| **1.2** Tier→modelo editável no admin | ✅ FEITO | Filament AiModelForm: `provider_model_id`, `supports_vision`, `context_limit`, margem — troca de motor sem deploy. |
+| **1.3** Routing por tier | ✅ FEITO | `App\Domain\Routing\TierResolver` — `AiModel::active()->first()` eliminado do proxy. |
+| **1.4** Vision silencioso | ✅ FEITO | Pedido com imagem/ficheiro em tier sem visão → motor `nexus-vision`; **cobrança à margem do tier escolhido, custo real do Vision**; auditável via `usage_logs.engine_model_id`. Teste prova a jogada de margem ($0.30 cobrado vs $3.00 se fosse o Medium real). |
+| **1.5** Validação multimodal | ✅ FEITO | `content` string **ou** array de parts; campos agênticos (tools, tool_choice...) preservados no passthrough. |
+| **1.6** Picker de tiers no IDE | ✅ FEITO | `provider.ts`: 3 tiers Nexus visíveis (Vision invisível); todos aceitam anexos client-side para o routing silencioso ser transparente. |
+| **1.7** Modalidade dinâmica | ✅ FEITO | `SyncModelCosts` sincroniza `supports_vision` + `context_limit` do catálogo OpenRouter. |
+| ⚠️ Pendente | — | **Products** ainda referenciam o modelo legacy `qolari` — decidir estrutura de pacotes por tier (Fase 2 ou antes do lançamento). |
+
 ---
 
 ## 1. Contexto e decisões estratégicas tomadas
