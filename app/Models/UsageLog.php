@@ -10,7 +10,7 @@ class UsageLog extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id', 'ai_model_id', 'request_id', 'prompt_tokens',
+        'user_id', 'ai_model_id', 'request_id', 'generation_id', 'prompt_tokens',
         'completion_tokens', 'cost_usd', 'charged_usd', 'ledger_entry_id',
         'status', 'created_at',
     ];

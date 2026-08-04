@@ -2,18 +2,17 @@
 
 namespace App\Domain\Proxy;
 
-use App\Domain\Wallet\WalletService;
+use App\Jobs\ReconcileStreamUsage;
 use App\Models\AiModel;
-use App\Models\ModelCost;
 use App\Models\Setting;
-use App\Models\UsageLog;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class OpenRouterProxyService
 {
-    public function __construct(private WalletService $walletService)
+    public function __construct(private UsageMeter $meter)
     {
     }
 
@@ -42,28 +41,32 @@ class OpenRouterProxyService
         $data = $response->json();
 
         if ($response->failed()) {
-            UsageLog::create([
-                'user_id' => $userId,
-                'ai_model_id' => $model->id,
-                'request_id' => $requestId,
-                'prompt_tokens' => 0,
-                'completion_tokens' => 0,
-                'cost_usd' => 0,
-                'charged_usd' => 0,
-                'status' => 'error',
-                'created_at' => now(),
-            ]);
+            $this->meter->recordError($userId, $model->id, $requestId);
 
             return $data;
         }
 
-        $this->meterAndDebit($userId, $model, $requestId, $data);
+        $usage = $data['usage'] ?? [];
+
+        $this->meter->meter(
+            userId: $userId,
+            aiModelId: $model->id,
+            requestId: $requestId,
+            promptTokens: $usage['prompt_tokens'] ?? 0,
+            completionTokens: $usage['completion_tokens'] ?? 0,
+            generationId: $data['id'] ?? null,
+        );
 
         return $data;
     }
 
     /**
      * Proxy streaming SSE: encaminha com stream, mede no fim.
+     *
+     * Estrategia de metering (nunca debitar $0 silencioso):
+     *  1. stream_options.include_usage → OpenRouter envia usage no ultimo chunk SSE
+     *  2. Fallback: job ReconcileStreamUsage consulta /api/v1/generation
+     *  3. Ultimo recurso: estimativa de tokens (status 'estimated')
      */
     public function stream(int $userId, array $body): StreamedResponse
     {
@@ -75,11 +78,17 @@ class OpenRouterProxyService
         $requestId = Str::uuid()->toString();
         $body['model'] = $model->provider_model_id;
         $body['stream'] = true;
+        $body['stream_options'] = ['include_usage' => true];
+
+        // Estimativa de prompt (fallback de metering): ~4 chars por token
+        $estimatedPromptTokens = (int) ceil(mb_strlen(json_encode($body['messages'] ?? [])) / 4);
 
         $apiKey = $this->apiKey();
-        $walletService = $this->walletService;
+        $meter = $this->meter;
 
-        return new StreamedResponse(function () use ($userId, $model, $requestId, $body, $apiKey, $walletService) {
+        return new StreamedResponse(function () use ($userId, $model, $requestId, $body, $apiKey, $meter, $estimatedPromptTokens) {
+            $buffer = '';
+
             $ch = curl_init('https://openrouter.ai/api/v1/chat/completions');
             curl_setopt_array($ch, [
                 CURLOPT_POST => true,
@@ -91,8 +100,9 @@ class OpenRouterProxyService
                 ],
                 CURLOPT_POSTFIELDS => json_encode($body),
                 CURLOPT_TIMEOUT => 300,
-                CURLOPT_WRITEFUNCTION => function ($ch, $chunk) {
+                CURLOPT_WRITEFUNCTION => function ($ch, $chunk) use (&$buffer) {
                     echo $chunk;
+                    $buffer .= $chunk;
                     if (ob_get_level()) {
                         ob_flush();
                     }
@@ -102,12 +112,47 @@ class OpenRouterProxyService
             ]);
 
             curl_exec($ch);
+            $curlError = curl_errno($ch);
+            $httpCode = (int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
             curl_close($ch);
 
-            // Apos o stream, buscar usage via request_id na OpenRouter
-            // (a OpenRouter inclui usage no ultimo chunk SSE com stream_options)
-            // Fallback: estimar pelo generation endpoint
-            $this->meterPostStream($userId, $model, $requestId, $walletService);
+            if ($curlError !== 0 || $httpCode >= 400) {
+                Log::warning('OpenRouter stream falhou.', [
+                    'request_id' => $requestId,
+                    'curl_errno' => $curlError,
+                    'http_code' => $httpCode,
+                ]);
+                $meter->recordError($userId, $model->id, $requestId);
+                return;
+            }
+
+            // Extrai usage, generation id e texto do buffer SSE
+            $parsed = $this->parseSseBuffer($buffer);
+
+            if ($parsed['usage']) {
+                // Caminho feliz: usage veio no ultimo chunk SSE
+                $meter->meter(
+                    userId: $userId,
+                    aiModelId: $model->id,
+                    requestId: $requestId,
+                    promptTokens: $parsed['usage']['prompt_tokens'] ?? 0,
+                    completionTokens: $parsed['usage']['completion_tokens'] ?? 0,
+                    generationId: $parsed['generation_id'],
+                );
+                return;
+            }
+
+            // Fallback: regista pendente e reconcilia via /generation (queue)
+            $meter->recordPending($userId, $model->id, $requestId, $parsed['generation_id']);
+
+            $estimatedCompletionTokens = (int) ceil(mb_strlen($parsed['completion_text']) / 4);
+
+            ReconcileStreamUsage::dispatch(
+                requestId: $requestId,
+                generationId: $parsed['generation_id'],
+                estimatedPromptTokens: $estimatedPromptTokens,
+                estimatedCompletionTokens: $estimatedCompletionTokens,
+            )->delay(now()->addSeconds(10));
         }, 200, [
             'Content-Type' => 'text/event-stream',
             'Cache-Control' => 'no-cache',
@@ -118,81 +163,53 @@ class OpenRouterProxyService
     }
 
     /**
-     * Mede tokens e debita (resposta nao-streaming).
+     * Faz parse do buffer SSE acumulado: extrai o usage (ultimo evento que o
+     * contenha), o generation id (primeiro evento) e o texto gerado (deltas).
+     *
+     * @return array{usage: array|null, generation_id: string|null, completion_text: string}
      */
-    private function meterAndDebit(int $userId, AiModel $model, string $requestId, array $data): void
+    private function parseSseBuffer(string $buffer): array
     {
-        $usage = $data['usage'] ?? [];
-        $promptTokens = $usage['prompt_tokens'] ?? 0;
-        $completionTokens = $usage['completion_tokens'] ?? 0;
+        $usage = null;
+        $generationId = null;
+        $completionText = '';
 
-        $cost = $this->calculateCost($model, $promptTokens, $completionTokens);
-        $charged = round($cost * (float) $model->margin_multiplier, 8);
+        foreach (preg_split('/\r?\n\r?\n/', $buffer) as $event) {
+            foreach (preg_split('/\r?\n/', $event) as $line) {
+                if (!str_starts_with($line, 'data:')) {
+                    continue;
+                }
 
-        // Debita wallet (idempotente)
-        $ledgerEntry = null;
-        if ($charged > 0) {
-            try {
-                $ledgerEntry = $this->walletService->debit(
-                    userId: $userId,
-                    aiModelId: $model->id,
-                    amountUsd: $charged,
-                    idempotencyKey: $requestId,
-                    referenceType: 'usage_log',
-                    meta: ['request_id' => $requestId],
-                );
-            } catch (\Exception) {
-                // Saldo insuficiente apos o request — regista mas nao bloqueia
+                $json = trim(substr($line, 5));
+                if ($json === '' || $json === '[DONE]') {
+                    continue;
+                }
+
+                $decoded = json_decode($json, true);
+                if (!is_array($decoded)) {
+                    continue;
+                }
+
+                $generationId ??= $decoded['id'] ?? null;
+
+                if (!empty($decoded['usage']) && is_array($decoded['usage'])) {
+                    $usage = $decoded['usage'];
+                }
+
+                foreach ($decoded['choices'] ?? [] as $choice) {
+                    $delta = $choice['delta']['content'] ?? null;
+                    if (is_string($delta)) {
+                        $completionText .= $delta;
+                    }
+                }
             }
         }
 
-        UsageLog::create([
-            'user_id' => $userId,
-            'ai_model_id' => $model->id,
-            'request_id' => $requestId,
-            'prompt_tokens' => $promptTokens,
-            'completion_tokens' => $completionTokens,
-            'cost_usd' => $cost,
-            'charged_usd' => $charged,
-            'ledger_entry_id' => $ledgerEntry?->id,
-            'status' => 'ok',
-            'created_at' => now(),
-        ]);
-    }
-
-    /**
-     * Metering pos-stream (fallback: consulta generation na OpenRouter).
-     */
-    private function meterPostStream(int $userId, AiModel $model, string $requestId, WalletService $walletService): void
-    {
-        // A OpenRouter expoe /api/v1/generation?id=... para obter usage apos stream
-        // Por agora, registamos com zeros e o job diario reconcilia
-        UsageLog::firstOrCreate(
-            ['request_id' => $requestId],
-            [
-                'user_id' => $userId,
-                'ai_model_id' => $model->id,
-                'prompt_tokens' => 0,
-                'completion_tokens' => 0,
-                'cost_usd' => 0,
-                'charged_usd' => 0,
-                'status' => 'ok',
-                'created_at' => now(),
-            ]
-        );
-    }
-
-    private function calculateCost(AiModel $model, int $promptTokens, int $completionTokens): float
-    {
-        $cost = $model->latestCost();
-        if (!$cost) {
-            return 0.0;
-        }
-
-        $inputCost = ($promptTokens / 1_000_000) * (float) $cost->input_cost_per_mtok;
-        $outputCost = ($completionTokens / 1_000_000) * (float) $cost->output_cost_per_mtok;
-
-        return round($inputCost + $outputCost, 8);
+        return [
+            'usage' => $usage,
+            'generation_id' => $generationId,
+            'completion_text' => $completionText,
+        ];
     }
 
     private function apiKey(): string
