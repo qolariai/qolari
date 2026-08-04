@@ -28,6 +28,18 @@
 | **1.7** Modalidade dinâmica | ✅ FEITO | `SyncModelCosts` sincroniza `supports_vision` + `context_limit` do catálogo OpenRouter. |
 | ⚠️ Pendente | — | **Products** ainda referenciam o modelo legacy `qolari` — decidir estrutura de pacotes por tier (Fase 2 ou antes do lançamento). |
 
+### Fase 2 — Recomendador de tiers (2026-08-04)
+
+| Item | Estado | Notas |
+|---|---|---|
+| **2.0** White-label leak | ✅ FEITO | **Crítico:** o ID real do motor fugia nas respostas — `model` sanitizado (sync + chunks SSE) para o tier slug. Prova e2e em teste. |
+| **2.1** TierRecommender rule-based | ✅ FEITO | `App\Domain\Routing\TierRecommender`: contexto grande→High, frases complexas→High, tarefa simples→Low. Visão→nunca sugere. |
+| **2.2/2.3** Gatilhos up/down | ✅ FEITO | Header `X-Nexus-Suggestion` nos 2 endpoints + endpoint de preview `POST /v1/recommendations/suggest`. |
+| **2.4** Regras de comportamento | ✅ FEITO | `SuggestionGate`: máx. 1 sugestão/5 pedidos; 2 recusas silenciam o tier 7 dias (`POST /v1/recommendations/dismiss`). |
+| **2.5** UI no IDE | ✅ FEITO | `nexus-suggestion.tsx`: banner acima do composer, debounce 600ms, 1-click troca tier, dismiss com aviso ao backend. Desktop-only (bridge Electron). |
+| **2.6** Nexus Auto | ✅ FEITO | `users.nexus_auto` (PUT `/v1/profile`); resolver escolhe o tier em silêncio e cobra ao tier usado. |
+| ⏳ Adiado | — | S5 (falhanço repetido) precisa de telemetria da sessão → Fase 4.5. Teste hands-on do banner no build desktop. |
+
 ---
 
 ## 1. Contexto e decisões estratégicas tomadas
