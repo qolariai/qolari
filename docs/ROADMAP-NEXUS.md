@@ -40,6 +40,18 @@
 | **2.6** Nexus Auto | ✅ FEITO | `users.nexus_auto` (PUT `/v1/profile`); resolver escolhe o tier em silêncio e cobra ao tier usado. |
 | ⏳ Adiado | — | S5 (falhanço repetido) precisa de telemetria da sessão → Fase 4.5. Teste hands-on do banner no build desktop. |
 
+### Fase 3 — Continuidade de contexto (2026-08-04)
+
+**Gate 3.1 — VEREDITO: compactação nativa é SUFICIENTE para v1** ✅ (análise do runtime: histórico persiste na troca; compactação re-corre para a janela do tier NOVO antes do 1º pedido — `prompt.ts:1161`, `overflow.ts:10-34`; template de resumo já estruturado: Objective/Completed/Active/Blocked/Next Move/Files).
+
+| Item | Estado | Notas |
+|---|---|---|
+| **3.1** Validar compactação nativa | ✅ FEITO | Veredito acima; v2 passa de blocker a enhancement (alvo: `SystemContextRegistry` V2) |
+| **3.5** Pre-flight handoff | ✅ FEITO | Agente de compactação pinado a `nexus-high` (`agent.ts`) — o resumo de handoff é SEMPRE escrito pelo modelo forte |
+| **3.2/3.4** Briefing + persistência | ✅ FEITO | Tabelas `conversations`/`briefings`, `BriefingService` (lock otimista), GET/PUT `/v1/conversations/{id}/briefing`. 4 testes. |
+| **3.6** Injeção no IDE | ✅ FEITO (v1) | Plugin interno `QolariBriefingPlugin` via hook `experimental.chat.system.transform` (cache 30s, fail silencioso). Migração futura: Context Source V2. |
+| **3.3** Captura automática | ⏳ PRÓXIMA ITERAÇÃO | PUT do resumo de compactação para o backend (eventos `message.updated` com `summary=true`) — anotado no código. |
+
 ---
 
 ## 1. Contexto e decisões estratégicas tomadas
