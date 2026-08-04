@@ -54,6 +54,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/v1/tokens', [TokenController::class, 'store'])->name('tokens.store');
     Route::delete('/v1/tokens/{id}', [TokenController::class, 'destroy'])->name('tokens.destroy');
 
+    // Session Briefing (continuidade entre tiers)
+    Route::get('/v1/conversations/{externalId}/briefing', [\App\Http\Controllers\Api\BriefingController::class, 'show'])->name('briefings.show');
+    Route::put('/v1/conversations/{externalId}/briefing', [\App\Http\Controllers\Api\BriefingController::class, 'update'])->name('briefings.update');
+
     // Recomendador de tiers
     Route::post('/v1/recommendations/suggest', [RecommendationController::class, 'suggest'])->name('recommendations.suggest');
     Route::post('/v1/recommendations/dismiss', [RecommendationController::class, 'dismiss'])->name('recommendations.dismiss');
