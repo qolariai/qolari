@@ -59,6 +59,12 @@ class SyncModelCosts implements ShouldQueue
                 'synced_at' => now(),
                 'created_at' => now(),
             ]);
+
+            // Capacidades dinamicas (1.7): visao + contexto, sem logica hardcoded
+            $inputModalities = $remote['architecture']['input_modalities'] ?? [];
+            $aiModel->supports_vision = in_array('image', $inputModalities, true);
+            $aiModel->context_limit = $remote['context_length'] ?? null;
+            $aiModel->save();
         });
 
         Log::info('SyncModelCosts: concluido.');

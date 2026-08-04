@@ -9,7 +9,8 @@ class AiModel extends Model
 {
     protected $fillable = [
         'slug', 'display_name', 'description', 'provider',
-        'provider_model_id', 'margin_multiplier', 'is_active', 'sort_order',
+        'provider_model_id', 'supports_vision', 'context_limit',
+        'margin_multiplier', 'is_active', 'sort_order',
     ];
 
     protected function casts(): array
@@ -17,6 +18,7 @@ class AiModel extends Model
         return [
             'margin_multiplier' => 'decimal:2',
             'is_active' => 'boolean',
+            'supports_vision' => 'boolean',
         ];
     }
 

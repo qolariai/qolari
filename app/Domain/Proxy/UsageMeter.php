@@ -11,6 +11,10 @@ use Illuminate\Support\Facades\Log;
  * Metering centralizado: calcula custo, debita wallet (idempotente)
  * e regista/atualiza o UsageLog. Usado pelo proxy (sync e stream)
  * e pelo job de reconciliacao pos-stream.
+ *
+ * Tier vs engine: o custo real vem do motor usado (engine), mas a margem
+ * e a wallet debitada sao do tier escolhido pelo cliente. Quando houve
+ * routing silencioso (ex: Nexus Vision), engine != tier.
  */
 class UsageMeter
 {
@@ -24,29 +28,37 @@ class UsageMeter
      */
     public function meter(
         int $userId,
-        int $aiModelId,
+        int $tierModelId,
+        int $engineModelId,
         string $requestId,
         int $promptTokens,
         int $completionTokens,
         string $status = 'ok',
         ?string $generationId = null,
     ): UsageLog {
-        $model = AiModel::findOrFail($aiModelId);
+        $tier = AiModel::findOrFail($tierModelId);
+        $engine = AiModel::findOrFail($engineModelId);
 
-        $cost = $this->calculateCost($model, $promptTokens, $completionTokens);
-        $charged = round($cost * (float) $model->margin_multiplier, 8);
+        // Custo real = motor usado; margem = tier escolhido pelo cliente
+        $cost = $this->calculateCost($engine, $promptTokens, $completionTokens);
+        $charged = round($cost * (float) $tier->margin_multiplier, 8);
 
-        // Debita wallet (idempotente por requestId)
+        // Debita a wallet do TIER (idempotente por requestId)
         $ledgerEntry = null;
         if ($charged > 0) {
             try {
                 $ledgerEntry = $this->walletService->debit(
                     userId: $userId,
-                    aiModelId: $model->id,
+                    aiModelId: $tier->id,
                     amountUsd: $charged,
                     idempotencyKey: $requestId,
                     referenceType: 'usage_log',
-                    meta: ['request_id' => $requestId, 'status' => $status],
+                    meta: [
+                        'request_id' => $requestId,
+                        'status' => $status,
+                        'engine_model_id' => $engine->id,
+                        'routed' => $engine->id !== $tier->id,
+                    ],
                 );
             } catch (\Exception) {
                 // Saldo insuficiente apos o request — regista mas nao bloqueia
@@ -57,7 +69,8 @@ class UsageMeter
             ['request_id' => $requestId],
             [
                 'user_id' => $userId,
-                'ai_model_id' => $model->id,
+                'ai_model_id' => $tier->id,
+                'engine_model_id' => $engine->id,
                 'generation_id' => $generationId,
                 'prompt_tokens' => $promptTokens,
                 'completion_tokens' => $completionTokens,
@@ -75,7 +88,8 @@ class UsageMeter
      */
     public function recordPending(
         int $userId,
-        int $aiModelId,
+        int $tierModelId,
+        int $engineModelId,
         string $requestId,
         ?string $generationId,
     ): UsageLog {
@@ -83,7 +97,8 @@ class UsageMeter
             ['request_id' => $requestId],
             [
                 'user_id' => $userId,
-                'ai_model_id' => $aiModelId,
+                'ai_model_id' => $tierModelId,
+                'engine_model_id' => $engineModelId,
                 'generation_id' => $generationId,
                 'prompt_tokens' => 0,
                 'completion_tokens' => 0,
@@ -98,13 +113,14 @@ class UsageMeter
     /**
      * Regista um request falhado (erro HTTP do provider).
      */
-    public function recordError(int $userId, int $aiModelId, string $requestId): UsageLog
+    public function recordError(int $userId, int $tierModelId, ?int $engineModelId, string $requestId): UsageLog
     {
         return UsageLog::firstOrCreate(
             ['request_id' => $requestId],
             [
                 'user_id' => $userId,
-                'ai_model_id' => $aiModelId,
+                'ai_model_id' => $tierModelId,
+                'engine_model_id' => $engineModelId,
                 'prompt_tokens' => 0,
                 'completion_tokens' => 0,
                 'cost_usd' => 0,
@@ -115,11 +131,11 @@ class UsageMeter
         );
     }
 
-    private function calculateCost(AiModel $model, int $promptTokens, int $completionTokens): float
+    private function calculateCost(AiModel $engine, int $promptTokens, int $completionTokens): float
     {
-        $cost = $model->latestCost();
+        $cost = $engine->latestCost();
         if (!$cost) {
-            Log::warning('UsageMeter: modelo sem custo sincronizado.', ['ai_model_id' => $model->id]);
+            Log::warning('UsageMeter: motor sem custo sincronizado.', ['ai_model_id' => $engine->id]);
             return 0.0;
         }
 

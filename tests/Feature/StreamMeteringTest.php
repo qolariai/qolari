@@ -63,13 +63,15 @@ class StreamMeteringTest extends TestCase
         // 100k prompt ($0.10) + 50k completion ($0.10) = $0.20 custo → $0.60 debitado (3x)
         $log = $this->meter->meter(
             userId: $this->user->id,
-            aiModelId: $this->model->id,
+            tierModelId: $this->model->id,
+            engineModelId: $this->model->id,
             requestId: 'req-1',
             promptTokens: 100_000,
             completionTokens: 50_000,
         );
 
         $this->assertEquals('ok', $log->status);
+        $this->assertEquals($this->model->id, $log->engine_model_id);
         $this->assertEqualsWithDelta(0.20, (float) $log->cost_usd, 0.000001);
         $this->assertEqualsWithDelta(0.60, (float) $log->charged_usd, 0.000001);
         $this->assertEqualsWithDelta(9.40, \App\Models\Wallet::where('user_id', $this->user->id)->first()->balance, 0.000001);
@@ -77,7 +79,7 @@ class StreamMeteringTest extends TestCase
 
     public function test_pending_log_is_created_without_debit(): void
     {
-        $log = $this->meter->recordPending($this->user->id, $this->model->id, 'req-2', 'gen-abc');
+        $log = $this->meter->recordPending($this->user->id, $this->model->id, $this->model->id, 'req-2', 'gen-abc');
 
         $this->assertEquals('pending', $log->status);
         $this->assertEquals('gen-abc', $log->generation_id);
@@ -87,7 +89,7 @@ class StreamMeteringTest extends TestCase
     public function test_reconcile_job_meters_from_generation_endpoint(): void
     {
         app(\App\Domain\Wallet\WalletService::class)->credit($this->user->id, $this->model->id, 10.00);
-        $this->meter->recordPending($this->user->id, $this->model->id, 'req-3', 'gen-xyz');
+        $this->meter->recordPending($this->user->id, $this->model->id, $this->model->id, 'req-3', 'gen-xyz');
 
         Http::fake([
             'openrouter.ai/api/v1/generation*' => Http::response([
@@ -112,7 +114,7 @@ class StreamMeteringTest extends TestCase
 
     public function test_reconcile_job_ignores_non_pending_logs(): void
     {
-        $this->meter->meter($this->user->id, $this->model->id, 'req-4', 1000, 500);
+        $this->meter->meter($this->user->id, $this->model->id, $this->model->id, 'req-4', 1000, 500);
 
         Http::fake([
             'openrouter.ai/api/v1/generation*' => Http::response([

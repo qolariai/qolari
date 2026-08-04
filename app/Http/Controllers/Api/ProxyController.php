@@ -15,17 +15,30 @@ class ProxyController extends Controller
     }
 
     /**
+     * Regras partilhadas. content pode ser string (texto) ou array de
+     * content parts (multimodal: text/image_url/file) — ver 1.5.
+     */
+    private function rules(): array
+    {
+        return [
+            'model' => 'nullable|string|max:100', // tier comercial (ex: nexus-medium)
+            'messages' => 'required|array|min:1',
+            'messages.*.role' => 'required|string|in:system,user,assistant,tool',
+            'messages.*.content' => 'required',
+            'messages.*.content.*.type' => 'sometimes|required|string|in:text,image_url,image,input_image,file',
+            'messages.*.name' => 'nullable|string|max:100',
+            'messages.*.tool_call_id' => 'nullable|string|max:100',
+            'temperature' => 'nullable|numeric|min:0|max:2',
+            'max_tokens' => 'nullable|integer|min:1',
+        ];
+    }
+
+    /**
      * POST /api/v1/chat/completions — nao-streaming
      */
     public function completions(Request $request): JsonResponse
     {
-        $body = $request->validate([
-            'messages' => 'required|array|min:1',
-            'messages.*.role' => 'required|string|in:system,user,assistant',
-            'messages.*.content' => 'required|string',
-            'temperature' => 'nullable|numeric|min:0|max:2',
-            'max_tokens' => 'nullable|integer|min:1',
-        ]);
+        $body = $this->validatedBody($request);
 
         $result = $this->proxyService->completions($request->user()->id, $body);
 
@@ -37,14 +50,19 @@ class ProxyController extends Controller
      */
     public function chat(Request $request): StreamedResponse
     {
-        $body = $request->validate([
-            'messages' => 'required|array|min:1',
-            'messages.*.role' => 'required|string|in:system,user,assistant',
-            'messages.*.content' => 'required|string',
-            'temperature' => 'nullable|numeric|min:0|max:2',
-            'max_tokens' => 'nullable|integer|min:1',
-        ]);
+        $body = $this->validatedBody($request);
 
         return $this->proxyService->stream($request->user()->id, $body);
+    }
+
+    /**
+     * Valida os campos base mas preserva campos agênticos extra
+     * (tools, tool_choice, response_format, reasoning, ...) que o IDE envia.
+     */
+    private function validatedBody(Request $request): array
+    {
+        $validated = $request->validate($this->rules());
+
+        return array_merge($request->except(['_token']), $validated);
     }
 }

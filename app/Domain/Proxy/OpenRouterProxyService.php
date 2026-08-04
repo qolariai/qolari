@@ -2,8 +2,8 @@
 
 namespace App\Domain\Proxy;
 
+use App\Domain\Routing\TierResolver;
 use App\Jobs\ReconcileStreamUsage;
-use App\Models\AiModel;
 use App\Models\Setting;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
@@ -12,8 +12,10 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 
 class OpenRouterProxyService
 {
-    public function __construct(private UsageMeter $meter)
-    {
+    public function __construct(
+        private UsageMeter $meter,
+        private TierResolver $tierResolver,
+    ) {
     }
 
     /**
@@ -21,13 +23,12 @@ class OpenRouterProxyService
      */
     public function completions(int $userId, array $body): array
     {
-        $model = AiModel::active()->first();
-        if (!$model) {
-            throw new \RuntimeException('Nenhum modelo ativo.');
-        }
+        $resolution = $this->tierResolver->resolve($body);
+        $tier = $resolution->tier;
+        $engine = $resolution->engine;
 
         $requestId = Str::uuid()->toString();
-        $body['model'] = $model->provider_model_id;
+        $body['model'] = $engine->provider_model_id;
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiKey(),
@@ -41,7 +42,7 @@ class OpenRouterProxyService
         $data = $response->json();
 
         if ($response->failed()) {
-            $this->meter->recordError($userId, $model->id, $requestId);
+            $this->meter->recordError($userId, $tier->id, $engine->id, $requestId);
 
             return $data;
         }
@@ -50,7 +51,8 @@ class OpenRouterProxyService
 
         $this->meter->meter(
             userId: $userId,
-            aiModelId: $model->id,
+            tierModelId: $tier->id,
+            engineModelId: $engine->id,
             requestId: $requestId,
             promptTokens: $usage['prompt_tokens'] ?? 0,
             completionTokens: $usage['completion_tokens'] ?? 0,
@@ -70,13 +72,12 @@ class OpenRouterProxyService
      */
     public function stream(int $userId, array $body): StreamedResponse
     {
-        $model = AiModel::active()->first();
-        if (!$model) {
-            throw new \RuntimeException('Nenhum modelo ativo.');
-        }
+        $resolution = $this->tierResolver->resolve($body);
+        $tier = $resolution->tier;
+        $engine = $resolution->engine;
 
         $requestId = Str::uuid()->toString();
-        $body['model'] = $model->provider_model_id;
+        $body['model'] = $engine->provider_model_id;
         $body['stream'] = true;
         $body['stream_options'] = ['include_usage' => true];
 
@@ -86,7 +87,7 @@ class OpenRouterProxyService
         $apiKey = $this->apiKey();
         $meter = $this->meter;
 
-        return new StreamedResponse(function () use ($userId, $model, $requestId, $body, $apiKey, $meter, $estimatedPromptTokens) {
+        return new StreamedResponse(function () use ($userId, $tier, $engine, $requestId, $body, $apiKey, $meter, $estimatedPromptTokens) {
             $buffer = '';
 
             $ch = curl_init('https://openrouter.ai/api/v1/chat/completions');
@@ -122,7 +123,7 @@ class OpenRouterProxyService
                     'curl_errno' => $curlError,
                     'http_code' => $httpCode,
                 ]);
-                $meter->recordError($userId, $model->id, $requestId);
+                $meter->recordError($userId, $tier->id, $engine->id, $requestId);
                 return;
             }
 
@@ -133,7 +134,8 @@ class OpenRouterProxyService
                 // Caminho feliz: usage veio no ultimo chunk SSE
                 $meter->meter(
                     userId: $userId,
-                    aiModelId: $model->id,
+                    tierModelId: $tier->id,
+                    engineModelId: $engine->id,
                     requestId: $requestId,
                     promptTokens: $parsed['usage']['prompt_tokens'] ?? 0,
                     completionTokens: $parsed['usage']['completion_tokens'] ?? 0,
@@ -143,7 +145,7 @@ class OpenRouterProxyService
             }
 
             // Fallback: regista pendente e reconcilia via /generation (queue)
-            $meter->recordPending($userId, $model->id, $requestId, $parsed['generation_id']);
+            $meter->recordPending($userId, $tier->id, $engine->id, $requestId, $parsed['generation_id']);
 
             $estimatedCompletionTokens = (int) ceil(mb_strlen($parsed['completion_text']) / 4);
 

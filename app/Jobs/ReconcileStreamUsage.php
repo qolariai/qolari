@@ -48,7 +48,8 @@ class ReconcileStreamUsage implements ShouldQueue
         if ($usage) {
             $meter->meter(
                 userId: $log->user_id,
-                aiModelId: $log->ai_model_id,
+                tierModelId: $log->ai_model_id,
+                engineModelId: $log->engine_model_id ?? $log->ai_model_id,
                 requestId: $this->requestId,
                 promptTokens: $usage['prompt_tokens'],
                 completionTokens: $usage['completion_tokens'],
@@ -72,7 +73,8 @@ class ReconcileStreamUsage implements ShouldQueue
 
         $meter->meter(
             userId: $log->user_id,
-            aiModelId: $log->ai_model_id,
+            tierModelId: $log->ai_model_id,
+            engineModelId: $log->engine_model_id ?? $log->ai_model_id,
             requestId: $this->requestId,
             promptTokens: $this->estimatedPromptTokens,
             completionTokens: $this->estimatedCompletionTokens,
