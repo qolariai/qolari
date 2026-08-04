@@ -12,7 +12,7 @@
 | **0.2** Lockdown A+B | ✅ FEITO | `provider.ts`: whitelist qolari-only no registry + config-extend ignora `qolari` (anti-exfiltração) + `defaultModel` ignora modelos externos. |
 | **0.3** Lockdown C | ✅ FEITO | `server.ts`: allowlist estrita de env para o sidecar; `QOLARI_PROXY_URL` pinned; credential store ganha sempre à shell. |
 | **0.4** Lockdown D+E+F+G | ✅ FEITO | Catálogo models.dev desativado; `Auth.all()` filtra não-qolari e ignora `OPENCODE_AUTH_CONTENT`; plugins externos desativados (`pure: true` hardcoded); `OPENCODE_CONFIG`/`OPENCODE_CONFIG_CONTENT` ignorados; GUI Connect Provider sem form custom. **Verificado em runtime:** `test/provider/qolari-lockdown.test.ts` (4 testes, todos passam). Typecheck OK em opencode/core/desktop/app. ~106 testes upstream falham **por design** (documentado em `ide/AGENTS.md`). |
-| **0.5** Estratégia de fork | ⏸️ PENDENTE | Requer confirmação do utilizador para operações git (commits/branch). Documentação já escrita em `ide/AGENTS.md`. |
+| **0.5** Estratégia de fork | ✅ FEITO | 3 commits no backend (`c5037a2`, `332b7ee`, `d7b4ed0`) + 3 no IDE (`0f17b69` rebrand/auth-gate, `1de9738` lockdown, `764052c` docs) sobre upstream `ceb4890`. Sync mensal com rebase documentado em `ide/AGENTS.md`. |
 | **0.6** Validação hands-on desktop | ⏸️ PENDENTE | Requer sessão interativa com o build. |
 
 ---
