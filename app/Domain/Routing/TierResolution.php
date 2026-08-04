@@ -16,6 +16,7 @@ class TierResolution
         public readonly AiModel $tier,
         public readonly AiModel $engine,
         public readonly bool $routed,
+        public readonly bool $auto = false,
     ) {
     }
 }

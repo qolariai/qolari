@@ -25,6 +25,7 @@ class User extends Authenticatable implements FilamentUser
         'country',
         'preferred_currency',
         'language',
+        'nexus_auto',
         'promo_code_id',
     ];
 
@@ -37,6 +38,7 @@ class User extends Authenticatable implements FilamentUser
     {
         return [
             'email_verified_at' => 'datetime',
+            'nexus_auto' => 'boolean',
             'password' => 'hashed',
             'is_admin' => 'boolean',
         ];

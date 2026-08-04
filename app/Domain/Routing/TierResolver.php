@@ -3,6 +3,7 @@
 namespace App\Domain\Routing;
 
 use App\Models\AiModel;
+use App\Models\User;
 
 /**
  * Resolve o tier pedido pelo cliente para o motor real.
@@ -13,14 +14,30 @@ use App\Models\AiModel;
  *  - Routing silencioso (1.4): se o pedido tem imagem/ficheiro e o tier não
  *    suporta visão, o motor passa a ser o nexus-vision — mas a cobrança
  *    continua a ser feita à tarifa do tier escolhido pelo cliente.
+ *  - Nexus Auto (2.6): se o user tem a flag ativa, o recomendador escolhe
+ *    o tier ideal em silêncio — a cobrança segue o tier efetivamente usado.
  */
 class TierResolver
 {
     public const VISION_TIER_SLUG = 'nexus-vision';
 
-    public function resolve(array $body): TierResolution
+    public function __construct(private TierRecommender $recommender)
+    {
+    }
+
+    public function resolve(array $body, ?User $user = null): TierResolution
     {
         $tierSlug = $this->normalizeTierSlug($body['model'] ?? null);
+        $auto = false;
+
+        // Nexus Auto: recomendador escolhe o tier por pedido (silencioso)
+        if ($user?->nexus_auto) {
+            $pick = $this->recommender->pickForAuto($tierSlug ?? '', $body);
+            if ($pick && AiModel::active()->where('slug', $pick)->exists()) {
+                $tierSlug = $pick;
+                $auto = true;
+            }
+        }
 
         $tier = $tierSlug
             ? AiModel::active()->where('slug', $tierSlug)->first()
@@ -52,7 +69,7 @@ class TierResolver
             // (o provider devolve erro e regista-se status 'error')
         }
 
-        return new TierResolution(tier: $tier, engine: $engine, routed: $routed);
+        return new TierResolution(tier: $tier, engine: $engine, routed: $routed, auto: $auto);
     }
 
     /**

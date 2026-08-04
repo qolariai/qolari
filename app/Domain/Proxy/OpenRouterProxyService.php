@@ -2,9 +2,12 @@
 
 namespace App\Domain\Proxy;
 
+use App\Domain\Routing\SuggestionGate;
+use App\Domain\Routing\TierRecommender;
 use App\Domain\Routing\TierResolver;
 use App\Jobs\ReconcileStreamUsage;
 use App\Models\Setting;
+use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
@@ -15,15 +18,19 @@ class OpenRouterProxyService
     public function __construct(
         private UsageMeter $meter,
         private TierResolver $tierResolver,
+        private TierRecommender $recommender,
+        private SuggestionGate $suggestionGate,
     ) {
     }
 
     /**
      * Proxy nao-streaming: encaminha request, mede tokens, debita.
+     *
+     * @return array{data: array, suggestion: array|null}
      */
-    public function completions(int $userId, array $body): array
+    public function completions(User $user, array $body): array
     {
-        $resolution = $this->tierResolver->resolve($body);
+        $resolution = $this->tierResolver->resolve($body, $user);
         $tier = $resolution->tier;
         $engine = $resolution->engine;
 
@@ -39,18 +46,23 @@ class OpenRouterProxyService
             ->timeout(300)
             ->post('https://openrouter.ai/api/v1/chat/completions', $body);
 
-        $data = $response->json();
+        $data = $response->json() ?? [];
+
+        // WHITE-LABEL: nunca expor o ID real do motor ao cliente
+        if (isset($data['model'])) {
+            $data['model'] = $tier->slug;
+        }
 
         if ($response->failed()) {
-            $this->meter->recordError($userId, $tier->id, $engine->id, $requestId);
+            $this->meter->recordError($user->id, $tier->id, $engine->id, $requestId);
 
-            return $data;
+            return ['data' => $data, 'suggestion' => null];
         }
 
         $usage = $data['usage'] ?? [];
 
         $this->meter->meter(
-            userId: $userId,
+            userId: $user->id,
             tierModelId: $tier->id,
             engineModelId: $engine->id,
             requestId: $requestId,
@@ -59,7 +71,7 @@ class OpenRouterProxyService
             generationId: $data['id'] ?? null,
         );
 
-        return $data;
+        return ['data' => $data, 'suggestion' => $this->suggestionFor($user, $tier->slug, $body)];
     }
 
     /**
@@ -70,9 +82,9 @@ class OpenRouterProxyService
      *  2. Fallback: job ReconcileStreamUsage consulta /api/v1/generation
      *  3. Ultimo recurso: estimativa de tokens (status 'estimated')
      */
-    public function stream(int $userId, array $body): StreamedResponse
+    public function stream(User $user, array $body): StreamedResponse
     {
-        $resolution = $this->tierResolver->resolve($body);
+        $resolution = $this->tierResolver->resolve($body, $user);
         $tier = $resolution->tier;
         $engine = $resolution->engine;
 
@@ -86,8 +98,23 @@ class OpenRouterProxyService
 
         $apiKey = $this->apiKey();
         $meter = $this->meter;
+        $engineModelId = $engine->provider_model_id;
+        $tierSlug = $tier->slug;
 
-        return new StreamedResponse(function () use ($userId, $tier, $engine, $requestId, $body, $apiKey, $meter, $estimatedPromptTokens) {
+        $headers = [
+            'Content-Type' => 'text/event-stream',
+            'Cache-Control' => 'no-cache',
+            'Connection' => 'keep-alive',
+            'X-Accel-Buffering' => 'no',
+            'X-Request-Id' => $requestId,
+        ];
+
+        $suggestion = $this->suggestionFor($user, $tierSlug, $body);
+        if ($suggestion) {
+            $headers['X-Nexus-Suggestion'] = json_encode($suggestion);
+        }
+
+        return new StreamedResponse(function () use ($user, $tier, $engine, $requestId, $body, $apiKey, $meter, $estimatedPromptTokens, $engineModelId, $tierSlug) {
             $buffer = '';
 
             $ch = curl_init('https://openrouter.ai/api/v1/chat/completions');
@@ -101,7 +128,9 @@ class OpenRouterProxyService
                 ],
                 CURLOPT_POSTFIELDS => json_encode($body),
                 CURLOPT_TIMEOUT => 300,
-                CURLOPT_WRITEFUNCTION => function ($ch, $chunk) use (&$buffer) {
+                CURLOPT_WRITEFUNCTION => function ($ch, $chunk) use (&$buffer, $engineModelId, $tierSlug) {
+                    // WHITE-LABEL: reescreve o ID real do motor no SSE
+                    $chunk = str_replace($engineModelId, $tierSlug, $chunk);
                     echo $chunk;
                     $buffer .= $chunk;
                     if (ob_get_level()) {
@@ -123,7 +152,7 @@ class OpenRouterProxyService
                     'curl_errno' => $curlError,
                     'http_code' => $httpCode,
                 ]);
-                $meter->recordError($userId, $tier->id, $engine->id, $requestId);
+                $meter->recordError($user->id, $tier->id, $engine->id, $requestId);
                 return;
             }
 
@@ -133,7 +162,7 @@ class OpenRouterProxyService
             if ($parsed['usage']) {
                 // Caminho feliz: usage veio no ultimo chunk SSE
                 $meter->meter(
-                    userId: $userId,
+                    userId: $user->id,
                     tierModelId: $tier->id,
                     engineModelId: $engine->id,
                     requestId: $requestId,
@@ -145,7 +174,7 @@ class OpenRouterProxyService
             }
 
             // Fallback: regista pendente e reconcilia via /generation (queue)
-            $meter->recordPending($userId, $tier->id, $engine->id, $requestId, $parsed['generation_id']);
+            $meter->recordPending($user->id, $tier->id, $engine->id, $requestId, $parsed['generation_id']);
 
             $estimatedCompletionTokens = (int) ceil(mb_strlen($parsed['completion_text']) / 4);
 
@@ -155,13 +184,34 @@ class OpenRouterProxyService
                 estimatedPromptTokens: $estimatedPromptTokens,
                 estimatedCompletionTokens: $estimatedCompletionTokens,
             )->delay(now()->addSeconds(10));
-        }, 200, [
-            'Content-Type' => 'text/event-stream',
-            'Cache-Control' => 'no-cache',
-            'Connection' => 'keep-alive',
-            'X-Accel-Buffering' => 'no',
-            'X-Request-Id' => $requestId,
-        ]);
+        }, 200, $headers);
+    }
+
+    /**
+     * Sugestao de tier para este pedido (2.1-2.4). Null quando:
+     * Nexus Auto ativo (ja escolhe em silencio), matriz nao tem nada a dizer,
+     * ou as regras de comportamento bloqueiam (rate limit / recusas).
+     */
+    private function suggestionFor(User $user, string $tierSlug, array $body): ?array
+    {
+        $this->suggestionGate->tick($user->id);
+
+        if ($user->nexus_auto) {
+            return null;
+        }
+
+        $suggestion = $this->recommender->suggest($tierSlug, $body);
+        if (!$suggestion) {
+            return null;
+        }
+
+        if (!$this->suggestionGate->allows($user->id, $suggestion['tier'])) {
+            return null;
+        }
+
+        $this->suggestionGate->recordShown($user->id);
+
+        return $suggestion;
     }
 
     /**

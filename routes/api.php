@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProxyController;
+use App\Http\Controllers\Api\RecommendationController;
 use App\Http\Controllers\Api\StripeWebhookController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\UsageController;
@@ -52,6 +53,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/v1/tokens', [TokenController::class, 'index'])->name('tokens.index');
     Route::post('/v1/tokens', [TokenController::class, 'store'])->name('tokens.store');
     Route::delete('/v1/tokens/{id}', [TokenController::class, 'destroy'])->name('tokens.destroy');
+
+    // Recomendador de tiers
+    Route::post('/v1/recommendations/suggest', [RecommendationController::class, 'suggest'])->name('recommendations.suggest');
+    Route::post('/v1/recommendations/dismiss', [RecommendationController::class, 'dismiss'])->name('recommendations.dismiss');
 
     // Proxy IA (rate limited)
     Route::middleware('throttle:60,1')->group(function () {

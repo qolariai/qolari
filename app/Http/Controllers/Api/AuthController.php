@@ -94,6 +94,7 @@ class AuthController extends Controller
             'preferred_currency' => 'sometimes|in:EUR,USD,GBP',
             'language' => 'sometimes|in:pt,en',
             'country' => 'sometimes|nullable|string|size:2',
+            'nexus_auto' => 'sometimes|boolean',
             'password' => 'sometimes|string|min:8|confirmed',
         ]);
 

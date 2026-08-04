@@ -40,9 +40,14 @@ class ProxyController extends Controller
     {
         $body = $this->validatedBody($request);
 
-        $result = $this->proxyService->completions($request->user()->id, $body);
+        $result = $this->proxyService->completions($request->user(), $body);
 
-        return response()->json($result);
+        $response = response()->json($result['data']);
+        if ($result['suggestion']) {
+            $response->headers->set('X-Nexus-Suggestion', json_encode($result['suggestion']));
+        }
+
+        return $response;
     }
 
     /**
@@ -52,7 +57,7 @@ class ProxyController extends Controller
     {
         $body = $this->validatedBody($request);
 
-        return $this->proxyService->stream($request->user()->id, $body);
+        return $this->proxyService->stream($request->user(), $body);
     }
 
     /**
