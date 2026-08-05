@@ -52,6 +52,16 @@
 | **3.6** Injeção no IDE | ✅ FEITO (v1) | Plugin interno `QolariBriefingPlugin` via hook `experimental.chat.system.transform` (cache 30s, fail silencioso). Migração futura: Context Source V2. |
 | **3.3** Captura automática | ⏳ PRÓXIMA ITERAÇÃO | PUT do resumo de compactação para o backend (eventos `message.updated` com `summary=true`) — anotado no código. |
 
+### Fase 4 — Governança de modelos (2026-08-05)
+
+| Item | Estado | Notas |
+|---|---|---|
+| **7.1** MODEL_CHANGELOG | ✅ FEITO | `docs/MODEL_CHANGELOG.md` com template (motivo/benchmarks/feito/pendente/rollback) + entrada inicial com baseline |
+| **7.2** Suite de regressão | ✅ FEITO | `benchmark/tier-suite.php` (17 prompts, 9 categorias, expetativas keyword) + `php artisan qolari:benchmark {tier?}` (direto ao OpenRouter, sem billing). Baseline Low: 12/16 |
+| **7.5** Telemetria | ✅ FEITO (backend) | Tabela `quality_signals` + `POST /v1/telemetry` (batch: accept/retry/abort/edit_after/regenerate). Falta: instrumentação no IDE → Fase 5 |
+| **7.3/7.4** Shadow + canary | ⏳ FASE 5 | Requer tráfego de produção; scaffolding quando houver clientes reais |
+| ⚠️ Issue IDE | 📋 REGISTADO | Crash `<Show>` stale ao selecionar projeto (dialog-select-directory) — investigar na Fase 5 |
+
 ---
 
 ## 1. Contexto e decisões estratégicas tomadas

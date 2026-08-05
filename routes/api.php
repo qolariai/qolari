@@ -54,6 +54,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/v1/tokens', [TokenController::class, 'store'])->name('tokens.store');
     Route::delete('/v1/tokens/{id}', [TokenController::class, 'destroy'])->name('tokens.destroy');
 
+    // Telemetria de qualidade (sinais do IDE)
+    Route::post('/v1/telemetry', [\App\Http\Controllers\Api\TelemetryController::class, 'store'])->name('telemetry.store');
+
     // Session Briefing (continuidade entre tiers)
     Route::get('/v1/conversations/{externalId}/briefing', [\App\Http\Controllers\Api\BriefingController::class, 'show'])->name('briefings.show');
     Route::put('/v1/conversations/{externalId}/briefing', [\App\Http\Controllers\Api\BriefingController::class, 'update'])->name('briefings.update');
