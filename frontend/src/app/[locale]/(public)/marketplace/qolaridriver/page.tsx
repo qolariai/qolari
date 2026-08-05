@@ -128,7 +128,7 @@ export default function QolariDriverPage() {
               </CardHeader>
               <CardContent>
                 <p className="text-sm text-muted-foreground mb-4">
-                  {t("credentials")}: admin@qolari.com / password
+                  {t("credentials")}: admin@qolari.com / QolariDriver@2026
                 </p>
                 <a
                   href="https://driver.qolari.com"
@@ -174,7 +174,7 @@ export default function QolariDriverPage() {
                 <div>
                   <p className="font-medium">QolariDriver — Full Source Code</p>
                   <p className="text-sm text-muted-foreground">
-                    Laravel admin panel + Flutter apps (User & Driver) + Docker Compose
+                    Laravel admin panel + Flutter apps (User & Driver)
                   </p>
                 </div>
                 <a
