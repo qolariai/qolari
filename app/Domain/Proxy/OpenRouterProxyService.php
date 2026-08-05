@@ -26,7 +26,7 @@ class OpenRouterProxyService
     /**
      * Proxy nao-streaming: encaminha request, mede tokens, debita.
      *
-     * @return array{data: array, suggestion: array|null}
+     * @return array{data: array, suggestion: array|null, status: int}
      */
     public function completions(User $user, array $body): array
     {
@@ -56,7 +56,7 @@ class OpenRouterProxyService
         if ($response->failed()) {
             $this->meter->recordError($user->id, $tier->id, $engine->id, $requestId);
 
-            return ['data' => $data, 'suggestion' => null];
+            return ['data' => $data, 'suggestion' => null, 'status' => $response->status()];
         }
 
         $usage = $data['usage'] ?? [];
@@ -71,7 +71,7 @@ class OpenRouterProxyService
             generationId: $data['id'] ?? null,
         );
 
-        return ['data' => $data, 'suggestion' => $this->suggestionFor($user, $tier->slug, $body)];
+        return ['data' => $data, 'suggestion' => $this->suggestionFor($user, $tier->slug, $body), 'status' => 200];
     }
 
     /**

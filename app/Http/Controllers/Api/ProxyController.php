@@ -42,7 +42,7 @@ class ProxyController extends Controller
 
         $result = $this->proxyService->completions($request->user(), $body);
 
-        $response = response()->json($result['data']);
+        $response = response()->json($result['data'], $result['status'] ?? 200);
         if ($result['suggestion']) {
             $response->headers->set('X-Nexus-Suggestion', json_encode($result['suggestion']));
         }

@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { useState, useEffect } from "react";
 import Cookies from "js-cookie";
 import { useAuth } from "@/lib/auth";
+import type { ApiError } from "@/lib/api";
 import { Link, useRouter } from "@/i18n/navigation";
 import { buttonVariants } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -53,8 +54,14 @@ export default function RegisterPage() {
       // Limpar cookie de referencia apos registo
       Cookies.remove("qolari_ref");
       router.push("/dashboard");
-    } catch {
-      setError(t("auth.registerError"));
+    } catch (err) {
+      // Mostra o erro real de validação do backend (ex: promo code inválido,
+      // email já registado) em vez do genérico
+      const apiErr = err as ApiError;
+      const firstError = apiErr?.errors
+        ? Object.values(apiErr.errors)[0]?.[0]
+        : undefined;
+      setError(firstError || apiErr?.message || t("auth.registerError"));
     } finally {
       setLoading(false);
     }
