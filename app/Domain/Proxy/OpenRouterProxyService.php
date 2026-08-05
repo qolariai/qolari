@@ -129,6 +129,9 @@ class OpenRouterProxyService
                 CURLOPT_POSTFIELDS => json_encode($body),
                 CURLOPT_TIMEOUT => 300,
                 CURLOPT_WRITEFUNCTION => function ($ch, $chunk) use (&$buffer, $engineModelId, $tierSlug) {
+                    // cURL exige o tamanho ORIGINAL do chunk no retorno;
+                    // a reescrita white-label muda o comprimento.
+                    $length = strlen($chunk);
                     // WHITE-LABEL: reescreve o ID real do motor no SSE
                     $chunk = str_replace($engineModelId, $tierSlug, $chunk);
                     echo $chunk;
@@ -137,7 +140,7 @@ class OpenRouterProxyService
                         ob_flush();
                     }
                     flush();
-                    return strlen($chunk);
+                    return $length;
                 },
             ]);
 
