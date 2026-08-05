@@ -36,6 +36,7 @@ class OpenRouterProxyService
 
         $requestId = Str::uuid()->toString();
         $body['model'] = $engine->provider_model_id;
+        $body = $this->sanitizeBody($body);
 
         $response = Http::withHeaders([
             'Authorization' => 'Bearer ' . $this->apiKey(),
@@ -92,6 +93,7 @@ class OpenRouterProxyService
         $body['model'] = $engine->provider_model_id;
         $body['stream'] = true;
         $body['stream_options'] = ['include_usage' => true];
+        $body = $this->sanitizeBody($body);
 
         // Estimativa de prompt (fallback de metering): ~4 chars por token
         $estimatedPromptTokens = (int) ceil(mb_strlen(json_encode($body['messages'] ?? [])) / 4);
@@ -265,6 +267,22 @@ class OpenRouterProxyService
             'generation_id' => $generationId,
             'completion_text' => $completionText,
         ];
+    }
+
+    /**
+     * JSON objects vazios (ex: "provider":{}) chegam como [] apos o
+     * json_decode associativo do PHP e seriam reenviados como array,
+     * o que a OpenRouter rejeita ("expected object, received array").
+     */
+    private function sanitizeBody(array $body): array
+    {
+        foreach (['provider', 'reasoning', 'response_format'] as $key) {
+            if (isset($body[$key]) && $body[$key] === []) {
+                unset($body[$key]);
+            }
+        }
+
+        return $body;
     }
 
     private function apiKey(): string
