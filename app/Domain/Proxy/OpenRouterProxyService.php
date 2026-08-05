@@ -118,6 +118,7 @@ class OpenRouterProxyService
 
         return new StreamedResponse(function () use ($user, $tier, $engine, $requestId, $body, $apiKey, $meter, $estimatedPromptTokens, $engineModelId, $tierSlug) {
             $buffer = '';
+            $errorBody = '';
 
             $ch = curl_init('https://openrouter.ai/api/v1/chat/completions');
             curl_setopt_array($ch, [
@@ -130,10 +131,19 @@ class OpenRouterProxyService
                 ],
                 CURLOPT_POSTFIELDS => json_encode($body),
                 CURLOPT_TIMEOUT => 300,
-                CURLOPT_WRITEFUNCTION => function ($ch, $chunk) use (&$buffer, $engineModelId, $tierSlug) {
+                CURLOPT_WRITEFUNCTION => function ($ch, $chunk) use (&$buffer, &$errorBody, $engineModelId, $tierSlug) {
                     // cURL exige o tamanho ORIGINAL do chunk no retorno;
                     // a reescrita white-label muda o comprimento.
                     $length = strlen($chunk);
+                    // Erros upstream (ex: 429 free-models-per-day) chegam como JSON
+                    // simples, nao como SSE. Este StreamedResponse ja sai com HTTP 200,
+                    // por isso o corpo de erro NAO pode ser ecoado cru — seria descartado
+                    // pelo parser SSE do cliente. Acumular e converter abaixo num frame
+                    // SSE de erro bem formado.
+                    if ((int) curl_getinfo($ch, CURLINFO_RESPONSE_CODE) >= 400) {
+                        $errorBody .= $chunk;
+                        return $length;
+                    }
                     // WHITE-LABEL: reescreve o ID real do motor no SSE
                     $chunk = str_replace($engineModelId, $tierSlug, $chunk);
                     echo $chunk;
@@ -158,6 +168,24 @@ class OpenRouterProxyService
                     'http_code' => $httpCode,
                 ]);
                 $meter->recordError($user->id, $tier->id, $engine->id, $requestId);
+
+                // Converte o erro upstream num frame SSE OpenAI-compatible, para o
+                // cliente mostrar a mensagem real em vez de um erro generico.
+                $payload = json_decode($errorBody, true);
+                $message = $payload['error']['message'] ?? null;
+                if (!is_string($message) || $message === '') {
+                    $message = 'Upstream error (HTTP ' . ($httpCode ?: 'desconhecido') . ')';
+                }
+                // WHITE-LABEL: nunca expor o ID real do motor na mensagem de erro
+                $message = str_replace($engineModelId, $tierSlug, $message);
+                $code = $payload['error']['code'] ?? ($httpCode ?: 'unknown');
+
+                echo 'data: ' . json_encode(['error' => ['message' => $message, 'code' => $code]]) . "\n\n";
+                echo "data: [DONE]\n\n";
+                if (ob_get_level()) {
+                    ob_flush();
+                }
+                flush();
                 return;
             }
 
