@@ -60,7 +60,7 @@
 | **7.2** Suite de regressão | ✅ FEITO | `benchmark/tier-suite.php` (17 prompts, 9 categorias, expetativas keyword) + `php artisan qolari:benchmark {tier?}` (direto ao OpenRouter, sem billing). Baseline Low: 12/16 |
 | **7.5** Telemetria | ✅ FEITO (backend) | Tabela `quality_signals` + `POST /v1/telemetry` (batch: accept/retry/abort/edit_after/regenerate). Falta: instrumentação no IDE → Fase 5 |
 | **7.3/7.4** Shadow + canary | ⏳ FASE 5 | Requer tráfego de produção; scaffolding quando houver clientes reais |
-| ⚠️ Issue IDE | 📋 REGISTADO | Crash `<Show>` stale ao selecionar projeto (dialog-select-directory) — investigar na Fase 5 |
+| ⚠️ Issue IDE | ✅ RESOLVIDO (05-08-2026) | Crash `<Show>` stale — causa raiz: `<Show>` callback-form sem `keyed` (bug upstream #16323/#39766). Culpado principal: composer `session-ui/v2/prompt-input/index.tsx` (crashava ao abrir projeto E engolia envios do chat). Corrigidos 12 ficheiros (app + session-ui) com `keyed` + leitura direta. Commit `4288b18` no ide. ~70 instâncias restantes documentadas para varredura preventiva. |
 
 ---
 
