@@ -26,9 +26,35 @@ Thumbs.db
 # Secrets — NUNCA commitar
 aceder.txt
 deploy/run-deploy.sh
+_sa_key.cjs
+_s.json
 
 # IDE desktop (Electron) — repo separado
 ide/
+
+# Extensão VS Code (fork Cline) — clone git independente, repo separado
+extensao/
+
+# Ficheiros de trabalho soltos (scripts temporários, artefactos, notas)
+/_show.php
+/captura_manual.txt
+/chk_rec.sh
+/device_screen.png
+/ecossistema_ia_estrategia_v3.pdf
+/mark_migrations.php
+/name
+/qolari
+/save()
+/seed_lisboa.php
+/seed_night.php
+/seed_vendor_features.php
+/nginx-qolarifood.conf
+/nginx-qolarifood-web.conf
+/qolaridriver-repo/
+/qolaridriver-driver-release.apk
+/qolaridriver-user-release.apk
+/qolarifood-user-debug.apk
+/qolarifood-user-release.apk
 
 # Frontend Next.js
 frontend/node_modules/
