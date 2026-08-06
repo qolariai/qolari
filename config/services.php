@@ -46,4 +46,12 @@ return [
         'base_url' => 'https://openrouter.ai/api/v1',
     ],
 
+    'deepseek' => [
+        'api_key' => env('DEEPSEEK_API_KEY'),
+    ],
+
+    'nvidia' => [
+        'api_key' => env('NVIDIA_API_KEY'),
+    ],
+
 ];

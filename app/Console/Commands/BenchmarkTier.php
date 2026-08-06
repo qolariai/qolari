@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Domain\Proxy\AiProviderResolver;
 use App\Models\AiModel;
-use App\Models\Setting;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Http;
 
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Http;
  * Suite de regressão dos tiers Nexus (Fase 4.2).
  *
  * Corre a suite benchmark/tier-suite.php contra o motor de um tier
- * DIRETAMENTE no OpenRouter (sem billing — é benchmark interno).
+ * DIRETAMENTE no provider upstream (sem billing — é benchmark interno).
  *
  * Uso:
  *   php artisan qolari:benchmark              → todos os tiers ativos
@@ -29,14 +29,8 @@ class BenchmarkTier extends Command
 
     protected $description = 'Corre a suite de regressão contra o motor de um tier';
 
-    public function handle(): int
+    public function handle(AiProviderResolver $providers): int
     {
-        $apiKey = Setting::get('openrouter_api_key') ?? config('services.openrouter.api_key');
-        if (!$apiKey) {
-            $this->error('openrouter_api_key não configurada.');
-            return self::FAILURE;
-        }
-
         $tiers = $this->argument('tier')
             ? AiModel::where('slug', $this->argument('tier'))->get()
             : AiModel::active()->orderBy('sort_order')->get();
@@ -44,6 +38,18 @@ class BenchmarkTier extends Command
         if ($tiers->isEmpty()) {
             $this->error('Nenhum tier encontrado.');
             return self::FAILURE;
+        }
+
+        // Resolve a key de cada provider usado pelos tiers (uma por provider)
+        $providerConfigs = [];
+        foreach ($tiers as $tier) {
+            $providerConfigs[$tier->provider] ??= $providers->forSlug($tier->provider);
+        }
+        foreach ($providerConfigs as $slug => $config) {
+            if (!$config['api_key']) {
+                $this->error("API key do provider '$slug' não configurada.");
+                return self::FAILURE;
+            }
         }
 
         $suite = require base_path('benchmark/tier-suite.php');
@@ -56,9 +62,9 @@ class BenchmarkTier extends Command
 
         foreach ($tiers as $tier) {
             $this->newLine();
-            $this->info("═══ {$tier->display_name} ({$tier->provider_model_id}) ═══");
+            $this->info("═══ {$tier->display_name} ({$tier->provider_model_id} @ {$tier->provider}) ═══");
 
-            [$pass, $total] = $this->runTier($tier, $suite, $apiKey);
+            [$pass, $total] = $this->runTier($tier, $suite, $providerConfigs[$tier->provider]);
             $globalPass += $pass;
             $globalTotal += $total;
 
@@ -73,7 +79,7 @@ class BenchmarkTier extends Command
     }
 
     /** @return array{0: int, 1: int} [pass, total] */
-    private function runTier(AiModel $tier, array $suite, string $apiKey): array
+    private function runTier(AiModel $tier, array $suite, array $provider): array
     {
         $pass = 0;
         $total = 0;
@@ -88,14 +94,12 @@ class BenchmarkTier extends Command
             $started = microtime(true);
 
             try {
-                $response = Http::withHeaders([
-                    'Authorization' => 'Bearer ' . $apiKey,
+                $response = Http::withHeaders(array_merge([
+                    'Authorization' => 'Bearer ' . $provider['api_key'],
                     'Content-Type' => 'application/json',
-                    'HTTP-Referer' => config('app.url'),
-                    'X-Title' => 'Qolari Benchmark',
-                ])
+                ], $provider['headers']))
                     ->timeout((int) $this->option('timeout'))
-                    ->post('https://openrouter.ai/api/v1/chat/completions', [
+                    ->post($provider['base_url'] . '/chat/completions', [
                         'model' => $tier->provider_model_id,
                         'messages' => $item['messages'],
                         'max_tokens' => $item['max_tokens'] ?? 300,

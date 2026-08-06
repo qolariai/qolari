@@ -2,9 +2,9 @@
 
 namespace App\Jobs;
 
+use App\Domain\Proxy\AiProviderResolver;
 use App\Models\AiModel;
 use App\Models\ModelCost;
-use App\Models\Setting;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -14,27 +14,39 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 /**
- * Sincroniza precos de custo da OpenRouter (por milhao de tokens).
+ * Sincroniza precos de custo dos providers com catalogo remoto
+ * (supports_catalog=true em config/ai_providers.php — hoje so a OpenRouter).
  * Corre diariamente.
+ *
+ * Modelos de providers diretos (DeepSeek, NVIDIA, ...) NAO sao tocados:
+ * os seus custos sao geridos manualmente no admin.
  */
 class SyncModelCosts implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public function handle(): void
+    public function handle(AiProviderResolver $providers): void
     {
-        $apiKey = Setting::get('openrouter_api_key');
-        if (!$apiKey) {
-            Log::warning('SyncModelCosts: openrouter_api_key nao configurada.');
+        foreach ($providers->catalogProviders() as $slug => $provider) {
+            $this->syncProvider($slug, $provider);
+        }
+
+        Log::info('SyncModelCosts: concluido.');
+    }
+
+    private function syncProvider(string $slug, array $provider): void
+    {
+        if (!$provider['api_key']) {
+            Log::warning("SyncModelCosts: API key do provider '$slug' nao configurada.");
             return;
         }
 
         $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $apiKey,
-        ])->get('https://openrouter.ai/api/v1/models');
+            'Authorization' => 'Bearer ' . $provider['api_key'],
+        ])->get($provider['base_url'] . '/models');
 
         if ($response->failed()) {
-            Log::error('SyncModelCosts: falha ao contactar OpenRouter.', [
+            Log::error("SyncModelCosts: falha ao contactar o provider '$slug'.", [
                 'status' => $response->status(),
             ]);
             return;
@@ -42,7 +54,7 @@ class SyncModelCosts implements ShouldQueue
 
         $models = collect($response->json('data', []))->keyBy('id');
 
-        AiModel::where('provider', 'openrouter')->each(function (AiModel $aiModel) use ($models) {
+        AiModel::where('provider', $slug)->each(function (AiModel $aiModel) use ($models) {
             $remote = $models->get($aiModel->provider_model_id);
             if (!$remote || !isset($remote['pricing'])) {
                 return;
@@ -73,7 +85,5 @@ class SyncModelCosts implements ShouldQueue
             $aiModel->context_limit = $remote['context_length'] ?? null;
             $aiModel->save();
         });
-
-        Log::info('SyncModelCosts: concluido.');
     }
 }

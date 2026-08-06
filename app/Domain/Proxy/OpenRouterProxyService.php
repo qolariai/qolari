@@ -6,13 +6,18 @@ use App\Domain\Routing\SuggestionGate;
 use App\Domain\Routing\TierRecommender;
 use App\Domain\Routing\TierResolver;
 use App\Jobs\ReconcileStreamUsage;
-use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
+/**
+ * Proxy OpenAI-compatible multi-provider (OpenRouter, DeepSeek direto,
+ * NVIDIA NIM, ...). O provider (base_url + key) vem do motor resolvido
+ * pelo TierResolver — ver config/ai_providers.php e AiProviderResolver.
+ * O nome da classe é histórico: os controllers/testes dependem dele.
+ */
 class OpenRouterProxyService
 {
     public function __construct(
@@ -20,6 +25,7 @@ class OpenRouterProxyService
         private TierResolver $tierResolver,
         private TierRecommender $recommender,
         private SuggestionGate $suggestionGate,
+        private AiProviderResolver $providers,
     ) {
     }
 
@@ -38,14 +44,14 @@ class OpenRouterProxyService
         $body['model'] = $engine->provider_model_id;
         $body = $this->sanitizeBody($body);
 
-        $response = Http::withHeaders([
-            'Authorization' => 'Bearer ' . $this->apiKey(),
+        $provider = $this->providers->forModel($engine);
+
+        $response = Http::withHeaders(array_merge([
+            'Authorization' => 'Bearer ' . $provider['api_key'],
             'Content-Type' => 'application/json',
-            'HTTP-Referer' => config('app.url'),
-            'X-Title' => 'Qolari',
-        ])
+        ], $provider['headers']))
             ->timeout(300)
-            ->post('https://openrouter.ai/api/v1/chat/completions', $body);
+            ->post($provider['base_url'] . '/chat/completions', $body);
 
         $data = $response->json() ?? [];
 
@@ -98,7 +104,11 @@ class OpenRouterProxyService
         // Estimativa de prompt (fallback de metering): ~4 chars por token
         $estimatedPromptTokens = (int) ceil(mb_strlen(json_encode($body['messages'] ?? [])) / 4);
 
-        $apiKey = $this->apiKey();
+        $provider = $this->providers->forModel($engine);
+        $baseUrl = $provider['base_url'];
+        $apiKey = $provider['api_key'];
+        $providerSlug = $provider['slug'];
+        $providerHeaders = $provider['headers'];
         $meter = $this->meter;
         $engineModelId = $engine->provider_model_id;
         $tierSlug = $tier->slug;
@@ -116,19 +126,21 @@ class OpenRouterProxyService
             $headers['X-Nexus-Suggestion'] = json_encode($suggestion);
         }
 
-        return new StreamedResponse(function () use ($user, $tier, $engine, $requestId, $body, $apiKey, $meter, $estimatedPromptTokens, $engineModelId, $tierSlug) {
+        return new StreamedResponse(function () use ($user, $tier, $engine, $requestId, $body, $baseUrl, $apiKey, $providerSlug, $providerHeaders, $meter, $estimatedPromptTokens, $engineModelId, $tierSlug) {
             $buffer = '';
             $errorBody = '';
 
-            $ch = curl_init('https://openrouter.ai/api/v1/chat/completions');
+            $ch = curl_init($baseUrl . '/chat/completions');
             curl_setopt_array($ch, [
                 CURLOPT_POST => true,
-                CURLOPT_HTTPHEADER => [
+                CURLOPT_HTTPHEADER => array_merge([
                     'Authorization: Bearer ' . $apiKey,
                     'Content-Type: application/json',
-                    'HTTP-Referer: ' . config('app.url'),
-                    'X-Title: Qolari',
-                ],
+                ], array_map(
+                    fn (string $name, string $value) => $name . ': ' . $value,
+                    array_keys($providerHeaders),
+                    $providerHeaders,
+                )),
                 CURLOPT_POSTFIELDS => json_encode($body),
                 CURLOPT_TIMEOUT => 300,
                 CURLOPT_WRITEFUNCTION => function ($ch, $chunk) use (&$buffer, &$errorBody, $engineModelId, $tierSlug) {
@@ -162,7 +174,8 @@ class OpenRouterProxyService
             curl_close($ch);
 
             if ($curlError !== 0 || $httpCode >= 400) {
-                Log::warning('OpenRouter stream falhou.', [
+                Log::warning('Proxy stream falhou.', [
+                    'provider' => $providerSlug,
                     'request_id' => $requestId,
                     'curl_errno' => $curlError,
                     'http_code' => $httpCode,
@@ -171,17 +184,7 @@ class OpenRouterProxyService
 
                 // Converte o erro upstream num frame SSE OpenAI-compatible, para o
                 // cliente mostrar a mensagem real em vez de um erro generico.
-                $payload = json_decode($errorBody, true);
-                $message = $payload['error']['message'] ?? null;
-                if (!is_string($message) || $message === '') {
-                    $message = 'Upstream error (HTTP ' . ($httpCode ?: 'desconhecido') . ')';
-                }
-                // WHITE-LABEL: nunca expor o ID real do motor na mensagem de erro
-                $message = str_replace($engineModelId, $tierSlug, $message);
-                $code = $payload['error']['code'] ?? ($httpCode ?: 'unknown');
-
-                echo 'data: ' . json_encode(['error' => ['message' => $message, 'code' => $code]]) . "\n\n";
-                echo "data: [DONE]\n\n";
+                echo $this->sseErrorFrame($errorBody, $httpCode, $engineModelId, $tierSlug);
                 if (ob_get_level()) {
                     ob_flush();
                 }
@@ -248,6 +251,28 @@ class OpenRouterProxyService
     }
 
     /**
+     * Frame SSE OpenAI-compatible para um erro upstream (qualquer provider).
+     * O StreamedResponse ja sai com HTTP 200, por isso o corpo de erro do
+     * upstream NAO pode ser ecoado cru — seria descartado pelo parser SSE
+     * do cliente. Emite `data: {"error":{...}}` + `data: [DONE]`.
+     * WHITE-LABEL: o ID real do motor nunca aparece na mensagem.
+     */
+    public function sseErrorFrame(string $errorBody, int $httpCode, string $engineModelId, string $tierSlug): string
+    {
+        $payload = json_decode($errorBody, true);
+        $message = $payload['error']['message'] ?? null;
+        if (!is_string($message) || $message === '') {
+            $message = 'Upstream error (HTTP ' . ($httpCode ?: 'desconhecido') . ')';
+        }
+        // WHITE-LABEL: nunca expor o ID real do motor na mensagem de erro
+        $message = str_replace($engineModelId, $tierSlug, $message);
+        $code = $payload['error']['code'] ?? ($httpCode ?: 'unknown');
+
+        return 'data: ' . json_encode(['error' => ['message' => $message, 'code' => $code]]) . "\n\n"
+            . "data: [DONE]\n\n";
+    }
+
+    /**
      * Faz parse do buffer SSE acumulado: extrai o usage (ultimo evento que o
      * contenha), o generation id (primeiro evento) e o texto gerado (deltas).
      *
@@ -311,10 +336,5 @@ class OpenRouterProxyService
         }
 
         return $body;
-    }
-
-    private function apiKey(): string
-    {
-        return Setting::get('openrouter_api_key') ?? config('services.openrouter.api_key', '');
     }
 }

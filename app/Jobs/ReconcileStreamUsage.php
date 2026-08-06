@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Domain\Proxy\UsageMeter;
+use App\Models\AiModel;
 use App\Models\Setting;
 use App\Models\UsageLog;
 use Illuminate\Bus\Queueable;
@@ -43,7 +44,11 @@ class ReconcileStreamUsage implements ShouldQueue
             return;
         }
 
-        $usage = $this->fetchGenerationUsage();
+        // O endpoint /generation so existe em providers com
+        // supports_generation_lookup (OpenRouter). Para providers diretos
+        // salta-se o lookup e aplica-se a estimativa diretamente.
+        $lookupSupported = $this->supportsGenerationLookup($log);
+        $usage = $lookupSupported ? $this->fetchGenerationUsage() : null;
 
         if ($usage) {
             $meter->meter(
@@ -59,7 +64,7 @@ class ReconcileStreamUsage implements ShouldQueue
             return;
         }
 
-        if ($this->attempts() < $this->tries) {
+        if ($lookupSupported && $this->attempts() < $this->tries) {
             // Geracao ainda nao disponivel na OpenRouter — tenta mais tarde
             $this->release(30);
             return;
@@ -81,6 +86,17 @@ class ReconcileStreamUsage implements ShouldQueue
             status: 'estimated',
             generationId: $this->generationId,
         );
+    }
+
+    /**
+     * So a OpenRouter tem endpoint /generation; providers diretos nao.
+     */
+    private function supportsGenerationLookup(UsageLog $log): bool
+    {
+        $engineSlug = AiModel::find($log->engine_model_id ?? $log->ai_model_id)?->provider
+            ?? config('ai_providers.default', 'openrouter');
+
+        return (bool) config("ai_providers.providers.$engineSlug.supports_generation_lookup", false);
     }
 
     /**
