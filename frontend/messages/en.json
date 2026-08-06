@@ -69,7 +69,12 @@
     "popular": "Popular",
     "perMonth": "/month",
     "oneTime": "one-time payment",
-    "selectCurrency": "Currency"
+    "selectCurrency": "Currency",
+    "influencerCode": "Influencer code (optional)",
+    "influencerCodePlaceholder": "E.g. TECHPT",
+    "influencerCodeChecking": "Validating code...",
+    "influencerCodeValid": "Valid code — it will be applied to your purchase.",
+    "influencerCodeInvalid": "Invalid or inactive code."
   },
   "auth": {
     "loginTitle": "Sign in to your account",

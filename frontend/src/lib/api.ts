@@ -118,6 +118,7 @@ export interface Product {
   description: string | null;
   credits_usd: string;
   is_active: boolean;
+  is_featured: boolean;
   sort_order: number;
   prices: ProductPrice[];
   ai_model: AiModel;
@@ -137,6 +138,7 @@ export interface AiModel {
   description: string | null;
   provider: string;
   is_active: boolean;
+  sort_order: number;
 }
 
 export interface Wallet {

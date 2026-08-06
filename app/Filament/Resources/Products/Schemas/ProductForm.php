@@ -36,6 +36,9 @@ class ProductForm
                     ->columnSpanFull(),
                 Toggle::make('is_active')
                     ->required(),
+                Toggle::make('is_featured')
+                    ->label('Destacado ("Popular")')
+                    ->helperText('Mostra o badge "Popular" no card deste produto na página de preços.'),
                 TextInput::make('sort_order')
                     ->required()
                     ->numeric()

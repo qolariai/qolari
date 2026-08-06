@@ -29,6 +29,11 @@ Route::post('/v1/login', [AuthController::class, 'login'])->name('auth.login');
 // Produtos (publico — pagina de precos)
 Route::get('/v1/products', [ProductController::class, 'index'])->name('products.index');
 
+// Validacao publica de codigos de influenciador (rate limit generoso)
+Route::get('/v1/promo-codes/{code}', [\App\Http\Controllers\Api\PromoCodeController::class, 'show'])
+    ->middleware('throttle:30,1')
+    ->name('promo-codes.show');
+
 // Rotas autenticadas (Sanctum)
 Route::middleware('auth:sanctum')->group(function () {
     // Auth

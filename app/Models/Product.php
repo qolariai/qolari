@@ -10,7 +10,7 @@ class Product extends Model
 {
     protected $fillable = [
         'type', 'ai_model_id', 'name', 'description', 'credits_usd',
-        'repo_reference', 'delivery_notes', 'is_active', 'sort_order',
+        'repo_reference', 'delivery_notes', 'is_active', 'is_featured', 'sort_order',
     ];
 
     protected function casts(): array
@@ -18,6 +18,7 @@ class Product extends Model
         return [
             'credits_usd' => 'decimal:2',
             'is_active' => 'boolean',
+            'is_featured' => 'boolean',
         ];
     }
 
