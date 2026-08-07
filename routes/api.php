@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\RecommendationController;
 use App\Http\Controllers\Api\StripeWebhookController;
 use App\Http\Controllers\Api\SubscriptionCheckoutController;
 use App\Http\Controllers\Api\SubscriptionController;
+use App\Http\Controllers\Api\SubscriptionPlanController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\UsageController;
 use App\Http\Controllers\Api\WalletController;
@@ -31,6 +32,9 @@ Route::post('/v1/login', [AuthController::class, 'login'])->name('auth.login');
 
 // Produtos (publico — pagina de precos)
 Route::get('/v1/products', [ProductController::class, 'index'])->name('products.index');
+
+// Planos de subscrição Chat (publico — pagina de precos; sem IDs Stripe)
+Route::get('/v1/subscription-plans', [SubscriptionPlanController::class, 'index'])->name('subscription-plans.index');
 
 // Validacao publica de codigos de influenciador (rate limit generoso)
 Route::get('/v1/promo-codes/{code}', [\App\Http\Controllers\Api\PromoCodeController::class, 'show'])

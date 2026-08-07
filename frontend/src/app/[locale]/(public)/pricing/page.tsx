@@ -2,7 +2,12 @@
 
 import { useTranslations } from "next-intl";
 import { useQuery } from "@tanstack/react-query";
-import { api, type AiModel, type Product } from "@/lib/api";
+import {
+  api,
+  type AiModel,
+  type Product,
+  type SubscriptionPlan,
+} from "@/lib/api";
 import { useAuth } from "@/lib/auth";
 import { Link } from "@/i18n/navigation";
 import { buttonVariants } from "@/components/ui/button";
@@ -44,6 +49,12 @@ export default function PricingPage() {
   const { data: products, isLoading } = useQuery({
     queryKey: ["products"],
     queryFn: () => api.get<Product[]>("/v1/products"),
+  });
+
+  // Planos de subscrição do Qolari Chat (endpoint público, sem IDs Stripe)
+  const { data: chatPlans } = useQuery({
+    queryKey: ["subscription-plans"],
+    queryFn: () => api.get<SubscriptionPlan[]>("/v1/subscription-plans"),
   });
 
   const promoValidation = useQuery({
@@ -142,6 +153,65 @@ export default function PricingPage() {
     );
   };
 
+  const getPlanPrice = (plan: SubscriptionPlan) => {
+    const price = plan.prices?.find((p) => p.currency === currency);
+    return price ? parseFloat(price.amount) : null;
+  };
+
+  const renderChatCard = (plan: SubscriptionPlan) => {
+    const price = getPlanPrice(plan);
+    return (
+      <Card key={plan.id} className="relative flex flex-col">
+        <CardHeader className="text-center">
+          <div className="flex justify-center mb-1">
+            <Badge variant="secondary">{t("common.appName")} Chat</Badge>
+          </div>
+          <CardTitle>{plan.name}</CardTitle>
+          <div className="mt-2">
+            <span className="text-3xl font-bold">
+              {price !== null ? `${price.toFixed(2)}` : "—"}
+            </span>
+            <span className="text-muted-foreground ml-1">
+              {currency}
+              {plan.period_days === 30
+                ? t("pricing.perMonth")
+                : t("pricing.perDays", { days: plan.period_days })}
+            </span>
+          </div>
+          <p className="text-sm text-muted-foreground mt-1">
+            {plan.token_limit_human} {t("pricing.tokens")}
+          </p>
+        </CardHeader>
+        <CardContent className="flex-1 flex flex-col">
+          <ul className="space-y-2 text-sm mb-6">
+            <li className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-primary" />
+              {t("pricing.chatTokens", { tokens: plan.token_limit_human })}
+            </li>
+            <li className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-primary" />
+              {t("pricing.chatStreaming")}
+            </li>
+          </ul>
+          <div className="mt-auto">
+            {isAuthenticated ? (
+              <SubscribeButton
+                planId={plan.id}
+                currency={currency}
+                disabled={price === null}
+                label={t("pricing.subscribe")}
+              />
+            ) : (
+              <Link href="/register" className={cn(buttonVariants(), "w-full")}>
+                {t("pricing.subscribe")}
+              </Link>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    );
+  };
+
   return (
     <div className="py-16">
       <div className="mx-auto max-w-6xl px-4">
@@ -219,6 +289,23 @@ export default function PricingPage() {
             {tierGroups.flatMap((group) => group.items).map(renderCard)}
           </div>
         )}
+
+        {/* Qolari Chat — planos de subscrição (secção pública) */}
+        {chatPlans && chatPlans.length > 0 && (
+          <section id="chat-plans" className="mt-20 scroll-mt-20">
+            <div className="text-center mb-8">
+              <h2 className="text-3xl font-bold mb-2">
+                {t("pricing.chatPlansTitle")}
+              </h2>
+              <p className="text-muted-foreground">
+                {t("pricing.chatPlansSubtitle")}
+              </p>
+            </div>
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {chatPlans.map(renderChatCard)}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );
@@ -259,5 +346,53 @@ function BuyButton({
     >
       {loading ? "..." : label}
     </button>
+  );
+}
+
+function SubscribeButton({
+  planId,
+  currency,
+  disabled,
+  label,
+}: {
+  planId: number;
+  currency: string;
+  disabled?: boolean;
+  label: string;
+}) {
+  const t = useTranslations();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+
+  const handleSubscribe = async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const data = await api.post<{ checkout_url: string }>(
+        "/v1/checkout/subscription",
+        { plan_id: planId, currency }
+      );
+      window.location.href = data.checkout_url;
+    } catch {
+      setError(true);
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="space-y-1.5">
+      <button
+        onClick={handleSubscribe}
+        disabled={loading || disabled}
+        className={cn(buttonVariants(), "w-full")}
+      >
+        {loading ? "..." : label}
+      </button>
+      {error && (
+        <p className="text-xs text-destructive text-center">
+          {t("pricing.subscribeError")}
+        </p>
+      )}
+    </div>
   );
 }

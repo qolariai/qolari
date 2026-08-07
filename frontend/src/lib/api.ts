@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
+export const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 
 export interface ApiError {
   message: string;
@@ -12,7 +12,11 @@ class ApiClient {
     this.baseUrl = baseUrl;
   }
 
-  private getToken(): string | null {
+  get baseUrlPath(): string {
+    return this.baseUrl;
+  }
+
+  getToken(): string | null {
     if (typeof window === "undefined") return null;
     return localStorage.getItem("qolari_token");
   }
@@ -194,4 +198,52 @@ export interface Paginated<T> {
   last_page: number;
   per_page: number;
   total: number;
+}
+
+// Subscrição Chat (mundo separado dos pacotes de créditos)
+export interface SubscriptionPlanPrice {
+  currency: string;
+  amount: string;
+}
+
+export interface SubscriptionPlan {
+  id: number;
+  slug: string;
+  name: string;
+  token_limit: number;
+  token_limit_human: string;
+  period_days: number;
+  prices: SubscriptionPlanPrice[];
+}
+
+export interface SubscriptionState {
+  status: string;
+  plan: {
+    slug: string | null;
+    name: string | null;
+    token_limit: number | null;
+    period_days: number | null;
+  } | null;
+  tokens_used: number;
+  current_period_start: string | null;
+  current_period_end: string | null;
+  cancel_at_period_end: boolean;
+  throttled: boolean;
+}
+
+export interface ChatConversation {
+  id: number;
+  title: string | null;
+  model_slug: string | null;
+  created_at: string;
+  updated_at: string;
+  messages_count?: number;
+}
+
+export interface ChatMessage {
+  id: number;
+  role: "user" | "assistant" | "system";
+  content: string;
+  tokens: number | null;
+  created_at: string;
 }

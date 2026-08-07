@@ -16,6 +16,7 @@ import {
   Zap,
   Menu,
   X,
+  MessageSquare,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -52,6 +53,7 @@ export default function DashboardLayout({
 
   const navItems = [
     { href: "/dashboard", icon: LayoutDashboard, label: t("nav.overview") },
+    { href: "/dashboard/chat", icon: MessageSquare, label: t("nav.chat") },
     { href: "/dashboard/orders", icon: ShoppingCart, label: t("nav.orders") },
     { href: "/dashboard/usage", icon: Activity, label: t("nav.usage") },
     { href: "/dashboard/tokens", icon: Key, label: t("nav.tokens") },
