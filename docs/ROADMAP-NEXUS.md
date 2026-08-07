@@ -12,6 +12,8 @@
 >
 > **✅ FASE 2.5 — SPIKE TÉCNICO CONCLUÍDO (07-08-2026):** fork do Cline em `extensao/` com diff mínimo (13 ficheiros, edições marcadas `// Qolari fork:`): rebrand `qolari-code`, provider único bloqueado ao proxy (`https://api.qolari.com/v1`, modelo default `nexus-high` livre-texto), PostHog desligado. Build verde → `extensao/apps/vscode/dist/qolari-code.vsix` (11.9 MB). Pendente: revisão legal (ToS/Apache), contas publisher (Marketplace + Open VSX), branding residual, publicar.
 >
+> **✅ FASE 3 (BACKEND) CONCLUÍDA (07-08-2026):** motor de subscrições + Chat backend. Tabelas `subscription_plans(+prices)`, `subscriptions`, `chat_conversations`, `chat_messages`; `SubscriptionService` (plafond de tokens por período, throttling, 402/429 white-label); Stripe `mode: subscription` + webhooks (`checkout.session.completed`, `customer.subscription.updated/deleted`, `invoice.payment_failed`) idempotentes via `payment_events`; Chat API com histórico persistido e streaming, billing **na subscrição** (`UsageMeter billTo='subscription'` — wallets intactas); admin Filament Plans/Subscriptions. **71/71 testes.** Pendente: Chat UI frontend, geo-pricing, Angola (AOA/Multicaixa).
+>
 > **Mudanças estratégicas que este roadmap ainda não reflete:**
 > 1. **Pivô OpenRouter → providers diretos:** o Code passa a usar **DeepSeek direto** (1 tier ativo; GLM futuro p/ visão). A arquitetura de tiers Nexus (slugs white-label, margens, routing, recomendador) **mantém-se** — só os motores mudam. OpenRouter fica como provider opcional por config. `SyncModelCosts` e os IDs de motores têm de ser adaptados.
 > 2. **API grátis (NVIDIA NIM/Qwen)** como provider de testes/dev.
