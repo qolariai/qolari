@@ -149,7 +149,7 @@ No Pilar 4, **o criador escolhe o modo do projeto:**
 
 | Fase | Conteúdo | Estado |
 |------|----------|--------|
-| **Fase 1 — Fundação e Motor** | Infra (provisionamento isolado, backups, deploy c/ rollback) + Motor Financeiro (ledger, wallets, lotes FIFO 12m, Stripe, admin Filament, auth) + proxy OpenAI-compatible (SSE, metering idempotente, tiers) **✅ ~85% FEITO e testado**. **Fecho:** ✅ abstração de provider por config + engine **DeepSeek direto** (seeder atualizado, 42/42 testes) + provider **NVIDIA NIM (free)** p/ testes + admin Model Costs. **Falta:** keys oficiais (DeepSeek/NVIDIA) no admin + benchmark de confirmação + Stripe live (dados da empresa) | 🟡 Em fecho |
+| **Fase 1 — Fundação e Motor** | Infra (provisionamento isolado, backups, deploy c/ rollback) + Motor Financeiro (ledger, wallets, lotes FIFO 12m, Stripe, admin Filament, auth) + proxy OpenAI-compatible (SSE, metering idempotente, tiers) **✅ ~85% FEITO e testado**. **Fecho:** ✅ abstração de provider por config + engine **DeepSeek direto** (seeder atualizado, 42/42 testes) + provider **NVIDIA NIM (free)** p/ testes + admin Model Costs. **✅ DEPLOY EM PRODUÇÃO (07-08):** backend + frontend ao vivo (`api.qolari.com/api/v1/*` + shim `/v1/*` p/ clientes OpenAI/extensão; `qolari.com`), **key NVIDIA configurada e validada (benchmark `nexus-low` 16/16)**, **Stripe (test) + webhook criado** (`checkout.session.completed` + eventos de subscrição). 73/73 testes. **Falta:** key oficial DeepSeek (compra) + benchmark nesse motor, Stripe **live** (dados da empresa), criar pacotes de créditos no admin | 🟢 Em produção |
 | **Fase 2 — IDE Desktop + Lançamento Code** | Fork OpenCode: rebrand, login gate, lockdown, picker de tiers, briefing, recomendador **✅ maior parte FEITA** (em curso no `ide/`). Web: ✅ endpoint de validação de código + **checkout com código de influenciador** (campo c/ validação live, `?ref=` → cookie) + **pricing agrupada por tier** + badge Popular editável (`is_featured`). Falta: validação hands-on do build, telemetria no IDE, pacotes por tier (criar no admin), instaladores Win/Linux, landing final. **→ Primeira receita** | 🟡 Quase |
 | **Fase 2.5 — Extensão VS Code/Cursor** | **Fork do Cline** (decisão 06-08): **✅ spike técnico concluído (07-08)** — 13 ficheiros, diff mínimo (marcado `// Qolari fork:`): rebrand (`qolari-code`), provider único "Qolari" bloqueado ao proxy (`api.qolari.com/v1`, modelo default `nexus-high`, livre-texto), telemetria PostHog desligada, **build verde → `extensao/apps/vscode/dist/qolari-code.vsix` (11.9 MB)**. Falta: revisão legal (ToS/Apache), contas publisher (VS Code Marketplace + Open VSX), limpar branding residual (walkthrough, strings webview), publicar | 🟡 Spike ✅ |
 | **Fase 3 — Qolari Chat + Angola** | **✅ Backend + Frontend (07-08):** motor de subscrições completo — `subscription_plans`/`subscriptions` (Stripe `mode: subscription`, webhooks sync idempotentes), plafond de tokens por período c/ roll-forward lazy, throttling (`X-Qolari-Throttled`), Chat API (conversas + mensagens persistidas, streaming SSE, billing na subscrição **sem tocar nas wallets**), admin Filament (Plans + Subscriptions), endpoint público de planos, **Chat UI no dashboard** (sidebar de conversas, streaming, barra de plafond, paywall 402/429) + secção de planos na pricing. **73/73 testes, build Next.js ✅.** Falta: geo-pricing (IP + país), AOA/Multicaixa Express (EMIS), EuPago se procura PT | 🟡 Chat ✅ · Angola ⬜ |
@@ -190,18 +190,18 @@ Universal (sem foco único de país no lançamento) — idiomas PT + EN, moedas 
 - [x] **Modelo chefe do Code:** DeepSeek (compra direta) — benchmark já não é K2.7 vs DeepSeek via OpenRouter
 - [x] **IDE:** fork do OpenCode desktop app (Fase 2) + extensão VS Code/Cursor (Fase 2.5)
 - [x] **Email profissional:** qolari@qolari.com
-- [ ] Confirmar dados da empresa em Portugal para Stripe e IVA (chaves **test** já existem; faltam as **live**)
+- [ ] Confirmar dados da empresa em Portugal para Stripe e IVA (chaves **test** já existem; faltam as **live**). Nota: webhook endpoint de **test** já criado (07-08) em `https://api.qolari.com/api/v1/webhooks/stripe` — criar o equivalente **live** quando houver conta live
 - [ ] **Definir o split dos Partners na constituição** (bloqueante para o Pilar 3)
 - [ ] Criar GitHub privado e dar o primeiro push (token GitHub existe; remote `origin` já configurado para `qolariai/qolari`)
 - [ ] Mac + Apple Developer ($99/ano) — só quando o Mac entrar no roadmap
-- [x] **API grátis para testes/dev:** provider **NVIDIA NIM configurado e validado** (key real testada 06-08; benchmark `nexus-low` free = 15/16). Qwen fica como alternativa
+- [x] **Push + deploy do backend** para `api.qolari.com` — **feito 07-08** (backend + frontend; inclui SSE error frame, pivô de providers, chat, billing; Stripe test + webhook; shim nginx `/v1/*` → `/api/v1/*` p/ clientes OpenAI)
+- [x] **API grátis para testes/dev:** provider **NVIDIA NIM configurado e validado** (key real testada 06-08; **benchmark confirmação `nexus-low` 16/16 a 07-08**). Qwen fica como alternativa
 - [ ] **Definir preço do Chat fora de Angola** e **nomes dos tiers** do Chat
 - [ ] Verificar integração **Multicaixa Express** (gateway EMIS: AppyPay vs GPO direto)
 - [ ] **Validação jurídica do escrow** (Stripe Connect + retenção de fundos em PT/UE) — pré-requisito do Pilar 4
 - [ ] **Contratos-quadro + vesting redigidos por advogado** — pré-requisito do Pilar 4
 - [ ] 🚨 **Mover `aceder.txt` para gestor de passwords e apagar do projeto** (credenciais em texto claro — viola a regra de segurança; já adicionado ao `.gitignore` como rede de segurança); considerar **rotação dos tokens** que estiveram expostos
-- [ ] **Obter API key oficial DeepSeek** e configurar no admin (`deepseek_api_key`); correr `AiModelsSeeder` + benchmark de confirmação (`php artisan qolari:benchmark`)
-- [ ] **Push + deploy do backend** para `api.qolari.com` (inclui `c417caf` SSE error frame + pivô de providers 06-08) — fazer quando a Fase 1 fechar
+- [ ] **Obter API key oficial DeepSeek** e configurar no servidor (`.env` ou admin `deepseek_api_key`); correr benchmark de confirmação nesse motor (`php artisan qolari:benchmark nexus-high`)
 
 ---
 
