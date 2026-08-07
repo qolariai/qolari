@@ -45,6 +45,10 @@ class OpenRouterProxyService
 
         $requestId = Str::uuid()->toString();
         $body['model'] = $engine->provider_model_id;
+        // Defesa: este caminho é não-streaming — se o cliente enviar stream
+        // (ou stream_options), o upstream devolveria SSE e o parse JSON falharia.
+        $body['stream'] = false;
+        unset($body['stream_options']);
         $body = $this->sanitizeBody($body);
 
         $provider = $this->providers->forModel($engine);

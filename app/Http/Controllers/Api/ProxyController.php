@@ -34,11 +34,18 @@ class ProxyController extends Controller
     }
 
     /**
-     * POST /api/v1/chat/completions — nao-streaming
+     * POST /api/v1/chat/completions — modo decidido pelo `stream` do body
+     * (padrão OpenAI: o mesmo endpoint serve streaming e não-streaming).
+     * O IDE envia stream=true para /chat/completions — sem isto receberia
+     * uma resposta vazia porque o upstream devolveria SSE a um handler JSON.
      */
-    public function completions(Request $request): JsonResponse
+    public function completions(Request $request): JsonResponse|StreamedResponse
     {
         $body = $this->validatedBody($request);
+
+        if (!empty($body['stream'])) {
+            return $this->proxyService->stream($request->user(), $body);
+        }
 
         $result = $this->proxyService->completions($request->user(), $body);
 

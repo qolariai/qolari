@@ -115,6 +115,35 @@ class AiProvidersTest extends TestCase
         $this->assertEquals('ok', $log->status);
     }
 
+    public function test_completions_with_stream_true_returns_sse_stream(): void
+    {
+        app(WalletService::class)->credit($this->user->id, $this->deepseekModel->id, 10.00);
+
+        // O IDE envia stream=true para /chat/completions (padrão OpenAI).
+        // Sem o routing para stream(), o handler JSON devolveria resposta
+        // vazia (o upstream responde SSE a um pedido com stream=true).
+        $mock = $this->mock(OpenRouterProxyService::class);
+        $mock->expects('stream')->once()->andReturn(new \Symfony\Component\HttpFoundation\StreamedResponse(
+            function () {
+                echo "data: [DONE]\n\n";
+            },
+            200,
+            ['Content-Type' => 'text/event-stream'],
+        ));
+
+        Sanctum::actingAs($this->user);
+
+        $response = $this->postJson('/api/v1/chat/completions', [
+            'model' => 'nexus-medium',
+            'stream' => true,
+            'messages' => [['role' => 'user', 'content' => 'ola']],
+        ]);
+
+        $response->assertOk();
+        $this->assertStringContainsString('text/event-stream', (string) $response->headers->get('Content-Type'));
+        $this->assertStringContainsString('data: [DONE]', $response->streamedContent());
+    }
+
     public function test_sse_error_frame_works_for_direct_provider(): void
     {
         $service = app(OpenRouterProxyService::class);

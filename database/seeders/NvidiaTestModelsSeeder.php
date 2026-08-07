@@ -17,13 +17,15 @@ use Illuminate\Support\Facades\DB;
 class NvidiaTestModelsSeeder extends Seeder
 {
     private const MODELS = [
+        // Latências medidas no free tier (07-08): 8b ~0.5s, 49b ~9s,
+        // 70b 18-30s — os 70b tornavam o chat/IDE inutilizáveis em teste.
         'nexus-high' => [
-            'provider_model_id' => 'meta/llama-3.3-70b-instruct',
+            'provider_model_id' => 'nvidia/llama-3.3-nemotron-super-49b-v1.5',
             'supports_vision' => false,
             'is_active' => true,
         ],
         'nexus-medium' => [
-            'provider_model_id' => 'meta/llama-3.1-70b-instruct',
+            'provider_model_id' => 'meta/llama-3.1-8b-instruct',
             'supports_vision' => false,
             'is_active' => true,
         ],
@@ -41,7 +43,7 @@ class NvidiaTestModelsSeeder extends Seeder
         ],
         // Legacy: Products antigos referenciam este slug.
         'qolari' => [
-            'provider_model_id' => 'meta/llama-3.1-70b-instruct',
+            'provider_model_id' => 'meta/llama-3.1-8b-instruct',
             'supports_vision' => false,
             'is_active' => true,
         ],
