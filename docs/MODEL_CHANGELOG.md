@@ -9,16 +9,17 @@
 
 ## Estado atual dos tiers
 
-| Tier | Motor (produção) | Motor (sandbox dev) | Desde |
-|---|---|---|---|
-| Nexus High | `moonshotai/kimi-k2.7-code` | `nvidia/nemotron-3-ultra-550b-a55b:free` | 2026-08-04 |
-| Nexus Medium | `deepseek/deepseek-v4-pro` | `nvidia/nemotron-3-super-120b-a12b:free` | 2026-08-04 |
-| Nexus Low | `qwen/qwen3-coder` | `nvidia/nemotron-nano-9b-v2:free` | 2026-08-04 |
-| Nexus Vision (silencioso) | `google/gemini-2.0-flash-001` | `google/gemma-4-26b-a4b-it:free` | 2026-08-04 |
+> **⚠️ v4.3 (2026-08-06) — Pivô para providers diretos:** os motores de produção passam de OpenRouter para **DeepSeek direto** (ver entrada 2026-08-06 abaixo). A tabela seguinte reflete o estado **após o pivô** (seeder `AiModelsSeeder` atualizado).
 
-⚠️ IDs de produção por validar contra o catálogo OpenRouter (`SyncModelCosts`
-confirma na 1ª execução com key válida — verifique se cada tier tem custos
-sincronizados em `model_costs`).
+| Tier | Motor (produção) | Provider | Desde |
+|---|---|---|---|
+| Nexus High | `deepseek-reasoner` | **deepseek** (direto) | 2026-08-06 |
+| Nexus Medium | `deepseek-chat` | **deepseek** (direto) | 2026-08-06 |
+| Nexus Low (dev/testes) | `meta/llama-3.1-8b-instruct` | **nvidia** (free tier) | 2026-08-06 |
+| Nexus Vision (silencioso) | **DORMENTE** (`is_active=false`) até haver GLM direto | — | 2026-08-06 |
+| Legacy `qolari` (Products) | `deepseek-chat` | **deepseek** (direto) | 2026-08-06 |
+
+⚠️ Custos iniciais DeepSeek/NVIDIA semeados pelo seeder (só se não existirem); ajustes finos no admin em **Model Costs** (resource criado em 2026-08-06). OpenRouter fica como provider opcional por config (`supports_catalog=true`, único com sync de custos).
 
 ---
 
@@ -40,6 +41,23 @@ sincronizados em `model_costs`).
 ---
 
 ## Entradas
+
+## [2026-08-06] Pivô v4.3: OpenRouter → providers diretos (DeepSeek)
+**Motivo:** decisão estratégica v4.3 (RESUMO.md) — compra direta às lojas oficiais (melhor margem, sem intermediário); OpenRouter fica opcional por config.
+**Benchmarks (suite regressão):** pendente — correr `php artisan qolari:benchmark` contra DeepSeek quando houver key (o comando já resolve key/base_url por provider).
+**Feito:**
+- [x] Abstração de providers (`config/ai_providers.php` + `App\Domain\Proxy\AiProviderResolver`) — openrouter/deepseek/nvidia, key via Setting (admin) com fallback env
+- [x] Proxy provider-aware (base_url/key/headers por motor); frame de erro SSE white-label generalizado a todos os providers
+- [x] `SyncModelCosts` só toca providers com catálogo (OpenRouter); custos diretos são manuais (admin → Model Costs)
+- [x] `ReconcileStreamUsage`: providers diretos saltam lookup `/generation` → estimativa direta
+- [x] Seeder idempotente atualizado (motores + custos iniciais) + settings `deepseek_api_key`/`nvidia_api_key`
+- [x] Suite de testes: **42/42** (7 novos de providers)
+**Pendente:**
+- [ ] Obter key DeepSeek oficial; correr benchmark de confirmação do DeepSeek (comparar com o baseline)
+- [x] ~~Validar quota/key NVIDIA NIM~~ → **VALIDADO 06-08-2026:** key real testada na API + suite de regressão `nexus-low` (Llama 3.1 8B free) = **15/16 (94%)** — acima do baseline 12/16 do nemotron free (2026-08-05). Único FAIL: logic-puzzle.
+- [ ] Definir margens finais por tier (atual: 3.00 uniforme)
+- [ ] GLM direto para reativar Nexus Vision
+**Rollback:** re-seedar com motores OpenRouter (o provider `openrouter` continua configurado e funcional — basta mudar `provider`/`provider_model_id` no admin, sem código nem deploy).
 
 ## [2026-08-04] Configuração inicial dos 4 tiers
 **Motivo:** lançamento da arquitetura de tiers Nexus

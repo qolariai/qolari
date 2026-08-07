@@ -3,6 +3,23 @@
 > **Versão:** 1.1 · **Data:** 2026-08-04
 > **Origem:** Sessão de análise estratégica + auditoria técnica ao backend Laravel, frontend Next.js e fork do IDE OpenCode.
 > **Estado:** Fase 0 em execução — 0.1 a 0.4 CONCLUÍDOS.
+>
+> ---
+> ### 🔄 NOTA v4.3 (06-08-2026) — Remodelação de Fases e pivô de providers
+> As fases mestras do projeto foram **remodeladas** (ver tabela abaixo e `RESUMO.md` v4.3). Este documento passa a ser o **detalhe de execução** das Fases 1 e 2 mestras (o trabalho de tiers, blindagem e continuidade aqui descrito continua válido e maioritariamente concluído).
+>
+> **✅ PIVÔ EXECUTADO (06-08-2026):** abstração de providers (`config/ai_providers.php` + `AiProviderResolver`), proxy provider-aware, `SyncModelCosts`/`ReconcileStreamUsage` adaptados, seeder com motores DeepSeek direto + NVIDIA free, admin Model Costs. **42/42 testes.** Registado em `docs/MODEL_CHANGELOG.md` (entrada 2026-08-06). Pendente: keys oficiais + benchmark de confirmação + deploy.
+>
+> **✅ FASE 2.5 — SPIKE TÉCNICO CONCLUÍDO (07-08-2026):** fork do Cline em `extensao/` com diff mínimo (13 ficheiros, edições marcadas `// Qolari fork:`): rebrand `qolari-code`, provider único bloqueado ao proxy (`https://api.qolari.com/v1`, modelo default `nexus-high` livre-texto), PostHog desligado. Build verde → `extensao/apps/vscode/dist/qolari-code.vsix` (11.9 MB). Pendente: revisão legal (ToS/Apache), contas publisher (Marketplace + Open VSX), branding residual, publicar.
+>
+> **Mudanças estratégicas que este roadmap ainda não reflete:**
+> 1. **Pivô OpenRouter → providers diretos:** o Code passa a usar **DeepSeek direto** (1 tier ativo; GLM futuro p/ visão). A arquitetura de tiers Nexus (slugs white-label, margens, routing, recomendador) **mantém-se** — só os motores mudam. OpenRouter fica como provider opcional por config. `SyncModelCosts` e os IDs de motores têm de ser adaptados.
+> 2. **API grátis (NVIDIA NIM/Qwen)** como provider de testes/dev.
+> 3. **Novos pilares:** Qolari Chat (browser, subscrição) e Co-Criação — ver `RESUMO.md`.
+> 4. **Geo-pricing Angola (AOA/Multicaixa Express)** no Code e no Chat.
+>
+> **Mapeamento:** Fases 0–5 deste documento ≈ trabalho de fecho das **Fases 1 e 2 mestras**.
+> ---
 
 ## ⏩ PROGRESSO (atualizado 2026-08-04)
 
@@ -68,7 +85,7 @@
 
 Este roadmap consolida todas as decisões debatidas:
 
-1. **Modelo de negócio:** revenda de acesso a modelos de IA via OpenRouter com margem (~3x), vendida como **créditos** (nunca "preço do modelo") dentro de um ecossistema fechado (IDE próprio + backend + frontend).
+1. **Modelo de negócio:** revenda de acesso a modelos de IA com margem (~3x), vendida como **créditos** (nunca "preço do modelo") dentro de um ecossistema fechado (IDE próprio + backend + frontend). ⚠️ **v4.3:** providers passam a ser **diretos** (DeepSeek no lançamento; GLM futuro) em vez de OpenRouter — 1 tier ativo, restantes dormentes. Chat (Fase 3) é **subscrição**, não créditos.
 2. **Tiers white-label:** o cliente nunca vê nomes reais de modelos. Tiers comerciais: **Nexus High**, **Nexus Medium**, **Nexus Low** e **Nexus Vision** (invisível).
 3. **Nexus Vision é silencioso:** entra automaticamente quando o cliente insere imagem/ficheiro e o tier atual não é multimodal. **Cobra-se à tarifa do tier escolhido pelo cliente** — o custo real mais baixo do Vision aumenta a margem.
 4. **Troca de tiers a meio da conversa tem de ser 100% transparente:** o modelo novo sabe o que foi feito e o que falta (Session Briefing / context handoff).
