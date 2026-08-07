@@ -32,9 +32,12 @@ class OpenRouterProxyService
     /**
      * Proxy nao-streaming: encaminha request, mede tokens, debita.
      *
+     * $billTo: 'wallet' (Code, default) ou 'subscription' (Chat — regista o
+     * custo mas nunca debita a wallet). Call sites existentes nao mudam.
+     *
      * @return array{data: array, suggestion: array|null, status: int}
      */
-    public function completions(User $user, array $body): array
+    public function completions(User $user, array $body, string $billTo = 'wallet'): array
     {
         $resolution = $this->tierResolver->resolve($body, $user);
         $tier = $resolution->tier;
@@ -76,6 +79,7 @@ class OpenRouterProxyService
             promptTokens: $usage['prompt_tokens'] ?? 0,
             completionTokens: $usage['completion_tokens'] ?? 0,
             generationId: $data['id'] ?? null,
+            billTo: $billTo,
         );
 
         return ['data' => $data, 'suggestion' => $this->suggestionFor($user, $tier->slug, $body), 'status' => 200];
@@ -275,10 +279,11 @@ class OpenRouterProxyService
     /**
      * Faz parse do buffer SSE acumulado: extrai o usage (ultimo evento que o
      * contenha), o generation id (primeiro evento) e o texto gerado (deltas).
+     * Publico para reutilizacao pelo Chat (que persiste o texto gerado).
      *
      * @return array{usage: array|null, generation_id: string|null, completion_text: string}
      */
-    private function parseSseBuffer(string $buffer): array
+    public function parseSseBuffer(string $buffer): array
     {
         $usage = null;
         $generationId = null;

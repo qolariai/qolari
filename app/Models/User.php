@@ -64,6 +64,16 @@ class User extends Authenticatable implements FilamentUser
         return $this->hasMany(UsageLog::class);
     }
 
+    public function subscriptions(): HasMany
+    {
+        return $this->hasMany(Subscription::class);
+    }
+
+    public function chatConversations(): HasMany
+    {
+        return $this->hasMany(ChatConversation::class);
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return $this->is_admin;

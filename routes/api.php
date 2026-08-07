@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\ChatController;
 use App\Http\Controllers\Api\CheckoutController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProxyController;
 use App\Http\Controllers\Api\RecommendationController;
 use App\Http\Controllers\Api\StripeWebhookController;
+use App\Http\Controllers\Api\SubscriptionCheckoutController;
+use App\Http\Controllers\Api\SubscriptionController;
 use App\Http\Controllers\Api\TokenController;
 use App\Http\Controllers\Api\UsageController;
 use App\Http\Controllers\Api\WalletController;
@@ -44,6 +47,10 @@ Route::middleware('auth:sanctum')->group(function () {
     // Checkout
     Route::post('/v1/checkout', [CheckoutController::class, 'store'])->name('checkout.store');
 
+    // Subscrição Chat (mundo separado dos pacotes de créditos)
+    Route::post('/v1/checkout/subscription', [SubscriptionCheckoutController::class, 'store'])->name('checkout.subscription');
+    Route::get('/v1/subscription', [SubscriptionController::class, 'show'])->name('subscription.show');
+
     // Wallets
     Route::get('/v1/wallets', [WalletController::class, 'index'])->name('wallets.index');
 
@@ -74,5 +81,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::middleware('throttle:60,1')->group(function () {
         Route::post('/v1/chat', [ProxyController::class, 'chat'])->name('proxy.chat');
         Route::post('/v1/chat/completions', [ProxyController::class, 'completions'])->name('proxy.completions');
+    });
+
+    // Chat por subscrição (rate limited; faturação no contador do período)
+    Route::middleware('throttle:30,1')->prefix('v1/chat')->group(function () {
+        Route::get('/conversations', [ChatController::class, 'index'])->name('chat.conversations.index');
+        Route::post('/conversations', [ChatController::class, 'store'])->name('chat.conversations.store');
+        Route::delete('/conversations/{id}', [ChatController::class, 'destroy'])->name('chat.conversations.destroy');
+        Route::get('/conversations/{id}/messages', [ChatController::class, 'messages'])->name('chat.messages.index');
+        Route::post('/conversations/{id}/messages', [ChatController::class, 'sendMessage'])->name('chat.messages.store');
     });
 });

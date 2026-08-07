@@ -25,6 +25,9 @@ class UsageMeter
     /**
      * Mede tokens, debita e regista. Idempotente por requestId:
      * se ja existir um debito com esta key, o WalletService devolve o existente.
+     *
+     * $billTo: 'wallet' debita créditos (Code); 'subscription' regista o
+     * custo mas NUNCA toca na wallet — o Chat conta contra o teto do período.
      */
     public function meter(
         int $userId,
@@ -35,6 +38,7 @@ class UsageMeter
         int $completionTokens,
         string $status = 'ok',
         ?string $generationId = null,
+        string $billTo = 'wallet',
     ): UsageLog {
         $tier = AiModel::findOrFail($tierModelId);
         $engine = AiModel::findOrFail($engineModelId);
@@ -43,9 +47,10 @@ class UsageMeter
         $cost = $this->calculateCost($engine, $promptTokens, $completionTokens);
         $charged = round($cost * (float) $tier->margin_multiplier, 8);
 
-        // Debita a wallet do TIER (idempotente por requestId)
+        // Debita a wallet do TIER (idempotente por requestId).
+        // Subscrição (Chat): o custo fica registado, mas a wallet é intocável.
         $ledgerEntry = null;
-        if ($charged > 0) {
+        if ($billTo === 'wallet' && $charged > 0) {
             try {
                 $ledgerEntry = $this->walletService->debit(
                     userId: $userId,
