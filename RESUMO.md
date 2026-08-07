@@ -156,6 +156,9 @@ No Pilar 4, **o criador escolhe o modo do projeto:**
 | **Fase 4 — Escala e Polimento** | Auto-update IDE, Mac, i18n ES/FR/DE, 2º modelo/tier ativo (GLM p/ visão), shadow/canary de modelos, ferramentas Partners (3+ parceiros), otimizações | ⬜ contínuo |
 | **Pilar 4 — Co-Criação** (fase própria, "no melhor momento") | **Pré-requisitos:** validação jurídica do escrow + contratos-quadro com advogado. **Build:** matchmaking, projetos/equipas, quotas por marcos, cockpit + telemetria, SOS à equipa, gestão de crise, stack de IA flexível + tetos por dev, KYC (angolanos nunca investidores), escrow Stripe Connect, Modo Qolari/Modo Livre (subscrição por assento), kill switch, PI intermédia. **Iteração 2:** RSA/code-is-law | ⬜ |
 
+> ### 🧪 FASE DE TESTES (07-08-2026)
+> **Todos os tiers ativos apontam para NVIDIA NIM (gratuito)** via `NvidiaTestModelsSeeder` — serve **Code e Chatbot** (ambos resolvem o motor pelo mesmo `TierResolver`): `nexus-high`→llama-3.3-70b · `nexus-medium`/`qolari`→llama-3.1-70b · `nexus-low`→llama-3.1-8b · `nexus-vision`→llama-3.2-90b-vision (vision ativo p/ testar o routing silencioso). **Validado E2E em produção:** proxy white-label ✅, Chat JSON+SSE ✅, billing correto (Chat debita a subscrição, Code debita a wallet) ✅. **Conta de testes:** `teste@qolari.com` / `TesteQolari2026` (créditos + subscrição ativa). **Stripe em modo test** (`details_submitted=false` — faltam os dados da empresa para live). **Voltar ao mapeamento de produção (DeepSeek):** `php artisan db:seed --class=AiModelsSeeder`.
+
 **Primeira receita possível:** fim da Fase 1 (venda de créditos via dashboard, antes do IDE existir).
 
 ---
