@@ -10,17 +10,17 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Radio, Eye, Monitor, Coins } from "lucide-react";
+import { Monitor, Layers, MessageSquare, CreditCard, Download } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function LandingPage() {
   const t = useTranslations();
 
   const features = [
-    { icon: Radio, title: t("landing.feature1Title"), desc: t("landing.feature1Desc") },
-    { icon: Eye, title: t("landing.feature2Title"), desc: t("landing.feature2Desc") },
-    { icon: Monitor, title: t("landing.feature3Title"), desc: t("landing.feature3Desc") },
-    { icon: Coins, title: t("landing.feature4Title"), desc: t("landing.feature4Desc") },
+    { icon: Monitor, title: t("landing.feature1Title"), desc: t("landing.feature1Desc") },
+    { icon: Layers, title: t("landing.feature2Title"), desc: t("landing.feature2Desc") },
+    { icon: MessageSquare, title: t("landing.feature3Title"), desc: t("landing.feature3Desc") },
+    { icon: CreditCard, title: t("landing.feature4Title"), desc: t("landing.feature4Desc") },
   ];
 
   const faqs = [
@@ -70,6 +70,24 @@ export default function LandingPage() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Download IDE */}
+      <section id="download" className="py-20 bg-muted/50">
+        <div className="mx-auto max-w-6xl px-4 text-center">
+          <h2 className="text-3xl font-bold mb-4">{t("landing.downloadTitle")}</h2>
+          <p className="mx-auto max-w-2xl text-muted-foreground mb-8">{t("landing.downloadSubtitle")}</p>
+          <div className="flex items-center justify-center gap-4">
+            <a href="/downloads/qolari-ide-win-x64.exe" className={cn(buttonVariants({ size: "lg" }))}>
+              <Download className="mr-2 h-4 w-4" />
+              {t("landing.downloadWin")}
+            </a>
+            <a href="/downloads/qolari-ide-linux-x64.tar.gz" className={cn(buttonVariants({ size: "lg", variant: "outline" }))}>
+              <Download className="mr-2 h-4 w-4" />
+              {t("landing.downloadLinux")}
+            </a>
           </div>
         </div>
       </section>
