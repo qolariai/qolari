@@ -21,6 +21,8 @@
 
 ⚠️ Custos iniciais DeepSeek/NVIDIA semeados pelo seeder (só se não existirem); ajustes finos no admin em **Model Costs** (resource criado em 2026-08-06). OpenRouter fica como provider opcional por config (`supports_catalog=true`, único com sync de custos).
 
+> **🧪 Mapeamento ATUAL em produção (fase de testes, 08-08):** todos os tiers de texto → `nvidia/nemotron-3-ultra-550b-a55b` (ver entrada 2026-08-08). A tabela acima é o mapeamento-alvo de produção, restaurável com `AiModelsSeeder`.
+
 ---
 
 ## Template de entrada
@@ -41,6 +43,20 @@
 ---
 
 ## Entradas
+
+## [2026-08-08] Fase de testes: tiers de texto → nvidia/nemotron-3-ultra-550b-a55b
+**Motivo:** os motores de teste anteriores eram inutilizáveis (llama-70b: 18–30s; super-49b: ~9s). Nemotron 3 Ultra 550B na NIM: frontier, ~1s TTFB, gratuito. Aplica-se ao Code (proxy/wallets) e ao Chat (subscrição) — ambos resolvem via TierResolver.
+**Benchmarks (suite regressão):** **16/16 (100%)** — nexus-high (`php artisan qolari:benchmark nexus-high`, 08-08). 1ª corrida deu 12/16 com 4 FAILs por HTTP 503 (sobrecarga transitória do free tier NIM — infra, não qualidade); re-run limpo 16/16. Baselines anteriores: llama-3.1-8b free 15/16; nemotron free 12/16.
+**Feito:**
+- [x] BD produção: nexus-high/medium/low/qolari → `nvidia/nemotron-3-ultra-550b-a55b` (vision fica llama-3.2-90b — decisão do motor Vision adiada)
+- [x] Thinking desligado via `extra_body` do provider nvidia (`chat_template_kwargs.enable_thinking=false`) — nemotron-3 é reasoning; sem isto o raciocínio ia em `reasoning_content` invisível no chatbot (resposta parecia parada)
+- [x] Deploy backend no servidor (inclui fix stream `/v1/chat/completions` que faltava — IDE recebia `[]`)
+- [x] Latência E2E produção: IDE/proxy 1.3s 1º chunk; chatbot ~1s (quente)
+- [x] Suite de regressão 16/16
+**Pendente:**
+- [ ] Decidir motor definitivo do Nexus Vision (adiado)
+- [ ] Se se quiser reasoning nos motores pagos: mostrar `reasoning_content` na UI ou reativar thinking
+**Rollback:** `php artisan db:seed --class=AiModelsSeeder` (DeepSeek) ou editar no admin — sem código nem deploy.
 
 ## [2026-08-06] Pivô v4.3: OpenRouter → providers diretos (DeepSeek)
 **Motivo:** decisão estratégica v4.3 (RESUMO.md) — compra direta às lojas oficiais (melhor margem, sem intermediário); OpenRouter fica opcional por config.
