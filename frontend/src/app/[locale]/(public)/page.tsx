@@ -88,6 +88,10 @@ export default function LandingPage() {
               <Download className="mr-2 h-4 w-4" />
               {t("landing.downloadLinux")}
             </a>
+            <a href="/downloads/qolari-code.vsix" className={cn(buttonVariants({ size: "lg", variant: "outline" }))}>
+              <Download className="mr-2 h-4 w-4" />
+              {t("landing.downloadExt")}
+            </a>
           </div>
         </div>
       </section>

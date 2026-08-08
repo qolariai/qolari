@@ -53,6 +53,7 @@
     "downloadSubtitle": "Native desktop app for Windows and Linux. Sign in with your Qolari account and start coding with AI.",
     "downloadWin": "Windows (x64)",
     "downloadLinux": "Linux (x64)",
+    "downloadExt": "VS Code / Cursor",
     "faqTitle": "Frequently asked questions",
     "faq1Q": "How do Code credits work?",
     "faq1A": "You buy a prepaid credit package. Each AI request debits the exact usage cost. Balance expires 12 months after purchase.",
