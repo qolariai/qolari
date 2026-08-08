@@ -94,6 +94,7 @@ export default function SettingsPage() {
                   <option value="EUR">EUR</option>
                   <option value="USD">USD</option>
                   <option value="GBP">GBP</option>
+                  <option value="AOA">AOA</option>
                 </select>
               </div>
               <div className="space-y-2">

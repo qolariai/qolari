@@ -41,6 +41,16 @@ return [
         'webhook_secret' => env('STRIPE_WEBHOOK_SECRET'),
     ],
 
+    'appypay' => [
+        'base_url' => env('APPYPAY_BASE_URL', 'https://gwy-api.appypay.co.ao/v2.0'),
+        'auth_url' => env('APPYPAY_AUTH_URL', 'https://login.microsoftonline.com/auth.appypay.co.ao/oauth2/token'),
+        'client_id' => env('APPYPAY_CLIENT_ID'),
+        'client_secret' => env('APPYPAY_CLIENT_SECRET'),
+        'resource' => env('APPYPAY_RESOURCE'),
+        'api_key' => env('APPYPAY_API_KEY'),
+        'webhook_secret' => env('APPYPAY_WEBHOOK_SECRET'),
+    ],
+
     'openrouter' => [
         'api_key' => env('OPENROUTER_API_KEY'),
         'base_url' => 'https://openrouter.ai/api/v1',

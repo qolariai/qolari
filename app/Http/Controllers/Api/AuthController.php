@@ -20,7 +20,7 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'promo_code' => 'nullable|string|exists:promo_codes,code',
             'country' => 'nullable|string|size:2',
-            'preferred_currency' => 'nullable|in:EUR,USD,GBP',
+            'preferred_currency' => 'nullable|in:EUR,USD,GBP,AOA',
             'language' => 'nullable|in:pt,en',
         ]);
 
@@ -91,7 +91,7 @@ class AuthController extends Controller
 
         $validated = $request->validate([
             'name' => 'sometimes|string|max:100',
-            'preferred_currency' => 'sometimes|in:EUR,USD,GBP',
+            'preferred_currency' => 'sometimes|in:EUR,USD,GBP,AOA',
             'language' => 'sometimes|in:pt,en',
             'country' => 'sometimes|nullable|string|size:2',
             'nexus_auto' => 'sometimes|boolean',

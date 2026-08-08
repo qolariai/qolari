@@ -88,7 +88,15 @@
     "subscribeError": "Could not start checkout. Try again.",
     "tokens": "tokens",
     "chatTokens": "{tokens} tokens per period",
-    "chatStreaming": "Real-time streaming responses"
+    "chatStreaming": "Real-time streaming responses",
+    "mcxPay": "Pay with Multicaixa Express",
+    "mcxPhoneLabel": "Multicaixa Express phone",
+    "mcxPhonePlaceholder": "9XX XXX XXX",
+    "mcxInvalidPhone": "Invalid number. Use the Angolan format 9XXXXXXXX.",
+    "mcxPendingTitle": "Confirm on your phone",
+    "mcxPendingBody": "We sent a payment request to your Multicaixa Express app. Open the app and confirm with your PIN.",
+    "mcxWaiting": "Waiting for confirmation...",
+    "mcxFailed": "The payment failed or expired. Please try again."
   },
   "auth": {
     "loginTitle": "Sign in to your account",

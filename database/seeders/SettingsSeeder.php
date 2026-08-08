@@ -22,6 +22,12 @@ class SettingsSeeder extends Seeder
             ['key' => 'nvidia_api_key', 'value' => null, 'is_secret' => true],
             ['key' => 'stripe_secret_key', 'value' => null, 'is_secret' => true],
             ['key' => 'stripe_webhook_secret', 'value' => null, 'is_secret' => true],
+            // AppyPay (Multicaixa Express / GPO — Angola, AOA)
+            ['key' => 'appypay_client_id', 'value' => null, 'is_secret' => true],
+            ['key' => 'appypay_client_secret', 'value' => null, 'is_secret' => true],
+            ['key' => 'appypay_resource', 'value' => null, 'is_secret' => true],
+            ['key' => 'appypay_api_key', 'value' => null, 'is_secret' => true],
+            ['key' => 'appypay_webhook_secret', 'value' => null, 'is_secret' => true],
         ];
 
         foreach ($defaults as $row) {

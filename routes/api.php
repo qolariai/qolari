@@ -26,6 +26,10 @@ use Illuminate\Support\Facades\Route;
 Route::post('/v1/webhooks/stripe', [StripeWebhookController::class, 'handle'])
     ->name('webhooks.stripe');
 
+// Webhook AppyPay (sem auth — assinatura HMAC no header X-AppyPay-Signature)
+Route::post('/v1/webhooks/appypay', [\App\Http\Controllers\Api\AppyPayWebhookController::class, 'handle'])
+    ->name('webhooks.appypay');
+
 // Auth publica
 Route::post('/v1/register', [AuthController::class, 'register'])->name('auth.register');
 Route::post('/v1/login', [AuthController::class, 'login'])->name('auth.login');
@@ -35,6 +39,11 @@ Route::get('/v1/products', [ProductController::class, 'index'])->name('products.
 
 // Planos de subscrição Chat (publico — pagina de precos; sem IDs Stripe)
 Route::get('/v1/subscription-plans', [SubscriptionPlanController::class, 'index'])->name('subscription-plans.index');
+
+// Geo-pricing: moeda sugerida por IP (publico, falha silenciosa)
+Route::get('/v1/geo', [\App\Http\Controllers\Api\GeoController::class, 'show'])
+    ->middleware('throttle:30,1')
+    ->name('geo.show');
 
 // Validacao publica de codigos de influenciador (rate limit generoso)
 Route::get('/v1/promo-codes/{code}', [\App\Http\Controllers\Api\PromoCodeController::class, 'show'])

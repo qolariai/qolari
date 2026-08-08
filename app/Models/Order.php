@@ -11,7 +11,7 @@ class Order extends Model
 {
     protected $fillable = [
         'user_id', 'product_id', 'currency', 'amount', 'exchange_rate_used',
-        'amount_usd', 'gateway', 'status', 'promo_code_id', 'idempotency_key',
+        'amount_usd', 'gateway', 'gateway_reference', 'status', 'promo_code_id', 'idempotency_key',
         'fulfillment_status',
     ];
 

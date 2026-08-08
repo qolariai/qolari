@@ -88,7 +88,15 @@
     "subscribeError": "Nao foi possivel iniciar o checkout. Tente novamente.",
     "tokens": "tokens",
     "chatTokens": "{tokens} tokens por periodo",
-    "chatStreaming": "Respostas em tempo real (streaming)"
+    "chatStreaming": "Respostas em tempo real (streaming)",
+    "mcxPay": "Pagar com Multicaixa Express",
+    "mcxPhoneLabel": "Telemovel Multicaixa Express",
+    "mcxPhonePlaceholder": "9XX XXX XXX",
+    "mcxInvalidPhone": "Numero invalido. Use o formato angolano 9XXXXXXXX.",
+    "mcxPendingTitle": "Confirme no seu telemovel",
+    "mcxPendingBody": "Enviamos um pedido de pagamento para a sua app Multicaixa Express. Abra a app e confirme com o seu PIN.",
+    "mcxWaiting": "A aguardar confirmacao...",
+    "mcxFailed": "O pagamento falhou ou expirou. Tente novamente."
   },
   "auth": {
     "loginTitle": "Entrar na sua conta",

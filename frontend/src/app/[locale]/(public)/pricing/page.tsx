@@ -20,7 +20,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Check } from "lucide-react";
 import Cookies from "js-cookie";
 
-const currencies = ["EUR", "USD", "GBP"] as const;
+const currencies = ["EUR", "USD", "GBP", "AOA"] as const;
 
 interface TierGroup {
   model: AiModel;
@@ -29,8 +29,38 @@ interface TierGroup {
 
 export default function PricingPage() {
   const t = useTranslations();
-  const { isAuthenticated } = useAuth();
-  const [currency, setCurrency] = useState<string>("EUR");
+  const { isAuthenticated, user } = useAuth();
+  const [currency, setCurrencyState] = useState<string>("EUR");
+  // Marca escolha manual — a sugestão geo/conta não sobrepõe a escolha do utilizador
+  const [currencyTouched, setCurrencyTouched] = useState(false);
+  const setCurrency = (c: string) => {
+    setCurrencyState(c);
+    setCurrencyTouched(true);
+  };
+
+  // Geo-pricing: visitantes anónimos recebem sugestão por IP (AO → AOA)
+  const { data: geo } = useQuery({
+    queryKey: ["geo"],
+    queryFn: () =>
+      api.get<{ country: string | null; suggested_currency: string | null }>(
+        "/v1/geo"
+      ),
+    enabled: !isAuthenticated,
+    staleTime: Infinity,
+    retry: false,
+  });
+
+  // Moeda inicial: país da conta (AO → AOA) → moeda preferida → IP
+  useEffect(() => {
+    if (currencyTouched) return;
+    if (user?.country === "AO") {
+      setCurrencyState("AOA");
+    } else if (user?.preferred_currency) {
+      setCurrencyState(user.preferred_currency);
+    } else if (geo?.suggested_currency) {
+      setCurrencyState(geo.suggested_currency);
+    }
+  }, [user, geo, currencyTouched]);
 
   // Código de influenciador: pré-preenchido do cookie qolari_ref (?ref=)
   // (lazy init — evita setState síncrono num effect; js-cookie devolve
@@ -322,6 +352,7 @@ function BuyButton({
   promoCode?: string;
   label: string;
 }) {
+  const t = useTranslations();
   const [loading, setLoading] = useState(false);
 
   const handleBuy = async () => {
@@ -338,6 +369,16 @@ function BuyButton({
     }
   };
 
+  if (currency === "AOA") {
+    return (
+      <MulticaixaButton
+        productId={productId}
+        promoCode={promoCode}
+        label={t("pricing.mcxPay")}
+      />
+    );
+  }
+
   return (
     <button
       onClick={handleBuy}
@@ -346,6 +387,128 @@ function BuyButton({
     >
       {loading ? "..." : label}
     </button>
+  );
+}
+
+/**
+ * Fluxo AOA / Multicaixa Express (AppyPay): o cliente introduz o
+ * telemóvel angolano, recebe o pedido na app Multicaixa Express e
+ * confirmamos via polling ao estado da order (o webhook credita).
+ */
+function MulticaixaButton({
+  productId,
+  promoCode,
+  label,
+}: {
+  productId: number;
+  promoCode?: string;
+  label: string;
+}) {
+  const t = useTranslations();
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [pendingOrderId, setPendingOrderId] = useState<number | null>(null);
+
+  // Polling ao estado da order enquanto o cliente confirma na app MCX
+  useEffect(() => {
+    if (pendingOrderId === null) return;
+
+    const startedAt = Date.now();
+    const interval = setInterval(async () => {
+      try {
+        const orders = await api.get<{ data: { id: number; status: string }[] }>(
+          "/v1/orders"
+        );
+        const order = orders.data.find((o) => o.id === pendingOrderId);
+        if (order?.status === "paid") {
+          clearInterval(interval);
+          window.location.href = "/dashboard?checkout=success";
+        } else if (order?.status === "failed") {
+          clearInterval(interval);
+          setPendingOrderId(null);
+          setLoading(false);
+          setError(t("pricing.mcxFailed"));
+        } else if (Date.now() - startedAt > 150_000) {
+          clearInterval(interval);
+          setPendingOrderId(null);
+          setLoading(false);
+          setError(t("pricing.mcxFailed"));
+        }
+      } catch {
+        // Falha transitória de rede — continua a tentar
+      }
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, [pendingOrderId, t]);
+
+  const handlePay = async () => {
+    setError(null);
+    const digits = phone.replace(/\D/g, "").replace(/^244/, "");
+    if (!/^9\d{8}$/.test(digits)) {
+      setError(t("pricing.mcxInvalidPhone"));
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const data = await api.post<{ order_id: number; status: string }>(
+        "/v1/checkout",
+        {
+          product_id: productId,
+          currency: "AOA",
+          phone: digits,
+          promo_code: promoCode,
+        }
+      );
+      if (data.status === "Failed") {
+        setLoading(false);
+        setError(t("pricing.mcxFailed"));
+        return;
+      }
+      setPendingOrderId(data.order_id);
+    } catch {
+      setLoading(false);
+      setError(t("pricing.mcxFailed"));
+    }
+  };
+
+  if (pendingOrderId !== null) {
+    return (
+      <div className="rounded-md border border-primary/40 bg-primary/5 p-3 text-center space-y-1">
+        <p className="text-sm font-medium">{t("pricing.mcxPendingTitle")}</p>
+        <p className="text-xs text-muted-foreground">
+          {t("pricing.mcxPendingBody")}
+        </p>
+        <p className="text-xs text-muted-foreground animate-pulse">
+          {t("pricing.mcxWaiting")}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="space-y-2">
+      <Input
+        type="tel"
+        inputMode="numeric"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+        placeholder={t("pricing.mcxPhonePlaceholder")}
+        aria-label={t("pricing.mcxPhoneLabel")}
+      />
+      <button
+        onClick={handlePay}
+        disabled={loading}
+        className={cn(buttonVariants(), "w-full")}
+      >
+        {loading ? "..." : label}
+      </button>
+      {error && (
+        <p className="text-xs text-destructive text-center">{error}</p>
+      )}
+    </div>
   );
 }
 
