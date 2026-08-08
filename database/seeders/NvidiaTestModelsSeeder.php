@@ -17,20 +17,22 @@ use Illuminate\Support\Facades\DB;
 class NvidiaTestModelsSeeder extends Seeder
 {
     private const MODELS = [
-        // Latências medidas no free tier (07-08): 8b ~0.5s, 49b ~9s,
-        // 70b 18-30s — os 70b tornavam o chat/IDE inutilizáveis em teste.
+        // Nemotron 3 Ultra 550B (08-08): ~1s TTFB na NIM, qualidade frontier.
+        // Os 70b anteriores (18-30s) e o super-49b (~9s) tornavam o chat/IDE
+        // inutilizáveis em teste. Thinking desligado via extra_body do provider
+        // nvidia (config/ai_providers.php) — resposta direta, sem reasoning_content.
         'nexus-high' => [
-            'provider_model_id' => 'nvidia/llama-3.3-nemotron-super-49b-v1.5',
+            'provider_model_id' => 'nvidia/nemotron-3-ultra-550b-a55b',
             'supports_vision' => false,
             'is_active' => true,
         ],
         'nexus-medium' => [
-            'provider_model_id' => 'meta/llama-3.1-8b-instruct',
+            'provider_model_id' => 'nvidia/nemotron-3-ultra-550b-a55b',
             'supports_vision' => false,
             'is_active' => true,
         ],
         'nexus-low' => [
-            'provider_model_id' => 'meta/llama-3.1-8b-instruct',
+            'provider_model_id' => 'nvidia/nemotron-3-ultra-550b-a55b',
             'supports_vision' => false,
             'is_active' => true,
         ],
@@ -43,7 +45,7 @@ class NvidiaTestModelsSeeder extends Seeder
         ],
         // Legacy: Products antigos referenciam este slug.
         'qolari' => [
-            'provider_model_id' => 'meta/llama-3.1-8b-instruct',
+            'provider_model_id' => 'nvidia/nemotron-3-ultra-550b-a55b',
             'supports_vision' => false,
             'is_active' => true,
         ],

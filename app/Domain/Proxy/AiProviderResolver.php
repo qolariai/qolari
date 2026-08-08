@@ -17,7 +17,7 @@ class AiProviderResolver
     /**
      * Config resolvida do provider de um modelo (motor).
      *
-     * @return array{slug: string, label: string, base_url: string, api_key: string, headers: array<string, string>, supports_catalog: bool, supports_generation_lookup: bool}
+     * @return array{slug: string, label: string, base_url: string, api_key: string, headers: array<string, string>, extra_body: array<string, mixed>, supports_catalog: bool, supports_generation_lookup: bool}
      */
     public function forModel(AiModel $model): array
     {
@@ -25,7 +25,7 @@ class AiProviderResolver
     }
 
     /**
-     * @return array{slug: string, label: string, base_url: string, api_key: string, headers: array<string, string>, supports_catalog: bool, supports_generation_lookup: bool}
+     * @return array{slug: string, label: string, base_url: string, api_key: string, headers: array<string, string>, extra_body: array<string, mixed>, supports_catalog: bool, supports_generation_lookup: bool}
      */
     public function forSlug(string $slug): array
     {
@@ -38,6 +38,7 @@ class AiProviderResolver
             'base_url' => rtrim($config['base_url'], '/'),
             'api_key' => $this->apiKey($config),
             'headers' => $this->resolveHeaders($config['extra_headers'] ?? []),
+            'extra_body' => $config['extra_body'] ?? [],
             'supports_catalog' => (bool) ($config['supports_catalog'] ?? false),
             'supports_generation_lookup' => (bool) ($config['supports_generation_lookup'] ?? false),
         ];

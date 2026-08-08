@@ -52,6 +52,9 @@ class OpenRouterProxyService
         $body = $this->sanitizeBody($body);
 
         $provider = $this->providers->forModel($engine);
+        // Defaults do provider (ex: nvidia enable_thinking=false) — os campos
+        // do pedido do cliente ganham sempre.
+        $body = array_merge($provider['extra_body'], $body);
 
         $response = Http::withHeaders(array_merge([
             'Authorization' => 'Bearer ' . $provider['api_key'],
@@ -113,6 +116,8 @@ class OpenRouterProxyService
         $estimatedPromptTokens = (int) ceil(mb_strlen(json_encode($body['messages'] ?? [])) / 4);
 
         $provider = $this->providers->forModel($engine);
+        // Defaults do provider (ver completions()).
+        $body = array_merge($provider['extra_body'], $body);
         $baseUrl = $provider['base_url'];
         $apiKey = $provider['api_key'];
         $providerSlug = $provider['slug'];

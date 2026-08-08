@@ -219,6 +219,55 @@ class AiProvidersTest extends TestCase
         Http::assertNotSent(fn ($request) => str_contains($request->url(), 'deepseek.com'));
     }
 
+    public function test_provider_extra_body_is_merged_into_upstream_payload(): void
+    {
+        Setting::set('nvidia_api_key', 'nvapi-test', true);
+
+        $nvidiaModel = AiModel::create([
+            'slug' => 'nexus-high',
+            'display_name' => 'Nexus High',
+            'provider' => 'nvidia',
+            'provider_model_id' => 'nvidia/nemotron-3-ultra-550b-a55b',
+            'supports_vision' => false,
+            'margin_multiplier' => 3.00,
+            'is_active' => true,
+            'sort_order' => 0,
+        ]);
+        ModelCost::create([
+            'ai_model_id' => $nvidiaModel->id,
+            'input_cost_per_mtok' => 0,
+            'output_cost_per_mtok' => 0,
+            'synced_at' => now(),
+            'created_at' => now(),
+        ]);
+        app(WalletService::class)->credit($this->user->id, $nvidiaModel->id, 10.00);
+
+        Http::fake([
+            'integrate.api.nvidia.com/*' => Http::response([
+                'id' => 'gen-nv-1',
+                'model' => 'nvidia/nemotron-3-ultra-550b-a55b',
+                'choices' => [['message' => ['role' => 'assistant', 'content' => 'ok'], 'finish_reason' => 'stop']],
+                'usage' => ['prompt_tokens' => 5, 'completion_tokens' => 2],
+            ]),
+        ]);
+
+        Sanctum::actingAs($this->user);
+
+        $this->postJson('/api/v1/chat/completions', [
+            'model' => 'nexus-high',
+            'messages' => [['role' => 'user', 'content' => 'ola']],
+        ])->assertOk();
+
+        // extra_body do provider nvidia (fase de testes: thinking desligado)
+        // vai no payload; os campos do pedido (model/messages) mantêm-se.
+        Http::assertSent(function ($request) {
+            return $request->url() === 'https://integrate.api.nvidia.com/v1/chat/completions'
+                && $request['chat_template_kwargs']['enable_thinking'] === false
+                && $request['model'] === 'nvidia/nemotron-3-ultra-550b-a55b'
+                && $request['messages'][0]['content'] === 'ola';
+        });
+    }
+
     public function test_reconcile_goes_straight_to_estimate_for_direct_providers(): void
     {
         app(WalletService::class)->credit($this->user->id, $this->deepseekModel->id, 10.00);

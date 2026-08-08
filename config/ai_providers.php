@@ -18,6 +18,8 @@ return [
     | - supports_generation_lookup: tem endpoint /generation para reconciliar
     |   usage pós-stream (só a OpenRouter); os demais caem na estimativa
     | - extra_headers: headers específicos do provider ('{app_url}' = config('app.url'))
+    | - extra_body: campos extra fundidos no payload upstream (defaults do
+    |   provider; campos do pedido do cliente ganham sempre)
     |
     */
 
@@ -56,6 +58,13 @@ return [
             'supports_catalog' => false,
             'supports_generation_lookup' => false,
             'extra_headers' => [],
+            // FASE DE TESTES: modelos nemotron-3 são "reasoning" — sem isto o
+            // thinking vai em reasoning_content (invisível no chatbot) e a
+            // resposta parece parada. Desligado = resposta direta e rápida.
+            // Verificado 08-08: modelos llama da NIM toleram/ignoram o kwarg.
+            'extra_body' => [
+                'chat_template_kwargs' => ['enable_thinking' => false],
+            ],
         ],
 
     ],

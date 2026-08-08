@@ -91,6 +91,8 @@ class ChatService
         $estimatedPromptTokens = (int) ceil(mb_strlen(json_encode($body['messages'] ?? [])) / 4);
 
         $provider = $this->providers->forModel($engine);
+        // Defaults do provider (ex: nvidia enable_thinking=false).
+        $body = array_merge($provider['extra_body'], $body);
         $baseUrl = $provider['base_url'];
         $apiKey = $provider['api_key'];
         $providerSlug = $provider['slug'];
